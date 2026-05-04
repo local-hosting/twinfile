@@ -1,0 +1,3 @@
+# Archived projects — exclude from Agent, Tab, @-mentions, and semantic search
+_archive/
+node_modules
