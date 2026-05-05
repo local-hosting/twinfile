@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/oci/oci-cfg.schema.json",
+  "type": "object",
+  "required": ["twinfile", "kind", "name", "version", "stability", "spec"],
+  "properties": {
+    "twinfile": { "const": 1 },
+    "kind": {
+      "enum": [
+        "place",
+        "base",
+        "mixin",
+        "resource",
+        "character",
+        "story",
+        "event",
+        "run",
+        "situation",
+        "scenario"
+      ]
+    },
+    "name": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+    "version": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/semver" },
+    "stability": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/stability" },
+    "spec": { "type": "string" },
+    "domains": { "type": "array", "items": { "type": "string" } },
+    "expects": { "type": "object" },
+    "timetable": { "type": "object" },
+    "phases": { "type": "array" }
+  },
+  "additionalProperties": false
+}

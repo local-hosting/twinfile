@@ -1,0 +1,15 @@
+from: ..
+twinfile: 2
+kind: scenario
+id: clock-no-offset
+name: Clock No Offset
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/situation/dam-release:1.0.0
+clock:
+  starts_at: "2026-06-12T09:00:00"
+  duration: PT30M
+  step: PT1M
+use:
+  runner: npm:@twinfile/runner-replay@^0

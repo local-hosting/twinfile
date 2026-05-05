@@ -1,0 +1,47 @@
+# Space services for mobility hubs (strategy board).
+# Declare with services[]: { id, kind, space } — see examples/mobility-hub.
+version: 1
+mobility:
+  - id: bike_parking
+    title: Bike parking
+  - id: bike_repair
+    title: Bike repair
+  - id: bike_sharing
+    title: Bike sharing
+  - id: car_sharing
+    title: Car-sharing
+  - id: charging
+    title: Charging
+  - id: information
+    title: Information
+  - id: micro_mobility
+    title: Micro mobility
+  - id: parking
+    title: Parking (park and ride)
+  - id: waiting_shelter
+    title: Waiting / shelter
+community:
+  - id: bakery
+    title: Bakery
+  - id: bank_post
+    title: Bank / post / dry-cleaner
+  - id: cafe_kiosk
+    title: Café / kiosk
+  - id: delivery_pickup
+    title: Delivery / pickup
+  - id: energy
+    title: Energy (e.g. solar canopy)
+  - id: event_exhibition
+    title: Event / exhibition
+  - id: food_restaurant
+    title: Food / restaurant
+  - id: garden
+    title: Garden
+  - id: indoor_public_space
+    title: Indoor public space
+  - id: meeting
+    title: Meeting
+  - id: coworking
+    title: Office / co-working
+  - id: outdoor_seating
+    title: Outdoor seating

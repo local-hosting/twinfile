@@ -1,0 +1,7 @@
+routes:
+  - id: main-aisle
+    from: entry
+    to: checkout
+    length_m: 40
+    kind: corridor
+    step_free: true

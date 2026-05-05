@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/ops/ai.schema.json",
+  "type": "object",
+  "required": ["ai"],
+  "properties": {
+    "ai": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "runs_on", "accountable", "dtpr"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "name": { "type": "string" },
+          "kind": { "type": "string" },
+          "runs_on": { "enum": ["on-device", "on-site", "cloud"] },
+          "space": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "accountable": { "type": "string" },
+          "dtpr": { "$ref": "https://twinfile.org/schemas/1/oci/dtpr.schema.json" },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

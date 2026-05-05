@@ -1,0 +1,13 @@
+twinfile: 2
+kind: place
+id: twinfile-2-layers
+name: Twinfile 2 Layers
+version: 0.1.0
+stability: example
+layers:
+  - place/place.yaml
+steps:
+  - place:
+      name: Mixed
+      kind: campus
+      timezone: UTC

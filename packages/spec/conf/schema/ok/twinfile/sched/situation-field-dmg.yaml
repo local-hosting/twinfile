@@ -1,0 +1,24 @@
+twinfile: 1
+kind: situation
+id: field-damage
+name: Field Damage
+version: 1.0.0
+stability: stable
+layers: []
+phases:
+  - reported
+  - active
+  - cleared
+expects:
+  hotspot:
+    kind: marker
+    min: 1
+  safe-access:
+    kind: marker
+    min: 1
+  collection-point:
+    kind: marker
+    min: 1
+  survey-station:
+    kind: station
+    min: 0

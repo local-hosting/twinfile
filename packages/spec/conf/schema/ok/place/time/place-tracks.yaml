@@ -1,0 +1,21 @@
+tracks:
+  - id: daylight
+    source: solar
+    unit: deg
+  - id: footfall
+    source: curve
+    interpolate: linear
+    points:
+      "07:00": 0.1
+      "12:00": 0.8
+      "18:00": 1.0
+      "22:00": 0.2
+  - id: stage
+    source: feed
+    device: gauge-upstream
+    property: stage
+    unit: m
+    interpolate: linear
+  - id: deliveries
+    source: schedule
+    schedule: produce-delivery

@@ -1,0 +1,8 @@
+spaces:
+  - id: lobby-shelter
+    $delete: true
+  - id: sales-floor
+    name: Sales floor
+    kind: retail
+    level: ground
+    exposure: indoor

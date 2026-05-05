@@ -1,0 +1,312 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/twinfile/twinfile.schema.json",
+  "oneOf": [
+    { "$ref": "#/$defs/placeTwinfile" },
+    { "$ref": "#/$defs/eventTwinfile" },
+    { "$ref": "#/$defs/situationTwinfile" },
+    { "$ref": "#/$defs/scenarioTwinfile" },
+    { "$ref": "#/$defs/mixinTwinfile" }
+  ],
+  "if": { "properties": { "kind": { "enum": ["place", "scenario", "mixin"] } }, "required": ["kind"] },
+  "else": {
+    "$comment": "twinfile 2 (RFC 0009) is for place, scenario, and mixin Twinfiles only.",
+    "properties": { "twinfile": { "const": 1 } }
+  },
+  "$defs": {
+    "placeSteps": {
+      "description": "Ordered steps (RFC 0009): one data patch, situation bind, or copy per item; each step builds one deterministic layer.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["copy"],
+            "properties": {
+              "copy": { "type": "string", "minLength": 1 },
+              "into": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+              "prefix": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["bind"],
+            "properties": { "bind": { "type": "object" } },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "required": ["plan"],
+            "properties": { "plan": { "type": "object" } },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "minProperties": 1,
+            "not": { "anyOf": [{ "required": ["copy"] }, { "required": ["bind"] }, { "required": ["plan"] }] },
+            "properties": { "mode": { "enum": ["patch", "replace"] } }
+          }
+        ]
+      }
+    },
+    "placeTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "if": { "properties": { "twinfile": { "const": 2 } }, "required": ["twinfile"] },
+          "then": {
+            "anyOf": [{ "required": ["steps"] }, { "required": ["patches"] }, { "required": ["instructions"] }],
+            "not": {
+              "anyOf": [
+                { "required": ["layers"] },
+                { "required": ["with"] },
+                { "required": ["buildings"] },
+                { "required": ["plans"] },
+                { "required": ["patch"] },
+                {
+                  "allOf": [
+                    { "required": ["steps"] },
+                    { "anyOf": [{ "required": ["patches"] }, { "required": ["instructions"] }] }
+                  ]
+                }
+              ]
+            }
+          },
+          "else": {
+            "required": ["layers"],
+            "not": { "anyOf": [{ "required": ["steps"] }, { "required": ["patches"] }, { "required": ["buildings"] }] }
+          }
+        },
+        {
+          "type": "object",
+          "properties": {
+            "steps": { "$ref": "#/$defs/placeSteps" },
+            "patches": { "$ref": "#/$defs/placeSteps" },
+            "instructions": { "$ref": "#/$defs/placeSteps" },
+            "kind": { "const": "place" },
+            "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
+            "axes": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxes" },
+            "with": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" }
+            },
+            "layers": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "oneOf": [
+                  { "type": "string", "minLength": 1 },
+                  {
+                    "type": "object",
+                    "required": ["path"],
+                    "properties": {
+                      "path": { "type": "string", "minLength": 1 },
+                      "mode": { "enum": ["patch", "replace"] }
+                    },
+                    "additionalProperties": false
+                  }
+                ]
+              }
+            },
+            "plans": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "Deprecated: list plan paths under layers: instead."
+            },
+            "geotype": {
+              "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/geotypeTwinfile"
+            },
+            "bridges": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "required": ["id", "bridge"],
+                "properties": {
+                  "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+                  "bridge": { "type": "string", "minLength": 1 },
+                  "role": { "enum": ["import", "export", "geometry"] }
+                },
+                "additionalProperties": false
+              }
+            },
+            "sources": {
+              "type": "object",
+              "additionalProperties": { "type": "string" }
+            },
+            "processors": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "https://twinfile.org/schemas/1/patch/patch-graph.schema.json#/$defs/manifestProcessor" }
+            },
+            "patch": {
+              "$ref": "https://twinfile.org/schemas/1/patch/patch-graph.schema.json",
+              "description": "Deprecated: use processors: with outlets: on each processor."
+            }
+          }
+        }
+      ]
+    },
+    "mixinTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "if": { "properties": { "twinfile": { "const": 2 } }, "required": ["twinfile"] },
+          "then": {
+            "required": ["steps"],
+            "not": { "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }] }
+          },
+          "else": {
+            "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }],
+            "not": { "required": ["steps"] }
+          }
+        },
+        {
+          "type": "object",
+          "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }, { "required": ["steps"] }],
+          "not": { "anyOf": [{ "required": ["from"] }, { "required": ["with"] }] },
+          "properties": {
+            "kind": { "const": "mixin" },
+            "axes": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxes" },
+            "applies_to": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxesFilter" },
+            "provides": {
+              "type": "object",
+              "properties": {
+                "situations": {
+                  "type": "array",
+                  "items": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" }
+                }
+              },
+              "additionalProperties": false
+            },
+            "layers": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "plans": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+            "steps": { "$ref": "#/$defs/placeSteps" }
+          }
+        }
+      ]
+    },
+    "eventTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "required": ["timetable", "expects"],
+          "properties": {
+            "kind": { "const": "event" },
+            "timetable": {
+              "type": "object",
+              "minProperties": 1,
+              "additionalProperties": { "type": "string" }
+            },
+            "expects": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/expectsRole"
+              }
+            },
+            "args": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/argDef"
+              }
+            },
+            "layers": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "situationTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "required": ["phases", "expects"],
+          "properties": {
+            "kind": { "const": "situation" },
+            "phases": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" }
+            },
+            "expects": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/expectsRole"
+              }
+            },
+            "args": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/argDef"
+              }
+            },
+            "mode": {
+              "enum": ["daily", "resilience"],
+              "description": "Workbench catalog mode (default resilience). Daily situations cover everyday operations."
+            },
+            "layers": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "scenarioTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "required": ["from"],
+          "properties": {
+            "kind": { "const": "scenario" },
+            "mode": {
+              "enum": ["daily", "resilience"],
+              "description": "Use mode the scenario answers for (default resilience). Daily scenarios keep the timeline in daily mode."
+            },
+            "from": { "type": "string" },
+            "steps": { "$ref": "#/$defs/placeSteps" },
+            "args": { "type": "object", "additionalProperties": true },
+            "t0": { "type": "string" },
+            "clock": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/clock" },
+            "metrics": { "type": "array", "items": { "type": "string" } },
+            "use": {
+              "type": "object",
+              "required": ["runner"],
+              "properties": {
+                "runner": { "type": "string" },
+                "runners": {
+                  "type": "array",
+                  "minItems": 1,
+                  "items": {
+                    "type": "object",
+                    "required": ["id", "runner"],
+                    "properties": {
+                      "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+                      "runner": { "type": "string", "minLength": 1 }
+                    },
+                    "additionalProperties": false
+                  }
+                }
+              },
+              "additionalProperties": false
+            },
+            "patch": {
+              "$ref": "https://twinfile.org/schemas/1/patch/patch-graph.schema.json"
+            }
+          }
+        },
+        {
+          "properties": {
+            "twinfile": { "const": 2 },
+            "include": false,
+            "layers": false
+          },
+          "required": ["twinfile", "steps"]
+        }
+      ]
+    }
+  }
+}

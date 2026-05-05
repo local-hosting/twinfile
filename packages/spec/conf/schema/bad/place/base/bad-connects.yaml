@@ -1,0 +1,6 @@
+openings:
+  - id: gate-1
+    kind: gate
+    connects:
+      - a
+    width_m: 2

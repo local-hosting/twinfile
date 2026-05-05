@@ -1,0 +1,11 @@
+twinfile: 1
+kind: place
+id: twinfile-1-buildings
+name: Twinfile 1 Buildings
+version: 0.1.0
+stability: example
+buildings:
+  - id: terminal-a
+    from: twinfile/terminal-a:0.1.0
+layers:
+  - place/place.yaml

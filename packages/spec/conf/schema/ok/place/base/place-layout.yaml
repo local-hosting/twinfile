@@ -1,0 +1,6 @@
+place:
+  name: Demo shop visit
+  kind: shop
+  timezone: America/New_York
+  archetype: indoor_stack
+  published: false

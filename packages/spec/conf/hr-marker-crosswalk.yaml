@@ -1,0 +1,74 @@
+# Humanitarian map marker tags (e.g. Lantern data.json) → Twinfile open schema.
+# Host bridges resolve markers; core only validates this file in CI.
+version: 1
+# Report pins (situation stories)
+reports:
+  - tag: fld
+    title: Flooding
+    situation: flood
+  - tag: fir
+    title: Fire
+    situation: wildfire
+  - tag: pwo
+    title: Outage
+    situation: power-outage
+  - tag: dmg
+    title: Damage
+    situation: field-damage
+  - tag: rdb
+    title: Debris
+    situation: field-damage
+  - tag: cba
+    title: Closure
+    situation: field-damage
+# Site pins (roles on merged place rows)
+sites:
+  - tag: shl
+    title: Shelter
+    role: shelter
+  - tag: hsp
+    title: Medical
+    role: shelter
+  - tag: bse
+    title: Base
+    role: shelter
+  - tag: wrh
+    title: Warehouse
+    role: collection-point
+  - tag: str
+    title: Store
+    role: collection-point
+# Resource pins (declarative stock on assets)
+resources:
+  - tag: wtr
+    title: Water
+    asset_ext:
+      shelter_resource: water
+  - tag: bed
+    title: Beds / cots
+    asset_ext:
+      shelter_resource: cots
+  - tag: med
+    title: Medical supplies
+    asset_ext:
+      relief_resource: medical
+  - tag: eat
+    title: Food
+    asset_ext:
+      relief_resource: food
+  - tag: ful
+    title: Fuel
+    asset_ext:
+      relief_resource: fuel
+  - tag: pwr
+    title: Power
+    asset_ext:
+      relief_resource: power
+  - tag: net
+    title: Internet
+    asset_ext:
+      relief_resource: internet
+  - tag: clo
+    title: Clothing
+    asset_ext:
+      relief_resource: clothing

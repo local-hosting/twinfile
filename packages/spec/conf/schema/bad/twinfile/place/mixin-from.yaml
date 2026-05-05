@@ -1,0 +1,9 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 1
+kind: mixin
+id: mixin-chained
+name: Mixin Chained
+version: 0.1.0
+stability: example
+layers:
+  - place/spaces.yaml

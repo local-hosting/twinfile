@@ -1,0 +1,3 @@
+schedules:
+  - id: produce-delivery
+    when: Mondays at 6am
