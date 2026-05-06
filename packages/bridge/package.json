@@ -1,0 +1,52 @@
+{
+  "name": "@local-hosting/twinfile-bridge",
+  "version": "0.1.1",
+  "packageManager": "yarn@4.9.2",
+  "type": "module",
+  "description": "Twinfile format bridges — built-in IMDF, GTFS, IFC, glTF, and shared crosswalk / place-kit",
+  "license": "MPL-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/local-hosting/twinfile.git",
+    "directory": "packages/bridge"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "node ../tooling/scripts/check-vendor-neutral.mjs && yarn build && yarn typecheck && yarn test"
+  },
+  "files": [
+    "dist",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "dependencies": {
+    "@local-hosting/geotypes": "0.1.2",
+    "@local-hosting/twinfile": "workspace:packages/spec",
+    "web-ifc": "^0.0.78",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.2",
+    "vitest": "^4.1.12"
+  },
+  "twinfilePinnedDependencies": {
+    "@local-hosting/geotypes": "0.1.2",
+    "@local-hosting/twinfile": "1.0.0-draft.2"
+  }
+}
