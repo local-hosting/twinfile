@@ -1,0 +1,40 @@
+{
+  "meta": {
+    "id": "mixin-flood",
+    "name": "Flood hooks — refuge, maintained crossing, stage gauge, wired plan",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "markers": [
+      {
+        "id": "flood-refuge-point",
+        "name": "Flood refuge",
+        "state": "open",
+        "roles": [
+          "flood-refuge"
+        ]
+      },
+      {
+        "id": "flood-safe-crossing",
+        "name": "Maintained crossing",
+        "state": "open",
+        "roles": [
+          "safe-access"
+        ]
+      }
+    ],
+    "gauges": [
+      {
+        "id": "flood-stage-gauge",
+        "observes": "stage",
+        "roles": [
+          "gauge"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:e4b9f7783010641a7a8fcd9af53bd491d500b13f333ad94d3800e52cfaf87615"
+}

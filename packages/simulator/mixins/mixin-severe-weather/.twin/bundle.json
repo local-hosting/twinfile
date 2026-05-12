@@ -1,0 +1,67 @@
+{
+  "meta": {
+    "id": "mixin-severe-weather",
+    "name": "Severe-weather hooks — shelter, outdoor assembly, two exits, wired plan",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "spaces": [
+      {
+        "id": "severe-weather-shelter",
+        "name": "Severe-weather shelter",
+        "kind": "hall",
+        "level": "ground",
+        "visit_order": 90,
+        "exposure": "indoor",
+        "roles": [
+          "shelter"
+        ]
+      },
+      {
+        "id": "severe-weather-assembly",
+        "name": "Outdoor assembly area",
+        "kind": "plaza",
+        "level": "ground",
+        "visit_order": 91,
+        "exposure": "outdoor",
+        "roles": [
+          "outdoor"
+        ]
+      }
+    ],
+    "openings": [
+      {
+        "id": "severe-weather-exit-a",
+        "name": "Shelter exit A",
+        "kind": "door",
+        "connects": [
+          "severe-weather-shelter",
+          "severe-weather-assembly"
+        ],
+        "width_m": 1.5,
+        "state": "open",
+        "roles": [
+          "exit"
+        ]
+      },
+      {
+        "id": "severe-weather-exit-b",
+        "name": "Shelter exit B",
+        "kind": "door",
+        "connects": [
+          "severe-weather-shelter",
+          "severe-weather-assembly"
+        ],
+        "width_m": 1.5,
+        "state": "open",
+        "roles": [
+          "exit"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:ab09287c3b1918e82ae4d93330ce419b6c733b1793e59365b428cdd81f3f9677"
+}

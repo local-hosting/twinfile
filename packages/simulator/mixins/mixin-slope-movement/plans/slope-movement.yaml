@@ -1,0 +1,19 @@
+for: slope-movement
+roles:
+  safe-access:
+    - slope-evac-route
+  flood-refuge:
+    - slope-high-ground
+  shelter:
+    - slope-movement-shelter
+  survey-station:
+    - slope-movement-monitor
+actions:
+  - at: evacuation
+    set:
+      slope-evac-route:
+        state: restricted
+      slope-high-ground:
+        state: open
+      slope-movement-shelter:
+        state: open

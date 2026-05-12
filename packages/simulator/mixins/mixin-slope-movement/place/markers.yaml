@@ -1,0 +1,11 @@
+markers:
+  - id: slope-evac-route
+    name: Maintained evacuation route
+    state: open
+    roles:
+      - safe-access
+  - id: slope-high-ground
+    name: High-ground refuge
+    state: open
+    roles:
+      - flood-refuge

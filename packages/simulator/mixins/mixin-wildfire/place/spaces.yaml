@@ -1,0 +1,15 @@
+spaces:
+  - id: wildfire-shelter
+    name: Wildfire shelter
+    kind: hall
+    level: ground
+    visit_order: 94
+    exposure: indoor
+    roles:
+      - shelter
+  - id: wildfire-muster-outdoor
+    name: Outdoor muster
+    kind: plaza
+    level: ground
+    visit_order: 95
+    exposure: outdoor

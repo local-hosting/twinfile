@@ -1,0 +1,5 @@
+stations:
+  - id: slope-movement-monitor
+    name: Slope stability monitor
+    roles:
+      - survey-station

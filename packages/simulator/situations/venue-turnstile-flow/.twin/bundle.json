@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "venue-turnstile-flow",
+    "name": "Venue turnstile flow",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:24653f889ec6aadc8edab45f0994bad9ec63e0bc7d135fbfda45cd1ad6c84794"
+}

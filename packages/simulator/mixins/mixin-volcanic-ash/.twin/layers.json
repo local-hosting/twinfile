@@ -1,0 +1,20 @@
+[
+  {
+    "ref": "place/spaces.yaml",
+    "kind": "place",
+    "content": "sha256:c3117a95ab463737c28b9d890622f2d914cf90f4c04779ad3d7728b65cd3ea1c",
+    "chain": "sha256:84c26c2cb26d71a833d6b45bbfc66dbe77f645cbda5ac87bc9b5e0677d0d0b57"
+  },
+  {
+    "ref": "place/openings.yaml",
+    "kind": "place",
+    "content": "sha256:14c2f3c3541615e3f9f21b7f3a87cfe152f6785d65474e558ef39e1a47f6f52a",
+    "chain": "sha256:2a751dfaf241b475156af1d08e8a6c882f0f35fc428ad03fbe1a6791d7f347eb"
+  },
+  {
+    "ref": "place/stations.yaml",
+    "kind": "place",
+    "content": "sha256:6bbee71b847631c0e47bdac8d3fc887263e1be1436d4e1cb53de661f26ce93f2",
+    "chain": "sha256:843e44190327e0f000f9c52d6bdbbd1ae877d274467cae13b73a254ee335a2b4"
+  }
+]

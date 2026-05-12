@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "recovery-resilience",
+    "name": "Post-hazard recovery — staging relief, surveying damage, standing down shelters",
+    "kind": "situation",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:048619be32ae338fdfcfd3692f64d9f2a5ec267477812769f5a98c9d0df7e5e7"
+}

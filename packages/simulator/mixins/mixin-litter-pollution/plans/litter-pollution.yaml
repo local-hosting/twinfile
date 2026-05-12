@@ -1,0 +1,11 @@
+for: litter-pollution
+roles:
+  hotspot:
+    - litter-hotspot
+  safe-access:
+    - litter-safe-access
+  collection-point:
+    - litter-collection
+  survey-station:
+    - litter-survey-station
+actions: []

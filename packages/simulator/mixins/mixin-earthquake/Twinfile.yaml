@@ -1,0 +1,13 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-earthquake
+name: Earthquake hooks — shelter, exits, outdoor survey zone, wired plan
+layers:
+  - place/spaces.yaml
+  - place/openings.yaml
+  - plans/earthquake.yaml
+provides:
+  situations:
+    - earthquake
