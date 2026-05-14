@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/meta/accessibility.schema.json",
+  "type": "object",
+  "required": [
+    "accessibility"
+  ],
+  "properties": {
+    "accessibility": {
+      "type": "object",
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": false
+}

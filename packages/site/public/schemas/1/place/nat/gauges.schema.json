@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/nat/gauges.schema.json",
+  "type": "object",
+  "required": [
+    "gauges"
+  ],
+  "properties": {
+    "gauges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "observes"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "observes": {
+            "type": "string"
+          },
+          "feed": {
+            "type": "object",
+            "required": [
+              "protocol",
+              "url"
+            ],
+            "properties": {
+              "protocol": {
+                "enum": [
+                  "file",
+                  "sensorthings",
+                  "ngsi-ld"
+                ]
+              },
+              "url": {
+                "type": "string"
+              },
+              "replay": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "simulate": {
+            "type": "object",
+            "required": [
+              "every"
+            ],
+            "properties": {
+              "every": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uplink": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dropout": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "additionalProperties": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,114 @@
+/**
+ * Flat workbench theme: square corners, no elevation shadows.
+ * Add class `tf-theme-flat-square` on `<html>` (workbench index.html).
+ */
+
+:root {
+  --tf-font-ui: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --tf-radius-panel: 10px;
+  --tf-radius-control: 6px;
+  --tf-radius-control-sm: 4px;
+  --tf-radius-pill: 999px;
+  --tf-radius-knob: 50%;
+  --tf-border-width-chrome: 1px;
+  --tf-border-width-control: 1px;
+  --tf-line-workbench: rgb(17 24 39 / 0.1);
+  --tf-border-accent: rgb(14 165 233 / 0.25);
+  --tf-border-tree: rgb(37 99 235 / 0.25);
+}
+
+.tf-theme-flat-square {
+  --tf-font-ui: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  --font-sans: var(--tf-font-ui);
+  --tf-radius-square: 0;
+  --tf-radius-panel: 0;
+  --tf-radius-control: 0;
+  --tf-radius-control-sm: 0;
+  --tf-radius-pill: 0;
+  --tf-radius-knob: 0;
+  --radius-sm: 0;
+  --radius-DEFAULT: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+  --radius-2xl: 0;
+  --radius-3xl: 0;
+  --radius-full: 0;
+  --tf-prose-pre-shadow: none;
+  --tf-line: rgb(17 24 39 / 0.06);
+  --tf-line-workbench: rgb(17 24 39 / 0.06);
+  --tf-border-width-chrome: 0;
+  --tf-border-width-control: 0;
+  --tf-border-accent: rgb(14 165 233 / 0.1);
+  --tf-border-tree: rgb(37 99 235 / 0.12);
+}
+
+.tf-theme-flat-square .twinfile-workbench__frame,
+.tf-theme-flat-square .twinfile-workbench__workspace {
+  box-shadow: none;
+}
+
+.tf-theme-flat-square .twinfile-workbench__world-subnav-tab,
+.tf-theme-flat-square .twinfile-workbench__view-nav-tab,
+.tf-theme-flat-square .twinfile-workbench__catalog-list--inline .twinfile-workbench__catalog-item {
+  border-width: 0;
+}
+
+.tf-theme-flat-square .twinfile-workbench__view-nav-tab {
+  background: transparent;
+}
+
+.tf-theme-flat-square .twinfile-workbench__view-nav-tab[aria-current='true'] {
+  background: rgb(37 99 235 / 0.1);
+}
+
+.tf-theme-flat-square .twinfile-workbench__catalog-list--inline .twinfile-workbench__catalog-item[aria-current='true'] {
+  background: rgb(224 242 254 / 0.85);
+}
+
+.tf-theme-flat-square .twinfile-workbench__environment-select,
+.tf-theme-flat-square .twinfile-workbench__environment-input {
+  border-width: 0;
+  background: rgb(17 24 39 / 0.04);
+}
+
+.tf-theme-flat-square .twinfile-workbench__host-place-panel:not(.twinfile-workbench__host-place-panel--sidebar),
+.tf-theme-flat-square .twinfile-workbench__catalog-nested-empty {
+  border-left-width: 1px;
+}
+
+.tf-theme-flat-square,
+.tf-theme-flat-square * {
+  text-transform: lowercase;
+}
+
+.tf-theme-flat-square body {
+  font-family: var(--tf-font-ui);
+}
+
+@layer theme {
+  .tf-theme-flat-square {
+    --font-sans: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .tf-theme-flat-square :is(
+    .rounded,
+    .rounded-sm,
+    .rounded-md,
+    .rounded-lg,
+    .rounded-xl,
+    .rounded-2xl,
+    .rounded-3xl,
+    .rounded-full
+  ) {
+    border-radius: 0;
+  }
+
+  .tf-theme-flat-square :is(.shadow, .shadow-sm, .shadow-md, .shadow-lg, .shadow-xl) {
+    --tw-shadow: 0 0 #0000;
+    --tw-shadow-colored: 0 0 #0000;
+    box-shadow: none;
+  }
+}

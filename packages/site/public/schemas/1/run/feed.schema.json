@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/feed.schema.json",
+  "title": "Feed row (one JSON Lines record)",
+  "type": "object",
+  "required": [
+    "device_id",
+    "observed_property",
+    "value",
+    "observed_at"
+  ],
+  "properties": {
+    "device_id": {
+      "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+    },
+    "observes": {
+      "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+    },
+    "observed_property": {
+      "type": "string",
+      "minLength": 1
+    },
+    "value": {
+      "type": "number"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "observed_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "available_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "quality": {
+      "type": "string"
+    },
+    "ext": {
+      "type": "object"
+    }
+  },
+  "additionalProperties": false
+}

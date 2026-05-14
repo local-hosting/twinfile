@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/plan.schema.json",
+  "type": "object",
+  "required": [
+    "for",
+    "roles",
+    "actions"
+  ],
+  "properties": {
+    "for": {
+      "type": "string"
+    },
+    "roles": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "at",
+          "set"
+        ],
+        "properties": {
+          "at": {
+            "type": "string"
+          },
+          "set": {
+            "type": "object",
+            "additionalProperties": true
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}
