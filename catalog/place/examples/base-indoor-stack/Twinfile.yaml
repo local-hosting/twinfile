@@ -1,0 +1,28 @@
+twinfile: 2
+kind: place
+id: base-indoor-stack
+name: Indoor-stack archetype base
+version: 0.1.0
+stability: example
+geotype:
+  primary: office_building
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: Indoor stack layout base
+      kind: building
+      timezone: UTC
+      published: false
+      archetype: indoor_stack
+      authoring_scale:
+        linear_unit: m
+        h3_resolution: 10
+        space_granularity: room
+      ext:
+        lat: 0
+        lon: 0
+        h3: 893a4484a6fffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0

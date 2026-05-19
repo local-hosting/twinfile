@@ -1,0 +1,417 @@
+presetId: mobility_hub_traveler
+label: Mobility hub traveler
+segmentMix:
+  default: 0.25
+  daily-commuter: 0.35
+  occasional-rider: 0.2
+  transfer-passenger: 0.15
+  accessibility-first: 0.05
+specVersion: "1.0"
+methodId: mobility-hub
+segments:
+  - id: default
+    overview:
+      name: Mobility Hub Traveler
+      mindset: Connection-aware and schedule-sensitive
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Decision to Visit:
+              thinking:
+                - I decide whether this hub is the right interchange before I
+                  commit to the trip.
+            Prep for Visit:
+              thinking:
+                - I checked delays before I left — real-time info has to stay
+                  accurate.
+            Arrival:
+              thinking:
+                - Signage, escalators, and platform changes determine if I make
+                  the connection.
+            Engage:
+              thinking:
+                - Comparing routes and modes has to happen fast when my buffer
+                  is thin.
+            Dwell:
+              thinking:
+                - If I am staying awhile, the hub should feel like a useful stop,
+                  not dead time.
+            Exit & Reflect:
+              thinking:
+                - After I leave, reminders and alerts should help me plan the
+                  return trip.
+        feelings:
+          positive:
+            - Confidence when departure boards match reality
+            - Relief when the next vehicle is easy to find and unlock
+          negative:
+            - Stress when a platform change is announced late
+            - Frustration when pricing or inventory only shows up after I arrive
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: make-the-connection
+            label: Make the Connection
+            innerThinking:
+              - One missed transfer ripples through the rest of my day.
+            guidingPrinciples:
+              - Reliable departure boards beat optimistic schedules
+            supportingCapabilities:
+              services: []
+        byFocus:
+          place:
+            mentalSpaces:
+              - id: find-the-right-hub
+                label: Find the Right Hub
+                innerThinking:
+                  - I need the correct entrance, bay, or interchange before I
+                    leave home.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          time:
+            mentalSpaces:
+              - id: protect-the-buffer
+                label: Protect the Buffer
+                innerThinking:
+                  - Live arrivals matter more than scheduled ones when I am
+                    cutting it close.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          wayfinding:
+            mentalSpaces:
+              - id: read-the-hub
+                label: Read the Hub
+                innerThinking:
+                  - Good signage should answer my next turn without opening an
+                    app.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          mode-selection:
+            mentalSpaces:
+              - id: pick-the-next-leg
+                label: Pick the Next Leg
+                innerThinking:
+                  - I compare route, price, and vehicle type before I commit to
+                    boarding.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          routing:
+            mentalSpaces:
+              - id: shortest-path
+                label: Shortest Path
+                innerThinking:
+                  - Which platform and which exit gets me to the next leg
+                    fastest?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+      - intentId: setup
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+      - intentId: fix
+        validLevelIds:
+          - beginner
+          - regular
+      - intentId: switch
+        validLevelIds:
+          - explorer
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Departure board accuracy
+            - Escalator and elevator status
+          othersObserved:
+            - How crowded the platform feels
+    hear:
+      hear:
+        baseline:
+          others:
+            - Announcements about delays or track changes
+          colleagues:
+            - Commuters complaining about morning reliability
+  - id: daily-commuter
+    overview:
+      name: Daily Commuter
+      mindset: Habit-driven and tolerance for routine friction
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Engage:
+              thinking:
+                - I know the morning crush — predictability matters more than
+                  novelty.
+            Dwell:
+              thinking:
+                - A delayed train on Tuesday sets the tone for the whole work
+                  week.
+        feelings:
+          positive:
+            - Confidence when the trip stays on schedule
+          negative:
+            - Stress when a delay threatens the first meeting
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: protect-the-routine
+            label: Protect the Routine
+            innerThinking:
+              - I have a preferred door, stairwell, and standing spot — do not
+                move them.
+            guidingPrinciples:
+              - Consistency earns long-term ridership
+            supportingCapabilities:
+              services: []
+        byFocus:
+          schedule:
+            mentalSpaces:
+              - id: peak-reliability
+                label: Peak Reliability
+                innerThinking:
+                  - Rush-hour delays cost me meetings, not just minutes.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          fare:
+            mentalSpaces:
+              - id: pass-value
+                label: Pass Value
+                innerThinking:
+                  - Monthly passes should be effortless — tap and go, no
+                    surprises.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          regular:
+            mentalSpaces:
+              - id: muscle-memory
+                label: Muscle Memory
+                innerThinking:
+                  - I navigate this hub without looking at a map anymore.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          champion:
+            mentalSpaces:
+              - id: advocate-for-riders
+                label: Advocate for Riders
+                innerThinking:
+                  - I notice when service cuts affect the whole neighborhood.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - regular
+          - champion
+      - intentId: setup
+        validLevelIds:
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Departure board accuracy
+            - Whether elevators are out of service
+          othersObserved:
+            - How crowded the platform feels
+    hear:
+      hear:
+        baseline:
+          others:
+            - Announcements about delays or platform changes
+          colleagues:
+            - Coworkers complaining about morning reliability
+  - id: occasional-rider
+    overview:
+      name: Occasional Rider
+      mindset: Infrequent user who needs extra guidance
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: decode-the-system
+            label: Decode the System
+            innerThinking:
+              - Fare rules and zone boundaries confuse me every time I ride.
+            guidingPrinciples:
+              - Simple wayfinding beats assuming local knowledge
+            supportingCapabilities:
+              services: []
+        byFocus:
+          fare:
+            mentalSpaces:
+              - id: ticket-clarity
+                label: Ticket Clarity
+                innerThinking:
+                  - Which machine, card, or app do I need for this one trip?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          stranger:
+            mentalSpaces:
+              - id: visible-help
+                label: Visible Help
+                innerThinking:
+                  - I will look for staff or kiosks before I guess at a
+                    turnstile.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: plan-the-trip
+                label: Plan the Trip
+                innerThinking:
+                  - I research the route at home because the hub feels
+                    overwhelming live.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+  - id: transfer-passenger
+    overview:
+      name: Transfer Passenger
+      mindset: Multi-modal connector under time pressure
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Arrival:
+              thinking:
+                - I am watching the clock and the board at the same time.
+            Dwell:
+              thinking:
+                - Short dwell time means any bottleneck becomes a missed
+                  connection.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: minimize-transfer-friction
+            label: Minimize Transfer Friction
+            innerThinking:
+              - Elevators, stairs, and cross-platform walks eat my buffer fast.
+            guidingPrinciples:
+              - Transfer paths should be signed in plain language
+            supportingCapabilities:
+              services: []
+        byFocus:
+          real-time-info:
+            mentalSpaces:
+              - id: live-updates
+                label: Live Updates
+                innerThinking:
+                  - Platform changes need to reach me before I am halfway down
+                    the wrong hall.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          routing:
+            mentalSpaces:
+              - id: cross-mode-handoff
+                label: Cross-Mode Handoff
+                innerThinking:
+                  - Bus bay to train platform should feel like one journey, not
+                    two systems.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+      - intentId: fix
+        validLevelIds:
+          - beginner
+          - regular
+  - id: accessibility-first
+    overview:
+      name: Accessibility First
+      mindset: Mobility and sensory needs shape every routing choice
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Awareness:
+              thinking:
+                - I plan accessible routes before I travel because not every
+                  path works.
+            Engage:
+              thinking:
+                - Broken elevators or unclear priority seating breaks my whole
+                  trip.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: reliable-access
+            label: Reliable Access
+            innerThinking:
+              - An out-of-service lift is not an inconvenience — it is a barrier.
+            guidingPrinciples:
+              - Accessibility status should be as visible as departure times
+            supportingCapabilities:
+              services: []
+        byFocus:
+          accessibility:
+            mentalSpaces:
+              - id: step-free-path
+                label: Step-Free Path
+                innerThinking:
+                  - I need a guaranteed ramp or elevator route, not a maybe.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          safety:
+            mentalSpaces:
+              - id: personal-space
+                label: Personal Space
+                innerThinking:
+                  - Crowded platforms without staff presence feel unsafe, not
+                    just uncomfortable.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+          - beginner
+      - intentId: fix
+        validLevelIds:
+          - beginner
+          - regular

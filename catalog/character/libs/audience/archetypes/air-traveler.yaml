@@ -1,0 +1,241 @@
+presetId: air_traveler
+label: Air traveler
+segmentMix:
+  business-traveler: 0.4
+  leisure-traveler: 0.3
+  frequent-flyer: 0.2
+  anxious-flyer: 0.1
+specVersion: "1.0"
+methodId: air-travel
+segments:
+  - id: default
+    overview:
+      name: Air Traveler
+      mindset: Journey-aware and time-sensitive
+      journeyPace: medium
+    empathy:
+      empathy:
+        phases:
+          service:
+            Prep for Visit:
+              thinking:
+                - Did I pack for security and weather at both ends?
+            Arrival:
+              thinking:
+                - Which terminal and how long is the walk to the gate?
+        feelings:
+          positive:
+            - Relief when security and boarding stay on schedule
+          negative:
+            - Anxiety when gate changes happen with little notice
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: make-the-connection
+            label: Make the Connection
+            innerThinking:
+              - Every leg has to line up or the whole trip breaks.
+            guidingPrinciples:
+              - Buffer time beats optimism
+            supportingCapabilities:
+              services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Gate assignments on monitors
+            - How long the security line looks
+          othersObserved:
+            - Whether other passengers seem calm or stressed
+    hear:
+      hear:
+        baseline:
+          others:
+            - Boarding announcements and delay updates
+          secondHand:
+            - Social posts about this airline's reliability
+  - id: business-traveler
+    overview:
+      name: Business Traveler
+      mindset: Efficiency-first with connectivity needs
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Engage:
+              thinking:
+                - Boarding order and overhead space determine my stress level.
+            Dwell:
+              thinking:
+                - I measure this flight by usable laptop time.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: protect-productivity
+            label: Protect Productivity
+            innerThinking:
+              - Dead time in transit is missed work.
+            guidingPrinciples:
+              - Wi-Fi and power are table stakes
+            supportingCapabilities:
+              services: []
+        byFocus:
+          wifi:
+            mentalSpaces:
+              - id: work-in-transit
+                label: Work In Transit
+                innerThinking:
+                  - Can I join the call from the gate if boarding delays?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          schedule:
+            mentalSpaces:
+              - id: tight-turnaround
+                label: Tight Turnaround
+                innerThinking:
+                  - I need to land and be in a meeting within the hour.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - regular
+      - intentId: setup
+        validLevelIds:
+          - explorer
+          - beginner
+  - id: leisure-traveler
+    overview:
+      name: Leisure Traveler
+      mindset: Experience-led and budget-conscious
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: start-the-vacation-early
+            label: Start the Vacation Early
+            innerThinking:
+              - The trip should feel fun before I land.
+            guidingPrinciples: []
+            supportingCapabilities:
+              services: []
+        byFocus:
+          price:
+            mentalSpaces:
+              - id: fare-flex-tradeoff
+                label: Fare Flex Tradeoff
+                innerThinking:
+                  - Is basic economy worth it if plans might change?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: plan-the-experience
+                label: Plan the Experience
+                innerThinking:
+                  - I research seats, meals, and airport lounges ahead of time.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+  - id: frequent-flyer
+    overview:
+      name: Frequent Flyer
+      mindset: Status-aware and loyalty-optimizing
+      journeyPace: fast
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: maximize-status
+            label: Maximize Status
+            innerThinking:
+              - Upgrades and perks reward consistent behavior.
+            guidingPrinciples:
+              - Loyalty math matters on every booking
+            supportingCapabilities:
+              services: []
+        byLevel:
+          champion:
+            mentalSpaces:
+              - id: elite-expectations
+                label: Elite Expectations
+                innerThinking:
+                  - I notice when service does not match my tier.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: upgrade
+        validLevelIds:
+          - regular
+          - champion
+      - intentId: learn
+        validLevelIds:
+          - regular
+          - champion
+  - id: anxious-flyer
+    overview:
+      name: Anxious Flyer
+      mindset: Uncertainty-sensitive and reassurance-seeking
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Awareness:
+              thinking:
+                - I start worrying about the trip days before I leave home.
+            Exit & Reflect:
+              thinking:
+                - Relief hits when bags and connections are confirmed.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: reduce-unknowns
+            label: Reduce Unknowns
+            innerThinking:
+              - Surprises at security or the gate spike my stress.
+            guidingPrinciples:
+              - Clear updates beat silence
+            supportingCapabilities:
+              services: []
+        byFocus:
+          safety:
+            mentalSpaces:
+              - id: trust-the-process
+                label: Trust the Process
+                innerThinking:
+                  - I need to know what happens at each step of the journey.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+          - rejoiner

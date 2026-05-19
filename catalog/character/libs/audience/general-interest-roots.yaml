@@ -1,0 +1,150 @@
+specVersion: "1.0"
+methodId: general-audience
+types:
+  - id: zcpuu7-2CI6n
+    label: Arts and culture
+    rootCategory: arts_culture
+    featured: true
+  - id: sJG14laTrhph
+    label: Design and built environment
+    rootCategory: design_built_environment
+    featured: true
+  - id: 8K9AwIQ3ENMO
+    label: Science and technology
+    rootCategory: science_technology
+    featured: true
+  - id: mhF_1aO5TP3t
+    label: Nature and environment
+    rootCategory: nature_environment
+    featured: true
+  - id: wvYDlmfj4brN
+    label: Society and civics
+    rootCategory: society_civics
+    featured: true
+  - id: j32jjWRlkir0
+    label: Economy and work
+    rootCategory: economy_work
+    featured: true
+  - id: 3cjUgJNuA2kK
+    label: Food and lifestyle
+    rootCategory: food_lifestyle
+    featured: true
+  - id: HDFpYM_yh8JF
+    label: Knowledge and media
+    rootCategory: knowledge_media
+    featured: true
+  - id: -BnYlgF3Upya
+    label: Music
+    parentId: zcpuu7-2CI6n
+    slug: music
+    featured: true
+  - id: 3BM6OHiaEEh1
+    label: Visual art
+    parentId: zcpuu7-2CI6n
+    slug: visual-art
+  - id: zbSZIgENT8i7
+    label: Theatre
+    parentId: zcpuu7-2CI6n
+    slug: theatre
+    redirectId: ERgtqueB48Yj
+  - id: ERgtqueB48Yj
+    label: Theater
+    parentId: zcpuu7-2CI6n
+    slug: theater
+    siblingIds:
+      - zbSZIgENT8i7
+  - id: xAWqpVtAsz0R
+    label: Architecture
+    parentId: sJG14laTrhph
+    slug: architecture
+    featured: true
+  - id: 0sDwCHhhJCAP
+    label: Product design
+    parentId: sJG14laTrhph
+    slug: product-design
+  - id: 0MIG1eA944rz
+    label: Technology
+    parentId: 8K9AwIQ3ENMO
+    slug: technology
+    featured: true
+  - id: dpTjIKhksY6X
+    label: Innovation
+    parentId: 8K9AwIQ3ENMO
+    slug: innovation
+  - id: FfQkFAvCTafc
+    label: Climate
+    parentId: mhF_1aO5TP3t
+    slug: climate
+    featured: true
+    themes:
+      - environment
+  - id: ODLt532GcW45
+    label: Biodiversity
+    parentId: mhF_1aO5TP3t
+    slug: biodiversity
+    themes:
+      - environment
+  - id: VegYTnNDPGWm
+    label: Education
+    parentId: wvYDlmfj4brN
+    slug: education
+    featured: true
+  - id: UqDD8ItemP6T
+    label: Community
+    parentId: wvYDlmfj4brN
+    slug: community
+  - id: F3TLJwWepdEx
+    label: Entrepreneurship
+    parentId: j32jjWRlkir0
+    slug: entrepreneurship
+    featured: true
+  - id: wo76eVvNePv0
+    label: Wellness
+    parentId: 3cjUgJNuA2kK
+    slug: wellness
+    featured: true
+  - id: H-i8Ty1YT_HR
+    label: Travel
+    parentId: 3cjUgJNuA2kK
+    slug: travel
+  - id: ApcN5fFrJJQ4
+    label: History
+    parentId: HDFpYM_yh8JF
+    slug: history
+    featured: true
+  - id: Fq9XqUdvcRB8
+    label: News
+    parentId: HDFpYM_yh8JF
+    slug: news
+  - id: vF2MLQKDZqoJ
+    label: Healthcare
+    parentId: wvYDlmfj4brN
+    slug: healthcare
+    featured: true
+    themes:
+      - wellness
+  - id: Z8HA3J4LgNmn
+    label: Caregiving
+    parentId: vF2MLQKDZqoJ
+    slug: caregiving
+    themes:
+      - wellness
+  - id: zU3IyEdVF191
+    label: Sports fandom
+    parentId: wvYDlmfj4brN
+    slug: sports-fandom
+    featured: true
+  - id: twkeHSmr4vxF
+    label: Public transit
+    parentId: j32jjWRlkir0
+    slug: public-transit
+    featured: true
+  - id: DyokrjIbXBnV
+    label: Multimodal travel
+    parentId: twkeHSmr4vxF
+    slug: multimodal-travel
+  - id: cRTDhDfIjPKB
+    label: Urban mobility
+    parentId: sJG14laTrhph
+    slug: urban-mobility
+    featured: true

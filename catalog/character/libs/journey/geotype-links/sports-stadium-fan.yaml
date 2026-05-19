@@ -1,0 +1,23 @@
+specVersion: "1.0"
+methodId: sports-stadium
+types:
+  - slug: stadium
+    id: EVS
+    activityKindHints: [dwell]
+    jobIds: [arrive-and-enter, find-seat-section, enjoy-pre-event]
+    journeyPhaseIds: [pre_visit, arrival, navigation, live_experience]
+  - slug: parking_lot
+    id: ASP
+    activityKindHints: [commute]
+    jobIds: [arrive-and-enter]
+    journeyPhaseIds: [pre_visit, arrival, egress]
+  - slug: restaurant
+    id: FDR
+    activityKindHints: [dwell]
+    jobIds: [enjoy-pre-event, grab-meal]
+    journeyPhaseIds: [pre_visit, concessions]
+  - slug: gas_station
+    id: ASG
+    activityKindHints: [transaction]
+    jobIds: [refuel-and-go]
+    journeyPhaseIds: [pre_visit, post_visit]

@@ -1,0 +1,277 @@
+presetId: retail_consumer
+label: Retail consumer
+segmentMix:
+  default: 0.4
+  value-seeker: 0.3
+  experience-explorer: 0.2
+  cautious-evaluator: 0.1
+specVersion: "1.0"
+methodId: retail
+segments:
+  - id: default
+    overview:
+      name: Everyday Shopper
+      mindset: Practical and time-conscious
+      journeyPace: medium
+    empathy:
+      empathy:
+        phases:
+          sales:
+            Awareness:
+              thinking:
+                - I noticed the store but have not decided to visit yet.
+            Engage:
+              thinking:
+                - Is staff helpful or just pushing add-ons?
+        feelings:
+          positive:
+            - Relief when checkout is fast
+          negative:
+            - Irritation when prices are unclear
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: get-it-done
+            label: Get It Done
+            innerThinking:
+              - I want this errand off my list without surprises.
+            guidingPrinciples:
+              - Clear pricing beats clever marketing
+            supportingCapabilities:
+              services: []
+        byFocus:
+          price:
+            mentalSpaces:
+              - id: price-checker
+                label: Price Checker
+                innerThinking:
+                  - Is the promo real or just signage?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          wifi:
+            mentalSpaces:
+              - id: connected-shopper
+                label: Connected Shopper
+                innerThinking:
+                  - Can I compare reviews while I walk the aisle?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          explorer:
+            mentalSpaces:
+              - id: compare-options
+                label: Compare Options
+                innerThinking:
+                  - What makes this store different from the one I usually visit?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          regular:
+            mentalSpaces:
+              - id: habitual-shopper
+                label: Habitual Shopper
+                innerThinking:
+                  - I know where things are — just let me finish quickly.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: informed-learner
+                label: Informed Learner
+                innerThinking:
+                  - Show me proof before I change my routine.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          purchase:
+            mentalSpaces:
+              - id: confident-buyer
+                label: Confident Buyer
+                innerThinking:
+                  - If the value is obvious, I will buy today.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Prominent price signage at the entrance
+            - How long the checkout line is
+          othersObserved:
+            - Whether other shoppers look frustrated or relaxed
+    hear:
+      hear:
+        baseline:
+          others:
+            - Friends comparing deals after a visit
+          secondHand:
+            - Social posts about whether a store is worth the trip
+  - id: value-seeker
+    overview:
+      name: Value Seeker
+      mindset: Deal-driven and skeptical of hidden fees
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: avoid-surprises
+            label: Avoiding Surprises
+            innerThinking:
+              - What happens after the promo ends?
+            guidingPrinciples:
+              - No hidden fees
+              - Compare total cost of ownership
+            supportingCapabilities:
+              services: []
+        byFocus:
+          price:
+            mentalSpaces:
+              - id: unit-price-math
+                label: Unit Price Math
+                innerThinking:
+                  - I calculate per-unit cost before I commit.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: deal-hunter
+                label: Deal Hunter
+                innerThinking:
+                  - Where is the catch in this offer?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          purchase:
+            mentalSpaces:
+              - id: stack-savings
+                label: Stack Savings
+                innerThinking:
+                  - Can I combine loyalty, coupon, and financing?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - regular
+  - id: experience-explorer
+    overview:
+      name: Experience Explorer
+      mindset: Curious and experience-led
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: discover-something-new
+            label: Discover Something New
+            innerThinking:
+              - Will this visit feel worth sharing?
+            guidingPrinciples:
+              - Experiences matter as much as products
+            supportingCapabilities:
+              services: []
+        byFocus:
+          experience:
+            mentalSpaces:
+              - id: immersive-visit
+                label: Immersive Visit
+                innerThinking:
+                  - I remember how it felt, not just what I bought.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          explorer:
+            mentalSpaces:
+              - id: try-before-buy
+                label: Try Before Buy
+                innerThinking:
+                  - Let me interact before I decide.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - beginner
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - regular
+          - champion
+  - id: cautious-evaluator
+    overview:
+      name: Cautious Evaluator
+      mindset: Methodical and risk-averse
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: reduce-regret
+            label: Reduce Regret
+            innerThinking:
+              - I need confidence this will still feel right next month.
+            guidingPrinciples: []
+            supportingCapabilities:
+              services: []
+        byLevel:
+          stranger:
+            mentalSpaces:
+              - id: trust-signals
+                label: Trust Signals
+                innerThinking:
+                  - Who else like me buys here?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: research-first
+                label: Research First
+                innerThinking:
+                  - I read reviews and ask friends before switching.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          switch:
+            mentalSpaces:
+              - id: switching-cost
+                label: Switching Cost
+                innerThinking:
+                  - How painful is it to leave my current provider?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: switch
+        validLevelIds:
+          - explorer
+          - rejoiner

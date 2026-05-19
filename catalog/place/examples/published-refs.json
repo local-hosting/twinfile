@@ -1,0 +1,199 @@
+{
+  "generatedAt": "2026-11-11T15:01:18.752Z",
+  "refs": {
+    "twinfile/airport:0.2.0": {
+      "digest": "sha256:596b142c40089133b1631904c49d561b62b5bf16077176eba8d98390b7d7818f",
+      "kind": "place",
+      "path": "airport"
+    },
+    "twinfile/arena:1.2.0": {
+      "digest": "sha256:184ecb0bb74f65ac5881bd003a9cad4f6fe8963e8af04bb39c1be7631cdd450b",
+      "kind": "place",
+      "path": "arena"
+    },
+    "twinfile/base-campus:0.1.0": {
+      "digest": "sha256:624a699b7edee96505540161f9c137abb7fe7c9540b7b03cafb69dc3e49b9672",
+      "kind": "place",
+      "path": "base-campus"
+    },
+    "twinfile/base-indoor-stack:0.1.0": {
+      "digest": "sha256:ed77c4e286bbfd9a03db8dc1425545ee94947992b0319c94f8af1fe299eb31fe",
+      "kind": "place",
+      "path": "base-indoor-stack"
+    },
+    "twinfile/base-linear:0.1.0": {
+      "digest": "sha256:400cfda98b10465020e7b081d2615fb96aa83ea35b7442041236fea5ea3db87f",
+      "kind": "place",
+      "path": "base-linear"
+    },
+    "twinfile/base-open-area:0.1.0": {
+      "digest": "sha256:9ba869b1d984c58e41e4c10ee7e5a8d781ba382b4c901e38a35b3b28f3a27fd4",
+      "kind": "place",
+      "path": "base-open-area"
+    },
+    "twinfile/base-single-level:0.1.0": {
+      "digest": "sha256:3b730eb5c5ad2e6be9668bb90c7ab1e0119cf2bb269e0546bf94134c4de10f01",
+      "kind": "place",
+      "path": "base-single-level"
+    },
+    "twinfile/expo:0.2.0": {
+      "digest": "sha256:6dd3c0369784eed71f2f8920fd9a646eff371af6030503dbac281b80da63247c",
+      "kind": "place",
+      "path": "expo"
+    },
+    "twinfile/mixin-assets:0.1.0": {
+      "digest": "sha256:9b017fbdd4ab7094d054c6b8afbc3619e6c4ebd6935f63b36ba576264d8cbddd",
+      "kind": "mixin",
+      "path": "mixin-assets"
+    },
+    "twinfile/mixin-sensors:0.1.0": {
+      "digest": "sha256:eb5ef5b8d163012856790be77261ea4b14ff5a9e1cc79acd01b31e19023df09e",
+      "kind": "mixin",
+      "path": "mixin-sensors"
+    },
+    "twinfile/mobility-hub:0.2.0": {
+      "digest": "sha256:48cf6a87ec87b86dc8a56ff7db7d2bf3f256f8dffa633d3db85392886ff8cef9",
+      "kind": "place",
+      "path": "mobility-hub"
+    },
+    "twinfile/transit-hub-campus:0.1.0": {
+      "digest": "sha256:fd9381d3fad886758b62cd4591af34e656f17b97c6c2ca9e8c3e1ee87887d44c",
+      "kind": "place",
+      "path": "mobility-hub/campus"
+    },
+    "twinfile/mobility-hub:0.1.0": {
+      "digest": "sha256:fdb8c58dbc26e34af08e08144973f87273b76157249d0c29507305651e977bd1",
+      "kind": "place",
+      "path": "mobility-hub/programme"
+    },
+    "twinfile/park:0.3.0": {
+      "digest": "sha256:781b49405ef225f989792fbd0f4c7a9fef0989461bcb62a700ddd4e464c132bc",
+      "kind": "place",
+      "path": "park"
+    },
+    "twinfile/port:0.2.0": {
+      "digest": "sha256:028a4571f16040ab4b344eb1b61957a933dff389c9e1ab716ea71401de30217d",
+      "kind": "place",
+      "path": "port"
+    },
+    "twinfile/river:0.2.0": {
+      "digest": "sha256:d15f425a5bf2c9eb132219ee65ab02aab4dc1539a411782b4b26b2c34042b6b8",
+      "kind": "place",
+      "path": "river"
+    },
+    "twinfile/shop:0.2.0": {
+      "digest": "sha256:2e94362ec0a716f193c7fe6a72c4413817888298a90f07405a8ee0182cf9babe",
+      "kind": "place",
+      "path": "shop"
+    },
+    "twinfile/mixin-dam-release:0.1.0": {
+      "digest": "sha256:c93f20a021ef3554739bdfb573ef9127aeb196488b587f051e926afb07363b91",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-dam-release"
+    },
+    "twinfile/mixin-drought:0.1.0": {
+      "digest": "sha256:f45fbaabfd279fb3f9737635b00ce5e01fd21764b0db4e0387c4bf816166164b",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-drought"
+    },
+    "twinfile/mixin-earthquake:0.1.0": {
+      "digest": "sha256:ac06ac0fc5871335ae5df25a6683c69039a64569cd2cff291ecc54127354b45e",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-earthquake"
+    },
+    "twinfile/mixin-field-damage:0.1.0": {
+      "digest": "sha256:789d23fc8862f4edc7694cd8545f4f2e3ca5cbb1d217f2e9bb48da65695487fb",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-field-damage"
+    },
+    "twinfile/mixin-flood:0.1.0": {
+      "digest": "sha256:3b29b466f1e45c1664f10b9f3c2776319a307ba835aa3e7f7e64cc2ce0049709",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-flood"
+    },
+    "twinfile/mixin-litter-pollution:0.1.0": {
+      "digest": "sha256:337d57370320b800ed4c2d2ca604a639e5a1c6f0b90d74a43d275ccbb5f60081",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-litter-pollution"
+    },
+    "twinfile/mixin-power-outage:0.1.0": {
+      "digest": "sha256:a81ebdb7d89836efe13cd9c9590d9855733b3d0f4f25a3295d28cfc5fbf16150",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-power-outage"
+    },
+    "twinfile/mixin-recovery-resilience:0.1.0": {
+      "digest": "sha256:e696aaa45f09ad445feb2fc5201159714da33ace4055897dd7fb72b7123a044d",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-recovery-resilience"
+    },
+    "twinfile/mixin-severe-weather:0.1.0": {
+      "digest": "sha256:9bdecb18359853f28b5d6251e986929fbd0ff677a680c0149039ff90b8648084",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-severe-weather"
+    },
+    "twinfile/mixin-slope-movement:0.1.0": {
+      "digest": "sha256:1ffb24940c3e216228401d6c3beac9245421383b33b653955ff2e44732a54996",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-slope-movement"
+    },
+    "twinfile/mixin-transit-disruption:0.1.0": {
+      "digest": "sha256:ede826cefa4d44eaa4a16223ab3efff7be2fd5f829386571c4273142d8254a7c",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-transit-disruption"
+    },
+    "twinfile/mixin-tsunami:0.1.0": {
+      "digest": "sha256:17f9ee38f964f6f99262541518c73491b69b7e1ec42116f0ac96c8049edc30db",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-tsunami"
+    },
+    "twinfile/mixin-volcanic-ash:0.1.0": {
+      "digest": "sha256:0041bd5428b97a79472e2f1fb316e3f63db4690a0e995e856d0a5891b3fcb609",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-volcanic-ash"
+    },
+    "twinfile/mixin-wildfire:0.1.0": {
+      "digest": "sha256:2f46dc81d57c529059825acd2852876eca304461291ddc285fb16e9c0ef3e7a3",
+      "kind": "mixin",
+      "path": "../simulator/mixins/mixin-wildfire"
+    }
+  },
+  "catalog": {
+    "byKind": {
+      "place": [
+        "twinfile/airport:0.2.0",
+        "twinfile/arena:1.2.0",
+        "twinfile/base-campus:0.1.0",
+        "twinfile/base-indoor-stack:0.1.0",
+        "twinfile/base-linear:0.1.0",
+        "twinfile/base-open-area:0.1.0",
+        "twinfile/base-single-level:0.1.0",
+        "twinfile/expo:0.2.0",
+        "twinfile/mobility-hub:0.1.0",
+        "twinfile/mobility-hub:0.2.0",
+        "twinfile/park:0.3.0",
+        "twinfile/port:0.2.0",
+        "twinfile/river:0.2.0",
+        "twinfile/shop:0.2.0",
+        "twinfile/transit-hub-campus:0.1.0"
+      ],
+      "mixin": [
+        "twinfile/mixin-assets:0.1.0",
+        "twinfile/mixin-dam-release:0.1.0",
+        "twinfile/mixin-drought:0.1.0",
+        "twinfile/mixin-earthquake:0.1.0",
+        "twinfile/mixin-field-damage:0.1.0",
+        "twinfile/mixin-flood:0.1.0",
+        "twinfile/mixin-litter-pollution:0.1.0",
+        "twinfile/mixin-power-outage:0.1.0",
+        "twinfile/mixin-recovery-resilience:0.1.0",
+        "twinfile/mixin-sensors:0.1.0",
+        "twinfile/mixin-severe-weather:0.1.0",
+        "twinfile/mixin-slope-movement:0.1.0",
+        "twinfile/mixin-transit-disruption:0.1.0",
+        "twinfile/mixin-tsunami:0.1.0",
+        "twinfile/mixin-volcanic-ash:0.1.0",
+        "twinfile/mixin-wildfire:0.1.0"
+      ]
+    }
+  }
+}

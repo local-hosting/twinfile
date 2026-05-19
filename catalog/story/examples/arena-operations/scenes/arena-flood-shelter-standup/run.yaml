@@ -1,0 +1,21 @@
+role: run
+from: twinfile/place/arena:1.2.0
+id: arena-flood-shelter-standup
+name: Flood shelter stand-up
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/situation/severe-weather:1.0.0
+domains:
+  - safety
+args:
+  attendance: 4000
+  target_role: shelter
+  resources:
+    cots: 600
+    water_liters: 8000
+  warningAt: severe-weather.warning
+use:
+  runner: npm:@twinfile/runner-hydraulic@^0
+catalog:
+  parent: twinfile/arena:1.2.0

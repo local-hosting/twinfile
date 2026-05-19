@@ -1,0 +1,209 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: arena
+name: Madison Square Garden
+version: 1.2.0
+stability: example
+geotype:
+  primary: stadium
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: Madison Square Garden
+      kind: arena
+      timezone: America/New_York
+      ext:
+        lat: 40.7505
+        lon: -73.9934
+        h3: 892a100d2cbffff
+      published: false
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+      - id: l1
+        name: Level 1
+        ordinal: 1
+  - spaces:
+      - id: concourse
+        name: Concourse building
+        kind: concourse
+        level: ground
+        exposure: indoor
+        roles:
+          - shelter
+      - id: plaza-east
+        name: East plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+      - id: plaza-west
+        name: West plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+      - id: lot-c
+        name: Parking lot C
+        kind: parking
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+      - id: bowl-a
+        name: Bowl section A
+        kind: seating
+        level: l1
+        exposure: outdoor
+        capacity: 3000
+        roles:
+          - seating
+  - openings:
+      - id: gate-1
+        kind: gate
+        connects:
+          - concourse-lower
+          - plaza-east
+        width_m: 3
+        state: open
+        roles:
+          - exit
+          - gate
+      - id: gate-2
+        kind: gate
+        connects:
+          - concourse-lower
+          - plaza-west
+        width_m: 3
+        state: open
+        roles:
+          - exit
+          - gate
+      - id: gate-3
+        kind: gate
+        connects:
+          - concourse-lower
+          - lot-c
+        width_m: 6
+        state: open
+        roles:
+          - exit
+          - gate
+      - id: gate-4
+        kind: gate
+        connects:
+          - concourse-lower
+          - lot-c
+        width_m: 3
+        state: open
+        roles:
+          - gate
+      - id: gate-tunnel-plaza
+        kind: gate
+        connects:
+          - concourse-tunnel-north
+          - plaza-east
+        width_m: 3
+        state: open
+        roles:
+          - exit
+          - gate
+  - routes:
+      - id: tunnel-plaza-east
+        name: Tunnel to east plaza
+        from: concourse-tunnel-north
+        to: plaza-east
+        length_m: 40
+        kind: ramp
+        step_free: true
+      - id: plaza-lot
+        name: East plaza to lot C
+        from: plaza-east
+        to: lot-c
+        length_m: 200
+        kind: path
+        step_free: true
+  - assets:
+      - id: gate-bowl
+        name: Bowl entry gate
+        kind: gate
+        space: bowl-a
+        state: active
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - concourse-lower
+          - concourse-tunnel-north
+        exit:
+          - gate-1
+          - gate-2
+          - gate-3
+          - concourse-gate-5
+          - concourse-gate-6
+          - gate-tunnel-plaza
+        outdoor:
+          - plaza-east
+          - plaza-west
+          - lot-c
+      actions:
+        - at: warning
+          set:
+            gate-4:
+              state: closed
+            plaza-east:
+              state: closed
+  - bind:
+      for: venue-turnstile-flow
+      roles:
+        gate:
+          - gate-1
+          - gate-2
+          - gate-3
+        seating:
+          - bowl-a
+      actions:
+        - at: pre-open
+          set: {}
+  - copy: ./parts/concourse
+    into: concourse
+processors:
+  - id: context-situations
+    type: twinfile/mod.situation-in@0.1.0
+    outlets:
+      - port: alert
+        to:
+          processor: context-signals
+          port: alert
+  - id: context-signals
+    type: twinfile/mod.signal-hub@0.1.0
+  - id: concourse-scope
+    type: twinfile/mod.building-scope@0.1.0
+    bind:
+      anchor: ref:building:concourse
+    outlets:
+      - port: scoped
+        to:
+          processor: map-concourse
+          port: building
+  - id: standup
+    type: twinfile/mod.shelter-standup@0.1.0
+    bind:
+      focus: ref:space:concourse-lower
+      cots: ref:asset:concourse-cot-stock
+      water: ref:asset:concourse-water-stock
+  - id: gtfs
+    type: twinfile/mod.bridge-import@0.1.0
+    outlets:
+      - port: place
+        to:
+          processor: map-campus
+          port: in
+  - id: map-campus
+    type: twinfile/mod.map-sink@0.1.0
+  - id: map-concourse
+    type: twinfile/mod.map-sink@0.1.0

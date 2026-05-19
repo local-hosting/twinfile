@@ -1,0 +1,28 @@
+specVersion: "1.0"
+methodId: hospital-visit
+types:
+  - slug: hospital
+    id: HMH
+    activityKindHints: [dwell, service]
+    jobIds: [support-loved-one, find-way-to-department, wait-comfortably]
+    journeyPhaseIds: [pre_visit, arrival, navigation, on_site]
+  - slug: hospital_emergency_room
+    id: ESH
+    activityKindHints: [dwell, service]
+    jobIds: [support-loved-one, wait-comfortably]
+    journeyPhaseIds: [arrival, on_site]
+  - slug: pharmacy
+    id: RSP
+    activityKindHints: [transaction]
+    jobIds: [fill-prescription, pick-up-essentials]
+    journeyPhaseIds: [pre_visit, on_site, post_visit]
+  - slug: cafe
+    id: FDC
+    activityKindHints: [dwell]
+    jobIds: [take-break, wait-comfortably]
+    journeyPhaseIds: [concessions, on_site]
+  - slug: parking_lot
+    id: ASP
+    activityKindHints: [commute]
+    jobIds: [find-way-to-department]
+    journeyPhaseIds: [pre_visit, arrival]

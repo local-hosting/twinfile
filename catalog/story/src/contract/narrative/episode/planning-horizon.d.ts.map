@@ -1,0 +1,1 @@
+{"version":3,"file":"planning-horizon.d.ts","sourceRoot":"","sources":["planning-horizon.ts"],"names":[],"mappings":"AAKA,wBAAgB,0BAA0B,CAAC,KAAK,CAAC,EAAE,MAAM,GAAG,MAAM,CAQjE;AAED,wBAAgB,oBAAoB,CAAC,KAAK,EAAE;IAC1C,aAAa,CAAC,EAAE,MAAM,CAAC;IACvB,WAAW,CAAC,EAAE,MAAM,CAAC;IACrB,mBAAmB,EAAE,MAAM,CAAC;IAC5B,MAAM,CAAC,EAAE,MAAM,MAAM,CAAC;CACvB,GAAG,MAAM,CAoBT"}

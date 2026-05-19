@@ -1,0 +1,5 @@
+{"device_id":"gauge-upstream","observed_property":"stage","value":4.2,"unit":"m","observed_at":"2026-06-12T13:00:00Z"}
+{"device_id":"gauge-upstream","observed_property":"stage","value":7.8,"unit":"m","observed_at":"2026-06-12T13:05:00Z"}
+{"device_id":"gauge-upstream","observed_property":"stage","value":9.5,"unit":"m","observed_at":"2026-06-12T13:10:00Z"}
+{"device_id":"gauge-upstream","observed_property":"stage","value":11.2,"unit":"m","observed_at":"2026-06-12T13:15:00Z"}
+{"device_id":"gauge-upstream","observed_property":"stage","value":10.1,"unit":"m","observed_at":"2026-06-12T13:20:00Z"}

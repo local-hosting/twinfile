@@ -1,0 +1,11 @@
+twinfile: 2
+kind: mixin
+id: mixin-sensors
+name: Starter sensors layer — occupancy probes on spaces
+version: 0.1.0
+stability: example
+steps:
+  - sensors:
+      - id: starter-sensor
+        name: Starter sensor
+        observes: occupancy
