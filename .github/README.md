@@ -9,7 +9,7 @@
 
 Per-package `.github/` under `packages/*` was removed — those workflows targeted the old split `twinfile/*` repos.
 
-**CI install:** `yarn` resolves `portal:` / `link:` to sibling repos (`../geotypes`, `../frameworks`, `../geokit`). The workflow shallow-clones those private repos before install (requires repo secret **`TF_PACKAGES_TOKEN`**: a PAT or fine-grained token with **read** access to those repos). **`@local-hosting/geotypes` is not on GitHub Packages yet** — CI cannot use registry-only install. Optional: `packages/tooling/scripts/ci-prepare-monorepo-install.mjs` for a future registry-only path.
+**CI install:** `yarn` resolves `portal:` / `link:` to sibling repos (`../geotypes`, `../frameworks`, `../geokit`, and geotypes’ `../../westlane/isocanvas`). The workflow shallow-clones those private repos before install (requires repo secret **`TF_PACKAGES_TOKEN`**: a PAT with **read** on those repos, including **`westlane/isocanvas`**). Optional: `packages/tooling/scripts/ci-prepare-monorepo-install.mjs` for a future registry-only path.
 
 **Env (CI and local):**
 

@@ -29,9 +29,12 @@ jobs:
             exit 1
           fi
           parent="$(dirname "$GITHUB_WORKSPACE")"
+          work_root="$(dirname "$parent")"
           for repo in geotypes frameworks geokit; do
             git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/local-hosting/${repo}.git" "${parent}/${repo}"
           done
+          mkdir -p "${work_root}/westlane"
+          git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/westlane/isocanvas.git" "${work_root}/westlane/isocanvas"
 
       - uses: actions/setup-node@v4
         with:
