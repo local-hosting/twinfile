@@ -28,4 +28,4 @@ The `litter-pollution` `bind:` item binds cleanup roles to pier + warehouse zone
 
 ## Related
 
-- [`Twinfile.yaml`](../Twinfile.yaml) · [`../PARTS.md`](../PARTS.md) (nested `copy:` — arena, airport, mobility campus)
+- [`Twinfile.yaml`](../Twinfile.yaml) · [`../PARTS.md`](../../PARTS.md) (nested `copy:` — arena, airport, mobility campus)

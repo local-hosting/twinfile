@@ -28,7 +28,7 @@ Illustrative single-terminal airport pinned at **John F. Kennedy International A
 | `ground` | Ground | 0 |
 | `airside` | Airside | 1 |
 
-Pattern guide: [campus-building-floor.md](../../../../spec/doc/place/campus-building-floor.md) (Pattern B — building copies its floor).
+Pattern guide: [campus-building-floor.md](../../../../../packages/spec/doc/place/campus-building-floor.md) (Pattern B — building copies its floor).
 
 ## Drill-down (future)
 
@@ -36,7 +36,7 @@ When adding gate/hall detail, add patches to [`parts/terminal-a/Twinfile.yaml`](
 
 ## Topology (this site)
 
-Vocabulary: [place topology taxonomy](../../../../spec/doc/place/topology-taxonomy.md).
+Vocabulary: [place topology taxonomy](../../../../../packages/spec/doc/place/topology-taxonomy.md).
 
 | Mobility | Id | Between regions |
 | --- | --- | --- |
