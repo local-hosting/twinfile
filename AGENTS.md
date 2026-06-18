@@ -1,6 +1,6 @@
 # Twinfile monorepo
 
-**Layout:** [`catalog/manifest.yaml`](catalog/manifest.yaml), [`README.md`](README.md), glossary [repository layout](packages/spec/doc/glossary.md#repository-layout-prose).
+**Layout:** [`catalog/README.md`](catalog/README.md), [`README.md`](README.md), glossary [repository layout](packages/spec/doc/glossary.md#repository-layout-prose).
 
 | Layer | Path |
 | --- | --- |
