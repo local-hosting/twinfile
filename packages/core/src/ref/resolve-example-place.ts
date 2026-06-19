@@ -10,11 +10,11 @@ import { readYamlDocument } from '../validate/validate-yaml.js';
 import { twinfilePlaceLayerPaths } from '../load/twinfile-paths.js';
 import { isPatchesTwinfile, parseManifestPatches } from '../load/twinfile-instructions.js';
 import { RefResolver } from './ref-resolver.js';
-import { examplePlaceDir } from '../paths/examples-catalog.js';
+import { flatExampleUnitDir } from '../paths/examples-catalog.js';
+import { resolvePlaceExamplesCatalogRoot } from '../paths/catalog-layout.js';
 
 const LIST_SKIP = new Set(['conf', 'presets', 'fixtures', 'docs', 'node_modules', 'dist', 'viewer', 'scripts']);
 import {
-  defaultExamplesRoot,
   loadTwinLocalMap,
   loadTwinLocalMapMerged,
   resolveTwinLocalPath,
@@ -45,7 +45,7 @@ function resolveTwinfileDirFromRef(ref: TwinfileRef, examplesRoot: string): stri
   }
   const resolver = new RefResolver();
   const { name } = parseRefName(normalized, resolver);
-  return examplePlaceDir(examplesRoot, name);
+  return flatExampleUnitDir(examplesRoot, name);
 }
 
 export function resolvedExamplePlaceFromTwinfileDir(
@@ -69,7 +69,7 @@ export function resolveExamplePlace(
   ref: TwinfileRef,
   options: ResolveExamplePlaceOptions = {},
 ): ResolvedExamplePlace {
-  const examplesRoot = options.examplesRoot ?? defaultExamplesRoot();
+  const examplesRoot = options.examplesRoot ?? resolvePlaceExamplesCatalogRoot();
   const unitRoot = resolveTwinfileDirFromRef(ref, examplesRoot);
   return resolvedExamplePlaceFromTwinfileDir(unitRoot, ref);
 }
@@ -88,11 +88,11 @@ export function listSiteSlugs(examplesRoot: string): string[] {
 }
 
 /** List published-style place refs under the flat place catalog. */
-export function listExamplePlaceRefs(examplesRoot: string = defaultExamplesRoot()): TwinfileRef[] {
+export function listExamplePlaceRefs(examplesRoot: string = resolvePlaceExamplesCatalogRoot()): TwinfileRef[] {
   const names = listSiteSlugs(examplesRoot);
   const out: TwinfileRef[] = [];
   for (const name of names) {
-    const unitDir = examplePlaceDir(examplesRoot, name);
+    const unitDir = flatExampleUnitDir(examplesRoot, name);
     const twinfile = join(unitDir, 'Twinfile.yaml');
     if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) continue;
     const head = readYamlDocument(twinfile).value as Record<string, unknown>;

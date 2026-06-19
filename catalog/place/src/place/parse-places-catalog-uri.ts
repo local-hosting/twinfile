@@ -2,6 +2,8 @@ import { statSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { resolve } from 'node:path';
 
+import { resolveExamplesRoot } from '@local-hosting/twinfile-core';
+
 export type ParsedPlacesCatalog =
   | { kind: 'file'; rootDir: string }
   | { kind: 'oci'; registry: string; repositoryPrefix?: string };
@@ -48,17 +50,14 @@ export type PlacesCatalogResolveInput = {
   placesCatalogUri?: string;
 };
 
-/** Resolve catalog from explicit URI, env, or legacy examples root. */
+/** Resolve catalog from an explicit URI, else the monorepo place catalog. */
 export function resolvePlacesCatalog(
   input: PlacesCatalogResolveInput = {},
 ): ParsedPlacesCatalog | undefined {
-  const fromUri = input.placesCatalogUri?.trim() || process.env.TF_PLACES_CATALOG_URI?.trim();
+  const fromUri = input.placesCatalogUri?.trim();
   if (fromUri) {
     return parsePlacesCatalogUri(fromUri);
   }
-  const examplesRoot = process.env.TF_EXAMPLES_ROOT?.trim();
-  if (examplesRoot && statSync(examplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
-    return { kind: 'file', rootDir: resolve(examplesRoot) };
-  }
-  return undefined;
+  const examplesRoot = resolveExamplesRoot();
+  return examplesRoot ? { kind: 'file', rootDir: examplesRoot } : undefined;
 }

@@ -49,7 +49,7 @@ export type PlaceMount = TwinfilePlaceMount;
 export type ResolvePlaceMountOptions = {
   /**
    * Where place units are listed — `file:///path/to/examples` or `oci://ghcr.io/twinfile`.
-   * Falls back to `TF_PLACES_CATALOG_URI`, then `examplesRoot` / `TF_EXAMPLES_ROOT`.
+   * Defaults to the monorepo place catalog.
    */
   placesCatalogUri?: string;
   /** Directory for OCI pull cache (default: os temp). */

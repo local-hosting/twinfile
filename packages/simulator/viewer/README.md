@@ -19,4 +19,4 @@ yarn workbench    # monorepo root → http://localhost:4173
 
 Static: `index.html`, `viewer-app.js`. Catalog listing without HTTP: `listViewerCatalog` from `@local-hosting/twinfile-simulator/viewer`.
 
-Env: **`TF_EXAMPLES_ROOT`**, **`TF_SIMULATOR_ROOT`**.
+Env: **`TF_TWINFILE_ROOT`** only when running outside the repo.

@@ -7,10 +7,10 @@ import { fileURLToPath } from 'node:url';
 
 const require = createRequire(import.meta.url);
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const simulatorRoot = resolve(process.env.TF_SIMULATOR_ROOT ?? join(root, '../simulator'));
+const simulatorRoot = resolve(root, '../simulator');
 const simulatorDist = join(simulatorRoot, 'dist/index.js');
 if (!statSync(simulatorDist, { throwIfNoEntry: false })?.isFile()) {
-  console.error(`run-conformance: missing ${simulatorDist} (build @local-hosting/twinfile-simulator or set TF_SIMULATOR_ROOT)`);
+  console.error(`run-conformance: missing ${simulatorDist} (build @local-hosting/twinfile-simulator)`);
   process.exit(1);
 }
 
@@ -348,8 +348,6 @@ function composeCaseProblem(examplesRoot, c) {
 function runComposeVector(vector) {
   const data = loadJson(vector.files[0]);
   const examplesRoot = mkdtempSync(join(tmpdir(), 'tf-compose-'));
-  const prevExamples = process.env.TF_EXAMPLES_ROOT;
-  process.env.TF_EXAMPLES_ROOT = examplesRoot;
   try {
     for (const [name, mixin] of Object.entries(data.mixins)) {
       writeJsonTree(join(examplesRoot, 'mixins', name), {
@@ -372,8 +370,6 @@ function runComposeVector(vector) {
     passVector(vector.id, `${data.cases.length} compose case(s)`);
   } finally {
     rmSync(examplesRoot, { recursive: true, force: true });
-    if (prevExamples === undefined) delete process.env.TF_EXAMPLES_ROOT;
-    else process.env.TF_EXAMPLES_ROOT = prevExamples;
   }
 }
 

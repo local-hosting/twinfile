@@ -12,9 +12,6 @@ jobs:
   twinfile:
     runs-on: ubuntu-latest
     env:
-      TF_TWINFILE_ROOT: ${{ github.workspace }}
-      TF_PLACE_CATALOG: ${{ github.workspace }}/catalog/place/examples
-      TF_EXAMPLES_ROOT: ${{ github.workspace }}/catalog/place/examples
       NODE_AUTH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN }}
     steps:
       - uses: actions/checkout@v4

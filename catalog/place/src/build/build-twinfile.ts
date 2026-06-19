@@ -122,7 +122,7 @@ export async function buildTwinfile(
       return err([
         {
           code: 'E_BUILD',
-          message: 'Scenario build requires examplesRoot or TF_EXAMPLES_ROOT',
+          message: 'Scenario build requires examplesRoot or TF_TWINFILE_ROOT',
           file: unit.twinfilePath,
         },
       ]);
@@ -144,7 +144,7 @@ export async function buildTwinfile(
       return err([
         {
           code: 'E_BUILD',
-          message: 'Place with from or with requires examplesRoot or TF_EXAMPLES_ROOT',
+          message: 'Place with from or with requires examplesRoot or TF_TWINFILE_ROOT',
           file: unit.twinfilePath,
         },
       ]);

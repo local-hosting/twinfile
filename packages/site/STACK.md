@@ -14,7 +14,7 @@ examples (golden catalog) + @local-hosting/twinfile-simulator (situations / view
 
 **Authoritative model:** Twinfile units (`twinfile/name:semver`, `place/` layers, `Place.data`, plans, scenarios). **Not** archived venue YAML trees, **not** AXM six-plane docs.
 
-**Host production path:** `twin pull` → build → run/disclose (OCI digest pins). Local dev: `resolveExamplePlace` + `TF_EXAMPLES_ROOT` or `examples/twin.local.yaml`.
+**Host production path:** `twin pull` → build → run/disclose (OCI digest pins). Local dev: `resolveExamplePlace` + `catalog/place/examples/twin.local.yaml`.
 
 ## Public web (separate from open-stack repos)
 

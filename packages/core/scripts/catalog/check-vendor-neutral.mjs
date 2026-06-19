@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { runVendorNeutralCli } from '../../../tooling/scripts/vn-scan-lib.mjs';
 
-import { resolveExamplesCatalogRoot } from './resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot } from '../../dist/index.js';
 
-runVendorNeutralCli(resolveExamplesCatalogRoot(import.meta.url));
+runVendorNeutralCli(resolvePlaceExamplesCatalogRoot());

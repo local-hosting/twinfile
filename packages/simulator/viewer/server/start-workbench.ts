@@ -8,9 +8,7 @@ import {
 } from '@local-hosting/twinfile-place';
 import {
   resolveExamplesRoot,
-  resolveExamplesRoots,
   resolveSimulatorRoot,
-  resolveSimulatorRoots,
 } from '@local-hosting/twinfile-core';
 
 import { readTwinfileOutputCss } from '../styles/read-twinfile-output-css.js';
@@ -152,19 +150,11 @@ export function startWorkbench(unitDir: string, port = 4173, options: StartWorkb
     options.incorporate && options.incorporate.length > 0
       ? viewerRootsFromPaths(options.incorporate)
       : (() => {
-          const examplesRoots = resolveExamplesRoots(unitDir);
-          const simulatorRoots = resolveSimulatorRoots(unitDir);
-          if (examplesRoots.length === 0) {
-            const fallback = resolveExamplesRoot(process.cwd());
-            if (fallback) examplesRoots.push(fallback);
-          }
-          if (simulatorRoots.length === 0) {
-            const fallback = resolveSimulatorRoot(process.cwd());
-            if (fallback) simulatorRoots.push(fallback);
-          }
+          const examplesRoot = resolveExamplesRoot(unitDir);
+          const simulatorRoot = resolveSimulatorRoot(unitDir);
           return {
-            examplesRoots,
-            simulatorRoots,
+            examplesRoots: examplesRoot ? [examplesRoot] : [],
+            simulatorRoots: simulatorRoot ? [simulatorRoot] : [],
           };
         })();
 

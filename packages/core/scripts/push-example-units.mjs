@@ -1,29 +1,25 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
 import { readFileSync, statSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { findTwinfileDirs } from './catalog/find-twinfile-dirs.mjs';
 import { resolveTwinfileHeadPath } from './catalog/resolve-twinfile-dir.mjs';
-import { resolveExamplesCatalogRoot } from './catalog/resolve-examples-catalog-root.mjs';
-import { resolveTwinfileRootFromPlaceCatalog, resolveTypeExamplesRoot } from './catalog/resolve-twinfile-paths.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../dist/index.js';
 
-const coreRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const twinCli = resolveTwinCli(import.meta.url);
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const resolvedTwinfileRoot = resolveTwinfileRootFromPlaceCatalog(examplesRoot);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const resolvedTwinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamplesRoot = resolveTypeExamplesRoot('story', resolvedTwinfileRoot);
-const simulatorRoot = resolve(process.env.TF_SIMULATOR_ROOT ?? join(coreRoot, '../simulator'));
+const simulatorRoot = resolveSimulatorRoot();
 
 function runTwin(args) {
   return spawnSync(process.execPath, [twinCli, ...args], {
     encoding: 'utf8',
     stdio: 'inherit',
-    env: { ...process.env, TF_EXAMPLES_ROOT: examplesRoot, TF_SIMULATOR_ROOT: simulatorRoot },
   });
 }
 

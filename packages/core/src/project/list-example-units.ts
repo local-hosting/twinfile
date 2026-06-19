@@ -1,7 +1,7 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/resolve-twinfile-root.js';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/catalog-layout.js';
 
 export const TWIN_EXAMPLE_TYPES = ['place', 'resource', 'character', 'story'] as const;
 

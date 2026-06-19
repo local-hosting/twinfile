@@ -15,7 +15,7 @@ export async function openServedPlace(
 ): Promise<{ ok: true; built: BuildTwinfileResult } | { ok: false; error: string }> {
   const dir = resolve(unitDir);
   const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
-  if (!examplesRoot) return { ok: false, error: 'TF_EXAMPLES_ROOT required' };
+  if (!examplesRoot) return { ok: false, error: 'TF_TWINFILE_ROOT required' };
   const built = await buildTwinfile(dir, {
     examplesRoot,
         writeLock: false,
