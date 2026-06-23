@@ -1,19 +1,16 @@
-/** Default pinned schema for badge icons (override with `TF_DTPR_SCHEMA` or inline `dtpr.schema`). */
+/** Default pinned schema for badge icons (override with inline `dtpr.schema`). */
 export const DEFAULT_DTPR_SCHEMA_VERSION = 'dtpr@2026-09-01-beta';
+
+const DTPR_API_BASE = 'https://api.dtpr.io/api/v2';
 
 const DTPR_ELEMENT_ID = /^[a-z0-9_]+$/;
 
 export function dtprApiBaseUrl(): string {
-  const base = process.env.TF_DTPR_API_BASE?.trim();
-  if (base) return base.replace(/\/$/, '');
-  return 'https://api.dtpr.io/api/v2';
+  return DTPR_API_BASE;
 }
 
 export function resolveDtprSchemaVersion(inlineSchema?: string): string {
-  const fromEnv = process.env.TF_DTPR_SCHEMA?.trim();
-  if (fromEnv) return fromEnv;
-  if (inlineSchema?.trim()) return inlineSchema.trim();
-  return DEFAULT_DTPR_SCHEMA_VERSION;
+  return inlineSchema?.trim() || DEFAULT_DTPR_SCHEMA_VERSION;
 }
 
 export function dtprElementIconUrl(schemaVersion: string, elementId: string): string | null {

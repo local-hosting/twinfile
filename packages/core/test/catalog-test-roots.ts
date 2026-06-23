@@ -1,11 +1,11 @@
 import { join } from 'node:path';
 
+import { goldenSceneRunRelPath } from '../src/paths/golden-scene-runs.js';
 import {
-  goldenSceneRunRelPath,
   resolvePlaceExamplesCatalogRoot,
   resolveSimulatorRoot,
   resolveTwinfileRoot,
-} from '@local-hosting/twinfile-core';
+} from '../src/paths/catalog-layout.js';
 
 export function testExamplesRoot(importMetaDir: string): string {
   return resolvePlaceExamplesCatalogRoot(resolveTwinfileRoot(importMetaDir));

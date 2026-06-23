@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { parsePlacesCatalogUri, resolvePlaceMount, resolvePlacesCatalog } from '../src/place/place-mount.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

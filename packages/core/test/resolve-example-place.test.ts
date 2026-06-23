@@ -4,7 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 import { resolveExamplePlace } from '../src/ref/resolve-example-place.js';
 import { loadTwinLocalMap } from '../src/ref/twin-local-map.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

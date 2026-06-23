@@ -15,7 +15,7 @@ import { runReplayLines } from '@local-hosting/twinfile-core';
 import { createRunPayload } from '@local-hosting/twinfile-simulator';
 import { loadFeedRows, resolveTrackFeeds } from '@local-hosting/twinfile-simulator';
 import { pullFeedRows, feedRowsToJsonl } from '@local-hosting/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from './test-examples-root.js';
+import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const examplesRoot = testExamplesRoot(importDir);

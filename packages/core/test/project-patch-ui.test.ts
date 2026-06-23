@@ -9,7 +9,7 @@ import { parseModuleGraphFromTwinfile } from '../src/patch/module-graph-twinfile
 import { loadPatchModuleTypeCatalog } from '../src/patch/module-type-catalog.js';
 import { projectPatchGraphForUi } from '../src/patch/project-patch-ui.js';
 import type { PatchGraphV1 } from '../src/types/patch-graph.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const examplesRoot = testExamplesRoot(importDir);
