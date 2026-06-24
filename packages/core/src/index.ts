@@ -84,7 +84,6 @@ export {
 export { listDtprDisclosures, type DtprDisclosureRow } from './dtpr/list-disclosures.js';
 export {
   isExamplesCatalogRoot,
-  isFlatExamplesCatalogRoot,
   listFlatExampleUnitNames,
 } from './paths/examples-catalog.js';
 export { resolveExamplesRoot } from './paths/resolve-examples-root.js';

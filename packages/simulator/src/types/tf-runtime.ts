@@ -77,7 +77,7 @@ export class TFPlace {
     const twinfile = typeof unit === 'string' ? Twinfile.at(unit) : unit;
     const dir = twinfile.root;
     const examplesRoot =
-      options.examplesRoot ?? resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
+      options.examplesRoot ?? resolveExamplesRoot(dir);
     if (!examplesRoot) {
       return err([{ code: 'E_CATALOG', message: 'TF_TWINFILE_ROOT or examplesRoot required', file: dir }]);
     }

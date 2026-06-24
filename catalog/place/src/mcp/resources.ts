@@ -40,9 +40,6 @@ export type McpResourceTemplate = {
 
 const JSON_MIME = 'application/json';
 
-/** @deprecated Use {@link mcpResourceTemplates} for the served unit refKey. */
-export const MCP_RESOURCE_TEMPLATES: McpResourceTemplate[] = mcpResourceTemplates('twinfile/_:0.0.0');
-
 export async function listTwinResources(
   unitDir: string,
   options: McpServeOptions = {},

@@ -4,7 +4,7 @@ import { join } from 'node:path';
 
 import { DISCOVER_TWIN_HEAD_YAML_NAMES } from '../../dist/index.js';
 
-export function resolveTwinfileDirPath(twinfileDir) {
+export function resolveTwinfileHeadPath(twinfileDir) {
   for (const name of DISCOVER_TWIN_HEAD_YAML_NAMES) {
     const path = join(twinfileDir, name);
     if (statSync(path, { throwIfNoEntry: false })?.isFile()) return path;
@@ -12,7 +12,6 @@ export function resolveTwinfileDirPath(twinfileDir) {
   return undefined;
 }
 
-export const resolveTwinfileHeadPath = resolveTwinfileDirPath;
 
 export function isRunHeadPath(headPath) {
   const base = headPath.split('/').pop() ?? '';

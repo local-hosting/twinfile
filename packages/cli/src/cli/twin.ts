@@ -494,7 +494,7 @@ async function runQuery(): Promise<number> {
 
 async function runRunScenario(scenarioDir: string): Promise<number> {
   const dir = resolve(scenarioDir);
-  const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(dir);
   if (!examplesRoot) {
     console.error('twin run requires TF_TWINFILE_ROOT');
     return 2;
@@ -542,7 +542,7 @@ async function runRun(): Promise<number> {
 async function runVerify(): Promise<number> {
   const dir = resolve(argv[1] ?? '.');
   const frozen = argv.includes('--frozen');
-  const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(dir);
   if (!examplesRoot) {
     console.error('twin verify requires TF_TWINFILE_ROOT');
     return 2;
@@ -751,7 +751,7 @@ async function runDisclose(): Promise<number> {
   }
   const json = argv.includes('--json');
   const yaml = argv.includes('--yaml');
-  const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(dir);
   const built = await buildTwinfile(dir, {
     examplesRoot,
         writeLock: false,
@@ -953,7 +953,7 @@ async function runDescribe(): Promise<number> {
     else if (!arg!.startsWith('-')) dir = arg!;
   }
   const unitDir = resolve(dir);
-  const examplesRoot = resolveExamplesRoot(unitDir) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(unitDir);
   if (!examplesRoot) {
     console.error('twin describe requires TF_TWINFILE_ROOT');
     return 2;
