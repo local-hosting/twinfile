@@ -1,10 +1,10 @@
 import { statSync, writeFileSync } from 'node:fs';
-import { join } from 'node:path';
 
 import type { BuildLayerResult } from '../types/build-layer.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
-import { TWINFILE_LOCK_FILENAME, type TwinfileLockDocument } from '../types/twinfile-lock.js';
+import { TWIN_LOCK_SUFFIX, type TwinfileLockDocument } from '../types/twinfile-lock.js';
+import { twinLockPath } from '../load/twinfile-locator.js';
 import { ajvErrorsToTwinErrors, type TwinValidator } from '../validate/create-validator.js';
 import { getDefaultValidator, readYamlDocument, type ParsedYamlFile } from '../validate/validate-yaml.js';
 
@@ -12,7 +12,7 @@ export type { TwinfileLockDocument } from '../types/twinfile-lock.js';
 export { lockRefKeyFromTwinfile } from '../types/twinfile-lock.js';
 
 export function readTwinfileLock(unitRoot: string): Result<TwinfileLockDocument | undefined> {
-  const path = join(unitRoot, TWINFILE_LOCK_FILENAME);
+  const path = twinLockPath(unitRoot);
   if (!statSync(path, { throwIfNoEntry: false })?.isFile()) {
     return ok(undefined);
   }
@@ -49,7 +49,7 @@ export function verifyLockEntry(
       {
         code: 'E_LOCK_DRIFT',
         message: `Lock missing ref "${input.refKey}"`,
-        file: TWINFILE_LOCK_FILENAME,
+        file: TWIN_LOCK_SUFFIX,
       },
     ];
   }
@@ -59,14 +59,14 @@ export function verifyLockEntry(
     errors.push({
       code: 'E_LOCK_DRIFT',
       message: `Lock version ${entry.version} != manifest ${input.manifestVersion}`,
-      file: TWINFILE_LOCK_FILENAME,
+      file: TWIN_LOCK_SUFFIX,
     });
   }
   if (entry.manifest && entry.manifest !== input.manifestDigest) {
     errors.push({
       code: 'E_LOCK_DRIFT',
       message: 'Twinfile digest does not match lock',
-      file: TWINFILE_LOCK_FILENAME,
+      file: TWIN_LOCK_SUFFIX,
       hint: `expected ${entry.manifest}, got ${input.manifestDigest}`,
     });
   }
@@ -74,7 +74,7 @@ export function verifyLockEntry(
     errors.push({
       code: 'E_LOCK_DRIFT',
       message: 'Tree digest does not match lock',
-      file: TWINFILE_LOCK_FILENAME,
+      file: TWIN_LOCK_SUFFIX,
     });
   }
   if (entry.layers) {
@@ -82,7 +82,7 @@ export function verifyLockEntry(
       errors.push({
         code: 'E_LOCK_DRIFT',
         message: `Layer chain count ${input.layerChains.length} != lock ${entry.layers.length}`,
-        file: TWINFILE_LOCK_FILENAME,
+        file: TWIN_LOCK_SUFFIX,
       });
     } else {
       for (let i = 0; i < entry.layers.length; i += 1) {
@@ -90,7 +90,7 @@ export function verifyLockEntry(
           errors.push({
             code: 'E_LOCK_DRIFT',
             message: `Layer chain mismatch at index ${i}`,
-            file: TWINFILE_LOCK_FILENAME,
+            file: TWIN_LOCK_SUFFIX,
           });
           break;
         }
@@ -122,7 +122,7 @@ export function mergeLockEntry(
 }
 
 export function writeTwinfileLock(unitRoot: string, lock: TwinfileLockDocument): void {
-  const path = join(unitRoot, TWINFILE_LOCK_FILENAME);
+  const path = twinLockPath(unitRoot);
   writeFileSync(path, `${JSON.stringify(lock, null, 2)}\n`, 'utf8');
 }
 

@@ -10,6 +10,7 @@ import { describe, expect, it } from 'vitest';
 import { loadTwinfile } from '../src/load/load-twinfile.js';
 import { placeBaseRefForArchetype } from '../src/ref/place-base-refs.js';
 import { testExamplesRoot } from './catalog-test-roots.js';
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
@@ -22,7 +23,7 @@ function writePlaceUnit(dir: string, place: Record<string, unknown>, spaces: unk
   mkdirSync(join(dir, 'place'), { recursive: true });
   const layers = ['place/place.yaml', ...(levels ? ['place/levels.yaml'] : []), 'place/spaces.yaml'];
   writeFileSync(
-    join(dir, 'Twinfile.yaml'),
+    twinHeadPath(dir),
     stringify({
       twinfile: 1,
       kind: 'place',

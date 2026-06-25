@@ -63,7 +63,6 @@
                 { "required": ["layers"] },
                 { "required": ["with"] },
                 { "required": ["buildings"] },
-                { "required": ["plans"] },
                 { "required": ["patch"] },
                 {
                   "allOf": [
@@ -112,11 +111,6 @@
                 ]
               }
             },
-            "plans": {
-              "type": "array",
-              "items": { "type": "string" },
-              "description": "Deprecated: list plan paths under layers: instead."
-            },
             "geotype": {
               "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/geotypeTwinfile"
             },
@@ -158,16 +152,16 @@
           "if": { "properties": { "twinfile": { "const": 2 } }, "required": ["twinfile"] },
           "then": {
             "required": ["steps"],
-            "not": { "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }] }
+            "not": { "required": ["layers"] }
           },
           "else": {
-            "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }],
+            "required": ["layers"],
             "not": { "required": ["steps"] }
           }
         },
         {
           "type": "object",
-          "anyOf": [{ "required": ["layers"] }, { "required": ["plans"] }, { "required": ["steps"] }],
+          "anyOf": [{ "required": ["layers"] }, { "required": ["steps"] }],
           "not": { "anyOf": [{ "required": ["from"] }, { "required": ["with"] }] },
           "properties": {
             "kind": { "const": "mixin" },
@@ -184,7 +178,6 @@
               "additionalProperties": false
             },
             "layers": { "type": "array", "minItems": 1, "items": { "type": "string" } },
-            "plans": { "type": "array", "minItems": 1, "items": { "type": "string" } },
             "steps": { "$ref": "#/$defs/placeSteps" }
           }
         }

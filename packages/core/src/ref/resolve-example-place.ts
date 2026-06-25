@@ -1,6 +1,8 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { twinHeadPath } from '../load/twinfile-locator.js';
+
 import type { TwinfileRef } from '../types/twinfile-ref.js';
 import type {
   ResolveExamplePlaceOptions,
@@ -51,9 +53,9 @@ export function resolvedExamplePlaceFromTwinfileDir(
   unitRoot: string,
   ref: TwinfileRef,
 ): ResolvedExamplePlace {
-  const twinfilePath = join(unitRoot, 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(unitRoot);
   if (!statSync(twinfilePath, { throwIfNoEntry: false })?.isFile()) {
-    throw new Error(`resolvedExamplePlaceFromTwinfileDir: no Twinfile.yaml at ${unitRoot}`);
+    throw new Error(`resolvedExamplePlaceFromTwinfileDir: no twin head at ${unitRoot}`);
   }
   const twinfile = readYamlDocument(twinfilePath).value as Record<string, unknown>;
   const layers = isPatchesTwinfile(twinfile)
@@ -86,7 +88,7 @@ export function listExamplePlaceRefs(examplesRoot: string = resolvePlaceExamples
   const out: TwinfileRef[] = [];
   for (const name of names) {
     const unitDir = flatExampleUnitDir(examplesRoot, name);
-    const twinfile = join(unitDir, 'Twinfile.yaml');
+    const twinfile = twinHeadPath(unitDir);
     if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) continue;
     const head = readYamlDocument(twinfile).value as Record<string, unknown>;
     const version = String(head.version ?? '0.0.0');
@@ -99,7 +101,7 @@ export function listExamplePlaceRefs(examplesRoot: string = resolvePlaceExamples
   for (const ref of map.keys()) {
     const unitDir = map.get(ref);
     if (!unitDir) continue;
-    const twinfile = join(unitDir, 'Twinfile.yaml');
+    const twinfile = twinHeadPath(unitDir);
     if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) continue;
     const head = readYamlDocument(twinfile).value as Record<string, unknown>;
     const kind = String(head.kind ?? 'place');

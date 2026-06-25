@@ -39,10 +39,10 @@ export function parseManifestLayerEntries(twinfile: Record<string, unknown>): Ma
 
 export function isBindingLayerPath(rel: string): boolean {
   if (!rel.endsWith('.yaml') && !rel.endsWith('.yml')) return false;
-  return rel.startsWith('bindings/') || rel.startsWith('plans/');
+  return rel.startsWith('bindings/');
 }
 
-/** Place graph layer files (excludes situation binding files under `bindings/` or legacy `plans/`). */
+/** Place graph layer files (excludes situation binding files under `bindings/`). */
 export function twinfilePlaceLayerPaths(twinfile: Record<string, unknown>): ManifestLayerEntry[] {
   return parseManifestLayerEntries(twinfile).filter((e) => !isBindingLayerPath(e.path));
 }
@@ -52,29 +52,14 @@ export function twinfileLayerPaths(twinfile: Record<string, unknown>): string[] 
   return twinfilePlaceLayerPaths(twinfile).map((e) => e.path);
 }
 
-/** Binding file paths: `bindings/*` or legacy `plans/*` in `layers:`, plus legacy manifest lists. */
+/** Binding file paths: `bindings/*` entries in `layers:`. */
 export function twinfileBindingPaths(twinfile: Record<string, unknown>): string[] {
-  const fromLayers = parseManifestLayerEntries(twinfile)
-    .filter((e) => isBindingLayerPath(e.path))
-    .map((e) => e.path);
-  const legacy = [...stringList(twinfile.bindings), ...stringList(twinfile.plans)];
-  const seen = new Set<string>();
-  const out: string[] = [];
-  for (const rel of [...fromLayers, ...legacy]) {
-    if (seen.has(rel)) continue;
-    seen.add(rel);
-    out.push(rel);
-  }
-  return out;
+  return [...new Set(parseManifestLayerEntries(twinfile).filter((e) => isBindingLayerPath(e.path)).map((e) => e.path))];
 }
 
 /** Full authoring stack (place + binding paths) for editor and `twin fmt`. */
 export function twinfileStackPaths(twinfile: Record<string, unknown>): string[] {
-  const layers = parseManifestLayerEntries(twinfile).map((e) => e.path);
-  const legacyBindings = [...stringList(twinfile.bindings), ...stringList(twinfile.plans)].filter(
-    (p) => !layers.includes(p),
-  );
-  return [...layers, ...legacyBindings];
+  return parseManifestLayerEntries(twinfile).map((e) => e.path);
 }
 
 /** Scenario stack refs: v1 `include:`, or `steps[].copy` of published units (RFC 0009). */

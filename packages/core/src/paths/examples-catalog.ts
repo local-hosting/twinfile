@@ -1,7 +1,7 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-import { PLACE_HEAD_NAMES } from '../load/twinfile-locator.js';
+import { findTwinfileYamlPath } from '../load/twinfile-locator.js';
 
 const ROOT_SKIP = new Set([
   'conf',
@@ -23,15 +23,6 @@ export function isExamplesCatalogRoot(dir: string): boolean {
   return listFlatExampleUnitNames(root).length > 0;
 }
 
-function hasTwinfileHead(unitDir: string): boolean {
-  for (const name of PLACE_HEAD_NAMES) {
-    if (statSync(join(unitDir, name), { throwIfNoEntry: false })?.isFile()) {
-      return true;
-    }
-  }
-  return false;
-}
-
 /** Top-level publishable unit folder names under a flat catalog root. */
 export function listFlatExampleUnitNames(catalogRoot: string): string[] {
   const root = resolve(catalogRoot);
@@ -43,7 +34,7 @@ export function listFlatExampleUnitNames(catalogRoot: string): string[] {
     if (name.startsWith('.') || ROOT_SKIP.has(name)) continue;
     const child = join(root, name);
     if (!statSync(child, { throwIfNoEntry: false })?.isDirectory()) continue;
-    if (hasTwinfileHead(child)) out.push(name);
+    if (findTwinfileYamlPath(child) !== undefined) out.push(name);
   }
   return out.sort();
 }

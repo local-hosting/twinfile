@@ -7,7 +7,7 @@ stability: example
 layers:
   - place/markers.yaml
   - place/gauges.yaml
-  - plans/dam-release.yaml
+  - bindings/dam-release.yaml
 applies_to:
   extent:
     - route
