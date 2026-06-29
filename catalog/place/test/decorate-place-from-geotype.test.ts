@@ -11,6 +11,7 @@ import { loadTwinfileStrict } from '../src/check/strict-place.js';
 import { decoratePlaceFromGeotype } from '../src/cli/decorate-place-from-geotype.js';
 import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
 import { testCatalogRoots } from '../../../packages/core/test/catalog-test-roots.js';
+import { twinHeadFileName, twinHeadPath } from '@local-hosting/twinfile-core';
 
 const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 const catalogOpts = { examplesRoot, simulatorRoot };
@@ -60,11 +61,11 @@ describe('decoratePlaceFromGeotype', () => {
     expect(result.mixins).toEqual(['twinfile/mixin-assets:0.1.0']);
     expect(result.situationHints).toEqual(['severe-weather']);
     expect(existsSync(join(unitDir, 'plans'))).toBe(false);
-    const twinfile = parseYaml(readFileSync(join(unitDir, 'Twinfile.yaml'), 'utf8')) as {
+    const twinfile = parseYaml(readFileSync(twinHeadPath(unitDir), 'utf8')) as {
       steps: Array<{ copy?: string; bind?: { for?: string } }>;
     };
     expect(twinfile.steps.flatMap((item) => (item.copy ? [item.copy] : []))).toEqual(result.mixins);
-    expect(readdirSync(unitDir)).toEqual(['Twinfile.yaml']);
+    expect(readdirSync(unitDir)).toEqual([twinHeadFileName(unitDir)]);
   });
 
   it('writes axes the archetype leaves open', () => {
@@ -75,7 +76,7 @@ describe('decoratePlaceFromGeotype', () => {
       unitName: 'hospital',
       useFrom: true,
     });
-    const twinfile = parseYaml(readFileSync(join(unitDir, 'Twinfile.yaml'), 'utf8')) as Record<string, unknown>;
+    const twinfile = parseYaml(readFileSync(twinHeadPath(unitDir), 'utf8')) as Record<string, unknown>;
     expect(twinfile.axes).toEqual({ vertical: placeAxesForSlug('hospital')!.vertical });
   });
 

@@ -3,6 +3,7 @@ import { join } from 'node:path';
 import { placeDecorationsForSlug, type PlaceLayerKind } from '@local-hosting/geotypes';
 
 import { loadTwinfile } from '@local-hosting/twinfile-core';
+import { twinHeadPath } from '@local-hosting/twinfile-core';
 import { listPlaceSituationBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
 import { placeMixinRef } from '@local-hosting/twinfile-core';
 import type { Result } from '@local-hosting/twinfile-core';
@@ -35,7 +36,7 @@ export function decoratePlaceFromGeotype(
 
   const kits = decorations.layers.filter((kind) => MIXIN_LAYER_KINDS.includes(kind));
   const mixinRefs = kits.map((kind) => placeMixinRef(kind));
-  const twinfilePath = join(unitDir, 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(unitDir);
   const twinfile = readTwinfileDoc(twinfilePath);
   addLeadingCopies(twinfile, mixinRefs);
   writeTwinfileDoc(twinfilePath, twinfile);

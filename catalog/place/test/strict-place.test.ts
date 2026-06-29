@@ -7,15 +7,16 @@ import { describe, expect, it } from 'vitest';
 import { loadTwinfileStrict, strictCheckPlace } from '../src/check/strict-place.js';
 import { loadTwinfile } from '@local-hosting/twinfile-core';
 import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
+import { twinHeadPath } from '@local-hosting/twinfile-core';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
 const plannedPlaces = readdirSync(examplesRoot).filter((name) => {
   if (name.startsWith('base-') || name.startsWith('mixin-') || name.endsWith('-programme')) return false;
-  const twinfile = join(examplesRoot, name, 'Twinfile.yaml');
+  const twinfile = twinHeadPath(join(examplesRoot, name));
   if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) return false;
   const raw = readFileSync(twinfile, 'utf8');
-  return raw.includes('plans/');
+  return raw.includes('bindings/');
 });
 
 describe('strictCheckPlace', () => {

@@ -3,14 +3,13 @@ import { join } from 'node:path';
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@local-hosting/twinfile-core';
 import { describe, expect, it } from 'vitest';
 
-import { headFile, kind, module } from '../src/index.js';
+import { kind, module } from '../src/index.js';
 
 const exampleDir = join(resolveTypeExamplesRoot('resource', resolveTwinfileRoot()), 'greeter-kiosk');
 
 describe('@local-hosting/twinfile-resource', () => {
   it('exports the resource module', () => {
     expect(kind).toBe('resource');
-    expect(headFile).toBe('Resource.yaml');
     expect(module.kind).toBe('resource');
   });
 
