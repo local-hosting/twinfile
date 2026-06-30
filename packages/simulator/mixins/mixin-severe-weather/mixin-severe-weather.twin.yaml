@@ -7,7 +7,7 @@ name: Severe-weather hooks — shelter, outdoor assembly, two exits, wired plan
 layers:
   - place/spaces.yaml
   - place/openings.yaml
-  - plans/severe-weather.yaml
+  - bindings/severe-weather.yaml
 provides:
   situations:
     - severe-weather

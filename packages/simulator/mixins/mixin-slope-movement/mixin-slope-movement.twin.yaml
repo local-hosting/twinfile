@@ -8,7 +8,7 @@ layers:
   - place/spaces.yaml
   - place/markers.yaml
   - place/stations.yaml
-  - plans/slope-movement.yaml
+  - bindings/slope-movement.yaml
 applies_to:
   extent:
     - route
