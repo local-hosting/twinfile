@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 const simulatorRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 const registryPath = join(simulatorRoot, 'events.registry.json');
 if (!existsSync(registryPath)) {
-  console.error('check-all: missing events.registry.json (run scripts/sync-place-events.mjs)');
+  console.error('check-all: missing events.registry.json (checked in at the simulator root)');
   process.exit(1);
 }
 const rows = JSON.parse(readFileSync(registryPath, 'utf8'));
