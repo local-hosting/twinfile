@@ -18,7 +18,7 @@ const SOURCE_REF = /sources\/[A-Za-z0-9_./-]+\.(?:geojson|json|ya?ml)/g;
 
 export type LoadTwinfileDocumentOptions = {
   examplesRoot?: string;
-  /** `composed` (default) inlines `with:` mixins; `from:` stays a ref on this unit’s Twinfile.yaml (npm deps). `local` is this dir only. */
+  /** `composed` (default) inlines `with:` mixins; `from:` stays a ref on this unit’s <unit>.twin.yaml (npm deps). `local` is this dir only. */
   stack?: 'composed' | 'local';
 };
 

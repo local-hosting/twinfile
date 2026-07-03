@@ -1,0 +1,161 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/place-type.schema.json",
+  "title": "PlaceTypeV1",
+  "description": "Host I/O surface for a built place (`Place.meta.placeType`).",
+  "type": "object",
+  "required": [
+    "schema",
+    "controls",
+    "dataInlets",
+    "dataOutlets",
+    "logicalOutputs"
+  ],
+  "properties": {
+    "schema": {
+      "const": "twinfile.place-type.v1"
+    },
+    "controls": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/controlAccept"
+      }
+    },
+    "dataInlets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dataPort"
+      }
+    },
+    "dataOutlets": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/dataPort"
+      }
+    },
+    "logicalOutputs": {
+      "type": "array",
+      "minItems": 1,
+      "contains": {
+        "type": "object",
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "const": "place.merged"
+          }
+        }
+      },
+      "items": {
+        "$ref": "#/$defs/logicalPort"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "modulePort": {
+      "type": "object",
+      "required": [
+        "module",
+        "port"
+      ],
+      "properties": {
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "port": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": false
+    },
+    "controlAccept": {
+      "type": "object",
+      "required": [
+        "id",
+        "wire"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wire": {
+          "type": "string",
+          "minLength": 1
+        },
+        "phases": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "inlet": {
+          "$ref": "#/$defs/modulePort"
+        }
+      },
+      "additionalProperties": false
+    },
+    "dataPort": {
+      "type": "object",
+      "required": [
+        "id",
+        "wire",
+        "module",
+        "port",
+        "direction"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wire": {
+          "type": "string",
+          "minLength": 1
+        },
+        "module": {
+          "type": "string",
+          "minLength": 1
+        },
+        "port": {
+          "type": "string",
+          "minLength": 1
+        },
+        "direction": {
+          "enum": [
+            "in",
+            "out"
+          ]
+        }
+      },
+      "additionalProperties": false
+    },
+    "logicalPort": {
+      "type": "object",
+      "required": [
+        "id",
+        "wire",
+        "detail"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "wire": {
+          "type": "string",
+          "minLength": 1
+        },
+        "detail": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
