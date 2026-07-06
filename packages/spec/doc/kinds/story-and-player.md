@@ -11,7 +11,7 @@ There is **no** published `twinfile/clock` or `twinfile/player` ref. **Clock** i
 
 ## Model
 
-1. **Story** (`Story.yaml`) — `story.scenes[]` (legacy `story.beats`), `links:` to place / character / resource; each scene may set **`run: ./scenes/<id>`**.
+1. **Story** (`<unit>.twin.yaml`) — `story.scenes[]` (legacy `story.beats`), `links:` to place / character / resource; each scene may set **`run: ./scenes/<id>`**.
 2. **Scene folder** — `run.yaml` with the former preset body (`from:`, `clock:`, `use.runner`, …). Not published as its own ref.
 3. **Player** — accepts **`twinfile/story/<id>:<ver>`**, builds linked places, walks scenes, advances **clock**, publishes session **edges** (and may spawn **runner** offline per scene).
 
@@ -25,7 +25,7 @@ Today **`createTwinfilePlayer(result)`** still takes one **`BuildTwinfileResult`
 
 ```text
 story/examples/shop-visit/
-  Story.yaml
+  shop-visit.twin.yaml
   scenes/
     shop-shelter-at-cap/
       run.yaml

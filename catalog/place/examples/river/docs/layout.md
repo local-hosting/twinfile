@@ -19,7 +19,7 @@
 
 ## Operator path
 
-See **`visits:`** in [`Twinfile.yaml`](../Twinfile.yaml) — sample beat at the eddy pool on the grab schedule.
+See **`visits:`** in [`river.twin.yaml`](../river.twin.yaml) — sample beat at the eddy pool on the grab schedule.
 
 ## Agents
 

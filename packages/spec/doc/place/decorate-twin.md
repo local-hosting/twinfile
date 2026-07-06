@@ -9,11 +9,11 @@ Customize a digital twin by **stacking published units and YAML patches**—same
 
 | Kind | Ref / path | What it adds | Mix via |
 | --- | --- | --- | --- |
-| **Archetype base** | `twinfile/base-*:0.1.0` | Map-shape skeleton: starter spaces, openings, default **`plans`** hooks | **`from:`** on place `Twinfile.yaml` |
-| **Situation** | `twinfile/severe-weather:1.0.0`, … | Shared story contract (`phases`, **`expects`** roles) | Scenario **`layers:`** + place **`plans/*.yaml`** (role → space ids) |
+| **Archetype base** | `twinfile/base-*:0.1.0` | Map-shape skeleton: starter spaces, openings, default **`bindings`** hooks | **`from:`** on place `<unit>.twin.yaml` |
+| **Situation** | `twinfile/severe-weather:1.0.0`, … | Shared story contract (`phases`, **`expects`** roles) | Scenario **`layers:`** + place **`bindings/*.yaml`** (role → space ids) |
 | **Place layer module** | Files under **`place/`** | Patches: extra spaces, assets, sensors, visit moments (`visits`), routes | Child **`layers:`** (merge on top of base) |
 
-Bases and situations ship from **`examples`** (OCI / `twin.local.yaml`). Your site only authors **deltas**: rename site, add zones, wire **`plans`**, drop in **`assets.yaml`**.
+Bases and situations ship from **`examples`** (OCI / `twin.local.yaml`). Your site only authors **deltas**: rename site, add zones, wire **`bindings`**, drop in **`assets.yaml`**.
 
 ## Dockerfile-style decorate recipe
 
@@ -36,8 +36,8 @@ layers:
   - place/assets.yaml
   - place/sensors.yaml
   - place/visits.yaml
-  - plans/severe-weather.yaml
-  - plans/transit-disruption.yaml
+  - bindings/severe-weather.yaml
+  - bindings/transit-disruption.yaml
 ```
 
 **Run** (scene `run.yaml`, not a Twinfile) copies situation/event refs at build time:
@@ -93,7 +93,7 @@ Paths: [`examples/`](../../../../catalog/place/examples/). Map-first pick: [Plac
 
 Common **natural hazard** labels map to these units in [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml) — see [Natural hazards](../kinds/natural-hazards.md).
 
-Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/plans/severe-weather.yaml) on expo). Resolve refs with [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
+Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`bindings/*.yaml`** maps those roles to **your** space and opening ids ([`bindings/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/bindings/severe-weather.yaml) on expo). Resolve refs with [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
 
 ### Decoration layer files (copy patterns)
 
@@ -110,7 +110,7 @@ Merge rules: RFC 7396 objects; **`id`** arrays merge by **`id`** ([Layers](../bu
 
 ## Hooks: `roles` on spaces
 
-Shared **`plans`** do not hard-code your ids. Tag spaces (and openings) so plans stay portable:
+Shared **`bindings`** do not hard-code your ids. Tag spaces (and openings) so plans stay portable:
 
 ```yaml
 spaces:
@@ -122,7 +122,7 @@ spaces:
     roles: [outdoor]
 ```
 
-See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/plan-scaffold-campus/) for a minimal role-tag sample used by `twin add plan`. Custom places wire situations by tagging **their** ids and authoring **`plans/*.yaml`**.
+See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/plan-scaffold-campus/) for a minimal role-tag sample used by `twin add plan`. Custom places wire situations by tagging **their** ids and authoring **`bindings/*.yaml`**.
 
 ## Minimal customize paths
 
@@ -130,8 +130,8 @@ See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/pl
 | --- | --- |
 | “Campus like the example, different name/coords” | **`from: base-campus`** + patch **`place/place.yaml`** only |
 | “Add retail tech to a floor” | Add **`place/assets.yaml`** layer |
-| “Enable storm scenario” | Add **`plans/severe-weather.yaml`** + space **`roles`** + scenario unit |
-| “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`plans`** ([expo](../../../../catalog/place/examples/expo/)) |
+| “Enable storm scenario” | Add **`bindings/severe-weather.yaml`** + space **`roles`** + scenario unit |
+| “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`bindings`** ([expo](../../../../catalog/place/examples/expo/)) |
 
 Thin derived examples: [`mobility-hub/campus`](../../../../catalog/place/examples/mobility-hub/campus/) — **`from:`** campus base, `place.kind: mobility_hub`, site `steps:`, **`copy: ./parts/transit-hub`**, **`transit-disruption`** plan. Building + floor: [`places/airport`](../../../../catalog/place/examples/airport/) (the building copies `./floors/airside`). Single building: [`expo`](../../../../catalog/place/examples/expo/), [`arena`](../../../../catalog/place/examples/arena/), [`port`](../../../../catalog/place/examples/port/). **`open_area`** [`park`](../../../../catalog/place/examples/park/) stays site-only ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). When geotypes **`suggest_building_import`** is true for the resolved archetype (today **`campus`** only), `twin init place --geotype` writes `PARTS.md`.
 
@@ -146,7 +146,7 @@ Every `@local-hosting/geotypes` slug carries suggested decorators next to its ar
 3. **`with:`** one golden mixin per suggested situation (`twinfile/mixin-severe-weather:0.1.0`, …) plus `mixin-assets` / `mixin-sensors` when suggested ([RFC 0004](../../rfcs/0004-composed-bases.md)). Each situation mixin brings its own role-tagged rows and a wired plan, so `twin check --strict` passes immediately.
 4. Prints remaining suggested layers (`next: add layers …`) that need real geometry (routes, optional visit moments).
 
-Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To bind a situation to your own rows, add a local `plans/<situation>.yaml` (the child wins over mixins).
+Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To bind a situation to your own rows, add a local `bindings/<situation>.yaml` (the child wins over mixins).
 
 ## CLI (decorate)
 
@@ -160,14 +160,14 @@ twin add plan severe-weather
 twin add assets
 ```
 
-`twin add plan` merges the place, matches **`roles:`** tags to each situation **`expects`** role, writes **`plans/<situation>.yaml`**, and appends that path to manifest **`layers:`** (via **`twin fmt`**). Fix gaps (`warn:` lines), then **`twin check --strict`**.
+`twin add plan` merges the place, matches **`roles:`** tags to each situation **`expects`** role, writes **`bindings/<situation>.yaml`**, and appends that path to manifest **`layers:`** (via **`twin fmt`**). Fix gaps (`warn:` lines), then **`twin check --strict`**.
 
 ## What is not automatic yet
 
 | Desired | Today | Direction |
 | --- | --- | --- |
 | Pick decorations from a UI | `twin init place --geotype` applies geotype-suggested decorators; otherwise author YAML refs manually | Catalog in examples + this doc; tooling can list refs |
-| `twin add plan severe-weather` | **Implemented** — see [Decorate a twin](../place/decorate-twin.md#cli-decorate) | Scaffold **`plans/`** from situation **`expects`** + role tags |
+| `twin add plan severe-weather` | **Implemented** — see [Decorate a twin](../place/decorate-twin.md#cli-decorate) | Scaffold **`bindings/`** from situation **`expects`** + role tags |
 | Multiple **`from:`** bases | Single **`from:`** per place | Chain bases sparingly, or publish composite bases |
 | Asset “sprite pack” ref | Patch **`assets.yaml`** or merge layer file | Optional published **`twinfile/decor-retail-kit:*`** place layer bundle |
 

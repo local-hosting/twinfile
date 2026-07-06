@@ -4,12 +4,12 @@ import { Resources } from '@/components/home/Resources'
 export const metadata = {
   title: 'Twinfile documentation',
   description:
-    'Author a place with one Twinfile.yaml, inherit golden bases, check and build a `Place`.',
+    'Author a place with one <unit>.twin.yaml, inherit golden bases, check and build a `Place`.',
 }
 
 # Twinfile documentation
 
-Twinfile is an open format for a place you can check, build, and publish. One **`Twinfile.yaml`** names the stack (`from:`, `layers:`, `plans:`); **`twin build`** builds a `Place` in memory. {{ className: 'lead' }}
+Twinfile is an open format for a place you can check, build, and publish. One **`<unit>.twin.yaml`** names the stack (`from:`, `layers:`, `bindings/`); **`twin build`** builds a `Place` in memory. {{ className: 'lead' }}
 
 1. **Pick a base** — geotype → archetype → `from: twinfile/base-*` ([examples](/examples)).
 2. **Patch** — local `place/*.yaml` in merge order.

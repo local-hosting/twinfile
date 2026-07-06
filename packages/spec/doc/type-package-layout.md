@@ -46,7 +46,7 @@ npm subpaths (stable):
 ## Rules
 
 - No nested package name folders (`pcm/pcm/`, `sam/sam/`) — use `contract/<domain>/contract/` for load/save/json.
-- Twin **heads** (`Place.yaml`, …) are only under `catalog/<type>/examples/`; `src/` is library code for parse/wire/export.
+- Twin **heads** (`<unit>.twin.yaml`, …) are only under `catalog/<type>/examples/`; `src/` is library code for parse/wire/export.
 - Cross-type links stay **refs** in YAML (`twinfile/<type>/<id>`), not TypeScript imports between type packages (except story narrative optionally peers character for mount compile).
 
 Unit folders: [unit-layout.md](unit-layout.md). Hub overview: [../../../catalog/README.md](../../../catalog/README.md).

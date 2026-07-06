@@ -22,7 +22,7 @@ Read in this order before opening every space row:
 
 | Step | File | What you learn |
 | --- | --- | --- |
-| 1 | `Twinfile.yaml` | `layers:` **merge order** (coarse → fine), `plans`, optional `from:` |
+| 1 | `<unit>.twin.yaml` | `layers:` **merge order** (coarse → fine, `bindings/` last), optional `from:` |
 | 2 | `place/place.yaml` | `archetype`, `authoring_scale.space_granularity`, site `ext`, name/kind |
 | 3 | `docs/layout.md` | Narrative map, region table, id prefixes, which layer files hold detail |
 | 3b | `ext/layout-index.yaml` | Machine **region tree** (validated when present) |
@@ -30,7 +30,7 @@ Read in this order before opening every space row:
 | 5 | `place/levels.yaml` | **Floor / airside** axis for indoor_stack and multi-level sites |
 | 6 | `place/spaces*.yaml` | Start with the **first** spaces layer (usually site/zone grain) |
 | 7 | `place/openings.yaml`, `place/routes.yaml` | Connectivity between regions and into interiors |
-| 8 | `plans/*.yaml` | Which space ids matter for each situation |
+| 8 | `bindings/*.yaml` | Which space ids matter for each situation |
 
 Built built `Place` (after `twin build`) is the single merged truth for tools; the list above is for **authoring and discovery**.
 
@@ -51,7 +51,7 @@ Declare the default grain on the place, then add finer layers that **patch** the
 
 ## Layer files: coarse first, detail later
 
-List layers in **`Twinfile.yaml`** from **overview → detail**. Merge rules ([Layers](../build/layers.md)): RFC 7396 on objects; **spaces with the same `id` deep-merge**; new ids append.
+List layers in **`<unit>.twin.yaml`** from **overview → detail**. Merge rules ([Layers](../build/layers.md)): RFC 7396 on objects; **spaces with the same `id` deep-merge**; new ids append.
 
 Recommended split (adjust names to your site):
 

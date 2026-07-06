@@ -1,8 +1,8 @@
 # Future mobility hubs — kit of parts
 
-**Programme:** [`programme/Twinfile.yaml`](../programme/Twinfile.yaml) (`twinfile/mobility-hub:0.1.0`) — full kit topology, services, assets, plan (no map pin).
+**Programme:** [`programme/programme.twin.yaml`](../programme/programme.twin.yaml) (`twinfile/mobility-hub:0.1.0`) — full kit topology, services, assets, plan (no map pin).
 
-**Map pin:** [`Twinfile.yaml`](../Twinfile.yaml) (**King's Cross, London**) — `from: twinfile/mobility-hub:0.1.0`, one step patches **`place.ext`** only. **Campus-shaped mobility hub** (same type, nested building): [`campus/`](../campus/) — `from: twinfile/base-campus`, `place.kind: mobility_hub`, ref id `transit-hub-campus` for the published catalog entry.
+**Map pin:** [`mobility-hub.twin.yaml`](../mobility-hub.twin.yaml) (**King's Cross, London**) — `from: twinfile/mobility-hub:0.1.0`, one step patches **`place.ext`** only. **Campus-shaped mobility hub** (same type, nested building): [`campus/`](../campus/) — `from: twinfile/base-campus`, `place.kind: mobility_hub`, ref id `transit-hub-campus` for the published catalog entry.
 
 **Scenario:** [`scenes/mobility-hub-hub-disruption`](../../../../story/examples/mobility-hub-operations/scenes/mobility-hub-hub-disruption/run.yaml) — `transit-disruption` queue on suburban rail/bus feed (`twinfile/mobility-hub-hub-disruption:1.0.0`).
 
@@ -37,7 +37,7 @@ Hierarchy: programme template → geo instance; within the bundle, `parent` roll
 
 ## Services (mobility + community boards)
 
-Canonical `kind` values live in [`mob-hub-services.yaml`](../../../../../packages/spec/conf/mob-hub-services.yaml). Step **`services:`** in `Twinfile.yaml` binds each `kind` to a **space** (the cell). **`assets[]`** remain physical resources (chargers, displays).
+Canonical `kind` values live in [`mob-hub-services.yaml`](../../../../../packages/spec/conf/mob-hub-services.yaml). Step **`services:`** in `<unit>.twin.yaml` binds each `kind` to a **space** (the cell). **`assets[]`** remain physical resources (chargers, displays).
 
 Urban **community wireframe** modules: bakery, bank/post, café, delivery, energy, event, restaurant, garden, indoor public space, meeting, co-working, outdoor seating — mostly under `urban-community`. Indoor programme is **`copy: ./parts/urban-services-building`** (own Twinfile; room ids like `urban-services-building-hall`).
 
@@ -53,7 +53,7 @@ Urban **community wireframe** modules: bakery, bank/post, café, delivery, energ
 
 ## Part index
 
-See strategy-board groupings in step 3 of `Twinfile.yaml` (rural node, rural hub, suburban hub, urban mobility / community / landscape). IndoorGML interchange is optional via the [`indoorgml`](../../../../../packages/spec/doc/pack/bridges.md#indoorgml-ogc-cell-space) bridge.
+See strategy-board groupings in step 3 of `<unit>.twin.yaml` (rural node, rural hub, suburban hub, urban mobility / community / landscape). IndoorGML interchange is optional via the [`indoorgml`](../../../../../packages/spec/doc/pack/bridges.md#indoorgml-ogc-cell-space) bridge.
 
 ## Related
 

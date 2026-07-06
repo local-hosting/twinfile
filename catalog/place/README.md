@@ -2,7 +2,7 @@
 
 Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../../packages/spec/doc/type-package-layout.md).
 
-- `src/twin-module.ts` — `Place.yaml` module
+- `src/twin-module.ts` — `<unit>.twin.yaml` module
 - `src/place/` — compose, copy, mounts, `PlaceType`, situation bindings
 - `src/build/` — `buildTwinfile`, scenario compose, `TwinfileBuilder`
 - `src/check/` — archetype layout checks, strict place load
