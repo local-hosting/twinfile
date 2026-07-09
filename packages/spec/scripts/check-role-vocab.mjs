@@ -64,45 +64,20 @@ function scanExpects(doc, label) {
   }
 }
 
-const examplesRoot = join(specRoot, '..', '..', 'catalog', 'place', 'examples');
-const simulatorRoot = join(specRoot, '..', 'simulator');
+const eventExamplesRoot = join(specRoot, '..', '..', 'catalog', 'event', 'examples');
 
-function situationExpectsFromBuiltin(situation) {
-  const builtinPath = join(simulatorRoot, 'src/catalog/builtin', `${situation}.ts`);
-  if (!statSync(builtinPath, { throwIfNoEntry: false })?.isFile()) return undefined;
-  const source = readFileSync(builtinPath, 'utf8');
-  const match = source.match(/expects:\s*\{([^}]+)\}/s);
-  if (!match) return undefined;
-  const expects = {};
-  for (const key of match[1].matchAll(/(\w+):/g)) {
-    expects[key[1]] = {};
-  }
-  return expects;
+function eventHeadPath(id) {
+  return join(eventExamplesRoot, id, `${id}.twin.yaml`);
 }
 
 function situationCatalogPresent(situation) {
-  if (situationExpectsFromBuiltin(situation)) return true;
-  const built = join(simulatorRoot, 'situations', situation, '.twin');
-  if (statSync(built, { throwIfNoEntry: false })?.isDirectory()) return true;
-  const registryPath = join(simulatorRoot, 'events.registry.json');
-  if (statSync(registryPath, { throwIfNoEntry: false })?.isFile()) {
-    const rows = JSON.parse(readFileSync(registryPath, 'utf8'));
-    if (Array.isArray(rows) && rows.some((row) => row?.id === situation)) return true;
-  }
-  return false;
+  return statSync(eventHeadPath(situation), { throwIfNoEntry: false })?.isFile() === true;
 }
 
-function scanSituationDirs(root, labelPrefix) {
-  const sitDir = join(root, 'situations');
-  if (!statSync(sitDir, { throwIfNoEntry: false })?.isDirectory()) return;
-  for (const name of readdirSync(sitDir)) {
-    const builtinExpects = situationExpectsFromBuiltin(name);
-    if (builtinExpects) scanExpects({ expects: builtinExpects }, `${labelPrefix}builtin/${name}`);
-  }
+for (const id of readdirSync(eventExamplesRoot)) {
+  if (!situationCatalogPresent(id)) continue;
+  scanExpects(parseYaml(readFileSync(eventHeadPath(id), 'utf8')), `catalog/event/${id}`);
 }
-
-scanSituationDirs(simulatorRoot, 'simulator/');
-scanSituationDirs(examplesRoot, 'examples/');
 
 const catalogPath = join(specRoot, 'conf', 'hazard-catalog.yaml');
 if (statSync(catalogPath, { throwIfNoEntry: false })?.isFile()) {

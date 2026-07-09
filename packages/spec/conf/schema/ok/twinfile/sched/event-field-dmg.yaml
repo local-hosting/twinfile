@@ -1,5 +1,5 @@
 twinfile: 1
-kind: situation
+kind: event
 id: field-damage
 name: Field Damage
 version: 1.0.0

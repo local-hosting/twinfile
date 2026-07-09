@@ -1,5 +1,5 @@
 twinfile: 1
-kind: situation
+kind: event
 id: dam-release
 name: Dam Release
 version: 1.0.0

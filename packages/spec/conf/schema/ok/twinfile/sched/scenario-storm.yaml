@@ -11,7 +11,13 @@ domains:
   - safety
 steps:
   - copy: twinfile/event/arena-game-day:1.0.0
-  - copy: twinfile/situation/severe-weather:1.0.0
+  - copy: twinfile/event/severe-weather:1.0.0
+schedule:
+  arena-game-day:
+    gates-open: -PT1H30M
+    kickoff: PT0S
+    halftime: PT1H5M
+    final: PT2H20M
 args:
   attendance: 18000
   warningAt: arena-game-day.halftime
