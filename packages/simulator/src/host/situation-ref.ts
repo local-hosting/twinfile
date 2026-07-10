@@ -3,10 +3,10 @@ import {
 } from '@local-hosting/twinfile-place';
 
 export function primarySituationRef(result: BuildTwinfileResult): string {
-  const bundled = (result.situations ?? []) as Record<string, unknown>[];
-  const first = bundled[0];
-  if (first && typeof first.id === 'string' && first.id.length > 0) {
-    return first.id;
+  const bundled = (result.events ?? []) as Record<string, unknown>[];
+  const primary = bundled.at(-1);
+  if (primary && typeof primary.id === 'string' && primary.id.length > 0) {
+    return primary.id;
   }
   const steps = result.loaded.twinfile.steps;
   if (Array.isArray(steps)) {

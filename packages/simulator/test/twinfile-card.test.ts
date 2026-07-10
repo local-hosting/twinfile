@@ -16,7 +16,6 @@ import {
 } from '@local-hosting/twinfile-core';
 import {
   PlaceHost,
-  ensureSimulatorEventCatalog,
   getRegisteredPlaceEvent,
   handleMcpRequest,
   placeEventToHead,
@@ -24,7 +23,7 @@ import {
 import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
+const { examplesRoot } = testCatalogRoots(importDir);
 
 const FIVE_UNITS = [
   { id: 'shop-place', path: join(examplesRoot, 'shop') },
@@ -37,7 +36,6 @@ const FIVE_UNITS = [
 async function summaryForUnit(unitPath: string) {
   const opened = await PlaceHost.load(unitPath, {
     examplesRoot,
-    simulatorRoot,
         writeLock: false,
         noCache: true,
   });
@@ -72,11 +70,10 @@ describe('TwinfileSummaryV1', () => {
   });
 
   it('severe-weather catalog event lists expects as inputs', () => {
-    ensureSimulatorEventCatalog(simulatorRoot);
     const event = getRegisteredPlaceEvent('severe-weather');
     expect(event?.id).toBe('severe-weather');
     const card = buildTwinfileSummary({ twinfile: placeEventToHead(event!) });
-    expect(card.head.kind).toBe('situation');
+    expect(card.head.kind).toBe('event');
     expect(card.io.inputs.map((row) => row.id).sort()).toEqual([
       'all-clearEndAt',
       'exit',
@@ -135,8 +132,7 @@ describe('TwinfileSummaryV1', () => {
     expect(hasQuestion(morning)).toBe(false);
   });
 
-  it('catalog situation layout lists expects as io', () => {
-    ensureSimulatorEventCatalog(simulatorRoot);
+  it('catalog event layout lists expects as io', () => {
     const event = getRegisteredPlaceEvent('severe-weather');
     const card = buildTwinfileSummary({ twinfile: placeEventToHead(event!) });
     expect(card.layouts.place.blocks.some((b) => b.type === 'io')).toBe(true);

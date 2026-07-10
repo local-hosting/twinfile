@@ -17,7 +17,6 @@ import { resolvePlaceExamplesCatalogRoot } from '../paths/catalog-layout.js';
 
 import {
   loadTwinLocalMap,
-  loadTwinLocalMapMerged,
   resolveTwinLocalPath,
 } from './twin-local-map.js';
 
@@ -39,7 +38,7 @@ function readLayerFile(unitRoot: string, rel: string): Record<string, unknown> {
 
 function resolveTwinfileDirFromRef(ref: TwinfileRef, examplesRoot: string): string {
   const normalized = ref.trim().startsWith('twinfile/') ? ref.trim() : (`twinfile/${ref.trim()}` as TwinfileRef);
-  const localMap = loadTwinLocalMapMerged(examplesRoot);
+  const localMap = loadTwinLocalMap(examplesRoot);
   const localPath = resolveTwinLocalPath(normalized, localMap);
   if (localPath && statSync(localPath, { throwIfNoEntry: false })?.isDirectory()) {
     return localPath;

@@ -9,13 +9,11 @@ import {
 
 import type { PlaceEvent, PlaceEventRequest } from '../types/place-event.js';
 
-import { placeEventCatalogKind, placeEventRef, placeEventToHead } from './place-event-head.js';
+import { placeEventRef, placeEventToHead } from './place-event-head.js';
 
 function defaultPhase(event: Omit<PlaceEvent, 'request'>, req: PlaceEventRequest): string {
   if (req.phase) return req.phase;
   if (event.phases?.length) return event.phases[0]!;
-  const keys = event.timetable ? Object.keys(event.timetable) : [];
-  if (keys.length) return keys[0]!;
   return 'active';
 }
 
@@ -35,10 +33,7 @@ export function placeEventRequestMessages(
   const phase = defaultPhase(event, req);
   const pulse = req.pulse ?? 'fast';
   const edge = req.edge ?? 'enter';
-  const situationRef =
-    placeEventCatalogKind(event) === 'situation'
-      ? placeEventRef(event)
-      : `twinfile/event/${event.id}:${event.version ?? '1.0.0'}`;
+  const situationRef = placeEventRef(event);
   const built = buildSituationMessage({
     situationHead: head,
     situationRef,

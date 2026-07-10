@@ -4,7 +4,7 @@ import { flatTwinfileRef, parseTwinfileRef } from '../src/types/twinfile-ref.js'
 
 describe('flatTwinfileRef', () => {
   it('strips typed kind segment for catalog keys', () => {
-    expect(flatTwinfileRef('twinfile/situation/severe-weather:1.0.0')).toBe(
+    expect(flatTwinfileRef('twinfile/event/severe-weather:1.0.0')).toBe(
       'twinfile/severe-weather:1.0.0',
     );
     expect(flatTwinfileRef('twinfile/event/arena-game-day:1.0.0')).toBe('twinfile/arena-game-day:1.0.0');

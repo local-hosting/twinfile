@@ -5,7 +5,7 @@ name: Upstream stage unsafe
 version: 1.0.0
 stability: example
 steps:
-  - copy: twinfile/situation/dam-release:1.0.0
+  - copy: twinfile/event/dam-release:1.0.0
 domains:
   - safety
 clock:

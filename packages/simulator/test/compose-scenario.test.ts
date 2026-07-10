@@ -15,24 +15,23 @@ import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-tes
 import { twinLockPath } from '@local-hosting/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
+const { examplesRoot } = testCatalogRoots(importDir);
 const scenarioRoot = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
 
 describe('composeScenarioLayers', () => {
-  it('orders place, event, situation, and args layers', () => {
+  it('orders place, event, and args layers', () => {
     const loaded = loadRunUnit(scenarioRoot);
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
 
-    const composed = composeScenarioLayers(loaded.value, { examplesRoot, simulatorRoot });
+    const composed = composeScenarioLayers(loaded.value, { examplesRoot });
     expect(composed.ok).toBe(true);
     if (!composed.ok) return;
 
     expect(composed.value.layers.length).toBeGreaterThan(4);
     expect(composed.value.layers.some((l) => l.ref === 'scenario/args')).toBe(true);
     expect(composed.value.resolvedArgs.warningAt).toBe(3900);
-    expect(composed.value.events).toHaveLength(1);
-    expect(composed.value.situations).toHaveLength(1);
+    expect(composed.value.events.map((row) => row.id)).toEqual(['arena-game-day', 'severe-weather']);
   });
 });
 
@@ -40,11 +39,10 @@ describe('buildTwinfile scenario', () => {
   it('builds storm-at-halftime bundle', async () => {
     cleanup();
     try {
-      const result = await buildTwinfile(scenarioRoot, { examplesRoot, simulatorRoot, writeLock: false });
+      const result = await buildTwinfile(scenarioRoot, { examplesRoot, writeLock: false });
       expect(result.ok).toBe(true);
       if (!result.ok) return;
-      expect(result.value.events?.length).toBe(1);
-      expect(result.value.situations?.length).toBe(1);
+      expect(result.value.events?.length).toBe(2);
       expect(result.value.layers.some((l) => l.kind === 'binding')).toBe(true);
     } finally {
       cleanup();

@@ -9,6 +9,7 @@ export {
   clearRegisteredEventCatalogs,
   mergedEventCatalog,
   getRegisteredPlaceEvent,
+  loadEventCatalog,
   resolveRegisteredPlaceEventRef,
 } from './catalog/event-catalog.js';
 export {
@@ -18,15 +19,7 @@ export {
 export {
   placeEventToHead,
   placeEventRef,
-  placeEventCatalogKind,
 } from './catalog/place-event-head.js';
-export { loadedTwinfileFromPlaceEvent } from './catalog/synthetic-place-event-load.js';
-export {
-  ensureSimulatorEventCatalog,
-  resetSimulatorEventCatalogBootstrap,
-} from './catalog/bootstrap-simulator-catalog.js';
-export { ensureExamplesEventCatalog, resetExamplesEventCatalogBootstrap } from './catalog/bootstrap-examples-catalog.js';
-export { simulatorBuiltinEventCatalog } from './catalog/builtin/index.js';
 
 export type { PlaceEvent, PlaceEventRequest, PlaceEventHead } from './types/place-event.js';
 export type {
@@ -184,11 +177,8 @@ export { handleMcpRequest, type McpServeOptions } from './mcp/server.js';
 export { runMcpStdio, MCP_PROTOCOL_VERSION, handleMcpProtocolMessage, type McpSession } from './mcp/protocol.js';
 export {
   addBindToPlace,
-  buildPlanRolesFromPlace,
-  collectPlaceIdsForRole,
+  buildBindingDocument,
   type AddBindToPlaceOptions,
   type AddBindToPlaceResult,
 } from './cli/add-plan-to-place.js';
-export { registerSimulatorCatalog } from './register-catalog-resolver.js';
 
-import './register-catalog-resolver.js';
