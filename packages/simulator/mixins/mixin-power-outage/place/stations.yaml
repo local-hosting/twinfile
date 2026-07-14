@@ -1,5 +1,0 @@
-stations:
-  - id: power-outage-grid-monitor
-    name: Grid status monitor
-    roles:
-      - survey-station

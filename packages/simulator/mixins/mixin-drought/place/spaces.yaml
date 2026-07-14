@@ -1,9 +1,0 @@
-spaces:
-  - id: drought-cooling-shelter
-    name: Cooling / relief shelter
-    kind: hall
-    level: ground
-    visit_order: 96
-    exposure: indoor
-    roles:
-      - shelter

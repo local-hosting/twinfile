@@ -13,7 +13,7 @@ import {
 } from '@local-hosting/twinfile-place';
 import { twinHeadPath } from '@local-hosting/twinfile-core';
 
-const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
+const { examplesRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 
 function writePlace(dir: string, from: string, mixins: string[]): void {
   mkdirSync(join(dir, 'place'), { recursive: true });
@@ -45,49 +45,29 @@ describe('place with: mixins', () => {
     rmSync(dir, { recursive: true, force: true });
   });
 
-  it('composes mixin layers after the base and inherits mixin plans', async () => {
+  it('composes mixin rows after the base', async () => {
     writePlace(dir, 'twinfile/base-linear:0.1.0', [
-      'twinfile/mixin-dam-release:0.1.0',
-      'twinfile/mixin-litter-pollution:0.1.0',
+      'twinfile/mixin-assets:0.1.0',
+      'twinfile/mixin-sensors:0.1.0',
     ]);
-    const built = await buildTwinfile(dir, {
-      examplesRoot,
-      simulatorRoot,
-            writeLock: false,
-          });
+    const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
     expect(built.ok, built.ok ? '' : JSON.stringify(built.errors)).toBe(true);
     if (!built.ok) return;
 
     const kinds = built.value.layers.map((layer) => `${layer.kind} ${layer.ref}`);
     expect(kinds[0]).toMatch(/^place from\/base-linear\//);
-    expect(kinds).toContain('mixin with/mixin-dam-release/place/gauges.yaml');
     expect(kinds.at(-1)).toBe('place place/place.yaml');
-    const bindings = (built.value.data as { situationBindings?: Record<string, unknown> }).situationBindings ?? {};
-    expect(Object.keys(bindings).sort()).toEqual(['dam-release', 'litter-pollution']);
+    const data = built.value.data as { assets?: { id: string }[]; sensors?: { id: string }[] };
+    expect(data.assets?.map((row) => row.id)).toContain('starter-kiosk');
+    expect(data.sensors?.map((row) => row.id)).toContain('starter-sensor');
 
-    const strict = loadTwinfileStrict(dir, { examplesRoot, simulatorRoot });
+    const strict = loadTwinfileStrict(dir, { examplesRoot });
     expect(strict.ok, strict.ok ? '' : JSON.stringify(strict.errors)).toBe(true);
-  });
-
-  it('rejects a mixin whose applies_to excludes the place axes', async () => {
-    writePlace(dir, 'twinfile/base-single-level:0.1.0', ['twinfile/mixin-dam-release:0.1.0']);
-    const built = await buildTwinfile(dir, {
-      examplesRoot,
-      simulatorRoot,
-            writeLock: false,
-          });
-    expect(built.ok).toBe(false);
-    if (built.ok) return;
-    expect(built.errors.map((e) => e.code)).toContain('E_MIXIN_AXES');
   });
 
   it('rejects with: refs that are not mixins', async () => {
     writePlace(dir, 'twinfile/base-single-level:0.1.0', ['twinfile/base-campus:0.1.0']);
-    const built = await buildTwinfile(dir, {
-      examplesRoot,
-      simulatorRoot,
-            writeLock: false,
-          });
+    const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
     expect(built.ok).toBe(false);
     if (built.ok) return;
     expect(built.errors[0]?.message).toMatch(/with must reference mixin units/);
