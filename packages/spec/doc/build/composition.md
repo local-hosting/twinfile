@@ -31,7 +31,7 @@ Id-array merge rules and **`$delete`**: [Layers](layers.md).
 | Dockerfile | `<unit>.twin.yaml` + `place/` + `steps: - plan:` | — |
 | `FROM` | **`from:`** on a **place** (or **`from: ..`** on a **scenario**) | Base unit ref in provenance |
 | `COPY` / patch steps | Manifest **`layers:`** / **`steps:`** — place patches and inline **`plan:`** (legacy `bindings/*.yaml` lifted by `twin fmt`) | **`place`** compose layers; bindings end on **`Place.data.situationBindings`** |
-| `COPY --from=<stage>` | **`with:`** mixin units (`kind: mixin`), applied after **`from:`** and before local **`layers:`** ([RFC 0004](../../rfcs/0004-composed-bases.md)) | **`mixin`** compose layers with refs like `with/mixin-severe-weather/place/spaces.yaml` |
+| `COPY --from=<stage>` | **`with:`** mixin units (`kind: mixin`), applied after **`from:`** and before local **`layers:`** ([RFC 0004](../../rfcs/0004-composed-bases.md)) | **`mixin`** compose layers with refs like `with/mixin-assets/place/assets.yaml` |
 | `COPY --from=<stage>` (local stage) | **`copy: ./parts/<name>`** (and `./floors/<floor>` inside a building), nested Twinfiles under the campus ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)) | **`copy`** compose layers under `copy/<into>/…` |
 | Shared dependency image | **Situation** / **event** units linked by **`bindings/`** (`for:` target name) | `situation`, `event`, `plan` compose layers |
 | `ARG` | **`args:`** on scenarios | `args` compose layer |
