@@ -2,7 +2,7 @@ import {
   type BuildTwinfileResult,
 } from '@local-hosting/twinfile-place';
 
-export function primarySituationRef(result: BuildTwinfileResult): string {
+export function primaryEventRef(result: BuildTwinfileResult): string {
   const bundled = (result.events ?? []) as Record<string, unknown>[];
   const primary = bundled.at(-1);
   if (primary && typeof primary.id === 'string' && primary.id.length > 0) {

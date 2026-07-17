@@ -34,13 +34,13 @@ export function describeTwinAt(options: DescribeTwinfileOptions): ReturnType<typ
     options.scenario?.question ??
     catalogQuestion;
   const name = typeof options.twinfile?.name === 'string' ? options.twinfile.name : options.scenario?.name;
-  const situations = options.situations ?? [];
+  const events = options.events ?? [];
   const phaseStarts =
     options.phaseStarts ??
     (options.clock
       ? resolvePhaseStarts({
           clock: options.clock,
-          situations,
+          events,
           resolvedArgs: options.resolvedArgs ?? {},
         })
       : undefined);
@@ -49,7 +49,7 @@ export function describeTwinAt(options: DescribeTwinfileOptions): ReturnType<typ
     place: options.place,
     spaceId: options.spaceId,
     sample: options.sample,
-    situations,
+    events,
     phaseStarts,
     resolvedArgs: options.resolvedArgs,
     viewMode: options.viewMode ?? options.sample?.mode,

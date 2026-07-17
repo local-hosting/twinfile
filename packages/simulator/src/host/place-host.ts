@@ -98,7 +98,7 @@ export class PlaceHost {
       twinfile: this.#compose.loaded.twinfile,
       spaceId: options.spaceId,
       sample,
-      situations: this.#place.situations,
+      events: this.#place.events,
       clock,
       resolvedArgs,
     });

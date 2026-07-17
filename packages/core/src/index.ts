@@ -94,8 +94,8 @@ export type {
   PlaceDataPortV1,
   PlaceLogicalPortV1,
 } from './types/place-type.js';
-export { buildSituationMessage } from './patch/build-situation-message.js';
-export { validateSituationMessageTarget } from './patch/validate-situation-message.js';
+export { buildEventMessage } from './patch/build-event-message.js';
+export { validateEventMessageTarget } from './patch/validate-event-message.js';
 export { connectPorts, disconnectPort, patchCordId, tryConnectPorts } from './patch/processor-graph-edit.js';
 export {
   ProcessorGraph,
@@ -115,12 +115,12 @@ export { PatchProgram, CurriedPatchProgram } from './patch/program/patch-program
 export { PatchContext } from './patch/program/patch-context.js';
 export { PatchGraphModel } from './patch/program/patch-graph-model.js';
 export { routeOneHop } from './patch/program/patch-router.js';
-export { situationPulseHandler, type SituationPulseHandlerOptions } from './patch/program/situation-pulse.js';
+export { eventPulseHandler, type EventPulseHandlerOptions } from './patch/program/event-pulse.js';
 export { SignalFeed, type SignalFeedInput } from './patch/program/signal-feed.js';
 export type {
-  BuildSituationMessageInput,
-  SituationPulsePayload,
-} from './types/situation-pulse.js';
+  BuildEventMessageInput,
+  EventPulsePayload,
+} from './types/event-pulse.js';
 export type {
   ContextSlice,
   PatchProgramBuiltInput,
@@ -358,11 +358,11 @@ export {
   isPatchesTwinfile,
   listTwinfileInstructions,
   listTwinfilePatchDocs,
-  listTwinfileSituationBindings,
+  listTwinfileEventBindings,
   parseManifestPatches,
 } from './load/twinfile-instructions.js';
 export type {
-  SituationBindingDoc,
+  EventBindingDoc,
   TwinfileCopyInstruction,
   TwinfileInstruction,
   TwinfilePatchInstruction,
@@ -383,15 +383,15 @@ export {
   type LayoutIndexRegion,
 } from './check/layout-index.js';
 export {
-  loadSituationRoleVocabulary,
-  situationRoleVocabularyPath,
+  loadEventRoleVocabulary,
+  eventRoleVocabularyPath,
   checkExpectsAgainstVocabulary,
   checkPlanRolesExact,
   checkPlaceRoleTags,
   checkPlaceRolesInVocabulary,
-  type SituationRoleVocabulary,
-  type SituationRoleVocabularyEntry,
-} from './check/situation-role-vocabulary.js';
+  type EventRoleVocabulary,
+  type EventRoleVocabularyEntry,
+} from './check/event-role-vocabulary.js';
 export { collectPlaceIdsForRole, planRolesFromPlace } from './check/event-roles.js';
 export { runScenarioRunner, digestFile, type RunHostResult } from './runners/runner-host.js';
 export { composeRunners, type ComposePayload, type ComposeResult } from './runners/compose-runners.js';

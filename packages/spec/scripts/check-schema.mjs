@@ -110,7 +110,7 @@ function checkTimeCase(id, c) {
     c.phaseStarts ??
     resolvePhaseStarts({
       clock: c.clock,
-      situations: c.situations ?? [],
+      events: c.events ?? [],
       resolvedArgs: c.resolvedArgs ?? {},
     });
   const feeds =

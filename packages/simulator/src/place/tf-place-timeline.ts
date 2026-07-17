@@ -20,7 +20,7 @@ export function timelineOptionsFromTFPlace(place: TFPlace): TFPlaceTimelineOptio
     place: place.data,
     placeRoot: place.unitRoot,
     seed: place.seed ?? 1,
-    situations: place.situations,
+    events: place.events,
     resolvedArgs: place.resolvedArgs,
     mode: place.mode ?? scenarioUseMode({}),
   };

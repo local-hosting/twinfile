@@ -161,8 +161,8 @@ function geotypeInitHintAspects(slug: string | undefined): TwinfileSummaryAspect
   const fixed: TwinfileSummaryAspect[] = [];
   if (deco.situations.length) {
     fixed.push({
-      id: 'situations.geotype-hint',
-      label: 'Geotype init hints (situations)',
+      id: 'events.geotype-hint',
+      label: 'Geotype init hints (events)',
       value: deco.situations.join(', '),
     });
   }
@@ -288,7 +288,7 @@ export function buildTwinfileSummary(
         id: 'bind.roles',
         label: 'Event role map',
         kind: 'binding',
-        detail: 'Embedded on built place as situationBindings (bindings/<event>.yaml or matched role tags)',
+        detail: 'Embedded on built place as eventBindings (bindings/<event>.yaml or matched role tags)',
       });
       break;
     case 'mixin':

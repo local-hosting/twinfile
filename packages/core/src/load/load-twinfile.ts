@@ -64,7 +64,7 @@ function validateLayerFiles(validator: TwinValidator, root: string, twinfile: Re
       validateFile(root, entry.path, 'Layer', (parsed) => validatePlaceLayerFile(validator, parsed)),
     ),
     ...twinfileBindingPaths(twinfile).flatMap((rel) =>
-      validateFile(root, rel, 'Situation binding', (parsed) => validatePlanFile(validator, parsed)),
+      validateFile(root, rel, 'Event binding', (parsed) => validatePlanFile(validator, parsed)),
     ),
   ];
 }

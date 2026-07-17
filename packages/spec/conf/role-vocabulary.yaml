@@ -1,6 +1,6 @@
-# Global controlled vocabulary for situation `expects` keys and place `roles[]` tags.
+# Global controlled vocabulary for event `expects` keys and place `roles[]` tags.
 # Each `id` must match plan/place usage; `kind` must match expectsRole.kind in defs.json.
-# Roles tag place regions for situation plans; context situations arrive on processor inputs (`twin:situation`).
+# Roles tag place regions for event plans; context events arrive on processor inputs (`twin:event`).
 version: 1
 roles:
   - id: shelter

@@ -1,11 +1,11 @@
 import type { LoadedTwinfile } from '@local-hosting/twinfile-core';
-import { listTwinfileInstructions, listTwinfileSituationBindings } from '@local-hosting/twinfile-core';
+import { listTwinfileInstructions, listTwinfileEventBindings } from '@local-hosting/twinfile-core';
 import { mergeObjects } from '@local-hosting/twinfile-core';
 import type { PlaceData } from '@local-hosting/twinfile-core';
 import { resolveTwinfileByRef, type TwinfileResolveOptions } from '@local-hosting/twinfile-core';
 import { catalogResolveOptions } from '@local-hosting/twinfile-core';
 import type { ComposedPlace, PlaceComposeEntry, PlaceComposeLayer } from '@local-hosting/twinfile-core';
-import type { SituationBindingDoc } from '@local-hosting/twinfile-core';
+import type { EventBindingDoc } from '@local-hosting/twinfile-core';
 import type { Result } from '@local-hosting/twinfile-core';
 import { err, ok } from '@local-hosting/twinfile-core';
 import { getPlaceArchetype, getPlaceAxes, resolveComposedAxes } from './place-axes.js';
@@ -152,26 +152,26 @@ export function mergePlaceFromTwinfile(place: LoadedTwinfile, options: PlaceInhe
 }
 
 /**
- * Effective situation bindings for a place: the nearest unit in the `from:` chain (child replaces base),
+ * Effective event bindings for a place: the nearest unit in the `from:` chain (child replaces base),
  * then every mixin's bindings, then bindings of copied units. First occurrence of a `rel` wins.
  */
-export function listPlaceSituationBindings(
+export function listPlaceEventBindings(
   place: LoadedTwinfile,
   options: PlaceInheritOptions | undefined,
-): Result<SituationBindingDoc[]> {
+): Result<EventBindingDoc[]> {
   const stack = getPlaceComposeStack(place, options);
   if (!stack.ok) return stack;
   const lookupRoots = stack.value.map((entry) => entry.loaded.root).reverse();
-  let placeBindings: SituationBindingDoc[] = [];
-  const mixinBindings: SituationBindingDoc[] = [];
-  const copiedBindings: SituationBindingDoc[] = [];
+  let placeBindings: EventBindingDoc[] = [];
+  const mixinBindings: EventBindingDoc[] = [];
+  const copiedBindings: EventBindingDoc[] = [];
   for (const { loaded: unit, role } of stack.value) {
-    const bindings = listTwinfileSituationBindings(unit, lookupRoots);
+    const bindings = listTwinfileEventBindings(unit, lookupRoots);
     if (role === 'mixin') mixinBindings.push(...bindings);
     else if (bindings.length > 0) placeBindings = bindings;
     const copied = listCopiedTwinfiles(unit, options);
     if (!copied.ok) return copied;
-    for (const source of copied.value) copiedBindings.push(...listTwinfileSituationBindings(source));
+    for (const source of copied.value) copiedBindings.push(...listTwinfileEventBindings(source));
   }
   const seen = new Set<string>();
   return ok(

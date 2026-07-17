@@ -176,8 +176,8 @@ export function resolveViewerSection(result: BuildTwinfileResult, sectionId: str
       return meta;
     case 'layers':
       return layers.map(({ ref, kind, chain, content }) => ({ ref, kind, chain, content }));
-    case 'place.situationBindings':
-      return (mergedPlace as { situationBindings?: Record<string, unknown> }).situationBindings ?? {};
+    case 'place.eventBindings':
+      return (mergedPlace as { eventBindings?: Record<string, unknown> }).eventBindings ?? {};
     case 'time.scrub':
       return viewerTimeMetaFromBuild(result) ?? null;
     case 'processors.patch':

@@ -21,8 +21,8 @@ export type TwinfileCopyInstruction = {
 /** One authored step of a unit, in build order (RFC 0009). */
 export type TwinfileInstruction = TwinfilePatchInstruction | TwinfileCopyInstruction;
 
-/** Situation binding document: `bindings/*.yaml` or a `steps[]` `bind:` item. */
-export type SituationBindingDoc = {
+/** Event binding document: `bindings/*.yaml` or a `steps[]` `bind:` item. */
+export type EventBindingDoc = {
   rel: string;
   doc: Record<string, unknown>;
 };

@@ -1,7 +1,7 @@
 import type { Occupancy, TimelineSample } from './twinfile-time.js';
 import type { WorldSessionEdge } from './world-session.js';
 
-/** Active situation programme phase at the playhead (from {@link TFWeather}). */
+/** Active event programme phase at the playhead (from {@link TFWeather}). */
 export type TFPlaceWeatherState = {
   id: string;
   phase?: string;

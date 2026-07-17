@@ -1,26 +1,26 @@
 # Humanitarian map marker tags (e.g. Lantern data.json) → Twinfile open schema.
 # Host bridges resolve markers; core only validates this file in CI.
 version: 1
-# Report pins (situation stories)
+# Report pins (event stories)
 reports:
   - tag: fld
     title: Flooding
-    situation: flood
+    event: flood
   - tag: fir
     title: Fire
-    situation: wildfire
+    event: wildfire
   - tag: pwo
     title: Outage
-    situation: power-outage
+    event: power-outage
   - tag: dmg
     title: Damage
-    situation: field-damage
+    event: field-damage
   - tag: rdb
     title: Debris
-    situation: field-damage
+    event: field-damage
   - tag: cba
     title: Closure
-    situation: field-damage
+    event: field-damage
 # Site pins (roles on merged place rows)
 sites:
   - tag: shl

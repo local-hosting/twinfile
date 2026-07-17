@@ -14,7 +14,7 @@
   },
   "$defs": {
     "placeSteps": {
-      "description": "Ordered steps (RFC 0009): one data patch, situation bind, or copy per item; each step builds one deterministic layer.",
+      "description": "Ordered steps (RFC 0009): one data patch, event bind, or copy per item; each step builds one deterministic layer.",
       "type": "array",
       "minItems": 1,
       "items": {

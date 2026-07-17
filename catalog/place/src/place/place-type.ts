@@ -1,5 +1,5 @@
 import { parseManifestPatches } from '@local-hosting/twinfile-core';
-import { situationBindingsFromBuilt } from './situation-bindings.js';
+import { eventBindingsFromBuilt } from './event-bindings.js';
 import { loadPatchModuleTypeCatalog } from '@local-hosting/twinfile-core';
 import { patchGraphBoundaryIo } from '@local-hosting/twinfile-core';
 import type { PatchGraphV1 } from '@local-hosting/twinfile-core';
@@ -32,11 +32,11 @@ const LOGICAL_OUTPUTS = [
 
 function controlIdsFromBindingsAndSteps(twinfile: Record<string, unknown>, place?: Record<string, unknown>): string[] {
   const ids = new Set<string>();
-  const bindings = place ? situationBindingsFromBuilt(place) : situationBindingsFromBuilt({});
+  const bindings = place ? eventBindingsFromBuilt(place) : eventBindingsFromBuilt({});
   for (const forId of Object.keys(bindings)) {
     if (forId.length > 0) ids.add(forId);
   }
-  for (const row of parseManifestPatches(twinfile).situationBindings) {
+  for (const row of parseManifestPatches(twinfile).eventBindings) {
     const target = row.doc.for;
     if (typeof target === 'string' && target.length > 0) ids.add(target);
   }

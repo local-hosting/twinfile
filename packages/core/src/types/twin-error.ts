@@ -24,7 +24,7 @@ export type TwinErrorCode =
   | 'E_BUILD'
   | 'E_PROCESSOR'
   | 'E_CATALOG'
-  | 'E_SITUATION'
+  | 'E_EVENT'
   | 'E_MESSAGE';
 
 export type TwinError = {
