@@ -1,23 +1,23 @@
 export const metadata = {
-  title: 'Situations and scenarios',
-  description: 'Shared situations, place plans, and a scenario that runs them.',
+  title: 'Events and scenarios',
+  description: 'Shared events, place plans, and a scenario that runs them.',
 }
 
-# Situations and scenarios
+# Events and scenarios
 
-A place describes the site. A situation describes a story any place can bind. A scenario runs that story against one place. {{ className: 'lead' }}
+A place describes the site. An event describes a story any place can bind. A scenario runs that story against one place. {{ className: 'lead' }}
 
-Unit kinds are `place`, `event`, `situation`, `scenario`, and `mixin`. Mixins are the packs `with:` attaches. Events are timetables a scenario can include (arena ships `events/game-day`).
+Unit kinds are `place`, `event`, `event`, `scenario`, and `mixin`. Mixins are the packs `with:` attaches. Events are timetables a scenario can include (arena ships `events/game-day`).
 
-## Shared situations {{ anchor: false }}
+## Shared events {{ anchor: false }}
 
-Fourteen shared situation units ship in the private [`@local-hosting/twinfile-simulator`](https://github.com/twinfile/simulator) catalog. A place opts in through a mixin or a local plan. The situation declares `phases` and the roles it `expects`. Hazard label → unit mapping: [`hazard-catalog.yaml`](https://github.com/twinfile/spec/blob/main/conf/hazard-catalog.yaml). Lantern-style map pins: [`hr-marker-crosswalk.yaml`](https://github.com/twinfile/spec/blob/main/conf/hr-marker-crosswalk.yaml).
+Fourteen shared event units ship in the private [`@local-hosting/twinfile-simulator`](https://github.com/twinfile/simulator) catalog. A place opts in through a mixin or a local plan. The event declares `phases` and the roles it `expects`. Hazard label → unit mapping: [`hazard-catalog.yaml`](https://github.com/twinfile/spec/blob/main/conf/hazard-catalog.yaml). Lantern-style map pins: [`hr-marker-crosswalk.yaml`](https://github.com/twinfile/spec/blob/main/conf/hr-marker-crosswalk.yaml).
 
 `twinfile/severe-weather:1.0.0`:
 
 ```yaml
 twinfile: 1
-kind: situation
+kind: event
 name: severe-weather
 version: 1.0.0
 stability: stable
@@ -37,7 +37,7 @@ expects:
     min: 0
 ```
 
-| Situation | Expects (excerpt) | Example places |
+| Event | Expects (excerpt) | Example places |
 | --- | --- | --- |
 | `severe-weather` | `shelter`, `exit`, `outdoor` | shop, arena, expo |
 | `flood` | `flood-refuge`, `safe-access`, `gauge` | mixin (sites, linear water) |
@@ -59,11 +59,11 @@ Your `bindings/*.yaml` maps those role names to space and opening ids on this si
 
 ## Live controls vs offline runs {{ anchor: false }}
 
-On a built **place**, `image.meta.placeType.controls` is the button surface (`signal:trigger` / situation pulses). Prefer that in product UI — not a separate Twinfile per button. The host **player** advances **`clock:`** and publishes the same IN messages as those buttons (patch module bus). **`use.runner`** stays the offline **ENTRYPOINT** for `twin run`, frozen verify, and **`question:`** answers (JSON Lines stdout) — same timeline, different sink ([world time](https://github.com/twinfile/spec/blob/main/doc/glossary.md#world-time-clock-timeline-player-runner)).
+On a built **place**, `image.meta.placeType.controls` is the button surface (`signal:trigger` / event pulses). Prefer that in product UI — not a separate Twinfile per button. The host **player** advances **`clock:`** and publishes the same IN messages as those buttons (patch module bus). **`use.runner`** stays the offline **ENTRYPOINT** for `twin run`, frozen verify, and **`question:`** answers (JSON Lines stdout) — same timeline, different sink ([world time](https://github.com/twinfile/spec/blob/main/doc/glossary.md#world-time-clock-timeline-player-runner)).
 
 ## A scene run {{ anchor: false }}
 
-A run is a scene payload under a **story**: `story/examples/<story>/scenes/<scene>/run.yaml`. `from:` is the place ref. `steps[].copy` pulls situation and event units (use typed refs). `args:` are the run inputs. `use.runner` names the solver.
+A run is a scene payload under a **story**: `story/examples/<story>/scenes/<scene>/run.yaml`. `from:` is the place ref. `steps[].copy` pulls event units (use typed refs). `args:` are the run inputs. `use.runner` names the solver.
 
 `story/examples/shop-visit/scenes/shop-shelter-at-cap` (shop's only reference run):
 
@@ -92,4 +92,4 @@ twin run story/examples/shop-visit/scenes/shop-shelter-at-cap
 twin verify story/examples/shop-visit/scenes/shop-shelter-at-cap --frozen
 ```
 
-Frozen runs pin `expected/digest.txt`. `twin check --strict --frozen` fails when the built digest moves. Compose order is place, then events, situations, plan bindings, scenario patches, and `args:` ([composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)).
+Frozen runs pin `expected/digest.txt`. `twin check --strict --frozen` fails when the built digest moves. Compose order is place, then events, plan bindings, scenario patches, and `args:` ([composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)).

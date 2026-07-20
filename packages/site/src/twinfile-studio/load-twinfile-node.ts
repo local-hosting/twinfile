@@ -136,11 +136,11 @@ function resolveRefDir(ref: string, examplesRoot: string): string {
   const name = ref.slice('twinfile/'.length).split(':')[0] ?? '';
   const flat = join(examplesRoot, name);
   if (findTwinfileYamlPath(flat)) return flat;
-  for (const bucket of ['mixins', 'situations']) {
+  for (const bucket of ['mixins', 'events']) {
     const candidate = join(examplesRoot, bucket, name);
     if (findTwinfileYamlPath(candidate)) return candidate;
   }
-  const hazardCandidate = join(examplesRoot, '../../../packages/simulator/situations', name);
+  const hazardCandidate = join(examplesRoot, '../../../packages/simulator/events', name);
   if (findTwinfileYamlPath(hazardCandidate)) return hazardCandidate;
   throw new Error(`loadTwinfileDocument: unknown ref ${ref}`);
 }

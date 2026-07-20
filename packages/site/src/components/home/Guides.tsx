@@ -9,8 +9,8 @@ const guides = [
     cta: 'Follow the recipe',
   },
   {
-    href: '/situations',
-    name: 'Situations',
+    href: '/events',
+    name: 'Events',
     description: 'Bind a shared story to one place and run it.',
     cta: 'See a scenario',
   },

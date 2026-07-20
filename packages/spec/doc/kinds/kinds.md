@@ -11,7 +11,7 @@ Twinfile hosts **four published twin types**: **place**, **resource**, **charact
 
 **Runs are not twins.** Executable presets live under **`story/.../scenes/<id>/run.yaml`** (`role: run`, `clock:`, `use.runner`). Hosts pass **`twinfile/story/<id>:<ver>`** to the player; the player walks **`story.scenes`** and loads scene runs.
 
-**Situations** and timetable **stage packs** remain in the **simulator catalog** (`catalogKind: situation` \| `event` in TypeScript) — not `kind: event` twins.
+**Events** and timetable **stage packs** remain in the **simulator catalog** (`catalogKind: event` \| `event` in TypeScript) — not `kind: event` twins.
 
 Logical refs: `twinfile/<type>/<id>:<ver>` for the four types ([RFC 0008](../../rfcs/0008-typed-unit-refs/index.md)). OCI defaults to `ghcr.io/local-hosting/twinfile/<type>/<id>`.
 

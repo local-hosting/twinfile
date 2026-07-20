@@ -58,7 +58,7 @@ A **merged place** is **`Place.data`**: the JSON object `twin build` produces af
 | Term | Meaning |
 | --- | --- |
 | **Built place** | In-memory **`Place`** — `Place.data`, `Place.meta`, `Place.digest` |
-| **Merged place** | **`Place.data`** only (collections + run extras such as `events` / `situations`) |
+| **Merged place** | **`Place.data`** only (collections + run extras such as `events` / `events`) |
 | **Wire `place:merged`** | Port payload shaped like **`Place.data`** (not full `Place.toWire()` unless noted) |
 
 ## Authoring
@@ -103,18 +103,18 @@ Legacy manifest `patch: { modules, connections }` and `inputs` / `outputs` / `co
 
 Golden: [`examples/arena`](../../../../catalog/place/examples/arena/), [`transit-hub-campus`](../../../../catalog/place/examples/mobility-hub/campus/).
 
-## Situation pulses (`twin:situation`)
+## Event pulses (`twin:event`)
 
-Host context publishes [`TwinMessageV1`](../../schemas/1/patch/twin-message.schema.json) with `wire: twin:situation` on a module **`in`** port (e.g. `twinfile/mod.situation-in@0.1.0`). Payload convention (validation in `@local-hosting/twinfile-core`):
+Host context publishes [`TwinMessageV1`](../../schemas/1/patch/twin-message.schema.json) with `wire: twin:event` on a module **`in`** port (e.g. `twinfile/mod.event-in@0.1.0`). Payload convention (validation in `@local-hosting/twinfile-core`):
 
 | Field | Meaning |
 | --- | --- |
-| `situationRef` | Pack ref or `id` from `Place.data.situations[]` |
-| `phase` | Must be in situation `phases` |
+| `eventRef` | Pack ref or `id` from `Place.data.events[]` |
+| `phase` | Must be in event `phases` |
 | `pulse` | `fast` \| `long` |
 | `edge` | `enter` \| `exit` \| `tick` (fast); long uses `enter` + `until` |
 | `until` | ISO end for long pulse |
-| `args` | Situation call-site args |
+| `args` | Event call-site args |
 
 Context **feeds** use wires `signal:rain`, `signal:alert`, `signal:rating`, `signal:volume`, `signal:open`, `signal:trigger`, `signal:status`, `signal:occupancy` into `twinfile/mod.signal-hub@0.1.0` (see `conf/patch-module-types.yaml`). Hub **outputs** `signal:status` and `signal:occupancy` are the usual open place columns.
 

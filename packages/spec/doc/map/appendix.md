@@ -2,7 +2,7 @@
 
 External mappings into the native document, which stays **`place/*.yaml`** (and a JSON Lines feed for observations). An importer writes that YAML. An exporter reads a built `Place`. Known terms and where they land are listed in [`conf/crosswalk.yaml`](../../conf/crosswalk.yaml). A term in that file is written only to the named field. A term marked `ext`, or absent from the file, goes in **`ext`**.
 
-Place identity stays a geotype slug. An IMDF venue `category` sets `geotype.primary` when that slug's `mappings.imdf` matches (`museum`). A GTFS line uses `mappings.gtfs: station`, which resolves to `train_station`. Room-level categories stay `spaces.kind`. Situation roles stay the role list; the crosswalk only tags a role that is already on that list (`egress` → `exit`).
+Place identity stays a geotype slug. An IMDF venue `category` sets `geotype.primary` when that slug's `mappings.imdf` matches (`museum`). A GTFS line uses `mappings.gtfs: station`, which resolves to `train_station`. Room-level categories stay `spaces.kind`. Event roles stay the role list; the crosswalk only tags a role that is already on that list (`egress` → `exit`).
 
 Fixtures: [`conf/map/`](../../conf/map/).
 
