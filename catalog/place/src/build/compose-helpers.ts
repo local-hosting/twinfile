@@ -83,7 +83,7 @@ export function composeSingleTwinfileLayers(
       : undefined;
     return composePlaceLayers(unit, inherit);
   }
-  if (kind === 'event' || kind === 'mixin') {
+  if (kind === 'event') {
     return ok(readManifestLayers(unit, '', 'place'));
   }
   if (kind === 'scenario') {

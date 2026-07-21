@@ -138,11 +138,11 @@ export async function buildTwinfile(
   } else {
     const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
     const resolveOpts = examplesRoot ? catalogResolveOptions(examplesRoot) : undefined;
-    if (!runUnit && (unit.twinfile.from || unit.twinfile.with) && !examplesRoot) {
+    if (!runUnit && unit.twinfile.from && !examplesRoot) {
       return err([
         {
           code: 'E_BUILD',
-          message: 'Place with from or with requires examplesRoot or TF_TWINFILE_ROOT',
+          message: 'Place with from requires examplesRoot or TF_TWINFILE_ROOT',
           file: unit.twinfilePath,
         },
       ]);

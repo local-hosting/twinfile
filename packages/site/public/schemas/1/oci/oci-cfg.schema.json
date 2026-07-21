@@ -18,7 +18,6 @@
       "enum": [
         "place",
         "base",
-        "mixin",
         "resource",
         "character",
         "story",

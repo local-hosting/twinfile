@@ -52,7 +52,7 @@ describe('parseTwinHead', () => {
 describe('findTwinHead', () => {
   it('types the folder-named head by its kind', () => {
     expect(findTwinHead(unitDir(RESOURCE_HEAD))?.kind).toBe('resource');
-    expect(findTwinHead(unitDir('kind: mixin\n'))?.kind).toBe('place');
+    expect(findTwinHead(unitDir('kind: mixin\n'))).toBeUndefined();
     expect(findTwinHead(unitDir('kind: unknown\n'))).toBeUndefined();
     expect(findTwinHead(unitDir())).toBeUndefined();
   });

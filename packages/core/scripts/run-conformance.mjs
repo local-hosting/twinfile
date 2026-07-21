@@ -293,7 +293,7 @@ function unitHead(kind, name) {
   return { twinfile: 1, kind, id: name, version: '0.1.0', stability: 'example' };
 }
 
-function composeCase(examplesRoot, c, withList) {
+function composeCase(examplesRoot, c) {
   const dir = mkdtempSync(join(examplesRoot, 'place-'));
   const place = {
     name: c.id,
@@ -305,7 +305,6 @@ function composeCase(examplesRoot, c, withList) {
   const manifest = {
     ...unitHead('place', 'compose-case'),
     ...(c.axes ? { axes: c.axes } : {}),
-    ...(withList.length ? { with: withList.map((name) => `twinfile/${name}:0.1.0`) } : {}),
     layers: Object.keys(files),
   };
   writeJsonTree(dir, { [twinHeadFileName(dir)]: manifest, ...files });
@@ -315,22 +314,8 @@ function composeCase(examplesRoot, c, withList) {
   );
 }
 
-function rowSet(place) {
-  return Object.entries(place)
-    .flatMap(([key, value]) => (Array.isArray(value) ? value.map((row) => `${key}/${JSON.stringify(row)}`) : [`${key}=${JSON.stringify(value)}`]))
-    .sort();
-}
-
-function chainDigest(layers) {
-  let parent = null;
-  for (const layer of layers) {
-    parent = layerChainDigest({ parent, content: sha256Digest(layer.patch), kind: layer.kind, ref: layer.ref });
-  }
-  return parent;
-}
-
 function composeCaseProblem(examplesRoot, c) {
-  const got = composeCase(examplesRoot, c, c.with ?? []);
+  const got = composeCase(examplesRoot, c);
   if (c.expectCodes) {
     if (got.ok) return 'expected failure';
     const missing = c.expectCodes.filter((code) => !got.errors.some((e) => e.code === code));
@@ -339,12 +324,6 @@ function composeCaseProblem(examplesRoot, c) {
   if (!got.ok) return got.errors.map((e) => `${e.code}: ${e.message}`).join('; ');
   const archetype = got.value.place.place?.archetype;
   if (c.expectArchetype && archetype !== c.expectArchetype) return `archetype ${archetype}, want ${c.expectArchetype}`;
-  if (c.sameRowsAs) {
-    const other = composeCase(examplesRoot, c, c.sameRowsAs);
-    if (!other.ok) return 'reordered compose failed';
-    if (JSON.stringify(rowSet(other.value.place)) !== JSON.stringify(rowSet(got.value.place))) return 'rows differ by order';
-    if (chainDigest(other.value.layers) === chainDigest(got.value.layers)) return 'chain digest ignores with order';
-  }
   return undefined;
 }
 
@@ -352,17 +331,6 @@ function runComposeVector(vector) {
   const data = loadJson(vector.files[0]);
   const examplesRoot = mkdtempSync(join(tmpdir(), 'tf-compose-'));
   try {
-    for (const [name, mixin] of Object.entries(data.mixins)) {
-      writeJsonTree(join(examplesRoot, 'mixins', name), {
-        [twinHeadFileName(name)]: { ...unitHead('mixin', name), ...(mixin.manifest ?? mixin.twinfile ?? {}) },
-        ...mixin.files,
-      });
-    }
-    const refLines = ['refs:'];
-    for (const name of Object.keys(data.mixins)) {
-      refLines.push(`  twinfile/${name}:0.1.0: mixins/${name}`);
-    }
-    writeFileSync(join(examplesRoot, 'twin.local.yaml'), `${refLines.join('\n')}\n`);
     for (const c of data.cases) {
       const problem = composeCaseProblem(examplesRoot, c);
       if (problem) {

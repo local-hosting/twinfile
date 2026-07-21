@@ -77,7 +77,7 @@ export function resolveExamplePlace(
 /** @internal Tests and diagnostics for flat catalog layout. */
 export function listSiteSlugs(examplesRoot: string): string[] {
   return listFlatExampleUnitNames(examplesRoot).filter(
-    (name) => !name.startsWith('base-') && !name.startsWith('mixin-') && !name.endsWith('-programme'),
+    (name) => !name.startsWith('base-') && !name.endsWith('-programme'),
   );
 }
 

@@ -5,7 +5,7 @@ import type { PlaceData } from '../build/contract-checker.js';
 import type { LoadedTwinfile } from '../load/load-twinfile.js';
 
 /** Where a unit sits in a place compose stack (RFC 0004). */
-export type PlaceComposeRole = 'from' | 'mixin' | 'self';
+export type PlaceComposeRole = 'from' | 'self';
 
 export type PlaceComposeEntry = {
   loaded: LoadedTwinfile;

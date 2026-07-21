@@ -1,0 +1,11 @@
+twinfile: 1
+kind: place
+id: place-with
+name: Place With
+version: 0.1.0
+stability: example
+from: twinfile/base-campus:0.1.0
+with:
+  - twinfile/mixin-assets:0.1.0
+layers:
+  - place/place.yaml

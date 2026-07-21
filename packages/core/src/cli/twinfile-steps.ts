@@ -35,14 +35,3 @@ export function upsertStepItem(
   setTwinfileStepItems(twinfile, items);
   return index;
 }
-
-/** Add `copy:` steps for refs not already copied, after the leading run of copies (like `with:` mixins). */
-export function addLeadingCopies(twinfile: Record<string, unknown>, refs: string[]): void {
-  const items = stepItems(twinfile);
-  const copied = new Set(items.map((item) => item?.copy).filter((ref) => typeof ref === 'string'));
-  const fresh = [...new Set(refs)].filter((ref) => !copied.has(ref)).map((ref) => ({ copy: ref }));
-  if (fresh.length === 0) return;
-  const lead = items.findIndex((item) => typeof item?.copy !== 'string' || typeof item.into === 'string');
-  items.splice(lead < 0 ? items.length : lead, 0, ...fresh);
-  setTwinfileStepItems(twinfile, items);
-}

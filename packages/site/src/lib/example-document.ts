@@ -6,7 +6,7 @@ export function examplesRoot(): string {
   return resolveSiteExamplesRoot()
 }
 
-/** Default loader: the unit plus linked `with:` mixins and `copy: ./…` buildings; `from:` stays a ref only. */
+/** Default loader: the unit plus linked `copy: ./…` buildings; `from:` stays a ref only. */
 export function loadExampleDocument(uri: string): string {
   const root = examplesRoot()
   const target = uri.startsWith('twinfile/') ? uri : join(root, uri)

@@ -6,7 +6,6 @@ import {
 } from '@local-hosting/twinfile-place';
 import {
   findTwinfileYamlPath,
-  twinfileMixinRefs,
   parseManifestPatches,
 } from '@local-hosting/twinfile-core';
 import { parse } from 'yaml';
@@ -18,7 +17,7 @@ const SOURCE_REF = /sources\/[A-Za-z0-9_./-]+\.(?:geojson|json|ya?ml)/g;
 
 export type LoadTwinfileDocumentOptions = {
   examplesRoot?: string;
-  /** `composed` (default) inlines `with:` mixins; `from:` stays a ref on this unit’s <unit>.twin.yaml (npm deps). `local` is this dir only. */
+  /** `composed` (default) inlines `copy: ./…` units; `from:` stays a ref on this unit’s <unit>.twin.yaml (npm deps). `local` is this dir only. */
   stack?: 'composed' | 'local';
 };
 
@@ -48,7 +47,7 @@ export function loadTwinfileDocument(uri: string, options: LoadTwinfileDocumentO
   throw new Error(`loadTwinfileDocument: not a file: ${path}`);
 }
 
-/** This unit's files only — no resolved `from:` / `with:` (like package.json without node_modules). */
+/** This unit's files only — no resolved `from:` (like package.json without node_modules). */
 export function loadLocalTwinfileDocument(
   uri: string,
   options: Omit<LoadTwinfileDocumentOptions, 'stack'> = {},
@@ -56,7 +55,7 @@ export function loadLocalTwinfileDocument(
   return loadTwinfileDocument(uri, { ...options, stack: 'local' });
 }
 
-/** Unit buffer: optional `from:` / `with:` stack (prefixed), then local files. */
+/** Unit buffer: optional `from:` stack (prefixed), then local files. */
 function readUnit(root: string, examplesRoot: string, stack: 'composed' | 'local'): string {
   const files = collectUnitFiles(root, examplesRoot, new Set(), '', stack);
   return serializeTwinfileFiles(files);
@@ -94,13 +93,6 @@ function collectUnitFiles(
 
   if (stack === 'composed') {
     const linked: { path: string; text: string }[] = [];
-    for (const mixinRef of twinfileMixinRefs(twinfile)) {
-      const ref = mixinRef.trim();
-      if (!ref.startsWith('twinfile/') || stackRefs.has(ref)) continue;
-      stackRefs.add(ref);
-      const mixinRoot = resolveRefDir(ref, examplesRoot);
-      linked.push(...collectUnitFiles(mixinRoot, examplesRoot, stackRefs, `with/${ref}/`, 'local'));
-    }
     for (const step of parseManifestPatches(twinfile).instructions) {
       if (step.type !== 'copy' || !isLocalCopyRef(step.copy)) continue;
       const rel = step.copy.replace(/^\.\//, '');
@@ -136,7 +128,7 @@ function resolveRefDir(ref: string, examplesRoot: string): string {
   const name = ref.slice('twinfile/'.length).split(':')[0] ?? '';
   const flat = join(examplesRoot, name);
   if (findTwinfileYamlPath(flat)) return flat;
-  for (const bucket of ['mixins', 'events']) {
+  for (const bucket of ['events']) {
     const candidate = join(examplesRoot, bucket, name);
     if (findTwinfileYamlPath(candidate)) return candidate;
   }

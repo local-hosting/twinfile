@@ -212,7 +212,6 @@ export {
 export {
   DEFAULT_PLACE_BASE_REFS,
   placeBaseRefForArchetype,
-  placeMixinRef,
   isPlaceArchetype,
   type PlaceArchetype,
 } from './ref/place-base-refs.js';
@@ -346,7 +345,6 @@ export {
   twinLockPath,
 } from './load/twinfile-locator.js';
 export {
-  twinfileMixinRefs,
   twinfileBindingPaths,
   twinfileLayerPaths,
   manifestScenarioComposeRefs,

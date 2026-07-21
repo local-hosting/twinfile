@@ -12,7 +12,7 @@ import { readYamlDocument } from '../validate/validate-yaml.js';
 
 export type ParseTwinHeadOptions = {
   readonly headFile: string;
-  /** Accepted `kind:` values — place heads also accept `mixin`. */
+  /** Accepted `kind:` values. */
   readonly kinds: readonly string[];
 };
 
@@ -35,7 +35,6 @@ export function parseTwinHead(raw: unknown, opts: ParseTwinHeadOptions): Result<
 }
 
 function twinKindOf(declared: unknown): TwinKind | undefined {
-  if (declared === 'mixin') return 'place';
   return TWIN_CATALOG_TYPES.find((kind) => kind === declared);
 }
 
