@@ -58,7 +58,7 @@ A **merged place** is **`Place.data`**: the JSON object `twin build` produces af
 | Term | Meaning |
 | --- | --- |
 | **Built place** | In-memory **`Place`** — `Place.data`, `Place.meta`, `Place.digest` |
-| **Merged place** | **`Place.data`** only (collections + run extras such as `events` / `events`) |
+| **Merged place** | **`Place.data`** only (collections + run extras such as `events`) |
 | **Wire `place:merged`** | Port payload shaped like **`Place.data`** (not full `Place.toWire()` unless noted) |
 
 ## Authoring

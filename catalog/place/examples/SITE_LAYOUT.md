@@ -1,10 +1,10 @@
 # Site folder layout
 
-Standard **catalog site** tree (bases and mixins omit optional paths).
+Standard **catalog site** tree (bases omit optional paths).
 
 ```text
 <unit>/
-  <unit>.twin.yaml              # place | base | mixin | nested building (v2 + steps:)
+  <unit>.twin.yaml              # place | base | nested building (v2 + steps:)
   README.md                  # pin + story (sites); one link to docs/layout.md
   docs/layout.md             # fiction map + id tables (sites)
   expected/contract.json     # strict binding snapshot (sites with bind:)
@@ -13,7 +13,7 @@ Standard **catalog site** tree (bases and mixins omit optional paths).
   sources/                   # optional fixtures (e.g. river gauges)
 ```
 
-**Not catalog sites:** `base-*`, `mixin-*`, `fixtures/` (test scaffold), `conf/`, `mcp/`.
+**Not catalog sites:** `base-*`, `fixtures/` (test scaffold), `conf/`, `mcp/`.
 
 **Recipe order (campus):** `place` → `levels` → topology → decoration → `bind:` → `copy:` last.
 

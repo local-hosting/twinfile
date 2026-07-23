@@ -9,7 +9,7 @@ Created: 2026-11-10
 
 ## Motivation
 
-[RFC 0004](0004-composed-bases.md) keeps a single `from:` skeleton and shares decorations with `with:` mixins. Multi-building sites (airport, hospital, expo) still duplicate interior topology in one folder or rely on informal layer splits. Authors want **one campus twin** with **indoor_stack twins per building/floor**, like Docker `COPY --from=` stages.
+[RFC 0004](0004-composed-bases.md) keeps a single `from:` skeleton. Multi-building sites (airport, hospital, expo) still duplicate interior topology in one folder or rely on informal layer splits. Authors want **one campus twin** with **indoor_stack twins per building/floor**, like Docker `COPY --from=` stages.
 
 ## Specification
 
@@ -39,7 +39,7 @@ Building units SHOULD omit `levels.yaml` when site levels already name floors (e
 
 ### Compose order
 
-After the usual `from:` chain, `with:` mixins, and site `layers:`:
+After the usual `from:` chain and site `layers:`:
 
 1. Each `buildings[].from` (in list order)
 2. Each nested `floors[]` (in list order)
@@ -48,7 +48,7 @@ Each import runs `composePlace` on the child unit, prefixes ids, strips child `p
 
 ### Plans
 
-Plan paths from imported units union with site and mixin plans (same rules as mixins for file lookup).
+Plan paths from imported units union with site plans.
 
 ### Errors
 

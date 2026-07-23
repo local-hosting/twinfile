@@ -10,7 +10,7 @@ Install `@local-hosting/twinfile-core`, point it at the examples checkout, and s
 <Note>
   Packages publish to GitHub Packages. Core depends on `@local-hosting/twinfile`, so a normal install
   brings the schemas with it. You still need a local `examples` checkout: `twin init`
-  resolves golden bases and mixins from disk.
+  resolves golden bases from disk.
 </Note>
 
 ## Install {{ anchor: false }}
@@ -37,13 +37,13 @@ yarn twin check ./my-mall
 yarn twin build ./my-mall
 ```
 
-`twin init place` writes `<unit>.twin.yaml` with `geotype.primary`, a `from:` base, and a `with:` list of mixins for the events that slug suggests. `twin check` validates the folder. `twin build` builds a `Place` in memory and writes `<unit>.twin.lock` when lock write is enabled.
+`twin init place` writes `<unit>.twin.yaml` with `geotype.primary`, a `from:` base, and starter `assets` / `sensors` rows when that slug suggests them. `twin check` validates the folder. `twin build` builds a `Place` in memory and writes `<unit>.twin.lock` when lock write is enabled.
 
-Pass `--no-from` for a skeleton with no base, or `--no-decorate` to skip mixins.
+Pass `--no-from` for a skeleton with no base, or `--no-decorate` to skip the starter rows.
 
 ## Read the recipe {{ anchor: false }}
 
-- [Author a place](/author) is the `from:` → `layers:` → `with:` → `bindings/` order.
+- [Author a place](/author) is the `from:` → `layers:` → `bindings/` order.
 - [Events](/events) is how a shared story binds to your space ids.
 - [Examples](/examples) opens golden place twins in the editor.
 - [twin CLI](/cli) covers `run`, `pack`, `push`, and `pull`.

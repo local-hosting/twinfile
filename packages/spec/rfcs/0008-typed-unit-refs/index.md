@@ -18,7 +18,7 @@ twinfile/<type>/<name>:<tag>             # typed (recommended)
 
 `<type>` for **published twins** MUST be one of: **`place`**, **`resource`**, **`character`**, **`story`**.
 
-Legacy typed segments **`event`**, **`event`**, **`scenario`** remain valid in **compose refs** (`copy: twinfile/event/...`) for simulator catalog modules and migrated presets; they do not denote a publishable twin kind. **`mixin`** / **`base`** map to **place** in OCI config.
+Legacy typed segments **`event`** and **`scenario`** remain valid in **compose refs** (`copy: twinfile/event/...`) for simulator catalog modules and migrated presets; they do not denote a publishable twin kind. **`base`** maps to **place** in OCI config.
 
 `<name>` and `<tag>` rules unchanged (`defs.json#/$defs/twinId`, semver tag).
 
