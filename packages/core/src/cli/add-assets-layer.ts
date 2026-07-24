@@ -3,20 +3,20 @@ import { join } from 'node:path';
 
 import { twinHeadPath } from '../load/twinfile-locator.js';
 
-import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
+import { stringify as stringifyYaml } from 'yaml';
 
 import { isPatchesTwinfile } from '../load/twinfile-instructions.js';
+import { starterLayerStep } from './starter-rows.js';
 import { readTwinfileDoc, upsertStepItem, writeTwinfileDoc } from './twinfile-steps.js';
 
 export type AddAssetsLayerOptions = {
   force?: boolean;
 };
 
-const STARTER_ASSETS = `# Decorator starter — bind devices/signage to space ids (twin add assets)\nassets:\n  - id: example-kiosk\n    name: Example kiosk\n    kind: kiosk\n    space: CHANGE_ME\n    state: active\n`;
+const STARTER_ASSETS_HEADER = '# Decorator starter — bind devices/signage to space ids (twin add assets)\n';
 
 function addAssetsPatch(twinfilePath: string, twinfile: Record<string, unknown>, force: boolean): string {
-  const starter = parseYaml(STARTER_ASSETS) as Record<string, unknown>;
-  const index = upsertStepItem(twinfile, starter, (item) => 'assets' in item, force);
+  const index = upsertStepItem(twinfile, starterLayerStep('assets'), (item) => 'assets' in item, force);
   if (index < 0) throw new Error('Assets step already exists in steps: (use --force)');
   writeTwinfileDoc(twinfilePath, twinfile);
   return `steps[${index}]`;
@@ -29,7 +29,7 @@ function addAssetsLayerFile(unitDir: string, twinfilePath: string, twinfile: Rec
     throw new Error(`Assets layer already exists: ${layerAbsPath} (use --force)`);
   }
   mkdirSync(join(unitDir, 'place'), { recursive: true });
-  writeFileSync(layerAbsPath, STARTER_ASSETS);
+  writeFileSync(layerAbsPath, STARTER_ASSETS_HEADER + stringifyYaml(starterLayerStep('assets')));
 
   const layers = Array.isArray(twinfile.layers) ? [...twinfile.layers.map(String)] : [];
   if (!layers.includes(layerRelPath)) {

@@ -5,8 +5,10 @@ import {
   isLocalCopyRef,
 } from '@local-hosting/twinfile-place';
 import {
+  catalogResolveOptions,
   findTwinfileYamlPath,
   parseManifestPatches,
+  resolveTwinfileByRef,
 } from '@local-hosting/twinfile-core';
 import { parse } from 'yaml';
 
@@ -118,23 +120,9 @@ function referencedSources(root: string, texts: string[]): string[] {
 }
 
 function resolveRefDir(ref: string, examplesRoot: string): string {
-  const mapPath = join(examplesRoot, 'twin.local.yaml');
-  if (statSync(mapPath, { throwIfNoEntry: false })?.isFile()) {
-    const doc = parse(readFileSync(mapPath, 'utf8')) as { refs?: Record<string, string> };
-    const rel = doc.refs?.[ref];
-    if (rel) return resolve(examplesRoot, rel);
-  }
-
-  const name = ref.slice('twinfile/'.length).split(':')[0] ?? '';
-  const flat = join(examplesRoot, name);
-  if (findTwinfileYamlPath(flat)) return flat;
-  for (const bucket of ['events']) {
-    const candidate = join(examplesRoot, bucket, name);
-    if (findTwinfileYamlPath(candidate)) return candidate;
-  }
-  const hazardCandidate = join(examplesRoot, '../../../packages/simulator/events', name);
-  if (findTwinfileYamlPath(hazardCandidate)) return hazardCandidate;
-  throw new Error(`loadTwinfileDocument: unknown ref ${ref}`);
+  const resolved = resolveTwinfileByRef(ref, catalogResolveOptions(examplesRoot));
+  if (!resolved.ok) throw new Error(`loadTwinfileDocument: unknown ref ${ref}`);
+  return resolved.value.loaded.root;
 }
 
 function hasPlaceCatalog(twinfileRoot: string): boolean {
