@@ -35,7 +35,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@local-hosting/geotypes": "0.1.2",
+    "@local-hosting/geotypes": "0.2.0",
     "@local-hosting/twinfile": "workspace:packages/spec",
     "web-ifc": "^0.0.78",
     "yaml": "^2.6.1"
@@ -46,7 +46,7 @@
     "vitest": "^4.1.12"
   },
   "twinfilePinnedDependencies": {
-    "@local-hosting/geotypes": "0.1.2",
+    "@local-hosting/geotypes": "0.2.0",
     "@local-hosting/twinfile": "1.0.0-draft.2"
   }
 }

@@ -7,7 +7,7 @@ version: 0.1.0
 stability: example
 geotype:
   primary: office_building
-  registry: "@local-hosting/geotypes@0.1.2"
+  registry: "@local-hosting/geotypes@0.2.0"
 steps:
   - place:
       name: Terminal A (interior)
