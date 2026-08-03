@@ -1,10 +1,8 @@
-import { statSync } from 'node:fs';
-import { join } from 'node:path';
 
 import { isRecord } from '../doc/is-record.js';
 import { findTwinfileYamlPath } from '../load/twinfile-locator.js';
 import { TWIN_CATALOG_TYPES } from '../paths/catalog-layout.js';
-import { RUN_PRESET_NAMES, type TwinKind } from '../types/twin-kind.js';
+import type { TwinKind } from '../types/twin-kind.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 import type { TwinHead, TwinHeadPath } from '../types/twin-head.js';
@@ -47,8 +45,7 @@ export function findTwinHead(dir: string): TwinHeadPath | undefined {
   return kind ? { kind, path } : undefined;
 }
 
-/** Publishable unit folder: a twin head or a scene run head. */
+/** Publishable unit folder: has a `<unit>.twin.yaml` head. */
 export function isTwinUnitDir(dir: string): boolean {
-  if (findTwinfileYamlPath(dir)) return true;
-  return RUN_PRESET_NAMES.some((name) => statSync(join(dir, name), { throwIfNoEntry: false })?.isFile());
+  return findTwinfileYamlPath(dir) !== undefined;
 }

@@ -1,6 +1,4 @@
-import { join } from 'node:path';
-
-import { goldenSceneRunRelPath } from '../src/paths/golden-scene-runs.js';
+import { resolveGoldenSceneRun } from '../src/paths/golden-scene-runs.js';
 import {
   resolvePlaceExamplesCatalogRoot,
   resolveTwinfileRoot,
@@ -14,9 +12,9 @@ export function testTwinfileRoot(importMetaDir: string): string {
   return resolveTwinfileRoot(importMetaDir);
 }
 
-/** Golden scene run dir (`catalog/story/examples/.../scenes/<id>/`). */
-export function goldenSceneRunDir(importMetaDir: string, runId: string): string {
-  return join(testTwinfileRoot(importMetaDir), goldenSceneRunRelPath(runId));
+/** Golden scene run address (`catalog/story/examples/<story>#<scene-id>`). */
+export function goldenSceneRun(importMetaDir: string, runId: string): string {
+  return resolveGoldenSceneRun(runId, testTwinfileRoot(importMetaDir));
 }
 
 export function testCatalogRoots(importMetaDir: string): { examplesRoot: string } {

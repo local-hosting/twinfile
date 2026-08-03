@@ -1,43 +1,15 @@
 #!/usr/bin/env node
-/** Run `twin verify` for every scene run with expected/digest.txt under story/scenes. */
+/** Run `twin verify` for every story scene run that pins `run.expected.digest`. */
 import { spawnSync } from 'node:child_process';
-import { readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
-import { isRunHeadPath, resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
+import { listPinnedSceneRuns } from './list-scene-runs.mjs';
 import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
 
-const examplesRoot = resolvePlaceExamplesCatalogRoot();
-const twinfileRoot = resolveTwinfileRoot(examplesRoot);
-const storyExamplesRoot = resolveTypeExamplesRoot('story', twinfileRoot);
+const twinfileRoot = resolveTwinfileRoot(resolvePlaceExamplesCatalogRoot());
 const twinCli = resolveTwinCli(import.meta.url);
-
-function isRunVerifyTarget(dir) {
-  const headPath = resolveTwinfileHeadPath(dir);
-  if (!headPath || !isRunHeadPath(headPath)) return false;
-  return statSync(join(dir, 'expected/digest.txt'), { throwIfNoEntry: false })?.isFile() === true;
-}
-
-function findRuns(dir, acc = []) {
-  if (!statSync(dir, { throwIfNoEntry: false })?.isDirectory()) return acc;
-  if (isRunVerifyTarget(dir)) {
-    acc.push(dir);
-    return acc;
-  }
-  for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git') continue;
-    findRuns(join(dir, name), acc);
-  }
-  return acc;
-}
-
-const runs = [
-  ...(statSync(storyExamplesRoot, { throwIfNoEntry: false })?.isDirectory()
-    ? findRuns(storyExamplesRoot)
-    : []),
-].sort();
+const runs = listPinnedSceneRuns(resolveTypeExamplesRoot('story', twinfileRoot));
 
 if (!runs.length) {
   console.error('verify-scenarios: none found');
@@ -45,9 +17,9 @@ if (!runs.length) {
 }
 
 let failed = 0;
-for (const dir of runs) {
-  const rel = `catalog/story/examples/${dir.slice(storyExamplesRoot.length + 1)}`;
-  const run = spawnSync(process.execPath, [twinCli, 'verify', dir], {
+for (const address of runs) {
+  const rel = address.slice(twinfileRoot.length + 1);
+  const run = spawnSync(process.execPath, [twinCli, 'verify', address], {
     encoding: 'utf8',
   });
   if (run.status !== 0) {

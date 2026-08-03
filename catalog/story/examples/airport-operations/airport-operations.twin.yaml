@@ -11,8 +11,35 @@ story:
   arc: operations
   scenes:
     - id: airport-morning-checkpoint
-      label: airport morning checkpoint
-      run: ./scenes/airport-morning-checkpoint
+      label: Morning checkpoint
+      run:
+        from: twinfile/place/airport:0.2.0
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        domains:
+          - mobility
+        args:
+          lanes: 3
+        use:
+          runner: npm:@twinfile/runner-queue@^0
     - id: airport-terminal-surge
-      label: airport terminal surge
-      run: ./scenes/airport-terminal-surge
+      label: Terminal surge
+      run:
+        from: twinfile/place/airport:0.2.0
+        steps:
+          - copy: twinfile/event/transit-disruption:1.0.0
+        domains:
+          - mobility
+        args:
+          peakArrivals: 300
+          lanes: 3
+          service_s: 45
+          stagingCap: 50
+        use:
+          runner: npm:@twinfile/runner-queue@^0
+        expected:
+          digest: sha256:87c13c05c7fe9bc9bdbb9e182fca48635f1f3740c9237141a342a7059501abda
+          metrics:
+            max_queue: 300
+            time_queue_spills_s: 3750
+            clearance_time_s: 4500

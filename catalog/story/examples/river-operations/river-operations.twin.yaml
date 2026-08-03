@@ -11,8 +11,48 @@ story:
   arc: operations
   scenes:
     - id: river-swim-unsafe-known
-      label: river swim unsafe known
-      run: ./scenes/river-swim-unsafe-known
+      label: Swim unsafe after release
+      run:
+        from: twinfile/place/river:0.2.0
+        steps:
+          - copy: twinfile/event/dam-release:1.0.0
+        domains:
+          - safety
+        clock:
+          starts_at: 2026-06-12T09:00:00-04:00
+          duration: PT6H
+          step: PT5M
+        args:
+          track: turbidity
+          threshold: 50
+        use:
+          runner: npm:@twinfile/runner-replay@^0
+        expected:
+          digest: sha256:317029bf3575a68bf764bc9629049832abdb201b267549bd9fd1dd7898a7c22e
+          metrics:
+            time_until_unsafe_s: 2700
+            time_until_known_unsafe_s: 3600
+            peak_turbidity: 124
     - id: river-until-stage-unsafe
-      label: river until stage unsafe
-      run: ./scenes/river-until-stage-unsafe
+      label: Upstream stage unsafe
+      run:
+        from: twinfile/place/river:0.2.0
+        steps:
+          - copy: twinfile/event/dam-release:1.0.0
+        domains:
+          - safety
+        clock:
+          starts_at: 2026-06-12T09:00:00-04:00
+          duration: PT30M
+          step: PT1M
+        args:
+          track: stage
+          threshold: 10
+        use:
+          runner: npm:@twinfile/runner-replay@^0
+        expected:
+          digest: sha256:97c438a00f705a0be93384790537bafed97d9b70c5baba5d50b65388e8c0af2b
+          metrics:
+            time_until_unsafe_s: 720
+            time_until_known_unsafe_s: 900
+            peak_stage: 11.2
