@@ -13,9 +13,9 @@ Short form; see [Composition](build/composition.md) for place patches vs compose
 | Docker | Twinfile |
 | --- | --- |
 | Dockerfile | **`<unit>.twin.yaml`** recipe for a **place** + `place/` (v2: `steps:`; v1: `layers:`) |
-| `FROM` | **`from:`** on a place (scene **`run.yaml`**: **`from:`** place ref) |
+| `FROM` | **`from:`** on a place (scene **`run:`**: **`from:`** place ref) |
 | Patch steps | Place **`steps:`** / v1 **`layers:`** (YAML merge; base **`from:`** first) |
-| Runtime stack | Run compose: event → plan → patch → **`args:`** (scene `run.yaml`, not a Twinfile) |
+| Runtime stack | Run compose: event → plan → patch → **`args:`** (story scene `run:`, not a Twinfile) |
 | `ARG` | **`args:`** |
 | `ENTRYPOINT` | **`use.runner`** (offline); live play uses host **player** → module bus ([World session](place/world-session.md)) |
 | `docker history` | **`twin layers`** |

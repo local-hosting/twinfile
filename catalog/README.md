@@ -9,7 +9,7 @@ Each twin type is one tree: **`catalog/<type>/`** = `@local-hosting/twinfile-<ty
 | character | `catalog/character/examples/<id>/` | `catalog/character/libs/{audience,journey,psychology}/` |
 | story | `catalog/story/examples/<id>/` | — |
 
-**Runs:** `catalog/story/examples/<story>/scenes/<scene>/run.yaml` only.
+**Runs:** inline `run:` on `story.scenes[]` in `catalog/story/examples/<story>/<story>.twin.yaml` only.
 
 **Ref map and digests:** [`place/examples/twin.local.yaml`](place/examples/twin.local.yaml), [`place/examples/published-refs.json`](place/examples/published-refs.json). **Spec conf** (normative): `packages/spec/conf/`.
 

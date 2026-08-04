@@ -143,7 +143,7 @@ The **minimal runnable layout recipe** is **`from:`** + **`place/place.yaml`** (
 | **Human + agent map** | **`docs/layout.md`**, **`ext/layout-index.yaml`** | README in image | Large sites; read before full `spaces` scan ([checklist](layout-navigation.md#checklist-for-a-new-large-place)) |
 | **Hierarchy** | **`spaces[].parent`** | Nested cgroup / path prefix | Rollups zone → building → room |
 | **Clock** | **`tracks.yaml`**, **`schedules.yaml`** | Cron / lifecycle | Time-varying scenarios ([Time](time.md)) |
-| **Run image** | Story scene **`run.yaml`** (`from:` place ref) | `docker compose` service | Exercises place + events + **`args:`** — not part of place layout recipe |
+| **Run image** | Story scene **`run:`** (`from:` place ref) | `docker compose` service | Exercises place + events + **`args:`** — not part of place layout recipe |
 | **Build / ship** | **`twin build`**, **`<unit>.twin.lock`**, **`twin pack`** / push | `docker build` / `push` | Artifact + layer chain ([Composition](../build/composition.md#what-twin-build-records)) |
 
 You do **not** need extra archetype steps for indoor and outdoor on one site — only **`exposure`** (and **`openings`**) on spaces. You do **not** need a composed `layout.map` + `layout.vertical` field in YAML today; derive **`archetype`** from the two-question table and write it on **`place`**.
