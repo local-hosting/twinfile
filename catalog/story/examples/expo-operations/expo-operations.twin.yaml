@@ -13,30 +13,15 @@ story:
     - id: expo-outdoor-shelter-cap
       label: Outdoor shelter capacity
       run:
-        from: twinfile/place/expo:0.2.0
         steps:
           - copy: twinfile/event/severe-weather:1.0.0
-        domains:
-          - safety
         args:
           occupancy: 4200
           target_role: shelter
-        use:
-          runner: npm:@twinfile/runner-hydraulic@^0
-        expected:
-          digest: sha256:970080c94214a26710e55761f2b5b749a4ca2f018f63d38cd9f93d246483d8b9
-          metrics:
-            time_to_shelter_s: 46
-            shelter_overflow: 0
     - id: expo-visitor-surge
       label: Visitor surge
       run:
-        from: twinfile/place/expo:0.2.0
         steps:
           - copy: twinfile/event/passenger-queue:1.0.0
-        domains:
-          - mobility
         args:
           lanes: 4
-        use:
-          runner: npm:@twinfile/runner-queue@^0

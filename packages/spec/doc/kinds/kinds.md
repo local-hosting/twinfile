@@ -9,7 +9,7 @@ Twinfile hosts **four published twin types**: **place**, **resource**, **charact
 | **character** | `character` | [PCM / SAM](pcm-sam.md) | **`disclosure:`** required |
 | **story** | `story` | SAM JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |
 
-**Runs are not twins.** Executable runs are inline **`run:`** blocks on **`story.scenes[]`** (`clock:`, `use.runner`, `expected:`), addressed as `<story-dir>#<scene-id>`. Hosts pass **`twinfile/story/<id>:<ver>`** to the player; the player walks **`story.scenes`** and loads scene runs.
+**Runs are not twins.** Executable runs are inline **`run:`** blocks on **`story.scenes[]`** (`steps:`, `clock:`, `args:`), addressed as `<story-dir>#<scene-id>`. Optional **`use.runner`** is offline-only. Hosts pass **`twinfile/story/<id>:<ver>`** to the player; the player walks **`story.scenes`** and loads scene runs.
 
 **Events** and timetable **stage packs** remain in the **simulator catalog** (`catalogKind: event` \| `event` in TypeScript) — not `kind: event` twins.
 

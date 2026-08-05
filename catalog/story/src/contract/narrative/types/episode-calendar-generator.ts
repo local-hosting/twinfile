@@ -11,7 +11,7 @@ export type EpisodeCalendarResources = {
   touchpointCatalog?: SAMTouchpointCatalog;
   /** Legacy minimal index — ignored when `touchpointCatalog` is set. */
   touchpointIndex?: TouchpointIndex;
-  /** Resolved place mounts — used for per-scene space defaults (`scene.venueKey` = `venueKey`). */
+  /** Resolved place mounts — used for per-scene space defaults (`scene.placeRef` = `placeRef`). */
   placeMounts?: readonly PlaceMount[];
   /** PCM mounts — hydrates scene spine fields during {@link compileSAM}. */
   characterContext?: SAMCharacterContext;

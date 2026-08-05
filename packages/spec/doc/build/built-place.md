@@ -12,7 +12,7 @@
 | **`docker history`** | **`twin layers`** (rebuilds; layer list is not persisted on disk) |
 | **Registry** | **`twin pack --out <dir>`** then **`twin push`** (OCI under `--out`, not inside the unit) |
 
-Persisted pins: **`<unit>.twin.lock`** (manifest + tree + layer chain digests). Scene runs pin **`run.expected.digest`** on the story head instead of a lock.
+Persisted pins: **`<unit>.twin.lock`** (manifest + tree + layer chain digests). Scene runs skip the unit lock.
 
 Wire schema: [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json).
 

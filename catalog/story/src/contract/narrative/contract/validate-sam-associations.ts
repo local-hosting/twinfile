@@ -1,4 +1,5 @@
 import type { Journey } from '@local-hosting/twinfile-character/pcm';
+import { placeRefIdentity } from '@local-hosting/twinfile-core/ref';
 
 import type { SAM } from '../types/sam.js';
 
@@ -11,7 +12,7 @@ export function validateSAMAssociations(
   context?: {
     journey?: Journey;
     knownPcmIds?: readonly string[];
-    knownVenueKeys?: readonly string[];
+    knownPlaceRefs?: readonly string[];
   },
 ): ValidateSAMAssociationsResult {
   const issues: string[] = [];
@@ -42,11 +43,11 @@ export function validateSAMAssociations(
     }
   }
 
-  if (context?.knownVenueKeys?.length && sam.venues?.length) {
-    const known = new Set(context.knownVenueKeys);
-    for (const venue of sam.venues) {
-      if (!known.has(venue.venueKey)) {
-        issues.push(`unknown venueKey "${venue.venueKey}" (not in mounted place catalog)`);
+  if (context?.knownPlaceRefs?.length && sam.places?.length) {
+    const known = new Set(context.knownPlaceRefs.map(placeRefIdentity));
+    for (const place of sam.places) {
+      if (!known.has(placeRefIdentity(place.placeRef))) {
+        issues.push(`unknown placeRef "${place.placeRef}" (not in mounted place catalog)`);
       }
     }
   }

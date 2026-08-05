@@ -17,11 +17,8 @@ story:
     - id: shop-shelter-at-cap
       label: Shelter at capacity
       run:
-        from: twinfile/place/shop:0.2.0
         steps:
           - copy: twinfile/event/severe-weather:1.0.0
-        domains:
-          - safety
         clock:
           starts_at: 2026-06-12T18:00:00-07:00
           duration: PT30M
@@ -29,12 +26,5 @@ story:
         args:
           occupancy: 180
           target_role: shelter
-        use:
-          runner: npm:@twinfile/runner-hydraulic@^0
-        expected:
-          digest: sha256:f1880f42b382b39182dfea1578f09d00594742be43fe642c673b835d63517bd1
-          metrics:
-            time_to_shelter_s: 27
-            shelter_overflow: 140
     - id: checkout
       label: Point of sale

@@ -7,9 +7,9 @@ export type SAMCharacterRef = {
   primary?: boolean;
 };
 
-/** Venue mounted on this story run (scene `venueKey` matches {@link SAMVenueRef.venueKey}). */
-export type SAMVenueRef = {
-  venueKey: string;
+/** Place mounted on this story run (scene `placeRef` matches {@link SAMPlaceRef.placeRef}). */
+export type SAMPlaceRef = {
+  placeRef: string;
   /** Human label — fleet slug, map name, etc. (host-specific). */
   label?: string;
   /** Scene role — primary visit site, transfer hub, home zone. */

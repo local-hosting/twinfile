@@ -23,16 +23,6 @@ import {
   type ParsedPlacesCatalog,
 } from './parse-places-catalog-uri.js';
 
-function venueKeyFromResolved(resolved: {
-  twinfile: Record<string, unknown>;
-  ref: TwinfileRef;
-}): string {
-  const name = String(
-    resolved.twinfile.id ?? resolved.ref.replace(/^twinfile\//, '').split(':')[0],
-  );
-  return `venue:${name}`;
-}
-
 function layoutSpacesFromLayers(
   layers: readonly Record<string, unknown>[],
 ): PlaceMountLayoutSpace[] {
@@ -151,8 +141,7 @@ export function placeMountFromResolved(resolved: {
   const layoutSpaces = layoutSpacesFromLayers(resolved.layers);
   const layoutLevels = layoutLevelsFromLayers(resolved.layers);
   const layoutPathways = layoutPathwaysFromLayers(resolved.layers);
-  const venueKey = venueKeyFromResolved(resolved);
-  const title = String(placeLayer?.name ?? resolved.twinfile.name ?? venueKey);
+  const title = String(placeLayer?.name ?? resolved.twinfile.name ?? resolved.ref);
   const defaultSpaceId = spaces[0]?.id;
   const geo = geoFromLayers(resolved.layers);
   const visits = visitMomentsFromLayers(resolved.layers);
@@ -161,7 +150,6 @@ export function placeMountFromResolved(resolved: {
   const schemaOrgType = geotype ? schemaOrgTypeForGeotypeRef(geotype.primary) : null;
   return {
     placeRef: resolved.ref,
-    venueKey,
     title,
     ...(geotype
       ? {

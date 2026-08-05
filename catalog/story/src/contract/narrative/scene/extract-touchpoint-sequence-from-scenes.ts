@@ -1,5 +1,5 @@
 import type { StoryScene } from '../types/scene.js';
-import { listSceneTouchpointRefs } from '../touchpoint/resolve-touchpoint-venue.js';
+import { listSceneTouchpointRefs } from '../touchpoint/resolve-touchpoint-place.js';
 
 function orderedScenes(scenes: readonly StoryScene[]): StoryScene[] {
   return [...scenes].sort((left, right) => left.order - right.order);

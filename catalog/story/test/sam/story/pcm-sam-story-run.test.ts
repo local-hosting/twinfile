@@ -26,7 +26,7 @@ const samWithArc: SAM = {
   title: 'Commute',
   revision: 1,
   characters: [{ pcmId: 'persona:rider', primary: true }],
-  venues: [{ venueKey: 'venue:demo-home' }],
+  places: [{ placeRef: 'twinfile/place/demo-home:0.0.0' }],
   arcTemplate: {
     id: 'arc:commute',
     label: 'Commute',
@@ -43,7 +43,7 @@ const samWithArc: SAM = {
       order: 0,
       actId: 'exposition',
       characterIds: ['persona:rider'],
-      venueKey: 'venue:demo-home',
+      placeRef: 'twinfile/place/demo-home:0.0.0',
       touchpointIds: ['touchpoint:rider-open-home'],
     },
     {
@@ -52,7 +52,7 @@ const samWithArc: SAM = {
       order: 1,
       actId: 'denouement',
       characterIds: ['persona:rider'],
-      venueKey: 'venue:demo-home',
+      placeRef: 'twinfile/place/demo-home:0.0.0',
       touchpointIds: ['touchpoint:rider-live-map'],
     },
   ],

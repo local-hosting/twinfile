@@ -7,16 +7,23 @@ export function resolveRunnerCommand(
   distRoot: string,
 ): string[] {
   const exec = process.execPath;
-  if (runnerRef.includes('runner-compose')) {
+  const ref = runnerRef.trim();
+  if (!ref) {
+    throw new Error('use.runner is required for offline twin run');
+  }
+  if (ref.includes('runner-compose')) {
     return [exec, join(distRoot, 'runners/runner-compose.js')];
   }
-  if (runnerRef.includes('runner-replay')) {
+  if (ref.includes('runner-replay')) {
     return [exec, join(distRoot, 'runners/runner-replay.js')];
   }
-  if (runnerRef.includes('runner-queue')) {
+  if (ref.includes('runner-queue')) {
     return [exec, join(distRoot, 'runners/runner-queue.js')];
   }
-  return [exec, join(distRoot, 'runners/runner-hydraulic.js')];
+  if (ref.includes('runner-hydraulic')) {
+    return [exec, join(distRoot, 'runners/runner-hydraulic.js')];
+  }
+  throw new Error(`unknown use.runner: ${ref}`);
 }
 
 export function distRootFromCli(): string {

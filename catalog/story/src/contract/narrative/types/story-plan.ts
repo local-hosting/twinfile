@@ -1,7 +1,7 @@
 import type { SamStoryCatalogMenuV1 } from './story-catalog-menu.js';
 import type {
   SamStoryPlanCatalogSnapshotV1,
-  SamStoryPlanFleetVenueSnapshotV1,
+  SamStoryPlanFleetPlaceSnapshotV1,
 } from './story-plan-catalog.js';
 import type { TouchpointGraphWire } from './touchpoint-catalog.js';
 
@@ -86,7 +86,7 @@ export type SamStoryPlanNarrativeContextV1 = {
     locus?: string;
   }>;
   hubTouchpointId?: string;
-  fleetVenues: SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: SamStoryPlanFleetPlaceSnapshotV1[];
 };
 
 export type SamStoryPlanScenarioHintsV1 = {
@@ -124,7 +124,7 @@ export type SamStoryPlanInputV1 = {
   interestIds?: string[];
   pcmId?: string;
   episodeId?: string;
-  venueKey?: string;
+  placeRef?: string;
   planningHorizonDays?: number;
   visitDayOffset?: number;
   useFeedCalendar?: boolean;
@@ -147,7 +147,7 @@ export type SamStoryPlanExtractedHintsV1 = {
   interestIds?: string[];
   pcmId?: string;
   episodeId?: string;
-  venueKey?: string;
+  placeRef?: string;
   planningHorizonDays?: number;
   visitDayOffset?: number;
   useFeedCalendar?: boolean;
@@ -171,7 +171,7 @@ export type SamStoryPlanExtractionIndexV1 = {
   storyPlanningGuide?: string;
   characters?: Array<{ pcmId: string; label: string; journeyIds: string[] }>;
   episodes?: Array<{ id: string; title: string; focalPcmId: string; journeyId?: string }>;
-  placeVenues?: Array<{ venueKey: string; title: string }>;
+  places?: Array<{ placeRef: string; title: string }>;
   segmentIds: string[];
   segmentLabels: Record<string, string | undefined>;
   segments: SamStoryPlanExtractionSegmentBriefV1[];
@@ -193,7 +193,7 @@ export type SamStoryPlanNarrativeBuildInputV1 = {
   obstacles?: Array<{ id: string; label?: string }>;
   journeys: Array<{ id: string; label?: string; focalPcmId?: string; journeyId?: string }>;
   storyMenu?: SamStoryCatalogMenuV1;
-  fleetVenues: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointGraph?: TouchpointGraphWire;
   storyPlanningGuide?: string;
   maxTouchpoints?: number;
@@ -211,7 +211,7 @@ export type SamStoryPlanCatalogBuildInputV1 = {
   samEpisodeIds: string[];
   storyMenu?: SamStoryCatalogMenuV1;
   jobIds: string[];
-  fleetVenues: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: readonly string[];

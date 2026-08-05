@@ -1,7 +1,7 @@
 import type { PlaceMount } from '../types/place-mount.js';
 import type { StoryScene, StorySceneTouchpointRef } from '../types/scene.js';
 import type { SAMTouchpointCatalog, SAMTouchpointLocus } from '../types/touchpoint-catalog.js';
-import { resolveSceneSpaceId } from '../place/venue-mount-catalog.js';
+import { resolveSceneSpaceId } from '../place/place-mount-catalog.js';
 
 const PHYSICAL_LOCI: readonly SAMTouchpointLocus[] = ['physical', 'blended'];
 
@@ -20,33 +20,33 @@ export function resolveTouchpointDefinition(
 }
 
 /**
- * Venue for a touchpoint in a scene: scene ref → catalog default → scene setting.
- * Physical/blended touchpoints should resolve to a mounted `venueKey`.
+ * Place for a touchpoint in a scene: scene ref → catalog default → scene setting.
+ * Physical/blended touchpoints should resolve to a mounted `placeRef`.
  */
-export function resolveTouchpointVenueAtScene(input: {
+export function resolveTouchpointPlaceAtScene(input: {
   touchpointId: string;
   scene: StoryScene;
   touchpointCatalog?: SAMTouchpointCatalog;
   placeMounts?: readonly PlaceMount[];
   sceneRef?: StorySceneTouchpointRef;
-}): { venueKey: string; spaceId?: string } {
+}): { placeRef: string; spaceId?: string } {
   const ref = input.sceneRef ?? input.scene.touchpoints?.find((row) => row.id === input.touchpointId);
   const definition = resolveTouchpointDefinition(input.touchpointId, input.touchpointCatalog);
 
-  const venueKey =
-    ref?.venueKey?.trim() ||
-    definition?.venueKey?.trim() ||
-    input.scene.venueKey;
+  const placeRef =
+    ref?.placeRef?.trim() ||
+    definition?.placeRef?.trim() ||
+    input.scene.placeRef;
 
   const spaceId =
     ref?.spaceId?.trim() ||
     definition?.spaceId?.trim() ||
     resolveSceneSpaceId(input.scene, input.placeMounts);
 
-  return { venueKey, spaceId };
+  return { placeRef, spaceId };
 }
 
-export function touchpointRequiresVenue(
+export function touchpointRequiresPlace(
   touchpointId: string,
   catalog?: SAMTouchpointCatalog,
 ): boolean {

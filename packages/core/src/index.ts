@@ -18,6 +18,9 @@ export {
   TWINFILE_REF_PATTERN,
   isTwinfileRef,
   parseTwinfileRef,
+  placeRefForName,
+  placeRefIdentity,
+  samePlaceRef,
   type TwinfileRef,
 } from './types/twinfile-ref.js';
 
@@ -147,7 +150,7 @@ export type {
   TwinfileSummaryLayoutV1,
   TwinfileSummaryLayoutRow,
   TwinfileSummaryBase,
-  TwinfileSummaryVenueVisit,
+  TwinfileSummaryPlaceVisit,
   TwinfileUseMode,
   BuildTwinfileSummaryInput,
 } from './types/twinfile-summary.js';
@@ -324,7 +327,7 @@ export {
   isRunComposeHead,
 } from './load/twinfile-unit-role.js';
 export { loadUnitRoot } from './load/load-unit-root.js';
-export type { LoadedScene, SceneExpected, SceneRun, SceneSchedule } from './types/scene-run.js';
+export type { LoadedScene, SceneRun, SceneSchedule } from './types/scene-run.js';
 export {
   validateDocumentAtPath,
   readYamlDocument,

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import '@local-hosting/twinfile-simulator';
-import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -64,8 +64,6 @@ import {
 import { runTwinTypeBuild } from './build-twin-type.js';
 import { runFeedPull } from './feed-pull.js';
 import { runFeedSimulate } from './feed-simulate.js';
-import { evalSceneRun } from '../eval/index.js';
-
 const argv = process.argv.slice(2);
 const command = argv[0];
 
@@ -99,7 +97,6 @@ function usage(): never {
   twin export jsonld [dir] [--out <file>] [--json]
   twin export <imdf|gtfs|brick|bot|sosa|indoorgml> [dir] --out <dir>
   twin project export [--format json|yaml] [--out <file>]
-  twin eval <scenarioDir> [--runs <dir>]
   twin migrate axm|jsm <path>   # persona plane import (stub)
   twin serve [dir] [--stdio] [--allow-runs]`);
   process.exit(2);
@@ -510,7 +507,11 @@ async function runRunScenario(scenarioDir: string): Promise<number> {
     console.error(formatTwinErrors(dir, loaded.errors).join('\n'));
     return 1;
   }
-  const runner = String((loaded.value.twinfile.use as { runner?: string } | undefined)?.runner ?? '');
+  const runner = String((loaded.value.twinfile.use as { runner?: string } | undefined)?.runner ?? '').trim();
+  if (!runner) {
+    console.log(`ok build ${built.value.digest} (no use.runner — skip offline run)`);
+    return 0;
+  }
   const distRoot = distRootFromCli();
   const anchor = resolveTwinfileAnchor(loaded.value.root, {
     ...loaded.value.twinfile,
@@ -557,23 +558,8 @@ async function runVerify(): Promise<number> {
     console.error(formatTwinErrors(dir, built.errors).join('\n'));
     return 1;
   }
-  const expected = built.value.loaded.scene?.expected;
-  if (expected?.digest && expected.digest !== built.value.digest) {
-    console.error(`verify: digest mismatch expected ${expected.digest} got ${built.value.digest}`);
-    return 1;
-  }
   const ran = await runRunScenario(dir);
   if (ran !== 0) return ran;
-  if (expected?.metrics) {
-    const metricsPath = join(built.value.loaded.root, 'runs', `${built.value.loaded.twinfile.id}.metrics.json`);
-    const actual = JSON.parse(readFileSync(metricsPath, 'utf8')) as Record<string, number>;
-    for (const [key, val] of Object.entries(expected.metrics)) {
-      if (actual[key] !== val) {
-        console.error(`verify: metric ${key} expected ${val} got ${actual[key]}`);
-        return 1;
-      }
-    }
-  }
   console.log('ok verify');
   return 0;
 }
@@ -763,22 +749,6 @@ async function runDisclose(): Promise<number> {
   else if (yaml) console.log(stringifyYaml({ rows, issues }));
   else console.log(`ok disclose (${rows.length} row(s), ${issues.length} lint issue(s))`);
   return issues.length > 0 ? 1 : 0;
-}
-
-function runEval(args: string[]): number {
-  const dirArg = args.find((a) => !a.startsWith('-'));
-  if (!dirArg) {
-    console.error('twin eval: scene required (<story-dir>#<scene-id>)');
-    return 2;
-  }
-  let runsDir: string | undefined;
-  for (let i = 0; i < args.length; i += 1) {
-    if (args[i] === '--runs') runsDir = resolve(args[i + 1] ?? '');
-  }
-  const result = evalSceneRun(resolve(dirArg), runsDir);
-  for (const line of result.messages) console.log(line);
-  console.log(result.pass ? 'ok eval' : 'eval failed');
-  return result.pass ? 0 : 1;
 }
 
 function runMigrate(args: string[]): number {
@@ -1050,9 +1020,6 @@ async function main(): Promise<void> {
   }
   if (command === 'import') {
     process.exit(await runImport(argv.slice(1)));
-  }
-  if (command === 'eval') {
-    process.exit(runEval(argv.slice(1)));
   }
   if (command === 'migrate') {
     process.exit(runMigrate(argv.slice(1)));

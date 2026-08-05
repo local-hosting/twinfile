@@ -1,5 +1,6 @@
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
 import type { Journey } from '@local-hosting/twinfile-character/pcm';
+import { samePlaceRef } from '@local-hosting/twinfile-core/ref';
 import type { SAM } from '../types/sam.js';
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';
 import { humanizeStoryWireLabel, humanizeToken } from './storyboard-scene-context.js';
@@ -20,8 +21,8 @@ export function resolveSamDenouementActLabel(sam?: SAM): string | undefined {
   return denouement?.label?.trim() || humanizeToken(denouement?.id ?? '');
 }
 
-/** Primary on-site label from SAM venue mounts (not generic “store”). */
-export function resolvePrimaryMomentVenueLabel(input: {
+/** Primary on-site label from SAM place mounts (not generic “store”). */
+export function resolvePrimaryMomentPlaceLabel(input: {
   sam?: SAM;
   arc?: EpisodeArcV1;
   journey?: Journey;
@@ -37,20 +38,20 @@ export function resolvePrimaryMomentVenueLabel(input: {
     if (last) onSiteIds.add(last);
   }
 
-  const venueLabels: string[] = [];
+  const placeLabels: string[] = [];
   for (const scene of input.sam?.scenes ?? []) {
     const hits = scene.touchpointIds?.some((id) => onSiteIds.has(id.trim()));
     if (!hits) continue;
-    const mount = input.sam?.venues?.find((row) => row.venueKey?.trim() === scene.venueKey?.trim());
+    const mount = input.sam?.places?.find((row) => samePlaceRef(row.placeRef, scene.placeRef));
     if (mount?.label?.trim()) {
-      venueLabels.push(mount.label.trim());
+      placeLabels.push(mount.label.trim());
     } else if (mount?.role?.trim()) {
-      venueLabels.push(humanizeToken(mount.role.trim()));
+      placeLabels.push(humanizeToken(mount.role.trim()));
     }
   }
 
-  if (venueLabels.length > 0) {
-    return [...new Set(venueLabels)].join(' / ');
+  if (placeLabels.length > 0) {
+    return [...new Set(placeLabels)].join(' / ');
   }
 
   const lastPhase = input.journey?.phases
@@ -119,7 +120,7 @@ export function resolveEffectiveEpisodeTiming(input: {
     planningHorizonDays,
     visitDayIndex,
     session: useSession,
-    primaryMomentLabel: resolvePrimaryMomentVenueLabel({
+    primaryMomentLabel: resolvePrimaryMomentPlaceLabel({
       sam: input.sam,
       arc,
       journey: input.journey,
@@ -152,12 +153,12 @@ export function formatDirectorArcParagraph(input: {
     const ending = lastTouchpointLabel
       ? `The **denouement** lands on “${lastTouchpointLabel}”`
       : 'The **denouement** lands on the last beat';
-    const venue = timing.primaryMomentLabel;
+    const place = timing.primaryMomentLabel;
     return (
       `${startPhrase}` +
       `This plays as **${timing.presentation.timeframeLabel}**—not a multi-week calendar. ` +
       `${jobPursuit} is the through-line; shoot the touchpoints in order as one pursuit arc. ` +
-      `${ending} at **${venue}**` +
+      `${ending} at **${place}**` +
       (timing.denouementLabel ? ` (${timing.denouementLabel}).` : '.')
     );
   }
@@ -173,7 +174,7 @@ export function formatDirectorArcParagraph(input: {
     `${startPhrase}` +
     `Across **${horizon} days**, ${jobPursuit} structures the episode—build, pursue, then release. ` +
     `Act one (days 0–${preEnd}) is setup and repeated attempts. ` +
-    `Day **${visit}** is the set-piece at **${primary}**—the venue-mounted moment the audience waits for. ` +
+    `Day **${visit}** is the set-piece at **${primary}**—the place-mounted moment the audience waits for. ` +
     `Act three (days ${postStart}–${postEnd}) is **denouement**: did the jobs stick, and what changed afterward? ` +
     `The simulation clock can advance beat by beat; the script is the on-screen spine.`
   );

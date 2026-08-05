@@ -37,9 +37,9 @@ export function buildSamStoryCatalogMenu(input: {
   }
   return {
     ...userMenu,
-    placeVenues: placeMounts.map((mount) => ({
-      venueKey: mount.venueKey,
-      title: mount.title?.trim() || mount.venueKey,
+    places: placeMounts.map((mount) => ({
+      placeRef: mount.placeRef,
+      title: mount.title?.trim() || mount.placeRef,
     })),
   };
 }

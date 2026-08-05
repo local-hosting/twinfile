@@ -10,7 +10,7 @@ describe('SAM storyboard scenes', () => {
       title: 'Board',
       revision: 1,
       characters: [{ pcmId: 'persona:rider', primary: true }],
-      venues: [{ venueKey: 'venue:curbside' }],
+      places: [{ placeRef: 'twinfile/place/curbside:0.0.0' }],
       arcTemplate: {
         id: 'arc:commute-hole',
         label: 'Commute hole',
@@ -28,7 +28,7 @@ describe('SAM storyboard scenes', () => {
           order: 0,
           actId: 'exposition',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
           touchpointIds: ['touchpoint:a'],
         },
         {
@@ -37,7 +37,7 @@ describe('SAM storyboard scenes', () => {
           order: 1,
           actId: 'climax',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
           touchpointIds: ['touchpoint:b'],
         },
         {
@@ -46,7 +46,7 @@ describe('SAM storyboard scenes', () => {
           order: 2,
           actId: 'denouement',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
           touchpointIds: ['touchpoint:c'],
         },
       ],

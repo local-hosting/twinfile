@@ -341,8 +341,8 @@ function formatProtagonistLeadSection(
   if (ctx.geography) {
     whereBits.push(`We are in **${ctx.geography}** for this episode.`);
   }
-  if (ctx.venueLabel) {
-    whereBits.push(`Her home base reads as **${ctx.venueLabel}**.`);
+  if (ctx.placeLabel) {
+    whereBits.push(`Her home base reads as **${ctx.placeLabel}**.`);
   }
   const first = scriptScenes[0];
   const firstTouchpointId = snapshot.when?.storyArc?.objectiveTouchpointIds?.[0]?.trim();
@@ -389,7 +389,7 @@ function directorWhereParagraph(snapshot: StoryBriefSnapshotV1): string | undefi
   const where = snapshot.where;
   if (!where) return undefined;
   const place =
-    where.venueSlug?.trim() ||
+    where.placeSlug?.trim() ||
     where.storeSlug?.trim() ||
     where.zip?.trim() ||
     where.dma?.trim() ||

@@ -56,6 +56,7 @@ export {
   URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM,
 } from './persona/persona-daily-rhythm-presets.js';
 export { resolvePersonaDailyRhythm } from './persona/resolve-persona-daily-rhythm.js';
+export { resolvePcmPersonaDisplayName } from './persona/resolve-persona-display-name.js';
 export { pickPersonaDailyRhythmTemplate } from './persona/pick-persona-daily-rhythm-template.js';
 export { adjustDailyRhythmForInstance } from './persona/adjust-daily-rhythm-for-instance.js';
 export {

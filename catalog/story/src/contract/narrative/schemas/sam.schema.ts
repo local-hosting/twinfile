@@ -3,7 +3,7 @@ import { z } from 'zod';
 import { normalizeSAMInput } from '../contract/normalize-sam-input.js';
 import { EpisodeArcV1Schema } from './episode-arc.schema.js';
 import { StoryArcTemplateSchema } from './story-arc-template.schema.js';
-import { StorySceneSchema } from './scene.schema.js';
+import { PlaceRefSchema, StorySceneSchema } from './scene.schema.js';
 import type { SAM } from '../types/sam.js';
 
 export const SAMCharacterRefSchema = z.object({
@@ -12,8 +12,8 @@ export const SAMCharacterRefSchema = z.object({
   primary: z.boolean().optional(),
 });
 
-export const SAMVenueRefSchema = z.object({
-  venueKey: z.string().min(1),
+export const SAMPlaceRefSchema = z.object({
+  placeRef: PlaceRefSchema,
   label: z.string().min(1).optional(),
   role: z.string().min(1).optional(),
 });
@@ -34,7 +34,7 @@ const SAMCoreSchema = z
     revision: z.number().int().nonnegative(),
     summary: z.string().optional(),
     characters: z.array(SAMCharacterRefSchema).min(1),
-    venues: z.array(SAMVenueRefSchema).min(1),
+    places: z.array(SAMPlaceRefSchema).min(1),
     arcTemplate: StoryArcTemplateSchema,
     scenes: z.array(StorySceneSchema).min(1),
     binding: SAMBindingSchema,

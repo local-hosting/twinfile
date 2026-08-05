@@ -20,7 +20,7 @@ function activityBlockFromScheduleEntry(input: {
     hour: number;
     touchpointId: string;
     phase: EpisodePhaseId;
-    venueKey?: string;
+    placeRef?: string;
     spaceId?: string;
     sceneId?: string;
   };
@@ -40,10 +40,10 @@ function activityBlockFromScheduleEntry(input: {
     journeyPhaseId: input.entry.phase,
     jobId: input.entry.touchpointId,
     label,
-    venueKey: input.entry.venueKey,
+    placeRef: input.entry.placeRef,
     spaceId: input.entry.spaceId,
     sceneId: input.entry.sceneId,
-    venueOpportunityId: input.entry.venueKey,
+    placeOpportunityId: input.entry.placeRef,
   };
 }
 

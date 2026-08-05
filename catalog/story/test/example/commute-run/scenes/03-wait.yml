@@ -4,13 +4,13 @@ order: 2
 actId: denouement
 characterIds:
   - persona:rider
-venueKey: venue:office-dropoff
+placeRef: twinfile/place/office-dropoff:0.0.0
 journeyPhaseId: phase:rider-wait
 jobIds:
   - job:wait-eta
 touchpoints:
   - id: touchpoint:rider-live-map
-    venueKey: venue:office-dropoff
+    placeRef: twinfile/place/office-dropoff:0.0.0
 emotions:
   band: high
   valence: positive

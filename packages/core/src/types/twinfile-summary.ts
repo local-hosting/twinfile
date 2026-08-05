@@ -109,7 +109,7 @@ export type TwinfileSummaryV1 = {
 };
 
 /** Summary before layouts are derived. */
-export type TwinfileSummaryVenueVisit = {
+export type TwinfileSummaryPlaceVisit = {
   id: string;
   label: string;
   space?: string;
@@ -119,12 +119,12 @@ export type TwinfileSummaryBase = Omit<TwinfileSummaryV1, 'layouts'> & {
   /** Inline manifest regions (workbench sidebar); omitted when only a rollup count is shown. */
   regions?: Array<{ id: string; name?: string }>;
   /** Visit moments from `visits[]` when a renderer lists them (preset I/O also exposes visits). */
-  venueVisits?: TwinfileSummaryVenueVisit[];
+  placeVisits?: TwinfileSummaryPlaceVisit[];
 };
 
 export type BuildTwinfileSummaryInput = {
   twinfile: Record<string, unknown>;
-  /** Distinguishes run presets from place Twinfiles (no `kind` on disk). */
+  /** Unit folder or scene address (`<story-dir>#<scene-id>`) when the summary is for a run. */
   unitPath?: string;
   digest?: string | null;
   place?: Record<string, unknown>;

@@ -4,11 +4,11 @@ import { validateSamNarrativeCoherence } from '../../../src/contract/narrative/c
 import { storyboardSamFixture } from '../helpers/storyboard-sam-fixture.js';
 
 describe('validateSamNarrativeCoherence', () => {
-  it('flags airport venue labels on commute journeys', () => {
+  it('flags airport place labels on commute journeys', () => {
     const sam = storyboardSamFixture({
-      venues: [
-        { venueKey: 'venue:demo-home', label: 'Home dropoff' },
-        { venueKey: 'venue:demo-airport', label: 'Airport pickup' },
+      places: [
+        { placeRef: 'twinfile/place/demo-home:0.0.0', label: 'Home dropoff' },
+        { placeRef: 'twinfile/place/demo-airport:0.0.0', label: 'Airport pickup' },
       ],
       scenes: [
         {
@@ -17,7 +17,7 @@ describe('validateSamNarrativeCoherence', () => {
           order: 1,
           actId: 'denouement',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:demo-airport',
+          placeRef: 'twinfile/place/demo-airport:0.0.0',
           touchpointIds: ['touchpoint:rider-live-map'],
         },
       ],
@@ -39,9 +39,9 @@ describe('validateSamNarrativeCoherence', () => {
 
   it('passes when commute mount is relabeled', () => {
     const sam = storyboardSamFixture({
-      venues: [
-        { venueKey: 'venue:demo-home', label: 'Home dropoff' },
-        { venueKey: 'venue:demo-airport', label: 'Curbside pickup' },
+      places: [
+        { placeRef: 'twinfile/place/demo-home:0.0.0', label: 'Home dropoff' },
+        { placeRef: 'twinfile/place/demo-airport:0.0.0', label: 'Curbside pickup' },
       ],
       scenes: [
         {
@@ -50,7 +50,7 @@ describe('validateSamNarrativeCoherence', () => {
           order: 1,
           actId: 'denouement',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:demo-airport',
+          placeRef: 'twinfile/place/demo-airport:0.0.0',
           touchpointIds: ['touchpoint:rider-live-map'],
         },
       ],

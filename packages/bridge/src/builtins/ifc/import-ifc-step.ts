@@ -92,7 +92,7 @@ export async function importIfcStep(input: IfcBytesInput): Promise<ImportResult>
     }
     if (spaces.length === 0) throw new Error('ifc: no IfcSpace entities found');
 
-    const venueName = typeof input.name === 'string' ? input.name : 'IFC building';
+    const placeName = typeof input.name === 'string' ? input.name : 'IFC building';
     const ifcFile = typeof input.file === 'string' ? input.file : undefined;
     const levels = storeys.map((row) =>
       withImportExt(
@@ -103,7 +103,7 @@ export async function importIfcStep(input: IfcBytesInput): Promise<ImportResult>
     const archetype = levels.length > 1 ? 'indoor_stack' : 'single_level';
     const site = withImportExt(
       {
-        name: venueName,
+        name: placeName,
         kind: 'building',
         timezone: 'UTC',
         published: false,
@@ -112,7 +112,7 @@ export async function importIfcStep(input: IfcBytesInput): Promise<ImportResult>
       { ...(ifcFile ? { ifc_file: ifcFile } : {}) },
     );
 
-    return packPlaceUnit(twinId(venueName), 'museum', [{ place: site }, { levels }, { spaces }]);
+    return packPlaceUnit(twinId(placeName), 'museum', [{ place: site }, { levels }, { spaces }]);
   } finally {
     api.CloseModel(modelId);
   }
