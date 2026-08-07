@@ -28,7 +28,7 @@ The **ref string** is flat (`twinfile/<name>:<tag>`). **Kind** is always manifes
 | `event` | shared fiction slug, or `{site}-{story}` | `severe-weather`, `arena-game-day` |
 | `scenario` | `{site}-{question}` | `arena-flood-shelter-standup` |
 
-Runs are inline **`run:`** blocks on story scenes (`story/examples/<story>/<story>.twin.yaml`); address as `<story-dir>#<scene-id>`. The scene id carries the site prefix (e.g. `arena-flood-shelter-standup`).
+Runs are inline **`run:`** blocks on story scenes (`story/examples/<story>/<story>.twin.yaml`); address as `<story-dir>#<scene-id>` (e.g. `catalog/story/examples/arena-operations#flood-shelter-standup`).
 
 ## `catalog.parent`
 

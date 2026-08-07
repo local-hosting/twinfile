@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/river:0.2.0
 story:
-  arc: operations
   scenes:
-    - id: river-swim-unsafe-known
+    - id: swim-unsafe-known
       label: Swim unsafe after release
       run:
         steps:
@@ -22,7 +21,7 @@ story:
         args:
           track: turbidity
           threshold: 50
-    - id: river-until-stage-unsafe
+    - id: until-stage-unsafe
       label: Upstream stage unsafe
       run:
         steps:

@@ -81,14 +81,14 @@ describe('MCP protocol', () => {
   });
 
   it('loads golden run test prompt when serving a scenario', async () => {
-    const runDir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
+    const runDir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shelter-at-cap');
     const state = await ready(runDir);
     const call = await rpc(runDir, state, 'tools/call', { name: 'run_test_prompt', arguments: {} });
     const body = JSON.parse((call?.result as { content: Array<{ text: string }> }).content[0]!.text) as {
       runId: string;
       prompt: string;
     };
-    expect(body.runId).toBe('shop-shelter-at-cap');
+    expect(body.runId).toBe('shelter-at-cap');
     expect(body.prompt).toMatch(/shelter/i);
   });
 

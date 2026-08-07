@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/transit-hub-campus:0.1.0
 story:
-  arc: operations
   scenes:
-    - id: transit-hub-campus-hub-queue-spill
+    - id: hub-queue-spill
       label: Hub queue spill
       run:
         steps:
@@ -20,7 +19,7 @@ story:
           lanes: 2
           service_s: 90
           stagingCap: 40
-    - id: transit-hub-campus-lunch-flow
+    - id: lunch-flow
       label: Lunch-hour flow
       run:
         steps:

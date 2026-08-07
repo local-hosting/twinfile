@@ -10,4 +10,4 @@ Illustrative **port** campus pinned at the **Port of New Orleans** (Napoleon Ave
 
 ## Runs
 
-[`port-gangway-backup`](../../../story/examples/port-operations/port-operations.twin.yaml) — offline gangway queue check (`twin run catalog/story/examples/port-operations#port-gangway-backup`).
+[`gangway-backup`](../../../story/examples/port-operations/port-operations.twin.yaml) — offline gangway queue check (`twin run catalog/story/examples/port-operations#gangway-backup`).

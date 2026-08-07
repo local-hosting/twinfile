@@ -27,7 +27,7 @@ const { examplesRoot } = testCatalogRoots(importDir);
 
 const FIVE_UNITS = [
   { id: 'shop-place', path: join(examplesRoot, 'shop') },
-  { id: 'airport-morning-scenario', path: goldenSceneRun(importDir, 'airport-morning-checkpoint') },
+  { id: 'airport-morning-scenario', path: goldenSceneRun(importDir, 'morning-checkpoint') },
   { id: 'expo-place', path: join(examplesRoot, 'expo') },
   { id: 'airport-place', path: join(examplesRoot, 'airport') },
   { id: 'arena-place', path: join(examplesRoot, 'arena') },
@@ -115,20 +115,20 @@ describe('TwinfileSummaryV1', () => {
   });
 
   it('scenario card uses manifest name, not ref id', async () => {
-    const runDir = goldenSceneRun(importDir, 'airport-morning-checkpoint');
+    const runDir = goldenSceneRun(importDir, 'morning-checkpoint');
     const wifi = await summaryForUnit(runDir);
     const loaded = loadRunUnit(runDir);
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) throw new Error('load failed');
     expect(loaded.value.twinfile.question).toBeUndefined();
     expect(wifi.header.name).toBe('Morning checkpoint');
-    expect(wifi.head.id).toBe('airport-morning-checkpoint');
+    expect(wifi.head.id).toBe('morning-checkpoint');
   });
 
   it('scenario card omits question block (MCP catalog holds test prompts)', async () => {
     const hasQuestion = (card: TwinfileSummaryV1) =>
       card.layouts.place.blocks.some((b) => b.type === 'list' && b.rows.some((r) => r.id === 'question'));
-    const morning = await summaryForUnit(goldenSceneRun(importDir, 'airport-morning-checkpoint'));
+    const morning = await summaryForUnit(goldenSceneRun(importDir, 'morning-checkpoint'));
     expect(hasQuestion(morning)).toBe(false);
   });
 

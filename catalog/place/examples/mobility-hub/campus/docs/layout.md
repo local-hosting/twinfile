@@ -1,6 +1,6 @@
 # Mobility hub campus — layout map
 
-Fictional **campus-shaped mobility hub** (transit hub = mobility hub in prose) for **`transit-disruption`** (`transit-hub-campus-hub-queue-spill`). Map pin is illustrative (Penn Station area); topology is fiction.
+Fictional **campus-shaped mobility hub** (transit hub = mobility hub in prose) for **`transit-disruption`** (`hub-queue-spill`). Map pin is illustrative (Penn Station area); topology is fiction.
 
 ## Site (one glance)
 

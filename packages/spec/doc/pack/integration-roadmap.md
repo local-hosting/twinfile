@@ -65,7 +65,7 @@ Normative product boundary and implementation order for **any** app using Twinfi
 
 1. [x] Arena concourse cots/water assets
 2. [x] Arena manifest patch graph (standup + bridge-import → map-sink)
-3. [x] Scenario `arena-flood-shelter-standup` (catalog naming in [refs.md](refs.md))
+3. [x] Scenario `flood-shelter-standup` (catalog naming in [refs.md](refs.md))
 4. [x] `verify` expected outputs + published refs refresh
 5. [x] Runner resource-gap metrics documented in spec ([runners.md](runners.md))
 
