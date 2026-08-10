@@ -41,6 +41,9 @@ import {
   resolveTwinfileAnchor,
   runScenarioRunner,
   exportProjectTwinBundle,
+  loadCanvasDemoPack,
+  TWIN_CATALOG_TYPES,
+  type TwinCatalogType,
 } from '@local-hosting/twinfile-core';
 import {
   addAssetsLayerToPlace,
@@ -67,6 +70,8 @@ import { runFeedSimulate } from './feed-simulate.js';
 const argv = process.argv.slice(2);
 const command = argv[0];
 
+const CATALOG_TYPE_SET = new Set<string>(TWIN_CATALOG_TYPES);
+
 function usage(): never {
   console.error(`Usage:
   twin check [dir] [--strict] [--profile processors] [--examples-root <path>] [--frozen] [--json]
@@ -82,6 +87,7 @@ function usage(): never {
   twin query [dir] [--role <role>] [--from <id>] [--to <id>] [--reachable <role>] [--step-free] [--json]
   twin describe [dir] [--space <id>] [--t <seconds>] [--seed N] [--json]
   twin summary [dir] [--json | --yaml | --markdown]   # alias: twin card
+  twin list [type] [--json | --yaml] [--pack canvas-demo]   # alias: twin index — catalog twinfile index
   twin run [scenarioDir] [--seed N]
   twin feed simulate [scenarioDir] --device <id> [--out <file>] [--seed N]
   twin feed pull --protocol <sensorthings|ngsi-ld> --url <endpoint> --device <id> --property <name> --out <file.jsonl>
@@ -789,6 +795,96 @@ function runProjectExport(): number {
   return 0;
 }
 
+function parseCatalogType(value: string | undefined): TwinCatalogType | undefined {
+  if (!value) return undefined;
+  if (!CATALOG_TYPE_SET.has(value)) {
+    console.error(`unknown catalog type: ${value} (expected ${TWIN_CATALOG_TYPES.join('|')})`);
+    process.exit(2);
+  }
+  return value as TwinCatalogType;
+}
+
+function runList(): number {
+  let typeFilter: TwinCatalogType | undefined;
+  let format: 'text' | 'json' | 'yaml' = 'text';
+  let demoPack = false;
+  for (let i = 1; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--json') format = 'json';
+    else if (arg === '--yaml') format = 'yaml';
+    else if (arg === '--pack') {
+      const next = argv[i + 1];
+      if (next !== 'canvas-demo') {
+        console.error('twin list --pack currently supports: canvas-demo');
+        process.exit(2);
+      }
+      demoPack = true;
+      i += 1;
+    } else if (arg === '--type') {
+      typeFilter = parseCatalogType(argv[i + 1]);
+      i += 1;
+    } else if (!arg.startsWith('-')) {
+      typeFilter = parseCatalogType(arg);
+    }
+  }
+
+  if (demoPack) {
+    const pack = loadCanvasDemoPack();
+    const units: Record<TwinCatalogType, string[]> = {
+      place: pack.places,
+      resource: pack.resources,
+      character: pack.characters,
+      story: pack.stories,
+      event: pack.events,
+    };
+    const types = typeFilter ? [typeFilter] : [...TWIN_CATALOG_TYPES];
+  if (format === 'json') {
+      console.log(JSON.stringify(typeFilter ? units[typeFilter] : units, null, 2));
+      return 0;
+    }
+    if (format === 'yaml') {
+      const slice = typeFilter ? units[typeFilter] : units;
+      console.log(stringifyYaml(slice).trimEnd());
+      return 0;
+    }
+    const lines: string[] = [];
+    for (const type of types) {
+      const ids = units[type] ?? [];
+      lines.push(`${type}/`);
+      for (const id of ids) lines.push(`  ${id}`);
+      if (ids.length === 0) lines.push('  (none)');
+    }
+    console.log(lines.join('\n'));
+    return 0;
+  }
+
+  const bundle = exportProjectTwinBundle();
+  const types = typeFilter ? [typeFilter] : [...TWIN_CATALOG_TYPES];
+  const units = Object.fromEntries(types.map((type) => [type, bundle.units[type]])) as Record<
+    TwinCatalogType,
+    string[]
+  >;
+
+  if (format === 'json') {
+    console.log(JSON.stringify(typeFilter ? units[typeFilter] : units, null, 2));
+    return 0;
+  }
+  if (format === 'yaml') {
+    console.log(stringifyYaml(typeFilter ? units[typeFilter] : units).trimEnd());
+    return 0;
+  }
+
+  const lines: string[] = [];
+  for (const type of types) {
+    const ids = units[type] ?? [];
+    lines.push(`${type}/`);
+    for (const id of ids) lines.push(`  ${id}`);
+    if (ids.length === 0) lines.push('  (none)');
+  }
+  console.log(lines.join('\n'));
+  return 0;
+}
+
 async function runExportJsonld(): Promise<number> {
   let unitDir = resolve('.');
   let outPath: string | undefined;
@@ -975,6 +1071,9 @@ async function main(): Promise<void> {
   }
   if (command === 'summary' || command === 'card') {
     process.exit(await runSummary());
+  }
+  if (command === 'list' || command === 'index') {
+    process.exit(runList());
   }
   if (command === 'describe') {
     process.exit(await runDescribe());

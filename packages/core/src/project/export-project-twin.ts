@@ -32,7 +32,7 @@ export function loadProjectTwinManifest(root?: string): ProjectTwinManifest {
 
 export { listExampleUnitIds } from './list-example-units.js';
 
-/** Storage-neutral project index (`twin project export`, JSON/YAML). */
+/** Storage-neutral project index (`twin list` / `twin project export`, JSON/YAML). */
 export function exportProjectTwinBundle(root?: string): ProjectTwinBundle {
   const manifest = loadProjectTwinManifest(root);
   const units = Object.fromEntries(
