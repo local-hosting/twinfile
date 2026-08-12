@@ -4,26 +4,16 @@ id: shop-visit
 name: Shop visit arc
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/shop:0.2.0
   - rel: involves
     href: twinfile/character/shop-greeter:0.1.0
 story:
+  pitch: Retail visit from sales-floor arrival through checkout — where online cues meet in-store movement.
   scenes:
     - id: arrive
       label: Enter sales floor
-    - id: shelter-at-cap
-      label: Shelter at capacity
-      run:
-        steps:
-          - copy: twinfile/event/severe-weather:1.0.0
-        clock:
-          starts_at: 2026-06-12T18:00:00-07:00
-          duration: PT30M
-          step: PT5M
-        args:
-          occupancy: 180
-          target_role: shelter
     - id: checkout
       label: Point of sale

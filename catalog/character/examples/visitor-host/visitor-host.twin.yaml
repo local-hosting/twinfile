@@ -15,5 +15,5 @@ character:
   role: host
   segment: waterfront-visitor
   goals:
-    - Greet dock visitors
-    - Coordinate pier equipment
+    - Greet dock visitors at the passenger shed
+    - Coordinate pier equipment so cast-off and return stay on schedule

@@ -10,4 +10,6 @@ See [patch graph](../../../../packages/spec/doc/pack/patch.md#event-pulses-twine
 
 ## Offline run (CI / MCP)
 
-**One** reference scenario: [`shelter-at-cap`](../../../story/examples/shop-visit/shop-visit.twin.yaml) — `twin run` against severe-weather. Product demos should use **pulses on the place**, not extra scenes per button.
+**Daily:** [`shop-visit`](../../../story/examples/shop-visit/shop-visit.twin.yaml) — sales-floor arrival and checkout (`mode: daily`).
+
+**Resilience:** [`shelter-at-cap`](../../../story/examples/shop-resilience/shop-resilience.twin.yaml) — `twin run` against severe-weather (`mode: resilience`). Product demos should use **pulses on the place**, not extra scenes per button.

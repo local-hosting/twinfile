@@ -4,6 +4,7 @@ id: transit-disruption
 name: Transit disruption
 version: 1.0.0
 stability: stable
+mode: daily
 phases:
   - disrupted
   - restored

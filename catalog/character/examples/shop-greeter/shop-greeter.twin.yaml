@@ -15,5 +15,5 @@ character:
   role: greeter
   segment: retail-visitor
   goals:
-    - Welcome visitors
-    - Answer wayfinding questions
+    - Welcome visitors onto the sales floor
+    - Close gaps between digital pickup cues and how people move in the shop

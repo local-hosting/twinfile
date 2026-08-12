@@ -2,7 +2,7 @@
   "generatedAt": "2026-11-16T19:48:27.429Z",
   "refs": {
     "twinfile/place/airport:0.2.0": {
-      "digest": "sha256:596b142c40089133b1631904c49d561b62b5bf16077176eba8d98390b7d7818f",
+      "digest": "sha256:83c3158968b4f79cd71902e4288354a79ee294b2a35075866ea70074144731e3",
       "kind": "place",
       "path": "catalog/place/examples/airport"
     },
@@ -76,42 +76,6 @@
       "kind": "place",
       "path": "catalog/place/examples/shop"
     },
-    "twinfile/story/airport-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/airport-operations"
-    },
-    "twinfile/story/arena-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/arena-operations"
-    },
-    "twinfile/story/expo-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/expo-operations"
-    },
-    "twinfile/story/mobility-hub-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/mobility-hub-operations"
-    },
-    "twinfile/story/park-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/park-operations"
-    },
-    "twinfile/story/port-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/port-operations"
-    },
-    "twinfile/story/river-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/river-operations"
-    },
-    "twinfile/story/shop-visit:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/shop-visit"
-    },
-    "twinfile/story/transit-hub-campus-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/transit-hub-campus-operations"
-    },
     "twinfile/event/arena-game-day:1.0.0": {
       "kind": "event",
       "path": "catalog/event/examples/arena-game-day",
@@ -180,6 +144,94 @@
     "twinfile/event/wildfire:1.0.0": {
       "kind": "event",
       "path": "catalog/event/examples/wildfire"
+    },
+    "twinfile/event/dawn-cast-off:0.1.0": {
+      "kind": "event",
+      "path": "catalog/event/examples/dawn-cast-off"
+    },
+    "twinfile/event/harbor-berth:0.1.0": {
+      "kind": "event",
+      "path": "catalog/event/examples/harbor-berth"
+    },
+    "twinfile/event/falls-loop:0.1.0": {
+      "kind": "event",
+      "path": "catalog/event/examples/falls-loop"
+    },
+    "twinfile/event/dunkirk-return:0.1.0": {
+      "kind": "event",
+      "path": "catalog/event/examples/dunkirk-return"
+    },
+    "twinfile/story/airport-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/airport-operations"
+    },
+    "twinfile/story/airport-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/airport-resilience"
+    },
+    "twinfile/story/arena-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/arena-operations"
+    },
+    "twinfile/story/arena-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/arena-resilience"
+    },
+    "twinfile/story/expo-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/expo-operations"
+    },
+    "twinfile/story/expo-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/expo-resilience"
+    },
+    "twinfile/story/falls-day-tour:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/falls-day-tour"
+    },
+    "twinfile/story/harbor-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/harbor-resilience"
+    },
+    "twinfile/story/mobility-hub-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/mobility-hub-operations"
+    },
+    "twinfile/story/morning-crossing:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/morning-crossing"
+    },
+    "twinfile/story/park-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/park-operations"
+    },
+    "twinfile/story/park-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/park-resilience"
+    },
+    "twinfile/story/port-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/port-operations"
+    },
+    "twinfile/story/port-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/port-resilience"
+    },
+    "twinfile/story/river-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/river-resilience"
+    },
+    "twinfile/story/shop-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/shop-resilience"
+    },
+    "twinfile/story/shop-visit:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/shop-visit"
+    },
+    "twinfile/story/transit-hub-campus-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/transit-hub-campus-operations"
     }
   },
   "catalog": {
@@ -201,24 +253,17 @@
         "twinfile/place/shop:0.2.0",
         "twinfile/place/transit-hub-campus:0.1.0"
       ],
-      "story": [
-        "twinfile/story/airport-operations:0.1.0",
-        "twinfile/story/arena-operations:0.1.0",
-        "twinfile/story/expo-operations:0.1.0",
-        "twinfile/story/mobility-hub-operations:0.1.0",
-        "twinfile/story/park-operations:0.1.0",
-        "twinfile/story/port-operations:0.1.0",
-        "twinfile/story/river-operations:0.1.0",
-        "twinfile/story/shop-visit:0.1.0",
-        "twinfile/story/transit-hub-campus-operations:0.1.0"
-      ],
       "event": [
         "twinfile/event/arena-game-day:1.0.0",
         "twinfile/event/dam-release:1.0.0",
+        "twinfile/event/dawn-cast-off:0.1.0",
         "twinfile/event/drought:1.0.0",
+        "twinfile/event/dunkirk-return:0.1.0",
         "twinfile/event/earthquake:1.0.0",
+        "twinfile/event/falls-loop:0.1.0",
         "twinfile/event/field-damage:1.0.0",
         "twinfile/event/flood:1.0.0",
+        "twinfile/event/harbor-berth:0.1.0",
         "twinfile/event/litter-pollution:1.0.0",
         "twinfile/event/passenger-queue:1.0.0",
         "twinfile/event/power-outage:1.0.0",
@@ -230,6 +275,26 @@
         "twinfile/event/venue-turnstile-flow:1.0.0",
         "twinfile/event/volcanic-ash:1.0.0",
         "twinfile/event/wildfire:1.0.0"
+      ],
+      "story": [
+        "twinfile/story/airport-operations:0.1.0",
+        "twinfile/story/airport-resilience:0.1.0",
+        "twinfile/story/arena-operations:0.1.0",
+        "twinfile/story/arena-resilience:0.1.0",
+        "twinfile/story/expo-operations:0.1.0",
+        "twinfile/story/expo-resilience:0.1.0",
+        "twinfile/story/falls-day-tour:0.1.0",
+        "twinfile/story/harbor-resilience:0.1.0",
+        "twinfile/story/mobility-hub-operations:0.1.0",
+        "twinfile/story/morning-crossing:0.1.0",
+        "twinfile/story/park-operations:0.1.0",
+        "twinfile/story/park-resilience:0.1.0",
+        "twinfile/story/port-operations:0.1.0",
+        "twinfile/story/port-resilience:0.1.0",
+        "twinfile/story/river-resilience:0.1.0",
+        "twinfile/story/shop-resilience:0.1.0",
+        "twinfile/story/shop-visit:0.1.0",
+        "twinfile/story/transit-hub-campus-operations:0.1.0"
       ]
     }
   }

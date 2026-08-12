@@ -4,6 +4,7 @@ id: venue-turnstile-flow
 name: Venue turnstile flow
 version: 1.0.0
 stability: stable
+mode: daily
 phases:
   - pre-open
   - peak-arrival

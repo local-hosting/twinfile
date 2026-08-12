@@ -11,7 +11,7 @@
 
 | Run | Intent doc |
 | --- | --- |
-| [`until-stage-unsafe`](../../../story/examples/river-operations/river-operations.twin.yaml) | `river-operations#until-stage-unsafe` |
-| [`swim-unsafe-known`](../../../story/examples/river-operations/river-operations.twin.yaml) | `river-operations#swim-unsafe-known` |
+| [`until-stage-unsafe`](../../../story/examples/river-resilience/river-resilience.twin.yaml) | `river-resilience#until-stage-unsafe` (`mode: resilience`) |
+| [`swim-unsafe-known`](../../../story/examples/river-resilience/river-resilience.twin.yaml) | `river-resilience#swim-unsafe-known` (`mode: resilience`) |
 
 Presets wire **clock**, **args**, and **runners** only — no `question:` on the run manifest.

@@ -4,6 +4,7 @@ id: arena-game-day
 name: Arena game day
 version: 1.0.0
 stability: example
+mode: daily
 phases:
   - gates-open
   - kickoff

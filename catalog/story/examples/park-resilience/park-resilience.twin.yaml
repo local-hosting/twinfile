@@ -1,0 +1,33 @@
+twinfile: 2
+kind: story
+id: park-resilience
+name: Park resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/park:0.3.0
+story:
+  pitch: Litter surge and field-damage response on the meadow–trailhead loop.
+  scenes:
+    - id: trailhead-backup
+      label: Trailhead backup
+      run:
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        args:
+          peakArrivals: 80
+          lanes: 1
+          service_s: 120
+          stagingCap: 20
+    - id: boardwalk-damage
+      label: Boardwalk damage
+      run:
+        steps:
+          - copy: twinfile/event/field-damage:1.0.0
+        args:
+          peakArrivals: 40
+          lanes: 1
+          service_s: 90
+          stagingCap: 15

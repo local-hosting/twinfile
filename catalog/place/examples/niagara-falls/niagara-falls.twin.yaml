@@ -27,3 +27,98 @@ steps:
         kind: plaza
         level: ground
         exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+      - id: overlook
+        name: Falls overlook
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        parent: visitor-plaza
+        roles:
+          - outdoor
+      - id: tram-stop
+        name: Tram stop
+        kind: transit
+        level: ground
+        exposure: covered
+        parent: visitor-plaza
+        roles:
+          - ground-transport
+          - alternative
+  - markers:
+      - id: plaza-hotspot
+        name: Plaza gathering point
+        roles:
+          - hotspot
+        state: open
+      - id: overlook-rail
+        name: Overlook rail access
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: plaza-bins
+        name: Plaza recycling station
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: visitor-survey
+        name: Visitor survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: plaza-overlook
+        name: Plaza to overlook
+        from: visitor-plaza
+        to: overlook
+        length_m: 150
+        kind: path
+        step_free: true
+      - id: plaza-tram
+        name: Plaza to tram stop
+        from: visitor-plaza
+        to: tram-stop
+        length_m: 60
+        kind: path
+        step_free: true
+  - visits:
+      - id: visit-plaza
+        kind: activity
+        name: Visitor plaza arrival
+        space: visitor-plaza
+        order: 0
+      - id: visit-overlook
+        kind: activity
+        name: Falls overlook
+        space: overlook
+        order: 1
+      - id: visit-tram
+        kind: activity
+        name: Tram boarding
+        space: tram-stop
+        order: 2
+  - assets:
+      - id: tram-sensor
+        name: Tram stop occupancy sensor
+        kind: sensor
+        space: tram-stop
+        state: active
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - plaza-hotspot
+        safe-access:
+          - overlook-rail
+        collection-point:
+          - plaza-bins
+        survey-station:
+          - visitor-survey
+      actions:
+        - at: post-storm-surge
+          set:
+            overlook-rail:
+              state: closed

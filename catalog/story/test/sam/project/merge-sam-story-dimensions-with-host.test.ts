@@ -67,7 +67,7 @@ describe('hostStoryWhereDimensionIsComplete', () => {
 });
 
 describe('attachPlaceSlugFromPlaceRef', () => {
-  it('derives venueSlug from placeRef when missing', () => {
+  it('derives venueSlug from twinfile placeRef when missing', () => {
     const bound = attachPlaceSlugFromPlaceRef({
       placeRef: 'twinfile/place/demo-airport:0.0.0',
       lat: 1,
@@ -75,5 +75,10 @@ describe('attachPlaceSlugFromPlaceRef', () => {
     });
     expect(bound.venueSlug).toBe('demo-airport');
     expect(bound.placeRef).toBe('twinfile/place/demo-airport:0.0.0');
+  });
+
+  it('derives venueSlug from legacy venue: mount ids', () => {
+    const bound = attachPlaceSlugFromPlaceRef({ placeRef: 'venue:demo-airport' });
+    expect(bound.venueSlug).toBe('demo-airport');
   });
 });

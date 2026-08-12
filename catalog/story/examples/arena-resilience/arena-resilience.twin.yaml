@@ -1,0 +1,44 @@
+twinfile: 2
+kind: story
+id: arena-resilience
+name: Arena resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/arena:1.2.0
+story:
+  pitch: Shelter stand-up and storm response when severe weather hits the bowl.
+  scenes:
+    - id: flood-shelter-standup
+      label: Flood shelter stand-up
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          attendance: 4000
+          target_role: shelter
+          resources:
+            cots: 600
+            water_liters: 8000
+          warningAt: severe-weather.warning
+    - id: storm-at-halftime
+      label: Storm at halftime
+      run:
+        steps:
+          - copy: twinfile/event/arena-game-day:1.0.0
+          - copy: twinfile/event/severe-weather:1.0.0
+        clock:
+          starts_at: 2026-09-15T13:00:00-04:00
+          duration: PT3H30M
+          step: PT5M
+        schedule:
+          arena-game-day:
+            gates-open: -PT1H30M
+            kickoff: PT0S
+            halftime: PT1H5M
+            final: PT2H20M
+        args:
+          attendance: 18000
+          warningAt: arena-game-day.halftime

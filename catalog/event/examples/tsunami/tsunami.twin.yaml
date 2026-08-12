@@ -4,6 +4,7 @@ id: tsunami
 name: Tsunami
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - advisory
   - warning

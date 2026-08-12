@@ -4,18 +4,14 @@ id: port-operations
 name: Port operations
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/port:0.2.0
 story:
+  pitch: Everyday pier arrival and warehouse transfer on a clear harbor day.
   scenes:
-    - id: gangway-backup
-      label: Gangway backup
-      run:
-        steps:
-          - copy: twinfile/event/litter-pollution:1.0.0
-        args:
-          peakArrivals: 120
-          lanes: 1
-          service_s: 60
-          stagingCap: 25
+    - id: pier-arrival
+      label: Pier arrival
+    - id: warehouse-transfer
+      label: Warehouse transfer

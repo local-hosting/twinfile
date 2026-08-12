@@ -4,18 +4,16 @@ id: park-operations
 name: Park operations
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/park:0.3.0
+  - rel: involves
+    href: twinfile/character/park-ranger:0.1.0
 story:
+  pitch: Everyday meadow–trailhead loop for visitors on a clear day.
   scenes:
-    - id: trailhead-backup
-      label: Trailhead backup
-      run:
-        steps:
-          - copy: twinfile/event/litter-pollution:1.0.0
-        args:
-          peakArrivals: 80
-          lanes: 1
-          service_s: 120
-          stagingCap: 20
+    - id: meadow-loop
+      label: Meadow loop
+    - id: trailhead-arrive
+      label: Trailhead arrival

@@ -59,7 +59,20 @@ function bestIdFromCandidates(
 }
 
 export function placeSlugFromPlaceRef(placeRef: string): string {
-  return parseTwinfileRef(placeRef)?.name ?? placeRef.trim();
+  const trimmed = placeRef.trim();
+  const fromRef = parseTwinfileRef(trimmed)?.name?.trim();
+  if (fromRef) {
+    return fromRef;
+  }
+  // Legacy mount ids (`venue:demo-airport`) — not Twinfile refs.
+  const colon = trimmed.indexOf(':');
+  if (colon > 0 && !trimmed.includes('/')) {
+    const slug = trimmed.slice(colon + 1).trim();
+    if (slug) {
+      return slug;
+    }
+  }
+  return trimmed;
 }
 
 /** Keyword match user catalog menu (+ optional fleet slugs) against natural language. */

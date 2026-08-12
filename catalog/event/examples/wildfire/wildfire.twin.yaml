@@ -4,6 +4,7 @@ id: wildfire
 name: Wildfire
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - watch
   - evacuation-order
