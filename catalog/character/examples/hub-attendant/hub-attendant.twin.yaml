@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: hub-attendant
+name: Hub attendant (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional attendant persona for the mobility hub campus example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/hub-kiosk:0.1.0
+character:
+  role: attendant
+  segment: transit-rider
+  goals:
+    - Keep hub-to-quad and shuttle-loop flows orderly
+    - Steer riders to the quad when the shuttle loop closes

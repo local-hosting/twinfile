@@ -11,9 +11,14 @@ links:
   - rel: involves
     href: twinfile/character/park-ranger:0.1.0
 story:
-  pitch: Everyday meadow–trailhead loop for visitors on a clear day.
+  pitch: Everyday meadow–trailhead loop and trailhead queue on a clear day.
   scenes:
     - id: meadow-loop
       label: Meadow loop
-    - id: trailhead-arrive
-      label: Trailhead arrival
+    - id: trailhead-queue
+      label: Trailhead queue
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 1

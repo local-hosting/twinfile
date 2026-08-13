@@ -1,0 +1,31 @@
+twinfile: 2
+kind: story
+id: transit-hub-campus-resilience
+name: Transit Hub Campus resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/transit-hub-campus:0.1.0
+  - rel: involves
+    href: twinfile/character/hub-attendant:0.1.0
+story:
+  pitch: Hub shelter under severe weather when the shuttle loop closes, then recovery staging.
+  scenes:
+    - id: hub-shelter
+      label: Hub shelter
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 600
+          target_role: shelter
+          warningAt: severe-weather.warning
+    - id: hub-recovery
+      label: Hub recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT45M

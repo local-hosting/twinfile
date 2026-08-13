@@ -11,6 +11,18 @@ links:
 resource:
   kind: station
   state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-parks
+    elements:
+      purpose:
+        - wayfinding
+        - environment
+      manifestation:
+        - sensor_telemetry
+      affected:
+        - people
   ext:
     lat: 40.7829
     lon: -73.9654

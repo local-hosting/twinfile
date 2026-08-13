@@ -48,5 +48,6 @@ See [MCP](mcp.md) for tool schemas.
 
 - [Open integration roadmap](integration-roadmap.md) — phased implementation
 - [Host adapters](adapters/host.md) — Phase 6 contracts (patch runtime, map, locker)
-- [Bridges](bridges.md) — format adapters vs patch module types
+- [Bridges](bridges.md) — format adapters vs patch module types (distinct from **views**: summary card / JSON-LD)
+- [Glossary — Views vs bridges](../glossary.md#views-vs-bridges-vs-host-adapters)
 - [Campus → building → floor](../place/campus-building-floor.md) — hierarchy without a separate subspace type

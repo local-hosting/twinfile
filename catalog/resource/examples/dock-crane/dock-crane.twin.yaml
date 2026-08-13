@@ -7,9 +7,21 @@ stability: example
 links:
   - rel: locatedIn
     href: twinfile/place/dunkirk-dock:0.1.0
+    anchor: crane-yard
 resource:
   kind: crane
   state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-waterfront
+    elements:
+      purpose:
+        - logistics
+      manifestation:
+        - sensor_telemetry
+      affected:
+        - people
   ext:
     lat: 42.468
     lon: -79.3185

@@ -1,0 +1,27 @@
+twinfile: 2
+kind: resource
+id: hub-kiosk
+name: Hub kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/transit-hub-campus:0.1.0
+    anchor: kiosk-transit
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-campus
+    elements:
+      purpose:
+        - wayfinding
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people
+  ext:
+    lat: 40.7506
+    lon: -73.9937

@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: river-guide
+name: River guide (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional guide persona for the Tellico River example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/river-gauge:0.1.0
+character:
+  role: guide
+  segment: river-visitor
+  goals:
+    - Lead clear-day reach and eddy visits
+    - Watch gauge and turbidity cues before swim calls

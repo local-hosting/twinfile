@@ -49,6 +49,16 @@ Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `ca
 
 A **place does not run**. **Runs** + **player** execute on a built place (runner offline, player live).
 
+## Views vs bridges vs host adapters
+
+| Term | Role | Not |
+| --- | --- | --- |
+| **View** | One-way presentation of a twin (`TwinfileSummaryV1` → ascii/json/yaml/markdown; place → Schema.org **JSON-LD**) | Round-trip format I/O |
+| **Bridge** | Authoring-time import/export of place layers (IMDF, GTFS, …) | Card/HTML rendering |
+| **Host adapter** | Host runtime contracts (patch bus, map sink, locker) | Spec/kernel presentation |
+
+Kernel API: `renderTwinfileSummaryView`, `renderTwinfilePlaceView` (`jsonld`). CLI: `twin summary`, `twin export jsonld`.
+
 ## Site stack (prose)
 
 | Term | Use for | Not |

@@ -1,6 +1,6 @@
 twinfile: 1
 id: canvas-demo
-description: Lake Erie waterfront demo pack for unsigned portable host Canvas shell chrome.
+description: Lake Erie waterfront demo pack for unsigned portable host Canvas shell chrome (daily + resilience).
 places:
   - dunkirk-dock
   - buffalo-harbor
@@ -16,11 +16,14 @@ resources:
 stories:
   - morning-crossing
   - falls-day-tour
+  - harbor-resilience
 events:
   - dawn-cast-off
   - harbor-berth
   - falls-loop
   - dunkirk-return
+  - tsunami
+  - field-damage
 storyEventIds:
   morning-crossing:
     - dawn-cast-off
@@ -28,3 +31,6 @@ storyEventIds:
   falls-day-tour:
     - falls-loop
     - dunkirk-return
+  harbor-resilience:
+    - tsunami
+    - field-damage

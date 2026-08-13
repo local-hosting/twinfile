@@ -8,8 +8,10 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/arena:1.2.0
+  - rel: involves
+    href: twinfile/character/arena-host:0.1.0
 story:
-  pitch: Shelter stand-up and storm response when severe weather hits the bowl.
+  pitch: Shelter stand-up, storm at halftime, earthquake survey, then wildfire evacuation.
   scenes:
     - id: flood-shelter-standup
       label: Flood shelter stand-up
@@ -42,3 +44,17 @@ story:
         args:
           attendance: 18000
           warningAt: arena-game-day.halftime
+    - id: bowl-quake
+      label: Bowl earthquake
+      run:
+        steps:
+          - copy: twinfile/event/earthquake:1.0.0
+        args:
+          shakingAt: earthquake.shaking
+    - id: bowl-wildfire
+      label: Bowl wildfire
+      run:
+        steps:
+          - copy: twinfile/event/wildfire:1.0.0
+        args:
+          evacuationAt: wildfire.evacuation-order

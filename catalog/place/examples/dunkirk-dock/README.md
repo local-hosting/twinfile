@@ -11,4 +11,4 @@ Illustrative **pier** site on Lake Erie for the canvas waterfront pack. Topology
 
 **Daily:** [`morning-crossing#dawn-cast-off`](../../../story/examples/morning-crossing/morning-crossing.twin.yaml) (`mode: daily`).
 
-**Resilience:** [`harbor-resilience#apron-damage`](../../../story/examples/harbor-resilience/harbor-resilience.twin.yaml) — field-damage on the apron (`mode: resilience`).
+**Resilience:** [`harbor-resilience`](../../../story/examples/harbor-resilience/harbor-resilience.twin.yaml) — tsunami advisory and apron field-damage (`mode: resilience`).
