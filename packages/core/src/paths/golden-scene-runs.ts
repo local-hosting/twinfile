@@ -50,6 +50,10 @@ export const GOLDEN_SCENE_RUN_STORIES: Record<string, string> = {
   'lunch-flow': 'transit-hub-campus-operations',
   'hub-shelter': 'transit-hub-campus-resilience',
   'hub-recovery': 'transit-hub-campus-resilience',
+  'confluence-round': 'watershed-river-operations',
+  'school-handoff': 'watershed-river-operations',
+  'creek-pollution': 'watershed-river-resilience',
+  'quality-exceedance': 'watershed-river-resilience',
 };
 
 function goldenSceneStory(runId: string): string {

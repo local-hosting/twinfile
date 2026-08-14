@@ -16,3 +16,6 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 | `dock-crane` | dunkirk-dock |
 | `visitor-shuttle` | buffalo-harbor |
 | `falls-tram` | niagara-falls |
+| `water-quality-sensor` | watershed-river (Mountain Creek) |
+| `river-buoy` | watershed-river (Williams Island) |
+| `bend-buoy` | watershed-river (Moccasin Bend) |

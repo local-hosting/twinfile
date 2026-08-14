@@ -1,0 +1,20 @@
+twinfile: 1
+kind: event
+id: monitor-round
+name: Monitor round
+version: 1.0.0
+stability: example
+mode: daily
+phases:
+  - patrol
+  - clear
+expects:
+  water-launch:
+    kind: marker
+    min: 1
+  survey-station:
+    kind: station
+    min: 1
+args:
+  startsAt:
+    type: time
