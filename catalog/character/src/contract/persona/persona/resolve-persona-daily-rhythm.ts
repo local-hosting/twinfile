@@ -1,4 +1,4 @@
-import type { PCM } from '../types/pcm.js';
+import type { Character } from '../types/character.js';
 import type { PersonaDailyRhythm } from '../types/strategy/persona-daily-rhythm.js';
 import {
   CREATIVE_LATE_WEEKDAY_DAILY_RHYTHM,
@@ -11,17 +11,17 @@ function textIncludes(haystack: string, needles: readonly string[]): boolean {
   return needles.some((needle) => lower.includes(needle));
 }
 
-/** Resolve the weekday rhythm template for a PCM persona (explicit or role-based default). */
-export function resolvePersonaDailyRhythm(pcm: PCM): PersonaDailyRhythm {
-  const authored = pcm.persona.dailyRhythm;
+/** Resolve the weekday rhythm template for a Character persona (explicit or role-based default). */
+export function resolvePersonaDailyRhythm(character: Character): PersonaDailyRhythm {
+  const authored = character.persona.dailyRhythm;
   if (authored?.weekday?.length) {
     return authored;
   }
 
-  const role = pcm.persona.role?.trim() ?? '';
-  const segment = pcm.persona.segment?.trim() ?? '';
-  const occupation = pcm.persona.exemplar?.occupation?.trim() ?? '';
-  const who = pcm.persona.who?.trim() ?? '';
+  const role = character.persona.role?.trim() ?? '';
+  const segment = character.persona.segment?.trim() ?? '';
+  const occupation = character.persona.exemplar?.occupation?.trim() ?? '';
+  const who = character.persona.who?.trim() ?? '';
 
   if (
     textIncludes(role, ['driver', 'courier']) ||

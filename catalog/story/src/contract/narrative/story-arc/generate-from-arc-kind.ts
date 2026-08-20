@@ -1,7 +1,7 @@
-import type { Journey, JourneyPhase } from '@local-hosting/twinfile-character/pcm';
+import type { Journey, JourneyPhase } from '@local-hosting/twinfile-character/persona';
 
-import type { SAMBinding } from '../types/sam.js';
-import type { SAMCharacterRef } from '../types/sam-refs.js';
+import type { StoryBinding } from '../types/story-narrative.js';
+import type { StoryCharacterRef } from '../types/story-refs.js';
 import type { StoryScene } from '../types/scene.js';
 import type { StoryArcKind } from '../types/story-arc-kind.js';
 import type { StoryArcTemplate } from '../types/story-arc-template.js';
@@ -49,7 +49,7 @@ export type ScaffoldScenesFromJourneyArcInput = {
 };
 
 /**
- * Map PCM journey phases onto the dramatic beat rail for a Write Practice arc kind
+ * Map Character journey phases onto the dramatic beat rail for a Write Practice arc kind
  * (one storyboard scene per journey phase).
  */
 export function scaffoldScenesFromJourneyArc(
@@ -93,25 +93,25 @@ export type GenerateSamEpisodeFromArcInput = {
   episodeId: string;
   title: string;
   revision: number;
-  focalPcmId: string;
+  focalCharacterId: string;
   placeRef: string;
   simulationEpochStart: string;
   planningHorizonDays?: number;
   visitDayIndex?: number;
-  /** Additional cast beyond the focal PCM. */
-  characters?: SAMCharacterRef[];
+  /** Additional cast beyond the focal Character. */
+  characters?: StoryCharacterRef[];
 };
 
 export type GeneratedSamEpisodeDraft = {
   arcTemplate: StoryArcTemplate;
   scenes: StoryScene[];
-  characters: SAMCharacterRef[];
-  binding: SAMBinding;
+  characters: StoryCharacterRef[];
+  binding: StoryBinding;
 };
 
 /**
- * Draft a SAM episode from a Write Practice arc kind + authored PCM journey
- * (acts rail + scenes). Run {@link compileSAM} / {@link generateEpisodeCalendar} next.
+ * Draft a Story episode from a Write Practice arc kind + authored Character journey
+ * (acts rail + scenes). Run {@link compileStory} / {@link generateEpisodeCalendar} next.
  */
 export function generateSamEpisodeFromArc(
   input: GenerateSamEpisodeFromArcInput,
@@ -126,20 +126,20 @@ export function generateSamEpisodeFromArc(
     kind: input.kind,
     journey: input.journey,
     placeRef: input.placeRef,
-    characterIds: [input.focalPcmId],
+    characterIds: [input.focalCharacterId],
   });
 
-  const characters: SAMCharacterRef[] =
+  const characters: StoryCharacterRef[] =
     input.characters?.length
       ? input.characters
-      : [{ pcmId: input.focalPcmId, primary: true }];
+      : [{ characterId: input.focalCharacterId, primary: true }];
 
   return {
     arcTemplate,
     scenes,
     characters,
     binding: {
-      pcmId: input.focalPcmId,
+      characterId: input.focalCharacterId,
       journeyId: input.journey.id,
       simulationEpochStart: input.simulationEpochStart,
       planningHorizonDays: input.planningHorizonDays,

@@ -1,4 +1,4 @@
-import type { Journey } from '@local-hosting/twinfile-character/pcm';
+import type { Journey } from '@local-hosting/twinfile-character/persona';
 
 export function resolveJourneyById(
   journeys: readonly Journey[],

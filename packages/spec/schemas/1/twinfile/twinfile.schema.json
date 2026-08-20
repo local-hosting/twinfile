@@ -4,11 +4,17 @@
   "oneOf": [
     { "$ref": "#/$defs/placeTwinfile" },
     { "$ref": "#/$defs/eventTwinfile" },
-    { "$ref": "#/$defs/scenarioTwinfile" }
+    { "$ref": "#/$defs/scenarioTwinfile" },
+    { "$ref": "#/$defs/characterTwinfile" },
+    { "$ref": "#/$defs/storyTwinfile" },
+    { "$ref": "#/$defs/resourceTwinfile" }
   ],
-  "if": { "properties": { "kind": { "enum": ["place", "scenario"] } }, "required": ["kind"] },
+  "if": {
+    "properties": { "kind": { "enum": ["place", "scenario", "character", "story", "resource", "event"] } },
+    "required": ["kind"]
+  },
   "else": {
-    "$comment": "twinfile 2 (RFC 0009) is for place and scenario Twinfiles only.",
+    "$comment": "Unknown kinds require twinfile manifest version 1.",
     "properties": { "twinfile": { "const": 1 } }
   },
   "$defs": {
@@ -171,6 +177,74 @@
             },
             "catalog": { "type": "object" },
             "layers": { "type": "array", "items": { "type": "string" } }
+          }
+        }
+      ]
+    },
+    "headComposeSteps": {
+      "description": "Ordered patches for non-place twin heads (RFC 0009 extension).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "oneOf": [
+          {
+            "type": "object",
+            "required": ["copy"],
+            "properties": {
+              "copy": { "type": "string", "minLength": 1 }
+            },
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "minProperties": 1,
+            "not": { "required": ["copy"] },
+            "properties": { "mode": { "enum": ["patch", "replace"] } }
+          }
+        ]
+      }
+    },
+    "characterTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "required": ["disclosure"],
+          "properties": {
+            "kind": { "const": "character" },
+            "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
+            "steps": { "$ref": "#/$defs/headComposeSteps" },
+            "character": { "type": "object" },
+            "disclosure": { "type": "object" }
+          }
+        }
+      ]
+    },
+    "storyTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "properties": {
+            "kind": { "const": "story" },
+            "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
+            "steps": { "$ref": "#/$defs/headComposeSteps" },
+            "mode": { "enum": ["daily", "resilience"] },
+            "story": { "type": "object" }
+          }
+        }
+      ]
+    },
+    "resourceTwinfile": {
+      "allOf": [
+        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
+        {
+          "type": "object",
+          "properties": {
+            "kind": { "const": "resource" },
+            "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
+            "steps": { "$ref": "#/$defs/headComposeSteps" },
+            "resource": { "type": "object" }
           }
         }
       ]

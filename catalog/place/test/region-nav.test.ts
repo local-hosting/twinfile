@@ -18,7 +18,7 @@ function loadTwinfile(rel: string): Record<string, unknown> {
 describe('regionNavFromTwinfile', () => {
   it('lists park meadow and trailhead', () => {
     const rows = regionNavFromTwinfile(loadTwinfile('examples/park/park.twin.yaml'));
-    expect(rows.map((r) => r.id).sort()).toEqual(['meadow', 'trailhead']);
+    expect(rows.map((r) => r.id).sort()).toEqual(['meadow', 'ranger-shelter', 'trailhead']);
   });
 
   it('omits copy anchors on campus twins', () => {
@@ -31,6 +31,6 @@ describe('regionNavFromTwinfile', () => {
 
   it('reads spaces from manifest steps', () => {
     const twinfile = loadTwinfile('examples/park/park.twin.yaml');
-    expect(spacesFromTwinfileSteps(twinfile).length).toBe(2);
+    expect(spacesFromTwinfileSteps(twinfile).length).toBe(3);
   });
 });

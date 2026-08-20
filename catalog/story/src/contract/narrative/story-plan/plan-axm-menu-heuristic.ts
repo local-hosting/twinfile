@@ -1,20 +1,20 @@
 import { samePlaceRef } from '@local-hosting/twinfile-core/ref';
 
 import { matchSamStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
-import type { SamStoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
+import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 import type { SamStoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
 import { resolveStoryPlanRandom } from './rng.js';
 
 export type SamStoryPlanAxmMenuSelectionV1 = {
-  pcmId: string;
-  samEpisodeId: string;
+  characterId: string;
+  episodeId: string;
   placeRef?: string;
   storeSlug?: string;
   rationale: string;
 };
 
 export type SamStoryPlanAxmMenuPlanInputV1 = {
-  pcmId?: string;
+  characterId?: string;
   episodeId?: string;
   placeRef?: string;
   storeSlug?: string;
@@ -22,7 +22,7 @@ export type SamStoryPlanAxmMenuPlanInputV1 = {
 
 export function planStoryCreateAxmMenuHeuristic(input: {
   scenario: string;
-  menu: SamStoryCatalogMenuV1;
+  menu: StoryCatalogMenuV1;
   catalog: Pick<SamStoryPlanCatalogSnapshotV1, 'fleetPlaces'>;
   plan?: SamStoryPlanAxmMenuPlanInputV1;
   random?: () => number;
@@ -36,56 +36,56 @@ export function planStoryCreateAxmMenuHeuristic(input: {
     text: scenario,
     menu: input.menu,
     fleetPlaces: input.catalog.fleetPlaces,
-    focalPcmId: plan.pcmId?.trim(),
+    focalCharacterId: plan.characterId?.trim(),
   });
 
-  const pcmId =
-    plan.pcmId?.trim() ||
-    matched.pcmId ||
-    input.menu.characters[0]?.pcmId;
-  if (!pcmId || !input.menu.characters.some((row) => row.pcmId === pcmId)) {
+  const characterId =
+    plan.characterId?.trim() ||
+    matched.characterId ||
+    input.menu.characters[0]?.characterId;
+  if (!characterId || !input.menu.characters.some((row) => row.characterId === characterId)) {
     throw new Error('Org user catalog menu has no characters');
   }
 
-  const episodesForPcm = input.menu.episodes.filter((row) => row.focalPcmId === pcmId);
+  const episodesForPcm = input.menu.episodes.filter((row) => row.focalCharacterId === characterId);
   const episodePool = episodesForPcm.length > 0 ? episodesForPcm : input.menu.episodes;
 
-  let samEpisodeId = plan.episodeId?.trim() || matched.episodeId;
-  if (!samEpisodeId || !episodePool.some((row) => row.id === samEpisodeId)) {
+  let episodeId = plan.episodeId?.trim() || matched.episodeId;
+  if (!episodeId || !episodePool.some((row) => row.id === episodeId)) {
     const index = Math.floor(random() * episodePool.length);
-    samEpisodeId = episodePool[index]?.id;
+    episodeId = episodePool[index]?.id;
   }
-  if (!samEpisodeId) {
-    throw new Error('Org user catalog menu has no SAM episodes');
+  if (!episodeId) {
+    throw new Error('Org user catalog menu has no Story episodes');
   }
 
-  const episode = input.menu.episodes.find((row) => row.id === samEpisodeId);
+  const episode = input.menu.episodes.find((row) => row.id === episodeId);
   const placeRef = plan.placeRef?.trim();
   const storeSlug = plan.storeSlug?.trim() || matched.storeSlug;
 
-  const character = input.menu.characters.find((row) => row.pcmId === pcmId);
+  const character = input.menu.characters.find((row) => row.characterId === characterId);
   const menuPlace =
     placeRef && input.menu.places?.length
       ? input.menu.places.find((row) => samePlaceRef(row.placeRef, placeRef))
       : undefined;
   return {
-    pcmId,
-    samEpisodeId,
+    characterId,
+    episodeId,
     placeRef,
     storeSlug,
-    rationale: `User catalog: character ${character?.label ?? pcmId}, episode ${episode?.title ?? samEpisodeId}${menuPlace ? `, place ${menuPlace.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
+    rationale: `User catalog: character ${character?.label ?? characterId}, episode ${episode?.title ?? episodeId}${menuPlace ? `, place ${menuPlace.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
   };
 }
 
 export function validateStoryPlanAxmSelection(input: {
-  menu: SamStoryCatalogMenuV1;
+  menu: StoryCatalogMenuV1;
   selection: SamStoryPlanAxmMenuSelectionV1;
 }): SamStoryPlanAxmMenuSelectionV1 {
-  if (!input.menu.characters.some((row) => row.pcmId === input.selection.pcmId)) {
-    throw new Error(`Invalid pcmId "${input.selection.pcmId}" — not in org user catalog`);
+  if (!input.menu.characters.some((row) => row.characterId === input.selection.characterId)) {
+    throw new Error(`Invalid characterId "${input.selection.characterId}" — not in org user catalog`);
   }
-  if (!input.menu.episodes.some((row) => row.id === input.selection.samEpisodeId)) {
-    throw new Error(`Invalid episodeId "${input.selection.samEpisodeId}" — not in org user catalog`);
+  if (!input.menu.episodes.some((row) => row.id === input.selection.episodeId)) {
+    throw new Error(`Invalid episodeId "${input.selection.episodeId}" — not in org user catalog`);
   }
   return input.selection;
 }

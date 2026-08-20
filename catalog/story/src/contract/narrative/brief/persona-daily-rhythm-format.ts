@@ -1,4 +1,4 @@
-/** Wire shape for PCM `SampledPersonaDailyRhythm` (avoid tight coupling on npm pin). */
+/** Wire shape for Character `SampledPersonaDailyRhythm` (avoid tight coupling on npm pin). */
 export type StoryBriefDailyRhythmBlockV1 = {
   id: string;
   label: string;

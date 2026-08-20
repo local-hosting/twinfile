@@ -6,8 +6,8 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 
 | Mode | Count | Stories |
 | --- | --- | --- |
-| **daily** | 12 | `airport-operations`, `arena-operations`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `park-operations`, `port-operations`, `river-operations`, `shop-visit`, `watershed-river-operations`, `transit-hub-campus-operations` |
-| **resilience** | 11 | `airport-resilience`, `arena-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `shop-resilience`, `watershed-river-resilience`, `transit-hub-campus-resilience` |
+| **daily** | 16 | `airport-operations`, `arena-operations`, `electronics-visit`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `online-visit`, `park-operations`, `port-operations`, `river-operations`, `shop-visit`, `watershed-river-operations`, `transit-hub-campus-operations`, `wireless-visit` |
+| **resilience** | 12 | `airport-resilience`, `arena-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `shop-resilience`, `watershed-river-resilience`, `transit-hub-campus-resilience`, `wireless-queue-stress` |
 
 | Place theme | Daily | Resilience |
 | --- | --- | --- |
@@ -19,6 +19,8 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 | river | `river-operations` | `river-resilience` |
 | tennessee river (Chattanooga) | `watershed-river-operations` | `watershed-river-resilience` |
 | shop | `shop-visit` | `shop-resilience` |
+| wireless-mobile | `wireless-visit` | `wireless-queue-stress` |
+| electronics-store | `electronics-visit` | — |
 | waterfront | `morning-crossing`, `falls-day-tour` | `harbor-resilience` |
 | mobility hub (King's Cross) | `mobility-hub-operations` | `mobility-hub-resilience` |
 | transit hub campus | `transit-hub-campus-operations` | `transit-hub-campus-resilience` |

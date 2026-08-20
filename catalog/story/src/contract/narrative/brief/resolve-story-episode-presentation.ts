@@ -1,7 +1,7 @@
-import { extractJourneyTouchpointSequence, type Journey } from '@local-hosting/twinfile-character/pcm';
+import { extractJourneyTouchpointSequence, type Journey } from '@local-hosting/twinfile-character/persona';
 
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
-import type { SAM } from '../types/sam.js';
+import type { Story } from '../types/story-narrative.js';
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';
 import { journeyHasCalendarSpan } from './journey-touchpoint-binding.js';
 
@@ -18,10 +18,10 @@ export type StoryEpisodePresentationV1 = {
 
 export function resolveStoryEpisodePresentation(input: {
   journey?: Journey;
-  sam?: SAM;
+  story?: Story;
   arc?: EpisodeArcV1;
 }): StoryEpisodePresentationV1 {
-  const arc = input.arc ?? input.sam?.episodeArc;
+  const arc = input.arc ?? input.story?.episodeArc;
   const fromJourney = input.journey ? extractJourneyTouchpointSequence(input.journey) : [];
   const fromArc = (arc?.objectiveTouchpointIds ?? []).map((id) => id.trim()).filter(Boolean);
   const scriptTouchpointIds = fromJourney.length > 0 ? fromJourney : fromArc;
@@ -32,7 +32,7 @@ export function resolveStoryEpisodePresentation(input: {
   });
   const horizonDays =
     arc?.planningHorizonDays ??
-    input.sam?.binding.planningHorizonDays ??
+    input.story?.binding.planningHorizonDays ??
     derived.planningHorizonDays;
   const hasCalendar = journeyHasCalendarSpan(input.journey);
   const sessionShapedJourney =

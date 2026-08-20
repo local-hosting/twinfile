@@ -26,7 +26,7 @@ function samLocusFromSpec(locus: string | undefined): TouchpointGraphWireLocus |
   return undefined;
 }
 
-/** Normalize host/org touchpoint graph JSON to SAM {@link TouchpointGraphWire}. */
+/** Normalize host/org touchpoint graph JSON to Story {@link TouchpointGraphWire}. */
 export function touchpointGraphToSamWire(graph: TouchpointGraphWireInput): TouchpointGraphWire {
   const touchpoints = (graph.touchpoints ?? []).map((row) => ({
     id: row.id,

@@ -17,7 +17,7 @@ export type PlaceMountLayoutPathway = {
   label?: string;
 };
 
-/** Built or resolved Twinfile place — SAM/AXM place mount wire. */
+/** Built or resolved Twinfile place — Story/AXM place mount wire. */
 export type TwinfilePlaceMount = {
   /** Unit ref the mount was resolved from; match mounts with `samePlaceRef` (kind + name, tag ignored). */
   placeRef: TwinfileRef;

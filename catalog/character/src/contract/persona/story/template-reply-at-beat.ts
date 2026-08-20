@@ -1,6 +1,6 @@
-import type { PcmStoryPsychology } from './pcm-story-psychology.js';
+import type { CharacterStoryPsychology } from './character-story-psychology.js';
 
-export type PcmStoryBeatContext = {
+export type CharacterStoryBeatContext = {
   isoDate: string;
   hourOfDay: number;
   touchpointId?: string;
@@ -9,13 +9,13 @@ export type PcmStoryBeatContext = {
   kind?: string;
 };
 
-export function templateReplyFromPcmAtBeat(
-  psychology: PcmStoryPsychology,
-  beat: PcmStoryBeatContext,
+export function templateReplyFromCharacterAtBeat(
+  psychology: CharacterStoryPsychology,
+  beat: CharacterStoryBeatContext,
   message: string,
 ): string {
   const trimmed = message.trim();
-  const name = psychology.displayName?.trim() || psychology.pcmId;
+  const name = psychology.displayName?.trim() || psychology.characterId;
   const mindset = psychology.mindset?.trim();
   const scene = beat.label ?? beat.touchpointId ?? beat.kind ?? 'the day';
   const opener = mindset ? `${name} (${mindset})` : name;

@@ -21,7 +21,7 @@ export type EpisodeCalendarDayEntry = {
 
 export type EpisodeCalendarDaysByIsoDate = Record<string, EpisodeCalendarDayEntry>;
 
-/** Map SAM `StoryTimelineHostWire` to per-ISO-day calendar entries (host adds feed metadata). */
+/** Map Story `StoryTimelineHostWire` to per-ISO-day calendar entries (host adds feed metadata). */
 export function buildCalendarDaysFromTimelineWire(
   timeline: StoryTimelineHostWire,
   subjectId: string,

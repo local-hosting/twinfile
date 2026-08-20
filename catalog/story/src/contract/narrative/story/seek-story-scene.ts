@@ -1,23 +1,23 @@
-import type { PcmStoryInstance } from '@local-hosting/twinfile-character/pcm';
+import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/persona';
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import {
   seekStoryEpisodeSceneOnArc,
   storySceneSeekRowsFromSam,
   type StorySceneSeekDirection,
 } from './seek-story-episode-scene.js';
-import { buildPcmSamStoryRun } from './pcm-sam-story-run.js';
+import { buildCharacterStoryRun } from './character-story-run.js';
 import type {
-  SamStoryInstanceDocument,
+  StoryInstanceDocument,
   StoryCharacteristics,
-} from './sam-story-instance-document.js';
+} from './story-instance-document.js';
 
 export type { StorySceneSeekDirection };
 
 export type SeekStorySceneInput = {
   personaId: string;
-  story: SamStoryInstanceDocument;
+  story: StoryInstanceDocument;
   /** When it matches `personaId`, the seek starts from the story's current clock. */
-  instance?: PcmStoryInstance;
+  instance?: CharacterStoryInstance;
   direction: StorySceneSeekDirection;
   sceneId?: string;
   order?: number;
@@ -45,16 +45,16 @@ export function seekStoryScene(input: SeekStorySceneInput): SeekStorySceneResult
 
   const arc = input.story.episodeArc;
   if (!arc) {
-    throw new Error('SAM story has no episodeArc — cannot seek scene');
+    throw new Error('Story story has no episodeArc — cannot seek scene');
   }
 
   const existing = input.instance
-    ? buildPcmSamStoryRun({ personaId, instance: input.instance, story: input.story })
+    ? buildCharacterStoryRun({ personaId, instance: input.instance, story: input.story })
     : undefined;
 
   const core = seekStoryEpisodeSceneOnArc({
     arc,
-    scenes: storySceneSeekRowsFromSam(input.story.sam.scenes),
+    scenes: storySceneSeekRowsFromSam(input.story.story.scenes),
     currentDayIndex: existing?.run.cursor.dayIndex ?? 0,
     direction: input.direction,
     sceneId: input.sceneId,

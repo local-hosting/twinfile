@@ -1,20 +1,20 @@
 import type { PlaceMount } from './place-mount.js';
 import type { EpisodeActivityCalendar } from './episode-activity.js';
 import type { EpisodeArcV1, EpisodeTouchpointScheduleEntry } from './episode-arc.js';
-import type { SAMCharacterContext } from './sam-character-context.js';
+import type { StoryCharacterContext } from './story-character-context.js';
 import type { StoryScene } from './scene.js';
-import type { SAMTouchpointCatalog } from './touchpoint-catalog.js';
+import type { StoryTouchpointCatalog } from './touchpoint-catalog.js';
 import type { TouchpointIndex } from './touchpoint-index.js';
 
-/** Touchpoint metadata for phase classification and activity labels (from org graph or SAM mount). */
+/** Touchpoint metadata for phase classification and activity labels (from org graph or Story mount). */
 export type EpisodeCalendarResources = {
-  touchpointCatalog?: SAMTouchpointCatalog;
+  touchpointCatalog?: StoryTouchpointCatalog;
   /** Legacy minimal index — ignored when `touchpointCatalog` is set. */
   touchpointIndex?: TouchpointIndex;
   /** Resolved place mounts — used for per-scene space defaults (`scene.placeRef` = `placeRef`). */
   placeMounts?: readonly PlaceMount[];
-  /** PCM mounts — hydrates scene spine fields during {@link compileSAM}. */
-  characterContext?: SAMCharacterContext;
+  /** Character mounts — hydrates scene spine fields during {@link compileStory}. */
+  characterContext?: StoryCharacterContext;
 };
 
 /** Simulation clock and visit placement for a compiled episode. */
@@ -42,7 +42,7 @@ export type GenerateEpisodeCalendarFromScenes = EpisodeCalendarClock &
     scenes: readonly StoryScene[];
   };
 
-/** Low-level calendar builder — prefer {@link compileSAM} for authored episodes. */
+/** Low-level calendar builder — prefer {@link compileStory} for authored episodes. */
 export type GenerateEpisodeCalendarInput =
   | GenerateEpisodeCalendarFromSequence
   | GenerateEpisodeCalendarFromScenes;

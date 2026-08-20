@@ -16,8 +16,8 @@ function parseDiskActs(actsDir: string): StoryArcAct[] {
 }
 
 /**
- * Merge `acts/*.yml` into `arcTemplate` from `sam.yml`.
- * Header fields (`id`, `label`, `description`) stay on `sam.yml`; act rows load from disk when present.
+ * Merge `acts/*.yml` into `arcTemplate` from `story.yml`.
+ * Header fields (`id`, `label`, `description`) stay on `story.yml`; act rows load from disk when present.
  */
 export function mergeArcTemplateFromDisk(
   raw: Record<string, unknown>,
@@ -33,7 +33,7 @@ export function mergeArcTemplateFromDisk(
 
   if (typeof header !== 'object' || header === null) {
     throw new Error(
-      `SAM root ${root} has acts/ but sam.yml is missing arcTemplate (id, label required)`,
+      `Story root ${root} has acts/ but story.yml is missing arcTemplate (id, label required)`,
     );
   }
 
@@ -41,7 +41,7 @@ export function mergeArcTemplateFromDisk(
   const id = typeof arcHeader.id === 'string' ? arcHeader.id.trim() : '';
   const label = typeof arcHeader.label === 'string' ? arcHeader.label.trim() : '';
   if (!id || !label) {
-    throw new Error(`SAM root ${root}: arcTemplate.id and arcTemplate.label are required when acts/ is used`);
+    throw new Error(`Story root ${root}: arcTemplate.id and arcTemplate.label are required when acts/ is used`);
   }
 
   const description =
@@ -51,7 +51,7 @@ export function mergeArcTemplateFromDisk(
   const kindParsed = StoryArcKindSchema.safeParse(kindRaw);
   if (!kindParsed.success) {
     throw new Error(
-      `SAM root ${root}: arcTemplate.kind is required (one of ${StoryArcKindSchema.options.join(', ')})`,
+      `Story root ${root}: arcTemplate.kind is required (one of ${StoryArcKindSchema.options.join(', ')})`,
     );
   }
 

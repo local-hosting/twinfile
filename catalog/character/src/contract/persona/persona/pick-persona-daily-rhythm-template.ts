@@ -1,4 +1,4 @@
-import type { PCM } from '../types/pcm.js';
+import type { Character } from '../types/character.js';
 import type {
   PersonaDailyRhythm,
   PersonaDailyRhythmVariant,
@@ -38,16 +38,16 @@ function variantToTemplate(variant: PersonaDailyRhythmVariant): PersonaDailyRhyt
 
 /** Pick authored rhythm, weighted variant, or role-based preset. */
 export function pickPersonaDailyRhythmTemplate(
-  pcm: PCM,
+  character: Character,
   random: () => number,
   pickMode: 'weighted' | 'first' = 'weighted',
 ): ResolvedPersonaDailyRhythmTemplate {
-  const authored = pcm.persona.dailyRhythm;
+  const authored = character.persona.dailyRhythm;
   if (authored?.weekday?.length) {
     return { template: authored };
   }
 
-  const variants = pcm.persona.dailyRhythmVariants ?? [];
+  const variants = character.persona.dailyRhythmVariants ?? [];
   if (variants.length > 0) {
     const picked = pickMode === 'first' ? variants[0]! : pickWeightedVariant(variants, random);
     return {
@@ -56,5 +56,5 @@ export function pickPersonaDailyRhythmTemplate(
     };
   }
 
-  return { template: resolvePersonaDailyRhythm(pcm) };
+  return { template: resolvePersonaDailyRhythm(character) };
 }

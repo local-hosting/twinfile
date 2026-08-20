@@ -30,6 +30,7 @@ Id-array merge rules and **`$delete`**: [Layers](layers.md).
 | --- | --- | --- |
 | Dockerfile | `<unit>.twin.yaml` + `place/` + `steps: - plan:` | — |
 | `FROM` | **`from:`** on a **place** (or **`from: ..`** on a **scenario**) | Base unit ref in provenance |
+| `FROM` (head) | **`from:`** on **character**, **story**, **resource**, or **event** | Same-kind parent + `steps:` patches (`composeHeadUnitDocument` in core) |
 | `COPY` / patch steps | Manifest **`layers:`** / **`steps:`** — place patches and inline **`plan:`** (legacy `bindings/*.yaml` lifted by `twin fmt`) | **`place`** compose layers; bindings end on **`Place.data.eventBindings`** |
 | `COPY --from=<stage>` (local stage) | **`copy: ./parts/<name>`** (and `./floors/<floor>` inside a building), nested Twinfiles under the campus ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)) | **`copy`** compose layers under `copy/<into>/…` |
 | Shared dependency image | **Event** units linked by **`bindings/`** (`for:` target name) or role tags | `event` and `plan` compose layers |

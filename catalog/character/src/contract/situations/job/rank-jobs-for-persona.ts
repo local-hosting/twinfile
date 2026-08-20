@@ -1,7 +1,7 @@
 import type { Job } from '../types/job.js';
 import type { JobSituationModel } from '../types/job-situation-model.js';
 
-/** Minimal PCM persona + journey shape for job ranking (no `@local-hosting/twinfile-character/pcm` dependency). */
+/** Minimal Character persona + journey shape for job ranking (no `@local-hosting/twinfile-character/persona` dependency). */
 export type PersonaJobRankingSourceV1 = {
   persona: {
     label: string;
@@ -50,8 +50,8 @@ function scoreTokenOverlap(query: string, corpus: string): number {
   return hits / corpusTokens.size;
 }
 
-function personaCorpusText(pcm: PersonaJobRankingSourceV1): string {
-  const persona = pcm.persona;
+function personaCorpusText(character: PersonaJobRankingSourceV1): string {
+  const persona = character.persona;
   return [
     persona.label,
     persona.who,
@@ -72,13 +72,13 @@ function jobCorpusText(job: Job): string {
     .join(' ');
 }
 
-function explicitJobIds(pcm: PersonaJobRankingSourceV1): Set<string> {
+function explicitJobIds(character: PersonaJobRankingSourceV1): Set<string> {
   const ids = new Set<string>();
-  for (const id of pcm.persona.jobIds ?? []) {
+  for (const id of character.persona.jobIds ?? []) {
     const trimmed = id.trim();
     if (trimmed) ids.add(trimmed);
   }
-  for (const journey of pcm.journeys ?? []) {
+  for (const journey of character.journeys ?? []) {
     for (const phase of journey.phases ?? []) {
       for (const id of phase.jobIds ?? []) {
         const trimmed = id.trim();
@@ -101,14 +101,14 @@ export type RankedJobForPersonaV1 = {
   explicit: boolean;
 };
 
-/** Rank JSM jobs for a focal PCM (explicit ids first, then token overlap with persona voice). */
+/** Rank Situations jobs for a focal Character (explicit ids first, then token overlap with persona voice). */
 export function rankJobsForPersona(
-  pcm: PersonaJobRankingSourceV1,
+  character: PersonaJobRankingSourceV1,
   model: JobSituationModel,
   limit = 8,
 ): RankedJobForPersonaV1[] {
-  const explicit = explicitJobIds(pcm);
-  const corpus = personaCorpusText(pcm);
+  const explicit = explicitJobIds(character);
+  const corpus = personaCorpusText(character);
   const ranked = model.jobs.map((job) => {
     const isExplicit = explicit.has(job.id);
     const overlap = scoreTokenOverlap(corpus, jobCorpusText(job));

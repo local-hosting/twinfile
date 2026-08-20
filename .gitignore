@@ -31,3 +31,4 @@ _archive/
 
 # twin run / verify output
 catalog/story/examples/*/runs/
+tooling/scripts/__pycache__/

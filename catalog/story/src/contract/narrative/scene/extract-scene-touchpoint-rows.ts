@@ -1,5 +1,5 @@
 import type { SceneEmotions, StoryScene } from '../types/scene.js';
-import type { SAMTouchpointCatalog } from '../types/touchpoint-catalog.js';
+import type { StoryTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import type { PlaceMount } from '../types/place-mount.js';
 import {
   listSceneTouchpointRefs,
@@ -28,7 +28,7 @@ export function extractSceneTouchpointRows(
   scenes: readonly StoryScene[],
   options?: {
     placeMounts?: readonly PlaceMount[];
-    touchpointCatalog?: SAMTouchpointCatalog;
+    touchpointCatalog?: StoryTouchpointCatalog;
   },
 ): SceneTouchpointRow[] {
   const rows: SceneTouchpointRow[] = [];

@@ -1,0 +1,13 @@
+twinfile: 2
+kind: resource
+id: device-showcase
+name: Device showcase
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/wireless-mobile:0.1.0
+    anchor: device-showcase
+resource:
+  kind: fixture
+  state: active

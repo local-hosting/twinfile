@@ -304,12 +304,16 @@ async function runCheck(): Promise<number> {
 async function runBuild(): Promise<number> {
   const { dir, json, frozen, writeLock } = parseBuildArgs(argv.slice(1));
   const unitDir = resolve(dir);
+  const examplesRoot = resolveExamplesRoot(unitDir);
   const head = findTwinHead(unitDir);
-  if (head && head.kind !== 'place') return runTwinTypeBuild(unitDir, head.kind, json);
+  if (head && head.kind !== 'place') {
+    return runTwinTypeBuild(unitDir, head.kind, json, { examplesRoot });
+  }
 
   const result = await buildTwinfile(unitDir, {
     frozen,
     writeLock,
+    examplesRoot,
   });
 
   if (!result.ok) {

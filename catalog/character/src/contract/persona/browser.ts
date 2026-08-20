@@ -1,27 +1,27 @@
 /**
- * Browser-safe PCM surface — no disk `loadPCM` or catalog file I/O.
+ * Browser-safe Character surface — no disk `loadCharacter` or catalog file I/O.
  * @packageDocumentation
  */
 
-export type { PCM, PCMDocument } from './types/pcm.js';
+export type { Character, CharacterDocument } from './types/character.js';
 export {
-  PCM_SPEC_VERSION,
-  assertSupportedPCMSpec,
-  pcmSpecVersion,
-  type PCMSpecVersion,
-} from './types/pcm-spec.js';
-export { PCM_PACKAGE } from './contract/pcm-package-meta.js';
-export type { PCMCharacter } from './types/pcm-character.js';
+  CHARACTER_SPEC_VERSION,
+  assertSupportedCharacterSpec,
+  characterSpecVersion,
+  type CharacterSpecVersion,
+} from './types/character-spec.js';
+export { CHARACTER_PACKAGE } from './contract/character-package-meta.js';
+export type { CharacterPersona } from './types/character-persona.js';
 export type {
-  PcmAudienceAspectRef,
-  PcmAudienceAspectSource,
+  CharacterAudienceAspectRef,
+  CharacterAudienceAspectSource,
 } from './types/audience/audience-aspect-ref.js';
-export type { PcmAudiencePlane } from './types/audience/pcm-audience-plane.js';
+export type { CharacterAudiencePlane } from './types/audience/character-audience-plane.js';
 export {
-  PcmAudienceAspectRefSchema,
-  PcmAudiencePlaneSchema,
-} from './schemas/audience/pcm-audience-plane.schema.js';
-export { normalizePcmAudiencePlane } from './audience/normalize-audience-plane-weights.js';
+  CharacterAudienceAspectRefSchema,
+  CharacterAudiencePlaneSchema,
+} from './schemas/audience/character-audience-plane.schema.js';
+export { normalizeCharacterAudiencePlane } from './audience/normalize-audience-plane-weights.js';
 export type { Persona } from './types/strategy/persona.js';
 export { stripPersonaGroupFields } from './contract/strip-group-fields.js';
 export type { Job } from '../situations/index.js';
@@ -77,50 +77,51 @@ export {
   resolveJourneyForPersona,
 } from './journey/resolve-journey.js';
 
-export { pcmToContribution, type PcmAxmContribution } from './contract/to-contribution.js';
-export { pcmToJSON, pcmFromJSON, type PcmJson } from './contract/json.js';
-export { PcmDocument } from './contract/pcm-document.js';
-export { validatePCM, type ValidatePCMResult } from './contract/validate-pcm.js';
-export { parsePCM, PCMSchema } from './schemas/pcm.schema.js';
+export { characterToContribution, type CharacterAxmContribution } from './contract/to-contribution.js';
+export { characterToJSON, characterFromJSON, type CharacterJson } from './contract/json.js';
+export { CharacterBundle } from './contract/character-document.js';
+export type { TwinfileLoroMap } from '@local-hosting/twinfile-core/loro';
+export { validateCharacter, type ValidateCharacterResult } from './contract/validate-character.js';
+export { parseCharacter, CharacterSchema } from './schemas/character.schema.js';
 export type {
-  PcmInstanceCharacteristics,
-  PcmStoryInstance,
-} from './types/story/pcm-story-instance.js';
-export type { PcmInstanceVariationPolicy } from './types/story/pcm-instance-variation.js';
-export { PcmStoryInstanceDocument } from './story/pcm-story-instance-document.js';
+  CharacterInstanceCharacteristics,
+  CharacterStoryInstance,
+} from './types/story/character-story-instance.js';
+export type { CharacterInstanceVariationPolicy } from './types/story/character-instance-variation.js';
+export { CharacterStoryInstanceDocument } from './story/character-story-instance-document.js';
 export {
-  DEFAULT_PCM_INSTANCE_TRAIT_PICK_COUNT,
-  DEFAULT_PCM_INSTANCE_VARIATION,
-} from './types/story/pcm-instance-variation.js';
+  DEFAULT_CHARACTER_INSTANCE_TRAIT_PICK_COUNT,
+  DEFAULT_CHARACTER_INSTANCE_VARIATION,
+} from './types/story/character-instance-variation.js';
 export {
-  materializePcmStoryInstance,
-  pickPcmInstanceCharacteristics,
-  demographicPlaneFromPcmSignals,
-  resolvePcmDemographicPlane,
+  materializeCharacterStoryInstance,
+  pickCharacterInstanceCharacteristics,
+  demographicPlaneFromCharacterSignals,
+  resolveCharacterDemographicPlane,
   sampleDemographicBandsFromPlane,
-  samplePcmDemographicBands,
-  type MaterializePcmStoryInstanceInput,
-} from './story/materialize-pcm-story-instance.js';
+  sampleCharacterDemographicBands,
+  type MaterializeCharacterStoryInstanceInput,
+} from './story/materialize-character-story-instance.js';
 export {
-  createPcmInstanceChance,
-  pcmInstanceRandomFromChance,
-  resolvePcmInstanceRandom,
-  type PcmInstanceRandomSource,
-} from './story/pcm-instance-rng.js';
+  createCharacterInstanceChance,
+  characterInstanceRandomFromChance,
+  resolveCharacterInstanceRandom,
+  type CharacterInstanceRandomSource,
+} from './story/character-instance-rng.js';
 export type { SignalDimension } from './types/story/signal-dimension.js';
 export { SignalDimensionSchema } from './schemas/story/signal-dimension.schema.js';
 export {
-  hydratePcmSignalsFromDimensions,
+  hydrateCharacterSignalsFromDimensions,
   researchSignalsFromDimensionsAndValues,
-} from './story/hydrate-pcm-signals-from-dimensions.js';
+} from './story/hydrate-character-signals-from-dimensions.js';
 export type { ResearchSignal } from './types/story/research-signal.js';
 export {
-  psychologyFromPcmStoryInstance,
-  type PcmStoryPsychology,
-} from './story/pcm-story-psychology.js';
+  psychologyFromCharacterStoryInstance,
+  type CharacterStoryPsychology,
+} from './story/character-story-psychology.js';
 export {
-  templateReplyFromPcmAtBeat,
-  type PcmStoryBeatContext,
+  templateReplyFromCharacterAtBeat,
+  type CharacterStoryBeatContext,
 } from './story/template-reply-at-beat.js';
 export type { JourneyPaceId } from './types/story/journey-pace.js';
 export { JOURNEY_PACE_IDS } from './types/story/journey-pace.js';
@@ -133,7 +134,7 @@ export {
 } from './story/resolve-journey-pace.js';
 export {
   segmentIdFromPersonaSegment,
-  segmentIdFromPcmPersonaSegment,
+  segmentIdFromCharacterPersonaSegment,
 } from './persona/segment-id-from-persona.js';
 
 export * from './myers-briggs/myers-briggs.schema.js';

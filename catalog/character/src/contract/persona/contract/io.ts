@@ -54,13 +54,13 @@ export function loadEntityDir<T>(dir: string): T[] {
 }
 
 /**
- * Legacy nested strategy roots only — prefer topic folders on the PCM root
+ * Legacy nested strategy roots only — prefer topic folders on the Character root
  * (`needs/`, `mental-models/`, …). Kept so older catalogs still load.
  */
 export const STRATEGY_DIR_CANDIDATES = ['strategy', 'a-strategy', 'f-strategy'] as const;
 export const STORY_DIR_CANDIDATES = ['d-story', 'a-story', 'story'] as const;
 
-export function resolvePcmSubdir(root: string, candidates: readonly string[]): string {
+export function resolveCharacterSubdir(root: string, candidates: readonly string[]): string {
   for (const name of candidates) {
     const path = join(root, name);
     if (statSync(path, { throwIfNoEntry: false })?.isDirectory()) {
@@ -70,8 +70,8 @@ export function resolvePcmSubdir(root: string, candidates: readonly string[]): s
   return join(root, candidates[0]);
 }
 
-/** Topic folders live on the PCM root; fall back to a nested strategy dir if present. */
-export function resolvePcmStrategyTopicRoot(
+/** Topic folders live on the Character root; fall back to a nested strategy dir if present. */
+export function resolveCharacterStrategyTopicRoot(
   root: string,
   topicFolders: readonly string[],
 ): string {

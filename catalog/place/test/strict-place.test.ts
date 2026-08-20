@@ -29,12 +29,12 @@ describe('strictCheckPlace', () => {
     const strict = strictCheckPlace(loaded.value, { examplesRoot });
     expect(strict.ok).toBe(true);
     if (strict.ok) {
-      expect(strict.value.bindings).toBe(2);
+      expect(strict.value.bindings).toBe(4);
     }
   });
 
   it.each(plannedPlaces)('%s strict plan satisfies event contract', (name) => {
-    const placeRoot = join(siteRoot, name);
+    const placeRoot = join(examplesRoot, name);
     const result = loadTwinfileStrict(placeRoot, { examplesRoot });
     expect(result.ok).toBe(true);
     if (result.ok) {
@@ -46,7 +46,7 @@ describe('strictCheckPlace', () => {
     const result = loadTwinfileStrict(join(examplesRoot, 'arena'), { examplesRoot });
     expect(result.ok).toBe(true);
     if (result.ok) {
-      expect(result.value.strictBindings).toBe(2);
+      expect(result.value.strictBindings).toBe(4);
     }
   });
 
