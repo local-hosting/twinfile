@@ -2,7 +2,7 @@ import { parseTwinfileRef } from '@local-hosting/twinfile-core/ref';
 
 import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 
-export type SamStoryCatalogTextMatchV1 = {
+export type StoryCatalogTextMatchV1 = {
   characterId?: string;
   episodeId?: string;
   placeRef?: string;
@@ -10,7 +10,7 @@ export type SamStoryCatalogTextMatchV1 = {
   journeyId?: string;
 };
 
-export type SamStoryCatalogFleetPlaceRef = {
+export type StoryCatalogFleetPlaceRef = {
   slug: string;
   name?: string;
 };
@@ -76,14 +76,14 @@ export function placeSlugFromPlaceRef(placeRef: string): string {
 }
 
 /** Keyword match user catalog menu (+ optional fleet slugs) against natural language. */
-export function matchSamStoryCatalogIdsFromText(input: {
+export function matchStoryCatalogIdsFromText(input: {
   text: string;
   menu: StoryCatalogMenuV1;
-  fleetPlaces?: readonly SamStoryCatalogFleetPlaceRef[];
+  fleetPlaces?: readonly StoryCatalogFleetPlaceRef[];
   focalCharacterId?: string;
   /** When false (default), do not infer placeRef from place mount titles — places are not user content. */
   includePlaces?: boolean;
-}): SamStoryCatalogTextMatchV1 {
+}): StoryCatalogTextMatchV1 {
   const scenario = input.text.trim();
   if (!scenario) {
     return {};

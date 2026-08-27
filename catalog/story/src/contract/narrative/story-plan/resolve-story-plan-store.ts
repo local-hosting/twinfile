@@ -1,9 +1,9 @@
-import type { SamStoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { StoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
 import { normalizeScenarioText, scenarioTokenSet } from './scenario-scoring.js';
 import { pickRandomStoryPlanStoreSlug } from './random.js';
 import { resolveStoryPlanRandom } from './rng.js';
 
-function scorePlaceHintMatch(haystack: string, place: SamStoryPlanFleetPlaceSnapshotV1): number {
+function scorePlaceHintMatch(haystack: string, place: StoryPlanFleetPlaceSnapshotV1): number {
   const text = normalizeScenarioText(haystack);
   if (!text) return 0;
 
@@ -32,7 +32,7 @@ export function resolveStoryPlanStoreFromHints(input: {
   place?: string;
   scenario?: string;
   topic?: string;
-  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: readonly StoryPlanFleetPlaceSnapshotV1[];
 }): string | undefined {
   const explicit = input.storeSlug?.trim();
   if (explicit) {
@@ -50,7 +50,7 @@ export function resolveStoryPlanStoreFromHints(input: {
     return undefined;
   }
 
-  let best: SamStoryPlanFleetPlaceSnapshotV1 | undefined;
+  let best: StoryPlanFleetPlaceSnapshotV1 | undefined;
   let bestScore = 0;
 
   for (const place of input.fleetPlaces) {
@@ -92,7 +92,7 @@ export function shouldRandomizeStoryPlanStore(input: {
 }
 
 export function resolveStoryPlanStoreForPlan(input: {
-  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: readonly StoryPlanFleetPlaceSnapshotV1[];
   storeSlug?: string;
   storeName?: string;
   place?: string;

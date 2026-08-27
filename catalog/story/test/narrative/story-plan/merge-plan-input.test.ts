@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { mergeSamStoryPlanInput } from '../../../src/contract/narrative/story-plan/plan-corpus.js';
+import { mergeStoryPlanInput } from '../../../src/contract/narrative/story-plan/plan-corpus.js';
 
-describe('mergeSamStoryPlanInput', () => {
+describe('mergeStoryPlanInput', () => {
   it('keeps explicit fields over extracted hints', () => {
-    const merged = mergeSamStoryPlanInput(
+    const merged = mergeStoryPlanInput(
       {
         request: 'Plan a visit',
         segmentId: 'early-adopter',

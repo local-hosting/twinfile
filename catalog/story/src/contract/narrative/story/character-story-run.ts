@@ -3,17 +3,17 @@ import {
   type CharacterStoryInstance,
   type CharacterStoryPsychology,
 } from '@local-hosting/twinfile-character/persona';
-import { assembleSamStoryRun } from './assemble-story-run.js';
+import { assembleCharacterStoryRun } from './assemble-story-run.js';
 import { resolveStoryBeatSceneJobIds } from './resolve-beat-scene-job-ids.js';
 import type { StoryInstanceDocument } from './story-instance-document.js';
 import type { StoryBeatSnapshot } from './resolve-story-beat.js';
-import type { SamStoryRunState } from '../types/story-run.js';
+import type { CharacterStoryRunState } from '../types/story-run.js';
 
 export type CharacterStoryRun = {
   personaId: string;
   instance: CharacterStoryInstance;
   psychology: CharacterStoryPsychology;
-  run: SamStoryRunState;
+  run: CharacterStoryRunState;
   beat: StoryBeatSnapshot;
   jobIds: string[];
 };
@@ -39,7 +39,7 @@ export function buildCharacterStoryRun(input: BuildCharacterStoryRunInput): Char
   const storyArc = story.episodeArc;
   if (!storyArc) return undefined;
 
-  const { run, beat } = assembleSamStoryRun({
+  const { run, beat } = assembleCharacterStoryRun({
     storyArc,
     cursor: story.clockCursor(),
     timeline: story.characteristics.timeline,

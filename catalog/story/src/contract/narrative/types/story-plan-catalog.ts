@@ -1,6 +1,6 @@
 import type { StoryCatalogMenuV1 } from './story-catalog-menu.js';
 
-export type SamStoryPlanFleetPlaceSnapshotV1 = {
+export type StoryPlanFleetPlaceSnapshotV1 = {
   slug: string;
   name?: string;
   lat?: number;
@@ -8,7 +8,7 @@ export type SamStoryPlanFleetPlaceSnapshotV1 = {
   h3Cell?: string;
 };
 
-export type SamStoryPlanSegmentSnapshotV1 = {
+export type StoryPlanSegmentSnapshotV1 = {
   id: string;
   label?: string;
   topic?: string;
@@ -17,14 +17,14 @@ export type SamStoryPlanSegmentSnapshotV1 = {
   intentIds: string[];
 };
 
-/** Org segment objective row (AXM planning catalog). */
-export type SamStoryPlanSegmentObjectiveV1 = {
+/** Org segment objective row (planning catalog). */
+export type StoryPlanSegmentObjectiveV1 = {
   intentId?: string;
   validLevelIds?: readonly string[];
 };
 
-export type SamStoryPlanCatalogSnapshotV1 = {
-  segments: SamStoryPlanSegmentSnapshotV1[];
+export type StoryPlanCatalogSnapshotV1 = {
+  segments: StoryPlanSegmentSnapshotV1[];
   engagementLevelIds: string[];
   intentIds: string[];
   focusAreaIds: string[];
@@ -33,9 +33,8 @@ export type SamStoryPlanCatalogSnapshotV1 = {
   episodeIds: string[];
   storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
-  fleetPlaces: SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: StoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: string[];
-  axmMenu?: StoryCatalogMenuV1;
 };

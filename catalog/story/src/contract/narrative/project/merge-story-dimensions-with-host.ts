@@ -131,4 +131,4 @@ export function mergeStoryDimensionsWithHost(
 }
 
 /** @deprecated Prefer {@link mergeStoryDimensionsWithHost}. */
-export const mergeSamStoryDimensionsIntoCreateBody = mergeStoryDimensionsWithHost;
+export const mergeStoryDimensionsIntoCreateBody = mergeStoryDimensionsWithHost;
