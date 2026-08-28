@@ -8,9 +8,9 @@ export type { StoryCharacterRef, StoryPlaceRef } from './types/story-refs.js';
 export type { DramaticBeatId } from './types/dramatic-beat.js';
 export { DRAMATIC_BEAT_IDS } from './types/dramatic-beat.js';
 export type {
-  SamCatalogCharacterRef,
-  SamCatalogEpisodeRef,
-  SamCatalogPlaceRef,
+  StoryCatalogCharacterRef,
+  StoryCatalogEpisodeRef,
+  StoryCatalogPlaceRef,
   StoryCatalogMenuV1,
   StorySelectionV1,
 } from './types/story-catalog-menu.js';
@@ -24,11 +24,11 @@ export {
 } from './story-arc/write-practice-presets.js';
 export {
   buildStoryArcTemplateFromKind,
-  generateSamEpisodeFromArc,
+  generateStoryEpisodeFromArc,
   scaffoldScenesFromJourneyArc,
   type BuildStoryArcTemplateFromKindInput,
-  type GeneratedSamEpisodeDraft,
-  type GenerateSamEpisodeFromArcInput,
+  type GeneratedStoryEpisodeDraft,
+  type GenerateStoryEpisodeFromArcInput,
   type ScaffoldScenesFromJourneyArcInput,
 } from './story-arc/generate-from-arc-kind.js';
 export type { SceneEmotions, StoryScene } from './types/scene.js';
