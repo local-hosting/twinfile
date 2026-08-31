@@ -8,6 +8,7 @@
 | `store-shopper` | — | wireless-mobile (generic segments) |
 | `online-shopper` | — | online funnel |
 | `store-shopper-visitor` | — | wireless-mobile (Jordan Blake) |
+| `wireless-desk-rep` | greeter-kiosk | wireless-mobile (`service_rep` staff, not visitor) |
 | `wireless-greeter` | greeter-kiosk | wireless-mobile |
 | `shop-greeter` | greeter-kiosk | shop |
 | `airport-liaison` | terminal-kiosk | airport |
