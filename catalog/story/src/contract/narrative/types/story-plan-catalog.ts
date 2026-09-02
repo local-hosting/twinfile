@@ -17,7 +17,7 @@ export type StoryPlanSegmentSnapshotV1 = {
   intentIds: string[];
 };
 
-/** Org segment objective row (planning catalog). */
+/** Segment objective row in the planning catalog snapshot. */
 export type StoryPlanSegmentObjectiveV1 = {
   intentId?: string;
   validLevelIds?: readonly string[];
