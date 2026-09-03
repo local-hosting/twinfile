@@ -20,16 +20,16 @@ export const CHARACTER_MENTAL_MODEL_SCOPE_FILE = 'scope.yml';
 /** Compact `{ objectives }` row inside `journeys/` — no `id`, unlike journeys. */
 export const CHARACTER_OBJECTIVES_FILE = 'objectives.yml';
 
-export type PcmSegmentFacetFileKey = keyof typeof CHARACTER_SEGMENT_FACET_FILES;
+export type CharacterSegmentFacetFileKey = keyof typeof CHARACTER_SEGMENT_FACET_FILES;
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return Boolean(value) && typeof value === 'object' && !Array.isArray(value);
 }
 
 /** Read whichever single-file segment slots exist on a Character root. */
-export function loadCharacterSegmentFacetFiles(root: string): Partial<Record<PcmSegmentFacetFileKey, unknown>> {
-  const out: Partial<Record<PcmSegmentFacetFileKey, unknown>> = {};
-  for (const [key, file] of Object.entries(CHARACTER_SEGMENT_FACET_FILES) as [PcmSegmentFacetFileKey, string][]) {
+export function loadCharacterSegmentFacetFiles(root: string): Partial<Record<CharacterSegmentFacetFileKey, unknown>> {
+  const out: Partial<Record<CharacterSegmentFacetFileKey, unknown>> = {};
+  for (const [key, file] of Object.entries(CHARACTER_SEGMENT_FACET_FILES) as [CharacterSegmentFacetFileKey, string][]) {
     const path = join(root, file);
     if (statSync(path, { throwIfNoEntry: false })?.isFile()) {
       out[key] = readYamlFile(path);

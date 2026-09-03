@@ -7,7 +7,7 @@ import { resolveStoryPlanRandom } from './rng.js';
 
 export type StoryPlanCatalogMenuSelectionV1 = {
   characterId: string;
-  episodeId: string;
+  storyId: string;
   placeRef?: string;
   storeSlug?: string;
   rationale: string;
@@ -15,7 +15,7 @@ export type StoryPlanCatalogMenuSelectionV1 = {
 
 export type StoryPlanCatalogMenuPlanInputV1 = {
   characterId?: string;
-  episodeId?: string;
+  storyId?: string;
   placeRef?: string;
   storeSlug?: string;
 };
@@ -47,19 +47,19 @@ export function planStoryCreateCatalogMenuHeuristic(input: {
     throw new Error('Story catalog menu has no characters');
   }
 
-  const episodesForCharacter = input.menu.episodes.filter((row) => row.focalCharacterId === characterId);
-  const episodePool = episodesForCharacter.length > 0 ? episodesForCharacter : input.menu.episodes;
+  const storiesForCharacter = input.menu.stories.filter((row) => row.focalCharacterId === characterId);
+  const storyPool = storiesForCharacter.length > 0 ? storiesForCharacter : input.menu.stories;
 
-  let episodeId = plan.episodeId?.trim() || matched.episodeId;
-  if (!episodeId || !episodePool.some((row) => row.id === episodeId)) {
-    const index = Math.floor(random() * episodePool.length);
-    episodeId = episodePool[index]?.id;
+  let storyId = plan.storyId?.trim() || matched.storyId;
+  if (!storyId || !storyPool.some((row) => row.id === storyId)) {
+    const index = Math.floor(random() * storyPool.length);
+    storyId = storyPool[index]?.id;
   }
-  if (!episodeId) {
-    throw new Error('Story catalog menu has no episodes');
+  if (!storyId) {
+    throw new Error('Story catalog menu has no Story twins');
   }
 
-  const episode = input.menu.episodes.find((row) => row.id === episodeId);
+  const story = input.menu.stories.find((row) => row.id === storyId);
   const placeRef = plan.placeRef?.trim();
   const storeSlug = plan.storeSlug?.trim() || matched.storeSlug;
 
@@ -70,10 +70,10 @@ export function planStoryCreateCatalogMenuHeuristic(input: {
       : undefined;
   return {
     characterId,
-    episodeId,
+    storyId,
     placeRef,
     storeSlug,
-    rationale: `User catalog: character ${character?.label ?? characterId}, episode ${episode?.title ?? episodeId}${menuPlace ? `, place ${menuPlace.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
+    rationale: `User catalog: character ${character?.label ?? characterId}, story ${story?.title ?? storyId}${menuPlace ? `, place ${menuPlace.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
   };
 }
 
@@ -84,8 +84,8 @@ export function validateStoryPlanCatalogMenuSelection(input: {
   if (!input.menu.characters.some((row) => row.characterId === input.selection.characterId)) {
     throw new Error(`Invalid characterId "${input.selection.characterId}" — not in story catalog menu`);
   }
-  if (!input.menu.episodes.some((row) => row.id === input.selection.episodeId)) {
-    throw new Error(`Invalid episodeId "${input.selection.episodeId}" — not in story catalog menu`);
+  if (!input.menu.stories.some((row) => row.id === input.selection.storyId)) {
+    throw new Error(`Invalid storyId "${input.selection.storyId}" — not in story catalog menu`);
   }
   return input.selection;
 }

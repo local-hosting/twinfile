@@ -5,9 +5,9 @@ jobs:
     label: Check in at the store
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I arrive without a clear next step
-    motivation: check in quickly and know where to wait or go
-    desiredOutcome: I am in the right queue or routed to a rep
+    context: When I arrive without a clear next step
+    goal: check in quickly and know where to wait or go
+    outcome: I am in the right queue or routed to a rep
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -19,9 +19,9 @@ jobs:
     label: Wait with clarity
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I must wait before service
-    motivation: see my place in line and what happens next
-    desiredOutcome: I am not anxious or overlooked
+    context: When I must wait before service
+    goal: see my place in line and what happens next
+    outcome: I am not anxious or overlooked
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: happiness
@@ -33,9 +33,9 @@ jobs:
     label: Compare devices
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am choosing a phone or tablet
-    motivation: compare models side by side with honest pricing
-    desiredOutcome: I pick the right device for my budget
+    context: When I am choosing a phone or tablet
+    goal: compare models side by side with honest pricing
+    outcome: I pick the right device for my budget
     visitationGoal: converge
     visitationSubGoal: explore
     heartDimensionId: engagement
@@ -47,9 +47,9 @@ jobs:
     label: Activate a mobile line
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am adding or upgrading mobile service
-    motivation: complete activation before I leave
-    desiredOutcome: I leave with a working line and clear monthly cost
+    context: When I am adding or upgrading mobile service
+    goal: complete activation before I leave
+    outcome: I leave with a working line and clear monthly cost
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -61,9 +61,9 @@ jobs:
     label: Resolve a billing question
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When my bill is unclear or wrong
-    motivation: get a rep to explain and fix charges
-    desiredOutcome: I trust the bill I will pay
+    context: When my bill is unclear or wrong
+    goal: get a rep to explain and fix charges
+    outcome: I trust the bill I will pay
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -75,9 +75,9 @@ jobs:
     label: Pay and exit
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am ready to leave
-    motivation: pay quickly with proof of purchase
-    desiredOutcome: I exit without surprises
+    context: When I am ready to leave
+    goal: pay quickly with proof of purchase
+    outcome: I exit without surprises
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess

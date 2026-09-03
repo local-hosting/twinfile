@@ -9,7 +9,7 @@ import {
 } from '../../../src/contract/persona/persona/sample-persona-daily-rhythm.js';
 import { DRIVER_WEEKDAY_DAILY_RHYTHM } from '../../../src/contract/persona/persona/persona-daily-rhythm-presets.js';
 
-function pcmStub(persona: Character['persona']): Character {
+function characterStub(persona: Character['persona']): Character {
   return {
     version: 1,
     id: persona.id,
@@ -22,7 +22,7 @@ function pcmStub(persona: Character['persona']): Character {
 describe('resolvePersonaDailyRhythm', () => {
   it('defaults drivers to early wake', () => {
     const rhythm = resolvePersonaDailyRhythm(
-      pcmStub({
+      characterStub({
         id: 'persona:driver',
         label: 'Driver',
         quote: 'Drive',
@@ -39,7 +39,7 @@ describe('resolvePersonaDailyRhythm', () => {
 
   it('defaults artists to late wake', () => {
     const rhythm = resolvePersonaDailyRhythm(
-      pcmStub({
+      characterStub({
         id: 'persona:artist',
         label: 'Artist',
         quote: 'Paint',

@@ -30,7 +30,7 @@ export type StoryPlanCatalogSnapshotV1 = {
   focusAreaIds: string[];
   journeyIds: string[];
   characterIds: string[];
-  episodeIds: string[];
+  storyIds: string[];
   storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
   fleetPlaces: StoryPlanFleetPlaceSnapshotV1[];

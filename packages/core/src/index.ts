@@ -83,7 +83,11 @@ export {
   isExamplesCatalogRoot,
   listFlatExampleUnitNames,
 } from './paths/examples-catalog.js';
-export { resolveExamplesRoot } from './paths/resolve-examples-root.js';
+export {
+  resolveAuditExamplesRoot,
+  resolveExamplesRoot,
+  resolveTwinfilePackRoot,
+} from './paths/resolve-examples-root.js';
 export { resolveTwinfileAnchor } from './paths/resolve-twinfile-anchor.js';
 export {
   patchGraphBoundaryIo,
@@ -146,6 +150,22 @@ export {
   type TwinfileSummaryViewFormat,
   type RenderTwinfileSummaryViewOptions,
 } from './views/render-summary-view.js';
+export { buildTwinfileAudit } from './views/audit/build-twinfile-audit.js';
+export { formatTwinfileAuditMarkdown } from './views/audit/format-twinfile-audit-markdown.js';
+export { formatTwinfileAuditBrief } from './views/audit/format-twinfile-audit-brief.js';
+export {
+  listPackUnitDirs,
+  listPackUnitDirsForPack,
+  packKindFromDir,
+} from './paths/list-pack-units.js';
+export {
+  renderTwinfileAuditView,
+} from './views/audit/render-twinfile-audit-view.js';
+export type {
+  TwinfileAuditCardV1,
+  TwinfileAuditFindingV1,
+  TwinfileAuditViewFormat,
+} from './views/audit/types.js';
 export {
   renderTwinfilePlaceView,
   type TwinfilePlaceViewFormat,

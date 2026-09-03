@@ -1,4 +1,4 @@
-import { obstacleCatalogFromJobs } from '@local-hosting/twinfile-character/situations';
+import { obstacleCatalogFromJobs } from '@local-hosting/twinfile-context';
 import {
   resolvePlanningSegmentJourneyPace,
   segmentIdFromPersonaSegment,
@@ -56,10 +56,13 @@ export function buildStoryPlanningCatalogsFromCharacters(
 
   const jtbdJobs = jobs.map((job) => ({
     id: job.id,
-    label: job.want || job.text,
-    when: job.when,
-    want: job.want,
-    so: job.so,
+    label: job.goal || job.text,
+    /** Situation. */
+    context: job.context,
+    /** Job / progress. */
+    goal: job.goal,
+    /** Definition of success. */
+    outcome: job.outcome,
     needId: job.id,
   }));
 

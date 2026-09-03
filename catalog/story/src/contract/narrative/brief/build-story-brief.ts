@@ -22,7 +22,7 @@ function formatWhoBullets(who: StoryBriefWhoV1 | undefined): string[] {
 function formatWhatBullets(what: StoryBriefWhatV1 | undefined): string[] {
   if (!what) return ['No `what` dimension on story'];
   return [
-    ...(what.episodeId ? [`Story episode \`${what.episodeId}\``] : []),
+    ...(what.storyId ? [`Story twin \`${what.storyId}\``] : []),
     ...(what.startStoreVisitJourney === true ? ['Store-visit journey started'] : []),
     ...(what.startStoreVisitJourney === false ? ['Store-visit journey not started'] : []),
   ];

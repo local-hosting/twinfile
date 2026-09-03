@@ -25,7 +25,11 @@ function flattenLegacyJobRows(rows: unknown[]): unknown[] {
       continue;
     }
     const item = row as Record<string, unknown>;
-    if (Array.isArray(item.jobs) && typeof item.when !== 'string') {
+    if (
+      Array.isArray(item.jobs) &&
+      typeof item.context !== 'string' &&
+      typeof item.when !== 'string'
+    ) {
       for (const nested of item.jobs) {
         if (!nested || typeof nested !== 'object' || Array.isArray(nested)) {
           out.push(nested);

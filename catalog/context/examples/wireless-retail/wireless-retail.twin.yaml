@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: wireless-retail
+name: Wireless retail visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Wireless retail visit
+context: When I am in a wireless retail store for a service or device need
+jobs:
+  - id: check-in-store
+    text: Check in at the store
+    context: When I arrive without a clear next step
+    goal: check in quickly and know where to wait or go
+    outcome: I am in the right queue or routed to a rep
+  - id: wait-with-clarity
+    text: Wait with clarity
+    context: When I must wait before service
+    goal: see my place in line and what happens next
+    outcome: I am not anxious or overlooked
+  - id: compare-devices
+    text: Compare devices
+    context: When I am choosing a phone or tablet
+    goal: compare models side by side with honest pricing
+    outcome: I pick the right device for my budget

@@ -37,8 +37,7 @@ function collectWho(story: Story): StoryDimensionWhoV1 {
 
 function collectWhat(story: Story): StoryDimensionWhatV1 {
   return {
-    episodeId: story.id,
-    journeyId: story.binding.journeyId,
+    storyId: story.id,
     ...(story.arcTemplate?.kind ? { arcKind: story.arcTemplate.kind } : {}),
   };
 }
@@ -76,15 +75,15 @@ function collectWhen(story: Story, input: ProjectStoryDimensionsFromStoryInput):
 function collectWhy(story: Story): StoryDimensionWhyV1 | undefined {
   const jobIds = uniqueSorted(story.scenes.flatMap((scene) => scene.jobIds ?? []));
   const firstBeat = story.scenes.find((scene) => scene.narrativeBeat?.trim())?.narrativeBeat?.trim();
-  const firstSituation = story.scenes.find((scene) => scene.situation?.trim())?.situation?.trim();
+  const firstContext = story.scenes.find((scene) => scene.context?.trim())?.context?.trim();
 
-  if (!jobIds.length && !firstBeat && !firstSituation) {
+  if (!jobIds.length && !firstBeat && !firstContext) {
     return undefined;
   }
 
   return {
     ...(jobIds.length ? { jobIds } : {}),
-    ...(firstSituation ? { situation: firstSituation } : {}),
+    ...(firstContext ? { context: firstContext } : {}),
     ...(firstBeat ? { narrativeBeat: firstBeat } : {}),
   };
 }

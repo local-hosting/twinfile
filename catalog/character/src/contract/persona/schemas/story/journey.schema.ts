@@ -57,6 +57,8 @@ export const JourneyMomentSchema = withCoalescedJobIds(
     order: z.number().int().nonnegative(),
     period: z.string().min(1).optional(),
     narrativeBeat: z.string().min(1).optional(),
+    context: z.string().min(1).optional(),
+    /** @deprecated Prefer `context`. */
     situation: z.string().min(1).optional(),
     jobIds: z.array(z.string().min(1)).optional(),
     touchpointIds: z.array(z.string().min(1)).default([]),
@@ -65,7 +67,11 @@ export const JourneyMomentSchema = withCoalescedJobIds(
     gain: z.string().min(1).optional(),
     obstacles: z.array(JourneyObstacleEncounterSchema).optional(),
   }),
-);
+).transform((row) => {
+  const context = row.context ?? row.situation;
+  const { situation: _situation, ...rest } = row;
+  return { ...rest, ...(context ? { context } : {}) };
+});
 
 const JourneyPhaseInputSchema = withCoalescedJobIds(
   z.object({
@@ -74,6 +80,8 @@ const JourneyPhaseInputSchema = withCoalescedJobIds(
     order: z.number().int().nonnegative(),
     goal: z.string().min(1).optional(),
     description: z.string().min(1).optional(),
+    context: z.string().min(1).optional(),
+    /** @deprecated Prefer `context`. */
     situation: z.string().min(1).optional(),
     narrativeBeat: z.string().min(1).optional(),
     jobIds: z.array(z.string().min(1)).default([]),
@@ -87,9 +95,14 @@ const JourneyPhaseInputSchema = withCoalescedJobIds(
   }),
 );
 
-export const JourneyPhaseSchema = JourneyPhaseInputSchema.transform((phase) =>
-  normalizeJourneyPhase(phase as Parameters<typeof normalizeJourneyPhase>[0]),
-);
+export const JourneyPhaseSchema = JourneyPhaseInputSchema.transform((phase) => {
+  const context = phase.context ?? phase.situation;
+  const { situation: _situation, ...rest } = phase;
+  return normalizeJourneyPhase({
+    ...rest,
+    ...(context ? { context } : {}),
+  } as Parameters<typeof normalizeJourneyPhase>[0]);
+});
 
 export const JourneyNarrativeArcBeatSchema = z.object({
   phaseId: z.string().min(1).optional(),

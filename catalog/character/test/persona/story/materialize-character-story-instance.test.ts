@@ -74,6 +74,34 @@ describe('materializeCharacterStoryInstance', () => {
     expect(row.voiceLine).toBeUndefined();
   });
 
+  it('passes through persona.personality onto the instance', () => {
+    const character: Character = {
+      ...sampleCharacter,
+      persona: {
+        ...sampleCharacter.persona,
+        personality: {
+          wants: 'A friend who is not afraid of her',
+          fears: 'Loud noises and slamming doors',
+          flaw: 'Freezes when it matters most',
+          delivery: { patterns: ['Near a whisper'], lines: ['Oh...'] },
+          movement: ['Tiny steps'],
+          temperament: ['Watchful'],
+          moods: ['Anxious'],
+          signatureMoves: ['Apologize before speaking'],
+        },
+      },
+    };
+    const withPersonality = pickCharacterInstanceCharacteristics(character, () => 0.5);
+    expect(withPersonality.personality?.wants).toBe('A friend who is not afraid of her');
+    expect(withPersonality.personality?.delivery?.lines).toEqual(['Oh...']);
+
+    const omitted = pickCharacterInstanceCharacteristics(
+      { ...character, instanceVariation: { specVersion: '1.0', includePersonality: false } },
+      () => 0.5,
+    );
+    expect(omitted.personality).toBeUndefined();
+  });
+
   it('is deterministic for the same random source', () => {
     const first = pickCharacterInstanceCharacteristics(sampleCharacter, () => 0.42);
     const second = pickCharacterInstanceCharacteristics(sampleCharacter, () => 0.42);

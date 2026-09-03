@@ -2,14 +2,14 @@ import type { EpisodeArcV1 } from '../types/episode-arc.js';
 import type { StoryBriefSnapshotV1 } from './types.js';
 import {
   buildStoryboardSceneContext,
-  findSamSceneForTouchpoint,
+  findStorySceneForTouchpoint,
   humanizeStoryWireLabel,
   humanizeToken,
 } from './storyboard-scene-context.js';
 import { resolveStoryEpisodePresentation } from './resolve-story-episode-presentation.js';
 import {
   buildStorySituationsNarrativeContext,
-  formatJsmJobBullet,
+  formatSituationsJobBullet,
 } from './story-situations-narrative-context.js';
 import { touchpointScriptScene } from './storyboard-touchpoint-scenes.js';
 import { buildProtagonistWhoBlurbLines } from './protagonist-identity.js';
@@ -36,7 +36,7 @@ export type {
 export { humanizeStoryWireLabel } from './storyboard-scene-context.js';
 export {
   buildStoryboardSceneContext,
-  findSamSceneForTouchpoint,
+  findStorySceneForTouchpoint,
   serializeStoryboardLlmContext,
   type StoryboardSceneContextV1,
 } from './storyboard-scene-context.js';
@@ -57,7 +57,7 @@ function formatCalendarDate(isoDate: string | undefined): string | undefined {
 function resolveEpisodeTitle(input: FormatStoryDirectorNarrativeInput): string {
   const pitch = input.snapshot.storyPitch?.trim();
   if (pitch) return pitch.replace(/\.$/, '');
-  const fromWhat = humanizeStoryWireLabel(input.snapshot.what?.episodeId);
+  const fromWhat = humanizeStoryWireLabel(input.snapshot.what?.storyId);
   if (fromWhat) return fromWhat;
   const storyId = input.snapshot.storyId?.trim();
   if (storyId) return humanizeToken(storyId);
@@ -282,24 +282,35 @@ function formatProtagonistLeadSection(
   if (ctx.mindset && !motivation.some((line) => line.includes(ctx.mindset!))) {
     motivation.push(`Play the **${ctx.mindset}** mindset in how fast she moves and how much she double-checks the map.`);
   }
-  const jsmNarrative =
-    input.jsmNarrative ??
+  if (ctx.wants) {
+    motivation.push(`She wants: **${ctx.wants}**.`);
+  }
+  if (ctx.fears) {
+    motivation.push(`She fears: **${ctx.fears}**.`);
+  }
+  if (ctx.flaw) {
+    motivation.push(`Her flaw: **${ctx.flaw}**.`);
+  }
+  const situationsNarrative =
+    input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      jsm: input.jsm,
+      situations: input.situations,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,
       personaFrustrations: input.personaFrustrations,
       personaQuote: input.personaQuote,
     });
-  if (jsmNarrative.situationPackSituation) {
-    motivation.push(`**Situation (Situations):** ${jsmNarrative.situationPackSituation}`);
+  if (situationsNarrative.contextPackContext) {
+    motivation.push(
+      `**Context (situation):** ${situationsNarrative.contextPackContext}`,
+    );
   }
-  if (jsmNarrative.journeyGoal) {
-    motivation.push(`**Journey goal:** ${jsmNarrative.journeyGoal}`);
+  if (situationsNarrative.journeyGoal) {
+    motivation.push(`**Journey goal:** ${situationsNarrative.journeyGoal}`);
   }
-  for (const job of jsmNarrative.rankedJobs.slice(0, 3)) {
-    motivation.push(formatJsmJobBullet(job));
+  for (const job of situationsNarrative.rankedJobs.slice(0, 3)) {
+    motivation.push(formatSituationsJobBullet(job));
   }
   if (input.personaQuote) {
     motivation.push(`In her own words: “${input.personaQuote}”`);
@@ -347,7 +358,7 @@ function formatProtagonistLeadSection(
   const first = scriptScenes[0];
   const firstTouchpointId = snapshot.when?.storyArc?.objectiveTouchpointIds?.[0]?.trim();
   if (first && firstTouchpointId) {
-    const openSam = findSamSceneForTouchpoint(ctx.story, firstTouchpointId);
+    const openSam = findStorySceneForTouchpoint(ctx.story, firstTouchpointId);
     const openPlace = resolveScenePlaceForReader({
       touchpointId: firstTouchpointId,
       story: ctx.story,
@@ -360,10 +371,10 @@ function formatProtagonistLeadSection(
     whereBits.push(`The camera meets her at **${first.slugline}** (${first.storyboard.time}).`);
   }
   const openSam =
-    (firstTouchpointId ? findSamSceneForTouchpoint(ctx.story, firstTouchpointId) : undefined) ??
+    (firstTouchpointId ? findStorySceneForTouchpoint(ctx.story, firstTouchpointId) : undefined) ??
     ctx.story?.scenes?.[0];
-  if (openSam?.situation?.trim()) {
-    whereBits.push(openSam.situation.trim());
+  if (openSam?.context?.trim()) {
+    whereBits.push(openSam.context.trim());
   }
   if (whereBits.length === 0) {
     whereBits.push('Establish a lived-in urban home before the first app beat—morning light, transit noise bleeding through the walls.');
@@ -431,10 +442,10 @@ export function formatStoryDirectorNarrative(input: FormatStoryDirectorNarrative
   const touchpoints = arc?.objectiveTouchpointIds ?? [];
   const startLabel = formatCalendarDate(snapshot.when?.simulationEpochStart ?? arc?.simulationEpochStart);
   const scriptScenes = buildDirectorScriptScenes(input);
-  const jsmNarrative =
-    input.jsmNarrative ??
+  const situationsNarrative =
+    input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      jsm: input.jsm,
+      situations: input.situations,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,
@@ -445,9 +456,9 @@ export function formatStoryDirectorNarrative(input: FormatStoryDirectorNarrative
     journey: input.journey,
     story: input.story,
     arc,
-    rankedJobCount: jsmNarrative.rankedJobs.length,
+    rankedJobCount: situationsNarrative.rankedJobs.length,
   });
-  const jobPursuit = formatJobPursuitPhrase({ journey: input.journey, jsmNarrative });
+  const jobPursuit = formatJobPursuitPhrase({ journey: input.journey, situationsNarrative });
   const lastTouchpointLabel =
     touchpoints.length > 0
       ? humanizeStoryWireLabel(touchpoints[touchpoints.length - 1])

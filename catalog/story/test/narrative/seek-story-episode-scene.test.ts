@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   dayIndexForSceneOnHorizon,
   seekStoryEpisodeSceneOnArc,
-  storySceneSeekRowsFromSam,
+  storySceneSeekRowsFromNarrative,
 } from '../../src/contract/narrative/story/seek-story-episode-scene.js';
 import type { EpisodeArcV1 } from '../../src/contract/narrative/types/episode-arc.js';
 import type { StoryScene } from '../../src/contract/narrative/types/scene.js';
@@ -50,7 +50,7 @@ describe('seekStoryEpisodeSceneOnArc', () => {
   });
 
   it('advances to the next scene day index', () => {
-    const rows = storySceneSeekRowsFromSam(scenes);
+    const rows = storySceneSeekRowsFromNarrative(scenes);
     const result = seekStoryEpisodeSceneOnArc({
       arc: sampleArc(),
       scenes: rows,

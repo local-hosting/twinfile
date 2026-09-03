@@ -2,9 +2,9 @@
 
 Use **one prose word per concept**. YAML and APIs keep stable field names; docs, comments, README, and UI copy use the terms below.
 
-Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Five published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
+Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Six published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
 
-Say **place**, **resource**, **character**, **story**, **event** — never three-letter contract acronyms in prose.
+Say **place**, **resource**, **character**, **context**, **story**, **event** — never three-letter contract acronyms in prose.
 
 ## Quick reference (prose ↔ on-disk)
 
@@ -12,7 +12,8 @@ Say **place**, **resource**, **character**, **story**, **event** — never three
 | --- | --- | --- |
 | **Place** | **`<unit>.twin.yaml`**, `kind: place` | Spatial twin → built **`Place`** |
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
-| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — persona + situations; **`disclosure:`** required |
+| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — persona; **`disclosure:`** required |
+| **Context** | **`<unit>.twin.yaml`**, `kind: context` | JTBD pack — When [Context], I want to [Goal], so I can [Outcome] without [Obstacle]; story blesses character |
 | **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — narrative; **player** input ([story-and-player](kinds/story-and-player.md)) |
 | **Event** | **`<unit>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; places host events through role tags |
 | **Run** | **`story.scenes[].run`** (`<story-dir>#<scene-id>`) | Inline scene run: `from:`, `copy:`, `clock:`, `args:` — **not** a published twin; optional `use.runner` for offline only |
@@ -28,7 +29,7 @@ Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-la
 
 | Term | Path | Role |
 | --- | --- | --- |
-| **Catalog hub** | `catalog/` | Five twin type workspaces |
+| **Catalog hub** | `catalog/` | Six twin type workspaces |
 | **Ref map** | `catalog/place/examples/` | `twin.local.yaml` (local refs) + `published-refs.json` (golden digests) — **not** normative spec |
 | **Spec conf** | `packages/spec/conf/` | Conformance vectors, role vocabulary, crosswalk — **not** twin ops |
 | **Kernel** | `packages/{spec,core,cli,bridge}/` | Format, load/merge, CLI |
@@ -90,7 +91,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 
 | Field | Role |
 | --- | --- |
-| **`kind`** | `place` \| `resource` \| `character` \| `story` \| `event` (loaders default **place** for legacy heads) |
+| **`kind`** | `place` \| `resource` \| `character` \| `context` \| `story` \| `event` (loaders default **place** for legacy heads) |
 | **`twinfile`** | Format generation (`1` or `2`) |
 | **`id`** | **Ref slug** — `twinfile/<type>/<id>:<version>`, lock keys, OCI segment |
 | **`name`** | **Display name** — cards, workbench, catalog (when set) |

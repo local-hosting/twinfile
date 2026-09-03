@@ -18,7 +18,7 @@ const catalog: StoryPlanCatalogSnapshotV1 = {
   focusAreaIds: [],
   journeyIds: [],
   characterIds: [],
-  episodeIds: [],
+  storyIds: [],
   jobIds: [],
   fleetPlaces: [],
   touchpointCount: 0,

@@ -28,7 +28,14 @@ export type CatalogUnitResolveOptions = {
   twinLocal?: TwinLocalMap;
 };
 
-const CATALOG_TYPES: TwinCatalogType[] = ['place', 'character', 'story', 'resource', 'event'];
+const CATALOG_TYPES: TwinCatalogType[] = [
+  'place',
+  'character',
+  'context',
+  'story',
+  'resource',
+  'event',
+];
 
 function parseTwinfileManifestRef(raw: string): { kind?: string; name: string; tag?: string } | undefined {
   const trimmed = raw.trim();

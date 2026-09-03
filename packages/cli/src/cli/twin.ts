@@ -36,6 +36,17 @@ import {
   queryPath,
   renderTwinfilePlaceView,
   renderTwinfileSummaryView,
+  buildTwinfileAudit,
+  readTwinHeadYaml,
+  listCatalogExampleUnitNames,
+  listPackUnitDirs,
+  listPackUnitDirsForPack,
+  packKindFromDir,
+  resolveTypeExamplesRoot,
+  resolveTwinfileRoot,
+  renderTwinfileAuditView,
+  formatTwinfileAuditBrief,
+  resolveAuditExamplesRoot,
   resolveExamplesRoot,
   resolveTwinfileAnchor,
   runScenarioRunner,
@@ -86,6 +97,7 @@ function usage(): never {
   twin layout summary [dir] [--json]
   twin query [dir] [--role <role>] [--from <id>] [--to <id>] [--reachable <role>] [--step-free] [--json]
   twin describe [dir] [--space <id>] [--t <seconds>] [--seed N] [--json]
+  twin audit [dir] [--markdown | --json] [--brief] [--catalog | --pack] [--type <place|character|resource|context|story|event>]
   twin summary [dir] [--json | --yaml | --markdown]   # alias: twin card
   twin list [type] [--json | --yaml] [--pack canvas-demo]   # alias: twin index — catalog twinfile index
   twin run [scenarioDir] [--seed N]
@@ -103,7 +115,7 @@ function usage(): never {
   twin export jsonld [dir] [--out <file>] [--json]
   twin export <imdf|gtfs|brick|bot|sosa|indoorgml> [dir] --out <dir>
   twin project export [--format json|yaml] [--out <file>]
-  twin migrate axm|jsm <path>   # persona plane import (stub)
+  twin migrate axm|situations <path>   # persona plane import (stub)
   twin serve [dir] [--stdio] [--allow-runs]`);
   process.exit(2);
 }
@@ -764,8 +776,8 @@ async function runDisclose(): Promise<number> {
 function runMigrate(args: string[]): number {
   const plane = args[0];
   const path = resolve(args[1] ?? '.');
-  if (plane !== 'axm' && plane !== 'jsm') {
-    console.error('twin migrate: use axm or jsm');
+  if (plane !== 'axm' && plane !== 'situations') {
+    console.error('twin migrate: use axm or situations');
     return 2;
   }
   console.log(
@@ -838,6 +850,7 @@ function runList(): number {
       place: pack.places,
       resource: pack.resources,
       character: pack.characters,
+      context: [],
       story: pack.stories,
       event: pack.events,
     };
@@ -978,6 +991,123 @@ async function runSummary(): Promise<number> {
   return 0;
 }
 
+async function runAudit(): Promise<number> {
+  let dir = '.';
+  let format: 'markdown' | 'json' = 'markdown';
+  let brief = false;
+  let catalog = false;
+  let pack = false;
+  let typeFilter: TwinCatalogType | undefined;
+  for (let i = 1; i < argv.length; i += 1) {
+    const arg = argv[i];
+    if (arg === '--json') format = 'json';
+    else if (arg === '--markdown') format = 'markdown';
+    else if (arg === '--brief') brief = true;
+    else if (arg === '--catalog') catalog = true;
+    else if (arg === '--pack') pack = true;
+    else if (arg === '--type') {
+      typeFilter = parseCatalogType(argv[++i]);
+    } else if (!arg!.startsWith('-')) dir = arg!;
+  }
+
+  const resolveOptions = (unitDir: string) => {
+    const examplesRoot = resolveAuditExamplesRoot(unitDir);
+    return examplesRoot ? { examplesRoot } : {};
+  };
+
+  const printCard = (unitDir: string): number => {
+    const loaded = readTwinHeadYaml(unitDir);
+    if (!loaded.ok) {
+      console.error(formatTwinErrors(unitDir, loaded.errors).join('\n'));
+      return 1;
+    }
+    const built = buildTwinfileAudit(loaded.value, resolveOptions(unitDir));
+    if (!built.ok) {
+      console.error(formatTwinErrors(unitDir, built.errors).join('\n'));
+      return 1;
+    }
+    if (brief) {
+      console.log(formatTwinfileAuditBrief(built.value));
+    } else {
+      console.log(renderTwinfileAuditView(built.value, format));
+    }
+    return 0;
+  };
+
+  const auditMany = (unitDirs: string[]): number => {
+    const blocks: string[] = [];
+  let exit = 0;
+    for (const unitDir of unitDirs) {
+      const loaded = readTwinHeadYaml(unitDir);
+      if (!loaded.ok) {
+        exit = 1;
+        continue;
+      }
+      const built = buildTwinfileAudit(loaded.value, resolveOptions(unitDir));
+      if (!built.ok) {
+        exit = 1;
+        continue;
+      }
+      blocks.push(
+        brief ? formatTwinfileAuditBrief(built.value) : renderTwinfileAuditView(built.value, format),
+      );
+    }
+    if (blocks.length === 0) return 1;
+    console.log(brief || format === 'json' ? blocks.join('\n') : blocks.join('\n\n---\n\n'));
+    return exit;
+  };
+
+  const resolvedDir = resolve(dir);
+  const kindDir = packKindFromDir(resolvedDir);
+  if (kindDir) {
+    return auditMany(listPackUnitDirs(resolvedDir));
+  }
+
+  if (pack) {
+    const packRoot = resolveAuditExamplesRoot(resolvedDir) ?? resolvedDir;
+    const unitDirs = listPackUnitDirsForPack(packRoot, typeFilter);
+    if (unitDirs.length === 0) {
+      console.error('twin audit --pack: no units under pack root');
+      return 1;
+    }
+    return auditMany(unitDirs);
+  }
+
+  if (!catalog) {
+    return printCard(resolvedDir);
+  }
+
+  const examplesRoot = resolveAuditExamplesRoot(resolve(dir)) ?? resolveExamplesRoot(resolve(dir));
+  if (!examplesRoot) {
+    console.error('twin audit --catalog requires twin.local.yaml, TF_TWINFILE_ROOT, or a catalog examples root');
+    return 2;
+  }
+
+  const types = typeFilter ? [typeFilter] : [...TWIN_CATALOG_TYPES];
+  const blocks: string[] = [];
+  for (const type of types) {
+    const ids = listCatalogExampleUnitNames(examplesRoot, type);
+    const catalogRoot = resolveTypeExamplesRoot(type, resolveTwinfileRoot(examplesRoot));
+    for (const id of ids) {
+      const unitDir = join(catalogRoot, id);
+      const loaded = readTwinHeadYaml(unitDir);
+      if (!loaded.ok) continue;
+      const built = buildTwinfileAudit(loaded.value, { examplesRoot });
+      if (!built.ok) continue;
+      blocks.push(
+        brief ? formatTwinfileAuditBrief(built.value) : renderTwinfileAuditView(built.value, format),
+      );
+    }
+  }
+
+  if (blocks.length === 0) {
+    console.error('twin audit --catalog: no example units found');
+    return 1;
+  }
+  console.log(brief || format === 'json' ? blocks.join('\n') : blocks.join('\n\n---\n\n'));
+  return 0;
+}
+
 async function runDescribe(): Promise<number> {
   let dir = '.';
   let json = false;
@@ -1057,6 +1187,9 @@ async function main(): Promise<void> {
   }
   if (command === 'describe') {
     process.exit(await runDescribe());
+  }
+  if (command === 'audit') {
+    process.exit(await runAudit());
   }
   if (command === 'feed') {
     if (argv[1] === 'simulate') {
