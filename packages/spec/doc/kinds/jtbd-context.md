@@ -23,10 +23,8 @@ On a story twin head (`steps.story.bless`), assign context(s) to character(s):
 steps:
   - story:
       bless:
-        - character: twinfile/character/spectrum-shopper-tech-titan:0.1.0
-          context: twinfile/context/spectrum-tech-titan:0.1.0
-        - character: twinfile/character/spectrum-shopper-tech-titan:0.1.0
-          context: twinfile/context/spectrum-upgrader:0.1.0
+        - character: twinfile/character/wireless-greeter:0.1.0
+          context: twinfile/context/wireless-retail:0.1.0
 ```
 
 Wire type: `StoryBlessBinding` in `@local-hosting/twinfile-story/narrative`.

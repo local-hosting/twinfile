@@ -63,13 +63,41 @@ describe('buildTwinfileAudit', () => {
     expect(built.value.lenses.props.some((row) => row.id === 'greeter-kiosk')).toBe(true);
   });
 
-  it('inherits place from story from: chain for visit shims', () => {
-    const oscRoot = join(dirname(fileURLToPath(import.meta.url)), '../../../../../osc-stores/osc-twinfile');
-    const loaded = readTwinHeadYaml(join(oscRoot, 'story/spectrum-fixer-visit'));
+  it('surfaces story bless bindings on the bless lens', () => {
+    const root = join(tmpdir(), `twin-audit-bless-${Date.now()}`, 'bless-visit');
+    mkdirSync(root, { recursive: true });
+    writeFileSync(
+      join(root, 'bless-visit.twin.yaml'),
+      `twinfile: 2
+kind: story
+id: bless-visit
+name: Bless visit
+version: 0.0.1
+links:
+  - rel: involves
+    href: twinfile/place/wireless-mobile:0.1.0
+  - rel: involves
+    href: twinfile/character/wireless-greeter:0.1.0
+  - rel: involves
+    href: twinfile/context/wireless-retail:0.1.0
+steps:
+  - story:
+      bless:
+        - character: twinfile/character/wireless-greeter:0.1.0
+          context: twinfile/context/wireless-retail:0.1.0
+story:
+  pitch: Bless
+  scenes:
+    - id: one
+      label: One
+`,
+    );
+
+    const loaded = readTwinHeadYaml(root);
     expect(loaded.ok).toBe(true);
     if (!loaded.ok) return;
 
-    const built = buildTwinfileAudit(loaded.value, { examplesRoot: oscRoot });
+    const built = buildTwinfileAudit(loaded.value, { examplesRoot });
     expect(built.ok).toBe(true);
     if (!built.ok) return;
 
