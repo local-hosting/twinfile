@@ -1,0 +1,10 @@
+{
+  "strictBindings": 5,
+  "bindings": [
+    { "for": "cold-chain-handoff" },
+    { "for": "passenger-queue" },
+    { "for": "transit-disruption" },
+    { "for": "power-outage" },
+    { "for": "severe-weather" }
+  ]
+}

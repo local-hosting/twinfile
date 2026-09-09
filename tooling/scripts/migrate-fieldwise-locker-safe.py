@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2].parent / "catalog-host"
 REPLACEMENTS = [
     (r"@local-hosting/twinfile-character/pcm/browser", "@local-hosting/twinfile-character/persona/browser"),
     (r"@local-hosting/twinfile-character/pcm", "@local-hosting/twinfile-character/persona"),
-    (r"@local-hosting/twinfile-character/jsm", "@local-hosting/twinfile-character/situations"),
+    (r"@local-hosting/twinfile-character/jsm", "@local-hosting/twinfile-context"),
     (r"@local-hosting/twinfile-story/sam/browser", "@local-hosting/twinfile-story/narrative/browser"),
     (r"@local-hosting/twinfile-story/sam", "@local-hosting/twinfile-story/narrative"),
     (r"\bpcmFromJSON\b", "characterFromJSON"),

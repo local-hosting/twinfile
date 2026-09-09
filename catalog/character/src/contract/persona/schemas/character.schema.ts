@@ -4,7 +4,6 @@ import { JourneySchema } from './story/journey.schema.js';
 import { MentalModelSchema } from './strategy/mental-model.schema.js';
 import { CharacterPersonaSchema } from './character-persona.schema.js';
 import { ThinkingStyleSchema } from './strategy/thinking-style.schema.js';
-import { JobSchema } from '../../situations/index.js';
 import { ResearchSignalSchema } from './story/research-signal.schema.js';
 import { ResearchQuoteSchema } from './story/quote.schema.js';
 import { normalizeCharacterInput } from '../contract/normalize-character-input.js';
@@ -35,7 +34,6 @@ const characterCoreSchema = z.object({
   revision: z.number().int().nonnegative(),
   summary: z.string().optional(),
   persona: CharacterPersonaSchema,
-  jobs: z.array(JobSchema).optional().default([]),
   journeys: z.array(JourneySchema).optional(),
   quotes: z.array(ResearchQuoteSchema).optional(),
   quoteTaxonomy: z.unknown().optional(),

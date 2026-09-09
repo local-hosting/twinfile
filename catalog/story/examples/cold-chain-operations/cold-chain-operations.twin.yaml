@@ -1,0 +1,50 @@
+twinfile: 2
+kind: story
+id: cold-chain-operations
+name: Cold-chain operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/cold-chain:0.1.0
+  - rel: involves
+    href: twinfile/place/airport:0.2.0
+  - rel: involves
+    href: twinfile/place/port:0.2.0
+  - rel: involves
+    href: twinfile/character/cold-chain-dispatcher:0.1.0
+  - rel: involves
+    href: twinfile/context/cold-chain-haul:0.1.0
+  - rel: involves
+    href: twinfile/resource/reefer-truck:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-parcel:0.1.0
+story:
+  pitch: Everyday multimodal cold-chain haul — air-cargo intake at the airport, hub cold-room handoff, then pier warehouse transfer.
+  scenes:
+    - id: air-cargo-intake
+      label: Air-cargo intake
+      run:
+        from: twinfile/place/airport:0.2.0
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2
+    - id: hub-handoff
+      label: Hub cold-room handoff
+      run:
+        from: twinfile/place/cold-chain:0.1.0
+        steps:
+          - copy: twinfile/event/cold-chain-handoff:1.0.0
+        args:
+          lanes: 2
+          stagingCap: 40
+    - id: pier-transfer
+      label: Pier warehouse transfer
+      run:
+        from: twinfile/place/port:0.2.0
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2

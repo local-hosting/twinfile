@@ -1,0 +1,26 @@
+twinfile: 2
+kind: story
+id: aquarium-operations
+name: Aquarium operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/aquarium:0.1.0
+  - rel: involves
+    href: twinfile/character/aquarium-host:0.1.0
+  - rel: involves
+    href: twinfile/context/aquarium-visit:0.1.0
+story:
+  pitch: Lobby check-in and visitor surge through ocean gallery and touch pools on a normal aquarium day.
+  scenes:
+    - id: lobby-arrive
+      label: Lobby arrival
+    - id: exhibit-surge
+      label: Exhibit surge
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 3

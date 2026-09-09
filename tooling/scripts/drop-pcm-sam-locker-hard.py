@@ -66,7 +66,7 @@ REPLACEMENTS = [
     (r"OrgTouchpointSamWire", "OrgTouchpointStoryWire"),
     (r"SAMTouchpoint", "StoryTouchpoint"),
     (r"@local-hosting/twinfile-character/pcm", "@local-hosting/twinfile-character/persona"),
-    (r"@local-hosting/twinfile-character/jsm", "@local-hosting/twinfile-character/situations"),
+    (r"@local-hosting/twinfile-character/jsm", "@local-hosting/twinfile-context"),
     (r"@local-hosting/twinfile-story/sam", "@local-hosting/twinfile-story/narrative"),
     (r"/mount-catalog/sam", "/mount-catalog/story"),
     (r"sam-persona-mount-wire", "story-persona-mount-wire"),

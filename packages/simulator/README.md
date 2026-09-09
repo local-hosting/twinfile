@@ -15,7 +15,7 @@ Scenes copy **events** (`copy: twinfile/event/...`) from [`catalog/event/example
 | --- | --- |
 | **`@local-hosting/twinfile-core`** | Load/build twins; `catalog/` path layout; ref resolve |
 | **`catalog/{place,resource,character,story,event}/`** | Golden twin heads + character YAML libs |
-| **`@local-hosting/twinfile-simulator`** | Timeline, session bus, event catalog (loads `catalog/event` units) |
+| **`@local-hosting/twinfile-simulator`** | Timeline, session bus, event catalog; **`buildStoryScene`** / **`createTwinfilePlayerFromStory`** orchestrate core + place (compose is not here) |
 
 Normative **format** (roles, `markers`, phases, plans) stays in **`@local-hosting/twinfile`**.
 

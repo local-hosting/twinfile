@@ -13,14 +13,6 @@ const persona = {
   segment: 'general',
 };
 
-const job = {
-  id: 'job:1',
-  text: 'Finish the task',
-  context: 'I open the product',
-  goal: 'to finish quickly',
-  outcome: 'I can move on',
-};
-
 describe('CharacterSpec', () => {
   it('defaults spec version when omitted', () => {
     const character = parseCharacter({
@@ -28,7 +20,6 @@ describe('CharacterSpec', () => {
       title: 'A',
       revision: 1,
       persona,
-      jobs: [job],
     });
     expect(character.version).toBe(CHARACTER_SPEC_VERSION);
     expect(characterSpecVersion(character)).toBe(1);
@@ -41,7 +32,6 @@ describe('CharacterSpec', () => {
       title: 'A',
       revision: 1,
       persona,
-      jobs: [job],
     });
     expect(character.version).toBe(1);
   });
@@ -55,9 +45,27 @@ describe('CharacterSpec', () => {
         title: 'A',
         revision: 1,
         persona,
-        jobs: [job],
       }),
     ).toThrow(/must agree/);
+  });
+
+  it('strips legacy JTBD jobs from character input', () => {
+    const character = parseCharacter({
+      id: 'persona:a',
+      title: 'A',
+      revision: 1,
+      persona,
+      jobs: [
+        {
+          id: 'job:1',
+          text: 'Finish the task',
+          context: 'I open the product',
+          goal: 'to finish quickly',
+          outcome: 'I can move on',
+        },
+      ],
+    });
+    expect('jobs' in character).toBe(false);
   });
 
   it('characterToJSON always includes document.version (spec)', () => {
@@ -67,7 +75,6 @@ describe('CharacterSpec', () => {
         title: 'A',
         revision: 3,
         persona,
-        jobs: [job],
       }),
     );
     const doc = json.document as Record<string, unknown>;

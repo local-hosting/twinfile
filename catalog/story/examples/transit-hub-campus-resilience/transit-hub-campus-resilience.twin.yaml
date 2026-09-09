@@ -10,6 +10,8 @@ links:
     href: twinfile/place/transit-hub-campus:0.1.0
   - rel: involves
     href: twinfile/character/hub-attendant:0.1.0
+  - rel: involves
+    href: twinfile/context/mobility-hub:0.1.0
 story:
   pitch: Hub shelter under severe weather when the shuttle loop closes, then recovery staging.
   scenes:

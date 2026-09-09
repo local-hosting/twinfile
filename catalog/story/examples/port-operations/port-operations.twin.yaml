@@ -10,6 +10,8 @@ links:
     href: twinfile/place/port:0.2.0
   - rel: involves
     href: twinfile/character/port-clerk:0.1.0
+  - rel: involves
+    href: twinfile/context/port-visit:0.1.0
 story:
   pitch: Everyday pier arrival queue and warehouse transfer on a clear harbor day.
   scenes:

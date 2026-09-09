@@ -1,0 +1,41 @@
+specVersion: "1.0"
+methodId: cold-chain-haul
+jobs:
+  - id: clear-air-cargo-intake
+    label: Clear air-cargo intake
+    granularity: theme
+    context: When parcels arrive on the apron or curb from a flight
+    goal: get them into controlled staging without breaking the cold window
+    outcome: Parcels are accepted and temperature-logged
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: stage-in-cold-room
+    label: Stage in cold room
+    granularity: story
+    parentJobId: clear-air-cargo-intake
+    context: When inbound lots must wait for the next vehicle or vessel window
+    goal: hold parcels at the right temperature until release
+    outcome: Inventory is staged and ready for the next leg
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: load-reefer-for-dispatch
+    label: Load reefer for dispatch
+    granularity: story
+    parentJobId: clear-air-cargo-intake
+    context: When the next haul window opens at the yard or curb
+    goal: load parcels onto the vehicle without excursions
+    outcome: The truck departs with sealed, logged cargo
+    visitationGoal: converge
+    visitationSubGoal: visit
+  - id: complete-pier-transfer
+    label: Complete pier transfer
+    granularity: story
+    parentJobId: clear-air-cargo-intake
+    context: When ocean or barge handoff is due at the port warehouse
+    goal: finish the pier-to-warehouse transfer with clear ownership
+    outcome: Parcels are staged for the vessel or onward haul
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess

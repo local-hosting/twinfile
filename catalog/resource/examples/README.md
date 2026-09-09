@@ -8,6 +8,8 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 | `terminal-kiosk` | airport |
 | `concession-cart` | arena |
 | `trail-station` | park |
+| `gallery-kiosk` | museum |
+| `exhibit-kiosk` | aquarium |
 | `gangway-kiosk` | port |
 | `pavilion-kiosk` | expo |
 | `river-gauge` | river |
@@ -15,6 +17,8 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 | `station-kiosk` | mobility-hub |
 | `dock-crane` | dunkirk-dock |
 | `visitor-shuttle` | buffalo-harbor |
+| `reefer-truck` | cold-chain |
+| `cold-parcel` | cold-chain |
 | `falls-tram` | niagara-falls |
 | `water-quality-sensor` | watershed-river (Mountain Creek) |
 | `river-buoy` | watershed-river (Williams Island) |
