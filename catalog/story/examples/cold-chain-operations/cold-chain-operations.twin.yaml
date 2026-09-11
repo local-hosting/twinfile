@@ -20,6 +20,12 @@ links:
     href: twinfile/resource/reefer-truck:0.1.0
   - rel: involves
     href: twinfile/resource/cold-parcel:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-pallet:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-temp-sensor:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-humidity-sensor:0.1.0
 story:
   pitch: Everyday multimodal cold-chain haul — air-cargo intake at the airport, hub cold-room handoff, then pier warehouse transfer.
   scenes:
