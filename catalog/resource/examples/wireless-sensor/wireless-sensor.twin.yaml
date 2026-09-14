@@ -1,0 +1,21 @@
+from: twinfile/resource/base-sensor:0.1.0
+twinfile: 2
+kind: resource
+id: wireless-sensor
+name: Wireless sensor
+version: 0.1.0
+stability: example
+steps:
+  - resource:
+      dtpr:
+        elements:
+          manifestation:
+            - sensor_telemetry
+            - wireless_telemetry
+      ext:
+        link: wireless
+        battery: true
+        sample:
+          value: null
+          quality: unknown
+          rssi_dbm: null

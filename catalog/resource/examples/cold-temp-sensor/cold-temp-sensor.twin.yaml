@@ -1,0 +1,31 @@
+from: twinfile/resource/wireless-sensor:0.1.0
+twinfile: 2
+kind: resource
+id: cold-temp-sensor
+name: Cold-room temperature sensor
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/cold-chain:0.1.0
+    anchor: cold-room
+steps:
+  - resource:
+      dtpr:
+        accountable: example-cold-chain
+        elements:
+          purpose:
+            - logistics
+          affected:
+            - environment
+            - people
+      ext:
+        lat: 35.04202
+        lon: -89.97702
+        observes: temperature
+        unit: degC
+        sample:
+          value: 2.4
+          quality: good
+          rssi_dbm: -67
+          at: 2026-06-18T10:15:00-05:00

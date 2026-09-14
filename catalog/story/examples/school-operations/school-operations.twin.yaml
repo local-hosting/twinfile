@@ -1,0 +1,26 @@
+twinfile: 2
+kind: story
+id: school-operations
+name: School operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/school:0.1.0
+  - rel: involves
+    href: twinfile/character/school-host:0.1.0
+  - rel: involves
+    href: twinfile/context/school-visit:0.1.0
+story:
+  pitch: Lobby check-in and class-change flow through classroom wing and gym on a normal school day.
+  scenes:
+    - id: school-arrive
+      label: Lobby check-in
+    - id: class-change
+      label: Class change
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2

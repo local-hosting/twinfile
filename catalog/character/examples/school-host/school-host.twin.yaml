@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: school-host
+name: School host (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional campus host for the school example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/classroom-kiosk:0.1.0
+character:
+  role: host
+  segment: school-visitor
+  goals:
+    - Guide students and visitors from the lobby through class periods
+    - Keep attendance and wayfinding clear when class-change queues build

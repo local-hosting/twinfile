@@ -31,5 +31,5 @@ Illustrative cold-storage campus for **cold-chain logistics**. **Daily:** air in
 ## Related
 
 - Place: [`cold-chain.twin.yaml`](../cold-chain.twin.yaml)
-- Resources: [`reefer-truck`](../../../../resource/examples/reefer-truck/), [`cold-parcel`](../../../../resource/examples/cold-parcel/)
+- Resources: [`reefer-truck`](../../../../resource/examples/reefer-truck/), [`cold-pallet`](../../../../resource/examples/cold-pallet/), [`cold-parcel`](../../../../resource/examples/cold-parcel/) (parcel `locatedIn` pallet), [`cold-temp-sensor`](../../../../resource/examples/cold-temp-sensor/) / [`cold-humidity-sensor`](../../../../resource/examples/cold-humidity-sensor/) (from [`wireless-sensor`](../../../../resource/examples/wireless-sensor/) ← [`base-sensor`](../../../../resource/examples/base-sensor/))
 - Network: [`airport`](../../airport/), [`port`](../../port/)

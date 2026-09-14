@@ -16,6 +16,7 @@
 | `park-ranger` | trail-station | park |
 | `museum-host` | gallery-kiosk | museum |
 | `aquarium-host` | exhibit-kiosk | aquarium |
+| `school-host` | classroom-kiosk | school |
 | `port-clerk` | gangway-kiosk | port |
 | `expo-host` | pavilion-kiosk | expo |
 | `river-guide` | river-gauge | river |
