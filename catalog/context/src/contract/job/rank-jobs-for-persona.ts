@@ -1,7 +1,7 @@
 import type { Job } from '../types/job.js';
 import type { JobContextModel } from '../types/job-context-model.js';
 
-/** Minimal Character persona + journey shape for job ranking (no `@local-hosting/twinfile-character/persona` dependency). */
+/** Minimal Character persona + journey shape for job ranking (no `@local-hosting/twinfile-character/character` dependency). */
 export type PersonaJobRankingSourceV1 = {
   persona: {
     label: string;

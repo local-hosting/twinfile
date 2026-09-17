@@ -1,0 +1,62 @@
+from: twinfile/base-single-level:0.1.0
+twinfile: 2
+kind: place
+id: pavilion
+name: Example pavilion
+version: 0.1.0
+stability: example
+geotype:
+  # Closest venue slug until a dedicated pavilion/exhibition pin exists.
+  primary: museum
+  registry: "@local-hosting/geotypes@0.2.0"
+steps:
+  - place:
+      name: Example pavilion
+      kind: pavilion
+      timezone: UTC
+      published: false
+      ext:
+        lat: 24.9607
+        lon: 55.1509
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: foyer
+        name: Pavilion foyer
+        kind: lobby
+        level: ground
+        exposure: indoor
+        roles:
+          - ground-transport
+          - shelter
+      - id: gallery
+        name: Main gallery
+        kind: hall
+        level: ground
+        exposure: indoor
+        parent: foyer
+        roles:
+          - shelter
+  - openings:
+      - id: door-foyer-gallery
+        kind: door
+        connects:
+          - foyer
+          - gallery
+        width_m: 3
+        state: open
+        roles:
+          - exit
+  - visits:
+      - id: visit-foyer
+        kind: entry
+        name: Enter foyer
+        space: foyer
+        order: 0
+      - id: visit-gallery
+        kind: activity
+        name: Tour gallery
+        space: gallery
+        order: 1

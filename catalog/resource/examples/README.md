@@ -4,10 +4,13 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 
 **Sensor bases:** `base-sensor` (global DTPR + sample skeleton) → `wireless-sensor` (`from:` + wireless link) → site sensors (`cold-temp-sensor`, `cold-humidity-sensor`).
 
+**Network base:** `base-network` (`kind: network`) — Contentful Research Center networks live in `@local-hosting/sensors-twinfile`.
+
 | Id | Place |
 | --- | --- |
 | `base-sensor` | — (resource base) |
 | `wireless-sensor` | — (extends `base-sensor`) |
+| `base-network` | — (resource base) |
 | `greeter-kiosk` | shop |
 | `terminal-kiosk` | airport |
 | `concession-cart` | arena |

@@ -204,6 +204,24 @@
         ]
       }
     },
+    "characterBody": {
+      "type": "object",
+      "description": "Character head body. Distinct from twin `kind: character`.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": ["narrative", "persona"],
+          "description": "narrative = fictional cast / game NPC / virtual host; persona = synthetic archetype for a real visitor or staff segment. Both remain disclosure.synthetic."
+        },
+        "role": { "type": "string", "minLength": 1 },
+        "segment": { "type": "string", "minLength": 1 },
+        "goals": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "additionalProperties": true
+    },
     "characterTwinfile": {
       "allOf": [
         { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
@@ -214,7 +232,7 @@
             "kind": { "const": "character" },
             "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
             "steps": { "$ref": "#/$defs/headComposeSteps" },
-            "character": { "type": "object" },
+            "character": { "$ref": "#/$defs/characterBody" },
             "disclosure": { "type": "object" }
           }
         }

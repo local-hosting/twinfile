@@ -14,6 +14,8 @@ refs:
   twinfile/mobility-hub:0.2.0: mobility-hub
   twinfile/arena:1.2.0: arena
   twinfile/expo:0.2.0: expo
+  twinfile/pavilion:0.1.0: pavilion
+  twinfile/transit-arrival:0.1.0: transit-arrival
   twinfile/transit-hub-campus:0.1.0: mobility-hub/campus
   twinfile/base-campus:0.1.0: base-campus
   twinfile/base-indoor-stack:0.1.0: base-indoor-stack

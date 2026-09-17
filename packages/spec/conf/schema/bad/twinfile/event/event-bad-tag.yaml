@@ -1,0 +1,16 @@
+twinfile: 2
+kind: event
+id: event-bad-tag
+name: Event with bare tag
+version: 0.1.0
+stability: example
+# Bare slugs are invalid — tags MUST be ns:slug
+tags:
+  - climate-bio
+mode: daily
+phases:
+  - open
+expects:
+  venue:
+    kind: space
+    min: 0
