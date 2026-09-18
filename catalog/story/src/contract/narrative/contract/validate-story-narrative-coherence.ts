@@ -1,4 +1,4 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 import { samePlaceRef } from '@local-hosting/twinfile-core/ref';
 
 import type { Story } from '../types/story-narrative.js';

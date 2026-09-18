@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
+import type { Journey, Character } from '@local-hosting/twinfile-character/character';
 
 import { resolveJourneyForStory } from '../journey/build/resolve-journey-for-story.js';
 import type { Story } from '../types/story-narrative.js';

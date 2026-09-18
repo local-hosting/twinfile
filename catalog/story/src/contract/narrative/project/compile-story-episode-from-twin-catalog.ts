@@ -1,4 +1,4 @@
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 
 import { resolveStoryEpisode } from '../story-catalog/resolve-story-episode.js';
 import {

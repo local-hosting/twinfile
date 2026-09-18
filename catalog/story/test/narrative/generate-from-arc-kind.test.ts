@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 
 import { compileStory } from '../../src/contract/narrative/contract/compile-story-narrative.js';
 import {

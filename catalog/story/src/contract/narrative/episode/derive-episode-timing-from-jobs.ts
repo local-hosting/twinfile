@@ -1,4 +1,4 @@
-import { extractJourneyTouchpointSequence, type Journey } from '@local-hosting/twinfile-character/persona';
+import { extractJourneyTouchpointSequence, type Journey } from '@local-hosting/twinfile-character/character';
 import { collectJobIdsFromJourney, journeyHasCalendarSpan } from '../brief/journey-touchpoint-binding.js';
 import {
   DEFAULT_PLANNING_HORIZON_DAYS,

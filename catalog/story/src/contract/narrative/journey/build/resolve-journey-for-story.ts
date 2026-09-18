@@ -1,5 +1,5 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
-import { requireJourneyById } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
+import { requireJourneyById } from '@local-hosting/twinfile-character/character';
 
 import type { Story } from '../../types/story-narrative.js';
 

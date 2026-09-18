@@ -1,4 +1,4 @@
-import type { Journey, JourneyPhase } from '@local-hosting/twinfile-character/persona';
+import type { Journey, JourneyPhase } from '@local-hosting/twinfile-character/character';
 
 import type { StoryBinding } from '../types/story-narrative.js';
 import type { StoryCharacterRef } from '../types/story-refs.js';

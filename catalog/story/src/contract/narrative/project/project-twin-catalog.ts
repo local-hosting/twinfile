@@ -1,5 +1,5 @@
 import type { Job } from '@local-hosting/twinfile-context';
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 
 import type { Story } from '../types/story-narrative.js';
 

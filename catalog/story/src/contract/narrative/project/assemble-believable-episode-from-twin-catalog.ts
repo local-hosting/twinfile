@@ -1,4 +1,4 @@
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 
 import { storyWireFocalCharacterArg } from '../story-plan/story-catalog-menu-wire.js';
 import {

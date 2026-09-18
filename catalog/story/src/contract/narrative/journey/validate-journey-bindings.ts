@@ -1,4 +1,4 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 
 import { extractJourneyTouchpointSequence } from './extract-touchpoint-sequence.js';
 import type { TouchpointIndex } from '../types/touchpoint-index.js';

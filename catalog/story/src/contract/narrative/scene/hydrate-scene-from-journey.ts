@@ -1,4 +1,4 @@
-import type { Journey, JourneyMoment, JourneyPhase } from '@local-hosting/twinfile-character/persona';
+import type { Journey, JourneyMoment, JourneyPhase } from '@local-hosting/twinfile-character/character';
 
 import type { SceneEmotions, StoryScene } from '../types/scene.js';
 

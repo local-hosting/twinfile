@@ -1,1 +1,1 @@
-export { extractJourneyTouchpointSequence } from '@local-hosting/twinfile-character/persona';
+export { extractJourneyTouchpointSequence } from '@local-hosting/twinfile-character/character';

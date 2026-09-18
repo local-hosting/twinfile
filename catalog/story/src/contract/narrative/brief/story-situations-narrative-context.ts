@@ -1,4 +1,4 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 import {
   pickJobsByIds,
   rankJobsForPersona,

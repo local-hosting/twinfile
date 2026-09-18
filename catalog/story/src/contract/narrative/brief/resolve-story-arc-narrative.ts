@@ -1,5 +1,5 @@
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 import { samePlaceRef } from '@local-hosting/twinfile-core/ref';
 import type { Story } from '../types/story-narrative.js';
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';

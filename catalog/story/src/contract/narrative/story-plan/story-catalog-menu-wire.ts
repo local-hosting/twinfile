@@ -1,4 +1,4 @@
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 import { matchStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
 import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 

@@ -1,4 +1,4 @@
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import { compileStory } from '../contract/compile-story-narrative.js';

@@ -1,4 +1,4 @@
-import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/persona';
+import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/character';
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import {
   seekStoryEpisodeSceneOnArc,
