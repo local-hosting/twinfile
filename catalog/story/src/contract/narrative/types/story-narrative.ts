@@ -16,7 +16,7 @@ export type StoryDocument = {
 
 /** Links focal character, journey, and simulation clock for this run. */
 export type StoryBinding = {
-  /** Focal Character id — must match journey.personaId when `journeyId` is set. */
+  /** Focal Character id — must match journey.characterId when `journeyId` is set. */
   characterId: string;
   /** Character/AXM journey id — links phase/obstacle spine; scenes are the narrative authority. */
   journeyId: string;

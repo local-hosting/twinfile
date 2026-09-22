@@ -17,7 +17,7 @@ describe('formatStoryDirectorNarrative', () => {
     const text = formatStoryDirectorNarrative({
       snapshot: {
         storyId: 'rider-urban-commuter-3',
-        personaId: 'rider-urban-commuter-3',
+        characterId: 'rider-urban-commuter-3',
         storyPitch: 'A rider threads the city from home to destination.',
         who: { characterId: 'persona:rider', displayName: 'Maya' },
         what: { storyId: 'story:episode:rider-commute' },
@@ -44,7 +44,7 @@ describe('formatStoryDirectorNarrative', () => {
           },
         },
       },
-      character: { personaId: 'rider-urban-commuter-3', name: 'Maya' },
+      character: { characterId: 'rider-urban-commuter-3', name: 'Maya' },
       story: storyboardStoryFixture({
         arcTemplate: {
           id: 'arc:commute-three-beat',
@@ -65,7 +65,7 @@ describe('formatStoryDirectorNarrative', () => {
         id: 'journey:rider-commute',
         journeyGoal: 'Arrive at work on time with predictable pickup',
         label: 'Rider morning commute',
-        personaId: 'persona:rider',
+        characterId: 'persona:rider',
         phases: [
           {
             id: 'phase:plan',
@@ -124,7 +124,7 @@ describe('formatStoryDirectorNarrative', () => {
           },
         },
       },
-      character: { personaId: 'rider-urban-commuter-3', name: 'Maya' },
+      character: { characterId: 'rider-urban-commuter-3', name: 'Maya' },
     });
     expect(scenes[0]?.storyboard.visual).toBeTruthy();
     expect(scenes[0]?.storyboard.caption).toBeTruthy();
@@ -177,7 +177,7 @@ describe('formatStoryDirectorNarrative', () => {
         },
       },
       character: {
-        personaId: 'rider-urban-commuter-3',
+        characterId: 'rider-urban-commuter-3',
         name: 'Maya',
         age: 32,
         occupation: 'product designer',

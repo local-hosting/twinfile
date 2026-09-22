@@ -29,7 +29,7 @@ export type CanvasDemoStoryRow = {
   id: string;
   cardTitle: string;
   title: string;
-  personaId: string;
+  characterId: string;
   orgStoryboardId: string;
   mapSlug: string;
   storyPitch: string;

@@ -44,7 +44,7 @@ function jitterBlocks(
 }
 
 /** Apply per-instance jitter to a persona rhythm template. */
-export function samplePersonaDailyRhythm(
+export function sampleCharacterDailyRhythm(
   template: PersonaDailyRhythm,
   random: () => number = Math.random,
   options?: SamplePersonaDailyRhythmOptions,

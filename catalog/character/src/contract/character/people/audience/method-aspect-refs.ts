@@ -13,7 +13,7 @@ export const ArchetypeAspectRefSchema = z.object({
 });
 
 export const PersonaAspectRefSchema = z.object({
-  personaId: z.string().min(1).optional(),
+  characterId: z.string().min(1).optional(),
   source: z.enum(['declared', 'inferred', 'modeled']).optional(),
 });
 

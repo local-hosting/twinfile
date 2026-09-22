@@ -23,9 +23,9 @@ export function characterToContribution(
 ): CharacterAxmContribution {
   const ownerId = character.persona.id;
   const mentalModels = (character.mentalModels ?? []).map((model) =>
-    model.personaIds?.length
+    model.characterIds?.length
       ? model
-      : { ...model, personaIds: [ownerId] },
+      : { ...model, characterIds: [ownerId] },
   );
   return {
     characterId: character.id,

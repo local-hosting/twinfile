@@ -26,7 +26,7 @@ describe('validateStoryNarrativeCoherence', () => {
       id: 'journey:rider-commute',
       label: 'Morning commute',
       journeyGoal: 'Arrive at work on time',
-      personaId: 'persona:rider',
+      characterId: 'persona:rider',
       phases: [],
     };
 
@@ -59,7 +59,7 @@ describe('validateStoryNarrativeCoherence', () => {
       id: 'journey:rider-commute',
       label: 'Morning commute',
       journeyGoal: 'Arrive at work on time',
-      personaId: 'persona:rider',
+      characterId: 'persona:rider',
       phases: [],
     };
 

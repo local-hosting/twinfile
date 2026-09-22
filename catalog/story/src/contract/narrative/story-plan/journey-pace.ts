@@ -2,7 +2,7 @@ export type { JourneyPaceId, PlanningSegmentJourneyPaceSource } from '@local-hos
 export {
   JOURNEY_PACE_IDS,
   normalizeJourneyPaceId,
-  resolvePersonaJourneyPace,
+  resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
-  resolveSegmentJourneyPaceFromPersonas,
+  resolveSegmentJourneyPaceFromCharacters,
 } from '@local-hosting/twinfile-character/character';

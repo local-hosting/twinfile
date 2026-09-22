@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
 import type { Character } from '../../../src/contract/character/types/character.js';
-import { resolvePersonaDailyRhythm } from '../../../src/contract/character/persona/resolve-persona-daily-rhythm.js';
+import { resolveCharacterDailyRhythm } from '../../../src/contract/character/persona/resolve-character-daily-rhythm.js';
 import {
   findDailyRhythmBlock,
   formatDailyRhythmClock,
-  samplePersonaDailyRhythm,
-} from '../../../src/contract/character/persona/sample-persona-daily-rhythm.js';
-import { DRIVER_WEEKDAY_DAILY_RHYTHM } from '../../../src/contract/character/persona/persona-daily-rhythm-presets.js';
+  sampleCharacterDailyRhythm,
+} from '../../../src/contract/character/persona/sample-character-daily-rhythm.js';
+import { DRIVER_WEEKDAY_DAILY_RHYTHM } from '../../../src/contract/character/persona/character-daily-rhythm-presets.js';
 
 function characterStub(persona: Character['persona']): Character {
   return {
@@ -19,9 +19,9 @@ function characterStub(persona: Character['persona']): Character {
   };
 }
 
-describe('resolvePersonaDailyRhythm', () => {
+describe('resolveCharacterDailyRhythm', () => {
   it('defaults drivers to early wake', () => {
-    const rhythm = resolvePersonaDailyRhythm(
+    const rhythm = resolveCharacterDailyRhythm(
       characterStub({
         id: 'persona:driver',
         label: 'Driver',
@@ -38,7 +38,7 @@ describe('resolvePersonaDailyRhythm', () => {
   });
 
   it('defaults artists to late wake', () => {
-    const rhythm = resolvePersonaDailyRhythm(
+    const rhythm = resolveCharacterDailyRhythm(
       characterStub({
         id: 'persona:artist',
         label: 'Artist',
@@ -55,9 +55,9 @@ describe('resolvePersonaDailyRhythm', () => {
   });
 });
 
-describe('samplePersonaDailyRhythm', () => {
+describe('sampleCharacterDailyRhythm', () => {
   it('jitters block starts within template bounds', () => {
-    const sampled = samplePersonaDailyRhythm(DRIVER_WEEKDAY_DAILY_RHYTHM, () => 0.99);
+    const sampled = sampleCharacterDailyRhythm(DRIVER_WEEKDAY_DAILY_RHYTHM, () => 0.99);
     const wake = findDailyRhythmBlock(sampled, 'wake');
     expect(wake).toBeTruthy();
     expect(formatDailyRhythmClock(wake!)).toMatch(/AM|PM/);

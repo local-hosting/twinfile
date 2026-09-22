@@ -4,7 +4,7 @@ import {
   characterCatalogLabel,
   characterCatalogSegment,
 } from '../../src/contract/character/contract/character-catalog-display.js';
-import { resolveCharacterPersonaDisplayName } from '../../src/contract/character/persona/resolve-persona-display-name.js';
+import { resolveCharacterDisplayName } from '../../src/contract/character/persona/resolve-character-display-name.js';
 import * as pcmEntry from '../../src/contract/character/index.js';
 import type { Character } from '../../src/contract/character/types/character.js';
 
@@ -37,12 +37,12 @@ describe('character catalog display helpers', () => {
     expect(characterCatalogSegment(sample)).toBe('segment:commute');
   });
 
-  it('resolveCharacterPersonaDisplayName honors override', () => {
-    expect(resolveCharacterPersonaDisplayName(sample, 'Custom')).toBe('Custom');
-    expect(resolveCharacterPersonaDisplayName(sample)).toBe('Alex Rider');
+  it('resolveCharacterDisplayName honors override', () => {
+    expect(resolveCharacterDisplayName(sample, 'Custom')).toBe('Custom');
+    expect(resolveCharacterDisplayName(sample)).toBe('Alex Rider');
   });
 
-  it('exports resolveCharacterPersonaDisplayName from the character entry', () => {
-    expect(pcmEntry.resolveCharacterPersonaDisplayName).toBe(resolveCharacterPersonaDisplayName);
+  it('exports resolveCharacterDisplayName from the character entry', () => {
+    expect(pcmEntry.resolveCharacterDisplayName).toBe(resolveCharacterDisplayName);
   });
 });

@@ -6,7 +6,7 @@ export function formatJourneyMarkdown(journey: StoryJourney): string {
     '',
     `**Story:** \`${journey.storyId}\`  `,
     `**Journey:** \`${journey.journeyId}\`  `,
-    `**Persona:** \`${journey.personaId}\``,
+    `**Persona:** \`${journey.characterId}\``,
     '',
     '## Phases',
     '',

@@ -80,7 +80,7 @@ export type JourneyNarrativeArc = {
 export type Journey = {
   id: string;
   label: string;
-  personaId: string;
+  characterId: string;
   /** Thinking style the persona wears in this journey's context (an "episode"). */
   thinkingStyleId?: string;
   description?: string;
@@ -97,7 +97,7 @@ export type Journey = {
 
 /** Materialized journey trace edge (AXM graph). */
 export type JourneyRelationshipEdge =
-  | { kind: 'journey_for_persona'; journeyId: string; personaId: string }
+  | { kind: 'journey_for_character'; journeyId: string; characterId: string }
   | { kind: 'journey_phase_job'; journeyId: string; phaseId: string; jobId: string }
   | { kind: 'journey_moment_job'; journeyId: string; momentId: string; jobId: string }
   | {

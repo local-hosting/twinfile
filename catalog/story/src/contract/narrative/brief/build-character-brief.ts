@@ -22,10 +22,10 @@ function personalityBullets(personality: StoryBriefPersonalityV1 | undefined): s
 
 export function buildCharacterBrief(input: { character: StoryBriefCharacterV1 }): BriefV1 {
   const { character } = input;
-  const name = character.name?.trim() || character.personaId;
+  const name = character.name?.trim() || character.characterId;
   const psych = character.psychology;
   const identityBullets: string[] = [
-    `Persona id \`${character.personaId}\``,
+    `Persona id \`${character.characterId}\``,
     ...(character.actorDid ? [`Actor \`${character.actorDid}\``] : []),
     ...(character.age != null ? [`Age ${character.age}`] : []),
     ...(character.householdSize != null ? [`Household size ${character.householdSize}`] : []),

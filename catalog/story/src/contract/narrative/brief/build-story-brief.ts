@@ -108,14 +108,14 @@ export function buildStoryBrief(input: {
   character?: StoryBriefCharacterV1;
 }): BriefV1 {
   const { snapshot, character } = input;
-  const storyId = snapshot.storyId?.trim() || character?.personaId || 'story';
-  const characterName = character?.name?.trim() || snapshot.personaId || character?.personaId;
+  const storyId = snapshot.storyId?.trim() || character?.characterId || 'story';
+  const characterName = character?.name?.trim() || snapshot.characterId || character?.characterId;
 
   const headline = characterName
     ? `Story — ${storyId} (${characterName})`
     : `Story — ${storyId}`;
 
-  const metaBullets = snapshot.personaId ? [`Persona \`${snapshot.personaId}\``] : [];
+  const metaBullets = snapshot.characterId ? [`Persona \`${snapshot.characterId}\``] : [];
 
   const pitchBullets = snapshot.storyPitch ? [snapshot.storyPitch] : [];
 

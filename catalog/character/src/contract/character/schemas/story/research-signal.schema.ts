@@ -8,7 +8,7 @@ const UNIT_MAX = { percent: 100, ratio: 1 } as const;
 export const ResearchSignalSchema = z
   .object({
     id: z.string().min(1),
-    personaId: z.string().min(1),
+    characterId: z.string().min(1),
     category: z.enum(RESEARCH_SIGNAL_CATEGORIES),
     label: z.string().min(1),
     value: z.number().min(0),

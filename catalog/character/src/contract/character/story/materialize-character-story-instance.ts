@@ -6,8 +6,8 @@ import {
   type CharacterInstanceVariationPolicy,
 } from '../types/story/character-instance-variation.js';
 import { adjustDailyRhythmForInstance } from '../persona/adjust-daily-rhythm-for-instance.js';
-import { pickPersonaDailyRhythmTemplate } from '../persona/pick-persona-daily-rhythm-template.js';
-import { samplePersonaDailyRhythm } from '../persona/sample-persona-daily-rhythm.js';
+import { pickCharacterDailyRhythmTemplate } from '../persona/pick-character-daily-rhythm-template.js';
+import { sampleCharacterDailyRhythm } from '../persona/sample-character-daily-rhythm.js';
 import { sampleCharacterDemographicBands } from './sample-character-demographic-bands.js';
 import { resolveCharacterInstanceRandom } from './character-instance-rng.js';
 
@@ -65,7 +65,7 @@ export function pickCharacterInstanceCharacteristics(
     variation.includeDemographics !== false ? sampleCharacterDemographicBands(character, random) : {};
   let dailyRhythm;
   if (variation.includeDailyRhythm !== false) {
-    const picked = pickPersonaDailyRhythmTemplate(
+    const picked = pickCharacterDailyRhythmTemplate(
       character,
       random,
       variation.rhythmVariantPick ?? 'weighted',
@@ -74,7 +74,7 @@ export function pickCharacterInstanceCharacteristics(
       persona: character.persona,
       demographics: Object.keys(demographics).length ? demographics : undefined,
     });
-    dailyRhythm = samplePersonaDailyRhythm(adjusted, random, {
+    dailyRhythm = sampleCharacterDailyRhythm(adjusted, random, {
       jitterMinutes: variation.rhythmJitterMinutes ?? adjusted.jitterMinutes,
       sourceVariantId: picked.variantId,
     });

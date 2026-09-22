@@ -4,7 +4,7 @@ import { rankJobsForPersona } from '@local-hosting/twinfile-context';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import type { EpisodeTimingVariation } from '../types/episode-timing-variation.js';
-import { resolvePersonaJourneyPace } from '../story-plan/journey-pace.js';
+import { resolveCharacterJourneyPace } from '../story-plan/journey-pace.js';
 import { resolveStoryEpisodeForCharacter } from '../story-catalog/resolve-story-episode-for-character.js';
 import { resolveJourneyForStory } from '../journey/build/resolve-journey-for-story.js';
 import { resolveStoryPlanStoreForPlan } from '../story-plan/resolve-story-plan-store.js';
@@ -135,7 +135,7 @@ export function assembleBelievableEpisodeFromCharacter(
 
   const journeyPace =
     input.journeyPace?.trim() ||
-    resolvePersonaJourneyPace(focalCharacter.persona) ||
+    resolveCharacterJourneyPace(focalCharacter.persona) ||
     undefined;
 
   const { rankedPlaceRefs, preferredPlaceRef } = pickPreferredPlaceRef(

@@ -4,7 +4,7 @@ import {
   CREATIVE_LATE_WEEKDAY_DAILY_RHYTHM,
   DRIVER_WEEKDAY_DAILY_RHYTHM,
   URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM,
-} from './persona-daily-rhythm-presets.js';
+} from './character-daily-rhythm-presets.js';
 
 function textIncludes(haystack: string, needles: readonly string[]): boolean {
   const lower = haystack.toLowerCase();
@@ -12,7 +12,7 @@ function textIncludes(haystack: string, needles: readonly string[]): boolean {
 }
 
 /** Resolve the weekday rhythm template for a Character persona (explicit or role-based default). */
-export function resolvePersonaDailyRhythm(character: Character): PersonaDailyRhythm {
+export function resolveCharacterDailyRhythm(character: Character): PersonaDailyRhythm {
   const authored = character.persona.dailyRhythm;
   if (authored?.weekday?.length) {
     return authored;

@@ -243,14 +243,14 @@ export function buildSegmentRelationshipGraph(
     }
   }
 
-  if (profile.exemplarPersonaId) {
+  if (profile.exemplarCharacterId) {
     edges.push({
       kind: 'segment_exemplar_persona',
       segmentId: profile.id,
-      personaId: profile.exemplarPersonaId,
+      characterId: profile.exemplarCharacterId,
     });
 
-    const exemplar = findPersonaProfile(personaCatalog, profile.exemplarPersonaId);
+    const exemplar = findPersonaProfile(personaCatalog, profile.exemplarCharacterId);
     for (const painPointId of exemplar?.painPointIds ?? []) {
       edges.push({
         kind: 'segment_pain_point',
@@ -334,13 +334,13 @@ export function validateSegmentProfileRelationships(
   const painPointIds = new Set(catalog.painPoints.map((row) => row.id));
   const graph = buildSegmentRelationshipGraph(profile, catalog, options.personaCatalog);
   const engagementBindings = segmentEngagementLevelBindings(profile);
-  if (profile.exemplarPersonaId) {
-    const exemplar = findPersonaProfile(options.personaCatalog, profile.exemplarPersonaId);
+  if (profile.exemplarCharacterId) {
+    const exemplar = findPersonaProfile(options.personaCatalog, profile.exemplarCharacterId);
     if (!exemplar) {
       issues.push({
         code: 'unknown_persona',
-        id: profile.exemplarPersonaId,
-        message: `Segment "${profile.id}" references unknown exemplar persona "${profile.exemplarPersonaId}"`,
+        id: profile.exemplarCharacterId,
+        message: `Segment "${profile.id}" references unknown exemplar persona "${profile.exemplarCharacterId}"`,
       });
     }
   }

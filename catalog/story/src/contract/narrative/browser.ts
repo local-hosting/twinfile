@@ -409,7 +409,7 @@ export type { JourneyPaceId, PlanningSegmentJourneyPaceSource } from './story-pl
 export {
   JOURNEY_PACE_IDS,
   normalizeJourneyPaceId,
-  resolvePersonaJourneyPace,
+  resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
-  resolveSegmentJourneyPaceFromPersonas,
+  resolveSegmentJourneyPaceFromCharacters,
 } from './story-plan/journey-pace.js';

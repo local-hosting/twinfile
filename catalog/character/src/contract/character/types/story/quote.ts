@@ -7,7 +7,7 @@ import type { StrategyEntityLifecycle } from '../strategy/strategy.js';
 export type ResearchQuote = {
   id: string;
   text: string;
-  personaId: string;
+  characterId: string;
   jobIds?: string[];
   journeyId?: string;
   phaseId?: string;

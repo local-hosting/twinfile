@@ -71,7 +71,7 @@ export type StoryBriefSnapshotV1 = {
   how?: StoryBriefHowV1;
   storyPitch?: string;
   storyId?: string;
-  personaId?: string;
+  characterId?: string;
 };
 
 import type { StoryBriefDailyRhythmV1 } from './persona-daily-rhythm-format.js';
@@ -93,7 +93,7 @@ export type StoryBriefPersonalityV1 = {
 
 export type StoryBriefCharacterV1 = {
   id?: string;
-  personaId: string;
+  characterId: string;
   name?: string;
   age?: number;
   dailyRhythm?: StoryBriefDailyRhythmV1;
