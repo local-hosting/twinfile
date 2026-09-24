@@ -6,7 +6,7 @@ import type { StoryJourneyContext } from '../../src/contract/narrative/types/sto
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 const story = storyboardStoryFixture({
-  id: 'story:episode:core-run',
+  id: 'story:core-run',
   title: 'Core run',
   characters: [{ characterId: 'persona:commuter', primary: true }],
   binding: {
@@ -57,9 +57,9 @@ describe('buildJourney', () => {
   it('shows obstacles and HEART over time on the episode journey', () => {
     const built = buildJourney(story, rubricContext());
     const markdown = formatJourneyMarkdown(built);
-    expect(built.storyId).toBe('story:episode:core-run');
+    expect(built.storyId).toBe('story:core-run');
     expect(built.journeyId).toBe('journey:core');
-    expect(markdown).toContain('**Story:** `story:episode:core-run`');
+    expect(markdown).toContain('**Story:** `story:core-run`');
     expect(markdown).toContain('- No wait time shown — _workaround_');
     expect(markdown).toContain('## HEART over time');
     expect(markdown).toContain('| task-success | 0.50 | 0.45 | 0.55 | rising / held high |');

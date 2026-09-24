@@ -22,7 +22,7 @@ const sessionArc: EpisodeArcV1 = {
 
 const samWithArc: Story = {
   version: 1,
-  id: 'story:episode:rider-commute',
+  id: 'story:rider-commute',
   title: 'Commute',
   revision: 1,
   characters: [{ characterId: 'persona:rider', primary: true }],

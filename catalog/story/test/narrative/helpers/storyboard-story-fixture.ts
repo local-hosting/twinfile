@@ -4,7 +4,7 @@ import type { Story } from '../../../src/contract/narrative/types/story-narrativ
 export function storyboardStoryFixture(overrides?: Partial<Story>): Story {
   return {
     version: 1,
-    id: 'story:episode:fixture',
+    id: 'story:fixture',
     title: 'Fixture episode',
     revision: 1,
     characters: [{ characterId: 'persona:rider', primary: true }],
