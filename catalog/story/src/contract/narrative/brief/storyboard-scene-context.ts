@@ -3,7 +3,7 @@ import type { Story } from '../types/story-narrative.js';
 import type { StoryScene } from '../types/scene.js';
 import { findJourneyTouchpointBinding } from './journey-touchpoint-binding.js';
 import { resolveJobsForTouchpoint } from './story-situations-narrative-context.js';
-import type { StoryBriefCharacterV1, StoryBriefSnapshotV1 } from './types.js';
+import type { StoryBriefSnapshotV1 } from './types.js';
 import type { DirectorScriptSceneV1, FormatStoryDirectorNarrativeInput, StoryboardPanelV1 } from './storyboard-types.js';
 import {
   isTechnicalStoryIdentityLabel,
