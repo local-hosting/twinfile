@@ -2,7 +2,7 @@
 
 Illustrative **school** campus pinned at **Bronx High School of Science** (`main-lobby`, `classroom-wing`, `gymnasium`). Topology is fiction — not a claim about real rooms or closures.
 
-Watershed sample pins stay under [`baylor-school`](../baylor-school/), [`red-bank-high`](../red-bank-high/), and [`normal-park`](../normal-park/).
+Chattanooga watershed school pins live in `@local-hosting/overlay-pack`.
 
 ## Runs
 
