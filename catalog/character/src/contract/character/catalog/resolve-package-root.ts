@@ -2,8 +2,6 @@ import { existsSync, readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { resolveCharacterCatalogRoot, resolveTwinfileRoot } from '@local-hosting/twinfile-core';
-
 function isCharacterPackageRoot(dir: string): boolean {
   const pkg = join(dir, 'package.json');
   if (!existsSync(pkg)) return false;
@@ -32,8 +30,13 @@ export function resolvePackageRoot(moduleUrl: string, depth = 3): string {
   return dir;
 }
 
-/** Character/Situations YAML under `catalog/character/libs/`. */
+/**
+ * Character/situations YAML under this package’s `libs/`
+ * (`audience|journey|psychology/`). Prefer the package root — do not re-derive
+ * via twinfile monorepo walk. Yarn `portal:` / nested `node_modules` symlink
+ * paths do not walk up into `local-hosting/twinfile`, so that path double-nests
+ * `catalog/character` and misses the YAML on disk.
+ */
 export function resolveCharacterCatalogsRoot(moduleUrl: string): string {
-  const packageRoot = resolvePackageRoot(moduleUrl);
-  return resolveCharacterCatalogRoot(resolveTwinfileRoot(packageRoot));
+  return join(resolvePackageRoot(moduleUrl), 'libs');
 }
