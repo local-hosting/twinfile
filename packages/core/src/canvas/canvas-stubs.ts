@@ -9,7 +9,15 @@ export function canvasStubEntity(type: TwinPanel, id: string): Record<string, un
     case 'place':
       return { id, cardTitle, geo: '', label: cardTitle, orgVenueId: id, slug: id };
     case 'resource':
-      return { id, cardTitle, geo: '', label: cardTitle, orgInventoryId: id, orgVehicleId: '' };
+      return {
+        id,
+        cardTitle,
+        geo: '',
+        label: cardTitle,
+        resourceKind: 'inventory',
+        orgInventoryId: id,
+        orgVehicleId: '',
+      };
     case 'character':
     case 'context':
     case 'event':
@@ -19,7 +27,6 @@ export function canvasStubEntity(type: TwinPanel, id: string): Record<string, un
         id,
         cardTitle,
         mapSlug: id,
-        orgStoryboardId: id,
         characterId: '',
         storyPitch: '',
         title: cardTitle,
