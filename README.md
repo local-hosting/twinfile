@@ -22,7 +22,7 @@ twinfile/
 
 Layout: [`catalog/README.md`](catalog/README.md). Agent map: [`AGENTS.md`](AGENTS.md).
 
-Sibling repos (portal deps): **`../geotypes`**, **`../geokit`**, **`../geokit-swift`**, **`../frameworks`**.
+Sibling repos (portal deps): **`../geotypes`**, **`../../local-hosting/geokit`**, **`../../local-hosting/geokit-swift`**, **`../frameworks`**.
 
 ## Quick start
 
