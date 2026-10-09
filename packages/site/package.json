@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "packageManager": "yarn@4.9.2",
-  "description": "twinfile.org \u2014 Twinfile documentation",
+  "description": "twinfile.org — Twinfile documentation",
   "repository": {
     "type": "git",
     "url": "https://github.com/local-hosting/twinfile.git",
@@ -20,9 +20,9 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@algolia/autocomplete-core": "^1.19.2",
-    "@local-hosting/geokit": "link:../../../../local-hosting/geokit",
     "@local-hosting/twinfile-place": "workspace:catalog/place",
     "@headlessui/react": "^2.2.6",
+    "@local-hosting/geokit": "link:../../../../local-hosting/geokit",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "16.1.6",
