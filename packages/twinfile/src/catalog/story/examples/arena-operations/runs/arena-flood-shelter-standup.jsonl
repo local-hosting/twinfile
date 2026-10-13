@@ -1,0 +1,5 @@
+{"t":0,"type":"phase","phase":"warning"}
+{"t":161,"type":"metric","id":"time_to_shelter_s","value":161,"unit":"s"}
+{"t":161,"type":"metric","id":"shelter_overflow","value":0,"unit":"count"}
+{"t":161,"type":"metric","id":"resource_shortfall_cots","value":3400,"unit":"count"}
+{"t":161,"type":"metric","id":"resource_shortfall_water_liters","value":0,"unit":"count"}

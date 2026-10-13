@@ -1,53 +1,36 @@
 #!/usr/bin/env node
 /**
- * Run workspace checks from the twinfile root (open stack only — not twinfile).
+ * Twinfile repo checks — single publish package under packages/twinfile.
  */
-import { existsSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { existsSync } from 'node:fs'
+import { spawnSync } from 'node:child_process'
+import { dirname, join } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '../../..');
-
-/** Run a workspace script from the monorepo root (avoids nested `yarn.lock` in package dirs). */
-function runWorkspaceScript(packageName, scriptArgs) {
-  return spawnSync('yarn', ['workspace', packageName, 'run', ...scriptArgs], {
-    cwd: root,
-    encoding: 'utf8',
-    stdio: ['ignore', 'pipe', 'pipe'],
-  });
-}
+const root = join(dirname(fileURLToPath(import.meta.url)), '../../..')
+const twinfilePkg = join(root, 'packages/twinfile')
 
 function runNodeScript(relDir, scriptName) {
   return spawnSync(process.execPath, [join(root, relDir, 'scripts', scriptName)], {
     cwd: join(root, relDir),
     encoding: 'utf8',
     stdio: ['ignore', 'pipe', 'pipe'],
-  });
+  })
 }
 
-const geotypesRoot = join(root, '../geotypes');
-const geotypesScript = join(geotypesRoot, 'scripts/check-all.mjs');
-
-/** Dependency order: each package typechecks against the `dist/` of the ones before it. */
-const BUILD_ORDER = [
-  '@local-hosting/twinfile-bridge',
-  '@local-hosting/twinfile-core',
-  '@local-hosting/twinfile-place',
-  '@local-hosting/twinfile-simulator',
-  '@local-hosting/twinfile-cli',
-];
-
-function buildWorkspaces() {
-  for (const name of BUILD_ORDER) {
-    const result = runWorkspaceScript(name, ['build']);
-    if (result.status !== 0) return result;
-  }
-  return { status: 0, stdout: '', stderr: '' };
-}
+const geotypesRoot = join(root, '../geotypes')
+const geotypesScript = join(geotypesRoot, 'scripts/check-all.mjs')
 
 const STEPS = [
-  { id: 'build', run: buildWorkspaces },
+  {
+    id: 'build',
+    run: () =>
+      spawnSync(process.execPath, [join(twinfilePkg, 'scripts/build-all.mjs')], {
+        cwd: twinfilePkg,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      }),
+  },
   ...(existsSync(geotypesScript)
     ? [
         {
@@ -62,50 +45,34 @@ const STEPS = [
       ]
     : []),
   { id: 'doc-links', run: () => runNodeScript('packages/tooling', 'check-doc-links.mjs') },
-  { id: 'spec', run: () => runWorkspaceScript('@local-hosting/twinfile', ['check']) },
-  { id: 'bridge', run: () => runWorkspaceScript('@local-hosting/twinfile-bridge', ['check']) },
-  { id: 'core', run: () => runWorkspaceScript('@local-hosting/twinfile-core', ['check:openstack']) },
-  { id: 'cli', run: () => runWorkspaceScript('@local-hosting/twinfile-cli', ['check']) },
-  { id: 'simulator', run: () => runWorkspaceScript('@local-hosting/twinfile-simulator', ['check']) },
-  { id: 'place-type', run: () => runWorkspaceScript('@local-hosting/twinfile-place', ['check']) },
-  { id: 'resource-type', run: () => runWorkspaceScript('@local-hosting/twinfile-resource', ['check']) },
-  { id: 'character-type', run: () => runWorkspaceScript('@local-hosting/twinfile-character', ['check']) },
-  { id: 'context-type', run: () => runWorkspaceScript('@local-hosting/twinfile-context', ['check']) },
-  { id: 'story-type', run: () => runWorkspaceScript('@local-hosting/twinfile-story', ['check']) },
-  { id: 'event-type', run: () => runWorkspaceScript('@local-hosting/twinfile-event', ['check']) },
-];
+  {
+    id: 'spec',
+    run: () =>
+      spawnSync('yarn', ['exec', 'node', 'scripts/check-layout.mjs'], {
+        cwd: join(twinfilePkg, 'spec'),
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+        shell: true,
+      }),
+  },
+]
 
 function parseOnly(argv) {
-  const idx = argv.indexOf('--only');
-  if (idx < 0) return null;
-  return argv[idx + 1]?.split(',').map((s) => s.trim()).filter(Boolean) ?? null;
+  const idx = argv.indexOf('--only')
+  if (idx < 0) return null
+  return argv[idx + 1] ?? null
 }
 
-const only = parseOnly(process.argv.slice(2));
-const steps = only ? STEPS.filter((s) => only.includes(s.id)) : STEPS;
+const only = parseOnly(process.argv)
+const steps = only ? STEPS.filter((s) => s.id === only) : STEPS
 
-if (only && steps.length !== only.length) {
-  const missing = only.filter((id) => !STEPS.some((s) => s.id === id));
-  console.error(`check-workspace: unknown step id(s): ${missing.join(', ')}`);
-  process.exit(1);
-}
-
-let failed = 0;
+let failed = false
 for (const step of steps) {
-  const result = step.run();
+  const result = step.run()
   if (result.status !== 0) {
-    failed += 1;
-    console.error(`\ncheck-workspace: FAIL ${step.id}`);
-    if (result.stdout) process.stderr.write(result.stdout);
-    if (result.stderr) process.stderr.write(result.stderr);
-  } else {
-    console.log(`ok ${step.id}`);
+    failed = true
+    process.stderr.write(result.stderr ?? '')
+    process.stderr.write(`check-workspace: ${step.id} failed\n`)
   }
 }
-
-if (failed > 0) {
-  console.error(`\ncheck-workspace: ${failed} failure(s)`);
-  process.exit(1);
-}
-
-console.log('check-workspace ok');
+process.exit(failed ? 1 : 0)

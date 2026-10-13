@@ -1,0 +1,81 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "customConditions": [],
+    "paths": {
+      "@local-hosting/twinfile": [
+        "../core/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/cli": [
+        "../core/dist/cli/twinfile-cli.d.ts"
+      ],
+      "@local-hosting/twinfile/bridge": [
+        "../bridge/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/bridge/*": [
+        "../bridge/dist/*"
+      ],
+      "@local-hosting/twinfile/character": [
+        "../catalog/character/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/character/module": [
+        "../catalog/character/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/character/*": [
+        "../catalog/character/dist/*"
+      ],
+      "@local-hosting/twinfile/context": [
+        "../catalog/context/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/context/module": [
+        "../catalog/context/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/context/*": [
+        "../catalog/context/dist/*"
+      ],
+      "@local-hosting/twinfile/event": [
+        "../catalog/event/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/event/module": [
+        "../catalog/event/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/event/*": [
+        "../catalog/event/dist/*"
+      ],
+      "@local-hosting/twinfile/place": [
+        "../catalog/place/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/place/module": [
+        "../catalog/place/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/place/*": [
+        "../catalog/place/dist/*"
+      ],
+      "@local-hosting/twinfile/resource": [
+        "../catalog/resource/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/resource/module": [
+        "../catalog/resource/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/resource/*": [
+        "../catalog/resource/dist/*"
+      ],
+      "@local-hosting/twinfile/story": [
+        "../catalog/story/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/story/module": [
+        "../catalog/story/dist/twin-module.d.ts"
+      ],
+      "@local-hosting/twinfile/story/*": [
+        "../catalog/story/dist/*"
+      ],
+      "@local-hosting/twinfile/simulator": [
+        "../simulator/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/simulator/*": [
+        "../simulator/dist/*"
+      ]
+    }
+  }
+}

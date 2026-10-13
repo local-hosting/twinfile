@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@local-hosting/twinfile/bridge": [
+        "../bridge/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/bridge/*": [
+        "../bridge/dist/*"
+      ]
+    },
+    "customConditions": []
+  },
+  "exclude": [
+    "dist",
+    "node_modules",
+    "**/*.test.ts",
+    "test"
+  ]
+}

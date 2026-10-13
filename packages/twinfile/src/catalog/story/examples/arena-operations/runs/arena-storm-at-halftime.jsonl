@@ -1,0 +1,3 @@
+{"t":0,"type":"phase","phase":"warning"}
+{"t":722,"type":"metric","id":"clearance_time_s","value":722,"unit":"s"}
+{"t":722,"type":"metric","id":"peak_queue","value":2572,"unit":"count"}
