@@ -17,6 +17,7 @@ export type {
   ProductObjectiveKeyResult,
   StrategyEntityLifecycle,
 } from './types/strategy/strategy.js';
+export type { MentalModel } from './types/strategy/mental-model.js';
 
 export {
   ObstacleSchema,
