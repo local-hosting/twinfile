@@ -5,7 +5,7 @@ Twinfile **1.0.0-draft.1** — normative prose, JSON Schema (2020-12), and confo
 ## Layout
 
 - [`doc/`](doc/index.md) — standard text (CC BY 4.0, see [`doc/gov/cc-by.md`](doc/gov/cc-by.md))
-- [`schemas/1/`](schemas/1/defs.json) — machine-readable schemas (Apache-2.0)
+- [`schemas/1/`](schemas/1/defs.json) — machine-readable schemas (MPL-2.0)
 - [`conf/`](conf/index.json) — conformance vectors
 
 ## Check
