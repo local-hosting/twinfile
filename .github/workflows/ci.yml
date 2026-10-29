@@ -25,10 +25,11 @@ jobs:
             echo "::error::Repo secret TF_PACKAGES_TOKEN is required (PAT with repo read on local-hosting/geotypes, geokit). See .github/README.md"
             exit 1
           fi
-          parent="$(dirname "$GITHUB_WORKSPACE")"
-          work_root="$(dirname "$parent")"
+          work_root="$(dirname "$(dirname "$GITHUB_WORKSPACE")")"
+          stack_root="${work_root}/local-hosting"
+          mkdir -p "${stack_root}"
           for repo in geotypes geokit; do
-            git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/local-hosting/${repo}.git" "${parent}/${repo}"
+            git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/local-hosting/${repo}.git" "${stack_root}/${repo}"
           done
           mkdir -p "${work_root}/westlane"
           git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/westlane/isocanvas.git" "${work_root}/westlane/isocanvas"
@@ -40,7 +41,7 @@ jobs:
       - run: corepack enable && corepack prepare yarn@4.9.2 --activate
 
       - name: Install and build geotypes
-        working-directory: ../geotypes
+        working-directory: ../../local-hosting/geotypes
         run: |
           corepack prepare yarn@4.9.2 --activate
           yarn install --no-immutable
