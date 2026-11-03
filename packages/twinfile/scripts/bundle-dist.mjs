@@ -43,7 +43,7 @@ if (existsSync(characterLibs)) {
   cpSync(characterLibs, join(distRoot, 'character/libs'), { recursive: true })
 }
 
-const fixtureSrc = join(srcRoot, 'core/canvas/demo-project-content.json')
+const fixtureSrc = join(srcRoot, 'core/canvas/canvas/demo-project-content.json')
 if (existsSync(fixtureSrc)) {
   const fixtureDest = join(distRoot, 'fixtures')
   mkdirSync(fixtureDest, { recursive: true })
@@ -61,9 +61,9 @@ export * from './story/index.js';
 export * from './simulator/index.js';
 `
 
-const browserJs = `export * from './character/character/browser.js';
-export * from './story/narrative/browser.js';
-export * from './context/browser.js';
+const browserJs = `export * from './character/contract/character/browser.js';
+export * from './story/contract/narrative/browser.js';
+export * from './context/contract/browser.js';
 `
 
 writeFileSync(join(distRoot, 'index.js'), indexJs)
