@@ -48,11 +48,10 @@ const STEPS = [
   {
     id: 'spec',
     run: () =>
-      spawnSync('yarn', ['exec', 'node', 'scripts/check-layout.mjs'], {
+      spawnSync(process.execPath, ['scripts/check-layout.mjs'], {
         cwd: join(twinfilePkg, 'spec'),
         encoding: 'utf8',
         stdio: ['ignore', 'pipe', 'pipe'],
-        shell: true,
       }),
   },
 ]

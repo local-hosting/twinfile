@@ -2,7 +2,7 @@
 
 Use **one prose word per concept**. YAML and APIs keep stable field names; docs, comments, README, and UI copy use the terms below.
 
-Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Six published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
+Canonical layers: [`packages/twinfile/src/catalog/place/examples/README.md`](../../src/catalog/place/examples/README.md#vocabulary-one-word-per-layer). Six published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
 
 Say **place**, **resource**, **character**, **context**, **story**, **event** — never three-letter contract acronyms in prose.
 
@@ -30,12 +30,12 @@ Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-la
 | Term | Path | Role |
 | --- | --- | --- |
 | **Catalog hub** | `catalog/` | Six twin type workspaces |
-| **Ref map** | `catalog/place/examples/` | `twin.local.yaml` (local refs) + `published-refs.json` (golden digests) — **not** normative spec |
-| **Spec conf** | `packages/spec/conf/` | Conformance vectors, role vocabulary, crosswalk — **not** twin ops |
+| **Ref map** | `packages/twinfile/src/catalog/place/examples/` | `twin.local.yaml` (local refs) + `published-refs.json` (golden digests) — **not** normative spec |
+| **Spec conf** | `packages/twinfile/spec/conf/` | Conformance vectors, role vocabulary, crosswalk — **not** twin ops |
 | **Kernel** | `packages/{spec,core,cli,bridge}/` | Format, load/merge, CLI |
-| **Player** | `packages/simulator/` | Events, playback — operates on catalogs |
+| **Player** | `packages/twinfile/src/simulator/` | Events, playback — operates on catalogs |
 
-Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `catalog/place/examples`, `packages/simulator` and `catalog/character/libs` derive from it. Path API: [`catalog-layout.ts`](../../core/src/paths/catalog-layout.ts).
+Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. Golden examples and `character/libs` derive from it under `packages/twinfile/src/catalog/`. Path API: [`catalog-layout.ts`](../../src/core/paths/catalog-layout.ts).
 
 ## Twinfile (the format)
 

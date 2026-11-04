@@ -12,29 +12,45 @@ const EXTERNAL = /^(?:[a-z]+:|\/)/i
 /** After single-package merge, many docs still link legacy `catalog/` and `packages/*` paths. */
 const LEGACY_PREFIXES = [
   ['catalog/', 'packages/twinfile/src/catalog/'],
-  ['packages/spec/', 'packages/twinfile/spec/'],
+  ['packages/twinfile/spec/', 'packages/twinfile/spec/'],
   ['packages/core/', 'packages/twinfile/src/core/'],
   ['packages/bridge/', 'packages/twinfile/src/bridge/'],
   ['packages/simulator/', 'packages/twinfile/src/simulator/'],
+  ['packages/twinfile/src/workbench/', 'packages/twinfile/src/workbench/'],
   ['packages/cli/', 'packages/twinfile/src/cli/'],
 ]
 
 function existsAtRepoPath(absPath) {
-  if (existsSync(absPath)) return true
   const rel = relative(root, absPath)
   if (rel.startsWith('..')) return false
+
+  const candidates = [absPath]
+
+  const wrongCatalog = rel.match(/^packages\/catalog\/(.+)/)
+  if (wrongCatalog) {
+    candidates.push(join(root, 'packages/twinfile/src/catalog', wrongCatalog[1]))
+    candidates.push(join(root, 'catalog', wrongCatalog[1]))
+  }
+
   for (const [from, to] of LEGACY_PREFIXES) {
-    if (!rel.startsWith(from)) continue
-    const remapped = join(root, to, rel.slice(from.length))
-    if (existsSync(remapped)) return true
-    if (existsSync(`${remapped}.md`)) return true
+    if (rel.startsWith(from)) {
+      candidates.push(join(root, to, rel.slice(from.length)))
+    }
+  }
+
+  for (const candidate of candidates) {
+    const path = candidate.replace(/\/$/, '')
+    if (existsSync(path)) return true
+    if (existsSync(`${path}.md`)) return true
   }
   return false
 }
 
 function trackedDocs() {
   const out = execFileSync('git', ['ls-files', '*.md', '*.mdx'], { cwd: root, encoding: 'utf8' })
-  return out.split('\n').filter((f) => f && !f.endsWith('CHANGELOG.md'))
+  return out
+    .split('\n')
+    .filter((f) => f && !f.endsWith('CHANGELOG.md') && existsSync(join(root, f)))
 }
 
 function brokenLinks(file) {
