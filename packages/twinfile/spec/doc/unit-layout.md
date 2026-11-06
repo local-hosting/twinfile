@@ -41,6 +41,6 @@ Each scene's **`run:`** is an inline mapping (`from?`, `steps`, `clock`, `schedu
 
 Cross-type links use refs only (`links:`, `copy: twinfile/<type>/<id>`).
 
-Place nested interiors: **`parts/<id>/`** ([`PARTS.md`](../../../catalog/place/examples/PARTS.md)).
+Place nested interiors: **`parts/<id>/`** ([`PARTS.md`](../../../src/catalog/place/examples/PARTS.md)).
 
-Events and timetable modules: **`packages/simulator/`** (simulator registry) — operates on twin catalogs; **not** under `catalog/` and not twin heads.
+Events and timetable modules: **`packages/twinfile/src/simulator/`** — operates on twin catalogs; **not** twin heads.

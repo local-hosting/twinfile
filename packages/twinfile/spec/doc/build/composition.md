@@ -70,7 +70,7 @@ layers:
   # … routes, assets, bindings/*.yaml …
 ```
 
-**Campus + nested building** (`twinfile: 2`) — site patches, then a copy of the building Twinfile under `parts/`. Pattern guide: [Campus → building → floor](../place/campus-building-floor.md). Examples: [`transit-hub-campus`](../../../../catalog/place/examples/mobility-hub/campus/), [`airport`](../../../../catalog/place/examples/airport/) (building copies `./floors/airside`), [`arena`](../../../../catalog/place/examples/arena/).
+**Campus + nested building** (`twinfile: 2`) — site patches, then a copy of the building Twinfile under `parts/`. Pattern guide: [Campus → building → floor](../place/campus-building-floor.md). Examples: [`transit-hub-campus`](../../../src/catalog/place/examples/mobility-hub/campus/), [`airport`](../../../src/catalog/place/examples/airport/) (building copies `./floors/airside`), [`arena`](../../../src/catalog/place/examples/arena/).
 
 ```yaml
 from: twinfile/base-campus:0.1.0

@@ -1,12 +1,14 @@
 #!/usr/bin/env node
 /**
- * Replace retired `@local-hosting/twinfile-*` workspace names with `@local-hosting/twinfile` subpaths.
+ * Replace retired `@local-hosting/twinfile-*` workspace names with `@local-hosting/twinfile` subpaths
+ * and fix stale monorepo path prose across the twinfile repository.
  */
 import { readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const pkgRoot = join(dirname(fileURLToPath(import.meta.url)), '..')
+const repoRoot = join(pkgRoot, '../..')
 
 const REPLACEMENTS = [
   ['@local-hosting/twinfile-character/module', '@local-hosting/twinfile/character/module'],
@@ -32,17 +34,48 @@ const REPLACEMENTS = [
   ['@local-hosting/twinfile-story', '@local-hosting/twinfile/story'],
   ['@local-hosting/twinfile-event', '@local-hosting/twinfile/event'],
   ['@local-hosting/twinfile-resource', '@local-hosting/twinfile/resource'],
+  ['packages/core/src/paths/catalog-layout.ts', 'packages/twinfile/src/core/paths/catalog-layout.ts'],
+  ['packages/spec/', 'packages/twinfile/spec/'],
+  ['yarn workspace @local-hosting/twinfile-cli build', 'yarn workspace @local-hosting/twinfile build'],
 ]
 
-const SCAN_DIRS = ['src', 'test', 'spec', '.']
-const SCAN_ROOT_FILES = ['README.md']
+const SKIP_DIRS = new Set([
+  'node_modules',
+  'dist',
+  '.yarn',
+  '.git',
+  'yarn.lock',
+])
+
+const SCAN_ROOTS = [
+  join(repoRoot, 'packages/twinfile'),
+  join(repoRoot, 'packages/site'),
+  join(repoRoot, 'packages/tooling'),
+  join(repoRoot, 'packages/twinfile/src/workbench'),
+  join(repoRoot, 'catalog'),
+  repoRoot,
+]
+
+const FILE_RE = /\.(ts|tsx|mts|js|mjs|md|mdx|yaml|yml|json)$/
 
 function walk(dir, out = []) {
-  for (const name of readdirSync(dir)) {
-    if (name === 'dist' || name === 'node_modules') continue
+  let names
+  try {
+    names = readdirSync(dir)
+  } catch {
+    return out
+  }
+  for (const name of names) {
+    if (SKIP_DIRS.has(name)) continue
     const p = join(dir, name)
-    if (statSync(p).isDirectory()) walk(p, out)
-    else if (/\.(ts|tsx|mts|md|mdx|yaml|json)$/.test(name)) out.push(p)
+    let st
+    try {
+      st = statSync(p)
+    } catch {
+      continue
+    }
+    if (st.isDirectory()) walk(p, out)
+    else if (FILE_RE.test(name)) out.push(p)
   }
   return out
 }
@@ -56,32 +89,17 @@ function rewrite(text) {
 }
 
 let n = 0
-for (const rel of SCAN_DIRS) {
-  const dir = join(pkgRoot, rel)
-  try {
-    for (const file of walk(dir)) {
-      const before = readFileSync(file, 'utf8')
-      const after = rewrite(before)
-      if (after !== before) {
-        writeFileSync(file, after)
-        n += 1
-      }
-    }
-  } catch {
-    // optional dir
-  }
-}
-for (const file of SCAN_ROOT_FILES) {
-  const p = join(pkgRoot, file)
-  try {
-    const before = readFileSync(p, 'utf8')
+const seen = new Set()
+for (const root of SCAN_ROOTS) {
+  for (const file of walk(root)) {
+    if (seen.has(file)) continue
+    seen.add(file)
+    const before = readFileSync(file, 'utf8')
     const after = rewrite(before)
     if (after !== before) {
-      writeFileSync(p, after)
+      writeFileSync(file, after)
       n += 1
     }
-  } catch {
-    // optional
   }
 }
 

@@ -11,6 +11,6 @@ One published npm package for Twinfile core, catalog types, bridge, CLI, and sim
 | `spec/` | Normative schemas and docs (not a separate npm package) |
 | `dist/` | Publish output (barrel + `./bridge`, `./loro`, `./simulator`) |
 
-Single npm name only — import `@local-hosting/twinfile` and documented subpaths (`/bridge`, `/loro`, `/place`, `/character`, `/simulator`, …). Retired `@local-hosting/twinfile-core`, `-place`, etc. are not published or used in source.
+Single npm name only — import `@local-hosting/twinfile` and documented subpaths (`/bridge`, `/loro`, `/place`, `/character`, `/simulator`, …). Retired `@local-hosting/twinfile`, `-place`, etc. are not published or used in source.
 
 Build: `yarn build` from this folder. Tests and vitest resolve the `development` condition on `package.json#exports` (source under `src/`).

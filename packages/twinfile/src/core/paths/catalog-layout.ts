@@ -29,6 +29,8 @@ export function catalogHubDir(twinfileRoot: string): string {
 }
 
 export function catalogTypeDir(twinfileRoot: string, type: TwinCatalogType): string {
+  const publishPkg = join(twinfileRoot, 'packages', 'twinfile', 'src', 'catalog', type);
+  if (existsSync(publishPkg)) return publishPkg;
   const unified = join(twinfileRoot, 'src', 'catalog', type);
   if (existsSync(unified)) return unified;
   return join(catalogHubDir(twinfileRoot), type);
@@ -47,7 +49,6 @@ export function isTwinfileMonorepoRoot(dir: string): boolean {
   const root = resolve(dir);
   if (existsSync(join(root, 'packages', 'twinfile', 'package.json'))) return true;
   if (existsSync(join(root, 'src', 'catalog', 'place'))) return true;
-  if (existsSync(join(root, 'packages', 'core'))) return true;
   return TWIN_CATALOG_TYPES.every((d) => existsSync(join(root, TWIN_CATALOG_HUB, d)));
 }
 

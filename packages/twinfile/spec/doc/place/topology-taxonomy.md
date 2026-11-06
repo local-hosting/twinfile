@@ -67,7 +67,7 @@ Each row is one **cell**: a named partition of the site (IndoorGML **CellSpace**
 | Airline “route”, slot, hours | *Not topology* | Schedules, scenarios, or out of scope for place graph |
 | Jet bridge | **Passage** or **Path** | Threshold plane↔gate lounge → passage; long bridge walk → path |
 
-Golden site: [`examples/airport`](../../../../catalog/place/examples/airport/) and [airport layout](../../../../catalog/place/examples/airport/docs/layout.md).
+Golden site: [`examples/airport`](../../../src/catalog/place/examples/airport/) and [airport layout](../../../src/catalog/place/examples/airport/docs/layout.md).
 
 ## Checklist (author)
 
@@ -94,9 +94,9 @@ Import/export: [`twinfile.bridge.indoorgml.v1`](../map/appendix.md#indoorgml-jso
 
 ## Composite kits (mobility hubs)
 
-**Mobility hub** and **transit hub** are the same place type in prose: a hub for interchange and waiting. A **campus-shaped** mobility hub uses **`from: twinfile/base-campus`** (outdoor anchors + optional `copy: ./parts/…`); the **kit-of-parts programme** under [`mobility-hub`](../../../../catalog/place/examples/mobility-hub/) models tiered nodes without requiring a map pin.
+**Mobility hub** and **transit hub** are the same place type in prose: a hub for interchange and waiting. A **campus-shaped** mobility hub uses **`from: twinfile/base-campus`** (outdoor anchors + optional `copy: ./parts/…`); the **kit-of-parts programme** under [`mobility-hub`](../../../src/catalog/place/examples/mobility-hub/) models tiered nodes without requiring a map pin.
 
-Modular “parts” (shelters, playgrounds, locker walls, **indoor public space**, retail counters) are **child cells**, not child twins. Use `parent` from part → **`programme_zone`** → **`mobility_site`**; set **`exposure`** per part; site context in **`ext.analysis`** / **`ext.design_intent`**. Wire indoor ↔ outdoor with **`openings`**. Pin fixtures on **`assets[]`**. See [mobility-hub kit of parts](mobility/parts.md) and [`examples/mobility-hub`](../../../../catalog/place/examples/mobility-hub/).
+Modular “parts” (shelters, playgrounds, locker walls, **indoor public space**, retail counters) are **child cells**, not child twins. Use `parent` from part → **`programme_zone`** → **`mobility_site`**; set **`exposure`** per part; site context in **`ext.analysis`** / **`ext.design_intent`**. Wire indoor ↔ outdoor with **`openings`**. Pin fixtures on **`assets[]`**. See [mobility-hub kit of parts](mobility/parts.md) and [`examples/mobility-hub`](../../../src/catalog/place/examples/mobility-hub/).
 
 ## Related
 

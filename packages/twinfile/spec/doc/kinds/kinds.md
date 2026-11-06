@@ -9,7 +9,7 @@ Twinfile hosts **six published twin types**: **place**, **resource**, **characte
 | **character** | `character` | [Character / story contracts](character-story.md) | **`disclosure:`** required; body **`character.kind`**: `narrative` \| `persona` |
 | **context** | `context` | [JTBD context](jtbd-context.md) | When [Context], I want to [Goal], so I can [Outcome] without [Obstacle]; story blesses character |
 | **story** | `story` | Narrative JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |
-| **event** | `event` | Event unit (`phases`, `expects`) | Timed occurrence a place hosts — [natural-hazards.md](natural-hazards.md), [`catalog/event/`](../../../../catalog/event/) |
+| **event** | `event` | Event unit (`phases`, `expects`) | Timed occurrence a place hosts — [natural-hazards.md](natural-hazards.md), [`catalog/event/`](../../../src/catalog/event/) |
 
 Any twin head MAY carry optional **`tags: []`** — namespaced `ns:slug` programme/interest labels (e.g. `theme:water`). That is **not** JTBD (`kind: context`) and **not** place **`roles[]`** event hooks. See [glossary — Twin head](../glossary.md#twin-head-all-types).
 
@@ -21,7 +21,7 @@ Logical refs: `twinfile/<type>/<id>:<ver>` for the six types ([RFC 0008](../../r
 
 ## No `question`
 
-Runner analyst prompts are **MCP-only** (`packages/cli/mcp/run-test-prompts.yaml`, `test_prompt` tool). Run heads do not carry `question:`.
+Runner analyst prompts are **MCP-only** (`packages/twinfile/src/catalog/place/examples/mcp/run-test-prompts.yaml`, `test_prompt` tool). Run heads do not carry `question:`.
 
 ## Pointers
 
