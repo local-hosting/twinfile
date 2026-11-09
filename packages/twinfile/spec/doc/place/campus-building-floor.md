@@ -8,9 +8,9 @@ Normative rules: [RFC 0009](../../rfcs/0009-dockerfile-model/index.md). Navigati
 
 | You need | Pattern | Golden example |
 | --- | --- | --- |
-| One building interior, site stays mostly outdoors/zones | **One `copy: ./parts/<name>`** with `into:` | [`mobility-hub/campus`](../../../src/catalog/place/examples/mobility-hub/campus/) |
-| Same building + a **second vertical slice** (landside vs airside) as its own Twinfile | **Building that copies `./floors/<floor>`** | [`airport`](../../../src/catalog/place/examples/airport/) |
-| Room detail only inside one site file | **More patches** after site spaces (no nested unit yet) | Airport [`layout.md`](../../../src/catalog/place/examples/airport/docs/layout.md) “Drill-down” |
+| One building interior, site stays mostly outdoors/zones | **One `copy: ./parts/<name>`** with `into:` | [`mobility-hub/campus`](../../../../catalog/place/examples/mobility-hub/campus/) |
+| Same building + a **second vertical slice** (landside vs airside) as its own Twinfile | **Building that copies `./floors/<floor>`** | [`airport`](../../../../catalog/place/examples/airport/) |
+| Room detail only inside one site file | **More patches** after site spaces (no nested unit yet) | Airport [`layout.md`](../../../../catalog/place/examples/airport/docs/layout.md) “Drill-down” |
 | Arbitrary containment tree in one unit | **`spaces[].parent`** (acyclic) | Spec [layout-navigation](layout-navigation.md#spaceparent-rollup) |
 
 ## Pattern A — one building (`mobility-hub/campus`)
@@ -101,7 +101,7 @@ steps:
 
 ## Authoring checklist
 
-1. **`twin init place … --geotype <slug>`** — campus slugs get `base-campus`, optional **`PARTS.md`** ([`examples/PARTS.md`](../../../src/catalog/place/examples/PARTS.md)), and `suggest_building_import` from geotypes.
+1. **`twin init place … --geotype <slug>`** — campus slugs get `base-campus`, optional **`PARTS.md`** ([`examples/PARTS.md`](../../../../catalog/place/examples/PARTS.md)), and `suggest_building_import` from geotypes.
 2. **Site first** — anchor building space id, outdoor/covered zones, `levels` if more than one slice matters on the map.
 3. **`twin init place parts/<name> --geotype …`** for each building, then `twin fmt --upgrade=2 --recursive`.
 4. **Copy** — append `copy: ./parts/<name>` with `into: <anchor>` after the patch that declares the anchor. Floors: the building appends `copy: ./floors/<floor>` with a `prefix:`.
@@ -110,13 +110,13 @@ steps:
 
 ## Pattern C — single building (`copy:`)
 
-One `copy: ./parts/<name>` with `into:` when the interior is large or reused. Small interiors can stay on the site twin (extra `spaces:` step) — see [`expo`](../../../src/catalog/place/examples/expo/) and [`port`](../../../src/catalog/place/examples/port/).
+One `copy: ./parts/<name>` with `into:` when the interior is large or reused. Small interiors can stay on the site twin (extra `spaces:` step) — see [`expo`](../../../../catalog/place/examples/expo/) and [`port`](../../../../catalog/place/examples/port/).
 
 | Site | `into:` anchor | Nested building |
 | --- | --- | --- |
-| [`arena`](../../../src/catalog/place/examples/arena/) | `concourse` | `parts/concourse` |
+| [`arena`](../../../../catalog/place/examples/arena/) | `concourse` | `parts/concourse` |
 
-[`park`](../../../src/catalog/place/examples/park/) is **`open_area`**: no buildings, outdoor-only fiction.
+[`park`](../../../../catalog/place/examples/park/) is **`open_area`**: no buildings, outdoor-only fiction.
 
 ## Ids after copy (prefix + provenance)
 

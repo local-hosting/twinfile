@@ -5,7 +5,7 @@ export const metadata = {
 
 # twin CLI
 
-`twin` ships with **`@local-hosting/twinfile/cli`** (`twin` / `twinfile` bins). It checks a unit, builds a `Place`, runs a scenario, and moves the unit to a registry. {{ className: 'lead' }}
+`twin` ships with **`@local-hosting/twinfile-cli`** (`twin` / `twinfile` bins). It checks a unit, builds a `Place`, runs a scenario, and moves the unit to a registry. {{ className: 'lead' }}
 
 Inside the monorepo, refs in `from:` and `copy:` resolve automatically. Elsewhere, set `TF_TWINFILE_ROOT` or pass `--examples-root`.
 
@@ -22,7 +22,7 @@ Inside the monorepo, refs in `from:` and `copy:` resolve automatically. Elsewher
 | `twin run [scenarioDir]` | Runs the scenario runner named by `use.runner`. |
 | `twin verify [scenarioDir]` | Compares the run to a frozen digest. `--frozen`. |
 
-From the monorepo root, after `yarn workspace @local-hosting/twinfile build`:
+From the monorepo root, after `yarn workspace @local-hosting/twinfile-cli build`:
 
 ```bash
 yarn twin check path/to/unit

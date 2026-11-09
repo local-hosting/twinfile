@@ -1,21 +1,21 @@
 # Place examples
 
-Golden **place** catalog: sites and bases. Layout: `packages/twinfile/src/catalog/place/examples/<id>/<id>.twin.yaml`.
+Golden **place** catalog: sites and bases. Layout: `catalog/place/examples/<id>/<id>.twin.yaml`.
 
 Other twin types:
 
 | Type | Examples root |
 | --- | --- |
-| **place** | `packages/twinfile/src/catalog/place/examples/` (this catalog) |
+| **place** | `catalog/place/examples/` (this catalog) |
 | **resource** | [`catalog/resource/examples/`](../../resource/examples/) |
 | **character** | [`catalog/character/examples/`](../../character/examples/) |
-| **story** | [`packages/twinfile/src/catalog/story/examples/`](../../story/examples/) — scenes with inline `run:` |
+| **story** | [`catalog/story/examples/`](../../story/examples/) — scenes with inline `run:` |
 
-**Runs:** only as inline **`run:`** on **`story.scenes[]`** (`packages/twinfile/src/catalog/story/examples/<story>#<scene-id>`).
+**Runs:** only as inline **`run:`** on **`story.scenes[]`** (`catalog/story/examples/<story>#<scene-id>`).
 
 No environment setup is needed inside the monorepo; tools find this catalog from the repo root.
 
-Normative layout: [`packages/twinfile/spec/doc/unit-layout.md`](../../../../spec/doc/unit-layout.md). Vocabulary: [`packages/twinfile/spec/doc/glossary.md`](../../../../spec/doc/glossary.md#quick-reference-prose--yaml).
+Normative layout: [`packages/spec/doc/unit-layout.md`](../../../../spec/doc/unit-layout.md). Vocabulary: [`packages/spec/doc/glossary.md`](../../../../spec/doc/glossary.md#quick-reference-prose--yaml).
 
 ### Vocabulary (one word per layer)
 

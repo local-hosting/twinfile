@@ -41,7 +41,7 @@ catalog:
 
 `parent` is the **host place ref** for indexes and MCP; compose uses `from:` and scenario **`steps` `copy:`**.
 
-Golden inventory: [`published-refs.json`](../../../src/catalog/place/examples/published-refs.json) (`refs` plus generated `catalog.byKind`).
+Golden inventory: [`published-refs.json`](../../../../catalog/place/examples/published-refs.json) (`refs` plus generated `catalog.byKind`).
 
 ## Renamed published units (2026-11)
 

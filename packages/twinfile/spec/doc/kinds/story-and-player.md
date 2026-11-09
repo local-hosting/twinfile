@@ -4,7 +4,7 @@
 
 | Layer | Package | Role |
 | --- | --- | --- |
-| **Authoring** | `packages/twinfile` | Four twin kinds + inline **`story.scenes[].run`** |
+| **Authoring** | `packages/core` | Four twin kinds + inline **`story.scenes[].run`** |
 | **Playback** | `@local-hosting/twinfile/simulator` | **Clock**, **timeline**, **session bus**, **`createTwinfilePlayer`** |
 
 There is **no** published `twinfile/clock` or `twinfile/player` ref. **Clock** is a field on a scene run; **player** is host/simulator code.
