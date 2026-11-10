@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { kind, module } from '../../../src/index.js';
+import { kind, module } from '../../../src/catalog/place/index.js';
 
 describe('@local-hosting/twinfile/place', () => {
   it('exports the place module', () => {

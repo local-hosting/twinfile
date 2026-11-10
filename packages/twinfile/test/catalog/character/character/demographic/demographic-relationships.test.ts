@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { validateDemographicCatalogRelationships } from '../../../../../src/contract/character/demographic/validate-demographic-catalog-relationships.js';
+import { validateDemographicCatalogRelationships } from '../../../../../src/catalog/character/contract/character/demographic/validate-demographic-catalog-relationships.js';
 
 describe('validateDemographicCatalogRelationships', () => {
   it('flags unknown cohort profile references', () => {

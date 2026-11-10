@@ -3,9 +3,9 @@ import { describe, expect, it } from 'vitest';
 import {
   buildEpisodeCalendarDays,
   generateEpisodeCalendar,
-} from '../../../../src/contract/narrative/calendar/generate-episode-calendar.js';
-import { simulationDateIso } from '../../../../src/contract/narrative/calendar/simulation-date.js';
-import { touchpointCatalogFromWire } from '../../../../src/contract/narrative/touchpoint/touchpoint-catalog.js';
+} from '../../../../src/catalog/story/contract/narrative/calendar/generate-episode-calendar.js';
+import { simulationDateIso } from '../../../../src/catalog/story/contract/narrative/calendar/simulation-date.js';
+import { touchpointCatalogFromWire } from '../../../../src/catalog/story/contract/narrative/touchpoint/touchpoint-catalog.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 const commuteScenes = storyboardStoryFixture({

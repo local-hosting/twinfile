@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { TwinfileLoroMap } from '@local-hosting/twinfile/loro';
 
-import { StoryDocument } from '../../../../src/contract/narrative/contract/story-document.js';
+import { StoryDocument } from '../../../../src/catalog/story/contract/narrative/contract/story-document.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 function memoryLoroMap(initial: Record<string, unknown> = {}): TwinfileLoroMap {

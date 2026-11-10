@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { validateStoryNarrativeCoherence } from '../../../../src/contract/narrative/contract/validate-story-narrative-coherence.js';
+import { validateStoryNarrativeCoherence } from '../../../../src/catalog/story/contract/narrative/contract/validate-story-narrative-coherence.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 describe('validateStoryNarrativeCoherence', () => {

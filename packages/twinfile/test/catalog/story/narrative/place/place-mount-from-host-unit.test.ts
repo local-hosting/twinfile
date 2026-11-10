@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { placeMountFromHostUnit } from '../../../../../src/contract/narrative/place/place-mount-from-host-unit.js';
+import { placeMountFromHostUnit } from '../../../../../src/catalog/story/contract/narrative/place/place-mount-from-host-unit.js';
 
 describe('placeMountFromHostUnit', () => {
   it('keeps the host-resolved placeRef as the mount key', () => {

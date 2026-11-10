@@ -4,7 +4,7 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 
 import { describe, expect, it } from 'vitest';
 
-import { loadTwinfileStrict, strictCheckPlace } from '../../../src/check/strict-place.js';
+import { loadTwinfileStrict, strictCheckPlace } from '../../../src/catalog/place/check/strict-place.js';
 import { loadTwinfile } from '@local-hosting/twinfile';
 import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
 import { twinHeadPath } from '@local-hosting/twinfile';

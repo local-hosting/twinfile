@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import type { StoryDimensionsV1 } from '../../../../../src/contract/narrative/types/story-dimensions.js';
+import type { StoryDimensionsV1 } from '../../../../../src/catalog/story/contract/narrative/types/story-dimensions.js';
 import {
   attachPlaceSlugFromPlaceRef,
   hostStoryWhereDimensionIsComplete,
   mergeStoryDimensionsWithHost,
-} from '../../../../../src/contract/narrative/project/merge-story-dimensions-with-host.js';
+} from '../../../../../src/catalog/story/contract/narrative/project/merge-story-dimensions-with-host.js';
 
 const storyDimensions: StoryDimensionsV1 = {
   specVersion: '1.0',

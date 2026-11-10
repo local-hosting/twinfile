@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { generateEpisodeCalendar } from '../../../../src/contract/narrative/calendar/generate-episode-calendar.js';
-import { touchpointCatalogFromWire } from '../../../../src/contract/narrative/touchpoint/touchpoint-catalog.js';
-import { resolveTouchpointPlaceAtScene } from '../../../../src/contract/narrative/touchpoint/resolve-touchpoint-place.js';
+import { generateEpisodeCalendar } from '../../../../src/catalog/story/contract/narrative/calendar/generate-episode-calendar.js';
+import { touchpointCatalogFromWire } from '../../../../src/catalog/story/contract/narrative/touchpoint/touchpoint-catalog.js';
+import { resolveTouchpointPlaceAtScene } from '../../../../src/catalog/story/contract/narrative/touchpoint/resolve-touchpoint-place.js';
 
 describe('physical touchpoint → place', () => {
   it('uses catalog placeRef for physical touchpoints when scene omits override', () => {

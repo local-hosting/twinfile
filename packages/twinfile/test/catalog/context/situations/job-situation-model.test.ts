@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseJobContextModel } from '../../../../src/contract/schemas/job-context-model.schema.js';
+import { parseJobContextModel } from '../../../../src/catalog/context/contract/schemas/job-context-model.schema.js';
 
 describe('JobContextModel', () => {
   it('parses a context pack of first-class JTBD jobs', () => {

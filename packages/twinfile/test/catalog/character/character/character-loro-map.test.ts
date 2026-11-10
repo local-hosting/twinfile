@@ -2,8 +2,8 @@ import { describe, expect, it } from 'vitest';
 
 import type { TwinfileLoroMap } from '@local-hosting/twinfile/loro';
 
-import { CharacterBundle } from '../../../../src/contract/character/contract/character-document.js';
-import type { Character } from '../../../../src/contract/character/types/character.js';
+import { CharacterBundle } from '../../../../src/catalog/character/contract/character/contract/character-document.js';
+import type { Character } from '../../../../src/catalog/character/contract/character/types/character.js';
 
 const sample: Character = {
   version: 1,

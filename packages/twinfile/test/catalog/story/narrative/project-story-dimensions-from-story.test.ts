@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { loadStory } from '../../../../src/contract/narrative/contract/load-story.js';
-import { compileStory } from '../../../../src/contract/narrative/contract/compile-story-narrative.js';
-import { projectStoryDimensionsFromStory } from '../../../../src/contract/narrative/project/project-story-dimensions-from-story.js';
+import { loadStory } from '../../../../src/catalog/story/contract/narrative/contract/load-story.js';
+import { compileStory } from '../../../../src/catalog/story/contract/narrative/contract/compile-story-narrative.js';
+import { projectStoryDimensionsFromStory } from '../../../../src/catalog/story/contract/narrative/project/project-story-dimensions-from-story.js';
 
 const exampleStoryRoot = path.resolve(
   path.dirname(fileURLToPath(import.meta.url)),

@@ -4,9 +4,9 @@ import {
   dayIndexForSceneOnHorizon,
   seekStoryEpisodeSceneOnArc,
   storySceneSeekRowsFromNarrative,
-} from '../../../../src/contract/narrative/story/seek-story-episode-scene.js';
-import type { EpisodeArcV1 } from '../../../../src/contract/narrative/types/episode-arc.js';
-import type { StoryScene } from '../../../../src/contract/narrative/types/scene.js';
+} from '../../../../src/catalog/story/contract/narrative/story/seek-story-episode-scene.js';
+import type { EpisodeArcV1 } from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
+import type { StoryScene } from '../../../../src/catalog/story/contract/narrative/types/scene.js';
 
 function sampleArc(): EpisodeArcV1 {
   return {

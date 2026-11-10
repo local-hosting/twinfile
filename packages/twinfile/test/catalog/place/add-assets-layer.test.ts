@@ -6,7 +6,7 @@ import { parse as parseYaml } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
 import { addAssetsLayerToPlace } from '@local-hosting/twinfile/cli';
-import { initPlaceFromGeotype } from '../../../src/cli/init-place-from-geotype.js';
+import { initPlaceFromGeotype } from '../../../src/catalog/place/cli/init-place-from-geotype.js';
 import { twinHeadPath } from '@local-hosting/twinfile';
 
 describe('add assets layer', () => {

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { pickJobsByIds } from '../../../../src/contract/job/pick-jobs-by-ids.js';
+import { pickJobsByIds } from '../../../../src/catalog/context/contract/job/pick-jobs-by-ids.js';
 
 describe('pickJobsByIds', () => {
   it('returns jobs in mount order', () => {

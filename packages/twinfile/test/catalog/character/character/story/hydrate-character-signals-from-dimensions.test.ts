@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Character } from '../../../../../src/contract/character/types/character.js';
-import { hydrateCharacterSignalsFromDimensions } from '../../../../../src/contract/character/story/hydrate-character-signals-from-dimensions.js';
+import type { Character } from '../../../../../src/catalog/character/contract/character/types/character.js';
+import { hydrateCharacterSignalsFromDimensions } from '../../../../../src/catalog/character/contract/character/story/hydrate-character-signals-from-dimensions.js';
 
 const basePcm: Character = {
   version: 1,

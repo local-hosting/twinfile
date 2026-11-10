@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildCharacterBrief } from '../../../../../src/contract/narrative/brief/build-character-brief.js';
+import { buildCharacterBrief } from '../../../../../src/catalog/story/contract/narrative/brief/build-character-brief.js';
 
 describe('buildCharacterBrief', () => {
   it('includes a Personality section from dramaturgy fields', () => {

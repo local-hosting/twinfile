@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { CharacterStoryInstanceDocument } from '../../../../src/contract/character/story/character-story-instance-document.js';
+import { CharacterStoryInstanceDocument } from '../../../../src/catalog/character/contract/character/story/character-story-instance-document.js';
 
 describe('CharacterStoryInstanceDocument', () => {
   it('toJSON round-trips via fromJSON', () => {

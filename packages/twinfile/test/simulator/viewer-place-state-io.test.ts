@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { placeStateIo } from '../viewer/public/viewer-place-state-io.js';
+import { placeStateIo } from '../../src/workbench/viewer/public/viewer-place-state-io.js';
 
 describe('viewer place state io', () => {
   it('keeps signal hub columns and drops plan controls', () => {

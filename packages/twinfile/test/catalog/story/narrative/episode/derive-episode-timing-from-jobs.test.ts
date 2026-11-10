@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { deriveEpisodeTimingFromJobs } from '../../../../../src/contract/narrative/episode/derive-episode-timing-from-jobs.js';
+import { deriveEpisodeTimingFromJobs } from '../../../../../src/catalog/story/contract/narrative/episode/derive-episode-timing-from-jobs.js';
 
 const commuteJourney = {
   id: 'journey:rider-commute',

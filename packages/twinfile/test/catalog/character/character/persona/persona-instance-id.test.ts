@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import {
   allocateUniqueCharacterId,
   buildCharacterIdSlug,
-} from '../../../../../src/contract/character/persona/character-instance-id.js';
-import { segmentIdFromCharacterSegment } from '../../../../../src/contract/character/persona/segment-id-from-character.js';
+} from '../../../../../src/catalog/character/contract/character/persona/character-instance-id.js';
+import { segmentIdFromCharacterSegment } from '../../../../../src/catalog/character/contract/character/persona/segment-id-from-character.js';
 
 describe('segmentIdFromCharacterSegment', () => {
   it('normalizes segment refs', () => {

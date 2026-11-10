@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import type { Character } from '@local-hosting/twinfile/character';
 
-import { buildStoryCatalogMenu, storyCatalogMenuHasStories } from '../../../../src/contract/narrative/story-catalog/build-story-catalog-menu.js';
-import { compileStoriesForCatalog } from '../../../../src/contract/narrative/story-catalog/compile-stories-for-catalog.js';
-import { resolveStoryEpisode } from '../../../../src/contract/narrative/story-catalog/resolve-story-episode.js';
+import { buildStoryCatalogMenu, storyCatalogMenuHasStories } from '../../../../src/catalog/story/contract/narrative/story-catalog/build-story-catalog-menu.js';
+import { compileStoriesForCatalog } from '../../../../src/catalog/story/contract/narrative/story-catalog/compile-stories-for-catalog.js';
+import { resolveStoryEpisode } from '../../../../src/catalog/story/contract/narrative/story-catalog/resolve-story-episode.js';
 import { placeMountFixture } from './helpers/place-mount-fixture.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildJourney } from '../../../../src/contract/narrative/journey/build/build-journey.js';
-import { formatJourneyMarkdown } from '../../../../src/contract/narrative/journey/build/format-journey-markdown.js';
-import type { StoryJourneyContext } from '../../../../src/contract/narrative/types/story-narrative-journey.js';
+import { buildJourney } from '../../../../src/catalog/story/contract/narrative/journey/build/build-journey.js';
+import { formatJourneyMarkdown } from '../../../../src/catalog/story/contract/narrative/journey/build/format-journey-markdown.js';
+import type { StoryJourneyContext } from '../../../../src/catalog/story/contract/narrative/types/story-narrative-journey.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 const story = storyboardStoryFixture({

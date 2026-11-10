@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { compactHostIo } from '../../../src/place/compact-host-io.js';
+import { compactHostIo } from '../../../src/catalog/place/place/compact-host-io.js';
 
 describe('compactHostIo', () => {
   it('drops control inputs and sorts labels', () => {

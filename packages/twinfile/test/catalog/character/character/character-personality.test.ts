@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseCharacter } from '../../../../src/contract/character/schemas/character.schema.js';
-import { CharacterPersonalitySchema } from '../../../../src/contract/character/schemas/character-persona.schema.js';
+import { parseCharacter } from '../../../../src/catalog/character/contract/character/schemas/character.schema.js';
+import { CharacterPersonalitySchema } from '../../../../src/catalog/character/contract/character/schemas/character-persona.schema.js';
 
 const blorkPersonality = {
   wants: 'A friend who is not afraid of her',

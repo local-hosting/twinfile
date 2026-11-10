@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   parseStoryDimensions,
   StoryDimensionWhereSchema,
-} from '../../../../src/contract/narrative/schemas/story-dimensions.schema.js';
+} from '../../../../src/catalog/story/contract/narrative/schemas/story-dimensions.schema.js';
 
 describe('StoryDimensionsSchema', () => {
   it('parses a compiled episode projection', () => {

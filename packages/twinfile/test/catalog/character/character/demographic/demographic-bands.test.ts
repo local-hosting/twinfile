@@ -5,7 +5,7 @@ import {
   incomeBandIdFromMedianIncome,
   resolveH3DemographicBands,
   selectPrimaryH3DemographicBands,
-} from '../../../../../src/contract/character/demographic/demographic-bands.js';
+} from '../../../../../src/catalog/character/contract/character/demographic/demographic-bands.js';
 
 describe('demographic bands', () => {
   it('maps median age and income to band ids', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { resolveStoryBeatSceneJobIds } from '../../../../src/contract/narrative/story/resolve-beat-scene-job-ids.js';
-import type { EpisodeArcV1 } from '../../../../src/contract/narrative/types/episode-arc.js';
+import { resolveStoryBeatSceneJobIds } from '../../../../src/catalog/story/contract/narrative/story/resolve-beat-scene-job-ids.js';
+import type { EpisodeArcV1 } from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
 
 const arc: EpisodeArcV1 = {
   version: 1,

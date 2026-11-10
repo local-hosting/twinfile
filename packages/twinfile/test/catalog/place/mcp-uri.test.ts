@@ -6,7 +6,7 @@ import {
   parseMcpLayersUri,
   parseMcpPlaceRowUri,
   parseMcpPlaceWireUri,
-} from '../../../src/mcp/mcp-uri.js';
+} from '../../../src/catalog/place/mcp/mcp-uri.js';
 
 const SHOP = 'twinfile/shop:0.2.0';
 

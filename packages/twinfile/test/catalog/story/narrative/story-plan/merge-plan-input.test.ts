@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { mergeStoryPlanInput } from '../../../../../src/contract/narrative/story-plan/plan-corpus.js';
+import { mergeStoryPlanInput } from '../../../../../src/catalog/story/contract/narrative/story-plan/plan-corpus.js';
 
 describe('mergeStoryPlanInput', () => {
   it('keeps explicit fields over extracted hints', () => {

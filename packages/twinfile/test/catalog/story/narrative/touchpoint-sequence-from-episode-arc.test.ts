@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { touchpointSequenceFromEpisodeArc } from '../../../../src/contract/narrative/episode/touchpoint-sequence-from-episode-arc.js';
-import type { EpisodeArcV1 } from '../../../../src/contract/narrative/types/episode-arc.js';
+import { touchpointSequenceFromEpisodeArc } from '../../../../src/catalog/story/contract/narrative/episode/touchpoint-sequence-from-episode-arc.js';
+import type { EpisodeArcV1 } from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
 
 describe('touchpointSequenceFromEpisodeArc', () => {
   it('returns a copy of objectiveTouchpointIds', () => {

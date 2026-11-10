@@ -4,7 +4,7 @@ import {
   resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
   resolveSegmentJourneyPaceFromCharacters,
-} from '../../../../../src/contract/character/story/resolve-journey-pace.js';
+} from '../../../../../src/catalog/character/contract/character/story/resolve-journey-pace.js';
 
 describe('resolve-journey-pace', () => {
   it('normalizes persona and planning segment pace', () => {

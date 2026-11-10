@@ -4,8 +4,8 @@ import {
   obstacleCatalogFromJobs,
   parseJob,
   parseObstacleCatalog,
-} from '../../../../src/contract/index.js';
-import { obstacleCatalogFromJobs as obstacleCatalogFromJobsBrowser } from '../../../../src/contract/browser.js';
+} from '../../../../src/catalog/context/contract/index.js';
+import { obstacleCatalogFromJobs as obstacleCatalogFromJobsBrowser } from '../../../../src/catalog/context/contract/browser.js';
 
 const activateLine = parseJob({
   id: 'job:activate-line',

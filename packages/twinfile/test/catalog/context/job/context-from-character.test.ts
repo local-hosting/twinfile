@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { contextFromCharacter } from '../../../../src/contract/job/context-from-character.js';
+import { contextFromCharacter } from '../../../../src/catalog/context/contract/job/context-from-character.js';
 
 describe('contextFromCharacter', () => {
   it('extracts a JobContextModel from Character jobs', () => {

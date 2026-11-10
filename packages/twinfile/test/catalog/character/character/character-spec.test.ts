@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { characterFromJSON, characterToJSON } from '../../../../src/contract/character/contract/json.js';
-import { parseCharacter } from '../../../../src/contract/character/schemas/character.schema.js';
-import { CHARACTER_SPEC_VERSION, characterSpecVersion } from '../../../../src/contract/character/types/character-spec.js';
+import { characterFromJSON, characterToJSON } from '../../../../src/catalog/character/contract/character/contract/json.js';
+import { parseCharacter } from '../../../../src/catalog/character/contract/character/schemas/character.schema.js';
+import { CHARACTER_SPEC_VERSION, characterSpecVersion } from '../../../../src/catalog/character/contract/character/types/character-spec.js';
 
 const persona = {
   id: 'persona:a',

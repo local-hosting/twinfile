@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { generateEpisodeCalendar } from '../../../../src/contract/narrative/calendar/generate-episode-calendar.js';
+import { generateEpisodeCalendar } from '../../../../src/catalog/story/contract/narrative/calendar/generate-episode-calendar.js';
 
 describe('scene place on schedule', () => {
   it('carries placeRef and sceneId on touchpoint schedule entries', () => {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { resolveStoryBeat } from '../../../../src/contract/narrative/story/resolve-story-beat.js';
+import { resolveStoryBeat } from '../../../../src/catalog/story/contract/narrative/story/resolve-story-beat.js';
 
 describe('resolveStoryBeat', () => {
   it('picks the activity covering the cursor hour', () => {

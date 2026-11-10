@@ -7,7 +7,7 @@ import {
   copyIntoAnchorsFromTwinfile,
   regionNavFromTwinfile,
   spacesFromTwinfileSteps,
-} from '../../../src/place/region-nav.js';
+} from '../../../src/catalog/place/place/region-nav.js';
 
 const packageRoot = join(import.meta.dirname, '..');
 

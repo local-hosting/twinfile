@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { situationsFromJSON, situationsToJSON } from '../../../../src/contract/contract/json.js';
-import type { JobContextModel } from '../../../../src/contract/types/job-context-model.js';
+import { situationsFromJSON, situationsToJSON } from '../../../../src/catalog/context/contract/contract/json.js';
+import type { JobContextModel } from '../../../../src/catalog/context/contract/types/job-context-model.js';
 
 const sample: JobContextModel = {
   id: 'jsm:in-store-mobile-activation',

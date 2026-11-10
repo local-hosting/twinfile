@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { Character } from '../../../../../src/contract/character/types/character.js';
+import type { Character } from '../../../../../src/catalog/character/contract/character/types/character.js';
 import {
   materializeCharacterStoryInstance,
   pickCharacterInstanceCharacteristics,
-} from '../../../../../src/contract/character/story/materialize-character-story-instance.js';
+} from '../../../../../src/catalog/character/contract/character/story/materialize-character-story-instance.js';
 const sampleCharacter: Character = {
   version: 1,
   id: 'persona:rider',

@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
-import { validateStoryNarrativeScenes } from '../../../../../src/contract/narrative/contract/validate-story-scenes.js';
+import { validateStoryNarrativeScenes } from '../../../../../src/catalog/story/contract/narrative/contract/validate-story-scenes.js';
 import {
   mergePlaceMountsByPlaceRef,
   minimalPlaceMount,
-} from '../../../../../src/contract/narrative/place/minimal-place-mount.js';
+} from '../../../../../src/catalog/story/contract/narrative/place/minimal-place-mount.js';
 import {
   findScenePlaceRefsOutsidePlaceMounts,
   resolveSceneSpaceId,
-} from '../../../../../src/contract/narrative/place/place-mount-catalog.js';
-import { placeMountFromPlaceRef } from '../../../../../src/contract/narrative/place/place-mount-from-place-ref.js';
-import { parseStory } from '../../../../../src/contract/narrative/schemas/story-narrative.schema.js';
+} from '../../../../../src/catalog/story/contract/narrative/place/place-mount-catalog.js';
+import { placeMountFromPlaceRef } from '../../../../../src/catalog/story/contract/narrative/place/place-mount-from-place-ref.js';
+import { parseStory } from '../../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
 
 const arena = {
   ...minimalPlaceMount({ placeRef: 'twinfile/place/arena:2.0.0', title: 'Arena' }),

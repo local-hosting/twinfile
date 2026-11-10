@@ -2,7 +2,7 @@ import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
-import { parsePlacesCatalogUri, resolvePlaceMount, resolvePlacesCatalog } from '../../../src/place/place-mount.js';
+import { parsePlacesCatalogUri, resolvePlaceMount, resolvePlacesCatalog } from '../../../src/catalog/place/place/place-mount.js';
 import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { labelFromSignalWire, sanitizeHostIo } from '../../../src/place/host-signal-ports.js';
+import { labelFromSignalWire, sanitizeHostIo } from '../../../src/catalog/place/place/host-signal-ports.js';
 
 describe('host signal port labels', () => {
   it('title-cases signal wire tails', () => {

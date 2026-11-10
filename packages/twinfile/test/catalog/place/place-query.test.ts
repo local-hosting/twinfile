@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { queryPlace } from '../../../src/query/place-query.js';
+import { queryPlace } from '../../../src/catalog/place/query/place-query.js';
 
 describe('queryPlace visits', () => {
   const sample = {

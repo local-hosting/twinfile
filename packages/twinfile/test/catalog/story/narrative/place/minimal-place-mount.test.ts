@@ -3,8 +3,8 @@ import { describe, expect, it } from 'vitest';
 import {
   mergePlaceMountsByPlaceRef,
   minimalPlaceMount,
-} from '../../../../../src/contract/narrative/place/minimal-place-mount.js';
-import { placeMountFromPlaceRef } from '../../../../../src/contract/narrative/place/place-mount-from-place-ref.js';
+} from '../../../../../src/catalog/story/contract/narrative/place/minimal-place-mount.js';
+import { placeMountFromPlaceRef } from '../../../../../src/catalog/story/contract/narrative/place/place-mount-from-place-ref.js';
 
 describe('placeMountFromPlaceRef', () => {
   it('builds a geo mount with a synthesized placeRef', () => {

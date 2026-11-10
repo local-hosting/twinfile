@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { buildStoryPlanExtractionIndex } from '../../../../../src/contract/narrative/story-plan/plan-corpus.js';
-import { enrichStoryPlanExtractionIndexFromProjectTwins } from '../../../../../src/contract/narrative/story-plan/enrich-story-plan-extraction-index-from-twins.js';
+import { buildStoryPlanExtractionIndex } from '../../../../../src/catalog/story/contract/narrative/story-plan/plan-corpus.js';
+import { enrichStoryPlanExtractionIndexFromProjectTwins } from '../../../../../src/catalog/story/contract/narrative/story-plan/enrich-story-plan-extraction-index-from-twins.js';
 import type { Character } from '@local-hosting/twinfile/character';
 import type { JobContextModel } from '@local-hosting/twinfile/context';
 

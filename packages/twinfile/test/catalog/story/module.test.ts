@@ -3,7 +3,7 @@ import { join } from 'node:path';
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@local-hosting/twinfile';
 import { describe, expect, it } from 'vitest';
 
-import { kind, module } from '../../../src/twin-module.js';
+import { kind, module } from '../../../src/catalog/story/twin-module.js';
 
 const exampleDir = join(resolveTypeExamplesRoot('story', resolveTwinfileRoot()), 'airport-operations');
 

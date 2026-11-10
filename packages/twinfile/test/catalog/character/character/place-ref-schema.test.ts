@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { PlaceRefSchema } from '../../../../src/contract/character/journey/place.schema.js';
+import { PlaceRefSchema } from '../../../../src/catalog/character/contract/character/journey/place.schema.js';
 
 describe('PlaceRefSchema', () => {
   it('carries an optional Twinfile placeRef instead of venueId', () => {

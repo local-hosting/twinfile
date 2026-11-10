@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { compileStory } from '../../../../src/contract/narrative/contract/compile-story-narrative.js';
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
+import { compileStory } from '../../../../src/catalog/story/contract/narrative/contract/compile-story-narrative.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
 
 describe('Story storyboard scenes', () => {
   it('compiles episode arc from scenes without a journey document', () => {

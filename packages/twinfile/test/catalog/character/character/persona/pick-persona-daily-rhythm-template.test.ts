@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Character } from '../../../../../src/contract/character/types/character.js';
-import { findDailyRhythmBlock } from '../../../../../src/contract/character/persona/sample-character-daily-rhythm.js';
-import { pickCharacterDailyRhythmTemplate } from '../../../../../src/contract/character/persona/pick-character-daily-rhythm-template.js';
-import { pickCharacterInstanceCharacteristics } from '../../../../../src/contract/character/story/materialize-character-story-instance.js';
-import { resolveCharacterInstanceRandom } from '../../../../../src/contract/character/story/character-instance-rng.js';
-import { URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM } from '../../../../../src/contract/character/persona/character-daily-rhythm-presets.js';
+import type { Character } from '../../../../../src/catalog/character/contract/character/types/character.js';
+import { findDailyRhythmBlock } from '../../../../../src/catalog/character/contract/character/persona/sample-character-daily-rhythm.js';
+import { pickCharacterDailyRhythmTemplate } from '../../../../../src/catalog/character/contract/character/persona/pick-character-daily-rhythm-template.js';
+import { pickCharacterInstanceCharacteristics } from '../../../../../src/catalog/character/contract/character/story/materialize-character-story-instance.js';
+import { resolveCharacterInstanceRandom } from '../../../../../src/catalog/character/contract/character/story/character-instance-rng.js';
+import { URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM } from '../../../../../src/catalog/character/contract/character/persona/character-daily-rhythm-presets.js';
 
 function characterWithVariants(): Character {
   return {

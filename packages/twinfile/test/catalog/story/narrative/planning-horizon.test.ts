@@ -2,11 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   DEFAULT_PLANNING_HORIZON_DAYS,
   MIN_PLANNING_HORIZON_DAYS,
-} from '../../../../src/contract/narrative/types/episode-arc.js';
+} from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
 import {
   resolvePlanningHorizonDays,
   resolveRandomPlanningHorizonDays,
-} from '../../../../src/contract/narrative/episode/planning-horizon.js';
+} from '../../../../src/catalog/story/contract/narrative/episode/planning-horizon.js';
 
 describe('resolvePlanningHorizonDays', () => {
   it('defaults to retail horizon', () => {

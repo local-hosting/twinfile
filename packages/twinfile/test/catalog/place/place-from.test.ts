@@ -3,10 +3,10 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { buildTwinfile } from '../../../src/build/build-twinfile.js';
-import { mergePlaceFromTwinfile } from '../../../src/place/place-inherit.js';
+import { buildTwinfile } from '../../../src/catalog/place/build/build-twinfile.js';
+import { mergePlaceFromTwinfile } from '../../../src/catalog/place/place/place-inherit.js';
 import { loadTwinfile } from '@local-hosting/twinfile';
-import { loadTwinfileStrict } from '../../../src/check/strict-place.js';
+import { loadTwinfileStrict } from '../../../src/catalog/place/check/strict-place.js';
 import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));

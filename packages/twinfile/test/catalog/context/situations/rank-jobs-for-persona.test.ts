@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { rankJobsForPersona } from '../../../../src/contract/job/rank-jobs-for-persona.js';
+import { rankJobsForPersona } from '../../../../src/catalog/context/contract/job/rank-jobs-for-persona.js';
 
 const character = {
   persona: {

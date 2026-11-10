@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { matchStoryCatalogIdsFromText } from '../../../../../src/contract/narrative/story-catalog/match-story-catalog-from-text.js';
-import type { StoryCatalogMenuV1 } from '../../../../../src/contract/narrative/types/story-catalog-menu.js';
+import { matchStoryCatalogIdsFromText } from '../../../../../src/catalog/story/contract/narrative/story-catalog/match-story-catalog-from-text.js';
+import type { StoryCatalogMenuV1 } from '../../../../../src/catalog/story/contract/narrative/types/story-catalog-menu.js';
 
 const menu: StoryCatalogMenuV1 = {
   characters: [

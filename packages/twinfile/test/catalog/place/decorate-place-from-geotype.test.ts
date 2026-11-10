@@ -7,9 +7,9 @@ import { placeAxesForSlug, placeDecorationsForSlug } from '@local-hosting/geotyp
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 
-import { loadTwinfileStrict } from '../../../src/check/strict-place.js';
-import { decoratePlaceFromGeotype } from '../../../src/cli/decorate-place-from-geotype.js';
-import { initPlaceFromGeotype } from '../../../src/cli/init-place-from-geotype.js';
+import { loadTwinfileStrict } from '../../../src/catalog/place/check/strict-place.js';
+import { decoratePlaceFromGeotype } from '../../../src/catalog/place/cli/decorate-place-from-geotype.js';
+import { initPlaceFromGeotype } from '../../../src/catalog/place/cli/init-place-from-geotype.js';
 import { testCatalogRoots } from '../../../helpers/catalog-test-roots.js';
 import { twinHeadFileName, twinHeadPath } from '@local-hosting/twinfile';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { planStoryEpisodeCalendar } from '../../../../../src/contract/narrative/story/plan-story-episode-calendar.js';
+import { planStoryEpisodeCalendar } from '../../../../../src/catalog/story/contract/narrative/story/plan-story-episode-calendar.js';
 
 describe('planStoryEpisodeCalendar', () => {
   it('builds timeline and calendar days from a minimal arc', () => {

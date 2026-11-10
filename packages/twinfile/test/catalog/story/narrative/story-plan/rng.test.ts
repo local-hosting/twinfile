@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { planStoryCreateHeuristic } from '../../../../../src/contract/narrative/story-plan/plan-catalog-heuristic.js';
-import type { StoryPlanCatalogSnapshotV1 } from '../../../../../src/contract/narrative/types/story-plan-catalog.js';
+import { planStoryCreateHeuristic } from '../../../../../src/catalog/story/contract/narrative/story-plan/plan-catalog-heuristic.js';
+import type { StoryPlanCatalogSnapshotV1 } from '../../../../../src/catalog/story/contract/narrative/types/story-plan-catalog.js';
 import {
   createStoryPlanChance,
   resolveStoryPlanRandom,
   storyPlanRandomFromChance,
-} from '../../../../../src/contract/narrative/story-plan/rng.js';
-import { pickRandomFrom } from '../../../../../src/contract/narrative/story-plan/random.js';
+} from '../../../../../src/catalog/story/contract/narrative/story-plan/rng.js';
+import { pickRandomFrom } from '../../../../../src/catalog/story/contract/narrative/story-plan/random.js';
 
 const catalog: StoryPlanCatalogSnapshotV1 = {
   segments: [

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import type { Journey } from '@local-hosting/twinfile/character';
 
-import { compileStory } from '../../../../src/contract/narrative/contract/compile-story-narrative.js';
+import { compileStory } from '../../../../src/catalog/story/contract/narrative/contract/compile-story-narrative.js';
 import {
   buildStoryArcTemplateFromKind,
   generateStoryEpisodeFromArc,
-} from '../../../../src/contract/narrative/story-arc/generate-from-arc-kind.js';
-import { STORY_ARC_KINDS } from '../../../../src/contract/narrative/types/story-arc-kind.js';
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
+} from '../../../../src/catalog/story/contract/narrative/story-arc/generate-from-arc-kind.js';
+import { STORY_ARC_KINDS } from '../../../../src/catalog/story/contract/narrative/types/story-arc-kind.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
 
 const commute = {
   id: 'journey:rider-commute',

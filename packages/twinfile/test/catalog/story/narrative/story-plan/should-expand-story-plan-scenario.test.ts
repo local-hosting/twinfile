@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { shouldExpandStoryPlanScenarioWithLlm } from '../../../../../src/contract/narrative/story-plan/should-expand-story-plan-scenario.js';
+import { shouldExpandStoryPlanScenarioWithLlm } from '../../../../../src/catalog/story/contract/narrative/story-plan/should-expand-story-plan-scenario.js';
 
 describe('shouldExpandStoryPlanScenarioWithLlm', () => {
   it('expands when NL request is present and useLlm', () => {

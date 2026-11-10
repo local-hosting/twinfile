@@ -4,8 +4,8 @@ import {
   defaultStoryClockHour,
   resolveStoryClockDayIndex,
   resolveStoryClockPosition,
-} from '../../../../src/contract/narrative/clock/story-clock.js';
-import type { EpisodeArcV1 } from '../../../../src/contract/narrative/types/episode-arc.js';
+} from '../../../../src/catalog/story/contract/narrative/clock/story-clock.js';
+import type { EpisodeArcV1 } from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
 
 function sampleArc(): EpisodeArcV1 {
   return {

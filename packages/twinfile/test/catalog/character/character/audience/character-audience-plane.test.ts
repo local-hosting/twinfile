@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { normalizeCharacterAudiencePlane } from '../../../../../src/contract/character/audience/normalize-audience-plane-weights.js';
-import { parseCharacter } from '../../../../../src/contract/character/schemas/character.schema.js';
+import { normalizeCharacterAudiencePlane } from '../../../../../src/catalog/character/contract/character/audience/normalize-audience-plane-weights.js';
+import { parseCharacter } from '../../../../../src/catalog/character/contract/character/schemas/character.schema.js';
 
 describe('Character audience planes (demographic ↔ psychographic symmetry)', () => {
   it('accepts matching demographic and psychographic shapes on persona', () => {

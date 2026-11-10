@@ -1,4 +1,4 @@
-import type { Story } from '../../../../../src/contract/narrative/types/story-narrative.js';
+import type { Story } from '../../../../../src/catalog/story/contract/narrative/types/story-narrative.js';
 
 /** Minimal valid storyboard Story for schema / JSON tests. */
 export function storyboardStoryFixture(overrides?: Partial<Story>): Story {

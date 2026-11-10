@@ -5,7 +5,7 @@ import {
   formatJtbdStatement,
   JobSchema,
   parseJob,
-} from '../../../../src/contract/index.js';
+} from '../../../../src/catalog/context/contract/index.js';
 
 describe('JTBD job contract', () => {
   it('accepts classic context / goal / outcome clauses', () => {

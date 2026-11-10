@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { compileStory } from '../../../../src/contract/narrative/contract/compile-story-narrative.js';
-import { loadStory } from '../../../../src/contract/narrative/contract/load-story.js';
+import { compileStory } from '../../../../src/catalog/story/contract/narrative/contract/compile-story-narrative.js';
+import { loadStory } from '../../../../src/catalog/story/contract/narrative/contract/load-story.js';
 
 describe('example/commute-run', () => {
   it('loads scenes from disk and compiles touchpoint sequence', () => {

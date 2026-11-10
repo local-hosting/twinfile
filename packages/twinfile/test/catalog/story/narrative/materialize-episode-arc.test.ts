@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import type { Journey } from '@local-hosting/twinfile/character';
 
-import { compileStory } from '../../../../src/contract/narrative/contract/compile-story-narrative.js';
-import { extractJourneyTouchpointSequence } from '../../../../src/contract/narrative/journey/extract-touchpoint-sequence.js';
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
-import { touchpointIndexFromIds } from '../../../../src/contract/narrative/types/touchpoint-index.js';
+import { compileStory } from '../../../../src/catalog/story/contract/narrative/contract/compile-story-narrative.js';
+import { extractJourneyTouchpointSequence } from '../../../../src/catalog/story/contract/narrative/journey/extract-touchpoint-sequence.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
+import { touchpointIndexFromIds } from '../../../../src/catalog/story/contract/narrative/types/touchpoint-index.js';
 
 const riderCommute = {
   id: 'journey:rider-commute',

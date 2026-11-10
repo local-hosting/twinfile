@@ -5,7 +5,7 @@ import {
   JobSchema,
   MAX_OBSTACLES_PER_JOB,
   parseJob,
-} from '../../../../src/contract/index.js';
+} from '../../../../src/catalog/context/contract/index.js';
 
 const baseJob = {
   id: 'job:activate-line',

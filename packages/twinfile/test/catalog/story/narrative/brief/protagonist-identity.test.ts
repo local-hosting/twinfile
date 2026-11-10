@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   isTechnicalStoryIdentityLabel,
   resolveHumanProtagonistNameWithCharacter,
-} from '../../../../../src/contract/narrative/brief/protagonist-identity.js';
+} from '../../../../../src/catalog/story/contract/narrative/brief/protagonist-identity.js';
 
 describe('isTechnicalStoryIdentityLabel', () => {
   it('flags instance slugs', () => {

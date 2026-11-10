@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import type { EpisodeArcV1 } from '../../../../src/contract/narrative/types/episode-arc.js';
+import type { EpisodeArcV1 } from '../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
 import {
   StoryInstanceDocument,
   storyCharacteristicsFromJSON,
-} from '../../../../src/contract/narrative/story/story-instance-document.js';
+} from '../../../../src/catalog/story/contract/narrative/story/story-instance-document.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 const arc: EpisodeArcV1 = {

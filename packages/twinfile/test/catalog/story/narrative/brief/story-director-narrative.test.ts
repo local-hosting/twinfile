@@ -3,7 +3,7 @@ import {
   buildDirectorScriptScenes,
   formatStoryDirectorNarrative,
   humanizeStoryWireLabel,
-} from '../../../../../src/contract/narrative/brief/format-story-director-narrative.js';
+} from '../../../../../src/catalog/story/contract/narrative/brief/format-story-director-narrative.js';
 import { storyboardStoryFixture } from '../helpers/storyboard-story-fixture.js';
 
 describe('humanizeStoryWireLabel', () => {

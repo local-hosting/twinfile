@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import type { Journey } from '@local-hosting/twinfile/character';
 
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
-import { validateStoryNarrativeAssociations } from '../../../../src/contract/narrative/contract/validate-story-associations.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
+import { validateStoryNarrativeAssociations } from '../../../../src/catalog/story/contract/narrative/contract/validate-story-associations.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 const journey = {

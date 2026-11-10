@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { storyFromJSON, storyToJSON } from '../../../../src/contract/narrative/contract/json.js';
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
+import { storyFromJSON, storyToJSON } from '../../../../src/catalog/story/contract/narrative/contract/json.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
 import {
   STORY_NARRATIVE_SPEC_VERSION,
   storyNarrativeSpecVersion,
-} from '../../../../src/contract/narrative/types/story-narrative-spec.js';
+} from '../../../../src/catalog/story/contract/narrative/types/story-narrative-spec.js';
 import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 
 describe('story narrative spec', () => {

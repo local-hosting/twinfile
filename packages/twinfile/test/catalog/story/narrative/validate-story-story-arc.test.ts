@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { parseStory } from '../../../../src/contract/narrative/schemas/story-narrative.schema.js';
-import { validateStoryNarrativeStoryArc } from '../../../../src/contract/narrative/contract/validate-story-story-arc.js';
+import { parseStory } from '../../../../src/catalog/story/contract/narrative/schemas/story-narrative.schema.js';
+import { validateStoryNarrativeStoryArc } from '../../../../src/catalog/story/contract/narrative/contract/validate-story-story-arc.js';
 
 const baseSceneboard = {
   characters: [{ characterId: 'persona:rider', primary: true }],

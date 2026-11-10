@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   createCharacterInstanceChance,
   resolveCharacterInstanceRandom,
-} from '../../../../../src/contract/character/story/character-instance-rng.js';
+} from '../../../../../src/catalog/character/contract/character/story/character-instance-rng.js';
 
 describe('character-instance-rng', () => {
   it('constructs Chance without relying on a CJS default export binding', () => {

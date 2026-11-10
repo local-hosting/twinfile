@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 
-import type { Character } from '../../../../../src/contract/character/types/character.js';
-import { resolveCharacterDailyRhythm } from '../../../../../src/contract/character/persona/resolve-character-daily-rhythm.js';
+import type { Character } from '../../../../../src/catalog/character/contract/character/types/character.js';
+import { resolveCharacterDailyRhythm } from '../../../../../src/catalog/character/contract/character/persona/resolve-character-daily-rhythm.js';
 import {
   findDailyRhythmBlock,
   formatDailyRhythmClock,
   sampleCharacterDailyRhythm,
-} from '../../../../../src/contract/character/persona/sample-character-daily-rhythm.js';
-import { DRIVER_WEEKDAY_DAILY_RHYTHM } from '../../../../../src/contract/character/persona/character-daily-rhythm-presets.js';
+} from '../../../../../src/catalog/character/contract/character/persona/sample-character-daily-rhythm.js';
+import { DRIVER_WEEKDAY_DAILY_RHYTHM } from '../../../../../src/catalog/character/contract/character/persona/character-daily-rhythm-presets.js';
 
 function characterStub(persona: Character['persona']): Character {
   return {

@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@local-hosting/twinfile';
 import { describe, expect, it } from 'vitest';
 
-import { kind, module } from '../../../src/index.js';
+import { kind, module } from '../../../src/catalog/context/index.js';
 
 const examplesRoot = resolveTypeExamplesRoot('context', resolveTwinfileRoot());
 

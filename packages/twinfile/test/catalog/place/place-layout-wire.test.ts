@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { placeMountFromJson, placeMountToJson } from '../../../src/place/place-mount-json.js';
-import { placeLayoutFromJson, placeLayoutToAxmContribution } from '../../../src/mounts/place-layout-json.js';
-import { placeMountFromPlaceLayout } from '../../../src/mounts/place-mount-from-layout-wire.js';
-import { placeMountToPlaceLayout } from '../../../src/mounts/place-mount-to-layout-wire.js';
+import { placeMountFromJson, placeMountToJson } from '../../../src/catalog/place/place/place-mount-json.js';
+import { placeLayoutFromJson, placeLayoutToAxmContribution } from '../../../src/catalog/place/mounts/place-layout-json.js';
+import { placeMountFromPlaceLayout } from '../../../src/catalog/place/mounts/place-mount-from-layout-wire.js';
+import { placeMountToPlaceLayout } from '../../../src/catalog/place/mounts/place-mount-to-layout-wire.js';
 
 const shopMount = {
   placeRef: 'twinfile/shop:0.2.0',

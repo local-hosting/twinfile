@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { STORY_ARC_KINDS } from '../../../../src/contract/narrative/types/story-arc-kind.js';
-import { defaultActsForStoryArcKind } from '../../../../src/contract/narrative/story-arc/write-practice-presets.js';
+import { STORY_ARC_KINDS } from '../../../../src/catalog/story/contract/narrative/types/story-arc-kind.js';
+import { defaultActsForStoryArcKind } from '../../../../src/catalog/story/contract/narrative/story-arc/write-practice-presets.js';
 
 describe('Write Practice story arc kinds', () => {
   it('defines six arc kinds with default beat rails', () => {

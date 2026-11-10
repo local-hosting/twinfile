@@ -5,7 +5,7 @@ import { join } from 'node:path';
 
 import { mergeObjects } from '@local-hosting/twinfile';
 import { placeImageDigest, sha256Digest } from '@local-hosting/twinfile';
-import { TwinfileBuilder } from '../../../src/build/twinfile-builder.js';
+import { TwinfileBuilder } from '../../../src/catalog/place/build/twinfile-builder.js';
 import { LayerCache } from '@local-hosting/twinfile';
 import { RefResolver } from '@local-hosting/twinfile';
 

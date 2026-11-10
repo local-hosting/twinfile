@@ -3,10 +3,10 @@ import {
   characterCatalogId,
   characterCatalogLabel,
   characterCatalogSegment,
-} from '../../../../src/contract/character/contract/character-catalog-display.js';
-import { resolveCharacterDisplayName } from '../../../../src/contract/character/persona/resolve-character-display-name.js';
-import * as pcmEntry from '../../../../src/contract/character/index.js';
-import type { Character } from '../../../../src/contract/character/types/character.js';
+} from '../../../../src/catalog/character/contract/character/contract/character-catalog-display.js';
+import { resolveCharacterDisplayName } from '../../../../src/catalog/character/contract/character/persona/resolve-character-display-name.js';
+import * as pcmEntry from '../../../../src/catalog/character/contract/character/index.js';
+import type { Character } from '../../../../src/catalog/character/contract/character/types/character.js';
 
 const sample: Character = {
   id: 'persona:rider',

@@ -4,9 +4,9 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { loadChanceCtor } from '../../../../../src/contract/character/story/load-chance-ctor.js';
+import { loadChanceCtor } from '../../../../../src/catalog/character/contract/character/story/load-chance-ctor.js';
 
-const storyDir = join(dirname(fileURLToPath(import.meta.url)), '../../../src/contract/character/story');
+const storyDir = join(dirname(fileURLToPath(import.meta.url)), '../../../src/catalog/character/contract/character/story');
 
 describe('loadChanceCtor', () => {
   it('does not default-import chance (Vite CJS interop)', () => {

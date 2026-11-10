@@ -3,7 +3,7 @@ import {
   loadMyersBriggsCatalog,
   mbtiDimensionsFromTypeId,
   resolveMbtiTypeDefinition,
-} from '../../../../src/contract/character/myers-briggs/index.js';
+} from '../../../../src/catalog/character/contract/character/myers-briggs/index.js';
 
 describe('myers-briggs (character)', () => {
   it('loads sixteen personality types from yaml', () => {

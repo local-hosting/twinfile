@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile } from '@local-hosting/twinfile';
-import { placeMountFromResolved } from '../../../src/place/place-mount.js';
+import { placeMountFromResolved } from '../../../src/catalog/place/place/place-mount.js';
 import { resolveExamplePlace } from '@local-hosting/twinfile';
 import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
 

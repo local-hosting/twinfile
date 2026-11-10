@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-import { buildTwinfile } from '../../../src/build/build-twinfile.js';
+import { buildTwinfile } from '../../../src/catalog/place/build/build-twinfile.js';
 import { readTwinfileLock } from '@local-hosting/twinfile';
 import { loadTwinfile } from '@local-hosting/twinfile';
 import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';

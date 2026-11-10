@@ -4,7 +4,7 @@ import {
   formatBriefMarkdown,
   joinBriefSections,
   briefSection,
-} from '../../../../../src/contract/narrative/brief/index.js';
+} from '../../../../../src/catalog/story/contract/narrative/brief/index.js';
 
 describe('formatBriefMarkdown', () => {
   it('renders headline and bullet sections', () => {

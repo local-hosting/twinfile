@@ -1,10 +1,10 @@
 import { CharacterStoryInstanceDocument } from '@local-hosting/twinfile/character';
 import { describe, expect, it } from 'vitest';
-import type { EpisodeArcV1 } from '../../../../../src/contract/narrative/types/episode-arc.js';
-import type { Story } from '../../../../../src/contract/narrative/types/story-narrative.js';
-import { advanceStoryEpisode } from '../../../../../src/contract/narrative/story/advance-story-episode.js';
-import { buildCharacterStoryRun } from '../../../../../src/contract/narrative/story/character-story-run.js';
-import { resolveStoryNarrativeInstance } from '../../../../../src/contract/narrative/story/resolve-story-narrative-instance.js';
+import type { EpisodeArcV1 } from '../../../../../src/catalog/story/contract/narrative/types/episode-arc.js';
+import type { Story } from '../../../../../src/catalog/story/contract/narrative/types/story-narrative.js';
+import { advanceStoryEpisode } from '../../../../../src/catalog/story/contract/narrative/story/advance-story-episode.js';
+import { buildCharacterStoryRun } from '../../../../../src/catalog/story/contract/narrative/story/character-story-run.js';
+import { resolveStoryNarrativeInstance } from '../../../../../src/catalog/story/contract/narrative/story/resolve-story-narrative-instance.js';
 
 const sessionArc: EpisodeArcV1 = {
   version: 1,

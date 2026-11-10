@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   CharacterKindSchema,
   CharacterPersonaSchema,
-} from '../../../../src/contract/character/schemas/character-persona.schema.js';
+} from '../../../../src/catalog/character/contract/character/schemas/character-persona.schema.js';
 
 describe('character.kind (narrative | persona)', () => {
   it('accepts narrative and persona', () => {

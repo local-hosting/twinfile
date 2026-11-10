@@ -6,8 +6,8 @@ import { placeScaffoldForSlug } from '@local-hosting/geotypes';
 import { parse as parseYaml } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
-import { initPlaceFromGeotype } from '../../../src/cli/init-place-from-geotype.js';
-import { PLACE_DEMO_EXT_H3 } from '../../../src/place/demo-ext-h3.js';
+import { initPlaceFromGeotype } from '../../../src/catalog/place/cli/init-place-from-geotype.js';
+import { PLACE_DEMO_EXT_H3 } from '../../../src/catalog/place/place/demo-ext-h3.js';
 import { placeBaseRefForArchetype } from '@local-hosting/twinfile';
 import { twinHeadPath } from '@local-hosting/twinfile';
 

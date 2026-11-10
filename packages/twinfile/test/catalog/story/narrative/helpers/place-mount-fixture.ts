@@ -1,4 +1,4 @@
-import type { PlaceMount } from '../../../../../src/contract/narrative/types/place-mount.js';
+import type { PlaceMount } from '../../../../../src/catalog/story/contract/narrative/types/place-mount.js';
 
 /** Minimal place mounts for unit tests (production uses {@link resolvePlaceMounts} from hosts). */
 export function placeMountFixture(input: {
