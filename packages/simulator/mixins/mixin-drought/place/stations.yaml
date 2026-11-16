@@ -1,5 +1,0 @@
-stations:
-  - id: drought-monitor
-    name: Drought monitoring post
-    roles:
-      - survey-station

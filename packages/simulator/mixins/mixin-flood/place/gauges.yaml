@@ -1,5 +1,0 @@
-gauges:
-  - id: flood-stage-gauge
-    observes: stage
-    roles:
-      - gauge

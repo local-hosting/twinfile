@@ -1,6 +1,0 @@
-markers:
-  - id: drought-water-pickup
-    name: Water distribution point
-    state: open
-    roles:
-      - collection-point
