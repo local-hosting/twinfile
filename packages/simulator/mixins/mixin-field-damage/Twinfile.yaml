@@ -1,0 +1,13 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-field-damage
+name: Field-damage hooks — damage hotspot, debris staging, safe lane, survey
+layers:
+  - place/markers.yaml
+  - place/stations.yaml
+  - plans/field-damage.yaml
+provides:
+  situations:
+    - field-damage

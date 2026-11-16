@@ -1,0 +1,524 @@
+[
+  {
+    "id": "dam-release",
+    "name": "Dam release",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "notice",
+      "release",
+      "peak",
+      "receding"
+    ],
+    "expects": {
+      "water-launch": {
+        "kind": "marker",
+        "min": 1
+      },
+      "flood-refuge": {
+        "kind": "marker",
+        "min": 1
+      },
+      "gauge": {
+        "kind": "gauge",
+        "min": 1
+      }
+    },
+    "args": {
+      "releaseAt": {
+        "type": "time"
+      },
+      "threshold": {
+        "type": "number"
+      }
+    }
+  },
+  {
+    "id": "drought",
+    "name": "Drought",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "advisory",
+      "restriction",
+      "emergency"
+    ],
+    "expects": {
+      "gauge": {
+        "kind": "gauge",
+        "min": 1
+      },
+      "collection-point": {
+        "kind": "marker",
+        "min": 1
+      },
+      "shelter": {
+        "kind": "space",
+        "min": 0
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "restrictionAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "earthquake",
+    "name": "Earthquake",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "alert",
+      "shaking",
+      "survey",
+      "all-clear"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 1
+      },
+      "exit": {
+        "kind": "opening",
+        "min": 2
+      },
+      "outdoor": {
+        "kind": "space",
+        "min": 0
+      }
+    },
+    "args": {
+      "shakingAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "field-damage",
+    "name": "Field damage",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "reported",
+      "active",
+      "cleared"
+    ],
+    "expects": {
+      "hotspot": {
+        "kind": "marker",
+        "min": 1
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "collection-point": {
+        "kind": "marker",
+        "min": 1
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "activeAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "flood",
+    "name": "Flood",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "advisory",
+      "warning",
+      "crest",
+      "receding"
+    ],
+    "expects": {
+      "flood-refuge": {
+        "kind": "marker",
+        "min": 1
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "gauge": {
+        "kind": "gauge",
+        "min": 1
+      }
+    },
+    "args": {
+      "crestAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "litter-pollution",
+    "name": "Litter and pollution",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "baseline",
+      "post-storm-surge",
+      "cleared"
+    ],
+    "expects": {
+      "hotspot": {
+        "kind": "marker",
+        "min": 1
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "collection-point": {
+        "kind": "marker",
+        "min": 1
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "surgeAt": {
+        "type": "time"
+      },
+      "threshold": {
+        "type": "number"
+      }
+    }
+  },
+  {
+    "id": "passenger-queue",
+    "name": "Passenger queue",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "steady",
+      "backlog",
+      "cleared"
+    ],
+    "expects": {
+      "ground-transport": {
+        "kind": "space",
+        "min": 1
+      }
+    },
+    "args": {
+      "startsAt": {
+        "type": "time"
+      },
+      "lanes": {
+        "type": "integer"
+      }
+    }
+  },
+  {
+    "id": "power-outage",
+    "name": "Power outage",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "outage",
+      "partial-restore",
+      "restored"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 1
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "alternative": {
+        "kind": "space",
+        "min": 0
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "outageAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "recovery-resilience",
+    "name": "Post-hazard recovery — staging relief, surveying damage, standing down shelters",
+    "version": "0.1.0",
+    "stability": "example",
+    "catalogKind": "situation",
+    "phases": [
+      "recovery",
+      "restoration",
+      "standing-down"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 0
+      },
+      "staging": {
+        "kind": "space",
+        "min": 0
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "restorationAt": {
+        "type": "time",
+        "default": "PT1H"
+      }
+    }
+  },
+  {
+    "id": "severe-weather",
+    "name": "Severe weather",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "watch",
+      "warning",
+      "all-clear"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 1
+      },
+      "exit": {
+        "kind": "opening",
+        "min": 2
+      },
+      "outdoor": {
+        "kind": "space",
+        "min": 0
+      }
+    },
+    "args": {
+      "warningAt": {
+        "type": "time"
+      },
+      "all-clearEndAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "slope-movement",
+    "name": "Slope movement",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "watch",
+      "evacuation",
+      "stabilized"
+    ],
+    "expects": {
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "flood-refuge": {
+        "kind": "marker",
+        "min": 1
+      },
+      "shelter": {
+        "kind": "space",
+        "min": 0
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "evacuationAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "transit-disruption",
+    "name": "Transit disruption",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "disrupted",
+      "restored"
+    ],
+    "expects": {
+      "ground-transport": {
+        "kind": "space",
+        "min": 1
+      },
+      "alternative": {
+        "kind": "space",
+        "min": 0
+      }
+    },
+    "args": {
+      "startsAt": {
+        "type": "time"
+      },
+      "line": {
+        "type": "string"
+      }
+    }
+  },
+  {
+    "id": "tsunami",
+    "name": "Tsunami",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "advisory",
+      "warning",
+      "arrival",
+      "all-clear"
+    ],
+    "expects": {
+      "flood-refuge": {
+        "kind": "marker",
+        "min": 1
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      },
+      "water-launch": {
+        "kind": "marker",
+        "min": 0
+      }
+    },
+    "args": {
+      "arrivalAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "venue-turnstile-flow",
+    "name": "Venue turnstile flow",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "pre-open",
+      "peak-arrival",
+      "gates-closed"
+    ],
+    "expects": {
+      "gate": {
+        "kind": "opening",
+        "min": 1
+      },
+      "seating": {
+        "kind": "space",
+        "min": 1
+      }
+    },
+    "args": {
+      "doorsAt": {
+        "type": "time"
+      },
+      "kickoffAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "volcanic-ash",
+    "name": "Volcanic ash",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "advisory",
+      "ashfall",
+      "all-clear"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 1
+      },
+      "exit": {
+        "kind": "opening",
+        "min": 1
+      },
+      "survey-station": {
+        "kind": "station",
+        "min": 0
+      }
+    },
+    "args": {
+      "ashfallAt": {
+        "type": "time"
+      }
+    }
+  },
+  {
+    "id": "wildfire",
+    "name": "Wildfire",
+    "version": "1.0.0",
+    "stability": "stable",
+    "catalogKind": "situation",
+    "phases": [
+      "watch",
+      "evacuation-order",
+      "contained"
+    ],
+    "expects": {
+      "shelter": {
+        "kind": "space",
+        "min": 1
+      },
+      "exit": {
+        "kind": "opening",
+        "min": 2
+      },
+      "safe-access": {
+        "kind": "marker",
+        "min": 1
+      }
+    },
+    "args": {
+      "evacuationAt": {
+        "type": "time"
+      }
+    }
+  }
+]

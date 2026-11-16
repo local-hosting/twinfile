@@ -1,0 +1,14 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-volcanic-ash
+name: Volcanic-ash hooks — shelter, exit, optional air-quality station
+layers:
+  - place/spaces.yaml
+  - place/openings.yaml
+  - place/stations.yaml
+  - plans/volcanic-ash.yaml
+provides:
+  situations:
+    - volcanic-ash

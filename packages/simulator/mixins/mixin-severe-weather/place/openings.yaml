@@ -1,0 +1,21 @@
+openings:
+  - id: severe-weather-exit-a
+    name: Shelter exit A
+    kind: door
+    connects:
+      - severe-weather-shelter
+      - severe-weather-assembly
+    width_m: 1.5
+    state: open
+    roles:
+      - exit
+  - id: severe-weather-exit-b
+    name: Shelter exit B
+    kind: door
+    connects:
+      - severe-weather-shelter
+      - severe-weather-assembly
+    width_m: 1.5
+    state: open
+    roles:
+      - exit

@@ -1,0 +1,14 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-wildfire
+name: Wildfire hooks — shelter, exits, evacuation route, wired plan
+layers:
+  - place/spaces.yaml
+  - place/openings.yaml
+  - place/markers.yaml
+  - plans/wildfire.yaml
+provides:
+  situations:
+    - wildfire

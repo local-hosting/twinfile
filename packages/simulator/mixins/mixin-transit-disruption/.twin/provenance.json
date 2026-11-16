@@ -1,0 +1,9 @@
+{
+  "layers": [
+    {
+      "ref": "place/spaces.yaml",
+      "index": 0,
+      "kind": "place"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-severe-weather
+name: Severe-weather hooks — shelter, outdoor assembly, two exits, wired plan
+layers:
+  - place/spaces.yaml
+  - place/openings.yaml
+  - plans/severe-weather.yaml
+provides:
+  situations:
+    - severe-weather

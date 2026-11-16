@@ -1,0 +1,15 @@
+for: flood
+roles:
+  flood-refuge:
+    - flood-refuge-point
+  safe-access:
+    - flood-safe-crossing
+  gauge:
+    - flood-stage-gauge
+actions:
+  - at: crest
+    set:
+      flood-refuge-point:
+        state: open
+      flood-safe-crossing:
+        state: restricted

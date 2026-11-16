@@ -1,0 +1,16 @@
+markers:
+  - id: litter-hotspot
+    name: Litter hotspot
+    state: open
+    roles:
+      - hotspot
+  - id: litter-safe-access
+    name: Maintained crossing
+    state: open
+    roles:
+      - safe-access
+  - id: litter-collection
+    name: Collection point
+    state: open
+    roles:
+      - collection-point

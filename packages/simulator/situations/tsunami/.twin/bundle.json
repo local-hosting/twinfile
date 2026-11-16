@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "tsunami",
+    "name": "Tsunami",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:d4a93a229c44ed4e6082dfd2d26e1e9e385c815b758d41b178a60753c6fa91da"
+}

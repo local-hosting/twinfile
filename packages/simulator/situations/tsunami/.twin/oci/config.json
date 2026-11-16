@@ -1,0 +1,28 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "tsunami",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "flood-refuge": {
+      "kind": "marker",
+      "min": 1
+    },
+    "safe-access": {
+      "kind": "marker",
+      "min": 1
+    },
+    "water-launch": {
+      "kind": "marker",
+      "min": 0
+    }
+  },
+  "phases": [
+    "advisory",
+    "warning",
+    "arrival",
+    "all-clear"
+  ]
+}

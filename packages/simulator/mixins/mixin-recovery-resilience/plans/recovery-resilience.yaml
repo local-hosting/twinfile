@@ -1,0 +1,19 @@
+for: recovery-resilience
+roles:
+  staging:
+    - recovery-relief-staging
+    - recovery-debris-yard
+  survey-station:
+    - recovery-survey-post
+  shelter: []
+actions:
+  - at: recovery
+    set:
+      recovery-relief-staging:
+        state: open
+      recovery-survey-post:
+        state: open
+  - at: standing-down
+    set:
+      recovery-relief-staging:
+        state: restricted

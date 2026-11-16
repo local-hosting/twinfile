@@ -1,0 +1,5 @@
+stations:
+  - id: field-damage-survey
+    name: Damage assessment post
+    roles:
+      - survey-station

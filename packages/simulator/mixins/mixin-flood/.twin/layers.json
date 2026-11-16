@@ -1,0 +1,14 @@
+[
+  {
+    "ref": "place/markers.yaml",
+    "kind": "place",
+    "content": "sha256:d535b2da9e28a988d1d6eb7e1105e02ee9b1e01a8f6cc2e55fe50b70f76c6791",
+    "chain": "sha256:0691a7b19f96d73595083c427e46a738791f810e8160bbf697987de9a51cb0ac"
+  },
+  {
+    "ref": "place/gauges.yaml",
+    "kind": "place",
+    "content": "sha256:64d928957972d56ea44094653af917ae8c0cf57d8fba2e56c12a95551a6e6a00",
+    "chain": "sha256:de3e3217743e4d6c7c5cfad310c6e33ba7bcddbe3d760d701b491838ca60f956"
+  }
+]

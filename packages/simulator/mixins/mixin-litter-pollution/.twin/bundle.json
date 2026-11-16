@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "id": "mixin-litter-pollution",
+    "name": "Litter-pollution hooks — hotspot, safe access, collection point, survey station, wired plan",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "markers": [
+      {
+        "id": "litter-hotspot",
+        "name": "Litter hotspot",
+        "state": "open",
+        "roles": [
+          "hotspot"
+        ]
+      },
+      {
+        "id": "litter-safe-access",
+        "name": "Maintained crossing",
+        "state": "open",
+        "roles": [
+          "safe-access"
+        ]
+      },
+      {
+        "id": "litter-collection",
+        "name": "Collection point",
+        "state": "open",
+        "roles": [
+          "collection-point"
+        ]
+      }
+    ],
+    "stations": [
+      {
+        "id": "litter-survey-station",
+        "name": "Litter survey station",
+        "roles": [
+          "survey-station"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:4a5b9888ba5c11fc56ad78e22f5295ea378c29f145f8086b7e29960dbcf11193"
+}

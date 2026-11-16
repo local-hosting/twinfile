@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Twinfile places</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link rel="stylesheet" href="/viewer.css" />
+    <link rel="stylesheet" href="/styles/twinfile-output.css" />
+    <script src="/vendor/highlight.js"></script>
+    <style type="text/tailwindcss">
+      body {
+        @apply m-0 min-h-screen bg-zinc-50 text-zinc-900 antialiased;
+      }
+      .viewer-shell {
+        @apply flex h-screen flex-col md:flex-row;
+      }
+      .viewer-aside {
+        @apply flex w-full shrink-0 flex-col border-b border-zinc-200 bg-white md:w-72 md:border-b-0 md:border-r;
+      }
+      .viewer-aside-body {
+        @apply min-h-0 flex-1 overflow-auto p-2;
+      }
+      .catalog-group {
+        @apply mb-3;
+      }
+      .catalog-group__title {
+        @apply px-2.5 pb-1 pt-2 text-[0.65rem] font-semibold uppercase tracking-wide text-zinc-400;
+      }
+      .catalog-list {
+        @apply m-0 list-none p-0;
+      }
+      .catalog-list > li {
+        @apply m-0 p-0;
+      }
+      .catalog-item {
+        @apply mb-0.5 block w-full rounded-md px-2.5 py-1.5 text-left text-sm text-zinc-700 hover:bg-zinc-100;
+      }
+      .catalog-item[aria-current='true'] {
+        @apply bg-zinc-100 font-medium text-zinc-900;
+      }
+      .catalog-item__id {
+        @apply mt-0.5 block truncate text-[0.65rem] font-normal text-zinc-400;
+      }
+    </style>
+    <style>
+      /* Examples SPA: token colors must win over Tailwind browser pre/code defaults */
+      #canvas .code-viewer .hljs-attr,
+      #canvas .code-viewer .hljs-property,
+      #canvas .code-viewer .hljs-section,
+      #canvas .code-viewer .hljs-meta,
+      #canvas .json-viewer .hljs-attr,
+      #canvas .json-viewer .hljs-property,
+      #canvas .json-viewer .hljs-section,
+      #canvas .json-viewer .hljs-meta {
+        color: var(--tf-shiki-keyword, #7dd3fc);
+      }
+      #canvas .code-viewer .hljs-string,
+      #canvas .json-viewer .hljs-string {
+        color: var(--tf-shiki-string, #34d399);
+      }
+      #canvas .code-viewer .hljs-number,
+      #canvas .code-viewer .hljs-literal,
+      #canvas .json-viewer .hljs-number,
+      #canvas .json-viewer .hljs-literal {
+        color: var(--tf-shiki-constant, #34d399);
+      }
+      #canvas .code-viewer .hljs-comment,
+      #canvas .json-viewer .hljs-comment {
+        color: var(--tf-shiki-comment, #71717a);
+      }
+      #canvas .code-viewer .hljs-punctuation,
+      #canvas .code-viewer .hljs-bullet,
+      #canvas .json-viewer .hljs-punctuation,
+      #canvas .json-viewer .hljs-bullet {
+        color: var(--tf-shiki-punctuation, #e4e4e7);
+      }
+      #canvas .code-viewer .hljs,
+      #canvas .json-viewer .hljs {
+        color: var(--tf-shiki-text, #fafafa);
+      }
+    </style>
+  </head>
+  <body class="viewer-shell">
+    <aside class="viewer-aside">
+      <header class="border-b border-zinc-200 px-4 py-3">
+        <p class="text-xs font-medium uppercase tracking-wide text-zinc-500">Golden catalog</p>
+        <h1 class="text-base font-semibold">Place cards</h1>
+      </header>
+      <nav class="viewer-aside-body" id="catalog" aria-label="Site catalog"></nav>
+    </aside>
+    <main class="flex min-w-0 flex-1 flex-col">
+      <nav class="flex flex-wrap gap-1 border-b border-zinc-200 bg-white px-3 py-2" id="tabs" role="tablist"></nav>
+      <div class="min-h-0 flex-1 overflow-auto p-4" id="canvas">
+        <p class="text-sm text-zinc-500">Pick a site.</p>
+      </div>
+    </main>
+    <script type="module" src="/viewer-app.js"></script>
+  </body>
+</html>

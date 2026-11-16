@@ -1,0 +1,5 @@
+stations:
+  - id: litter-survey-station
+    name: Litter survey station
+    roles:
+      - survey-station

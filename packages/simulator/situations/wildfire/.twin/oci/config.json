@@ -1,0 +1,27 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "wildfire",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "shelter": {
+      "kind": "space",
+      "min": 1
+    },
+    "exit": {
+      "kind": "opening",
+      "min": 2
+    },
+    "safe-access": {
+      "kind": "marker",
+      "min": 1
+    }
+  },
+  "phases": [
+    "watch",
+    "evacuation-order",
+    "contained"
+  ]
+}

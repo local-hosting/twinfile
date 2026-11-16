@@ -1,0 +1,17 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-tsunami
+name: Tsunami hooks — high ground, evacuation route, optional coastal access
+layers:
+  - place/markers.yaml
+  - plans/tsunami.yaml
+applies_to:
+  extent:
+    - route
+    - area
+    - site
+provides:
+  situations:
+    - tsunami

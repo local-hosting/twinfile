@@ -1,0 +1,14 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-power-outage
+name: Power-outage hooks — shelter, safe egress, backup circulation, grid monitor
+layers:
+  - place/spaces.yaml
+  - place/markers.yaml
+  - place/stations.yaml
+  - plans/power-outage.yaml
+provides:
+  situations:
+    - power-outage
