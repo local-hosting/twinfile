@@ -19,7 +19,7 @@ export type TwinfileSourcePaneProps = {
   className?: string;
 };
 
-/** Declarative `Twinfile.yaml` + map (no stitched patch files). */
+/** Declarative `<unit>.twin.yaml` + map (no stitched patch files). */
 export function TwinfileSourcePane({
   unitKey,
   text,
@@ -56,7 +56,7 @@ export function TwinfileSourcePane({
       ),
       createElement('textarea', {
         className: 'twinfile-editor__text',
-        'aria-label': 'Twinfile.yaml',
+        'aria-label': 'Twin head',
         spellCheck: false,
         wrap: 'off',
         readOnly: readOnly ? true : undefined,
@@ -95,5 +95,5 @@ export function TwinfileSourcePane({
 function statusLine(uri: string, draft: MapDraft): string {
   const count = draft.features.length;
   const noun = count === 1 ? 'feature' : 'features';
-  return `${uri} · Twinfile.yaml · ${count} map ${noun}`;
+  return `${uri} · twin head · ${count} map ${noun}`;
 }
