@@ -1,5 +1,0 @@
-gauges:
-  - id: dam-release-gauge
-    observes: stage
-    roles:
-      - gauge

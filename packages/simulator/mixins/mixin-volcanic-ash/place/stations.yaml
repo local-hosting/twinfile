@@ -1,5 +1,0 @@
-stations:
-  - id: volcanic-ash-monitor
-    name: Air-quality monitor
-    roles:
-      - survey-station

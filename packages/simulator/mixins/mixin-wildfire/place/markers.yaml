@@ -1,6 +1,0 @@
-markers:
-  - id: wildfire-evac-route
-    name: Evacuation route
-    state: open
-    roles:
-      - safe-access
