@@ -2,20 +2,38 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://twinfile.org/schemas/1/place/ops/services.schema.json",
   "type": "object",
-  "required": ["services"],
+  "required": [
+    "services"
+  ],
   "properties": {
     "services": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "kind", "space"],
+        "required": [
+          "id",
+          "kind",
+          "space"
+        ],
         "properties": {
-          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
-          "name": { "type": "string" },
-          "kind": { "type": "string" },
-          "space": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
-          "state": { "type": "string" },
-          "ext": { "type": "object" }
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "space": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "state": {
+            "type": "string"
+          },
+          "ext": {
+            "type": "object"
+          }
         },
         "additionalProperties": false
       }

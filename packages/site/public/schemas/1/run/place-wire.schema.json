@@ -4,7 +4,11 @@
   "title": "PlaceWire",
   "description": "Wire JSON for MCP twin://place (root) and OCI config (`Place.toWire()`).",
   "type": "object",
-  "required": ["meta", "place", "digest"],
+  "required": [
+    "meta",
+    "place",
+    "digest"
+  ],
   "properties": {
     "meta": {
       "type": "object",
@@ -15,8 +19,13 @@
       },
       "additionalProperties": true
     },
-    "place": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/mergedPlace" },
-    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+    "place": {
+      "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/mergedPlace"
+    },
+    "digest": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$"
+    }
   },
   "additionalProperties": false
 }

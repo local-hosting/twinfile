@@ -17,10 +17,15 @@
     "kind": {
       "enum": [
         "place",
+        "base",
+        "mixin",
+        "resource",
+        "character",
+        "story",
         "event",
+        "run",
         "situation",
-        "scenario",
-        "mixin"
+        "scenario"
       ]
     },
     "name": {
