@@ -11,7 +11,7 @@
 
 | Run | Intent doc |
 | --- | --- |
-| [`until-stage-unsafe`](../../../story/examples/river-operations/scenes/river-until-stage-unsafe) | [`README.md`](../../../story/examples/river-operations/scenes/river-until-stage-unsafe/run.yaml) |
-| [`swim-unsafe-known`](../../../story/examples/river-operations/scenes/river-swim-unsafe-known) | [`README.md`](../../../story/examples/river-operations/scenes/river-swim-unsafe-known/run.yaml) |
+| [`river-until-stage-unsafe`](../../../story/examples/river-operations/river-operations.twin.yaml) | `river-operations#river-until-stage-unsafe` |
+| [`river-swim-unsafe-known`](../../../story/examples/river-operations/river-operations.twin.yaml) | `river-operations#river-swim-unsafe-known` |
 
 Presets wire **clock**, **args**, and **runners** only — no `question:` on the run manifest.

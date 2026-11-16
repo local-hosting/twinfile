@@ -38,4 +38,4 @@ Implementations MUST accept **both** forms when resolving a unit. Kind is **neve
 ## Conformance
 
 - JSON Schema `#/$defs/twinfileRef` accepts legacy and typed short refs.
-- Golden twins publish under `place/examples/`, `resource/examples/`, etc.; scene runs under `story/examples/*/scenes/*/run.yaml`.
+- Golden twins publish under `place/examples/`, `resource/examples/`, etc.; scene runs inline on `story.scenes[]` in `story/examples/*/<story>.twin.yaml`.

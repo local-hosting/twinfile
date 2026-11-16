@@ -1,6 +1,6 @@
 # Twinfile
 
-**doppler-group/twinfile** — one monorepo for the Twinfile open stack: **four twin types** (**place, resource, character, story**). Scene **runs** live under `catalog/story/examples/.../scenes/*/run.yaml`; the **player** (`packages/simulator`) executes stories.
+**doppler-group/twinfile** — one monorepo for the Twinfile open stack: **four twin types** (**place, resource, character, story**). Scene **runs** are inline `run:` blocks on `story.scenes[]` in `catalog/story/examples/`; the **player** (`packages/simulator`) executes stories.
 
 **Twinfile** is a Dockerfile-style recipe for a place you can build, pin, publish, and talk to — without a closed host to author or validate units.
 

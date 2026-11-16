@@ -8,7 +8,7 @@ Use this page when aligning **Twinfile**, **workbench**, and **host apps** (live
 
 | Piece | Where | Notes |
 | --- | --- | --- |
-| **`clock:`** | Scene **`run.yaml`** | `starts_at`, `duration`, `step` → playhead `t` |
+| **`clock:`** | Scene **`run:`** | `starts_at`, `duration`, `step` → playhead `t` |
 | **tracks / schedules / feeds** | Place layers | Recipes evaluated at each `t` |
 | **`timeline.at(t)`** | `@doppler-group/twinfile-simulator` (`openTimelineForPlace`) | Authoritative sample: tracks, `active`, `occupancy`, `phaseStarts`, … |
 | **Patch wires** | Host only | `TwinMessageV1` on module **bus** — not YAML |
@@ -22,7 +22,7 @@ Do **not** publish catalog refs named `twinfile/clock` or `twinfile/player`. **C
 | **Session** | built `Place` + `clock:` + current `t` | Read model for UI and algorithms |
 | **Player** | Advancing `t`, play/scrub/speed | Patch **module bus** (`signal:trigger`, `twin:event`, `signal:*`) |
 | **Runner** | `use.runner` **ENTRYPOINT** | **Stdout** JSON Lines (`twin run`, frozen verify) |
-| **Run** | Story scene **`run.yaml`** | Compose + optional `clock:` + optional `use.runner` |
+| **Run** | Story scene **`run:`** | Compose + optional `clock:` + optional `use.runner` |
 
 **Consolidate implementation, not manifest pins:** built-in threshold replay can be one library invoked by **player** (live metrics on the bus) and by **`twin run`** (JSONL). Untrusted **`npm:`** runners stay subprocesses ([`gov/security.md`](../gov/security.md)).
 
@@ -51,7 +51,7 @@ When a scenario has **`clock:`**, the workbench shows a **session clock** (play 
 
 **`@doppler-group/twinfile-simulator/host`** owns bus → patch wiring (`createTwinfilePlayer`, `twinfilePlayerAdvance`, `attachSessionClockEventManager`). Scrub/play emit **`note`** / **`edge`** on the session clock bus; **`edge`** drives patch publish (phases + schedule/mode **signals**). Workbench replays bus events after advance so scrub triggers live pulse + world pulse UI.
 
-On a host site, preview uses **`entry`** for the **place card** (spatial twin) and optional **`lens`** for the active **run** (a story scene `run.yaml`). Session clock, **`question`**, **`use.runner`**, **`clock`**, and args come from the lens build; they do not replace the place card. The place is built and (live) **played**; only the **run** is executed by the **runner** (offline) or driven by the host **player**. URL: `?entry=river&lens=scenarios/...`.
+On a host site, preview uses **`entry`** for the **place card** (spatial twin) and optional **`lens`** for the active **run** (a story scene `run:`). Session clock, **`question`**, **`use.runner`**, **`clock`**, and args come from the lens build; they do not replace the place card. The place is built and (live) **played**; only the **run** is executed by the **runner** (offline) or driven by the host **player**. URL: `?entry=river&lens=scenarios/...`.
 
 ## Host player (checklist)
 

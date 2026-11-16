@@ -17,4 +17,4 @@ Standard **catalog site** tree (bases omit optional paths).
 
 **Recipe order (campus):** `place` → `levels` → topology → decoration → `bind:` → `copy:` last.
 
-Runs live under [`catalog/story/examples/<story>/scenes/<scene>/run.yaml`](../../story/examples/); CI runs **`twin verify`** on scenes with **`expected/digest.txt`**.
+Runs are inline `run:` blocks on story scenes in [`catalog/story/examples/`](../../story/examples/); `yarn workspace @doppler-group/twinfile-core verify:scenarios` runs **`twin verify`** on scenes with **`run.expected.digest`**.

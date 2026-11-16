@@ -2,7 +2,7 @@
 
 ## Run test prompts
 
-Analyst questions for example **runs** live here, not in `run.yaml`.
+Analyst questions for example **runs** live here, not in the scene `run:`.
 
 - **File:** [`run-test-prompts.yaml`](./run-test-prompts.yaml)
 - **Schema:** `twinfile.mcp.run-test-prompts.v1`

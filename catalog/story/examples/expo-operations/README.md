@@ -1,3 +1,3 @@
 # expo-operations
 
-Runs live under `events/<run-id>/`.
+Runs are inline `run:` blocks on `story.scenes[]` in the story head — `twin verify <story-dir>#<scene-id>`.

@@ -40,21 +40,19 @@ layers:
   - bindings/transit-disruption.yaml
 ```
 
-**Run** (scene `run.yaml`, not a Twinfile) copies event refs at build time:
+**Run** (inline on a story scene, not a Twinfile) copies event refs at build time:
 
 ```yaml
-# story/examples/<story>/scenes/<scene>/run.yaml
-role: run
-from: twinfile/place/expo:0.2.0
-id: expo-outdoor-shelter-cap
-name: Outdoor shelter capacity
-version: 1.0.0
-stability: example
-steps:
-  - copy: twinfile/event/severe-weather:1.0.0
-args:
-  occupancy: 4200
-  target_role: shelter
+# story/examples/expo-operations/expo-operations.twin.yaml (story.scenes[])
+- id: expo-outdoor-shelter-cap
+  label: Outdoor shelter capacity
+  run:
+    from: twinfile/place/expo:0.2.0
+    steps:
+      - copy: twinfile/event/severe-weather:1.0.0
+    args:
+      occupancy: 4200
+      target_role: shelter
 ```
 
 See [Composition](../build/composition.md) for full compose order (place → events → scenario patches → **`args:`**).

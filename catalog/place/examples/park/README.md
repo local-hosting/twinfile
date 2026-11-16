@@ -10,4 +10,4 @@ Illustrative **`open_area`** site pinned at **Central Park, Manhattan** (`meadow
 
 ## Runs
 
-Offline verification: [`scenarios/trailhead-backup`](../../../story/examples/park-operations/scenes/park-trailhead-backup) — litter event on the meadow–trailhead loop. **Analyst intent** (not in `run.yaml`): see [`scenarios/trailhead-backup/README.md`](../../../story/examples/park-operations/scenes/park-trailhead-backup/run.yaml). Live demos use event **pulses** on the place, not extra scenario folders per button.
+Offline verification: [`park-trailhead-backup`](../../../story/examples/park-operations/park-operations.twin.yaml) — litter event on the meadow–trailhead loop. **Analyst intent** lives in [`mcp/`](../mcp/), not in the scene `run:`. Live demos use event **pulses** on the place, not extra scenes per button.

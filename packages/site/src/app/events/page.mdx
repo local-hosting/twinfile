@@ -63,33 +63,35 @@ On a built **place**, `image.meta.placeType.controls` is the button surface (`si
 
 ## A scene run {{ anchor: false }}
 
-A run is a scene payload under a **story**: `story/examples/<story>/scenes/<scene>/run.yaml`. `from:` is the place ref. `steps[].copy` pulls event units (use typed refs). `args:` are the run inputs. `use.runner` names the solver.
+A run is an inline **`run:`** on a scene in a **story** head. `from:` is the place ref. `steps[].copy` pulls event units (use typed refs). `args:` are the run inputs. `use.runner` names the solver. `expected:` pins what `twin verify` checks.
 
-`story/examples/shop-visit/scenes/shop-shelter-at-cap` (shop's only reference run):
+The `shop-shelter-at-cap` scene in `story/examples/shop-visit/shop-visit.twin.yaml` (shop's only reference run):
 
 ```yaml
-role: run
-from: twinfile/place/shop:0.2.0
-id: shop-shelter-at-cap
-name: Shelter at capacity
-version: 1.0.0
-stability: example
-steps:
-  - copy: twinfile/event/severe-weather:1.0.0
-clock:
-  starts_at: 2026-06-12T18:00:00-07:00
-  duration: PT30M
-  step: PT5M
-args:
-  occupancy: 180
-  target_role: shelter
-use:
-  runner: npm:@twinfile/runner-hydraulic@^0
+- id: shop-shelter-at-cap
+  label: Shelter at capacity
+  run:
+    from: twinfile/place/shop:0.2.0
+    steps:
+      - copy: twinfile/event/severe-weather:1.0.0
+    clock:
+      starts_at: 2026-06-12T18:00:00-07:00
+      duration: PT30M
+      step: PT5M
+    args:
+      occupancy: 180
+      target_role: shelter
+    use:
+      runner: npm:@twinfile/runner-hydraulic@^0
+    expected:
+      digest: sha256:…
+      metrics:
+        time_to_shelter_s: 27
 ```
 
 ```bash
-twin run story/examples/shop-visit/scenes/shop-shelter-at-cap
-twin verify story/examples/shop-visit/scenes/shop-shelter-at-cap --frozen
+twin run story/examples/shop-visit#shop-shelter-at-cap
+twin verify story/examples/shop-visit#shop-shelter-at-cap
 ```
 
-Frozen runs pin `expected/digest.txt`. `twin check --strict --frozen` fails when the built digest moves. Compose order is place, then events, plan bindings, scenario patches, and `args:` ([composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)).
+`twin verify` fails when the built digest moves off `expected.digest` or a metric differs from `expected.metrics`. Compose order is place, then events, plan bindings, scenario patches, and `args:` ([composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)).

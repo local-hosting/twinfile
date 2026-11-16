@@ -12,15 +12,15 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
 | **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — PCM/JSM; **`disclosure:`** required |
 | **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
-| **Run** | **`story/.../scenes/<id>/run.yaml`** | Scene preset (`role: run`): `from:`, `copy:`, `clock:`, optional `use.runner` — **not** a published twin |
+| **Run** | **`story.scenes[].run`** (`<story-dir>#<scene-id>`) | Inline scene run: `from:`, `copy:`, `clock:`, optional `use.runner`, `expected:` — **not** a published twin |
 | **Runner** | `use.runner` | Offline **ENTRYPOINT** (`npm:` ref) for `twin run` — MCP / host supplies the analyst prompt; see [Runners](pack/runners.md) |
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
-| **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads scene **`run.yaml`**, advances **session** on the patch **module bus** |
+| **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads each scene's inline **`run:`**, advances **session** on the patch **module bus** |
 | **Event** | **`catalog/event/<id>/<id>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; the scene `schedule:` and the player decide when phases fire. Places host events through role tags; `bindings/<event>.yaml` is an optional override |
 | **`id`** | head field | Ref slug (`twinfile/<type>/<id>:<version>`) — never UI copy |
 | **`name`** | head field | Display title |
 
-Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-layout.md)). **Runs** nest under **`catalog/story/examples/.../scenes/`** only. Legacy place **`scenarios/`** → `yarn sync:story-scenes`.
+Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-layout.md)). **Runs** are inline **`run:`** blocks on story scenes only (`<story-dir>#<scene-id>`).
 
 ## Repository layout (prose)
 
@@ -43,7 +43,7 @@ Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `ca
 | **Twinfile** | The interchange format and tooling (`twin` CLI) |
 | **Twin** | One published unit (`twinfile/<type>/<id>:<ver>`) |
 | **Place** (build) | Output of `twin build` on a place unit |
-| **Run** | Scene **`run.yaml`** — compose `kind: scenario` for verify; not **`twinfile/event/`** |
+| **Run** | Scene **`run:`** — compose `kind: scenario` for verify; not **`twinfile/event/`** |
 | **Runner** | **`use.runner`** on a run — offline verify; prompts are MCP-only |
 | **Event** | **`kind: event`** under `catalog/event/` — a timed occurrence a place hosts (hazards, game days) |
 
@@ -71,7 +71,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 | Artifact | Prose | Role |
 | --- | --- | --- |
 | **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
-| **`run.yaml`** | **Run** (scene) | Under `story/.../scenes/` — not published |
+| **`story.scenes[].run`** | **Run** (scene) | Inline on the story head — not published |
 | **Place event (TS)** | **Event** loaded from `catalog/event` | Catalog + `request()` → patch bus |
 
 ## Twin head (all types)
@@ -82,7 +82,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 | **`twinfile`** | Format generation (`1` or `2`) |
 | **`id`** | **Ref slug** — `twinfile/<type>/<id>:<version>`, lock keys, OCI segment |
 | **`name`** | **Display name** — cards, workbench, catalog (when set) |
-| **`use.runner`** | **Runs only** (`run.yaml`) — **`npm:`** solver ref; analyst prompts are MCP-only (`test_prompt`), not twin YAML |
+| **`use.runner`** | **Runs only** (scene `run:`) — **`npm:`** solver ref; analyst prompts are MCP-only (`test_prompt`), not twin YAML |
 
 **`place.name`** in `steps` = site fiction on the map, not the published ref in **`id`**.
 
