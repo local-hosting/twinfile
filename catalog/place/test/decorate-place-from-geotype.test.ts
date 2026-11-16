@@ -41,7 +41,7 @@ describe('decoratePlaceFromGeotype', () => {
 
     const result = decoratePlaceFromGeotype(unitDir, slug, catalogOpts);
 
-    const events = placeDecorationsForSlug(slug)!.situations;
+    const events = placeDecorationsForSlug(slug)!.events;
     expect(result.eventHints).toEqual(events);
     const strict = loadTwinfileStrict(unitDir, catalogOpts);
     if (events.length === 0) {

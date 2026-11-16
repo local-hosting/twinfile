@@ -4,21 +4,22 @@ import { loadTwinfile } from '@local-hosting/twinfile-core';
 import { twinHeadPath } from '@local-hosting/twinfile-core';
 import { listPlaceEventBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
 import type { Result } from '@local-hosting/twinfile-core';
-import { readTwinfileDoc, upsertStepItem, writeTwinfileDoc } from '@local-hosting/twinfile-core/cli';
+import {
+  isStarterLayerKind,
+  readTwinfileDoc,
+  starterLayerStep,
+  upsertStepItem,
+  writeTwinfileDoc,
+  type StarterLayerKind,
+} from '@local-hosting/twinfile-core/cli';
 
 export type DecoratePlaceResult = {
   /** Layers seeded with starter rows (`assets`, `sensors`). */
-  starterLayers: PlaceLayerKind[];
+  starterLayers: StarterLayerKind[];
   bindings: string[];
   suggestedLayers: PlaceLayerKind[];
   /** Event ids from geotypes — wire with `bind:` + the event catalog. */
   eventHints?: string[];
-};
-
-/** Starter rows for decoration layers; other suggested layers are site-specific. */
-const STARTER_LAYER_ROWS: Partial<Record<PlaceLayerKind, Record<string, unknown>[]>> = {
-  assets: [{ id: 'starter-kiosk', name: 'Starter kiosk', kind: 'kiosk', state: 'active' }],
-  sensors: [{ id: 'starter-sensor', name: 'Starter sensor', observes: 'occupancy' }],
 };
 
 function unwrap<T>(result: Result<T>): T {
@@ -35,11 +36,11 @@ export function decoratePlaceFromGeotype(
   const decorations = placeDecorationsForSlug(slug);
   if (!decorations) throw new Error(`No decorations for geotype "${slug}"`);
 
-  const starterLayers = decorations.layers.filter((kind) => STARTER_LAYER_ROWS[kind]);
+  const starterLayers = decorations.layers.filter(isStarterLayerKind);
   const twinfilePath = twinHeadPath(unitDir);
   const twinfile = readTwinfileDoc(twinfilePath);
   for (const kind of starterLayers) {
-    upsertStepItem(twinfile, { [kind]: STARTER_LAYER_ROWS[kind] }, (step) => kind in step, false);
+    upsertStepItem(twinfile, starterLayerStep(kind), (step) => kind in step, false);
   }
   writeTwinfileDoc(twinfilePath, twinfile);
 
@@ -50,6 +51,6 @@ export function decoratePlaceFromGeotype(
     starterLayers,
     bindings: unwrap(listPlaceEventBindings(unit, inherit)).map((row) => row.rel),
     suggestedLayers: decorations.layers.filter((kind) => !place[kind]?.length),
-    eventHints: [...decorations.situations],
+    eventHints: [...decorations.events],
   };
 }
