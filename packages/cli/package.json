@@ -1,0 +1,43 @@
+{
+  "name": "@doppler-group/twinfile-cli",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doppler-group/twinfile.git",
+    "directory": "packages/cli"
+  },
+  "type": "module",
+  "bin": {
+    "twin": "./bin/twinfile.js",
+    "twinfile": "./bin/twinfile.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "check": "yarn build && yarn typecheck"
+  },
+  "exports": {
+    "./eval": "./src/eval/index.ts",
+    "./cli/twin": {
+      "types": "./dist/cli/twin.d.ts",
+      "import": "./dist/cli/twin.js",
+      "default": "./dist/cli/twin.js"
+    }
+  },
+  "dependencies": {
+    "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
+    "@doppler-group/twinfile-character": "workspace:^",
+    "@doppler-group/twinfile-core": "workspace:packages/core",
+    "@doppler-group/twinfile-place": "workspace:^",
+    "@doppler-group/twinfile-resource": "workspace:^",
+    "@doppler-group/twinfile-simulator": "workspace:packages/simulator",
+    "@doppler-group/twinfile-story": "workspace:^",
+    "yaml": "^2.8.1",
+    "zod": "^4.1.11"
+  },
+  "devDependencies": {
+    "@types/node": "^22.15.21",
+    "typescript": "^5.8.3"
+  }
+}
