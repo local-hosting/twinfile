@@ -38,7 +38,7 @@ Optional **`visits.yaml`** or a v2 **`steps:`** item → **`visits[]`**: **visit
 
 | Field | Role |
 | --- | --- |
-| `id` | Stable beat id (SAM `visitMomentId`). |
+| `id` | Stable beat id (story `visitMomentId`). |
 | `kind` | `arrival`, `entry`, `waiting`, `activity`, `exit`, `return` |
 | `space` | Primary space for the moment |
 | `order` | Sort key (0 = first) |
