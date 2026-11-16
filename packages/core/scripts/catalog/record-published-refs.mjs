@@ -11,7 +11,7 @@ import { parse as parseYaml } from 'yaml';
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';
 import { resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
 
-import { resolveTwinCli } from '../../../packages/tooling/scripts/resolve-twin-cli.mjs';
+import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
 import { resolveTwinfileRootFromPlaceCatalog, resolveTypeExamplesRoot } from './resolve-twinfile-paths.mjs';

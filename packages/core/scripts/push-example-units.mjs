@@ -5,7 +5,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml } from 'yaml';
 
-import { resolveTwinCli } from '../../packages/tooling/scripts/resolve-twin-cli.mjs';
+import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { findTwinfileDirs } from './catalog/find-twinfile-dirs.mjs';
 import { resolveTwinfileHeadPath } from './catalog/resolve-twinfile-dir.mjs';
