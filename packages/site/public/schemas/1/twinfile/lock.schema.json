@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/twinfile/lock.schema.json",
+  "type": "object",
+  "required": [
+    "twinfile",
+    "refs"
+  ],
+  "properties": {
+    "twinfile": {
+      "const": 1
+    },
+    "refs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": [
+          "version"
+        ],
+        "properties": {
+          "version": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/semver"
+          },
+          "manifest": {
+            "type": "string"
+          },
+          "tree": {
+            "type": "string"
+          },
+          "layers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "overridden": {
+          "type": "boolean"
+        }
+      }
+    }
+  },
+  "additionalProperties": false
+}

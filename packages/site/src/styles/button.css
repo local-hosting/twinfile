@@ -1,0 +1,74 @@
+/**
+ * Brand book buttons (primary / secondary / tertiary) and mono eyebrow labels.
+ * "Active" covers pressed, current, and selected states.
+ */
+@layer components {
+  .tf-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.25rem;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    line-height: 1.5rem;
+    font-weight: 600;
+    transition:
+      background-color 150ms,
+      color 150ms,
+      opacity 150ms;
+  }
+
+  .tf-btn:focus-visible {
+    outline: 2px solid var(--tf-accent);
+    outline-offset: 2px;
+  }
+
+  .tf-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+
+  .tf-btn-primary {
+    background-color: var(--tf-btn-primary-bg);
+    color: var(--tf-btn-primary-text);
+  }
+
+  .tf-btn-primary:is(:hover, :active, [aria-current], [aria-pressed='true'], [data-active]) {
+    background-color: var(--tf-btn-primary-active-bg);
+    color: var(--tf-btn-primary-active-text);
+  }
+
+  .tf-btn-secondary {
+    background-color: var(--tf-btn-secondary-bg);
+    color: var(--tf-btn-secondary-text);
+  }
+
+  .tf-btn-secondary:is(:hover, :active, [aria-current], [aria-pressed='true'], [data-active]) {
+    background-color: var(--tf-btn-secondary-active-bg);
+    color: var(--tf-btn-secondary-active-text);
+    box-shadow: inset 0 0 0 1px var(--tf-btn-secondary-bg);
+  }
+
+  .tf-btn-tertiary {
+    background-color: var(--tf-btn-tertiary-bg);
+    color: var(--tf-btn-tertiary-text);
+    box-shadow: inset 0 0 0 1px var(--tf-line);
+  }
+
+  .tf-btn-tertiary:is(:hover, :active, [aria-current], [aria-pressed='true'], [data-active]) {
+    background-color: var(--tf-btn-tertiary-active-bg);
+    color: var(--tf-btn-tertiary-active-text);
+  }
+
+  .tf-eyebrow {
+    font-family: var(--font-mono);
+    font-size: var(--tf-type-mono-label-size);
+    line-height: var(--tf-type-mono-label-leading);
+    font-weight: var(--tf-font-weight-medium);
+    letter-spacing: var(--tf-type-eyebrow-tracking);
+    text-transform: uppercase;
+    color: var(--tf-label);
+  }
+}

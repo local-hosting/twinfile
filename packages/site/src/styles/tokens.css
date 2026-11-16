@@ -1,0 +1,219 @@
+/**
+ * Docs colors follow the first-commit Tailwind template:
+ * white page, gray type, sky links (Commit `typography.css`).
+ */
+
+:root {
+  /* Palette mapped onto the template gray / sky scale. */
+  --tf-brand-green: #0ea5e9;
+  --tf-brand-green-deep: #0284c7;
+  --tf-brand-mint: #38bdf8;
+  --tf-brand-indigo: #38bdf8;
+  --tf-brand-violet: #7dd3fc;
+  --tf-brand-navy: #111827;
+  --tf-brand-navy-raised: #030712;
+  --tf-brand-navy-inset: #1f2937;
+  --tf-brand-slate: #374151;
+  --tf-brand-cream: #ffffff;
+  --tf-brand-cream-raised: #f9fafb;
+  --tf-brand-cream-inset: #f3f4f6;
+  --tf-brand-gray: #e5e7eb;
+  --tf-brand-coral: #6ee7b7;
+  --tf-brand-yellow: #6ee7b7;
+  --tf-brand-white: #ffffff;
+
+  /* —— Hero rail (always dark) —— */
+  --tf-hero-surface: var(--tf-brand-navy);
+  --tf-hero-glow-a: rgb(56 189 248 / 0.35);
+  --tf-hero-glow-b: rgb(14 165 233 / 0.12);
+  --tf-hero-glow-fade: rgb(255 255 255 / 0);
+  --tf-hero-divider: rgb(255 255 255 / 1);
+  --tf-hero-text: var(--tf-brand-white);
+  --tf-hero-text-muted: rgb(255 255 255 / 0.8);
+  --tf-hero-text-subtle: rgb(255 255 255 / 0.45);
+  --tf-hero-accent: var(--tf-brand-green);
+  --tf-hero-accent-strong: var(--tf-brand-mint);
+  --tf-hero-link: rgb(255 255 255 / 0.3);
+  --tf-hero-link-hover: var(--tf-brand-green);
+  --tf-hero-link-bg-hover: rgb(255 255 255 / 0.05);
+  --tf-hero-ring: rgb(255 255 255 / 0.15);
+  --tf-biolum-glow: var(--tf-brand-mint);
+  --tf-biolum-glow-alt: var(--tf-brand-green);
+
+  /* Hero UI (forms, buttons on dark panel) */
+  --tf-hero-form-placeholder: var(--tf-hero-text-subtle);
+  --tf-hero-form-surface: rgb(255 255 255 / 0.025);
+  --tf-hero-form-ring: var(--tf-hero-ring);
+  --tf-hero-form-focus-ring: rgb(44 200 117 / 0.15);
+  --tf-hero-form-focus-border: var(--tf-brand-green);
+
+  /* Typography scale (Document fonts — use bundled weights 300 / 400 / 500 / 700 only) */
+  --tf-type-caption-size: 0.8125rem;
+  --tf-type-caption-leading: 1.5rem;
+  --tf-type-body-small-size: 0.75rem;
+  --tf-type-body-size: 0.875rem;
+  --tf-type-body-leading: 1.5rem;
+  --tf-type-label-size: 0.875rem;
+  --tf-type-page-title-size: 1.125rem;
+  --tf-type-prose-title-size: 1.25rem;
+  --tf-type-prose-subhead-size: 1rem;
+  --tf-type-hero-display-size: 2.25rem;
+  --tf-type-hero-display-leading: 1.1;
+  --tf-type-mono-label-size: 0.6875rem;
+  --tf-type-mono-label-leading: 1rem;
+  --tf-type-eyebrow-tracking: 0.12em;
+  --tf-font-sans: 'Supreme', ui-sans-serif, system-ui, sans-serif;
+  --tf-font-mono: 'DM Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --tf-font-weight-light: 300;
+  --tf-font-weight-regular: 400;
+  --tf-font-weight-medium: 500;
+  --tf-font-weight-bold: 700;
+
+  /* Shape */
+  --tf-radius-square: 0.5rem;
+
+  /* Ocean backdrop (canvas) — keep aligned with `src/lib/brand-palette.ts` */
+  --tf-ocean-floor: var(--tf-brand-navy);
+
+  /* —— 2. Page chrome —— */
+  --tf-page-surface: var(--tf-brand-cream);
+  --tf-page-surface-elevated: var(--tf-brand-white);
+  --tf-page-surface-inset: var(--tf-brand-cream-raised);
+  --tf-page-overlay: rgb(17 24 39 / 0.25);
+
+  /* Lines (borders, rings, dividers) and hover washes */
+  --tf-line-subtle: rgb(17 24 39 / 0.05);
+  --tf-line: rgb(17 24 39 / 0.1);
+  --tf-line-strong: rgb(17 24 39 / 0.2);
+  --tf-hover-wash: rgb(17 24 39 / 0.05);
+
+  /* —— Prose / changelog column —— */
+  --tf-prose-body: #4b5563;
+  --tf-prose-heading: #111827;
+  --tf-prose-muted: #6b7280;
+  --tf-prose-subtle: #9ca3af;
+  --tf-prose-quote: var(--tf-prose-muted);
+  --tf-prose-quote-border: var(--tf-line);
+  --tf-prose-link: #0ea5e9;
+  --tf-prose-link-hover: #0284c7;
+  --tf-prose-link-underline: rgb(56 189 248 / 0.4);
+  --tf-prose-link-hover-underline: rgb(2 132 199 / 0.4);
+  --tf-prose-bold: #111827;
+  --tf-prose-code: #111827;
+  --tf-prose-kbd: var(--tf-prose-body);
+  --tf-prose-kbd-bg: var(--tf-page-surface-inset);
+  --tf-prose-kbd-border: var(--tf-line);
+  --tf-prose-pre-surface: var(--tf-brand-navy);
+  --tf-prose-pre-text: rgb(255 255 255 / 0.8);
+  --tf-prose-pre-shadow: none;
+  --tf-prose-hr: var(--tf-line-subtle);
+  --tf-prose-table-border: var(--tf-line-strong);
+  --tf-prose-table-border-soft: var(--tf-line-subtle);
+  --tf-prose-marker: var(--tf-prose-subtle);
+
+  /* —— Accent (sky, matching template links) —— */
+  --tf-accent: #0ea5e9;
+  --tf-accent-muted: #7dd3fc;
+  --tf-accent-emphasis: #0284c7;
+  --tf-accent-text: #0284c7;
+  --tf-accent-wash: rgb(14 165 233 / 0.1);
+  --tf-accent-ring: rgb(14 165 233 / 0.35);
+  --tf-label: #6b7280;
+  --tf-info: #0284c7;
+  --tf-info-wash: rgb(14 165 233 / 0.08);
+  --tf-info-ring: rgb(14 165 233 / 0.25);
+  --tf-warning: #8a8c00;
+  --tf-warning-wash: rgb(224 228 58 / 0.2);
+  --tf-warning-ring: rgb(224 228 58 / 0.6);
+  --tf-danger: #d93b3b;
+  --tf-danger-wash: rgb(255 98 98 / 0.1);
+  --tf-danger-ring: rgb(255 98 98 / 0.35);
+
+  /* —— Code panel (always dark) —— */
+  --tf-code-chrome: var(--tf-brand-navy-raised);
+  --tf-code-muted: rgb(255 255 255 / 0.5);
+  --tf-code-line: rgb(255 255 255 / 0.08);
+
+  /* —— Buttons (brand book: primary / secondary / tertiary, enabled + active) —— */
+  --tf-btn-primary-bg: #111827;
+  --tf-btn-primary-text: #ffffff;
+  --tf-btn-primary-active-bg: #374151;
+  --tf-btn-primary-active-text: #ffffff;
+  --tf-btn-secondary-bg: #f3f4f6;
+  --tf-btn-secondary-text: #111827;
+  --tf-btn-secondary-active-bg: #e5e7eb;
+  --tf-btn-secondary-active-text: #111827;
+  --tf-btn-tertiary-bg: #ffffff;
+  --tf-btn-tertiary-text: #374151;
+  --tf-btn-tertiary-active-bg: #f9fafb;
+  --tf-btn-tertiary-active-text: #111827;
+
+  /* —— UI chrome —— */
+  --tf-toggle-icon: var(--tf-brand-navy);
+  --tf-toggle-icon-opacity: 0.6;
+  --tf-media-ring: var(--tf-line);
+  --tf-timeline-tick: var(--tf-line-strong);
+  --tf-hero-timeline: var(--tf-timeline-tick);
+
+  /* —— Syntax (Shiki) —— */
+  --tf-shiki-text: #ffffff;
+  --tf-shiki-constant: #6ee7b7;
+  --tf-shiki-string: #6ee7b7;
+  --tf-shiki-tag: #7dd3fc;
+  --tf-shiki-comment: #6b7280;
+  --tf-shiki-keyword: #7dd3fc;
+  --tf-shiki-parameter: #f9a8d4;
+  --tf-shiki-function: #c4b5fd;
+  --tf-shiki-punctuation: #e5e7eb;
+}
+
+.dark {
+  --tf-page-surface: #030712;
+  --tf-page-surface-elevated: #111827;
+  --tf-page-surface-inset: #1f2937;
+  --tf-page-overlay: rgb(0 0 0 / 0.5);
+
+  --tf-line-subtle: rgb(255 255 255 / 0.06);
+  --tf-line: rgb(255 255 255 / 0.12);
+  --tf-line-strong: rgb(255 255 255 / 0.24);
+  --tf-hover-wash: rgb(255 255 255 / 0.05);
+
+  --tf-prose-body: #d1d5db;
+  --tf-prose-heading: #ffffff;
+  --tf-prose-muted: #9ca3af;
+  --tf-prose-subtle: #6b7280;
+  --tf-prose-link: #38bdf8;
+  --tf-prose-link-hover: #ffffff;
+  --tf-prose-link-underline: rgb(56 189 248 / 0.4);
+  --tf-prose-link-hover-underline: rgb(255 255 255 / 0.4);
+  --tf-prose-bold: var(--tf-brand-white);
+  --tf-prose-code: var(--tf-brand-white);
+  --tf-prose-kbd: var(--tf-brand-white);
+  --tf-prose-pre-surface: var(--tf-brand-navy-raised);
+  --tf-prose-pre-text: rgb(255 255 255 / 0.65);
+  --tf-prose-pre-shadow: none;
+
+  --tf-accent-text: #38bdf8;
+  --tf-accent-wash: rgb(56 189 248 / 0.08);
+  --tf-accent-ring: rgb(56 189 248 / 0.3);
+  --tf-label: #9ca3af;
+  --tf-info: #7dd3fc;
+  --tf-info-wash: rgb(56 189 248 / 0.1);
+  --tf-info-ring: rgb(56 189 248 / 0.3);
+  --tf-warning: var(--tf-brand-yellow);
+  --tf-warning-wash: rgb(224 228 58 / 0.08);
+  --tf-warning-ring: rgb(224 228 58 / 0.3);
+  --tf-danger: var(--tf-brand-coral);
+  --tf-danger-wash: rgb(255 98 98 / 0.08);
+  --tf-danger-ring: rgb(255 98 98 / 0.3);
+
+  --tf-code-chrome: var(--tf-brand-navy-inset);
+  --tf-btn-primary-active-bg: #4b5563;
+  --tf-btn-tertiary-bg: transparent;
+  --tf-btn-tertiary-text: #e5e7eb;
+  --tf-btn-tertiary-active-bg: rgb(255 255 255 / 0.05);
+  --tf-btn-tertiary-active-text: #ffffff;
+
+  --tf-toggle-icon: var(--tf-brand-white);
+  --tf-toggle-icon-opacity: 0.5;
+}

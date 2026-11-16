@@ -1,0 +1,95 @@
+export const metadata = {
+  title: 'Situations and scenarios',
+  description: 'Shared situations, place plans, and a scenario that runs them.',
+}
+
+# Situations and scenarios
+
+A place describes the site. A situation describes a story any place can bind. A scenario runs that story against one place. {{ className: 'lead' }}
+
+Unit kinds are `place`, `event`, `situation`, `scenario`, and `mixin`. Mixins are the packs `with:` attaches. Events are timetables a scenario can include (arena ships `events/game-day`).
+
+## Shared situations {{ anchor: false }}
+
+Fourteen shared situation units ship in the private [`@local-hosting/twinfile-simulator`](https://github.com/twinfile/simulator) catalog (`situations/` on disk when `TF_SIMULATOR_ROOT` is set). A place opts in through a mixin or a local plan. The situation declares `phases` and the roles it `expects`. Hazard label → unit mapping: [`hazard-catalog.yaml`](https://github.com/twinfile/spec/blob/main/conf/hazard-catalog.yaml). Lantern-style map pins: [`hr-marker-crosswalk.yaml`](https://github.com/twinfile/spec/blob/main/conf/hr-marker-crosswalk.yaml).
+
+`twinfile/severe-weather:1.0.0`:
+
+```yaml
+twinfile: 1
+kind: situation
+name: severe-weather
+version: 1.0.0
+stability: stable
+phases:
+  - watch
+  - warning
+  - all-clear
+expects:
+  shelter:
+    kind: space
+    min: 1
+  exit:
+    kind: opening
+    min: 2
+  outdoor:
+    kind: space
+    min: 0
+```
+
+| Situation | Expects (excerpt) | Example places |
+| --- | --- | --- |
+| `severe-weather` | `shelter`, `exit`, `outdoor` | shop, arena, expo |
+| `flood` | `flood-refuge`, `safe-access`, `gauge` | mixin (sites, linear water) |
+| `earthquake` | `shelter`, `exit`, `outdoor` | mixin |
+| `wildfire` | `shelter`, `exit`, `safe-access` | mixin |
+| `tsunami` | `flood-refuge`, `safe-access`, `water-launch` | mixin (coastal) |
+| `volcanic-ash` | `shelter`, `exit`, `survey-station` | mixin |
+| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | mixin (avalanche, landslide, lahar) |
+| `drought` | `gauge`, `collection-point`, `shelter` | mixin |
+| `power-outage` | `shelter`, `safe-access`, `alternative` | mixin |
+| `dam-release` | `water-launch`, `flood-refuge`, `gauge` | river |
+| `transit-disruption` | `ground-transport`, `alternative` | shop, airport, expo, transit-hub-campus |
+| `field-damage` | `hotspot`, `safe-access`, `collection-point` | mixin (debris, closures, structural damage) |
+| `litter-pollution` | `hotspot`, `safe-access`, `collection-point` | port, park |
+
+Your `plans/*.yaml` maps those role names to space and opening ids on this site. See [Author a place](/author#plans).
+
+**Relief vertical slice:** [`twinfile/arena:1.2.0`](https://github.com/twinfile/twinfile/blob/main/examples/arena/) with declarative `ext.shelter_resource` on concourse assets and scenario `arena-flood-shelter-standup` (shelter capacity vs stock on the built place).
+
+## Live controls vs offline runs {{ anchor: false }}
+
+On a built **place**, `image.meta.placeType.controls` is the button surface (`signal:trigger` / situation pulses). Prefer that in product UI — not a separate Twinfile per button. The host **player** advances **`clock:`** and publishes the same IN messages as those buttons (patch module bus). **`use.runner`** stays the offline **ENTRYPOINT** for `twin run`, frozen verify, and **`question:`** answers (JSON Lines stdout) — same timeline, different sink ([world time](https://github.com/twinfile/spec/blob/main/doc/glossary.md#world-time-clock-timeline-player-runner)).
+
+## A scene run {{ anchor: false }}
+
+A run is a scene payload under a **story**: `story/examples/<story>/scenes/<scene>/run.yaml`. `from:` is the place ref. `steps[].copy` pulls situation and event units (use typed refs). `args:` are the run inputs. `use.runner` names the solver.
+
+`story/examples/shop-visit/scenes/shop-shelter-at-cap` (shop's only reference run):
+
+```yaml
+role: run
+from: twinfile/place/shop:0.2.0
+id: shop-shelter-at-cap
+name: Shelter at capacity
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/situation/severe-weather:1.0.0
+clock:
+  starts_at: 2026-06-12T18:00:00-07:00
+  duration: PT30M
+  step: PT5M
+args:
+  occupancy: 180
+  target_role: shelter
+use:
+  runner: npm:@twinfile/runner-hydraulic@^0
+```
+
+```bash
+twin run story/examples/shop-visit/scenes/shop-shelter-at-cap
+twin verify story/examples/shop-visit/scenes/shop-shelter-at-cap --frozen
+```
+
+Frozen runs pin `expected/digest.txt`. `twin check --strict --frozen` fails when the built digest moves. Compose order is place, then events, situations, plan bindings, scenario patches, and `args:` ([composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)).

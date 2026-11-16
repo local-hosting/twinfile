@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/metrics.schema.json",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "unit",
+    "aggregate",
+    "of"
+  ],
+  "properties": {
+    "id": {
+      "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+    },
+    "title": {
+      "type": "string"
+    },
+    "unit": {
+      "type": "string"
+    },
+    "aggregate": {
+      "enum": [
+        "max",
+        "min",
+        "sum",
+        "last",
+        "p95"
+      ]
+    },
+    "of": {
+      "type": "string"
+    },
+    "tolerance": {
+      "type": "object",
+      "properties": {
+        "abs": {
+          "type": "number"
+        },
+        "rel": {
+          "type": "number"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

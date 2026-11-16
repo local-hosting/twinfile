@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/visits.schema.json",
+  "type": "object",
+  "required": [
+    "visits"
+  ],
+  "properties": {
+    "visits": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind",
+          "space",
+          "order"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "kind": {
+            "enum": [
+              "arrival",
+              "entry",
+              "waiting",
+              "activity",
+              "exit",
+              "return"
+            ]
+          },
+          "name": {
+            "type": "string"
+          },
+          "space": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "order": {
+            "type": "integer",
+            "minimum": 0
+          },
+          "during": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

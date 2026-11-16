@@ -1,0 +1,80 @@
+/**
+ * Shared Tailwind @theme — maps `tokens.css` to utilities (both apps import this).
+ */
+@theme {
+  --text-2xs: var(--tf-type-mono-label-size);
+  --text-2xs--line-height: var(--tf-type-mono-label-leading);
+  --text-caption: var(--tf-type-caption-size);
+  --text-caption--line-height: var(--tf-type-caption-leading);
+  --text-prose-body: var(--tf-type-body-size);
+  --text-prose-body--line-height: var(--tf-type-body-leading);
+  --text-prose-title: var(--tf-type-prose-title-size);
+  --text-page-title: var(--tf-type-page-title-size);
+  --text-hero-display: var(--tf-type-hero-display-size);
+  --text-hero-display--line-height: var(--tf-type-hero-display-leading);
+
+  --font-sans: var(--tf-font-sans);
+  --font-display: var(--tf-font-sans);
+  --font-mono: var(--tf-font-mono);
+
+  --radius-square: var(--tf-radius-square);
+
+  --color-surface-page: var(--tf-page-surface);
+  --color-surface-elevated: var(--tf-page-surface-elevated);
+  --color-surface-inset: var(--tf-page-surface-inset);
+  --color-surface-hero: var(--tf-hero-surface);
+  --color-surface-code: var(--tf-prose-pre-surface);
+  --color-surface-code-chrome: var(--tf-code-chrome);
+  --color-surface-overlay: var(--tf-page-overlay);
+
+  --color-line-subtle: var(--tf-line-subtle);
+  --color-line: var(--tf-line);
+  --color-line-strong: var(--tf-line-strong);
+  --color-hover-wash: var(--tf-hover-wash);
+
+  --color-code-muted: var(--tf-code-muted);
+  --color-code-line: var(--tf-code-line);
+
+  --color-hero-text: var(--tf-hero-text);
+  --color-hero-muted: var(--tf-hero-text-muted);
+  --color-hero-subtle: var(--tf-hero-text-subtle);
+  --color-hero-accent: var(--tf-hero-accent);
+  --color-hero-accent-strong: var(--tf-hero-accent-strong);
+  --color-hero-link: var(--tf-hero-link);
+  --color-hero-link-hover: var(--tf-hero-link-hover);
+  --color-hero-link-bg-hover: var(--tf-hero-link-bg-hover);
+  --color-hero-timeline: var(--tf-hero-timeline);
+  --color-hero-glow: var(--tf-hero-glow-b);
+
+  --color-prose-body: var(--tf-prose-body);
+  --color-prose-heading: var(--tf-prose-heading);
+  --color-prose-muted: var(--tf-prose-muted);
+  --color-prose-subtle: var(--tf-prose-subtle);
+  --color-prose-link: var(--tf-prose-link);
+  --color-prose-link-hover: var(--tf-prose-link-hover);
+  --color-prose-link-underline: var(--tf-prose-link-underline);
+  --color-prose-hr: var(--tf-prose-hr);
+
+  --color-accent: var(--tf-accent);
+  --color-accent-muted: var(--tf-accent-muted);
+  --color-accent-emphasis: var(--tf-accent-emphasis);
+  --color-accent-text: var(--tf-accent-text);
+  --color-accent-wash: var(--tf-accent-wash);
+  --color-accent-ring: var(--tf-accent-ring);
+
+  --color-label: var(--tf-label);
+  --color-info: var(--tf-info);
+  --color-info-wash: var(--tf-info-wash);
+  --color-info-ring: var(--tf-info-ring);
+  --color-warning: var(--tf-warning);
+  --color-warning-wash: var(--tf-warning-wash);
+  --color-warning-ring: var(--tf-warning-ring);
+  --color-danger: var(--tf-danger);
+  --color-danger-wash: var(--tf-danger-wash);
+  --color-danger-ring: var(--tf-danger-ring);
+
+  --color-brand-violet: var(--tf-brand-violet);
+  --color-brand-indigo: var(--tf-brand-indigo);
+  --color-toggle: var(--tf-toggle-icon);
+  --color-timeline-tick: var(--tf-timeline-tick);
+}
