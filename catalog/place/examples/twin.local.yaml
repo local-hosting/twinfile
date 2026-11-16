@@ -18,11 +18,11 @@ refs:
   twinfile/base-linear:0.1.0: base-linear
   twinfile/mixin-assets:0.1.0: mixin-assets
   twinfile/mixin-sensors:0.1.0: mixin-sensors
-  twinfile/shop-shelter-at-cap:1.0.0: shop/scenarios/shelter-at-cap
-  twinfile/airport-morning-checkpoint:1.0.0: airport/scenarios/morning-checkpoint
-  twinfile/arena-gate-open-ramp:1.0.0: arena/scenarios/gate-open-ramp
-  twinfile/transit-hub-campus-lunch-flow:1.0.0: mobility-hub/campus/scenarios/lunch-flow
-  twinfile/expo-visitor-surge:1.0.0: expo/scenarios/visitor-surge
-  twinfile/transit-hub-campus-hub-queue-spill:1.0.0: mobility-hub/campus/scenarios/hub-queue-spill
-  twinfile/expo-outdoor-shelter-cap:1.0.0: expo/scenarios/outdoor-shelter-cap
-  twinfile/mobility-hub-hub-disruption:1.0.0: mobility-hub/scenarios/hub-disruption
+  twinfile/shop-shelter-at-cap:1.0.0: ../../story/examples/shop-visit/scenes/shop-shelter-at-cap
+  twinfile/airport-morning-checkpoint:1.0.0: ../../story/examples/airport-operations/scenes/airport-morning-checkpoint
+  twinfile/arena-gate-open-ramp:1.0.0: ../../story/examples/arena-operations/scenes/arena-gate-open-ramp
+  twinfile/transit-hub-campus-lunch-flow:1.0.0: ../../story/examples/transit-hub-campus-operations/scenes/transit-hub-campus-lunch-flow
+  twinfile/expo-visitor-surge:1.0.0: ../../story/examples/expo-operations/scenes/expo-visitor-surge
+  twinfile/transit-hub-campus-hub-queue-spill:1.0.0: ../../story/examples/transit-hub-campus-operations/scenes/transit-hub-campus-hub-queue-spill
+  twinfile/expo-outdoor-shelter-cap:1.0.0: ../../story/examples/expo-operations/scenes/expo-outdoor-shelter-cap
+  twinfile/mobility-hub-hub-disruption:1.0.0: ../../story/examples/mobility-hub-operations/scenes/mobility-hub-hub-disruption
