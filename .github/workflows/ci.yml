@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  packages: read
 
 jobs:
   twinfile:
@@ -16,9 +15,23 @@ jobs:
       TF_TWINFILE_ROOT: ${{ github.workspace }}
       TF_PLACE_CATALOG: ${{ github.workspace }}/catalog/place/examples
       TF_EXAMPLES_ROOT: ${{ github.workspace }}/catalog/place/examples
-      NODE_AUTH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN || github.token }}
+      NODE_AUTH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN }}
     steps:
       - uses: actions/checkout@v4
+
+      - name: Clone sibling repositories (portal/link deps)
+        env:
+          GH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN }}
+        run: |
+          set -euo pipefail
+          if [ -z "${GH_TOKEN}" ]; then
+            echo "::error::Repo secret TF_PACKAGES_TOKEN is required (PAT with repo read on doppler-group/geotypes, frameworks, geokit). See .github/README.md"
+            exit 1
+          fi
+          parent="$(dirname "$GITHUB_WORKSPACE")"
+          for repo in geotypes frameworks geokit; do
+            git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/doppler-group/${repo}.git" "${parent}/${repo}"
+          done
 
       - uses: actions/setup-node@v4
         with:
@@ -26,8 +39,20 @@ jobs:
 
       - run: corepack enable && corepack prepare yarn@4.9.2 --activate
 
-      - name: Use registry @doppler-group deps (no sibling checkouts)
-        run: node packages/tooling/scripts/ci-prepare-monorepo-install.mjs
+      - name: Build linked frameworks (core + presets)
+        working-directory: ../frameworks
+        run: |
+          corepack prepare yarn@4.14.1 --activate
+          yarn install --no-immutable
+          yarn workspace @doppler-group/frameworks-core run build
+          yarn workspace @doppler-group/frameworks-presets run build
+
+      - name: Install and build geotypes
+        working-directory: ../geotypes
+        run: |
+          corepack prepare yarn@4.9.2 --activate
+          yarn install --no-immutable
+          yarn build
 
       - run: yarn install --no-immutable
 

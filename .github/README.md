@@ -9,7 +9,7 @@
 
 Per-package `.github/` under `packages/*` was removed — those workflows targeted the old split `twinfile/*` repos.
 
-**CI install:** `ci-prepare-monorepo-install.mjs` rewrites `portal:` / `link:` deps to pinned GitHub Packages versions before `yarn install` (sibling checkouts are optional for local dev). Set org/repo secret **`TF_PACKAGES_TOKEN`** (PAT with `read:packages`) when `GITHUB_TOKEN` cannot read `@doppler-group/*` packages.
+**CI install:** `yarn` resolves `portal:` / `link:` to sibling repos (`../geotypes`, `../frameworks`, `../geokit`). The workflow shallow-clones those private repos before install (requires repo secret **`TF_PACKAGES_TOKEN`**: a PAT or fine-grained token with **read** access to those repos). **`@doppler-group/geotypes` is not on GitHub Packages yet** — CI cannot use registry-only install. Optional: `packages/tooling/scripts/ci-prepare-monorepo-install.mjs` for a future registry-only path.
 
 **Env (CI and local):**
 
