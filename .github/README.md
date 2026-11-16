@@ -9,6 +9,8 @@
 
 Per-package `.github/` under `packages/*` was removed — those workflows targeted the old split `twinfile/*` repos.
 
+**Sibling checkouts (CI):** `yarn` links `portal:` / `link:` deps to `../geotypes`, `../frameworks`, and `../geokit`. The workflow checks out those private repos beside the workspace before `yarn install`. Set org/repo secret **`TF_PACKAGES_TOKEN`** (PAT with `repo` + `read:packages`) if `GITHUB_TOKEN` cannot read sibling repos.
+
 **Env (CI and local):**
 
 | Variable | Path |
