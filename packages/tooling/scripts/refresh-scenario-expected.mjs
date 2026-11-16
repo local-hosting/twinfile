@@ -1,8 +1,7 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
 import { copyFileSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 
 import { resolveTwinCli } from './resolve-twin-cli.mjs';
 import { isRunHeadPath, resolveTwinfileHeadPath } from '../../../packages/core/scripts/catalog/resolve-twinfile-dir.mjs';

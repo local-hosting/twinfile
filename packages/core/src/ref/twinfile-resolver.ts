@@ -49,8 +49,6 @@ function catalogTwinfileRoots(catalogRoot: string, name: string, placeRoot?: str
   const roots: string[] = [];
   roots.push(join(catalogRoot, name));
   roots.push(join(catalogRoot, 'mixins', name));
-  roots.push(join(catalogRoot, 'templates', 'place', name));
-  roots.push(join(catalogRoot, 'templates', name));
   if (placeRoot) {
     roots.push(join(placeRoot, 'events', name));
     roots.push(join(placeRoot, 'scenarios', name));

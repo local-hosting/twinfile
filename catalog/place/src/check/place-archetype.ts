@@ -103,7 +103,7 @@ export function checkPlaceArchetype(unit: LoadedTwinfile): Result<{ archetype?: 
     return ok({});
   }
 
-  const examplesRoot = resolveExamplesRoot(unit.root) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(unit.root);
   const composed = composePlace(unit, examplesRoot ? { examplesRoot } : undefined);
   if (!composed.ok) return composed;
 

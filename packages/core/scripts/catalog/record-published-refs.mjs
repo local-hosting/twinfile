@@ -4,8 +4,7 @@
  */
 import { spawnSync } from 'node:child_process';
 import { readFileSync, statSync, writeFileSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';

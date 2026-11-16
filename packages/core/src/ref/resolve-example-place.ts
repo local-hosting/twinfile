@@ -1,5 +1,5 @@
-import { readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { statSync } from 'node:fs';
+import { join } from 'node:path';
 
 import type { TwinfileRef } from '../types/twinfile-ref.js';
 import type {
@@ -10,10 +10,9 @@ import { readYamlDocument } from '../validate/validate-yaml.js';
 import { twinfilePlaceLayerPaths } from '../load/twinfile-paths.js';
 import { isPatchesTwinfile, parseManifestPatches } from '../load/twinfile-instructions.js';
 import { RefResolver } from './ref-resolver.js';
-import { flatExampleUnitDir } from '../paths/examples-catalog.js';
+import { flatExampleUnitDir, listFlatExampleUnitNames } from '../paths/examples-catalog.js';
 import { resolvePlaceExamplesCatalogRoot } from '../paths/catalog-layout.js';
 
-const LIST_SKIP = new Set(['conf', 'presets', 'fixtures', 'docs', 'node_modules', 'dist', 'viewer', 'scripts']);
 import {
   loadTwinLocalMap,
   loadTwinLocalMapMerged,
@@ -76,15 +75,9 @@ export function resolveExamplePlace(
 
 /** @internal Tests and diagnostics for flat catalog layout. */
 export function listSiteSlugs(examplesRoot: string): string[] {
-  const root = resolve(examplesRoot);
-  const slugs: string[] = [];
-  for (const name of readdirSync(root)) {
-    if (name.startsWith('.') || LIST_SKIP.has(name)) continue;
-    if (name.startsWith('base-') || name.startsWith('mixin-') || name.endsWith('-programme')) continue;
-    const twinfile = join(root, name, 'Twinfile.yaml');
-    if (statSync(twinfile, { throwIfNoEntry: false })?.isFile()) slugs.push(name);
-  }
-  return slugs;
+  return listFlatExampleUnitNames(examplesRoot).filter(
+    (name) => !name.startsWith('base-') && !name.startsWith('mixin-') && !name.endsWith('-programme'),
+  );
 }
 
 /** List published-style place refs under the flat place catalog. */
