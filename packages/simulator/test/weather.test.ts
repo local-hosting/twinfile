@@ -23,7 +23,7 @@ describe('Weather', () => {
     expect(edges).toEqual([{ kind: 'phase.enter', phase: 'warning', t: 1800 }]);
   });
 
-  it('createWeathersFromPlace builds one Weather per situation on the place', () => {
+  it('createWeathersFromPlace builds one Weather per event on the place', () => {
     const list = createWeathersFromPlace(
       clock,
       [

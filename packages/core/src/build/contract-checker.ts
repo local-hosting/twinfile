@@ -60,11 +60,11 @@ function recordsForKind(place: PlaceData, kind: string): IdRow[] {
 }
 
 export class ContractChecker {
-  checkPlanPresent(plan: PlanRoles | undefined, situationName: string): ContractError | null {
+  checkPlanPresent(plan: PlanRoles | undefined, eventName: string): ContractError | null {
     if (!plan || !Object.keys(plan).length) {
       return {
         code: 'E_NO_PLAN',
-        message: `No situation binding for ${situationName}`,
+        message: `No event binding for ${eventName}`,
       };
     }
     return null;

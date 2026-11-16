@@ -1,17 +1,17 @@
-import type { ContextSlice, ContextSituationState, PatchCordId } from '../../types/patch-program.js';
+import type { ContextSlice, ContextEventState, PatchCordId } from '../../types/patch-program.js';
 import { SignalFeed } from './signal-feed.js';
-import { SituationPulse } from './situation-pulse.js';
-import type { SituationPulseKind } from '../../types/situation-pulse.js';
+import { EventPulse } from './event-pulse.js';
+import type { EventPulseKind } from '../../types/event-pulse.js';
 
 export class PatchContext {
   readonly signals: Record<string, unknown>;
-  readonly situations: ContextSituationState[];
+  readonly events: ContextEventState[];
   readonly cuts: Set<PatchCordId>;
   readonly feeds: SignalFeed[];
 
   constructor(slice: ContextSlice = {}) {
     this.signals = { ...(slice.signals ?? {}) };
-    this.situations = [...(slice.situations ?? [])];
+    this.events = [...(slice.events ?? [])];
     this.cuts = new Set(slice.cuts ?? []);
     this.feeds = (slice.feeds ?? []).map(
       (row) =>
@@ -28,7 +28,7 @@ export class PatchContext {
   withSignals(signals: Record<string, unknown>): PatchContext {
     return new PatchContext({
       signals: { ...this.signals, ...signals },
-      situations: this.situations,
+      events: this.events,
       cuts: [...this.cuts],
       feeds: this.feeds.map((f) => ({
         wire: f.wire,
@@ -40,12 +40,12 @@ export class PatchContext {
     });
   }
 
-  withSituation(row: ContextSituationState): PatchContext {
-    const situations = this.situations.filter((s) => s.ref !== row.ref);
-    situations.push(row);
+  withEvent(row: ContextEventState): PatchContext {
+    const events = this.events.filter((s) => s.ref !== row.ref);
+    events.push(row);
     return new PatchContext({
       signals: this.signals,
-      situations,
+      events,
       cuts: [...this.cuts],
       feeds: this.feeds.map((f) => ({
         wire: f.wire,
@@ -62,7 +62,7 @@ export class PatchContext {
     cuts.add(cordId);
     return new PatchContext({
       signals: this.signals,
-      situations: this.situations,
+      events: this.events,
       cuts: [...cuts],
       feeds: this.feeds.map((f) => ({
         wire: f.wire,
@@ -77,7 +77,7 @@ export class PatchContext {
   toSlice(): ContextSlice {
     return {
       signals: { ...this.signals },
-      situations: [...this.situations],
+      events: [...this.events],
       cuts: [...this.cuts],
       feeds: this.feeds.map((f) => ({
         wire: f.wire,
@@ -89,17 +89,17 @@ export class PatchContext {
     };
   }
 
-  situationPulses(
+  eventPulses(
     headsByRef: Map<string, Record<string, unknown>>,
-  ): SituationPulse[] {
-    const out: SituationPulse[] = [];
-    for (const row of this.situations) {
+  ): EventPulse[] {
+    const out: EventPulse[] = [];
+    for (const row of this.events) {
       if (!row.enabled) continue;
       const head = headsByRef.get(row.ref) ?? headsByRef.get(row.ref.split(':')[0] ?? '');
       if (!head) continue;
-      const pulse = (row.pulse ?? 'fast') as SituationPulseKind;
+      const pulse = (row.pulse ?? 'fast') as EventPulseKind;
       out.push(
-        new SituationPulse(head, {
+        new EventPulse(head, {
           phase: row.phase ?? (Array.isArray(head.phases) ? String(head.phases[0]) : 'warning'),
           pulse,
           edge: 'enter',

@@ -1,16 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildSituationMessage } from '../src/patch/build-situation-message.js';
+import { buildEventMessage } from '../src/patch/build-event-message.js';
 import { connectPorts, patchCordId } from '../src/patch/processor-graph-edit.js';
 import { PatchProgram } from '../src/patch/program/patch-program.js';
 import { PatchContext } from '../src/patch/program/patch-context.js';
 import { PatchGraphModel } from '../src/patch/program/patch-graph-model.js';
-import { situationPulseHandler } from '../src/patch/program/situation-pulse.js';
+import { eventPulseHandler } from '../src/patch/program/event-pulse.js';
 
-describe('buildSituationMessage', () => {
-  it('builds twin:situation fast enter pulse', () => {
-    const built = buildSituationMessage({
-      situationHead: { id: 'severe-weather', version: '0.1.0', phases: ['warning', 'all-clear'] },
+describe('buildEventMessage', () => {
+  it('builds twin:event fast enter pulse', () => {
+    const built = buildEventMessage({
+      eventHead: { id: 'severe-weather', version: '0.1.0', phases: ['warning', 'all-clear'] },
       phase: 'warning',
       pulse: 'fast',
       edge: 'enter',
@@ -18,18 +18,18 @@ describe('buildSituationMessage', () => {
     });
     expect(built.ok).toBe(true);
     if (!built.ok) throw new Error('build failed');
-    expect(built.value.wire).toBe('twin:situation');
+    expect(built.value.wire).toBe('twin:event');
     expect(built.value.payload).toMatchObject({ phase: 'warning', edge: 'enter' });
   });
 });
 
-describe('PatchProgram situation inputs', () => {
-  it('routes situation pulse through context-situations to signal-hub', () => {
+describe('PatchProgram event inputs', () => {
+  it('routes event pulse through context-events to signal-hub', () => {
     const twinfile = {
       processors: [
         {
-          id: 'context-situations',
-          type: 'twinfile/mod.situation-in@0.1.0',
+          id: 'context-events',
+          type: 'twinfile/mod.event-in@0.1.0',
           outlets: [{ port: 'alert', to: { processor: 'context-signals', port: 'alert' } }],
         },
         { id: 'context-signals', type: 'twinfile/mod.signal-hub@0.1.0' },
@@ -38,15 +38,15 @@ describe('PatchProgram situation inputs', () => {
     const program = PatchProgram.fromBuilt({
       twinfile,
       place: {},
-      situations: [{ id: 'severe-weather', version: '0.1.0', phases: ['warning'] }],
+      events: [{ id: 'severe-weather', version: '0.1.0', phases: ['warning'] }],
     });
     expect(program).toBeDefined();
     if (!program) throw new Error('program missing');
 
     let alertSeen = 0;
     program.setHandler(
-      'context-situations',
-      situationPulseHandler({ alertTo: { module: 'context-signals', port: 'alert' } }),
+      'context-events',
+      eventPulseHandler({ alertTo: { module: 'context-signals', port: 'alert' } }),
     );
     program.setHandler('context-signals', (_port, msg) => {
       if (msg.wire === 'signal:alert') alertSeen += 1;
@@ -54,13 +54,13 @@ describe('PatchProgram situation inputs', () => {
     });
 
     const ctx = new PatchContext({
-      situations: [
+      events: [
         {
           ref: 'severe-weather',
           enabled: true,
           phase: 'warning',
           pulse: 'fast',
-          target: { module: 'context-situations', port: 'in' },
+          target: { module: 'context-events', port: 'in' },
         },
       ],
     });
@@ -72,7 +72,7 @@ describe('PatchProgram situation inputs', () => {
   it('connectPorts records a cord id', () => {
     const graph = {
       modules: [
-        { id: 'a', type: 'twinfile/mod.situation-in@0.1.0' },
+        { id: 'a', type: 'twinfile/mod.event-in@0.1.0' },
         { id: 'b', type: 'twinfile/mod.signal-hub@0.1.0' },
       ],
       connections: [],

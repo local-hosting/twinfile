@@ -20,7 +20,7 @@ describe('twinfileDisplayName', () => {
   });
 
   it('titleizes ref id when name omitted', () => {
-    expect(twinfileDisplayName({ kind: 'situation', id: 'field-damage' })).toBe('Field Damage');
+    expect(twinfileDisplayName({ kind: 'event', id: 'field-damage' })).toBe('Field Damage');
   });
 
   it('titleizes scenario id when name omitted', () => {

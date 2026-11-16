@@ -11,7 +11,7 @@ import {
 } from '../src/index.js'; // package entry under test
 
 describe('place events', () => {
-  it('default request emits twin:situation', () => {
+  it('default request emits twin:event', () => {
     const earthquake = definePlaceEvent({
       id: 'earthquake',
       name: 'Earthquake',
@@ -26,7 +26,7 @@ describe('place events', () => {
     expect(messages.ok).toBe(true);
     if (!messages.ok) return;
     expect(messages.value).toHaveLength(1);
-    expect(messages.value[0]!.wire).toBe('twin:situation');
+    expect(messages.value[0]!.wire).toBe('twin:event');
     expect(messages.value[0]!.payload.phase).toBe('shaking');
   });
 

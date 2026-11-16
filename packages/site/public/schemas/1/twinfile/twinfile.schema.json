@@ -9,9 +9,6 @@
       "$ref": "#/$defs/eventTwinfile"
     },
     {
-      "$ref": "#/$defs/situationTwinfile"
-    },
-    {
       "$ref": "#/$defs/scenarioTwinfile"
     },
     {
@@ -42,7 +39,7 @@
   },
   "$defs": {
     "placeSteps": {
-      "description": "Ordered steps (RFC 0009): one data patch, situation bind, or copy per item; each step builds one deterministic layer.",
+      "description": "Ordered steps (RFC 0009): one data patch, event bind, or copy per item; each step builds one deterministic layer.",
       "type": "array",
       "minItems": 1,
       "items": {
@@ -419,18 +416,6 @@
             "applies_to": {
               "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxesFilter"
             },
-            "provides": {
-              "type": "object",
-              "properties": {
-                "situations": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
-                  }
-                }
-              },
-              "additionalProperties": false
-            },
             "layers": {
               "type": "array",
               "minItems": 1,
@@ -446,50 +431,7 @@
       ]
     },
     "eventTwinfile": {
-      "allOf": [
-        {
-          "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead"
-        },
-        {
-          "type": "object",
-          "required": [
-            "timetable",
-            "expects"
-          ],
-          "properties": {
-            "kind": {
-              "const": "event"
-            },
-            "timetable": {
-              "type": "object",
-              "minProperties": 1,
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "expects": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/expectsRole"
-              }
-            },
-            "args": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/argDef"
-              }
-            },
-            "layers": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "situationTwinfile": {
+      "description": "What happens at a place: ordered phases, expected roles, args. Timing lives on the scene (`schedule:`) or the simulator.",
       "allOf": [
         {
           "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead"
@@ -502,7 +444,7 @@
           ],
           "properties": {
             "kind": {
-              "const": "situation"
+              "const": "event"
             },
             "phases": {
               "type": "array",
@@ -528,7 +470,10 @@
                 "daily",
                 "resilience"
               ],
-              "description": "Workbench catalog mode (default resilience). Daily situations cover everyday operations."
+              "description": "Workbench catalog mode (default resilience). Daily events cover everyday operations."
+            },
+            "catalog": {
+              "type": "object"
             },
             "layers": {
               "type": "array",
@@ -570,6 +515,17 @@
             "args": {
               "type": "object",
               "additionalProperties": true
+            },
+            "schedule": {
+              "description": "Phase start offsets per copied event (`<event-id>: { <phase>: <ISO-8601 duration> }`); unscheduled phases are left to the simulator.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object",
+                "minProperties": 1,
+                "additionalProperties": {
+                  "type": "string"
+                }
+              }
             },
             "t0": {
               "type": "string"

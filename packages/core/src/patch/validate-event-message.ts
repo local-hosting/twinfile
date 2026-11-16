@@ -18,17 +18,17 @@ function portWire(
   return def.wire;
 }
 
-export function validateSituationMessageTarget(
+export function validateEventMessageTarget(
   graph: PatchGraphV1,
   message: TwinMessageV1,
   catalog: PatchModuleTypeCatalog = loadPatchModuleTypeCatalog(),
 ): Result<void, TwinError[]> {
   const errors: TwinError[] = [];
-  if (message.wire !== 'twin:situation') {
-    errors.push({ code: 'E_MESSAGE', message: `expected wire twin:situation, got ${message.wire}` });
+  if (message.wire !== 'twin:event') {
+    errors.push({ code: 'E_MESSAGE', message: `expected wire twin:event, got ${message.wire}` });
   }
   if (!message.to) {
-    errors.push({ code: 'E_MESSAGE', message: 'situation message requires to port' });
+    errors.push({ code: 'E_MESSAGE', message: 'event message requires to port' });
     return err(errors);
   }
   const inWire = portWire(graph, catalog, message.to.module, message.to.port, 'in');
@@ -37,10 +37,10 @@ export function validateSituationMessageTarget(
       code: 'E_PROCESSOR',
       message: `unknown inlet ${message.to.module}.${message.to.port}`,
     });
-  } else if (inWire !== 'twin:situation') {
+  } else if (inWire !== 'twin:event') {
     errors.push({
       code: 'E_PROCESSOR',
-      message: `inlet ${message.to.module}.${message.to.port} expects wire ${inWire}, not twin:situation`,
+      message: `inlet ${message.to.module}.${message.to.port} expects wire ${inWire}, not twin:event`,
     });
   }
   return errors.length ? err(errors) : ok(undefined);

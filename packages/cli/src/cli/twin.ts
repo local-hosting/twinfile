@@ -91,7 +91,7 @@ function usage(): never {
   twin verify [scenarioDir] [--frozen]
   twin fmt [path] [--check] [--recursive] [--upgrade=2] [--upgrade=heads]
   twin init place <dir> [--geotype <slug>] [--no-from] [--no-decorate] [--name <unitName>]
-  twin add bind <situation> [dir] [--force] [--examples-root <path>]   # alias: add plan
+  twin add bind <event> [dir] [--force] [--examples-root <path>]   # alias: add plan
   twin add assets [dir] [--force]
   twin disclose [dir] [--json | --yaml]   # HTML: host UI (e.g. writeDiscloseHtml)
   twin import <imdf|gtfs|brick|bot|sosa|gltf|ifc|indoorgml> <file-or-dir> --out <dir>
@@ -588,7 +588,7 @@ async function runVerify(): Promise<number> {
 async function runAdd(): Promise<number> {
   const sub = argv[1];
   if (sub === 'bind' || sub === 'plan') {
-    let situation = '';
+    let event = '';
     let dir = '.';
     let force = false;
     let examplesRoot: string | undefined;
@@ -598,23 +598,23 @@ async function runAdd(): Promise<number> {
       else if (arg === '--examples-root') {
         examplesRoot = argv[i + 1];
         i += 1;
-      } else if (!arg.startsWith('-') && !situation) {
-        situation = arg;
+      } else if (!arg.startsWith('-') && !event) {
+        event = arg;
       } else if (!arg.startsWith('-')) {
         dir = arg;
       }
     }
-    if (!situation) {
-      console.error('twin add bind requires a situation name (e.g. severe-weather)');
+    if (!event) {
+      console.error('twin add bind requires an event name (e.g. severe-weather)');
       return 2;
     }
     const unitDir = resolve(dir);
     try {
-      const result = await addBindToPlace(unitDir, situation, { force, examplesRoot });
+      const result = await addBindToPlace(unitDir, event, { force, examplesRoot });
       for (const warning of result.warnings) {
         console.error(`warn: ${warning}`);
       }
-      console.log(`ok add bind ${result.location} (${situation})`);
+      console.log(`ok add bind ${result.location} (${event})`);
       return result.warnings.length > 0 ? 0 : 0;
     } catch (error) {
       console.error(String(error));
@@ -638,7 +638,7 @@ async function runAdd(): Promise<number> {
       return 1;
     }
   }
-  console.error('twin add supports: plan <situation> [dir] | assets [dir]');
+  console.error('twin add supports: plan <event> [dir] | assets [dir]');
   return 2;
 }
 

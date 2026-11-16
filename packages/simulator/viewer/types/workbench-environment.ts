@@ -1,13 +1,13 @@
 /** Environment slice for host player (`applyPlayerContextPulse` in `@local-hosting/twinfile-simulator/host`). */
 export type WorkbenchEnvironmentSlice = {
-  /** One-shot pulses (enter/exit) without enabling a long-lived situation state. */
+  /** One-shot pulses (enter/exit) without enabling a long-lived event state. */
   pulses?: Array<{
     ref: string;
     phase: string;
     edge: 'enter' | 'exit';
     pulse?: 'fast' | 'long';
   }>;
-  situations?: Array<{
+  events?: Array<{
     ref: string;
     enabled: boolean;
     phase?: string;

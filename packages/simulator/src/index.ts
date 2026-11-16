@@ -23,11 +23,11 @@ export {
 
 export type { PlaceEvent, PlaceEventRequest, PlaceEventHead } from './types/place-event.js';
 export type {
-  SituationPulseKind,
-  SituationPulseEdge,
-  SituationPulsePayload,
-  BuildSituationMessageInput,
-} from './types/situation-pulse.js';
+  EventPulseKind,
+  EventPulseEdge,
+  EventPulsePayload,
+  BuildEventMessageInput,
+} from './types/event-pulse.js';
 export type { SessionPlaybackMeta } from './types/session-playback.js';
 export type {
   SessionClockBus,

@@ -3,7 +3,7 @@ import type { PlaceEvent } from '../types/place-event.js';
 import type { ClockSpec, PhaseEnds, PhaseStarts } from '../types/twinfile-time.js';
 import type { WorldSessionEdge } from '../types/world-session.js';
 
-/** Hazard / situation programme on the session timeline — separate from {@link createClock} grid math. */
+/** Hazard / event programme on the session timeline — separate from {@link createClock} grid math. */
 export class Weather {
   readonly id: string;
   readonly phaseStarts: PhaseStarts;
@@ -20,26 +20,22 @@ export class Weather {
     clock: ClockSpec,
     resolvedArgs: Record<string, unknown>,
   ): Weather {
-    const situation = {
-      phases: event.phases,
-      args: event.args,
-    };
-    const ctx = { clock, situations: [situation], resolvedArgs };
+    const ctx = { clock, events: [{ phases: event.phases, args: event.args }], resolvedArgs };
     return new Weather(event.id, resolvePhaseStarts(ctx), resolvePhaseEnds(ctx));
   }
 
-  static fromBundledSituation(
-    situation: Record<string, unknown>,
+  static fromBundledEvent(
+    event: Record<string, unknown>,
     clock: ClockSpec,
     resolvedArgs: Record<string, unknown>,
   ): Weather | undefined {
-    const id = typeof situation.id === 'string' ? situation.id : undefined;
+    const id = typeof event.id === 'string' ? event.id : undefined;
     if (!id) return undefined;
     return Weather.fromPlaceEvent(
       {
         id,
-        phases: Array.isArray(situation.phases) ? (situation.phases as string[]) : undefined,
-        args: situation.args as PlaceEvent['args'],
+        phases: Array.isArray(event.phases) ? (event.phases as string[]) : undefined,
+        args: event.args as PlaceEvent['args'],
       },
       clock,
       resolvedArgs,
@@ -86,12 +82,12 @@ export class Weather {
 
 export function createWeathersFromPlace(
   clock: ClockSpec,
-  situations: Record<string, unknown>[] | undefined,
+  events: Record<string, unknown>[] | undefined,
   resolvedArgs: Record<string, unknown>,
 ): Weather[] {
   const out: Weather[] = [];
-  for (const situation of situations ?? []) {
-    const weather = Weather.fromBundledSituation(situation, clock, resolvedArgs);
+  for (const event of events ?? []) {
+    const weather = Weather.fromBundledEvent(event, clock, resolvedArgs);
     if (weather) out.push(weather);
   }
   return out;

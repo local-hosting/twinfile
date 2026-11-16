@@ -70,7 +70,7 @@ export function createTFPlaceSession(
   const clock = place.clock;
   const weathers = createTFWeathersFromPlace(
     timeline.clock,
-    timeline.situations,
+    timeline.events,
     timeline.resolvedArgs ?? {},
   );
   const session = createTFSessionBus(options.recordSession ? { record: true } : undefined);

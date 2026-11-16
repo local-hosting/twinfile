@@ -78,7 +78,7 @@ export async function runFeedSimulate(argv: string[]): Promise<number> {
     (built.value.meta as { resolvedArgs?: Record<string, unknown> }).resolvedArgs ?? {};
   const phaseStarts = resolvePhaseStarts({
     clock,
-    situations: (built.value.events ?? []) as Record<string, unknown>[],
+    events: (built.value.events ?? []) as Record<string, unknown>[],
     resolvedArgs,
   });
   const rows = generateSimulatedFeedRows(device, createClock(clock), phaseStarts, seed);

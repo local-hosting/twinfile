@@ -6,7 +6,7 @@ export const CORE_SPEC_PIN = '1.0.0-draft.1' as const;
 
 export type TwinfileFormatVersion = typeof TWINFILE_FORMAT_VERSION;
 
-/** Primary summary layout id (situations arrive via context inputs, not catalog modes). */
+/** Primary summary layout id (events arrive via context inputs, not catalog modes). */
 export const TWINFILE_SUMMARY_LAYOUT_ID = 'place' as const;
 
 /** Single layout id for summary markdown and ASCII. */
