@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/port:0.2.0
 story:
-  arc: operations
   scenes:
-    - id: port-gangway-backup
+    - id: gangway-backup
       label: Gangway backup
       run:
         steps:

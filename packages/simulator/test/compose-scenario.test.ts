@@ -16,7 +16,7 @@ import { twinLockPath } from '@doppler-group/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot } = testCatalogRoots(importDir);
-const scenarioRoot = goldenSceneRun(importDir, 'arena-storm-at-halftime');
+const scenarioRoot = goldenSceneRun(importDir, 'storm-at-halftime');
 
 describe('composeScenarioLayers', () => {
   it('orders place, event, and args layers', () => {

@@ -32,7 +32,7 @@ const sensorthings = {
 
 describe('feed pull', () => {
   it('writes SensorThings rows a replay scenario can run without changing the scenario', async () => {
-    const scenarioDir = goldenSceneRun(importDir, 'river-until-stage-unsafe');
+    const scenarioDir = goldenSceneRun(importDir, 'until-stage-unsafe');
     const storyHead = loadRunUnit(scenarioDir);
     if (!storyHead.ok) throw new Error('river scene failed to load');
     const before = readFileSync(storyHead.value.twinfilePath, 'utf8');

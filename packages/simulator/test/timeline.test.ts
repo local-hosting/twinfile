@@ -121,7 +121,7 @@ describe('feeds', () => {
 
 describe('createRunPayload', () => {
   it('adds a timeline for the river scenario', async () => {
-    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'river-until-stage-unsafe');
+    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'until-stage-unsafe');
     const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
     const loaded = loadRunUnit(dir);
     if (!built.ok || !loaded.ok) throw new Error('river scenario failed to build');

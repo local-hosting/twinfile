@@ -6,21 +6,21 @@ import { resolveTwinfileRoot } from './catalog-layout.js';
 
 /** Golden scene run id → story example folder that declares it under `story.scenes[]`. */
 export const GOLDEN_SCENE_RUN_STORIES: Record<string, string> = {
-  'airport-morning-checkpoint': 'airport-operations',
-  'airport-terminal-surge': 'airport-operations',
-  'arena-flood-shelter-standup': 'arena-operations',
-  'arena-gate-open-ramp': 'arena-operations',
-  'arena-storm-at-halftime': 'arena-operations',
-  'expo-outdoor-shelter-cap': 'expo-operations',
-  'expo-visitor-surge': 'expo-operations',
-  'mobility-hub-hub-disruption': 'mobility-hub-operations',
-  'park-trailhead-backup': 'park-operations',
-  'port-gangway-backup': 'port-operations',
-  'river-swim-unsafe-known': 'river-operations',
-  'river-until-stage-unsafe': 'river-operations',
-  'shop-shelter-at-cap': 'shop-visit',
-  'transit-hub-campus-hub-queue-spill': 'transit-hub-campus-operations',
-  'transit-hub-campus-lunch-flow': 'transit-hub-campus-operations',
+  'morning-checkpoint': 'airport-operations',
+  'terminal-surge': 'airport-operations',
+  'flood-shelter-standup': 'arena-operations',
+  'gate-open-ramp': 'arena-operations',
+  'storm-at-halftime': 'arena-operations',
+  'outdoor-shelter-cap': 'expo-operations',
+  'visitor-surge': 'expo-operations',
+  'hub-disruption': 'mobility-hub-operations',
+  'trailhead-backup': 'park-operations',
+  'gangway-backup': 'port-operations',
+  'swim-unsafe-known': 'river-operations',
+  'until-stage-unsafe': 'river-operations',
+  'shelter-at-cap': 'shop-visit',
+  'hub-queue-spill': 'transit-hub-campus-operations',
+  'lunch-flow': 'transit-hub-campus-operations',
 };
 
 function goldenSceneStory(runId: string): string {

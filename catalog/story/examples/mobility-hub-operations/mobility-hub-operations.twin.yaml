@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/mobility-hub:0.2.0
 story:
-  arc: operations
   scenes:
-    - id: mobility-hub-hub-disruption
+    - id: hub-disruption
       label: Hub disruption
       run:
         steps:

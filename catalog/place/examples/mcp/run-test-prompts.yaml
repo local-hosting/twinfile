@@ -1,34 +1,34 @@
 # Analyst prompts for golden-run MCP/CI testing — not part of preset.yaml or place twins.
 schema: twinfile.mcp.run-test-prompts.v1
 prompts:
-  shop-shelter-at-cap: >-
+  shelter-at-cap: >-
     How long to move shoppers to shelter when the stockroom is smaller than occupancy?
-  park-trailhead-backup: >-
+  trailhead-backup: >-
     How long to clear visitors backed up at the trailhead after litter surge closes the creek crossing?
-  airport-morning-checkpoint: >-
+  morning-checkpoint: >-
     When does the security checkpoint queue back up on a typical morning bank?
-  airport-terminal-surge: >-
+  terminal-surge: >-
     How long to clear a security checkpoint backlog when a train is cancelled?
-  expo-visitor-surge: >-
+  visitor-surge: >-
     When does pavilion entry queue length exceed the comfort threshold on opening day?
-  expo-outdoor-shelter-cap: >-
+  outdoor-shelter-cap: >-
     How long to move visitors from outdoor program spaces into pavilion shelter during a weather warning?
-  arena-gate-open-ramp: >-
+  gate-open-ramp: >-
     How quickly do gates absorb arrivals between doors-open and kickoff on game day?
-  arena-storm-at-halftime: >-
+  storm-at-halftime: >-
     How long does the bowl take to clear if a storm warning comes at halftime?
-  arena-flood-shelter-standup: >-
+  flood-shelter-standup: >-
     When a flood warning forces shelter on the lower concourse, do cots and water cover the sheltered
     headcount, and how fast do gates clear?
-  port-gangway-backup: >-
+  gangway-backup: >-
     How long to clear passenger backup when gangways are limited after litter surge?
-  river-until-stage-unsafe: >-
+  until-stage-unsafe: >-
     When does upstream stage cross the unsafe threshold after release?
-  river-swim-unsafe-known: >-
+  swim-unsafe-known: >-
     After the release, when does the eddy pool get too murky to swim, and when could anyone have known?
-  mobility-hub-hub-disruption: >-
+  hub-disruption: >-
     How long does queue spill at suburban rail when bus feed is disrupted?
-  transit-hub-campus-lunch-flow: >-
+  lunch-flow: >-
     When does the hub concourse queue spill during the weekday lunch peak?
-  transit-hub-campus-hub-queue-spill: >-
+  hub-queue-spill: >-
     When does the transit hub queue exceed staging capacity during disruption?

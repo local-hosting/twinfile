@@ -12,11 +12,11 @@ describe('mcp run test prompts', () => {
   it('lists golden run prompts keyed by preset id', () => {
     const rows = listMcpRunTestPrompts(examplesRoot);
     expect(rows.length).toBeGreaterThanOrEqual(10);
-    expect(rows.some((r) => r.runId === 'shop-shelter-at-cap' && r.prompt.includes('shelter'))).toBe(true);
+    expect(rows.some((r) => r.runId === 'shelter-at-cap' && r.prompt.includes('shelter'))).toBe(true);
   });
 
   it('resolves airport morning checkpoint', () => {
-    const hit = mcpRunTestPromptForRun(examplesRoot, 'airport-morning-checkpoint');
+    const hit = mcpRunTestPromptForRun(examplesRoot, 'morning-checkpoint');
     expect(hit?.prompt).toMatch(/checkpoint/i);
   });
 });

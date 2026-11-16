@@ -10,11 +10,10 @@ links:
   - rel: involves
     href: twinfile/character/shop-greeter:0.1.0
 story:
-  arc: visit
   scenes:
     - id: arrive
       label: Enter sales floor
-    - id: shop-shelter-at-cap
+    - id: shelter-at-cap
       label: Shelter at capacity
       run:
         steps:
