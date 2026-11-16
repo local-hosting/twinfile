@@ -220,7 +220,7 @@ async function runCheck(): Promise<number> {
   const examplesRoot = explicitRoot ?? (strict || profileProcessors ? resolveExamplesRoot(unitDir) : undefined);
 
   if (strict && !examplesRoot) {
-    console.error('twin check --strict requires --examples-root or TF_EXAMPLES_ROOT');
+    console.error('twin check --strict requires --examples-root or TF_TWINFILE_ROOT');
     process.exit(2);
   }
 
@@ -238,7 +238,7 @@ async function runCheck(): Promise<number> {
   let processorSummary: { processorCount: number; outletCount: number } | undefined;
   if (profileProcessors) {
     if (!examplesRoot) {
-      console.error('twin check --profile processors requires --examples-root or TF_EXAMPLES_ROOT');
+      console.error('twin check --profile processors requires --examples-root or TF_TWINFILE_ROOT');
       process.exit(2);
     }
     const built = await buildTwinfile(unitDir, {
@@ -496,7 +496,7 @@ async function runRunScenario(scenarioDir: string): Promise<number> {
   const dir = resolve(scenarioDir);
   const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
   if (!examplesRoot) {
-    console.error('twin run requires TF_EXAMPLES_ROOT');
+    console.error('twin run requires TF_TWINFILE_ROOT');
     return 2;
   }
   const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
@@ -544,7 +544,7 @@ async function runVerify(): Promise<number> {
   const frozen = argv.includes('--frozen');
   const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
   if (!examplesRoot) {
-    console.error('twin verify requires TF_EXAMPLES_ROOT');
+    console.error('twin verify requires TF_TWINFILE_ROOT');
     return 2;
   }
   const built = await buildTwinfile(dir, {
@@ -955,7 +955,7 @@ async function runDescribe(): Promise<number> {
   const unitDir = resolve(dir);
   const examplesRoot = resolveExamplesRoot(unitDir) ?? resolveExamplesRoot(process.cwd());
   if (!examplesRoot) {
-    console.error('twin describe requires TF_EXAMPLES_ROOT');
+    console.error('twin describe requires TF_TWINFILE_ROOT');
     return 2;
   }
   const opened = await PlaceHost.load(unitDir, { examplesRoot, seed });

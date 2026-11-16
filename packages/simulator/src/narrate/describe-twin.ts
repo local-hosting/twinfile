@@ -18,7 +18,7 @@ export type DescribeTwinfileOptions = PlaceNarrativeInput & {
   twinfile?: Record<string, unknown>;
   clock?: ClockSpec;
   resolvedArgs?: Record<string, unknown>;
-  /** Examples catalog root; defaults to `TF_EXAMPLES_ROOT` / walk-up from `unitDir`. */
+  /** Examples catalog root; defaults to `TF_TWINFILE_ROOT` / walk-up from `unitDir`. */
   examplesRoot?: string;
   /** Scenario directory for examples-root discovery when env is unset. */
   unitDir?: string;

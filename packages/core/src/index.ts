@@ -85,11 +85,9 @@ export { listDtprDisclosures, type DtprDisclosureRow } from './dtpr/list-disclos
 export {
   isExamplesCatalogRoot,
   isFlatExamplesCatalogRoot,
-  isLegacyExamplesCatalogRoot,
   listFlatExampleUnitNames,
 } from './paths/examples-catalog.js';
-export { resolveExamplesRoot, resolveExamplesRoots } from './paths/resolve-examples-root.js';
-export { resolveSimulatorRoot, resolveSimulatorRoots } from './paths/resolve-simulator-root.js';
+export { resolveExamplesRoot } from './paths/resolve-examples-root.js';
 export { resolveTwinfileAnchor } from './paths/resolve-twinfile-anchor.js';
 export {
   patchGraphBoundaryIo,
@@ -213,8 +211,6 @@ export {
   loadTwinLocalMapMerged,
   mergeTwinLocalMaps,
   resolveTwinLocalPath,
-  defaultExamplesRoot,
-  defaultSimulatorRoot,
 } from './ref/twin-local-map.js';
 export {
   resolveExamplePlace,
@@ -281,15 +277,10 @@ export {
   isTwinfileMonorepoRoot,
   resolveCharacterCatalogRoot,
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorPackageRoot,
-  resolveTwinCatalogOperateRoots,
+  resolveSimulatorRoot,
   resolveTwinfileRoot,
-  resolveTwinfileRootFromImportMeta,
-  resolveTwinfileRootFromPlaceCatalog,
   resolveTypeExamplesRoot,
-  typeExamplesRootCandidates,
   type TwinCatalogType,
-  type TwinCatalogType as TwinTypeDir,
 } from './paths/catalog-layout.js';
 export {
   GOLDEN_SCENE_RUN_RELPATHS,

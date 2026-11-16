@@ -47,4 +47,4 @@ npm install @local-hosting/twinfile-core@0.1.0
 
 ## Post-0.1 (not in this release)
 
-Runners, MCP, viewer, plane repo slimming — see [docs/audit.md](audit.md). Venue layout uses core **`resolvePlaceMount`** ([archived-venue-to-place](../../spec/doc/migration/venue-to-place.md)).
+Runners, MCP, viewer, plane repo slimming. Venue layout uses core **`resolvePlaceMount`** ([archived-venue-to-place](../../spec/doc/migration/venue-to-place.md)).

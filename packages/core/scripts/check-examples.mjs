@@ -1,25 +1,26 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
 import { readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
-import { listTwinfileSituationBindings, loadTwinfile } from '../dist/index.js';
+import {
+  listTwinfileSituationBindings,
+  loadTwinfile,
+  resolvePlaceExamplesCatalogRoot,
+  resolveSimulatorRoot,
+} from '../dist/index.js';
 import { listPlaceSituationBindings } from '@local-hosting/twinfile-place';
 
 import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
-import { resolveExamplesCatalogRoot } from './catalog/resolve-examples-catalog-root.mjs';
 
-const coreRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const twinCli = resolveTwinCli(import.meta.url);
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const simulatorRoot = resolve(process.env.TF_SIMULATOR_ROOT ?? join(coreRoot, '../simulator'));
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const simulatorRoot = resolveSimulatorRoot();
 
 function runTwin(args) {
   return spawnSync(process.execPath, [twinCli, ...args], {
     encoding: 'utf8',
-    env: { ...process.env, TF_EXAMPLES_ROOT: examplesRoot, TF_SIMULATOR_ROOT: simulatorRoot },
   });
 }
 
@@ -129,7 +130,7 @@ for (const dir of listBaseUnitDirs()) {
 
 const siteDirs = listSiteUnitDirs();
 if (siteDirs.length === 0) {
-  console.error(`check-examples: no site units under ${examplesRoot} (set EXAMPLES_ROOT)`);
+  console.error(`check-examples: no site units under ${examplesRoot}`);
   process.exit(1);
 }
 

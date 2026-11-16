@@ -7,7 +7,7 @@ export const metadata = {
 
 `twin` ships with **`@local-hosting/twinfile-cli`** (`twin` / `twinfile` bins). It checks a unit, builds a `Place`, runs a scenario, and moves the unit to a registry. {{ className: 'lead' }}
 
-Set `TF_EXAMPLES_ROOT`, or pass `--examples-root`, whenever a unit uses `from:` or `with:`.
+Inside the monorepo, refs in `from:` and `with:` resolve automatically. Elsewhere, set `TF_TWINFILE_ROOT` or pass `--examples-root`.
 
 ## Everyday commands {{ anchor: false }}
 

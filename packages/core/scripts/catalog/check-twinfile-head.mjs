@@ -5,10 +5,10 @@ import { join, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';
-import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
 
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const simulatorRoot = resolveSimulatorCatalogRoot(import.meta.url);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const simulatorRoot = resolveSimulatorRoot();
 const ID = /^[a-z0-9][a-z0-9-]{0,62}$/;
 
 const errors = [];

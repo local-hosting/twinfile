@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { resolveTwinfileRoot } from './resolve-twinfile-root.js';
+import { resolveTwinfileRoot } from './catalog-layout.js';
 
 /** Canonical golden scene runs (`catalog/story/examples/.../scenes/<id>/run.yaml`). */
 export const GOLDEN_SCENE_RUN_RELPATHS: Record<string, string> = {

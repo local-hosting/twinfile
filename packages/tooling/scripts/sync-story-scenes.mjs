@@ -7,12 +7,9 @@ import { basename, dirname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
-import {
-  resolveTwinfileRootFromImportMeta,
-  resolveTypeExamplesRoot,
-} from '../../../packages/core/scripts/catalog/resolve-twinfile-paths.mjs';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../core/dist/index.js';
 
-const root = resolveTwinfileRootFromImportMeta(import.meta.url);
+const root = resolveTwinfileRoot();
 const placeExamples = resolveTypeExamplesRoot('place', root);
 const storyExamples = resolveTypeExamplesRoot('story', root);
 

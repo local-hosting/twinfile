@@ -107,7 +107,7 @@ export const MCP_TOOLS: McpToolDef[] = [
   {
     name: 'run_test_prompts',
     method: 'run.test.prompts',
-    description: 'List all golden-run test prompts when TF_EXAMPLES_ROOT resolves.',
+    description: 'List all golden-run test prompts when TF_TWINFILE_ROOT resolves.',
     inputSchema: schema({}),
   },
   {

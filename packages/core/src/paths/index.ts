@@ -9,23 +9,17 @@ export {
   isTwinfileMonorepoRoot,
   resolveCharacterCatalogRoot,
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorPackageRoot,
-  resolveTwinCatalogOperateRoots,
+  resolveSimulatorRoot,
   resolveTwinfileRoot,
-  resolveTwinfileRootFromImportMeta,
-  resolveTwinfileRootFromPlaceCatalog,
   resolveTypeExamplesRoot,
-  typeExamplesRootCandidates,
   type TwinCatalogType,
 } from './catalog-layout.js';
 export {
   isExamplesCatalogRoot,
   isFlatExamplesCatalogRoot,
-  isLegacyExamplesCatalogRoot,
   listFlatExampleUnitNames,
 } from './examples-catalog.js';
-export { resolveExamplesRoot, resolveExamplesRoots } from './resolve-examples-root.js';
-export { resolveSimulatorRoot, resolveSimulatorRoots } from './resolve-simulator-root.js';
+export { resolveExamplesRoot } from './resolve-examples-root.js';
 export { catalogResolveOptions } from './catalog-resolve-options.js';
 export {
   GOLDEN_SCENE_RUN_RELPATHS,

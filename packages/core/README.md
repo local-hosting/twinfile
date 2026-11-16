@@ -51,7 +51,7 @@ Build yields a **`Place`** (`Twinfile.build()` / `buildTwinfile`). **`Twinfile.l
 ## API
 
 - **Load / validate** — `loadTwinfile`, `validateTwinfileYamlPath`, `validateWorldYamlPath`, `createTwinValidator`
-- **Examples / local refs** — `resolveExamplePlace`, `listExamplePlaceRefs`, `loadTwinLocalMap`, `loadTwinLocalMapMerged`, `defaultExamplesRoot`, `resolveSimulatorRoot` (on-disk sibling catalog under `TF_SIMULATOR_ROOT`; register hook is `@local-hosting/twinfile-simulator`)
+- **Examples / local refs** — `resolveExamplePlace`, `listExamplePlaceRefs`, `loadTwinLocalMap`, `loadTwinLocalMapMerged`, `resolvePlaceExamplesCatalogRoot`, `resolveSimulatorRoot` (`packages/simulator` under the repo root; register hook is `@local-hosting/twinfile-simulator`)
 - **Build** — `Twinfile`, `Place`, `buildTwinfile`, `composeScenarioLayers`, five-layer order (RFC 0001); `TwinfileBuilder`, `mergeObjects`, `sha256Digest`, `placeImageDigest`, `ContractChecker`, `RefResolver`, `resolveTwinfileByRef`
 
 - **OCI** — `pushTwinfileToRegistry`, `pullTwinfileFromRegistry`, `packTwinfileOci`

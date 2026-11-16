@@ -6,10 +6,10 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
-import { resolveExamplesCatalogRoot } from './resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot } from '../../dist/index.js';
 
 const require = createRequire(import.meta.url);
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const specRoot = dirname(require.resolve('@local-hosting/twinfile/package.json'));
 
 const ajv = new Ajv2020({ strict: false, allErrors: true });

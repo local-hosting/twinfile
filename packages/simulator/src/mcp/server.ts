@@ -192,7 +192,7 @@ export async function handleMcpRequest(
   if (method === 'run.test.prompt') {
     const examplesRoot = resolveMcpRunTestPromptsRoot(dir);
     if (!examplesRoot) {
-      return { digest, error: 'TF_EXAMPLES_ROOT not resolved for served unit' };
+      return { digest, error: 'TF_TWINFILE_ROOT not resolved for served unit' };
     }
     const paramRunId =
       (typeof req.params?.runId === 'string' && req.params.runId.trim()) ||
@@ -210,7 +210,7 @@ export async function handleMcpRequest(
   if (method === 'run.test.prompts') {
     const examplesRoot = resolveMcpRunTestPromptsRoot(dir);
     if (!examplesRoot) {
-      return { digest, error: 'TF_EXAMPLES_ROOT not resolved for served unit' };
+      return { digest, error: 'TF_TWINFILE_ROOT not resolved for served unit' };
     }
     const prompts = listMcpRunTestPrompts(examplesRoot);
     return { digest, schema: 'twinfile.mcp.run-test-prompts.v1', prompts };

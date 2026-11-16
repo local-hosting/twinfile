@@ -24,17 +24,16 @@ Install `@local-hosting/twinfile-core`, point it at the examples checkout, and s
 ```bash
 yarn add @local-hosting/twinfile-core
 git clone https://github.com/twinfile/twinfile.git
-export TF_EXAMPLES_ROOT="$PWD/twinfile/examples"
-export TF_SIMULATOR_ROOT="$PWD/twinfile/simulator"
+export TF_TWINFILE_ROOT="$PWD/twinfile"
 ```
 
-`TF_EXAMPLES_ROOT` is how the CLI finds refs such as `twinfile/base-campus:0.1.0`. `examples/twin.local.yaml` is the same map, checked in.
+`TF_TWINFILE_ROOT` is how the CLI finds refs such as `twinfile/base-campus:0.1.0` when you work outside the checkout. `catalog/place/examples/twin.local.yaml` is the same map, checked in.
 
 ## Scaffold and check {{ anchor: false }}
 
 ```bash
 yarn twin init place ./my-mall --geotype shopping_mall --name my-mall
-yarn twin check ./my-mall --examples-root "$TF_EXAMPLES_ROOT"
+yarn twin check ./my-mall
 yarn twin build ./my-mall
 ```
 

@@ -1,5 +1,5 @@
 import { statSync } from 'node:fs';
-import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/resolve-twinfile-root.js';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/catalog-layout.js';
 import { listExampleUnitIds, TWIN_EXAMPLE_TYPES } from './list-example-units.js';
 
 export type ProjectTwinManifest = {

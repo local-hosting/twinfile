@@ -11,7 +11,7 @@ import {
 } from '../load/twinfile-paths.js';
 import { readYamlDocument } from '../validate/validate-yaml.js';
 import { resolveExamplesRoot } from '../paths/resolve-examples-root.js';
-import { resolveSimulatorRoot } from '../paths/resolve-simulator-root.js';
+import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
 import { catalogResolveOptions } from '../paths/catalog-resolve-options.js';
 import { resolveTwinfileByRef } from '../ref/twinfile-resolver.js';
 import { flatTwinfileRef, parseTwinfileRef } from '../types/twinfile-ref.js';

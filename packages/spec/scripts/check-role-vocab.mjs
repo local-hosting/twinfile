@@ -64,17 +64,8 @@ function scanExpects(doc, label) {
   }
 }
 
-function resolveExamplesRoot() {
-  const fromEnv = process.env.TF_EXAMPLES_ROOT ?? process.env.EXAMPLES_ROOT;
-  if (fromEnv) return join(fromEnv);
-  return join(specRoot, '..', '..', 'catalog', 'place', 'examples');
-}
-const examplesRoot = resolveExamplesRoot();
-const simulatorRoot = process.env.TF_SIMULATOR_ROOT
-  ? join(process.env.TF_SIMULATOR_ROOT)
-  : process.env.SIMULATOR_ROOT
-    ? join(process.env.SIMULATOR_ROOT)
-    : join(specRoot, '..', 'simulator');
+const examplesRoot = join(specRoot, '..', '..', 'catalog', 'place', 'examples');
+const simulatorRoot = join(specRoot, '..', 'simulator');
 
 function situationExpectsFromBuiltin(situation) {
   const builtinPath = join(simulatorRoot, 'src/catalog/builtin', `${situation}.ts`);

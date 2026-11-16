@@ -7,13 +7,12 @@ import { join, resolve } from 'node:path';
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { isRunHeadPath, resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
-import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
-import { resolveTwinfileRootFromPlaceCatalog, resolveTypeExamplesRoot } from './resolve-twinfile-paths.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
 
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const twinfileRoot = resolveTwinfileRootFromPlaceCatalog(examplesRoot);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const twinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamplesRoot = resolveTypeExamplesRoot('story', twinfileRoot);
-const simulatorRoot = resolveSimulatorCatalogRoot(import.meta.url);
+const simulatorRoot = resolveSimulatorRoot();
 const twinCli = resolveTwinCli(import.meta.url);
 
 function isRunVerifyTarget(dir) {
@@ -51,7 +50,6 @@ for (const dir of runs) {
   const rel = `catalog/story/examples/${dir.slice(storyExamplesRoot.length + 1)}`;
   const run = spawnSync(process.execPath, [twinCli, 'verify', dir], {
     encoding: 'utf8',
-    env: { ...process.env, TF_EXAMPLES_ROOT: examplesRoot, TF_SIMULATOR_ROOT: simulatorRoot },
   });
   if (run.status !== 0) {
     console.error(run.stderr || run.stdout);

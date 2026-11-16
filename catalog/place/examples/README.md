@@ -13,12 +13,7 @@ Other twin types:
 
 **Runs:** only under **`catalog/story/examples/<story>/scenes/<scene>/run.yaml`**. Legacy site presets → `yarn sync:story-scenes`.
 
-```bash
-# Monorepo roots (local dev)
-export TF_TWINFILE_ROOT=.
-export TF_EXAMPLES_ROOT=$TF_TWINFILE_ROOT/catalog/place/examples
-export TF_SIMULATOR_ROOT=$TF_TWINFILE_ROOT/packages/simulator
-```
+No environment setup is needed inside the monorepo; tools find this catalog from the repo root.
 
 Normative layout: [`packages/spec/doc/unit-layout.md`](../../../packages/spec/doc/unit-layout.md). Vocabulary: [`packages/spec/doc/glossary.md`](../../../packages/spec/doc/glossary.md#quick-reference-prose--yaml).
 

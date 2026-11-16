@@ -11,7 +11,7 @@ export type TwinfileEditorProps = {
   uri: string;
   /** Browser hosts pass this for `twinfile/` and `file://` URIs. */
   load?: LoadTwinfileOptions['load'];
-  /** Catalog root used by the Node loader. Defaults to `TF_EXAMPLES_ROOT`. */
+  /** Catalog root used by the Node loader. Defaults to `TF_TWINFILE_ROOT`. */
   examplesRoot?: string;
   value?: string;
   onChange?: (text: string) => void;

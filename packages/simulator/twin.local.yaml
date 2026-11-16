@@ -1,4 +1,4 @@
-# Local ref map for @local-hosting/twinfile-simulator (merge with examples via TF_SIMULATOR_ROOT).
+# Local ref map for @local-hosting/twinfile-simulator.
 # Ref grammar: spec/doc/pack/refs.md
 refs:
   # Situations
