@@ -5,7 +5,7 @@ Created: 2026-11-04
 
 ## Summary
 
-Twinfile 1.0 defines four **unit kinds** (`place`, `event`, `event`, `scenario`) and place-local **plans**, composed in a fixed **layer order** like Docker images.
+Twinfile 1.0 defines three **unit kinds** (`place`, `event`, `scenario`) and place-local **plans**, composed in a fixed **layer order** like Docker images.
 
 ## Motivation
 

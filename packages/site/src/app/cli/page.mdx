@@ -7,13 +7,13 @@ export const metadata = {
 
 `twin` ships with **`@local-hosting/twinfile-cli`** (`twin` / `twinfile` bins). It checks a unit, builds a `Place`, runs a scenario, and moves the unit to a registry. {{ className: 'lead' }}
 
-Inside the monorepo, refs in `from:` and `with:` resolve automatically. Elsewhere, set `TF_TWINFILE_ROOT` or pass `--examples-root`.
+Inside the monorepo, refs in `from:` and `copy:` resolve automatically. Elsewhere, set `TF_TWINFILE_ROOT` or pass `--examples-root`.
 
 ## Everyday commands {{ anchor: false }}
 
 | Command | What it does |
 | --- | --- |
-| `twin init place <dir> --geotype <slug>` | Writes a place with `from:` and `with:` mixins. `--no-from` and `--no-decorate` skip those steps. |
+| `twin init place <dir> --geotype <slug>` | Writes a place with `from:` and starter decoration rows. `--no-from` and `--no-decorate` skip those steps. |
 | `twin add plan <event> [dir]` | Binds an event to spaces tagged with `roles:`. |
 | `twin add assets [dir]` | Adds a starter `assets` layer. |
 | `twin check [dir]` | Validates manifest, layers, and contracts. `--strict`, `--frozen`, `--examples-root`. |

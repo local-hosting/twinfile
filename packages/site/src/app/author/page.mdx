@@ -1,6 +1,6 @@
 export const metadata = {
   title: 'Author a place',
-  description: 'Inherit a base, patch layers, attach mixins, and wire plans.',
+  description: 'Inherit a base, patch layers, add starter rows, and wire plans.',
 }
 
 # Author a place
@@ -27,7 +27,7 @@ Indoor, covered, and outdoor program is `exposure` on each space. It does not ch
 twin init place ./my-mall --geotype shopping_mall --name my-mall
 ```
 
-That command writes `from:`, `geotype`, a thin starter `place/place.yaml` (site identity only — `archetype` and `authoring_scale` come from the **`from:`** base), and `with:` mixins. When `@local-hosting/geotypes` **`suggestBuildingImportForSlug`** is true for your slug (today: resolved **campus** archetype), init also writes `place/parts/README.md` (RFC 0009 nested-part checklist). Override `archetype` in `place/place.yaml` only when the twin is finer than the map default.
+That command writes `from:`, `geotype`, a thin starter `place/place.yaml` (site identity only — `archetype` and `authoring_scale` come from the **`from:`** base), and starter `assets` / `sensors` steps when the geotype suggests them. When `@local-hosting/geotypes` **`suggestBuildingImportForSlug`** is true for your slug (today: resolved **campus** archetype), init also writes `place/parts/README.md` (RFC 0009 nested-part checklist). Override `archetype` in `place/place.yaml` only when the twin is finer than the map default.
 
 ## Inherit and patch {{ anchor: false }}
 
@@ -63,16 +63,11 @@ steps:
     into: transit-hub
 ```
 
-`spaces:` defines your topology; the base does not ship demo spaces you must remove. `twin layers` prints the full stack, including copied parts (same chain as build). The editor inlines `with:` mixins and `copy: ./…` nested units in the stack rail; `from:` stays a ref on the manifest.
+`spaces:` defines your topology; the base does not ship demo spaces you must remove. `twin layers` prints the full stack, including copied parts (same chain as build). The editor inlines `copy: ./…` nested units in the stack rail; `from:` stays a ref on the manifest.
 
-## Mixins {{ anchor: false }}
+## Starter rows {{ anchor: false }}
 
-`with:` attaches published mixin units. `twin init` adds `mixin-assets` or `mixin-sensors` when the geotype asks for them. Events need no mixin: a place hosts an event through the `roles:` it already tags.
-
-| Mixin | Adds |
-| --- | --- |
-| `twinfile/mixin-assets:0.1.0` | Starter `assets` layer |
-| `twinfile/mixin-sensors:0.1.0` | Starter `sensors` layer |
+When the geotype suggests `assets` or `sensors`, `twin init` writes one starter row for each as a step in your manifest (`starter-kiosk`, `starter-sensor`). Rename them and set their `space:`. Events need no extra rows: a place hosts an event through the `roles:` it already tags.
 
 A local `bindings/<event>.yaml` overrides role matching. Tag your own spaces with `roles:` (`shelter`, `outdoor`, `exit`) and run:
 
