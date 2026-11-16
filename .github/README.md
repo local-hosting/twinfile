@@ -9,7 +9,7 @@
 
 Per-package `.github/` under `packages/*` was removed — those workflows targeted the old split `twinfile/*` repos.
 
-**Sibling clones (CI):** `yarn` links `portal:` / `link:` deps to `../geotypes`, `../frameworks`, and `../geokit`. The workflow clones those repos into the runner parent of `GITHUB_WORKSPACE` (siblings of this repo root). Set org/repo secret **`TF_PACKAGES_TOKEN`** (PAT with `repo` + `read:packages`) if `GITHUB_TOKEN` cannot read sibling repos.
+**CI install:** `ci-prepare-monorepo-install.mjs` rewrites `portal:` / `link:` deps to pinned GitHub Packages versions before `yarn install` (sibling checkouts are optional for local dev). Set org/repo secret **`TF_PACKAGES_TOKEN`** (PAT with `read:packages`) when `GITHUB_TOKEN` cannot read `@doppler-group/*` packages.
 
 **Env (CI and local):**
 

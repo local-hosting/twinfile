@@ -2,6 +2,7 @@
 /**
  * Run workspace checks from the twinfile root (open stack only — not productgrade).
  */
+import { existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -26,17 +27,22 @@ function runNodeScript(relDir, scriptName) {
 }
 
 const geotypesRoot = join(root, '../geotypes');
+const geotypesScript = join(geotypesRoot, 'scripts/check-all.mjs');
 
 const STEPS = [
-  {
-    id: 'geotypes',
-    run: () =>
-      spawnSync(process.execPath, [join(geotypesRoot, 'scripts/check-all.mjs')], {
-        cwd: geotypesRoot,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'pipe'],
-      }),
-  },
+  ...(existsSync(geotypesScript)
+    ? [
+        {
+          id: 'geotypes',
+          run: () =>
+            spawnSync(process.execPath, [geotypesScript], {
+              cwd: geotypesRoot,
+              encoding: 'utf8',
+              stdio: ['ignore', 'pipe', 'pipe'],
+            }),
+        },
+      ]
+    : []),
   { id: 'bridge', run: () => runWorkspaceScript('@doppler-group/twinfile-bridge', ['check']) },
   { id: 'cli', run: () => runWorkspaceScript('@doppler-group/twinfile-cli', ['check']) },
   { id: 'core', run: () => runWorkspaceScript('@doppler-group/twinfile-core', ['check:openstack']) },

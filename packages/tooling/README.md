@@ -6,6 +6,7 @@ Monorepo scripts — invoked from root `package.json`:
 | --- | --- |
 | `check-workspace.mjs` | Full open-stack gate (`yarn check:twinfile`) |
 | `repo-hygiene.mjs` | `yarn hygiene` — legacy dirs, nested `node_modules` |
+| `ci-prepare-monorepo-install.mjs` | CI: swap portal/link deps for GitHub Packages pins |
 | `vn-scan-lib.mjs` / `check-vendor-neutral.mjs` | Vendor-neutral scan (packages call `node ../tooling/scripts/check-vendor-neutral.mjs`) |
 | `sync-vendor-neutral-lib.mjs` | Copy vn-scan into sibling `geotypes` / `geokit` mirrors only |
 | `sync-ci-tooling.mjs` | Refresh standalone mirror copies of `ci-prepare-deps` (monorepo uses tooling paths) |
