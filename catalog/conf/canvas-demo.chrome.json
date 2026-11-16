@@ -1,0 +1,127 @@
+{
+  "places": [
+    {
+      "id": "dunkirk-dock",
+      "cardTitle": "Dunkirk Dock",
+      "label": "Dunkirk Dock",
+      "slug": "dunkirk-dock",
+      "orgVenueId": "",
+      "geo": "42.4795, -79.3337"
+    },
+    {
+      "id": "buffalo-harbor",
+      "cardTitle": "Buffalo Harbor",
+      "label": "Buffalo Harbor",
+      "slug": "buffalo-harbor",
+      "orgVenueId": "",
+      "geo": "42.8864, -78.8784"
+    },
+    {
+      "id": "niagara-falls",
+      "cardTitle": "Niagara Falls Visitor",
+      "label": "Niagara Falls Visitor",
+      "slug": "niagara-falls",
+      "orgVenueId": "",
+      "geo": "43.0896, -79.0849"
+    }
+  ],
+  "characters": [
+    {
+      "id": "ferry-captain",
+      "cardTitle": "Ferry Captain",
+      "label": "Ferry Captain"
+    },
+    {
+      "id": "harbor-guide",
+      "cardTitle": "Harbor Guide",
+      "label": "Harbor Guide"
+    },
+    {
+      "id": "visitor-host",
+      "cardTitle": "Visitor Host",
+      "label": "Visitor Host"
+    }
+  ],
+  "stories": [
+    {
+      "id": "morning-crossing",
+      "cardTitle": "Morning Crossing",
+      "title": "Morning Crossing",
+      "personaId": "ferry-captain",
+      "orgStoryboardId": "",
+      "mapSlug": "buffalo-harbor",
+      "storyPitch": "Dawn ferry run from Dunkirk into Buffalo Harbor."
+    },
+    {
+      "id": "falls-day-tour",
+      "cardTitle": "Falls Day Tour",
+      "title": "Falls Day Tour",
+      "personaId": "harbor-guide",
+      "orgStoryboardId": "",
+      "mapSlug": "niagara-falls",
+      "storyPitch": "Guided loop from the harbor to Niagara Falls Visitor."
+    }
+  ],
+  "resources": [
+    {
+      "id": "dock-crane",
+      "cardTitle": "Dock Crane",
+      "label": "Dock Crane",
+      "orgInventoryId": "",
+      "orgVehicleId": "",
+      "geo": "42.4680, -79.3185"
+    },
+    {
+      "id": "visitor-shuttle",
+      "cardTitle": "Visitor Shuttle",
+      "label": "Visitor Shuttle",
+      "orgInventoryId": "",
+      "orgVehicleId": "",
+      "geo": "42.8750, -78.8620"
+    },
+    {
+      "id": "falls-tram",
+      "cardTitle": "Falls Tram",
+      "label": "Falls Tram",
+      "orgInventoryId": "",
+      "orgVehicleId": "",
+      "geo": "43.0780, -79.0700"
+    }
+  ],
+  "events": [
+    {
+      "id": "dawn-cast-off",
+      "cardTitle": "Dawn cast-off",
+      "label": "Dawn cast-off",
+      "dayIndex": "0"
+    },
+    {
+      "id": "harbor-berth",
+      "cardTitle": "Harbor berth",
+      "label": "Harbor berth",
+      "dayIndex": "1"
+    },
+    {
+      "id": "falls-loop",
+      "cardTitle": "Falls day loop",
+      "label": "Falls day loop",
+      "dayIndex": "2"
+    },
+    {
+      "id": "dunkirk-return",
+      "cardTitle": "Dunkirk return",
+      "label": "Dunkirk return",
+      "dayIndex": "3"
+    }
+  ],
+  "storyEventIds": {
+    "morning-crossing": [
+      "dawn-cast-off",
+      "harbor-berth"
+    ],
+    "falls-day-tour": [
+      "falls-loop",
+      "dunkirk-return"
+    ]
+  }
+}

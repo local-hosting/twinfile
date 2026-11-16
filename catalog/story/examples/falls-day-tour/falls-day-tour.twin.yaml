@@ -1,0 +1,24 @@
+twinfile: 2
+kind: story
+id: falls-day-tour
+name: Falls Day Tour
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/niagara-falls:0.1.0
+  - rel: involves
+    href: twinfile/character/harbor-guide:0.1.0
+story:
+  pitch: Guided loop from the harbor to Niagara Falls Visitor.
+  scenes:
+    - id: falls-loop
+      label: Falls day loop
+      run:
+        steps:
+          - copy: twinfile/event/falls-loop:0.1.0
+    - id: dunkirk-return
+      label: Dunkirk return
+      run:
+        steps:
+          - copy: twinfile/event/dunkirk-return:0.1.0

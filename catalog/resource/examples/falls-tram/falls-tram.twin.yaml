@@ -1,0 +1,15 @@
+twinfile: 2
+kind: resource
+id: falls-tram
+name: Falls Tram
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/niagara-falls:0.1.0
+resource:
+  kind: tram
+  state: active
+  ext:
+    lat: 43.078
+    lon: -79.07

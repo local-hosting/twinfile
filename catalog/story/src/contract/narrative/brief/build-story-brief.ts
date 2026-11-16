@@ -90,8 +90,17 @@ function formatWhyBullets(why: StoryBriefWhyV1 | undefined): string[] {
   ];
 }
 
-function formatHowBullets(_how: StoryBriefHowV1 | undefined): string[] {
-  return ['Configured via PCM persona / segment mounts on the AXM'];
+function formatHowBullets(how: StoryBriefHowV1 | undefined): string[] {
+  if (!how) {
+    return ['Configured via PCM persona / segment mounts'];
+  }
+  return [
+    ...(how.journeyPace?.trim() ? [`Pace \`${how.journeyPace.trim()}\``] : []),
+    ...(how.dramaticBeatIds?.length
+      ? [`Beats: ${how.dramaticBeatIds.map((id) => `\`${id}\``).join(', ')}`]
+      : []),
+    ...(how.segmentPresetId?.trim() ? [`Preset \`${how.segmentPresetId.trim()}\``] : []),
+  ];
 }
 
 export function buildStoryBrief(input: {

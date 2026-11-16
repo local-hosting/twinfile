@@ -1,0 +1,15 @@
+twinfile: 2
+kind: resource
+id: visitor-shuttle
+name: Visitor Shuttle
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/buffalo-harbor:0.1.0
+resource:
+  kind: shuttle
+  state: active
+  ext:
+    lat: 42.875
+    lon: -78.862

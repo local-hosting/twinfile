@@ -256,10 +256,28 @@ export type {
   SamStoryDimensionWhyV1,
   SamStoryDimensionHowV1,
 } from './types/story-dimensions.js';
+export type {
+  HostEngagementLevelId,
+  HostStoryCreateDimensionsV1,
+  HostStoryDimensionHowV1,
+  HostStoryDimensionWhatV1,
+  HostStoryDimensionWhenV1,
+  HostStoryDimensionWhereV1,
+  HostStoryDimensionWhoV1,
+  HostStoryDimensionWhyV1,
+} from './types/host-story-dimensions.js';
 export {
   projectStoryDimensionsFromSam,
   type ProjectStoryDimensionsFromSamInput,
 } from './project/project-story-dimensions-from-sam.js';
+export {
+  attachPlaceSlugFromPlaceRef,
+  HOST_STORY_WHERE_DIMENSION_ERROR,
+  hostStoryWhereDimensionIsComplete,
+  mergeSamStoryDimensionsIntoCreateBody,
+  mergeSamStoryDimensionsWithHost,
+  type HostStoryWhereDimensionInput,
+} from './project/merge-sam-story-dimensions-with-host.js';
 export { buildJourney, buildJourneyFromBinding } from './journey/build/build-journey.js';
 export { formatJourneyMarkdown } from './journey/build/format-journey-markdown.js';
 export { journeyFileBasename } from './journey/build/journey-file-basename.js';

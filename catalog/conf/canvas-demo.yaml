@@ -1,0 +1,30 @@
+twinfile: 1
+id: canvas-demo
+description: Lake Erie waterfront demo pack for unsigned Fieldwise Canvas shell chrome.
+places:
+  - dunkirk-dock
+  - buffalo-harbor
+  - niagara-falls
+characters:
+  - ferry-captain
+  - harbor-guide
+  - visitor-host
+resources:
+  - dock-crane
+  - visitor-shuttle
+  - falls-tram
+stories:
+  - morning-crossing
+  - falls-day-tour
+events:
+  - dawn-cast-off
+  - harbor-berth
+  - falls-loop
+  - dunkirk-return
+storyEventIds:
+  morning-crossing:
+    - dawn-cast-off
+    - harbor-berth
+  falls-day-tour:
+    - falls-loop
+    - dunkirk-return
