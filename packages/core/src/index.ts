@@ -150,6 +150,14 @@ export {
   renderTwinfilePlaceView,
   type TwinfilePlaceViewFormat,
 } from './views/place-json-ld.js';
+export {
+  compactForLoroStorage,
+  prepareTwinfileLoroValue,
+  renderTwinfileLoroView,
+  stripMethodFieldsForLoro,
+  type TwinfileLoroViewFormat,
+  type RenderTwinfileLoroViewOptions,
+} from './views/loro-value.js';
 export type {
   TwinfileSummaryV1,
   TwinfileSummaryHeader,
