@@ -1,5 +1,10 @@
 import type { Journey } from '@doppler-group/twinfile-character/persona';
-import { pickJobsByIds, rankJobsForPersona, type Job, type JobSituationModel } from '@doppler-group/twinfile-character/situations';
+import {
+  pickJobsByIds,
+  rankJobsForPersona,
+  type Job,
+  type JobContextModel,
+} from '@doppler-group/twinfile-context';
 
 import type { StoryBriefCharacterV1 } from './types.js';
 import {
@@ -8,18 +13,23 @@ import {
 } from './journey-touchpoint-binding.js';
 import { humanizeStoryWireLabel } from './storyboard-scene-context.js';
 
+/** JTBD narrative row: context (situation) → goal (job/progress) → outcome (success). */
 export type StorySituationsJobNarrativeV1 = {
   id: string;
   label: string;
-  when: string;
-  want: string;
-  so: string;
+  /** Situation. */
+  context: string;
+  /** Job / progress. */
+  goal: string;
+  /** Definition of success. */
+  outcome: string;
   obstacles: readonly string[];
 };
 
 export type StorySituationsNarrativeContextV1 = {
-  situationPackLabel?: string;
-  situationPackSituation?: string;
+  contextPackLabel?: string;
+  /** Pack-level context (situation). */
+  contextPackContext?: string;
   rankedJobs: readonly StorySituationsJobNarrativeV1[];
   journeyJobIds: readonly string[];
   personaGoals: readonly string[];
@@ -32,9 +42,9 @@ function jobToNarrative(job: Job): StorySituationsJobNarrativeV1 {
   return {
     id: job.id,
     label: job.shortText?.trim() || job.text?.trim() || humanizeStoryWireLabel(job.id),
-    when: job.when.trim(),
-    want: job.want.trim(),
-    so: job.so.trim(),
+    context: job.context.trim(),
+    goal: job.goal.trim(),
+    outcome: job.outcome.trim(),
     obstacles: (job.obstacles ?? []).map((row) => row.text.trim()).filter(Boolean),
   };
 }
@@ -50,7 +60,7 @@ function uniqueJobNarratives(rows: readonly StorySituationsJobNarrativeV1[]): St
 }
 
 export function resolveJobsForTouchpoint(input: {
-  jsm?: JobSituationModel;
+  situations?: JobContextModel;
   journey?: Journey;
   touchpointId: string;
   personaJobIds?: readonly string[];
@@ -58,14 +68,14 @@ export function resolveJobsForTouchpoint(input: {
   const binding = findJourneyTouchpointBinding(input.journey, input.touchpointId);
   const phaseJobIds = binding?.moment?.jobIds ?? binding?.phase.jobIds ?? [];
   const sceneJobIds = [...phaseJobIds, ...(input.personaJobIds ?? [])];
-  if (!input.jsm || sceneJobIds.length === 0) {
+  if (!input.situations || sceneJobIds.length === 0) {
     return [];
   }
-  return pickJobsByIds(input.jsm, sceneJobIds).map(jobToNarrative);
+  return pickJobsByIds(input.situations, sceneJobIds).map(jobToNarrative);
 }
 
 export function buildStorySituationsNarrativeContext(input: {
-  jsm?: JobSituationModel;
+  situations?: JobContextModel;
   journey?: Journey;
   character?: StoryBriefCharacterV1;
   personaGoals?: readonly string[];
@@ -83,25 +93,25 @@ export function buildStorySituationsNarrativeContext(input: {
   const personaFrustrations = (input.personaFrustrations ?? []).map((row) => row.trim()).filter(Boolean);
 
   let rankedJobs: StorySituationsJobNarrativeV1[] = [];
-  if (input.jsm && input.personaJobRankingSource) {
-    rankedJobs = rankJobsForPersona(input.personaJobRankingSource, input.jsm).map((row) =>
+  if (input.situations && input.personaJobRankingSource) {
+    rankedJobs = rankJobsForPersona(input.personaJobRankingSource, input.situations).map((row) =>
       jobToNarrative(row.job),
     );
-  } else if (input.jsm) {
+  } else if (input.situations) {
     const ids = uniqueJobNarratives(
-      pickJobsByIds(input.jsm, journeyJobIds).map(jobToNarrative),
+      pickJobsByIds(input.situations, journeyJobIds).map(jobToNarrative),
     );
     rankedJobs = ids;
   }
 
-  if (input.jsm && journeyJobIds.length > 0) {
-    const journeyJobs = pickJobsByIds(input.jsm, journeyJobIds).map(jobToNarrative);
+  if (input.situations && journeyJobIds.length > 0) {
+    const journeyJobs = pickJobsByIds(input.situations, journeyJobIds).map(jobToNarrative);
     rankedJobs = uniqueJobNarratives([...rankedJobs, ...journeyJobs]);
   }
 
   return {
-    situationPackLabel: input.jsm?.label?.trim(),
-    situationPackSituation: input.jsm?.situation?.trim(),
+    contextPackLabel: input.situations?.label?.trim(),
+    contextPackContext: input.situations?.context?.trim(),
     rankedJobs,
     journeyJobIds,
     personaGoals,
@@ -111,8 +121,9 @@ export function buildStorySituationsNarrativeContext(input: {
   };
 }
 
-export function formatJsmJobBullet(job: StorySituationsJobNarrativeV1): string {
-  const obstacle =
-    job.obstacles.length > 0 ? ` Friction: ${job.obstacles.slice(0, 2).join('; ')}.` : '';
-  return `**${job.label}** — *When* ${job.when} *I want* ${job.want} *so* ${job.so}.${obstacle}`;
+export function formatSituationsJobBullet(job: StorySituationsJobNarrativeV1): string {
+  const goal = job.goal.replace(/^(to\s+)/i, '');
+  const without =
+    job.obstacles.length > 0 ? ` without ${job.obstacles.slice(0, 2).join('; ')}` : '';
+  return `**${job.label}** — When ${job.context}, I want to ${goal}, so I can ${job.outcome}${without}.`;
 }

@@ -1,6 +1,6 @@
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
 import type { StoryScene } from '../types/scene.js';
-import { dayIndexForSceneOnHorizon, storySceneSeekRowsFromSam } from './seek-story-episode-scene.js';
+import { dayIndexForSceneOnHorizon, storySceneSeekRowsFromNarrative } from './seek-story-episode-scene.js';
 import type { StoryBeatSnapshot } from './resolve-story-beat.js';
 
 function uniqueSorted(ids: readonly string[]): string[] {
@@ -13,7 +13,7 @@ export function resolveStoryBeatSceneJobIds(input: {
   scenes: readonly StoryScene[] | undefined;
   arc: EpisodeArcV1;
 }): string[] {
-  const rows = storySceneSeekRowsFromSam(input.scenes);
+  const rows = storySceneSeekRowsFromNarrative(input.scenes);
   if (rows.length === 0) {
     const activityJob = input.beat.activity?.jobId?.trim();
     return activityJob ? [activityJob] : [];

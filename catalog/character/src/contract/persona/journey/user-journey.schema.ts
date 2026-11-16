@@ -43,7 +43,9 @@ export const UserJourneyPhaseSchema = z.object({
   order: z.number().int().nonnegative(),
   goal: z.string().min(1),
   description: z.string().min(1).optional(),
-  /** Phase situation/context — overrides journey situation when set. */
+  /** Phase context — overrides journey context when set. */
+  context: z.string().min(1).optional(),
+  /** @deprecated Prefer `context`. */
   situation: z.string().min(1).optional(),
   narrativeBeat: z.string().min(1).optional(),
   lifecycleStageId: LifecycleStageIdSchema.optional(),
@@ -52,7 +54,7 @@ export const UserJourneyPhaseSchema = z.object({
   opportunityIds: z.array(VisitOpportunityIdSchema).default([]),
   intentIds: z.array(CustomerIntentIdSchema).default([]),
   touchpointIds: z.array(z.string().min(1)).default([]),
-  /** JTBD jobs accomplishable in this phase's situation/context. */
+  /** JTBD jobs accomplishable in this phase's context. */
   jobIds: z.array(z.string().min(1)).default([]),
   /** Obstacles that commonly block progress during this phase. */
   obstacleIds: z.array(z.string().min(1)).default([]),
@@ -62,16 +64,33 @@ export const UserJourneyPhaseSchema = z.object({
   emotions: JourneyPhaseEmotionProfileSchema.optional(),
 });
 
-/**
- * Formal user journey — phases, touchpoints, emotions, and goal for simulation and JTBD linking.
- * Storyboard beats and flow graphs live in `@doppler-group/twinfile-story/narrative` (`scenes`, `arcTemplate`).
- */
-export const UserJourneySchema = z
+function normalizeJourneyContextFields<
+  T extends {
+    context?: string;
+    situation?: string;
+    phases: Array<{ context?: string; situation?: string } & Record<string, unknown>>;
+  },
+>(journey: T): Omit<T, 'situation'> & { context?: string } {
+  const context = journey.context ?? journey.situation;
+  const { situation: _situation, ...rest } = journey;
+  const phases = journey.phases.map((phase) => {
+    const phaseContext = phase.context ?? phase.situation;
+    const { situation: _phaseSituation, ...phaseRest } = phase;
+    return { ...phaseRest, ...(phaseContext ? { context: phaseContext } : {}) };
+  });
+  return { ...rest, phases, ...(context ? { context } : {}) } as Omit<T, 'situation'> & {
+    context?: string;
+  };
+}
+
+const UserJourneyObjectSchema = z
   .object({
     id: z.string().min(1),
     label: z.string().min(1),
     description: z.string().min(1).optional(),
-    /** Journey situation/context — scopes which JTBD jobs are accomplishable per phase. */
+    /** Journey context — scopes which JTBD jobs are accomplishable per phase. */
+    context: z.string().min(1).optional(),
+    /** @deprecated Prefer `context`. */
     situation: z.string().min(1).optional(),
     userTypeId: UserTypeIdSchema,
     journeyGoal: z.string().min(1),
@@ -79,16 +98,24 @@ export const UserJourneySchema = z
     touchpointGraph: TouchpointGraphSpecSchema.optional(),
   })
   .describe(
-    'User journey: situation/context, ordered phases with touchpoints, emotions, and journey goal.',
+    'User journey: context, ordered phases with touchpoints, emotions, and journey goal.',
   );
+
+/**
+ * Formal user journey — phases, touchpoints, emotions, and goal for simulation and JTBD linking.
+ * Storyboard beats and flow graphs live in `@doppler-group/twinfile-story/narrative` (`scenes`, `arcTemplate`).
+ */
+export const UserJourneySchema = UserJourneyObjectSchema.transform(normalizeJourneyContextFields);
 
 /** Customer-family user types — lead, prospect, and customer under abstract user. */
 export const CustomerFamilyUserTypeIdSchema = UserKindSchema;
 
 /** Customer journey — a user journey scoped to a customer-family user type. */
-export const CustomerJourneySchema = UserJourneySchema.extend({
+export const CustomerJourneySchema = UserJourneyObjectSchema.extend({
   userTypeId: CustomerFamilyUserTypeIdSchema,
-}).describe('Customer journey — UserJourney for lead, prospect, or customer types.');
+})
+  .transform(normalizeJourneyContextFields)
+  .describe('Customer journey — UserJourney for lead, prospect, or customer types.');
 
 export const UserJourneyCatalogSchema = z
   .object({
@@ -118,12 +145,16 @@ export const UserJourneyEngagementSchema = z.object({
   engagements: z.array(ActiveJourneyEngagementSchema).min(1),
 });
 
+/** JTBD on a journey map: context (situation) → goal (job/progress) → outcome (success). */
 export const JourneyMapJobEntrySchema = z.object({
   id: z.string().min(1),
   label: z.string().min(1),
-  situation: z.string().min(1),
-  motivation: z.string().min(1),
-  desiredOutcome: z.string().min(1),
+  /** Situation. */
+  context: z.string().min(1),
+  /** Job / progress. */
+  goal: z.string().min(1),
+  /** Definition of success. */
+  outcome: z.string().min(1),
 });
 
 export const JourneyMapPhaseEntrySchema = z.object({
@@ -131,7 +162,7 @@ export const JourneyMapPhaseEntrySchema = z.object({
   label: z.string().min(1),
   order: z.number().int().nonnegative(),
   goal: z.string().min(1),
-  situation: z.string().min(1).optional(),
+  context: z.string().min(1).optional(),
   touchpointIds: z.array(z.string().min(1)).default([]),
   accomplishableJobIds: z.array(z.string().min(1)).default([]),
   accomplishableJobs: z.array(JourneyMapJobEntrySchema).default([]),
@@ -142,7 +173,7 @@ export const JourneyMapPhaseEntrySchema = z.object({
 export const JourneyMapSchema = z.object({
   journeyId: z.string().min(1),
   label: z.string().min(1),
-  situation: z.string().min(1).optional(),
+  context: z.string().min(1).optional(),
   journeyGoal: z.string().min(1),
   userTypeId: UserTypeIdSchema,
   phases: z.array(JourneyMapPhaseEntrySchema).min(1),

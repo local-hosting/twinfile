@@ -23,9 +23,9 @@ const sample: Character = {
     {
       id: 'job:commute',
       text: 'Get to work reliably',
-      when: 'I am getting ready for work',
-      want: 'to request a ride',
-      so: 'I can get to work on time',
+      context: 'I am getting ready for work',
+      goal: 'to request a ride',
+      outcome: 'I can get to work on time',
     },
   ],
 };

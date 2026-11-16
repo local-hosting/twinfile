@@ -4,9 +4,9 @@ jobs:
   - id: support-loved-one
     label: Support loved one
     granularity: theme
-    situation: When someone I care about is in the hospital
-    motivation: be present, informed, and helpful during their stay
-    desiredOutcome: They feel supported and I understand the care plan
+    context: When someone I care about is in the hospital
+    goal: be present, informed, and helpful during their stay
+    outcome: They feel supported and I understand the care plan
     visitationGoal: connect
     visitationSubGoal: friends
     heartDimensionId: happiness
@@ -14,9 +14,9 @@ jobs:
     label: Find way to department
     granularity: story
     parentJobId: support-loved-one
-    situation: When the campus layout is unfamiliar
-    motivation: reach the correct wing or room without getting lost
-    desiredOutcome: I arrive at the right place on the first try
+    context: When the campus layout is unfamiliar
+    goal: reach the correct wing or room without getting lost
+    outcome: I arrive at the right place on the first try
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -24,8 +24,8 @@ jobs:
     label: Wait comfortably
     granularity: story
     parentJobId: support-loved-one
-    situation: When procedures or visits run longer than expected
-    motivation: stay nearby without added stress
-    desiredOutcome: I can wait without feeling stranded or anxious
+    context: When procedures or visits run longer than expected
+    goal: stay nearby without added stress
+    outcome: I can wait without feeling stranded or anxious
     visitationGoal: converge
     visitationSubGoal: visit

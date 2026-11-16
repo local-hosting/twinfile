@@ -21,6 +21,7 @@ Tools (underscore names; dotted forms such as `place.query` are accepted on `too
 | `run_test_prompt` | Golden test prompt for the served run's preset `id` (`examples/mcp/run-test-prompts.yaml` in the place catalog) |
 | `run_test_prompts` | List all cataloged run test prompts |
 | `processors_validate` | Validate `processors:` outlets and binds against the merged place |
+| `twin_audit` | Believability card for any twin unit (`dir`, `format`, `brief`) — same as `twin audit` CLI |
 
 `place_path` walks the merged place (see [Layout navigation](../place/layout-navigation.md#path-query)).
 

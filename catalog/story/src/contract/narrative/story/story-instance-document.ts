@@ -20,7 +20,7 @@ export type StoryInstanceJson = StoryCharacteristics;
 
 export type StoryRuntimeWire = StoryCharacteristics;
 
-const SAM_TEMPLATE_KEYS = ['episodeArc', 'scenes', 'binding', 'arcTemplate', 'characters', 'places'] as const;
+const STORY_TEMPLATE_KEYS = ['episodeArc', 'scenes', 'binding', 'arcTemplate', 'characters', 'places'] as const;
 
 function isClock(value: unknown): value is StoryClockCursorWire {
   if (!value || typeof value !== 'object') return false;
@@ -38,7 +38,7 @@ export function storyCharacteristicsFromJSON(json: unknown): StoryCharacteristic
     throw new Error('Story characteristics must be an object');
   }
   const row = json as Record<string, unknown>;
-  for (const key of SAM_TEMPLATE_KEYS) {
+  for (const key of STORY_TEMPLATE_KEYS) {
     if (key in row) {
       throw new Error(
         'Story characteristics cannot include the Story template. Compose the story from the Story plus clock and timeline.',

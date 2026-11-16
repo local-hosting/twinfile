@@ -30,6 +30,7 @@
     "check": "yarn typecheck && yarn test"
   },
   "dependencies": {
+    "@doppler-group/twinfile-context": "workspace:^",
     "@doppler-group/twinfile-core": "workspace:packages/core",
     "chance": "^1.1.12",
     "js-yaml": "^4.1.0",

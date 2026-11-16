@@ -8,6 +8,7 @@ Any application can depend on the **open stack** alone. Hosts add realtime UI, l
 | --- | --- |
 | Author units | `<unit>.twin.yaml`, `place/*`, `bindings/*` |
 | Build & verify | `twin build`, `twin check`, `twin layers` |
+| Believability audit | `twin audit [dir] [--markdown \| --json] [--brief] [--pack \| --catalog]` — LLM-oriented structural card (cast, stage, motive, path, props, bless, gaps); `story/` audits every story; MCP `twin_audit` |
 | Publish | OCI unit, `<unit>.twin.lock` |
 | External formats | `@doppler-group/twinfile-bridge`, `twin import` / `export` |
 | Scenarios | Events, `clock`, optional runners (`use.runner`); timeline in `@doppler-group/twinfile-core` |
@@ -24,7 +25,7 @@ Any application can depend on the **open stack** alone. Hosts add realtime UI, l
 | Live pub/sub between modules | Host patch runtime |
 | Map collab (camera, selection) | Host map viewer |
 | Platform feed lockers | Host feed data plane |
-| AXM catalog mounts | `twinfile-locker` + `@productgrade/axm` |
+| Project twin mounts (Character/Story) | Host project locker + `@doppler-group/twinfile-character` / `@doppler-group/twinfile-story` |
 | Org auth, fleet sync | Host studio / ops apps |
 
 Hosts **should** read/write the same twin units on disk and use **`Place.digest`** for pin semantics.

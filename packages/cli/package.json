@@ -27,6 +27,7 @@
   "dependencies": {
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
     "@doppler-group/twinfile-character": "workspace:^",
+    "@doppler-group/twinfile-context": "workspace:^",
     "@doppler-group/twinfile-core": "workspace:packages/core",
     "@doppler-group/twinfile-event": "workspace:^",
     "@doppler-group/twinfile-place": "workspace:^",

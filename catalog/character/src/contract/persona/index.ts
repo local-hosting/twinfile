@@ -18,7 +18,7 @@ export type {
   StrategyEntityLifecycle,
 } from './types/strategy/strategy.js';
 
-/** @deprecated Import from `@doppler-group/twinfile-character/situations`. */
+/** @deprecated Import from `@doppler-group/twinfile-context`. */
 export { JobSchema, parseJob } from '../situations/index.js';
 
 export {
@@ -35,7 +35,16 @@ export {
   CHARACTER_SEGMENT_FACET_FILES,
 } from './contract/character-segment-topics.js';
 export type { CharacterSegmentFacets, CharacterSegmentStrategy } from './types/character-segment-facets.js';
-export type { CharacterEmpathy, CharacterExemplar } from './types/character-persona.js';
+export type {
+  CharacterEmpathy,
+  CharacterExemplar,
+  CharacterPersonality,
+  CharacterPersonalityDelivery,
+} from './types/character-persona.js';
+export {
+  CharacterPersonalitySchema,
+  CharacterPersonalityDeliverySchema,
+} from './schemas/character-persona.schema.js';
 
 export {
   demographicProfileFromCharacter,

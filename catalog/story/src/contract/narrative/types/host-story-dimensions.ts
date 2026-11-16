@@ -15,8 +15,7 @@ export type HostStoryDimensionWhoV1 = {
 };
 
 export type HostStoryDimensionWhatV1 = {
-  episodeId?: string;
-  journeyId?: string;
+  storyId?: string;
   arcKind?: string;
   startStoreVisitJourney?: boolean;
 };
@@ -62,7 +61,7 @@ export type HostEngagementLevelId =
 
 export type HostStoryDimensionWhyV1 = {
   jobIds?: string[];
-  situation?: string;
+  context?: string;
   narrativeBeat?: string;
   engagementLevelId?: HostEngagementLevelId;
   intentIds?: string[];

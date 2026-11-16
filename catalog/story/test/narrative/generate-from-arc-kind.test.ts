@@ -47,7 +47,7 @@ describe('generateStoryEpisodeFromArc', () => {
       const draft = generateStoryEpisodeFromArc({
         kind,
         journey: commute,
-        episodeId: 'story:episode:test',
+        storyId: 'story:episode:test',
         title: 'Test',
         revision: 1,
         focalCharacterId: 'persona:rider',

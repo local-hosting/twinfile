@@ -23,6 +23,14 @@ export {
 } from './schemas/audience/character-audience-plane.schema.js';
 export { normalizeCharacterAudiencePlane } from './audience/normalize-audience-plane-weights.js';
 export type { Persona } from './types/strategy/persona.js';
+export type {
+  CharacterPersonality,
+  CharacterPersonalityDelivery,
+} from './types/character-persona.js';
+export {
+  CharacterPersonalitySchema,
+  CharacterPersonalityDeliverySchema,
+} from './schemas/character-persona.schema.js';
 export { stripPersonaGroupFields } from './contract/strip-group-fields.js';
 export type { Job } from '../situations/index.js';
 export type {

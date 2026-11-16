@@ -130,6 +130,17 @@ export const MCP_TOOLS: McpToolDef[] = [
       'Validate manifest processors: wiring (outlets, binds) against the merged place — same rules as twin check --profile processors.',
     inputSchema: schema({}),
   },
+  {
+    name: 'twin_audit',
+    method: 'twin.audit',
+    description:
+      'Believability audit card for any twin unit (story, place, character, …). Resolves twin.local.yaml when dir is under an overlay pack. Not schema validation.',
+    inputSchema: schema({
+      dir: str,
+      format: { type: 'string', enum: ['markdown', 'json'] },
+      brief: bool,
+    }),
+  },
 ];
 
 export function mcpToolMethod(name: string): string | undefined {

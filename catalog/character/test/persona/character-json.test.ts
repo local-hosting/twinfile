@@ -16,14 +16,28 @@ const sample: Character = {
     frustrations: ['Unpredictable ETAs'],
     segment: 'commuter',
     jobIds: ['job:commute'],
+    traits: ['hurried', 'observant'],
+    personality: {
+      wants: 'A commute that does not eat the morning',
+      fears: 'Missing the last reliable connection',
+      flaw: 'Checks the app twice instead of walking',
+      delivery: {
+        patterns: ['Short clipped sentences'],
+        lines: ['Is this still on time?'],
+      },
+      movement: ['Phone in hand at the curb'],
+      temperament: ['Time-sensitive'],
+      moods: ['Focused'],
+      signatureMoves: ['Glance at the ETA, then the street'],
+    },
   },
   jobs: [
     {
       id: 'job:commute',
       text: 'Get to work reliably',
-      when: 'I am getting ready for work',
-      want: 'to request a ride',
-      so: 'I can get to work on time',
+      context: 'I am getting ready for work',
+      goal: 'to request a ride',
+      outcome: 'I can get to work on time',
     },
   ],
 };
@@ -34,6 +48,8 @@ describe('character json', () => {
     const restored = characterFromJSON(json);
     expect(restored.id).toBe(sample.id);
     expect(restored.persona.label).toBe('Rider');
+    expect(restored.persona.personality?.wants).toBe(sample.persona.personality?.wants);
+    expect(restored.persona.personality?.delivery?.lines).toEqual(['Is this still on time?']);
     expect(restored.jobs).toHaveLength(1);
   });
 });

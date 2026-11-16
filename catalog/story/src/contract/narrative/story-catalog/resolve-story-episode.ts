@@ -3,12 +3,12 @@ import type { Journey, Character } from '@doppler-group/twinfile-character/perso
 import { resolveJourneyForStory } from '../journey/build/resolve-journey-for-story.js';
 import type { Story } from '../types/story-narrative.js';
 
-export type ResolveStoryEpisodeSelection = {
-  episodeId?: string;
+export type ResolveStorySelection = {
+  storyId?: string;
   characterId?: string;
 };
 
-export type StoryEpisodeMountV1 = {
+export type StoryMountV1 = {
   story: Story;
   focalCharacter: Character;
   journey: Journey;
@@ -27,40 +27,40 @@ function characterByIdMap(characters: readonly Character[]): Record<string, Char
 export function resolveStoryEpisode(input: {
   stories: readonly Story[];
   characters: readonly Character[];
-  selection: ResolveStoryEpisodeSelection;
-}): StoryEpisodeMountV1 {
-  const episodeId = input.selection.episodeId?.trim();
-  if (episodeId) {
-    const direct = input.stories.find((row) => row.id === episodeId);
+  selection: ResolveStorySelection;
+}): StoryMountV1 {
+  const storyId = input.selection.storyId?.trim();
+  if (storyId) {
+    const direct = input.stories.find((row) => row.id === storyId);
     if (!direct) {
-      throw new Error(`Story episode "${episodeId}" is not in mounted catalog`);
+      throw new Error(`Story "${storyId}" is not in mounted catalog`);
     }
-    return mountStoryEpisode(direct, input.characters, input.selection.characterId);
+    return mountStory(direct, input.characters, input.selection.characterId);
   }
 
   if (input.stories.length === 1) {
-    return mountStoryEpisode(input.stories[0], input.characters, input.selection.characterId);
+    return mountStory(input.stories[0], input.characters, input.selection.characterId);
   }
 
   const characterId = input.selection.characterId?.trim();
   if (characterId) {
     const forCharacter = input.stories.filter((row) => row.binding.characterId === characterId);
     if (forCharacter.length === 1) {
-      return mountStoryEpisode(forCharacter[0], input.characters, characterId);
+      return mountStory(forCharacter[0], input.characters, characterId);
     }
     if (forCharacter.length > 1) {
-      throw new Error(`Multiple Story episodes for Character "${characterId}" — pass episodeId`);
+      throw new Error(`Multiple Stories for Character "${characterId}" — pass storyId`);
     }
   }
 
-  throw new Error('Could not resolve Story episode — pass episodeId or characterId');
+  throw new Error('Could not resolve Story — pass storyId or characterId');
 }
 
-function mountStoryEpisode(
+function mountStory(
   story: Story,
   characters: readonly Character[],
   characterIdOverride?: string,
-): StoryEpisodeMountV1 {
+): StoryMountV1 {
   const characterById = characterByIdMap(characters);
   const focalCharacterId = characterIdOverride?.trim() || story.binding.characterId;
   const focalCharacter = characterById[focalCharacterId];

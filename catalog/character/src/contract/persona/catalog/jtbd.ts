@@ -1,2 +1,2 @@
-/** @deprecated Prefer `@doppler-group/twinfile-character/situations/catalog/jtbd.js`. */
-export * from '../../situations/catalog/jtbd.js';
+/** @deprecated Prefer `@doppler-group/twinfile-context/catalog/jtbd.js`. */
+export * from '@doppler-group/twinfile-context/catalog/jtbd.js';

@@ -15,11 +15,10 @@ export function buildUserStoryCatalogMenu(input: {
       label: character.persona.label?.trim() || character.title?.trim() || character.persona.id,
       journeyIds: (character.journeys ?? []).map((row) => row.id),
     })),
-    episodes: input.stories.map((story) => ({
+    stories: input.stories.map((story) => ({
       id: story.id,
       title: story.title?.trim() || story.id,
       focalCharacterId: story.binding.characterId,
-      journeyId: story.binding.journeyId,
     })),
   };
 }
@@ -47,6 +46,6 @@ export function buildStoryCatalogMenu(input: {
   };
 }
 
-export function storyCatalogMenuHasEpisodes(menu: StoryCatalogMenuV1): boolean {
-  return menu.episodes.length > 0 && menu.characters.length > 0;
+export function storyCatalogMenuHasStories(menu: StoryCatalogMenuV1): boolean {
+  return menu.stories.length > 0 && menu.characters.length > 0;
 }

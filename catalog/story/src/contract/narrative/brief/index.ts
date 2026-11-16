@@ -7,7 +7,7 @@ export { buildStoryBrief } from './build-story-brief.js';
 export {
   buildDirectorScriptScenes,
   buildStoryboardSceneContext,
-  findSamSceneForTouchpoint,
+  findStorySceneForTouchpoint,
   formatStoryDirectorNarrative,
   humanizeStoryWireLabel,
   serializeStoryboardLlmContext,
@@ -25,7 +25,10 @@ export { buildCharacterBrief } from './build-character-brief.js';
 export { buildFleetBrief, type BuildFleetBriefInput, type FleetBriefMember } from './build-fleet-brief.js';
 export { buildFeedBrief, type FeedBriefRow } from './build-feed-brief.js';
 export { buildAxmSegmentBrief } from './build-axm-segment-brief.js';
-export { mergeJobSituationModels } from './merge-job-situation-models.js';
+export {
+  mergeJobContextModels,
+  mergeJobSituationModels,
+} from './merge-job-context-models.js';
 export {
   resolveStoryEpisodePresentation,
   type StoryEpisodePresentationMode,
@@ -33,7 +36,7 @@ export {
 } from './resolve-story-episode-presentation.js';
 export {
   buildStorySituationsNarrativeContext,
-  formatJsmJobBullet,
+  formatSituationsJobBullet,
   resolveJobsForTouchpoint,
   type StorySituationsNarrativeContextV1,
 } from './story-situations-narrative-context.js';
@@ -42,5 +45,6 @@ export type {
   BriefSectionV1,
   BriefV1,
   StoryBriefCharacterV1,
+  StoryBriefPersonalityV1,
   StoryBriefSnapshotV1,
 } from './types.js';

@@ -11,7 +11,7 @@ import {
 import { collectJobIdsFromJourney } from './journey-touchpoint-binding.js';
 import type { StorySituationsNarrativeContextV1 } from './story-situations-narrative-context.js';
 
-export function resolveSamDenouementActLabel(story?: Story): string | undefined {
+export function resolveStoryDenouementActLabel(story?: Story): string | undefined {
   const acts = story?.arcTemplate?.acts;
   if (!acts?.length) return undefined;
   const sorted = [...acts].sort((left, right) => left.order - right.order);
@@ -66,10 +66,10 @@ export function resolvePrimaryMomentPlaceLabel(input: {
 
 export function formatJobPursuitPhrase(input: {
   journey?: Journey;
-  jsmNarrative?: StorySituationsNarrativeContextV1;
+  situationsNarrative?: StorySituationsNarrativeContextV1;
 }): string {
   const jobLabels: string[] = [];
-  for (const job of input.jsmNarrative?.rankedJobs.slice(0, 4) ?? []) {
+  for (const job of input.situationsNarrative?.rankedJobs.slice(0, 4) ?? []) {
     const title = job.label?.trim();
     if (title) jobLabels.push(title);
   }
@@ -125,7 +125,7 @@ export function resolveEffectiveEpisodeTiming(input: {
       arc,
       journey: input.journey,
     }),
-    denouementLabel: resolveSamDenouementActLabel(input.story),
+    denouementLabel: resolveStoryDenouementActLabel(input.story),
   };
 }
 

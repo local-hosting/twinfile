@@ -4,9 +4,9 @@ jobs:
   - id: arrive-and-enter
     label: Arrive and enter
     granularity: theme
-    situation: When game day traffic and entry queues compress my timeline
-    motivation: get into the venue before kickoff or first pitch
-    desiredOutcome: I am inside with time to settle in
+    context: When game day traffic and entry queues compress my timeline
+    goal: get into the venue before kickoff or first pitch
+    outcome: I am inside with time to settle in
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -14,9 +14,9 @@ jobs:
     label: Find seat section
     granularity: story
     parentJobId: arrive-and-enter
-    situation: When the bowl layout or gate assignment is unfamiliar
-    motivation: reach my section without circling the concourse
-    desiredOutcome: I am in my seat before the event starts
+    context: When the bowl layout or gate assignment is unfamiliar
+    goal: reach my section without circling the concourse
+    outcome: I am in my seat before the event starts
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -24,9 +24,9 @@ jobs:
     label: Enjoy pre-event
     granularity: story
     parentJobId: arrive-and-enter
-    situation: When I arrive early and want the full game-day experience
-    motivation: grab food, merch, or warm-up atmosphere
-    desiredOutcome: I feel the energy before the main event
+    context: When I arrive early and want the full game-day experience
+    goal: grab food, merch, or warm-up atmosphere
+    outcome: I feel the energy before the main event
     visitationGoal: converge
     visitationSubGoal: explore
     heartDimensionId: engagement

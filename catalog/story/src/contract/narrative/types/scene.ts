@@ -39,7 +39,8 @@ export type StoryScene = {
   /** Dramatic beat on the arc rail (`actId` alias in YAML). */
   actId: DramaticBeatId;
   narrativeBeat?: string;
-  situation?: string;
+  /** Context / circumstance for this beat (JTBD). */
+  context?: string;
   /** Character ids present in this scene — subset of {@link import('./story.js').Story.characters}. */
   characterIds: string[];
   /** Mounted place place key — must appear on {@link import('./story.js').Story.places}. */

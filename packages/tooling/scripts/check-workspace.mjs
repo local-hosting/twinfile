@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Run workspace checks from the twinfile root (open stack only — not productgrade).
+ * Run workspace checks from the twinfile root (open stack only — not twinfile).
  */
 import { existsSync } from 'node:fs';
 import { spawnSync } from 'node:child_process';

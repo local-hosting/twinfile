@@ -7,7 +7,15 @@ export type StoryJourneyRefV1 = {
 
 export type StoryPlanningJtbdCatalogV1 = {
   specVersion: string;
-  jobs: Array<{ id: string; label?: string; when?: string; want?: string; so?: string; needId?: string }>;
+  /** JTBD: context (situation) → goal (job/progress) → outcome (definition of success). */
+  jobs: Array<{
+    id: string;
+    label?: string;
+    context?: string;
+    goal?: string;
+    outcome?: string;
+    needId?: string;
+  }>;
 };
 
 export type StoryPlanningObstacleCatalogV1 = {

@@ -19,10 +19,14 @@
     "./narrative/browser": "./src/contract/narrative/browser.ts"
   },
   "peerDependencies": {
-    "@doppler-group/twinfile-character": "workspace:^"
+    "@doppler-group/twinfile-character": "workspace:^",
+    "@doppler-group/twinfile-context": "workspace:^"
   },
   "peerDependenciesMeta": {
     "@doppler-group/twinfile-character": {
+      "optional": false
+    },
+    "@doppler-group/twinfile-context": {
       "optional": false
     }
   },
@@ -39,6 +43,7 @@
   },
   "devDependencies": {
     "@doppler-group/twinfile-character": "workspace:^",
+    "@doppler-group/twinfile-context": "workspace:^",
     "@types/chance": "^1.1.6",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.0",

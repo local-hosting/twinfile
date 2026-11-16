@@ -40,7 +40,7 @@ export function hydrateSceneFromJourney(scene: StoryScene, journey: Journey): St
 
   return {
     ...scene,
-    situation: scene.situation ?? spine.situation,
+    context: scene.context ?? spine.context,
     narrativeBeat: scene.narrativeBeat ?? spine.narrativeBeat,
     jobIds: scene.jobIds ?? spine.jobIds,
     emotions: scene.emotions ?? toSceneEmotions(spine.emotions),

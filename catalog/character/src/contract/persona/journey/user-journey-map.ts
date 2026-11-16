@@ -1,4 +1,4 @@
-import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-character/situations/catalog/jtbd.schema.js';
+import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-context/catalog/jtbd.schema.js';
 import {
   JourneyMapJobEntrySchema,
   JourneyMapSchema,
@@ -30,9 +30,9 @@ function jobMapEntry(job: JobDefinition) {
   return JourneyMapJobEntrySchema.parse({
     id: job.id,
     label: job.label,
-    situation: job.situation,
-    motivation: job.motivation,
-    desiredOutcome: job.desiredOutcome,
+    context: job.context,
+    goal: job.goal,
+    outcome: job.outcome,
   });
 }
 
@@ -40,8 +40,8 @@ function jobsByIdFromCatalog(jtbdCatalog?: JtbdCatalog): Map<string, JobDefiniti
   return new Map((jtbdCatalog?.jobs ?? []).map((job) => [job.id, job]));
 }
 
-function resolvePhaseSituation(journey: UserJourney, phase: UserJourneyPhase): string | undefined {
-  return phase.situation ?? journey.situation ?? phase.description;
+function resolvePhaseContext(journey: UserJourney, phase: UserJourneyPhase): string | undefined {
+  return phase.context ?? journey.context ?? phase.description;
 }
 
 function mapJobsForPhase(phase: UserJourneyPhase, jobsById: Map<string, JobDefinition>) {
@@ -83,7 +83,7 @@ export function buildJourneyMap(
       label: phase.label,
       order: phase.order,
       goal: phase.goal,
-      situation: resolvePhaseSituation(parsed, phase),
+      context: resolvePhaseContext(parsed, phase),
       touchpointIds: phase.touchpointIds,
       accomplishableJobIds: mappedJobs.jobIds,
       accomplishableJobs: mappedJobs.jobs,
@@ -98,7 +98,7 @@ export function buildJourneyMap(
   return JourneyMapSchema.parse({
     journeyId: parsed.id,
     label: parsed.label,
-    situation: parsed.situation,
+    context: parsed.context,
     journeyGoal: parsed.journeyGoal,
     userTypeId: parsed.userTypeId,
     phases,

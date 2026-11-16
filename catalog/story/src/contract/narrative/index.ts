@@ -10,7 +10,7 @@ export type { DramaticBeatId } from './types/dramatic-beat.js';
 export { DRAMATIC_BEAT_IDS } from './types/dramatic-beat.js';
 export type {
   StoryCatalogCharacterRef,
-  StoryCatalogEpisodeRef,
+  StoryCatalogStoryRef,
   StoryCatalogPlaceRef,
   StoryCatalogMenuV1,
   StorySelectionV1,
@@ -127,7 +127,7 @@ export {
   dayIndexForSceneOnHorizon,
   resolveStorySceneSeekTarget,
   seekStoryEpisodeSceneOnArc,
-  storySceneSeekRowsFromSam,
+  storySceneSeekRowsFromNarrative,
   type SeekStoryEpisodeSceneCoreResult,
   type SeekStoryEpisodeSceneInput,
   type StorySceneSeekDirection,
@@ -150,6 +150,7 @@ export type {
   EpisodeScheduledActivity,
 } from './types/episode-activity.js';
 export type { StoryCharacterContext } from './types/story-character-context.js';
+export type { StoryBlessBinding } from './types/story-bless.js';
 export type { StoryPlaceMount, PlaceMount, TwinfilePlaceMount } from './types/place-mount.js';
 export {
   findScenePlaceRefsOutsidePlaceMounts,
@@ -304,7 +305,7 @@ export { resolveJourneyForStory } from './journey/build/resolve-journey-for-stor
 export {
   buildStoryCatalogMenu,
   buildUserStoryCatalogMenu,
-  storyCatalogMenuHasEpisodes,
+  storyCatalogMenuHasStories,
 } from './story-catalog/build-story-catalog-menu.js';
 export {
   matchStoryCatalogIdsFromText,
@@ -365,6 +366,33 @@ export {
   mergeStoryPlanInput,
 } from './story-plan/plan-corpus.js';
 export {
+  buildTouchpointGraphFromStories,
+  type BuildTouchpointGraphFromStoriesOptions,
+} from './touchpoint/build-touchpoint-graph-from-stories.js';
+export {
+  compileStoryEpisodeFromTwinCatalog,
+  type CompileStoryEpisodeFromTwinCatalogInput,
+} from './project/compile-story-episode-from-twin-catalog.js';
+export {
+  assembleBelievableEpisodeFromTwinCatalog,
+  type AssembleBelievableEpisodeFromTwinCatalogInput,
+} from './project/assemble-believable-episode-from-twin-catalog.js';
+export {
+  projectTwinCatalogFromSource,
+  type ProjectTwinCatalog,
+  type ProjectTwinCatalogSource,
+  type ProjectTwinCharacterRow,
+  type ProjectTwinStoryRow,
+} from './project/project-twin-catalog.js';
+export { resolveStoryIdForPlanJobs } from './story-plan/resolve-story-id-for-plan-jobs.js';
+export {
+  STORY_PLAN_EXTRACT_SYSTEM_PROMPT,
+  buildStoryPlanExtractUserContent,
+  parseStoryPlanExtractedHintsFromLlmJson,
+  sanitizeStoryPlanExtractedHints,
+  storyPlanExtractedHintsSchema,
+} from './story-plan/story-plan-llm-extract.js';
+export {
   buildStoryPlanNarrativeContext,
   formatStoryPlanLlmUserPrompt,
 } from './story-plan/narrative.js';
@@ -383,16 +411,14 @@ export {
   listStoryJourneyRefsFromPlanningCatalogs,
 } from './story-plan/build-story-planning-catalogs-from-characters.js';
 export {
-  focalCharacterIdFromStoryMenuEpisode,
-  personaMountIdFromStoryMenuEpisode,
-  focalCharacterFromStoryEpisodeMount,
-  storyPlanJourneyRowsFromMenuEpisodes,
+  focalCharacterIdFromStoryMenuStory,
+  focalCharacterFromStoryMount,
+  storyPlanJourneyRowsFromMenuStories,
   matchStoryCatalogIdsFromTextForPlanning,
-  matchStoryCatalogIdsFromTextForFieldwise,
   storyWireFocalCharacterArg,
   storyWireFocalCharacterField,
-  storyMenuEpisodeRefForTest,
-  type StoryMenuEpisodeWire,
+  storyMenuStoryRefForTest,
+  type StoryMenuStoryWire,
   type StoryPlanJourneyRowWire,
 } from './story-plan/story-catalog-menu-wire.js';
 export type {
@@ -435,8 +461,8 @@ export {
 } from './story/build-calendar-days-from-timeline.js';
 export {
   resolveStoryEpisode,
-  type ResolveStoryEpisodeSelection,
-  type StoryEpisodeMountV1,
+  type ResolveStorySelection,
+  type StoryMountV1,
 } from './story-catalog/resolve-story-episode.js';
 export { compileStoriesForCatalog } from './story-catalog/compile-stories-for-catalog.js';
 export type {
@@ -466,7 +492,6 @@ export {
   attachPlaceSlugFromPlaceRef,
   HOST_STORY_WHERE_DIMENSION_ERROR,
   hostStoryWhereDimensionIsComplete,
-  mergeStoryDimensionsIntoCreateBody,
   mergeStoryDimensionsWithHost,
   type HostStoryWhereDimensionInput,
 } from './project/merge-story-dimensions-with-host.js';
@@ -494,11 +519,13 @@ export {
   type BriefV1,
   type FleetBriefMember,
   type StoryBriefCharacterV1,
+  type StoryBriefPersonalityV1,
   type DirectorScriptSceneV1,
   type FormatStoryDirectorNarrativeInput,
   type StoryboardPanelV1,
   type StoryboardSceneContextV1,
   type StoryBriefSnapshotV1,
+  mergeJobContextModels,
   mergeJobSituationModels,
   resolveStoryEpisodePresentation,
   buildStorySituationsNarrativeContext,

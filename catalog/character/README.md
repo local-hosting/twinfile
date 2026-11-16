@@ -8,9 +8,9 @@ src/
   mounts/                 # legacy AXM character-id sidecar reader
   contract/
     persona/                # journey/, empathy/, people/, contract/, schemas/
-    situations/             # job situations + JTBD catalogs
+    situations/             # deprecated re-export → @doppler-group/twinfile-context
 # twin example heads → catalog/character/examples/
 # character YAML libs → catalog/character/libs/{audience,journey,psychology}/
 ```
 
-Import **`@doppler-group/twinfile-character/persona`** (persona) and **`…/situations`** (situations) — legacy subpath names. **`disclosure:`** required on published characters.
+Import **`@doppler-group/twinfile-character/persona`**. JTBD lives on **`@doppler-group/twinfile-context`**. **`disclosure:`** required on published characters.

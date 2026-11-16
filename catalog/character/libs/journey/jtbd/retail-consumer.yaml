@@ -5,18 +5,18 @@ jobs:
     label: Compare prices
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When prices or promos differ between nearby stores
-    motivation: confirm I am getting a fair deal before I buy
-    desiredOutcome: I choose the store and basket that fit my budget
+    context: When prices or promos differ between nearby stores
+    goal: confirm I am getting a fair deal before I buy
+    outcome: I choose the store and basket that fit my budget
     visitationGoal: converge
     visitationSubGoal: visit
   - id: find-product-fast
     label: Find product fast
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am on a tight schedule and know what I need
-    motivation: locate the item quickly without wandering the store
-    desiredOutcome: I find the product and move to checkout
+    context: When I am on a tight schedule and know what I need
+    goal: locate the item quickly without wandering the store
+    outcome: I find the product and move to checkout
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -24,9 +24,9 @@ jobs:
     label: Browse new arrivals
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I have discretionary time and want to explore
-    motivation: discover new products or seasonal items
-    desiredOutcome: I find something worth buying or bookmark for later
+    context: When I have discretionary time and want to explore
+    goal: discover new products or seasonal items
+    outcome: I find something worth buying or bookmark for later
     visitationGoal: converge
     visitationSubGoal: explore
     heartDimensionId: engagement
@@ -34,18 +34,18 @@ jobs:
     label: Compare options
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am evaluating a considered purchase
-    motivation: weigh features, price, and availability across choices
-    desiredOutcome: I feel confident in the option I select
+    context: When I am evaluating a considered purchase
+    goal: weigh features, price, and availability across choices
+    outcome: I feel confident in the option I select
     visitationGoal: converge
     visitationSubGoal: explore
   - id: complete-purchase
     label: Complete purchase
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am ready to pay and leave
-    motivation: finish checkout quickly with no surprises
-    desiredOutcome: I pay, receive my items, and exit smoothly
+    context: When I am ready to pay and leave
+    goal: finish checkout quickly with no surprises
+    outcome: I pay, receive my items, and exit smoothly
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
