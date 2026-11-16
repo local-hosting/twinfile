@@ -19,26 +19,23 @@ import {
 import { getDefaultValidator } from '@local-hosting/twinfile-core';
 import { TFPlace } from '../src/types/tf-runtime.js';
 
-import { testCatalogRoots } from './test-examples-root.js';
+import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
 
 function catalogPlaceRoots(root: string): string[] {
-  const legacy = join(root, 'places');
-  const dirs = statSync(legacy, { throwIfNoEntry: false })?.isDirectory()
-    ? readdirSync(legacy).map((name) => join(legacy, name))
-    : readdirSync(root)
-        .filter(
-          (name) =>
-            !name.startsWith('.') &&
-            !name.startsWith('base-') &&
-            !name.startsWith('mixin-') &&
-            !name.endsWith('-programme') &&
-            name !== 'mobility-hub' &&
-            !['conf', 'presets', 'fixtures', 'docs'].includes(name),
-        )
-        .map((name) => join(root, name));
+  const dirs = readdirSync(root)
+    .filter(
+      (name) =>
+        !name.startsWith('.') &&
+        !name.startsWith('base-') &&
+        !name.startsWith('mixin-') &&
+        !name.endsWith('-programme') &&
+        name !== 'mobility-hub' &&
+        !['conf', 'presets', 'fixtures', 'docs'].includes(name),
+    )
+    .map((name) => join(root, name));
   const mobilityCampus = join(root, 'mobility-hub', 'campus');
   if (statSync(join(mobilityCampus, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile()) {
     dirs.push(mobilityCampus);

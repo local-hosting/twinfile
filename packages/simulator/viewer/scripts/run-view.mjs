@@ -13,7 +13,7 @@ const staticIndex = join(viewerRoot, 'dist/static/index.html');
 const tsc = join(twinfileRoot, 'node_modules/.bin/tsc');
 
 const args = process.argv.slice(2);
-const skipBuild = args.includes('--no-build') || process.env.TF_VIEWER_SKIP_BUILD === '1';
+const skipBuild = args.includes('--no-build');
 const forward = args.filter((a) => a !== '--no-build');
 
 function buildViewer() {

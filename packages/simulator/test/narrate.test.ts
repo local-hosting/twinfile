@@ -11,7 +11,7 @@ import { buildPlaceNarrative, describeTwinAt, openTimelineForPlace } from '@loca
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { goldenSceneRunDir, testCatalogRoots } from './test-examples-root.js';
+import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);

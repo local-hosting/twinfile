@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { stringify } from 'yaml';
 
-import { testCatalogRoots } from './test-examples-root.js';
+import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 import {
   buildTwinfile,
   loadTwinfileStrict,

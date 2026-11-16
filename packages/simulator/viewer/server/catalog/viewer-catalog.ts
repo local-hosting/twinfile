@@ -252,16 +252,11 @@ function collectStorySceneRuns(storyExamplesRoot: string): ViewerCatalogEntry[] 
 function collectRunPresets(root: string): ViewerCatalogEntry[] {
   const out: ViewerCatalogEntry[] = [];
   const presetRoots: string[] = [];
-  const placesDir = join(root, 'places');
-  if (statSync(placesDir, { throwIfNoEntry: false })?.isDirectory()) {
-    presetRoots.push(placesDir);
-  } else {
-    for (const name of readdirSync(root)) {
-      if (name.startsWith('.') || name === 'conf' || name === 'presets') continue;
-      const child = join(root, name);
-      if (statSync(child, { throwIfNoEntry: false })?.isDirectory() && hasTwinfile(child)) {
-        presetRoots.push(child);
-      }
+  for (const name of readdirSync(root)) {
+    if (name.startsWith('.') || name === 'conf' || name === 'presets') continue;
+    const child = join(root, name);
+    if (statSync(child, { throwIfNoEntry: false })?.isDirectory() && hasTwinfile(child)) {
+      presetRoots.push(child);
     }
   }
   if (presetRoots.length === 0) return out;
@@ -457,11 +452,6 @@ export function viewerRootsFromPaths(paths: string[]): ViewerRoots {
 
     if (isDir(join(abs, 'mixins'))) {
       pushUniqueRoots(examplesRoots, abs);
-      continue;
-    }
-
-    if (basename(abs) === 'places' && isDir(abs)) {
-      pushUniqueRoots(examplesRoots, dirname(abs));
       continue;
     }
 

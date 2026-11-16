@@ -3,16 +3,28 @@ import { join } from 'node:path';
 
 import { isRecord } from '../doc/is-record.js';
 import { PLACE_HEAD_NAMES } from '../load/twinfile-locator.js';
+import { RUN_PRESET_NAMES, TWIN_HEAD_FILES, type TwinKind } from '../types/twin-kind.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 import type { TwinHead, TwinHeadPath } from '../types/twin-head.js';
-import { TWIN_HEAD_FILES, type TwinKind } from '../types/twin-kind.js';
 
 export type ParseTwinHeadOptions = {
   readonly headFile: string;
   /** Accepted `kind:` values — place heads also accept `mixin`. */
   readonly kinds: readonly string[];
 };
+
+/** Every publishable twin head filename (catalog scripts, publish walk). */
+export const DISCOVER_TWIN_HEAD_YAML_NAMES = [
+  ...PLACE_HEAD_NAMES,
+  TWIN_HEAD_FILES.resource,
+  'resource.yaml',
+  TWIN_HEAD_FILES.character,
+  'character.yaml',
+  TWIN_HEAD_FILES.story,
+  'story.yaml',
+  ...RUN_PRESET_NAMES,
+] as const;
 
 const HEAD_NAMES_BY_KIND: Record<TwinKind, readonly string[]> = {
   place: PLACE_HEAD_NAMES,

@@ -8,7 +8,7 @@ import { parseModuleGraphFromTwinfile } from '../src/patch/module-graph-twinfile
 import { loadPatchModuleTypeCatalog } from '../src/patch/module-type-catalog.js';
 import { patchModuleWireIo } from '../src/patch/patch-card-io.js';
 import type { PatchGraphV1 } from '../src/types/patch-graph.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
