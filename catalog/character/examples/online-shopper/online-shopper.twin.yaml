@@ -1,3 +1,4 @@
+from: twinfile/character/shopper:0.1.0
 twinfile: 2
 kind: character
 id: online-shopper
@@ -8,10 +9,10 @@ disclosure:
   synthetic: true
   no_pii: true
   note: Exemplar digital shopper for cart-to-checkout stories.
-character:
-  role: visitor
-  segment: default
-  exemplar:
-    name: Alex Kim
-  goals:
-    - Complete checkout or schedule in-store pickup
+steps:
+  - character:
+      segment: default
+      exemplar:
+        name: Alex Kim
+      goals:
+        - Complete checkout or schedule in-store pickup
