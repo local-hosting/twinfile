@@ -59,6 +59,10 @@
       "types": "./dist/method/index.d.ts",
       "import": "./dist/method/index.js",
       "default": "./dist/method/index.js"
+    },
+    "./canvas/demo-project-content": {
+      "import": "./canvas/demo-project-content.json",
+      "default": "./canvas/demo-project-content.json"
     }
   },
   "types": "./dist/index.d.ts",
@@ -71,11 +75,12 @@
     "check": "node ../tooling/scripts/check-vendor-neutral.mjs && node scripts/check-open-standard.mjs && node scripts/check-no-src-emit.mjs && node scripts/sync-patch-module-types.mjs && node scripts/build-geotypes.mjs && yarn build && yarn workspace @local-hosting/twinfile-place build && node scripts/check-no-src-emit.mjs && yarn typecheck && yarn test",
     "check:openstack": "yarn check && yarn check:catalog-golden && yarn check:examples && yarn conformance",
     "check:examples": "node scripts/build-geotypes.mjs && yarn build && node scripts/check-examples.mjs",
-    "check:catalog-golden": "node scripts/catalog/check-vendor-neutral.mjs && node scripts/catalog/check-twinfile-head.mjs && node scripts/catalog/check-all.mjs && node scripts/catalog/check-matrix.mjs",
+    "check:catalog-golden": "node scripts/catalog/check-vendor-neutral.mjs && node scripts/catalog/check-twinfile-head.mjs && node scripts/catalog/check-all.mjs && node scripts/catalog/check-matrix.mjs && yarn build && node scripts/sync-canvas-demo-chrome.mjs",
     "check:published-refs": "node scripts/catalog/check-published-refs.mjs",
     "conformance": "node scripts/build-geotypes.mjs && yarn build && yarn workspace @local-hosting/twinfile-simulator build && yarn workspace @local-hosting/twinfile-cli build && node scripts/run-conformance.mjs"
   },
   "files": [
+    "canvas",
     "dist",
     "scripts/check-open-standard.mjs",
     "scripts/build-geotypes.mjs",

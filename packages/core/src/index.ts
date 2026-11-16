@@ -297,6 +297,21 @@ export {
   canvasEntitiesFromProjectBundle,
   type CanvasProjectExport,
 } from './canvas/export-project-entities.js';
+export {
+  loadCanvasDemoChrome,
+  loadCanvasDemoPack,
+  resolveCanvasDemoPackPath,
+  writeCanvasDemoChromeJson,
+} from './canvas/load-canvas-demo-chrome.js';
+export type {
+  CanvasDemoCharacterRow,
+  CanvasDemoEventRow,
+  CanvasDemoPackManifest,
+  CanvasDemoPlaceRow,
+  CanvasDemoProjectContent,
+  CanvasDemoResourceRow,
+  CanvasDemoStoryRow,
+} from './types/canvas-demo-chrome.js';
 export { canvasStubEntity } from './canvas/canvas-stubs.js';
 export { urnTwinfile, parseUrnTwinfile } from './ref/urn-twinfile.js';
 export { copyRefAlternates } from './load/copy-ref-alternates.js';

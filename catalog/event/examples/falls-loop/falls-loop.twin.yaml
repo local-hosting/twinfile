@@ -1,0 +1,18 @@
+twinfile: 1
+kind: event
+id: falls-loop
+name: Falls day loop
+version: 0.1.0
+stability: example
+mode: daily
+canvas:
+  dayIndex: "2"
+phases:
+  - loop
+expects:
+  hotspot:
+    kind: marker
+    min: 0
+args:
+  startsAt:
+    type: time

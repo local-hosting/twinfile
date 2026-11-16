@@ -1,0 +1,18 @@
+twinfile: 1
+kind: event
+id: dawn-cast-off
+name: Dawn cast-off
+version: 0.1.0
+stability: example
+mode: daily
+canvas:
+  dayIndex: "0"
+phases:
+  - start
+expects:
+  hotspot:
+    kind: marker
+    min: 0
+args:
+  startsAt:
+    type: time

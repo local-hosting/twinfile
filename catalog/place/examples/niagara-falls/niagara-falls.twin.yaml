@@ -1,0 +1,29 @@
+from: twinfile/base-open-area:0.1.0
+twinfile: 2
+kind: place
+id: niagara-falls
+name: Niagara Falls Visitor
+version: 0.1.0
+stability: example
+geotype:
+  primary: public_park
+  registry: "@local-hosting/geotypes@0.2.0"
+steps:
+  - place:
+      name: Niagara Falls Visitor
+      kind: plaza
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 43.0896
+        lon: -79.0849
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: visitor-plaza
+        name: Visitor plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor

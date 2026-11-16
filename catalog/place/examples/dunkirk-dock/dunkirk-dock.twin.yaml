@@ -1,0 +1,29 @@
+from: twinfile/base-open-area:0.1.0
+twinfile: 2
+kind: place
+id: dunkirk-dock
+name: Dunkirk Dock
+version: 0.1.0
+stability: example
+geotype:
+  primary: public_park
+  registry: "@local-hosting/geotypes@0.2.0"
+steps:
+  - place:
+      name: Dunkirk Dock
+      kind: pier
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 42.4795
+        lon: -79.3337
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: dock-apron
+        name: Dock apron
+        kind: plaza
+        level: ground
+        exposure: outdoor
