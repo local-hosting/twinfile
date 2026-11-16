@@ -52,41 +52,41 @@ export function attachPlaceSlugFromPlaceRef(
  * Character display names, fleet `storeSlug`, geo, and engagement live in overrides — not on Story.
  */
 export function mergeStoryDimensionsWithHost(
-  samDimensions: StoryDimensionsV1,
+  storyDimensions: StoryDimensionsV1,
   overrides: Partial<HostStoryCreateDimensionsV1> = {},
 ): HostStoryCreateDimensionsV1 {
   const who: HostStoryDimensionWhoV1 = {
-    characterId: overrides.who?.characterId ?? samDimensions.who.characterId,
+    characterId: overrides.who?.characterId ?? storyDimensions.who.characterId,
     ...(overrides.who?.displayName?.trim()
       ? { displayName: overrides.who.displayName.trim() }
       : {}),
     ...(overrides.who?.segmentId?.trim() ? { segmentId: overrides.who.segmentId.trim() } : {}),
     ...(overrides.who?.characterIds?.length
       ? { characterIds: [...overrides.who.characterIds] }
-      : samDimensions.who.characterIds.length
-        ? { characterIds: [...samDimensions.who.characterIds] }
+      : storyDimensions.who.characterIds.length
+        ? { characterIds: [...storyDimensions.who.characterIds] }
         : {}),
   };
 
-  const whereFromSam: HostStoryDimensionWhereV1 = {
-    ...(samDimensions.where.placeRefs.length
-      ? { placeRefs: [...samDimensions.where.placeRefs] }
+  const whereFromStory: HostStoryDimensionWhereV1 = {
+    ...(storyDimensions.where.placeRefs.length
+      ? { placeRefs: [...storyDimensions.where.placeRefs] }
       : {}),
-    ...(samDimensions.where.primaryPlaceRef
+    ...(storyDimensions.where.primaryPlaceRef
       ? {
-          primaryPlaceRef: samDimensions.where.primaryPlaceRef,
-          placeRef: samDimensions.where.primaryPlaceRef,
+          primaryPlaceRef: storyDimensions.where.primaryPlaceRef,
+          placeRef: storyDimensions.where.primaryPlaceRef,
         }
       : {}),
-    ...(samDimensions.where.spaceIds?.length
-      ? { spaceIds: [...samDimensions.where.spaceIds] }
+    ...(storyDimensions.where.spaceIds?.length
+      ? { spaceIds: [...storyDimensions.where.spaceIds] }
       : {}),
   };
 
   const how =
-    overrides.how || samDimensions.how
+    overrides.how || storyDimensions.how
       ? {
-          ...(samDimensions.how ?? {}),
+          ...(storyDimensions.how ?? {}),
           ...(overrides.how ?? {}),
         }
       : undefined;
@@ -94,23 +94,24 @@ export function mergeStoryDimensionsWithHost(
   return {
     who,
     what: {
-      episodeId: overrides.what?.episodeId ?? samDimensions.what.episodeId,
-      journeyId: overrides.what?.journeyId ?? samDimensions.what.journeyId,
-      ...(samDimensions.what.arcKind || overrides.what?.arcKind
-        ? { arcKind: overrides.what?.arcKind ?? samDimensions.what.arcKind }
+      storyId:
+        overrides.what?.storyId ??
+        storyDimensions.what.storyId,
+      ...(storyDimensions.what.arcKind || overrides.what?.arcKind
+        ? { arcKind: overrides.what?.arcKind ?? storyDimensions.what.arcKind }
         : {}),
       ...(overrides.what?.startStoreVisitJourney != null
         ? { startStoreVisitJourney: overrides.what.startStoreVisitJourney }
         : {}),
     },
-    where: { ...whereFromSam, ...overrides.where },
+    where: { ...whereFromStory, ...overrides.where },
     when: {
       simulationEpochStart:
-        overrides.when?.simulationEpochStart ?? samDimensions.when.simulationEpochStart,
+        overrides.when?.simulationEpochStart ?? storyDimensions.when.simulationEpochStart,
       planningHorizonDays:
-        overrides.when?.planningHorizonDays ?? samDimensions.when.planningHorizonDays,
-      visitDayOffset: overrides.when?.visitDayOffset ?? samDimensions.when.visitDayIndex,
-      ...(samDimensions.when.storyArc ? { storyArc: samDimensions.when.storyArc } : {}),
+        overrides.when?.planningHorizonDays ?? storyDimensions.when.planningHorizonDays,
+      visitDayOffset: overrides.when?.visitDayOffset ?? storyDimensions.when.visitDayIndex,
+      ...(storyDimensions.when.storyArc ? { storyArc: storyDimensions.when.storyArc } : {}),
       ...(overrides.when?.useFeedCalendar != null
         ? { useFeedCalendar: overrides.when.useFeedCalendar }
         : {}),
@@ -118,10 +119,10 @@ export function mergeStoryDimensionsWithHost(
         ? { alignToWallCalendar: overrides.when.alignToWallCalendar }
         : {}),
     },
-    ...(overrides.why || samDimensions.why
+    ...(overrides.why || storyDimensions.why
       ? {
           why: {
-            ...(samDimensions.why ?? {}),
+            ...(storyDimensions.why ?? {}),
             ...(overrides.why ?? {}),
           },
         }
@@ -130,5 +131,3 @@ export function mergeStoryDimensionsWithHost(
   };
 }
 
-/** @deprecated Prefer {@link mergeStoryDimensionsWithHost}. */
-export const mergeStoryDimensionsIntoCreateBody = mergeStoryDimensionsWithHost;

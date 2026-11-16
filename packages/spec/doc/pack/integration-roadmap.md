@@ -22,7 +22,7 @@ Normative product boundary and implementation order for **any** app using Twinfi
 | Live message bus, Node-RED UI | Host patch runtime + canvas |
 | Locker realtime sync | Host locker / replication plane |
 | Feed compile / H3 lockers | Host feed compilers |
-| AXM mount wire | `twinfile-locker` + ProductGrade |
+| AXM mount wire | `twinfile-locker` + Twinfile |
 
 ## Phase 0 — Documentation (done / in progress)
 

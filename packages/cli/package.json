@@ -27,6 +27,7 @@
   "dependencies": {
     "@local-hosting/twinfile-bridge": "workspace:packages/bridge",
     "@local-hosting/twinfile-character": "workspace:^",
+    "@local-hosting/twinfile-context": "workspace:^",
     "@local-hosting/twinfile-core": "workspace:packages/core",
     "@local-hosting/twinfile-event": "workspace:^",
     "@local-hosting/twinfile-place": "workspace:^",

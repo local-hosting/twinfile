@@ -8,7 +8,7 @@ import {
   CHARACTER_MENTAL_MODEL_SCOPE_FILE,
   CHARACTER_OBJECTIVES_FILE,
   CHARACTER_SEGMENT_FACET_FILES,
-  type PcmSegmentFacetFileKey,
+  type CharacterSegmentFacetFileKey,
 } from './character-segment-topics.js';
 
 function dumpYaml(value: unknown): string {
@@ -29,7 +29,7 @@ function writeYamlFile(dir: string, file: string, value: unknown): void {
 
 /** Segment slots: single files on the root plus compact rows in `mental-models/` and `journeys/`. */
 function saveCharacterSegmentFacets(root: string, character: Character): void {
-  for (const [key, file] of Object.entries(CHARACTER_SEGMENT_FACET_FILES) as [PcmSegmentFacetFileKey, string][]) {
+  for (const [key, file] of Object.entries(CHARACTER_SEGMENT_FACET_FILES) as [CharacterSegmentFacetFileKey, string][]) {
     const value = character[key];
     if (value !== undefined) writeYamlFile(root, file, value);
   }
@@ -43,7 +43,7 @@ function saveCharacterSegmentFacets(root: string, character: Character): void {
 
 /**
  * Write a Character root in the uniform catalog layout:
- * `pcm.yml`, `character.yml`, segment slot files, and compact `signals/values.yml`
+ * `character.yml`, segment slot files, and compact `signals/values.yml`
  * when `signalValues` is set. Does not rewrite journeys / mental-models / other topic forests.
  */
 export function saveCharacter(root: string, character: Character): void {

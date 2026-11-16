@@ -30,7 +30,7 @@ describe('buildStoryBrief', () => {
         personaId: 'character-1',
         storyPitch: 'Explorer at Polaris.',
         who: { segmentId: 'early-adopter' },
-        what: { episodeId: 'story:episode:store-visit', startStoreVisitJourney: true },
+        what: { storyId: 'story:episode:store-visit', startStoreVisitJourney: true },
         where: { storeSlug: 'SAC06', lat: 40.1, lon: -82.9, h3Cell: '852a957b' },
         when: { useFeedCalendar: true },
         why: { engagementLevelId: 'explorer', intentIds: ['setup'], focusAreaId: 'mobile-phones' },

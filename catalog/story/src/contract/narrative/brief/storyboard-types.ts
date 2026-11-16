@@ -1,5 +1,5 @@
 import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
-import type { JobSituationModel } from '@local-hosting/twinfile-character/situations';
+import type { JobSituationModel } from '@local-hosting/twinfile-context';
 import type { Story } from '../types/story-narrative.js';
 import type { StoryEpisodePresentationV1 } from './resolve-story-episode-presentation.js';
 import type { StorySituationsNarrativeContextV1 } from './story-situations-narrative-context.js';
@@ -32,7 +32,7 @@ export type FormatStoryDirectorNarrativeInput = {
   /** Character user journey for `story.binding.journeyId`. */
   journey?: Journey;
   /** Org Situations model(s) merged for JTBD lookups. */
-  jsm?: JobSituationModel;
+  situations?: JobSituationModel;
   personaGoals?: readonly string[];
   personaFrustrations?: readonly string[];
   personaQuote?: string;
@@ -43,5 +43,5 @@ export type FormatStoryDirectorNarrativeInput = {
   /** Precomputed; otherwise derived from journey + arc. */
   presentation?: StoryEpisodePresentationV1;
   /** Precomputed Situations + persona context. */
-  jsmNarrative?: StorySituationsNarrativeContextV1;
+  situationsNarrative?: StorySituationsNarrativeContextV1;
 };

@@ -1,3 +1,4 @@
+import type { CharacterPersonality } from '../types/character-persona.js';
 import type { CharacterStoryInstance } from '../types/story/character-story-instance.js';
 
 /** Cognition-facing slice of a materialized Character story instance (portable, no host contract). */
@@ -8,6 +9,7 @@ export type CharacterStoryPsychology = {
   mindset?: string;
   traits?: readonly string[];
   voiceLine?: string;
+  personality?: CharacterPersonality;
   demographics?: Readonly<Record<string, string>>;
 };
 
@@ -20,6 +22,7 @@ export function psychologyFromCharacterStoryInstance(instance: CharacterStoryIns
     ...(characteristics.mindset ? { mindset: characteristics.mindset } : {}),
     ...(characteristics.traits?.length ? { traits: [...characteristics.traits] } : {}),
     ...(characteristics.voiceLine ? { voiceLine: characteristics.voiceLine } : {}),
+    ...(characteristics.personality ? { personality: characteristics.personality } : {}),
     ...(characteristics.demographics && Object.keys(characteristics.demographics).length
       ? { demographics: { ...characteristics.demographics } }
       : {}),

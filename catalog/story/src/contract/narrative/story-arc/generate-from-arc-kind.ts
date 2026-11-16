@@ -90,7 +90,7 @@ export function scaffoldScenesFromJourneyArc(
 export type GenerateStoryEpisodeFromArcInput = {
   kind: StoryArcKind;
   journey: Journey;
-  episodeId: string;
+  storyId: string;
   title: string;
   revision: number;
   focalCharacterId: string;
@@ -118,7 +118,7 @@ export function generateStoryEpisodeFromArc(
 ): GeneratedStoryEpisodeDraft {
   const arcTemplate = buildStoryArcTemplateFromKind({
     kind: input.kind,
-    id: `arc:${input.episodeId.replace(/^story:episode:/, '')}`,
+    id: `arc:${input.storyId.replace(/^story:episode:/, '')}`,
     label: input.title,
   });
 

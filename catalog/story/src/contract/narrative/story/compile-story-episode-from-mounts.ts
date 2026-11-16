@@ -36,7 +36,7 @@ export type CompileStoryEpisodeFromMountsInput = {
 export type CompileStoryEpisodeFromMountsResult = {
   storyArc: EpisodeArcV1;
   touchpointSequence: string[];
-  episodeId: string;
+  storyId: string;
   story: Story;
   dimensions: StoryDimensionsV1;
 };
@@ -147,7 +147,7 @@ export function compileStoryEpisodeFromMounts(
   return {
     storyArc,
     touchpointSequence: [...storyArc.objectiveTouchpointIds],
-    episodeId: input.story.id,
+    storyId: input.story.id,
     story: compiled.story,
     dimensions,
   };

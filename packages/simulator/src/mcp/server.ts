@@ -1,4 +1,4 @@
-import { join } from 'node:path';
+import { isAbsolute, join, resolve } from 'node:path';
 
 import {
   explainField,
@@ -8,9 +8,14 @@ import {
   type McpServeOptions,
 } from '@local-hosting/twinfile-place';
 import {
+  buildTwinfileAudit,
   checkProcessorGraph,
+  formatTwinfileAuditBrief,
   loadTwinfile,
   queryPath,
+  readTwinHeadYaml,
+  renderTwinfileAuditView,
+  resolveAuditExamplesRoot,
   runScenarioRunner,
 } from '@local-hosting/twinfile-core';
 import { ContractChecker, performBridgeImport, type PlaceData } from '@local-hosting/twinfile-core';
@@ -41,6 +46,35 @@ export async function handleMcpRequest(
 ): Promise<Record<string, unknown>> {
   const method = req.method?.replace(/_/g, '.') ?? '';
   if (method === 'place.init') return createPlaceFromMcp(req.params, unitDir);
+
+  if (method === 'twin.audit') {
+    const rawDir = typeof req.params?.dir === 'string' ? req.params.dir.trim() : '';
+    const targetDir = rawDir
+      ? isAbsolute(rawDir)
+        ? resolve(rawDir)
+        : resolve(unitDir, rawDir)
+      : unitDir;
+    const format = req.params?.format === 'json' ? 'json' : 'markdown';
+    const brief = req.params?.brief === true || req.params?.brief === 'true';
+    const loaded = readTwinHeadYaml(targetDir);
+    if (!loaded.ok) {
+      return {
+        error: loaded.errors.map((e) => e.message).join('; '),
+      };
+    }
+    const examplesRoot = resolveAuditExamplesRoot(targetDir);
+    const built = buildTwinfileAudit(loaded.value, examplesRoot ? { examplesRoot } : {});
+    if (!built.ok) {
+      return { error: built.errors.map((e) => e.message).join('; ') };
+    }
+    const card = built.value;
+    return {
+      card,
+      brief: formatTwinfileAuditBrief(card),
+      markdown: brief ? undefined : renderTwinfileAuditView(card, format),
+      ...(format === 'json' && !brief ? { json: renderTwinfileAuditView(card, 'json') } : {}),
+    };
+  }
 
   if (method === 'bridge.import') {
     const bridge = typeof req.params?.bridge === 'string' ? req.params.bridge.trim() : '';

@@ -24,7 +24,17 @@ const withCoalescedSceneFields = <T extends z.ZodTypeAny>(schema: T) =>
       if (!raw || typeof raw !== 'object' || Array.isArray(raw)) {
         return raw;
       }
-      return coalesceJobIdsFields(raw as Record<string, unknown>);
+      const row = coalesceJobIdsFields(raw as Record<string, unknown>);
+      // JTBD: situation → context (circumstance)
+      if (typeof row.context !== 'string' && typeof row.situation === 'string') {
+        const { situation, ...rest } = row;
+        return { ...rest, context: situation };
+      }
+      if ('situation' in row) {
+        const { situation: _situation, ...rest } = row;
+        return rest;
+      }
+      return row;
     },
     schema,
   );
@@ -54,7 +64,8 @@ export const StorySceneSchema = withCoalescedSceneFields(
     order: z.number().int().nonnegative(),
     actId: SceneBeatIdSchema,
     narrativeBeat: z.string().min(1).optional(),
-    situation: z.string().min(1).optional(),
+    /** Context / circumstance for this beat (JTBD). */
+    context: z.string().min(1).optional(),
     characterIds: z.array(z.string().min(1)).min(1),
     placeRef: PlaceRefSchema,
     spaceId: z.string().min(1).optional(),

@@ -38,6 +38,9 @@ export type StoryboardSceneContextV1 = {
   segmentLabel?: string;
   mindset?: string;
   traits: readonly string[];
+  wants?: string;
+  fears?: string;
+  flaw?: string;
   occupation?: string;
   engagementLevel?: string;
   focusArea?: string;
@@ -110,7 +113,7 @@ function resolvePlaceLabelFromSam(story: Story | undefined, placeRef: string | u
   return humanizeStoryWireLabel(id);
 }
 
-export function findSamSceneForTouchpoint(story: Story | undefined, touchpointId: string): StoryScene | undefined {
+export function findStorySceneForTouchpoint(story: Story | undefined, touchpointId: string): StoryScene | undefined {
   const needle = touchpointId.trim();
   if (!needle || !story?.scenes?.length) return undefined;
   for (const scene of story.scenes) {
@@ -137,6 +140,9 @@ export function buildStoryboardSceneContext(input: FormatStoryDirectorNarrativeI
       humanizeStoryWireLabel(snapshot.who?.segmentId),
     mindset: character?.psychology?.mindset?.trim(),
     traits: character?.psychology?.traits?.map((t) => t.trim()).filter(Boolean) ?? [],
+    wants: character?.psychology?.personality?.wants?.trim(),
+    fears: character?.psychology?.personality?.fears?.trim(),
+    flaw: character?.psychology?.personality?.flaw?.trim(),
     occupation: character?.occupation?.trim(),
     engagementLevel: snapshot.why?.engagementLevelId?.trim(),
     focusArea: snapshot.why?.focusAreaId?.trim(),
@@ -175,13 +181,13 @@ export function applyStoryboardPersonalization(
   touchpointId: string,
   input?: FormatStoryDirectorNarrativeInput,
 ): DirectorScriptSceneV1 {
-  const samScene = findSamSceneForTouchpoint(ctx.story, touchpointId);
+  const samScene = findStorySceneForTouchpoint(ctx.story, touchpointId);
   const journeyBinding = input?.journey
     ? findJourneyTouchpointBinding(input.journey, touchpointId)
     : undefined;
   const jsmJobs = input
     ? resolveJobsForTouchpoint({
-        jsm: input.jsm,
+        situations: input.situations,
         journey: input.journey,
         touchpointId,
         personaJobIds: input.character?.psychology?.characterId ? undefined : undefined,
@@ -200,16 +206,17 @@ export function applyStoryboardPersonalization(
     ctx.geography;
   const { protagonistName, protagonistDescriptor } = ctx;
 
-  const situation = samScene?.situation?.trim();
+  const sceneContext = samScene?.context?.trim();
   const narrativeBeat = samScene?.narrativeBeat?.trim();
   const sceneLabel = samScene?.label?.trim();
 
-  const phaseSituation = journeyBinding?.moment?.situation?.trim() || journeyBinding?.phase.situation?.trim();
+  const phaseContext =
+    journeyBinding?.moment?.context?.trim() || journeyBinding?.phase.context?.trim();
   const phasePain = journeyBinding?.phase.pain?.trim();
 
   let visual = draft.storyboard.visual.replaceAll(protagonistName, protagonistDescriptor);
-  if (situation || phaseSituation) {
-    visual = `${protagonistDescriptor} — ${situation || phaseSituation}`;
+  if (sceneContext || phaseContext) {
+    visual = `${protagonistDescriptor} — ${sceneContext || phaseContext}`;
   } else if (ctx.storyPitch && draft.sceneNumber === 1) {
     visual = `${visual} (${ctx.storyPitch})`;
   }
@@ -220,7 +227,7 @@ export function applyStoryboardPersonalization(
   const primaryJob = jsmJobs[0];
   let caption =
     narrativeBeat ||
-    (primaryJob ? `${primaryJob.want}` : undefined) ||
+    (primaryJob ? `${primaryJob.goal}` : undefined) ||
     (sceneLabel ? `${sceneLabel}.` : undefined) ||
     draft.storyboard.caption;
   if (ctx.mindset && !narrativeBeat && !primaryJob) {
@@ -228,8 +235,8 @@ export function applyStoryboardPersonalization(
   }
 
   let action = draft.action.replaceAll(protagonistName, protagonistDescriptor);
-  if (situation) {
-    action = `${protagonistDescriptor}: ${situation}`;
+  if (sceneContext) {
+    action = `${protagonistDescriptor}: ${sceneContext}`;
   }
 
   let setting = draft.storyboard.setting;
@@ -290,18 +297,21 @@ export function serializeStoryboardLlmContext(input: FormatStoryDirectorNarrativ
         segment: ctx.segmentLabel,
         mindset: ctx.mindset,
         traits: ctx.traits,
+        wants: ctx.wants,
+        fears: ctx.fears,
+        flaw: ctx.flaw,
       },
       place: { geography: ctx.geography, place: ctx.placeLabel },
       story: {
         pitch: ctx.storyPitch,
         engagement: ctx.engagementLevel,
         focus: ctx.focusArea,
-        episodeId: input.snapshot.what?.episodeId,
+        storyId: input.snapshot.what?.storyId,
       },
-      samScenes: ctx.story?.scenes?.map((scene) => ({
+      storyScenes: ctx.story?.scenes?.map((scene) => ({
         id: scene.id,
         label: scene.label,
-        situation: scene.situation,
+        context: scene.context,
         narrativeBeat: scene.narrativeBeat,
         placeRef: scene.placeRef,
         touchpointIds: scene.touchpointIds,

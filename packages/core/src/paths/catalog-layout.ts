@@ -3,14 +3,21 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- * Monorepo folder for the **twin types** (place, resource, character, story, event).
+ * Monorepo folder for the **twin types** (place, resource, character, context, story, event).
  * The **simulator** package is not under this hub — it plays these catalogs at runtime.
  *
  * Every catalog path derives from the monorepo root; `TF_TWINFILE_ROOT` is the only override.
  */
 export const TWIN_CATALOG_HUB = 'catalog' as const;
 
-export const TWIN_CATALOG_TYPES = ['place', 'resource', 'character', 'story', 'event'] as const;
+export const TWIN_CATALOG_TYPES = [
+  'place',
+  'resource',
+  'character',
+  'context',
+  'story',
+  'event',
+] as const;
 
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
 

@@ -1,3 +1,6 @@
+import { dirname, resolve } from 'node:path';
+
+import { loadTwinLocalMap } from '../ref/twin-local-map.js';
 import { isExamplesCatalogRoot } from './examples-catalog.js';
 import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot } from './catalog-layout.js';
 
@@ -5,4 +8,21 @@ import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot } from './catalog-
 export function resolveExamplesRoot(fromDir?: string): string | undefined {
   const catalog = resolvePlaceExamplesCatalogRoot(resolveTwinfileRoot(fromDir));
   return isExamplesCatalogRoot(catalog) ? catalog : undefined;
+}
+
+/** Nearest ancestor of `fromDir` that owns `twin.local.yaml` refs (overlay packs such as osc-twinfile). */
+export function resolveTwinfilePackRoot(fromDir: string): string | undefined {
+  let dir = resolve(fromDir);
+  for (let i = 0; i < 16; i += 1) {
+    if (loadTwinLocalMap(dir).size > 0) return dir;
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  return undefined;
+}
+
+/** Ref resolution root for audits: overlay pack, else monorepo place examples catalog. */
+export function resolveAuditExamplesRoot(fromDir: string): string | undefined {
+  return resolveTwinfilePackRoot(fromDir) ?? resolveExamplesRoot(fromDir);
 }

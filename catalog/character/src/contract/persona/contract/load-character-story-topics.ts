@@ -2,7 +2,7 @@ import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { loadEntityDir, loadTopicFolder, readYamlFile, resolveCharacterSubdir, STORY_DIR_CANDIDATES } from './io.js';
-import { PCM_STORY_TOPIC_MAP } from './topic-maps.js';
+import { CHARACTER_STORY_TOPIC_MAP } from './topic-maps.js';
 
 export function loadCharacterStoryTopics(root: string): {
   journeys: unknown[];
@@ -30,7 +30,7 @@ export function loadCharacterStoryTopics(root: string): {
   }
 
   const storyDir = resolveCharacterSubdir(root, STORY_DIR_CANDIDATES);
-  const storySlice = loadTopicFolder(storyDir, PCM_STORY_TOPIC_MAP);
+  const storySlice = loadTopicFolder(storyDir, CHARACTER_STORY_TOPIC_MAP);
   const taxonomyPath = join(storyDir, 'taxonomy.yml');
   const journeys = storySlice.journeys;
   const quotes = storySlice.quotes;

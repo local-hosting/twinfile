@@ -26,7 +26,7 @@ export const StoryBindingSchema = z.object({
   visitDayIndex: z.number().int().nonnegative().optional(),
 });
 
-const SAMCoreSchema = z
+const storyNarrativeCoreSchema = z
   .object({
     version: z.literal(1).default(1),
     id: z.string().min(1),
@@ -50,7 +50,7 @@ const SAMCoreSchema = z
     }
   });
 
-export const StoryNarrativeSchema = z.preprocess(normalizeStoryInput, SAMCoreSchema);
+export const StoryNarrativeSchema = z.preprocess(normalizeStoryInput, storyNarrativeCoreSchema);
 
 export function parseStory(input: unknown): Story {
   return StoryNarrativeSchema.parse(input) as Story;

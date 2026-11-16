@@ -2,7 +2,7 @@ import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/p
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import {
   seekStoryEpisodeSceneOnArc,
-  storySceneSeekRowsFromSam,
+  storySceneSeekRowsFromNarrative,
   type StorySceneSeekDirection,
 } from './seek-story-episode-scene.js';
 import { buildCharacterStoryRun } from './character-story-run.js';
@@ -54,7 +54,7 @@ export function seekStoryScene(input: SeekStorySceneInput): SeekStorySceneResult
 
   const core = seekStoryEpisodeSceneOnArc({
     arc,
-    scenes: storySceneSeekRowsFromSam(input.story.story.scenes),
+    scenes: storySceneSeekRowsFromNarrative(input.story.story.scenes),
     currentDayIndex: existing?.run.cursor.dayIndex ?? 0,
     direction: input.direction,
     sceneId: input.sceneId,

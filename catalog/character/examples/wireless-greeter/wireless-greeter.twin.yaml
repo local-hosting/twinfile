@@ -14,6 +14,41 @@ links:
 character:
   role: greeter
   segment: retail-visitor
+  who: The Floor Anchor · First hello, clear next step, calm in the rush.
+  quote: Welcome in — tell me what you need and I will get you in the right queue.
+  traits:
+    - Warm
+    - Direct
+    - Steady
+    - Observant
   goals:
     - Welcome visitors at the welcome desk
     - Route prospects and service visitors to the right queue
+  personality:
+    wants: Every visitor leaves the desk knowing exactly what happens next
+    fears: A backed-up floor with no clear owner for the next guest
+    flaw: Over-explains when the kiosk ticket is already enough
+    delivery:
+      patterns:
+        - Clear short sentences
+        - Soft volume at the desk
+        - Names the next step first
+      lines:
+        - Welcome in — what brings you in today?
+        - You are checked in — here is your place in line.
+        - Self-serve is open if you want to skip the wait.
+    movement:
+      - Open posture at the welcome desk
+      - Points with an open hand
+      - Steps aside for kiosk-preferring visitors
+    temperament:
+      - Even-keeled
+      - Helpful without hovering
+      - Reads the room
+    moods:
+      - Focused
+      - Welcoming
+      - Calm under queue pressure
+    signatureMoves:
+      - Ask errand type before issuing a ticket
+      - Reset a confused ticket out loud so the guest hears ownership

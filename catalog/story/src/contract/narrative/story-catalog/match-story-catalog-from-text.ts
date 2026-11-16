@@ -4,10 +4,9 @@ import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 
 export type StoryCatalogTextMatchV1 = {
   characterId?: string;
-  episodeId?: string;
+  storyId?: string;
   placeRef?: string;
   storeSlug?: string;
-  journeyId?: string;
 };
 
 export type StoryCatalogFleetPlaceRef = {
@@ -98,14 +97,14 @@ export function matchStoryCatalogIdsFromText(input: {
   );
 
   const focalCharacterId = input.focalCharacterId?.trim() || characterId;
-  const episodePool = focalCharacterId
-    ? input.menu.episodes.filter((row) => row.focalCharacterId === focalCharacterId)
-    : input.menu.episodes;
-  const episodeId = bestIdFromCandidates(
+  const storyPool = focalCharacterId
+    ? input.menu.stories.filter((row) => row.focalCharacterId === focalCharacterId)
+    : input.menu.stories;
+  const storyId = bestIdFromCandidates(
     scenario,
-    episodePool.map((row) => ({
+    storyPool.map((row) => ({
       id: row.id,
-      labels: [row.id, row.title, row.id.replace(/^story:episode:/, ''), row.journeyId ?? ''],
+      labels: [row.id, row.title, row.id.replace(/^story:episode:/, '')],
     })),
     0.15,
   );
@@ -134,15 +133,10 @@ export function matchStoryCatalogIdsFromText(input: {
       )
     : undefined;
 
-  const journeyId = episodeId
-    ? input.menu.episodes.find((row) => row.id === episodeId)?.journeyId
-    : undefined;
-
   return {
     ...(characterId ? { characterId } : {}),
-    ...(episodeId ? { episodeId } : {}),
+    ...(storyId ? { storyId } : {}),
     ...(placeRef ? { placeRef } : {}),
     ...(storeSlug ? { storeSlug } : {}),
-    ...(journeyId ? { journeyId } : {}),
   };
 }

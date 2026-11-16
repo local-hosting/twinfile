@@ -8,11 +8,11 @@ export type StoryCatalogCharacterRef = {
   journeyIds: readonly string[];
 };
 
-export type StoryCatalogEpisodeRef = {
+/** One mounted Story twin in the project catalog menu. */
+export type StoryCatalogStoryRef = {
   id: string;
   title: string;
   focalCharacterId: string;
-  journeyId?: string;
 };
 
 export type StoryCatalogPlaceRef = {
@@ -22,14 +22,14 @@ export type StoryCatalogPlaceRef = {
 
 export type StoryCatalogMenuV1 = {
   characters: readonly StoryCatalogCharacterRef[];
-  episodes: readonly StoryCatalogEpisodeRef[];
+  stories: readonly StoryCatalogStoryRef[];
   /** Host-only place plane — omit for story.plan / user NL extraction. */
   places?: readonly StoryCatalogPlaceRef[];
 };
 
-/** Resolved ids for one story run (before compile). Character spine is on the episode binding. */
+/** Resolved ids for one story run (before compile). Character spine is on the Story binding. */
 export type StorySelectionV1 = {
   characterId: string;
-  episodeId: string;
+  storyId: string;
   placeRef?: string;
 };

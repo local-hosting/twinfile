@@ -4,13 +4,13 @@ import type { DramaticBeatId } from './dramatic-beat.js';
 /** Story-owned slice of “who” — Character ref + cast; display names come from Character materialization on the host. */
 export type StoryDimensionWhoV1 = {
   characterId: string;
-  /** PCMs appearing in `scenes` (includes focal `characterId` when present in cast). */
+  /** Characters appearing in `scenes` (includes focal `characterId` when present in cast). */
   characterIds: string[];
 };
 
 export type StoryDimensionWhatV1 = {
-  episodeId: string;
-  journeyId: string;
+  /** Mounted Story twin id — journey spine lives on the Story document (`binding.journeyId`), not duplicated here. */
+  storyId: string;
   arcKind?: string;
 };
 
@@ -32,7 +32,7 @@ export type StoryDimensionWhenV1 = {
 /** Motivation spine from scenes (needs/jobs); engagement levels remain host catalog policy. */
 export type StoryDimensionWhyV1 = {
   jobIds?: string[];
-  situation?: string;
+  context?: string;
   narrativeBeat?: string;
 };
 

@@ -28,7 +28,7 @@ const ObstacleCatalogSchema = z.object({
   description: z.string().optional(),
 });
 
-const PCMCoreSchema = z.object({
+const characterCoreSchema = z.object({
   version: z.literal(1).default(1),
   id: z.string().min(1),
   title: z.string().min(1),
@@ -54,7 +54,7 @@ const PCMCoreSchema = z.object({
   objectives: SegmentObjectivesPartSchema.shape.objectives.optional(),
 });
 
-export const CharacterSchema = z.preprocess(normalizeCharacterInput, PCMCoreSchema);
+export const CharacterSchema = z.preprocess(normalizeCharacterInput, characterCoreSchema);
 
 export function parseCharacter(input: unknown): Character {
   return CharacterSchema.parse(input) as Character;

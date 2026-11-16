@@ -1,4 +1,4 @@
-import type { TouchpointGraphWire } from '../types/touchpoint-catalog.js';
+import type { StoryTouchpointCatalog, TouchpointGraphWire } from '../types/touchpoint-catalog.js';
 
 export type TouchpointGraphWireLocus = 'physical' | 'digital' | 'blended';
 
@@ -19,7 +19,7 @@ export type TouchpointGraphWireInput = {
   }[];
 };
 
-function samLocusFromSpec(locus: string | undefined): TouchpointGraphWireLocus | undefined {
+function touchpointLocusFromSpec(locus: string | undefined): TouchpointGraphWireLocus | undefined {
   if (locus === 'physical' || locus === 'digital' || locus === 'blended') {
     return locus;
   }
@@ -32,7 +32,7 @@ export function touchpointGraphToStoryWire(graph: TouchpointGraphWireInput): Tou
     id: row.id,
     label: row.label,
     journeyPhase: row.journeyPhase,
-    locus: samLocusFromSpec(row.locus),
+    locus: touchpointLocusFromSpec(row.locus),
     placeRef: row.placeRef?.trim(),
     spaceId: row.spaceId,
   }));
@@ -45,5 +45,14 @@ export function touchpointGraphToStoryWire(graph: TouchpointGraphWireInput): Tou
       toTouchpointId: link.toTouchpointId,
       label: link.label,
     })),
+  };
+}
+
+/** Coerce wire graph into compile-time {@link StoryTouchpointCatalog}. */
+export function touchpointGraphWireToCatalog(graph: TouchpointGraphWire): StoryTouchpointCatalog {
+  return {
+    hubTouchpointId: graph.hubTouchpointId,
+    touchpoints: graph.touchpoints ?? [],
+    links: graph.links,
   };
 }

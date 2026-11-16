@@ -4,18 +4,18 @@ jobs:
   - id: manage-daily-life
     label: Manage daily life
     granularity: theme
-    situation: When I am out running routine personal tasks
-    motivation: keep my week moving without unnecessary trips or delays
-    desiredOutcome: Daily tasks are done and I stay on schedule
+    context: When I am out running routine personal tasks
+    goal: keep my week moving without unnecessary trips or delays
+    outcome: Daily tasks are done and I stay on schedule
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
   - id: run-weekly-errands
     label: Run weekly errands
     granularity: theme
-    situation: When I need to restock essentials or finish routine tasks while out
-    motivation: get what I need without wasting time or money
-    desiredOutcome: I finish my errands with minimal friction
+    context: When I need to restock essentials or finish routine tasks while out
+    goal: get what I need without wasting time or money
+    outcome: I finish my errands with minimal friction
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -23,54 +23,54 @@ jobs:
     label: Stock up pantry
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I am doing a larger grocery run for the week
-    motivation: buy enough staples to avoid extra trips
-    desiredOutcome: My pantry is stocked for the week ahead
+    context: When I am doing a larger grocery run for the week
+    goal: buy enough staples to avoid extra trips
+    outcome: My pantry is stocked for the week ahead
     visitationGoal: converge
     visitationSubGoal: visit
   - id: pick-up-essentials
     label: Pick up essentials
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I need a quick top-up between major shopping trips
-    motivation: grab a few items without a full outing
-    desiredOutcome: I get what I came for in one short stop
+    context: When I need a quick top-up between major shopping trips
+    goal: grab a few items without a full outing
+    outcome: I get what I came for in one short stop
     visitationGoal: converge
     visitationSubGoal: visit
   - id: refuel-and-go
     label: Refuel and go
     granularity: story
     parentJobId: manage-daily-life
-    situation: When I am driving between stops
-    motivation: fill up quickly and keep moving
-    desiredOutcome: I am back on the road with minimal delay
+    context: When I am driving between stops
+    goal: fill up quickly and keep moving
+    outcome: I am back on the road with minimal delay
     visitationGoal: converge
     visitationSubGoal: visit
   - id: handle-banking-errand
     label: Handle banking errand
     granularity: story
     parentJobId: manage-daily-life
-    situation: When I need to deposit, withdraw, or resolve an account task
-    motivation: complete banking without a separate trip later
-    desiredOutcome: My banking task is done in one visit
+    context: When I need to deposit, withdraw, or resolve an account task
+    goal: complete banking without a separate trip later
+    outcome: My banking task is done in one visit
     visitationGoal: converge
     visitationSubGoal: visit
   - id: ship-or-pick-up-parcel
     label: Ship or pick up parcel
     granularity: story
     parentJobId: run-weekly-errands
-    situation: When I have a package to send or collect
-    motivation: finish the shipping task while I am already out
-    desiredOutcome: The parcel is sent or in my hands
+    context: When I have a package to send or collect
+    goal: finish the shipping task while I am already out
+    outcome: The parcel is sent or in my hands
     visitationGoal: converge
     visitationSubGoal: visit
   - id: fill-prescription
     label: Fill prescription
     granularity: story
     parentJobId: manage-daily-life
-    situation: When I or someone I care for needs medication
-    motivation: pick up the prescription reliably and on time
-    desiredOutcome: I leave with the correct medication
+    context: When I or someone I care for needs medication
+    goal: pick up the prescription reliably and on time
+    outcome: I leave with the correct medication
     visitationGoal: converge
     visitationSubGoal: visit
     heartDimensionId: taskSuccess
@@ -78,26 +78,26 @@ jobs:
     label: Grab a meal
     granularity: story
     parentJobId: manage-daily-life
-    situation: When my outing spans a meal window
-    motivation: eat without derailing the rest of my plan
-    desiredOutcome: I refuel and continue on schedule
+    context: When my outing spans a meal window
+    goal: eat without derailing the rest of my plan
+    outcome: I refuel and continue on schedule
     visitationGoal: converge
     visitationSubGoal: visit
   - id: take-break
     label: Take a break
     granularity: story
     parentJobId: manage-daily-life
-    situation: When a long day needs a pause
-    motivation: rest before the next leg
-    desiredOutcome: I feel recharged enough to continue
+    context: When a long day needs a pause
+    goal: rest before the next leg
+    outcome: I feel recharged enough to continue
     visitationGoal: consume
     visitationSubGoal: visit
   - id: stay-active
     label: Stay active
     granularity: story
     parentJobId: manage-daily-life
-    situation: When I am maintaining a fitness routine
-    motivation: complete a workout as part of my weekly plan
-    desiredOutcome: I finish my session and stay on track
+    context: When I am maintaining a fitness routine
+    goal: complete a workout as part of my weekly plan
+    outcome: I finish my session and stay on track
     visitationGoal: consume
     visitationSubGoal: learn
