@@ -14,12 +14,21 @@ function printBuildErrors(unitDir: string, errors: TwinError[], json: boolean): 
   return 1;
 }
 
+export type RunTwinTypeBuildOptions = {
+  examplesRoot?: string;
+};
+
 /** `twin build` for twin types other than place, dispatched through the type module. */
-export async function runTwinTypeBuild(unitDir: string, kind: TwinKind, json: boolean): Promise<number> {
+export async function runTwinTypeBuild(
+  unitDir: string,
+  kind: TwinKind,
+  json: boolean,
+  opts: RunTwinTypeBuildOptions = {},
+): Promise<number> {
   const module = twinTypes.getOne(kind);
   if (!module.ok) return printBuildErrors(unitDir, module.errors, json);
 
-  const built = await module.value.build(unitDir, {});
+  const built = await module.value.build(unitDir, { examplesRoot: opts.examplesRoot });
   if (!built.ok) return printBuildErrors(unitDir, built.errors, json);
 
   const twin = module.value.toJSON(built.value);

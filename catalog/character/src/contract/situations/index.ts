@@ -1,5 +1,5 @@
 /**
- * @doppler-group/twinfile-character/pcm — Job Situation Model (mountable situation packs + JTBD jobs).
+ * @doppler-group/twinfile-character/persona — Job Situation Model (mountable situation packs + JTBD jobs).
  *
  * @packageDocumentation
  */
@@ -60,7 +60,7 @@ export {
 export { obstacleCatalogFromJobs } from './catalog/obstacle-catalog-from-jobs.js';
 export type { CustomerObstacleDefinition, ObstacleCatalog } from './catalog/obstacles.schema.js';
 
-export { jsmFromJSON, jsmToJSON } from './contract/json.js';
+export { situationsFromJSON, situationsToJSON } from './contract/json.js';
 export { pickJobsByIds } from './job/pick-jobs-by-ids.js';
 export {
   rankJobsForPersona,
@@ -68,7 +68,7 @@ export {
   type RankedJobForPersonaV1,
 } from './job/rank-jobs-for-persona.js';
 
-export { JSM_PACKAGE } from './contract/jsm-package-meta.js';
+export { SITUATIONS_PACKAGE } from './contract/situations-package-meta.js';
 export {
   HeartDimensionIdSchema,
   type HeartDimensionId,

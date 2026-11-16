@@ -1,5 +1,5 @@
 /**
- * Browser-safe JSM surface — no disk I/O.
+ * Browser-safe Situations surface — no disk I/O.
  * @packageDocumentation
  */
 
@@ -48,8 +48,8 @@ export {
 export { obstacleCatalogFromJobs } from './catalog/obstacle-catalog-from-jobs.js';
 export type { CustomerObstacleDefinition, ObstacleCatalog } from './catalog/obstacles.schema.js';
 
-export { JSM_PACKAGE } from './contract/jsm-package-meta.js';
-export { jsmFromJSON, jsmToJSON } from './contract/json.js';
+export { SITUATIONS_PACKAGE } from './contract/situations-package-meta.js';
+export { situationsFromJSON, situationsToJSON } from './contract/json.js';
 export { pickJobsByIds } from './job/pick-jobs-by-ids.js';
 export {
   rankJobsForPersona,

@@ -1,4 +1,4 @@
-import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/pcm';
+import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/persona';
 
 import type { SceneEmotions, StoryScene } from '../types/scene.js';
 
@@ -22,7 +22,7 @@ function findPhase(journey: Journey, phaseId: string): JourneyPhase | undefined 
   return journey.phases.find((row) => row.id === phaseId);
 }
 
-/** Fill scene JTBD / emotions from linked PCM journey phase or moment when not authored on the scene. */
+/** Fill scene JTBD / emotions from linked Character journey phase or moment when not authored on the scene. */
 export function hydrateSceneFromJourney(scene: StoryScene, journey: Journey): StoryScene {
   const phaseId = scene.journeyPhaseId?.trim();
   if (!phaseId) {

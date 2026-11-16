@@ -10,4 +10,4 @@ src/
 examples/*/<story>.twin.yaml  # story.scenes[].run — scene runs (not twins)
 ```
 
-Import **`@doppler-group/twinfile-story/sam`** when compiling episodes (legacy subpath); **`<unit>.twin.yaml`** twins depend on **`@doppler-group/twinfile-core`** only.
+Import **`@doppler-group/twinfile-story/narrative`** when compiling episodes (legacy subpath); **`<unit>.twin.yaml`** twins depend on **`@doppler-group/twinfile-core`** only.

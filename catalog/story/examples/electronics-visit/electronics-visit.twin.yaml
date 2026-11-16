@@ -1,0 +1,19 @@
+twinfile: 2
+kind: story
+id: electronics-visit
+name: Electronics store visit
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/electronics-store:0.1.0
+  - rel: involves
+    href: twinfile/character/store-shopper-visitor:0.1.0
+story:
+  pitch: Browse and compare devices on a thin electronics floor.
+  scenes:
+    - id: browse
+      label: Solution floor browse
+    - id: checkout
+      label: Self-checkout

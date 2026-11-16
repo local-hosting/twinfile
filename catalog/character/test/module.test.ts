@@ -8,7 +8,7 @@ import { kind, module } from '../src/index.js';
 const exampleDir = join(resolveTypeExamplesRoot('character', resolveTwinfileRoot()), 'shop-greeter');
 
 describe('@doppler-group/twinfile-character', () => {
-  it('exports TwinTypeModule with PCM wire', () => {
+  it('exports TwinTypeModule with Character wire', () => {
     expect(kind).toBe('character');
   });
 

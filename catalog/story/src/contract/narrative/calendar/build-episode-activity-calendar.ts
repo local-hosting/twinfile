@@ -5,7 +5,7 @@ import type {
   EpisodeActivityKind,
   EpisodeScheduledActivity,
 } from '../types/episode-activity.js';
-import type { SAMTouchpointCatalog } from '../types/touchpoint-catalog.js';
+import type { StoryTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import type { TouchpointIndex } from '../types/touchpoint-index.js';
 import { resolveTouchpointLabel } from '../touchpoint/touchpoint-catalog.js';
 import { simulationDateIso } from './simulation-date.js';
@@ -24,7 +24,7 @@ function activityBlockFromScheduleEntry(input: {
     spaceId?: string;
     sceneId?: string;
   };
-  catalog?: SAMTouchpointCatalog;
+  catalog?: StoryTouchpointCatalog;
   index?: TouchpointIndex;
 }): EpisodeScheduledActivity {
   const startTime = input.entry.hour;
@@ -51,7 +51,7 @@ export type BuildEpisodeActivityCalendarInput = {
   episodeArc: EpisodeArcV1;
   /** Persona or subject id — doppler `DailyActivitySchedule.subjectId`. */
   subjectId: string;
-  touchpointCatalog?: SAMTouchpointCatalog;
+  touchpointCatalog?: StoryTouchpointCatalog;
   touchpointIndex?: TouchpointIndex;
   /** When true, emit a row for every horizon day (empty `activities` on quiet days). */
   includeEmptyDays?: boolean;

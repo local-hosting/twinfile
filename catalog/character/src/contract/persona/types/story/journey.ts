@@ -60,7 +60,7 @@ export type JourneyPhase = {
   moments?: JourneyMoment[];
 };
 
-/** @deprecated Author `arcTemplate` and `scenes` on {@link https://github.com/twinfile/persona/tree/main/packages/sam `@doppler-group/twinfile-story/sam`} instead. */
+/** @deprecated Author `arcTemplate` and `scenes` on {@link https://github.com/twinfile/persona/tree/main/packages/story `@doppler-group/twinfile-story/narrative`} instead. */
 export type JourneyNarrativeArcBeat = {
   phaseId?: string;
   momentId?: string;
@@ -69,7 +69,7 @@ export type JourneyNarrativeArcBeat = {
   valence?: JourneyEmotionValence;
 };
 
-/** @deprecated Author `arcTemplate` and `scenes` on `@doppler-group/twinfile-story/sam` instead. */
+/** @deprecated Author `arcTemplate` and `scenes` on `@doppler-group/twinfile-story/narrative` instead. */
 export type JourneyNarrativeArc = {
   summary?: string;
   beats?: JourneyNarrativeArcBeat[];
@@ -87,7 +87,7 @@ export type Journey = {
   seriesId?: string;
   seriesOrder?: number;
   phases: JourneyPhase[];
-  /** @deprecated Use SAM `arcTemplate` / `scenes` for storyboard beats. */
+  /** @deprecated Use Story `arcTemplate` / `scenes` for storyboard beats. */
   narrativeArc?: JourneyNarrativeArc;
   /** HEART values (0…1) before the first phase; unset dimensions start at 0.5. */
   heartBaseline?: Partial<Record<HeartDimension, number>>;

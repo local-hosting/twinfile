@@ -1,0 +1,21 @@
+presetId: online_shopper
+label: Online retail shopper
+specVersion: "1.0"
+methodId: retail
+segmentMix:
+  default: 0.5
+  value-seeker: 0.3
+  experience-explorer: 0.2
+segments:
+  - id: default
+    overview:
+      name: Digital shopper
+      mindset: Browses and buys online first
+      journeyPace: fast
+    empathy:
+      empathy:
+        feelings:
+          negative:
+            - Abandons when checkout surprises
+          positive:
+            - Satisfied when pickup is seamless

@@ -2,26 +2,26 @@ import type { DramaticBeatId } from './dramatic-beat.js';
 import type { EpisodeArcV1 } from './episode-arc.js';
 
 /**
- * Host create-body 5W+H — SAM episode spine plus host overlays
- * (PCM display name, fleet store, geo pin, engagement catalog).
+ * Host create-body 5W+H — Story episode spine plus host overlays
+ * (Character display name, fleet store, geo pin, engagement catalog).
  * Portable across Fieldwise / other hosts; not a Trustbase type.
  */
 
 export type HostStoryDimensionWhoV1 = {
-  pcmId?: string;
+  characterId?: string;
   characterIds?: string[];
   displayName?: string;
   segmentId?: string;
 };
 
 export type HostStoryDimensionWhatV1 = {
-  samEpisodeId?: string;
+  episodeId?: string;
   journeyId?: string;
   arcKind?: string;
   startStoreVisitJourney?: boolean;
 };
 
-/** Geo + fleet overlays on {@link SamStoryDimensionWhereV1}. */
+/** Geo + fleet overlays on {@link StoryDimensionWhereV1}. */
 export type HostStoryDimensionWhereV1 = {
   countryCode?: string;
   storeSlug?: string;

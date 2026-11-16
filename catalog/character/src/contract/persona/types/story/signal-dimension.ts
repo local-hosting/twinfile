@@ -3,7 +3,7 @@ import type { StrategyEntityLifecycle } from '../strategy/strategy.js';
 
 /**
  * Shared research instrument (labels / unit / source) — authored once on AXM.
- * Per-PCM scores live in `signalValues` and hydrate to {@link ResearchSignal}.
+ * Per-Character scores live in `signalValues` and hydrate to {@link ResearchSignal}.
  */
 export type SignalDimension = {
   id: string;

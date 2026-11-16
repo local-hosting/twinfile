@@ -25,6 +25,12 @@
       "import": "./dist/types/twinfile-ref.js",
       "default": "./dist/types/twinfile-ref.js"
     },
+    "./loro": {
+      "development": "./src/views/loro.ts",
+      "types": "./dist/views/loro.d.ts",
+      "import": "./dist/views/loro.js",
+      "default": "./dist/views/loro.js"
+    },
     "./cli": {
       "types": "./dist/cli/twinfile-cli.d.ts",
       "import": "./dist/cli/twinfile-cli.js",

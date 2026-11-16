@@ -43,7 +43,7 @@ export const JobObstacleSchema = z
     text: normalizeJtbdClause(obstacle.text),
   }));
 
-/** First-class JTBD job (authoring unit on a JSM / strategy / PCM). */
+/** First-class JTBD job (authoring unit on a Situations / strategy / Character). */
 export const JobSchema = z
   .object({
     id: z.string().min(1),

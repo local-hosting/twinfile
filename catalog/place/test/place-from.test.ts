@@ -17,7 +17,7 @@ describe('place from (DRY base)', () => {
     const strict = loadTwinfileStrict(childRoot, { examplesRoot });
     expect(strict.ok).toBe(true);
     if (!strict.ok) return;
-    expect(strict.value.strictBindings).toBe(2);
+    expect(strict.value.strictBindings).toBe(3);
 
     const merged = mergePlaceFromTwinfile(strict.value, { examplesRoot });
     expect(merged.ok).toBe(true);

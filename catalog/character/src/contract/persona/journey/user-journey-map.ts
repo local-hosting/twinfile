@@ -1,4 +1,4 @@
-import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-character/jsm/catalog/jtbd.schema.js';
+import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-character/situations/catalog/jtbd.schema.js';
 import {
   JourneyMapJobEntrySchema,
   JourneyMapSchema,

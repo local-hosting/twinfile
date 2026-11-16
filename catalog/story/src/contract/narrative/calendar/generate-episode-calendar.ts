@@ -1,4 +1,4 @@
-import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import type { Journey } from '@doppler-group/twinfile-character/persona';
 
 import { resolvePlanningHorizonDays, resolveVisitDayIndex } from '../episode/planning-horizon.js';
 import { extractTouchpointSequenceFromScenes } from '../scene/extract-touchpoint-sequence-from-scenes.js';
@@ -73,7 +73,7 @@ function buildEpisodeArcFromSequence(input: {
   touchpointIndex?: TouchpointIndex;
   scenes?: readonly StoryScene[];
   placeMounts?: readonly PlaceMount[];
-  touchpointCatalog?: import('../types/touchpoint-catalog.js').SAMTouchpointCatalog;
+  touchpointCatalog?: import('../types/touchpoint-catalog.js').StoryTouchpointCatalog;
 }): EpisodeArcV1 {
   const touchpointSchedule =
     input.scenes?.length
@@ -116,7 +116,7 @@ function buildEpisodeArcFromSequence(input: {
 
 /**
  * Low-level episode calendar (`EpisodeArcV1`) from storyboard scenes or an explicit touchpoint sequence.
- * Product hosts should use {@link compileSAM} (SAM + PCM + place mounts).
+ * Product hosts should use {@link compileStory} (Story + Character + place mounts).
  */
 export function generateEpisodeCalendar(
   input: GenerateEpisodeCalendarInput,
@@ -191,7 +191,7 @@ export function buildEpisodeCalendarDays(input: BuildEpisodeCalendarDaysInput): 
   };
 }
 
-/** Convenience: storyboard scenes (same scheduling as {@link compileSAM}). */
+/** Convenience: storyboard scenes (same scheduling as {@link compileStory}). */
 export function generateEpisodeCalendarFromScenes(input: {
   scenes: readonly StoryScene[];
   simulationEpochStart: string;

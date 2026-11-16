@@ -1,15 +1,15 @@
 /**
- * SAM-owned touchpoint catalog slice — absorbs doppler `TouchpointGraphSpec` nodes for
+ * Story-owned touchpoint catalog slice — absorbs doppler `TouchpointGraphSpec` nodes for
  * phase classification and activity labels without a runtime dependency on @doppler-group/frameworks.
  */
-export type SAMTouchpointLocus = 'physical' | 'digital' | 'blended';
+export type StoryTouchpointLocus = 'physical' | 'digital' | 'blended';
 
-export type SAMTouchpointDefinition = {
+export type StoryTouchpointDefinition = {
   id: string;
   label?: string;
   /** Authoring hint — e.g. `pre-visit`, `on-site` (doppler `journeyPhase`). */
   journeyPhase?: string;
-  locus?: SAMTouchpointLocus;
+  locus?: StoryTouchpointLocus;
   /**
    * Default place for `physical` / `blended` touchpoints (`place:*` / place mount key).
    * Scene-level or per-scene-touchpoint refs override at compile time.
@@ -18,16 +18,16 @@ export type SAMTouchpointDefinition = {
   spaceId?: string;
 };
 
-export type SAMTouchpointLink = {
+export type StoryTouchpointLink = {
   fromTouchpointId: string;
   toTouchpointId: string;
   label?: string;
 };
 
-export type SAMTouchpointCatalog = {
+export type StoryTouchpointCatalog = {
   hubTouchpointId?: string;
-  touchpoints: readonly SAMTouchpointDefinition[];
-  links?: readonly SAMTouchpointLink[];
+  touchpoints: readonly StoryTouchpointDefinition[];
+  links?: readonly StoryTouchpointLink[];
 };
 
 /** Structural wire subset for adapters. */
@@ -37,7 +37,7 @@ export type TouchpointGraphWire = {
     id: string;
     label?: string;
     journeyPhase?: string;
-    locus?: SAMTouchpointLocus;
+    locus?: StoryTouchpointLocus;
     placeRef?: string;
     spaceId?: string;
   }[];

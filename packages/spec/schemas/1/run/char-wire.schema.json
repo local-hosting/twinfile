@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://twinfile.org/schemas/1/run/char-wire.schema.json",
   "title": "CharacterWire",
-  "description": "Wire JSON for character twins (personnel / PCM) — MCP and OCI config.",
+  "description": "Wire JSON for character twins (personnel / Character) — MCP and OCI config.",
   "type": "object",
   "required": ["meta", "character", "disclosure", "digest"],
   "properties": {

@@ -16,7 +16,7 @@ export type {
   JtbdKpiMap,
 } from './jtbd.schema.js';
 import type { KpiDefinition } from '../types/kpi-definition-wire.js';
-import type { PsychographicSegmentId } from '@doppler-group/twinfile-character/pcm/people/customer/profile/customer-ids.js';
+import type { PsychographicSegmentId } from '@doppler-group/twinfile-character/persona/people/customer/profile/customer-ids.js';
 
 const JOB_STATEMENT_PATTERNS: readonly RegExp[] = [
   /^When (.+?), I want to (.+?) so that (.+?)\.?$/i,

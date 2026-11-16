@@ -1,0 +1,22 @@
+from: twinfile/place/wireless-mobile:0.1.0
+twinfile: 2
+kind: place
+id: electronics-store
+name: Example electronics store
+version: 0.1.0
+stability: example
+geotype:
+  primary: electronics_store
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Example electronics store
+      kind: shop
+      timezone: America/Chicago
+      published: false
+  - assets:
+      - id: kiosk-checkout
+        name: Self-checkout kiosk
+        kind: kiosk
+        space: solution-floor
+        state: active

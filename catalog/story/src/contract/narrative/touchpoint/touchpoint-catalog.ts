@@ -1,12 +1,12 @@
 import type { TouchpointIndex, TouchpointIndexEntry } from '../types/touchpoint-index.js';
 import type {
-  SAMTouchpointCatalog,
-  SAMTouchpointDefinition,
+  StoryTouchpointCatalog,
+  StoryTouchpointDefinition,
   TouchpointGraphWire,
 } from '../types/touchpoint-catalog.js';
 
-export function touchpointCatalogFromWire(wire: TouchpointGraphWire): SAMTouchpointCatalog {
-  const touchpoints: SAMTouchpointDefinition[] = (wire.touchpoints ?? []).map((row) => ({
+export function touchpointCatalogFromWire(wire: TouchpointGraphWire): StoryTouchpointCatalog {
+  const touchpoints: StoryTouchpointDefinition[] = (wire.touchpoints ?? []).map((row) => ({
     id: row.id,
     label: row.label,
     journeyPhase: row.journeyPhase,
@@ -26,7 +26,7 @@ export function touchpointCatalogFromWire(wire: TouchpointGraphWire): SAMTouchpo
   };
 }
 
-export function touchpointIndexFromCatalog(catalog: SAMTouchpointCatalog): TouchpointIndex {
+export function touchpointIndexFromCatalog(catalog: StoryTouchpointCatalog): TouchpointIndex {
   const touchpoints: TouchpointIndexEntry[] = catalog.touchpoints.map((row) => ({
     id: row.id,
     label: row.label,
@@ -38,7 +38,7 @@ export function touchpointIndexFromCatalog(catalog: SAMTouchpointCatalog): Touch
 
 export function resolveTouchpointLabel(
   touchpointId: string,
-  catalog?: SAMTouchpointCatalog,
+  catalog?: StoryTouchpointCatalog,
   index?: TouchpointIndex,
 ): string {
   const fromCatalog = catalog?.touchpoints.find((row) => row.id === touchpointId);

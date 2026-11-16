@@ -64,7 +64,7 @@ export const UserJourneyPhaseSchema = z.object({
 
 /**
  * Formal user journey — phases, touchpoints, emotions, and goal for simulation and JTBD linking.
- * Storyboard beats and flow graphs live in `@doppler-group/twinfile-story/sam` (`scenes`, `arcTemplate`).
+ * Storyboard beats and flow graphs live in `@doppler-group/twinfile-story/narrative` (`scenes`, `arcTemplate`).
  */
 export const UserJourneySchema = z
   .object({

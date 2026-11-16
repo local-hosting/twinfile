@@ -1,4 +1,4 @@
-/** Normalize PCM `persona.segment` to a host segment id (last `:` path segment). */
+/** Normalize Character `persona.segment` to a host segment id (last `:` path segment). */
 export function segmentIdFromPersonaSegment(segment: string | undefined): string {
   const trimmed = segment?.trim() ?? '';
   if (!trimmed) return 'default';
@@ -7,4 +7,4 @@ export function segmentIdFromPersonaSegment(segment: string | undefined): string
 }
 
 /** @deprecated Prefer {@link segmentIdFromPersonaSegment}. */
-export const segmentIdFromPcmPersonaSegment = segmentIdFromPersonaSegment;
+export const segmentIdFromCharacterPersonaSegment = segmentIdFromPersonaSegment;

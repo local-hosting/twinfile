@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-/** Matches {@link @doppler-group/twinfile-character/pcm} `HEART_DIMENSIONS` — kept in PCM to avoid subpath export churn in tests. */
+/** Matches {@link @doppler-group/twinfile-character/persona} `HEART_DIMENSIONS` — kept in Character to avoid subpath export churn in tests. */
 export const HEART_DIMENSION_IDS = [
   'happiness',
   'engagement',

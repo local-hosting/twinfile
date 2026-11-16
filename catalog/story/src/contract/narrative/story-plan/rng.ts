@@ -17,7 +17,7 @@ export function createStoryPlanChance(seed?: string | number): StoryPlanChance {
   return new Chance(seed);
 }
 
-/** `0 <= n < 1` sampler backed by Chance (stable across SAM pick helpers). */
+/** `0 <= n < 1` sampler backed by Chance (stable across Story pick helpers). */
 export function storyPlanRandomFromChance(chance: StoryPlanChance): () => number {
   return () => chance.floating({ min: 0, max: 1, fixed: 10 });
 }

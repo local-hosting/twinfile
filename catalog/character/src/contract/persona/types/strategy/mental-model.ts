@@ -108,7 +108,7 @@ type MentalModelBase = {
   /** The goal people are addressing, phrased from their side (e.g. "Get online at home"). */
   purpose?: string;
   /**
-   * Owning character id(s). When the model lives under `personas/<pcm>/mental-models/`,
+   * Owning character id(s). When the model lives under `personas/<character>/mental-models/`,
    * ownership is implied by the folder — `personaIds` may be omitted and is stamped on load.
    */
   personaIds?: string[];

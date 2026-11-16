@@ -11,12 +11,12 @@
   "exports": {
     ".": "./src/index.ts",
     "./module": "./src/twin-module.ts",
-    "./sam": {
+    "./narrative": {
       "development": "./src/contract/narrative/index.ts",
       "default": "./src/contract/narrative/index.ts"
     },
-    "./sam/*": "./src/contract/narrative/*",
-    "./sam/browser": "./src/contract/narrative/browser.ts"
+    "./narrative/*": "./src/contract/narrative/*",
+    "./narrative/browser": "./src/contract/narrative/browser.ts"
   },
   "peerDependencies": {
     "@doppler-group/twinfile-character": "workspace:^"

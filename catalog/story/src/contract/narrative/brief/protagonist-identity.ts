@@ -1,4 +1,4 @@
-import type { PCM } from '@doppler-group/twinfile-character/pcm';
+import type { Character } from '@doppler-group/twinfile-character/persona';
 import type { StoryBriefCharacterV1, StoryBriefSnapshotV1 } from './types.js';
 
 function humanizeToken(token: string): string {
@@ -33,13 +33,13 @@ export function isTechnicalStoryIdentityLabel(value: string | undefined): boolea
   return false;
 }
 
-function exemplarNameFromPcm(pcm: PCM | undefined): string | undefined {
-  const name = pcm?.persona.exemplar?.name?.trim();
+function exemplarNameFromCharacter(character: Character | undefined): string | undefined {
+  const name = character?.persona.exemplar?.name?.trim();
   return name || undefined;
 }
 
-function personaLabelFromPcm(pcm: PCM | undefined): string | undefined {
-  const label = pcm?.persona.label?.trim();
+function personaLabelFromCharacter(character: Character | undefined): string | undefined {
+  const label = character?.persona.label?.trim();
   if (!label || isTechnicalStoryIdentityLabel(label)) return undefined;
   return label;
 }
@@ -56,9 +56,9 @@ export function resolveHumanProtagonistName(input: {
       return candidate;
     }
   }
-  const pcmId = snapshot.who?.pcmId?.trim() || character?.psychology?.pcmId?.trim();
-  if (pcmId) {
-    const fromPcmId = humanizeStoryWireLabel(pcmId);
+  const characterId = snapshot.who?.characterId?.trim() || character?.psychology?.characterId?.trim();
+  if (characterId) {
+    const fromPcmId = humanizeStoryWireLabel(characterId);
     if (fromPcmId) return fromPcmId;
   }
   const personaId = snapshot.personaId?.trim() || character?.personaId?.trim();
@@ -72,15 +72,15 @@ export function resolveHumanProtagonistName(input: {
   return 'Our protagonist';
 }
 
-export function resolveHumanProtagonistNameWithPcm(input: {
+export function resolveHumanProtagonistNameWithCharacter(input: {
   snapshot: StoryBriefSnapshotV1;
   character?: StoryBriefCharacterV1;
-  focalPcm?: PCM;
+  focalCharacter?: Character;
   personaLabel?: string;
 }): string {
-  const fromExemplar = exemplarNameFromPcm(input.focalPcm);
+  const fromExemplar = exemplarNameFromCharacter(input.focalCharacter);
   if (fromExemplar) return fromExemplar;
-  const fromLabel = personaLabelFromPcm(input.focalPcm) ?? input.personaLabel?.trim();
+  const fromLabel = personaLabelFromCharacter(input.focalCharacter) ?? input.personaLabel?.trim();
   if (fromLabel && !isTechnicalStoryIdentityLabel(fromLabel)) {
     return fromLabel;
   }
@@ -88,9 +88,9 @@ export function resolveHumanProtagonistNameWithPcm(input: {
   if (!isTechnicalStoryIdentityLabel(base)) {
     return base;
   }
-  const pcmId = input.focalPcm?.id?.trim() || input.snapshot.who?.pcmId?.trim();
-  if (pcmId) {
-    return humanizeStoryWireLabel(pcmId) || base;
+  const characterId = input.focalCharacter?.id?.trim() || input.snapshot.who?.characterId?.trim();
+  if (characterId) {
+    return humanizeStoryWireLabel(characterId) || base;
   }
   const storyId = input.snapshot.storyId?.trim();
   if (storyId) {
@@ -105,7 +105,7 @@ export function formatProtagonistInstanceCredits(input: {
 }): string | undefined {
   const storyId = input.snapshot.storyId?.trim();
   const personaId = input.snapshot.personaId?.trim() || input.character?.personaId?.trim();
-  const pcmId = input.snapshot.who?.pcmId?.trim() || input.character?.psychology?.pcmId?.trim();
+  const characterId = input.snapshot.who?.characterId?.trim() || input.character?.psychology?.characterId?.trim();
   const bits: string[] = [];
   if (storyId && isTechnicalStoryIdentityLabel(storyId)) {
     bits.push(`project instance \`${storyId}\``);
@@ -113,8 +113,8 @@ export function formatProtagonistInstanceCredits(input: {
   if (personaId && personaId !== storyId && isTechnicalStoryIdentityLabel(personaId)) {
     bits.push(`catalog id \`${personaId}\``);
   }
-  if (pcmId) {
-    bits.push(`org PCM \`${pcmId}\``);
+  if (characterId) {
+    bits.push(`org Character \`${characterId}\``);
   }
   if (bits.length === 0) return undefined;
   return bits.join(' · ');

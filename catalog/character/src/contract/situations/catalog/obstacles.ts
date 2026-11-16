@@ -1,9 +1,9 @@
-import type { CustomerCatalog } from '@doppler-group/twinfile-character/pcm/people/customer/profile/customer.js';
+import type { CustomerCatalog } from '@doppler-group/twinfile-character/persona/people/customer/profile/customer.js';
 import type { JobDefinition } from './jtbd.schema.js';
 import {
   JtbdRelationshipGraphSchema,
   type JtbdRelationshipEdge,
-} from '@doppler-group/twinfile-character/pcm/people/customer/graph/customer-relationships.js';
+} from '@doppler-group/twinfile-character/persona/people/customer/graph/customer-relationships.js';
 import {
   CustomerObstacleDefinitionSchema,
   ObstacleCatalogSchema,

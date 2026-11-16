@@ -1,13 +1,13 @@
 import {
   resolveJourneyForPersona,
   type Journey,
-  type PCM,
-} from '@doppler-group/twinfile-character/pcm';
+  type Character,
+} from '@doppler-group/twinfile-character/persona';
 
-import type { SAMCharacterContext } from '../types/sam-character-context.js';
+import type { StoryCharacterContext } from '../types/story-character-context.js';
 
 export function resolveJourneyFromCharacterContext(
-  context: SAMCharacterContext,
+  context: StoryCharacterContext,
 ): Journey | undefined {
   if (context.journey) {
     return context.journey;
@@ -17,20 +17,20 @@ export function resolveJourneyFromCharacterContext(
     return undefined;
   }
 
-  const focalPcm = resolvePcmForCharacter(context);
-  if (focalPcm) {
-    return resolveJourneyForPersona(focalPcm, journeyId, context.focalPcmId);
+  const focalCharacter = resolveCharacterForContext(context);
+  if (focalCharacter) {
+    return resolveJourneyForPersona(focalCharacter, journeyId, context.focalCharacterId);
   }
 
   return undefined;
 }
 
-export function resolvePcmForCharacter(context: SAMCharacterContext): PCM | undefined {
-  const direct = context.pcmById?.[context.focalPcmId];
+export function resolveCharacterForContext(context: StoryCharacterContext): Character | undefined {
+  const direct = context.characterById?.[context.focalCharacterId];
   if (direct) {
     return direct;
   }
-  return Object.values(context.pcmById ?? {}).find(
-    (pcm) => pcm.persona.id === context.focalPcmId || pcm.id === context.focalPcmId,
+  return Object.values(context.characterById ?? {}).find(
+    (character) => character.persona.id === context.focalCharacterId || character.id === context.focalCharacterId,
   );
 }

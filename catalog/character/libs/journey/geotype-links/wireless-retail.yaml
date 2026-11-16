@@ -1,0 +1,14 @@
+specVersion: "1.0"
+methodId: wireless-retail
+types:
+  - slug: wireless_mobile_store
+    id: RWM
+    activityKindHints: [transaction, dwell, service]
+    jobIds:
+      - check-in-store
+      - wait-with-clarity
+      - compare-devices
+      - activate-mobile-line
+      - resolve-billing
+      - pay-and-exit
+    journeyPhaseIds: [arrival, navigation, on_site]

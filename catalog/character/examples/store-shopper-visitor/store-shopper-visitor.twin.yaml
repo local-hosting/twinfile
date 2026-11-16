@@ -1,0 +1,20 @@
+twinfile: 2
+kind: character
+id: store-shopper-visitor
+name: Store shopper visitor (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Exemplar in-store visitor — Jordan Blake, spec-forward segment (generic id).
+links:
+  - rel: involves
+    href: twinfile/place/wireless-mobile:0.1.0
+character:
+  role: visitor
+  segment: spec-forward
+  exemplar:
+    name: Jordan Blake
+  goals:
+    - Compare devices and activate a new mobile line

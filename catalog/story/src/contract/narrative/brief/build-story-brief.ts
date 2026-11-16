@@ -15,14 +15,14 @@ function formatWhoBullets(who: StoryBriefWhoV1 | undefined): string[] {
   if (!who) return ['No `who` dimension on story'];
   return [
     ...(who.segmentId ? [`Segment \`${who.segmentId}\``] : []),
-    ...(who.pcmId ? [`PCM \`${who.pcmId}\``] : []),
+    ...(who.characterId ? [`Character \`${who.characterId}\``] : []),
   ];
 }
 
 function formatWhatBullets(what: StoryBriefWhatV1 | undefined): string[] {
   if (!what) return ['No `what` dimension on story'];
   return [
-    ...(what.samEpisodeId ? [`SAM episode \`${what.samEpisodeId}\``] : []),
+    ...(what.episodeId ? [`Story episode \`${what.episodeId}\``] : []),
     ...(what.startStoreVisitJourney === true ? ['Store-visit journey started'] : []),
     ...(what.startStoreVisitJourney === false ? ['Store-visit journey not started'] : []),
   ];
@@ -92,7 +92,7 @@ function formatWhyBullets(why: StoryBriefWhyV1 | undefined): string[] {
 
 function formatHowBullets(how: StoryBriefHowV1 | undefined): string[] {
   if (!how) {
-    return ['Configured via PCM persona / segment mounts'];
+    return ['Configured via Character persona / segment mounts'];
   }
   return [
     ...(how.journeyPace?.trim() ? [`Pace \`${how.journeyPace.trim()}\``] : []),

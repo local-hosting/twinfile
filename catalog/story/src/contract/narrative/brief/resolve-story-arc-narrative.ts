@@ -1,7 +1,7 @@
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
-import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import type { Journey } from '@doppler-group/twinfile-character/persona';
 import { samePlaceRef } from '@doppler-group/twinfile-core/ref';
-import type { SAM } from '../types/sam.js';
+import type { Story } from '../types/story-narrative.js';
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';
 import { humanizeStoryWireLabel, humanizeToken } from './storyboard-scene-context.js';
 import {
@@ -9,10 +9,10 @@ import {
   type StoryEpisodePresentationV1,
 } from './resolve-story-episode-presentation.js';
 import { collectJobIdsFromJourney } from './journey-touchpoint-binding.js';
-import type { StoryJsmNarrativeContextV1 } from './story-jsm-narrative-context.js';
+import type { StorySituationsNarrativeContextV1 } from './story-situations-narrative-context.js';
 
-export function resolveSamDenouementActLabel(sam?: SAM): string | undefined {
-  const acts = sam?.arcTemplate?.acts;
+export function resolveSamDenouementActLabel(story?: Story): string | undefined {
+  const acts = story?.arcTemplate?.acts;
   if (!acts?.length) return undefined;
   const sorted = [...acts].sort((left, right) => left.order - right.order);
   const denouement =
@@ -21,9 +21,9 @@ export function resolveSamDenouementActLabel(sam?: SAM): string | undefined {
   return denouement?.label?.trim() || humanizeToken(denouement?.id ?? '');
 }
 
-/** Primary on-site label from SAM place mounts (not generic “store”). */
+/** Primary on-site label from Story place mounts (not generic “store”). */
 export function resolvePrimaryMomentPlaceLabel(input: {
-  sam?: SAM;
+  story?: Story;
   arc?: EpisodeArcV1;
   journey?: Journey;
 }): string {
@@ -39,10 +39,10 @@ export function resolvePrimaryMomentPlaceLabel(input: {
   }
 
   const placeLabels: string[] = [];
-  for (const scene of input.sam?.scenes ?? []) {
+  for (const scene of input.story?.scenes ?? []) {
     const hits = scene.touchpointIds?.some((id) => onSiteIds.has(id.trim()));
     if (!hits) continue;
-    const mount = input.sam?.places?.find((row) => samePlaceRef(row.placeRef, scene.placeRef));
+    const mount = input.story?.places?.find((row) => samePlaceRef(row.placeRef, scene.placeRef));
     if (mount?.label?.trim()) {
       placeLabels.push(mount.label.trim());
     } else if (mount?.role?.trim()) {
@@ -66,7 +66,7 @@ export function resolvePrimaryMomentPlaceLabel(input: {
 
 export function formatJobPursuitPhrase(input: {
   journey?: Journey;
-  jsmNarrative?: StoryJsmNarrativeContextV1;
+  jsmNarrative?: StorySituationsNarrativeContextV1;
 }): string {
   const jobLabels: string[] = [];
   for (const job of input.jsmNarrative?.rankedJobs.slice(0, 4) ?? []) {
@@ -89,12 +89,12 @@ export function formatJobPursuitPhrase(input: {
 
 export function resolveEffectiveEpisodeTiming(input: {
   journey?: Journey;
-  sam?: SAM;
+  story?: Story;
   arc?: EpisodeArcV1;
   journeyPace?: string;
   rankedJobCount?: number;
 }): DerivedEpisodeTimingPresentation {
-  const arc = input.arc ?? input.sam?.episodeArc;
+  const arc = input.arc ?? input.story?.episodeArc;
   const touchpointIds = arc?.objectiveTouchpointIds ?? [];
   const derived = deriveEpisodeTimingFromJobs({
     journey: input.journey,
@@ -104,7 +104,7 @@ export function resolveEffectiveEpisodeTiming(input: {
   });
   const presentation = resolveStoryEpisodePresentation({
     journey: input.journey,
-    sam: input.sam,
+    story: input.story,
     arc,
   });
 
@@ -121,11 +121,11 @@ export function resolveEffectiveEpisodeTiming(input: {
     visitDayIndex,
     session: useSession,
     primaryMomentLabel: resolvePrimaryMomentPlaceLabel({
-      sam: input.sam,
+      story: input.story,
       arc,
       journey: input.journey,
     }),
-    denouementLabel: resolveSamDenouementActLabel(input.sam),
+    denouementLabel: resolveSamDenouementActLabel(input.story),
   };
 }
 

@@ -55,7 +55,7 @@ export function samePlaceRef(a: string, b: string): boolean {
   return left != null && left === placeRefIdentity(b);
 }
 
-/** Typed place ref for mounts without a published unit (PCM places, geo anchors). */
+/** Typed place ref for mounts without a published unit (Character places, geo anchors). */
 export function placeRefForName(name: string, tag = '0.0.0'): TwinfileRef {
   const slug = name
     .trim()

@@ -1,4 +1,4 @@
-import type { SamStoryCatalogMenuV1 } from './story-catalog-menu.js';
+import type { StoryCatalogMenuV1 } from './story-catalog-menu.js';
 
 export type SamStoryPlanFleetPlaceSnapshotV1 = {
   slug: string;
@@ -29,13 +29,13 @@ export type SamStoryPlanCatalogSnapshotV1 = {
   intentIds: string[];
   focusAreaIds: string[];
   journeyIds: string[];
-  pcmIds: string[];
-  samEpisodeIds: string[];
-  storyMenu?: SamStoryCatalogMenuV1;
+  characterIds: string[];
+  episodeIds: string[];
+  storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
   fleetPlaces: SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: string[];
-  axmMenu?: SamStoryCatalogMenuV1;
+  axmMenu?: StoryCatalogMenuV1;
 };

@@ -1,4 +1,4 @@
-import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-character/jsm/catalog/jtbd.schema.js';
+import type { JtbdCatalog, JobDefinition } from '@doppler-group/twinfile-character/situations/catalog/jtbd.schema.js';
 import type { TouchpointGraphSpec } from '../../journey/touchpoints.schema.js';
 import type { PersonaProfile } from '../../people/audience/persona.schema.js';
 import type {
@@ -7,7 +7,7 @@ import type {
   NeedSatisfaction,
 } from './mental-model-map.schema.js';
 import { MentalModelMapCatalogSchema } from './mental-model-map.schema.js';
-import { isStoryJob, jobsForSegment } from '@doppler-group/twinfile-character/jsm/catalog/jtbd.js';
+import { isStoryJob, jobsForSegment } from '@doppler-group/twinfile-character/situations/catalog/jtbd.js';
 
 export interface MentalModelMapIssue {
   code:

@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 import { resolveTwinfileRoot } from '@doppler-group/twinfile-core';
 
-/** Legacy AXM strategy sidecar list (host project `a-strategy/pcm-ids.yml`), not a twin head. */
+/** Legacy AXM strategy sidecar list (host project `a-strategy/character-ids.yml`), not a twin head. */
 export type AxmPcmMountIds = { ids: string[] };
 
 function parsePcmIdsFile(path: string): string[] {
@@ -16,12 +16,12 @@ function parsePcmIdsFile(path: string): string[] {
   return ids;
 }
 
-/** Read PCM mount ids from a host AXM tree or the monorepo dev fixture. */
+/** Read Character mount ids from a host AXM tree or the monorepo dev fixture. */
 export function loadAxmPcmMountIds(projectRoot?: string): AxmPcmMountIds {
   const twinRoot = resolveTwinfileRoot(projectRoot);
   const candidates = [
-    projectRoot ? join(projectRoot, 'a-strategy/pcm-ids.yml') : undefined,
-    join(twinRoot, 'character/test/fixtures/axm/pcm-ids.yml'),
+    projectRoot ? join(projectRoot, 'a-strategy/character-ids.yml') : undefined,
+    join(twinRoot, 'character/test/fixtures/axm/character-ids.yml'),
   ].filter((p): p is string => Boolean(p));
 
   for (const path of candidates) {

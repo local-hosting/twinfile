@@ -31,8 +31,8 @@ export function buildSamStoryPlanCatalogSnapshot(
     intentIds: input.intentIds,
     focusAreaIds: input.focusAreaIds,
     journeyIds: input.journeyIds,
-    pcmIds: input.pcmIds,
-    samEpisodeIds: input.samEpisodeIds,
+    characterIds: input.characterIds,
+    episodeIds: input.episodeIds,
     ...(input.storyMenu ? { storyMenu: input.storyMenu } : {}),
     jobIds: input.jobIds,
     fleetPlaces: [...input.fleetPlaces],
@@ -70,7 +70,7 @@ export function buildSamStoryPlanExtractionIndex(
     ...(axmMenu?.characters.length
       ? {
           characters: axmMenu.characters.map((row) => ({
-            pcmId: row.pcmId,
+            characterId: row.characterId,
             label: row.label,
             journeyIds: [...row.journeyIds],
           })),
@@ -81,7 +81,7 @@ export function buildSamStoryPlanExtractionIndex(
           episodes: axmMenu.episodes.map((row) => ({
             id: row.id,
             title: row.title,
-            focalPcmId: row.focalPcmId,
+            focalCharacterId: row.focalCharacterId,
             journeyId: row.journeyId,
           })),
         }
@@ -95,8 +95,8 @@ export function buildSamStoryPlanExtractionIndex(
     intentIds: catalog.intentIds,
     focusAreaIds: catalog.focusAreaIds,
     journeyIds: catalog.journeyIds,
-    pcmIds: catalog.pcmIds,
-    samEpisodeIds: catalog.samEpisodeIds,
+    characterIds: catalog.characterIds,
+    episodeIds: catalog.episodeIds,
     jobIds: catalog.jobIds,
   };
 }
@@ -151,7 +151,7 @@ export function mergeSamStoryPlanInput(
     intentId: pickString(body.intentId, extracted.intentId),
     focusAreaId: pickString(body.focusAreaId, extracted.focusAreaId),
     interestIds: mergeStringArrays(body.interestIds, extracted.interestIds),
-    pcmId: pickString(body.pcmId, extracted.pcmId),
+    characterId: pickString(body.characterId, extracted.characterId),
     episodeId: pickString(body.episodeId, extracted.episodeId),
     placeRef: pickString(body.placeRef, extracted.placeRef),
     planningHorizonDays: body.planningHorizonDays ?? extracted.planningHorizonDays,

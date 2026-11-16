@@ -2,7 +2,7 @@ import { parseJobSituationModel } from '../schemas/job-situation-model.schema.js
 import type { JobSituationModel } from '../types/job-situation-model.js';
 
 /** Storage-neutral JSON export. */
-export function jsmToJSON(jsm: JobSituationModel): Record<string, unknown> {
+export function situationsToJSON(jsm: JobSituationModel): Record<string, unknown> {
   const parsed = parseJobSituationModel(jsm);
   return {
     id: parsed.id,
@@ -13,6 +13,6 @@ export function jsmToJSON(jsm: JobSituationModel): Record<string, unknown> {
   };
 }
 
-export function jsmFromJSON(json: unknown): JobSituationModel {
+export function situationsFromJSON(json: unknown): JobSituationModel {
   return parseJobSituationModel(json);
 }

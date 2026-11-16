@@ -1,4 +1,4 @@
-import { extractJourneyTouchpointSequence, type Journey } from '@doppler-group/twinfile-character/pcm';
+import { extractJourneyTouchpointSequence, type Journey } from '@doppler-group/twinfile-character/persona';
 import { collectJobIdsFromJourney, journeyHasCalendarSpan } from '../brief/journey-touchpoint-binding.js';
 import {
   DEFAULT_PLANNING_HORIZON_DAYS,

@@ -26,13 +26,13 @@ describe('buildTwinfile', () => {
       if (!result.ok) return;
 
       expect(result.value.digest).toMatch(/^sha256:[a-f0-9]{64}$/);
-      expect(result.value.layers.length).toBe(11);
+      expect(result.value.layers.length).toBe(12);
       expect(result.value.refKey).toBe('twinfile/arena:1.2.0');
 
       const lock = readTwinfileLock(arenaRoot);
       expect(lock.ok).toBe(true);
       if (lock.ok && lock.value) {
-        expect(lock.value.refs['twinfile/arena:1.2.0']?.layers?.length).toBe(11);
+        expect(lock.value.refs['twinfile/arena:1.2.0']?.layers?.length).toBe(12);
       }
     } finally {
       cleanupArenaLock();

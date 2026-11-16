@@ -1,8 +1,8 @@
 import type { Journey } from '../types/story/journey.js';
-import type { PCM } from '../types/pcm.js';
+import type { Character } from '../types/character.js';
 
-export function listJourneysForPersona(pcm: PCM, personaId: string): Journey[] {
-  const journeys = pcm.journeys ?? [];
+export function listJourneysForPersona(character: Character, personaId: string): Journey[] {
+  const journeys = character.journeys ?? [];
   return journeys.filter((row) => row.personaId === personaId);
 }
 
@@ -19,11 +19,11 @@ export function requireJourneyById(journeys: readonly Journey[], journeyId: stri
 }
 
 export function resolveJourneyForPersona(
-  pcm: PCM,
+  character: Character,
   journeyId: string,
   personaId?: string,
 ): Journey | undefined {
-  const journeys = pcm.journeys ?? [];
+  const journeys = character.journeys ?? [];
   const journey = resolveJourneyById(journeys, journeyId);
   if (!journey) {
     return undefined;

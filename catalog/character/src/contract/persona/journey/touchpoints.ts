@@ -1,4 +1,4 @@
-import type { KpiDefinition, KpiRegistry } from '@doppler-group/twinfile-character/jsm/types/kpi-definition-wire.js';
+import type { KpiDefinition, KpiRegistry } from '@doppler-group/twinfile-character/situations/types/kpi-definition-wire.js';
 import type {
   TouchpointDefinition,
   TouchpointGraphSpec,

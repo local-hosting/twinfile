@@ -1,0 +1,24 @@
+twinfile: 2
+kind: resource
+id: queue-display
+name: Queue display
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/wireless-mobile:0.1.0
+    anchor: queue-display
+resource:
+  kind: display
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-carrier
+    elements:
+      purpose:
+        - commerce
+      manifestation:
+        - informational_display
+      affected:
+        - people

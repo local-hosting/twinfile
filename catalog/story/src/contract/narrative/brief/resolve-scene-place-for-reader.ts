@@ -1,14 +1,14 @@
-import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import type { Journey } from '@doppler-group/twinfile-character/persona';
 
-import type { SAM } from '../types/sam.js';
+import type { Story } from '../types/story-narrative.js';
 import type { StoryScene } from '../types/scene.js';
 import { findJourneyTouchpointBinding } from './journey-touchpoint-binding.js';
 import { humanizeStoryWireLabel } from './storyboard-scene-context.js';
 
-function resolvePlaceLabelFromSam(sam: SAM | undefined, placeRef: string | undefined): string | undefined {
+function resolvePlaceLabelFromSam(story: Story | undefined, placeRef: string | undefined): string | undefined {
   const id = placeRef?.trim();
   if (!id) return undefined;
-  const place = sam?.places?.find((row) => row.placeRef?.trim() === id);
+  const place = story?.places?.find((row) => row.placeRef?.trim() === id);
   if (place?.label?.trim()) return place.label.trim();
   return humanizeStoryWireLabel(id);
 }
@@ -36,12 +36,12 @@ function journeyMentionsAirport(journey: Journey | undefined): boolean {
  * Human place name for reader copy — corrects demo mounts (e.g. airport place on a commute journey).
  */
 export function resolvePlaceLabelForNarrative(args: {
-  sam?: SAM;
+  story?: Story;
   placeRef?: string;
   journey?: Journey;
   touchpointId?: string;
 }): string | undefined {
-  const raw = resolvePlaceLabelFromSam(args.sam, args.placeRef);
+  const raw = resolvePlaceLabelFromSam(args.story, args.placeRef);
   if (!raw) return undefined;
 
   if (
@@ -61,7 +61,7 @@ export function resolvePlaceLabelForNarrative(args: {
 
 export function resolveScenePlaceForReader(args: {
   touchpointId: string;
-  sam?: SAM;
+  story?: Story;
   samScene?: StoryScene;
   journey?: Journey;
   slugline?: string;
@@ -74,7 +74,7 @@ export function resolveScenePlaceForReader(args: {
   const phaseLabel = binding?.phase.label?.trim();
 
   const place = resolvePlaceLabelForNarrative({
-    sam: args.sam,
+    story: args.story,
     placeRef: args.samScene?.placeRef,
     journey: args.journey,
     touchpointId,

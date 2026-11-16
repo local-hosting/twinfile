@@ -1,4 +1,4 @@
-import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/pcm';
+import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/persona';
 
 export type JourneyTouchpointBindingV1 = {
   phase: JourneyPhase;
@@ -9,7 +9,7 @@ function orderedPhases(journey: Journey): JourneyPhase[] {
   return [...journey.phases].sort((left, right) => left.order - right.order);
 }
 
-/** PCM journey row that owns a touchpoint (phase or nested moment). */
+/** Character journey row that owns a touchpoint (phase or nested moment). */
 export function findJourneyTouchpointBinding(
   journey: Journey | undefined,
   touchpointId: string,

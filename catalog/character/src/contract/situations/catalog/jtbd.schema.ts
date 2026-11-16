@@ -1,11 +1,11 @@
 import { z } from 'zod';
-import { PsychographicSegmentIdSchema } from '@doppler-group/twinfile-character/pcm/people/customer/profile/customer-ids.js';
-import { JourneyPhaseRefSchema } from '@doppler-group/twinfile-character/pcm/journey/user-journey.schema.js';
+import { PsychographicSegmentIdSchema } from '@doppler-group/twinfile-character/persona/people/customer/profile/customer-ids.js';
+import { JourneyPhaseRefSchema } from '@doppler-group/twinfile-character/persona/journey/user-journey.schema.js';
 import { HeartDimensionIdSchema } from '../schemas/heart-dimension-id.schema.js';
 import {
   VisitationGoalSchema,
   VisitationSubGoalSchema,
-} from '@doppler-group/twinfile-character/pcm/journey/touchpoints.schema.js';
+} from '@doppler-group/twinfile-character/persona/journey/touchpoints.schema.js';
 
 export const JobGranularitySchema = z.enum(['theme', 'story']);
 

@@ -1,4 +1,4 @@
-import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import type { Journey } from '@doppler-group/twinfile-character/persona';
 
 export function resolveJourneyById(
   journeys: readonly Journey[],

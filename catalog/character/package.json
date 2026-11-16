@@ -11,18 +11,18 @@
   "exports": {
     ".": "./src/index.ts",
     "./module": "./src/twin-module.ts",
-    "./pcm": {
+    "./persona": {
       "development": "./src/contract/persona/index.ts",
       "default": "./src/contract/persona/index.ts"
     },
-    "./pcm/*": "./src/contract/persona/*",
-    "./jsm": {
+    "./persona/*": "./src/contract/persona/*",
+    "./situations": {
       "development": "./src/contract/situations/index.ts",
       "default": "./src/contract/situations/index.ts"
     },
-    "./jsm/*": "./src/contract/situations/*",
-    "./pcm/browser": "./src/contract/persona/browser.ts",
-    "./jsm/browser": "./src/contract/situations/browser.ts"
+    "./situations/*": "./src/contract/situations/*",
+    "./persona/browser": "./src/contract/persona/browser.ts",
+    "./situations/browser": "./src/contract/situations/browser.ts"
   },
   "scripts": {
     "test": "vitest run",

@@ -3,7 +3,7 @@ import {
   MIN_PLANNING_HORIZON_DAYS,
 } from './episode-arc.js';
 
-/** Accepted bounds and pacing rules when visit day / horizon are not fixed on the SAM binding. */
+/** Accepted bounds and pacing rules when visit day / horizon are not fixed on the Story binding. */
 export type EpisodeTimingVariation = {
   specVersion: '1.0';
   minPlanningHorizonDays: number;

@@ -1,17 +1,17 @@
-import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import type { Journey } from '@doppler-group/twinfile-character/persona';
 import {
   journeyHeartSeries,
   journeyHeartTrends,
   phaseObstacleEncounters,
-} from '@doppler-group/twinfile-character/pcm';
+} from '@doppler-group/twinfile-character/persona';
 
-import type { SamJourney, SamJourneyContext, SamJourneyTouchpoint } from '../../types/sam-journey.js';
-import type { SAM } from '../../types/sam.js';
-import { resolveJourneyForSam } from './resolve-journey-for-sam.js';
+import type { StoryJourney, StoryJourneyContext, StoryJourneyTouchpoint } from '../../types/story-narrative-journey.js';
+import type { Story } from '../../types/story-narrative.js';
+import { resolveJourneyForStory } from './resolve-journey-for-story.js';
 
 function touchpointLabel(
   touchpointId: string,
-  touchpoints: Map<string, SamJourneyTouchpoint>,
+  touchpoints: Map<string, StoryJourneyTouchpoint>,
 ): string {
   const tp = touchpoints.get(touchpointId);
   if (!tp) {
@@ -23,7 +23,7 @@ function touchpointLabel(
 function collectTouchpointLabels(
   phase: Journey['phases'][number],
   journey: Journey,
-  touchpoints: Map<string, SamJourneyTouchpoint>,
+  touchpoints: Map<string, StoryJourneyTouchpoint>,
 ): string[] {
   const labels: string[] = [];
   for (const id of phase.touchpointIds) {
@@ -40,12 +40,12 @@ function collectTouchpointLabels(
   return labels;
 }
 
-/** Build a journey view when the PCM journey row and episode identity are already known. */
+/** Build a journey view when the Character journey row and episode identity are already known. */
 export function buildJourneyFromBinding(
   journey: Journey,
-  context: SamJourneyContext,
-  episode: { samId: string; samTitle: string },
-): SamJourney {
+  context: StoryJourneyContext,
+  episode: { storyId: string; storyTitle: string },
+): StoryJourney {
   const touchpoints = new Map((context.touchpoints ?? []).map((tp) => [tp.id, tp] as const));
   const obstacles = [...(context.obstacles ?? [])];
   const obstacleText = new Map(obstacles.map((o) => [o.id, o.text]));
@@ -53,8 +53,8 @@ export function buildJourneyFromBinding(
   const heartByPhase = new Map(journeyHeartSeries(journey, obstacles).map((p) => [p.phaseId, p.values]));
 
   return {
-    samId: episode.samId,
-    samTitle: episode.samTitle,
+    storyId: episode.storyId,
+    storyTitle: episode.storyTitle,
     journeyId: journey.id,
     id: journey.id,
     label: journey.label,
@@ -77,7 +77,7 @@ export function buildJourneyFromBinding(
   };
 }
 
-export function buildJourney(sam: SAM, context: SamJourneyContext): SamJourney {
-  const journey = resolveJourneyForSam(sam, context.journeys);
-  return buildJourneyFromBinding(journey, context, { samId: sam.id, samTitle: sam.title });
+export function buildJourney(story: Story, context: StoryJourneyContext): StoryJourney {
+  const journey = resolveJourneyForStory(story, context.journeys);
+  return buildJourneyFromBinding(journey, context, { storyId: story.id, storyTitle: story.title });
 }

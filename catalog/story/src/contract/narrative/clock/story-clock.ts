@@ -1,7 +1,7 @@
 import { simulationDateIso } from '../calendar/simulation-date.js';
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
 
-/** Named beats hosts jump to when advancing a compiled SAM episode. */
+/** Named beats hosts jump to when advancing a compiled Story episode. */
 export type StoryClockAdvanceTarget = 'visit_day' | 'post_visit';
 
 /** Current story clock position on the episode horizon (sim day + hour-of-day). */
