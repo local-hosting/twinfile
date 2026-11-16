@@ -7,6 +7,7 @@ export { formatTwinfilePath, twinfileYamlPaths } from './fmt-twinfiles.js';
 export { upgradeTypedHeadFiles, collectHeadUpgradePaths } from './format-head-files.js';
 export { distRootFromCli, resolveRunnerCommand } from './resolve-runner.js';
 export { addAssetsLayerToPlace } from './add-assets-layer.js';
+export { isStarterLayerKind, starterLayerStep, STARTER_LAYER_ROWS, type StarterLayerKind } from './starter-rows.js';
 export { formatPlaceManifestFile, orderPlaceTwinfileKeys } from './format-twinfile.js';
 export { readTwinfileDoc, upsertStepItem, writeTwinfileDoc } from './twinfile-steps.js';
 export { writeCampusBuildingScaffold } from './campus-building-scaffold.js';

@@ -19,7 +19,7 @@ import { PLACE_DEMO_EXT_H3 } from '../place/demo-ext-h3.js';
 import { resolveExamplesRoot } from '@local-hosting/twinfile-core';
 import { twinHeadPath } from '@local-hosting/twinfile-core';
 import { placeBaseRefForArchetype } from '@local-hosting/twinfile-core';
-import { decoratePlaceFromGeotype } from './decorate-place-from-geotype.js';
+import { decoratePlaceFromGeotype, type DecoratePlaceResult } from './decorate-place-from-geotype.js';
 import { writeCampusBuildingScaffold } from '@local-hosting/twinfile-core/cli';
 import { formatPlaceManifestFile, orderPlaceTwinfileKeys } from '@local-hosting/twinfile-core/cli';
 
@@ -130,7 +130,7 @@ export type CreatePlaceResult = {
   dir: string;
   unitName: string;
   geotype: string;
-  starterLayers: PlaceLayerKind[];
+  starterLayers: DecoratePlaceResult['starterLayers'];
   bindings: string[];
   suggestedLayers: PlaceLayerKind[];
   suggestBuildingImport?: boolean;
