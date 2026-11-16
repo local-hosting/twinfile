@@ -4,6 +4,7 @@ id: field-damage
 name: Field damage
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - reported
   - active

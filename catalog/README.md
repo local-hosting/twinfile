@@ -11,6 +11,8 @@ Each twin type is one tree: **`catalog/<type>/`** = `@doppler-group/twinfile-<ty
 
 **Runs:** inline `run:` on `story.scenes[]` in `catalog/story/examples/<story>/<story>.twin.yaml` only.
 
+**Mode:** tag story and event examples with `mode: daily` or `mode: resilience` (same enum). Keep those modes in separate story units — see [`story/examples/README.md`](story/examples/README.md) and [`event/README.md`](event/README.md).
+
 **Ref map and digests:** [`place/examples/twin.local.yaml`](place/examples/twin.local.yaml), [`place/examples/published-refs.json`](place/examples/published-refs.json). **Spec conf** (normative): `packages/spec/conf/`.
 
 **Env:** `TF_TWINFILE_ROOT` only, when running from outside the repo. All catalog paths derive from the repo root.

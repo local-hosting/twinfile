@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: airport-liaison
+name: Airport liaison (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional terminal persona for the airport example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/terminal-kiosk:0.1.0
+character:
+  role: liaison
+  segment: air-traveler
+  goals:
+    - Help travelers move curb to gate without queue breakdowns
+    - Surface where purchase and wayfinding journeys stall in the terminal

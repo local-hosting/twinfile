@@ -4,6 +4,7 @@ id: flood
 name: Flood
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - advisory
   - warning

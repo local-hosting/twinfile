@@ -1,0 +1,25 @@
+twinfile: 2
+kind: story
+id: shop-resilience
+name: Shop resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/shop:0.2.0
+story:
+  pitch: Severe-weather shelter capacity when the stockroom becomes the refuge.
+  scenes:
+    - id: shelter-at-cap
+      label: Shelter at capacity
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        clock:
+          starts_at: 2026-06-12T18:00:00-07:00
+          duration: PT30M
+          step: PT5M
+        args:
+          occupancy: 180
+          target_role: shelter

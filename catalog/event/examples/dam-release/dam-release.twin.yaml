@@ -4,6 +4,7 @@ id: dam-release
 name: Dam release
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - notice
   - release

@@ -1,3 +1,5 @@
 # airport-operations
 
-Runs are inline `run:` blocks on `story.scenes[]` in the story head — `twin run <story-dir>#<scene-id>`.
+`mode: daily` — morning checkpoint queue and terminal surge. Shelter/recovery lives in [`airport-resilience`](../airport-resilience/).
+
+Runs are inline `run:` on `story.scenes[]` — `twin run <story-dir>#<scene-id>`.
