@@ -15,7 +15,7 @@ export type LayoutSummary = {
 
 /** Summarize place topology from merged compose (no full build). */
 export function buildLayoutSummary(loaded: LoadedTwinfile): LayoutSummary {
-  const examplesRoot = resolveExamplesRoot(loaded.root) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(loaded.root);
   const merged = mergePlaceFromTwinfile(loaded, examplesRoot ? { examplesRoot } : undefined);
   if (!merged.ok) {
     throw new Error(merged.errors.map((e) => e.message).join('; '));

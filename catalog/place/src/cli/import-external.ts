@@ -116,7 +116,7 @@ export async function runExportExternal(args: string[]): Promise<number> {
     return 2;
   }
 
-  const examplesRoot = resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
+  const examplesRoot = resolveExamplesRoot(dir);
   const built = await buildTwinfile(dir, {
     examplesRoot,
         writeLock: false,

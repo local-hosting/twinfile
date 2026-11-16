@@ -1,6 +1,8 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+import { PLACE_HEAD_NAMES } from '../load/twinfile-locator.js';
+
 const ROOT_SKIP = new Set([
   'conf',
   'presets',
@@ -12,8 +14,8 @@ const ROOT_SKIP = new Set([
   'scripts',
 ]);
 
-/** Flat layout: twin.local.yaml and/or top-level Twinfile unit folders. */
-export function isFlatExamplesCatalogRoot(dir: string): boolean {
+/** Catalog root: twin.local.yaml and/or top-level place unit folders. */
+export function isExamplesCatalogRoot(dir: string): boolean {
   const root = resolve(dir);
   if (statSync(join(root, 'twin.local.yaml'), { throwIfNoEntry: false })?.isFile()) {
     return true;
@@ -21,12 +23,8 @@ export function isFlatExamplesCatalogRoot(dir: string): boolean {
   return listFlatExampleUnitNames(root).length > 0;
 }
 
-export function isExamplesCatalogRoot(dir: string): boolean {
-  return isFlatExamplesCatalogRoot(dir);
-}
-
 function hasTwinfileHead(unitDir: string): boolean {
-  for (const name of ['Place.yaml', 'place.yaml', 'Twinfile.yaml', 'twinfile.yaml']) {
+  for (const name of PLACE_HEAD_NAMES) {
     if (statSync(join(unitDir, name), { throwIfNoEntry: false })?.isFile()) {
       return true;
     }

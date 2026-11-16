@@ -16,7 +16,6 @@ export {
 } from './catalog-layout.js';
 export {
   isExamplesCatalogRoot,
-  isFlatExamplesCatalogRoot,
   listFlatExampleUnitNames,
 } from './examples-catalog.js';
 export { resolveExamplesRoot } from './resolve-examples-root.js';

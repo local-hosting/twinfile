@@ -87,7 +87,6 @@ export { mcpResourceTemplates } from './mcp/mcp-uri.js';
 export {
   listTwinResources,
   readTwinResource,
-  MCP_RESOURCE_TEMPLATES,
   type McpResourceListing,
   type McpResourceTemplate,
 } from './mcp/resources.js';
