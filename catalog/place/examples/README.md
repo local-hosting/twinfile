@@ -9,9 +9,9 @@ Other twin types:
 | **place** | `catalog/place/examples/` (this catalog) |
 | **resource** | [`catalog/resource/examples/`](../../resource/examples/) |
 | **character** | [`catalog/character/examples/`](../../character/examples/) |
-| **story** | [`catalog/story/examples/`](../../story/examples/) — scenes + `scenes/<id>/run.yaml` |
+| **story** | [`catalog/story/examples/`](../../story/examples/) — scenes with inline `run:` |
 
-**Runs:** only under **`catalog/story/examples/<story>/scenes/<scene>/run.yaml`**. Legacy site presets → `yarn sync:story-scenes`.
+**Runs:** only as inline **`run:`** on **`story.scenes[]`** (`catalog/story/examples/<story>#<scene-id>`).
 
 No environment setup is needed inside the monorepo; tools find this catalog from the repo root.
 
