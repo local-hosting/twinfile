@@ -21,6 +21,7 @@ Every twin under `catalog/<type>/examples/<id>/` shares:
 
 ```yaml
 # catalog/story/examples/<story-id>/<story-id>.twin.yaml
+mode: resilience                 # or daily — keep modes in separate story units
 links:
   - rel: involves
     href: twinfile/place/shop:0.2.0
@@ -36,7 +37,7 @@ story:
         args: { occupancy: 180 }
 ```
 
-Each scene's **`run:`** is an inline mapping (`from?`, `steps`, `clock`, `schedule`, `args`, optional `use.runner` for offline `twin run`). **`from:`** defaults to the story's single **`links` `involves` place** ref; set it only to override. Address a scene as **`<story-dir>#<scene-id>`** (`twin run catalog/story/examples/shop-visit#shelter-at-cap`). A string `run:` (old scene folder) fails to load. Legacy **`beats`** loads as **`scenes`**.
+Each scene's **`run:`** is an inline mapping (`from?`, `steps`, `clock`, `schedule`, `args`, optional `use.runner` for offline `twin run`). **`from:`** defaults to the story's single **`links` `involves` place** ref; set it only to override. Address a scene as **`<story-dir>#<scene-id>`** (`twin run catalog/story/examples/shop-resilience#shelter-at-cap`). A string `run:` (old scene folder) fails to load. Legacy **`beats`** loads as **`scenes`**.
 
 Cross-type links use refs only (`links:`, `copy: twinfile/<type>/<id>`).
 

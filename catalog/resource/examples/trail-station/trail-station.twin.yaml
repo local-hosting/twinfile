@@ -1,0 +1,16 @@
+twinfile: 2
+kind: resource
+id: trail-station
+name: Trail station
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/park:0.3.0
+    anchor: trailhead
+resource:
+  kind: station
+  state: active
+  ext:
+    lat: 40.7829
+    lon: -73.9654

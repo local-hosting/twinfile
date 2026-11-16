@@ -1,0 +1,37 @@
+twinfile: 2
+kind: story
+id: harbor-resilience
+name: Harbor resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/buffalo-harbor:0.1.0
+  - rel: involves
+    href: twinfile/place/dunkirk-dock:0.1.0
+story:
+  pitch: Litter surge at the Buffalo slip, then field-damage clearance on the Dunkirk apron.
+  scenes:
+    - id: slip-litter
+      label: Slip litter surge
+      run:
+        from: twinfile/place/buffalo-harbor:0.1.0
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        args:
+          peakArrivals: 90
+          lanes: 1
+          service_s: 90
+          stagingCap: 20
+    - id: apron-damage
+      label: Apron damage
+      run:
+        from: twinfile/place/dunkirk-dock:0.1.0
+        steps:
+          - copy: twinfile/event/field-damage:1.0.0
+        args:
+          peakArrivals: 50
+          lanes: 1
+          service_s: 75
+          stagingCap: 15

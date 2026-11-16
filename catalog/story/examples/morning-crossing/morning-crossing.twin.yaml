@@ -4,9 +4,12 @@ id: morning-crossing
 name: Morning Crossing
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/buffalo-harbor:0.1.0
+  - rel: involves
+    href: twinfile/place/dunkirk-dock:0.1.0
   - rel: involves
     href: twinfile/character/ferry-captain:0.1.0
 story:
@@ -15,10 +18,12 @@ story:
     - id: dawn-cast-off
       label: Dawn cast-off
       run:
+        from: twinfile/place/dunkirk-dock:0.1.0
         steps:
           - copy: twinfile/event/dawn-cast-off:0.1.0
     - id: harbor-berth
       label: Harbor berth
       run:
+        from: twinfile/place/buffalo-harbor:0.1.0
         steps:
           - copy: twinfile/event/harbor-berth:0.1.0

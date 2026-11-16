@@ -4,6 +4,7 @@ id: drought
 name: Drought
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - advisory
   - restriction

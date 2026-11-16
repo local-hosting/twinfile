@@ -4,10 +4,12 @@ id: transit-hub-campus-operations
 name: Transit Hub Campus operations
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/transit-hub-campus:0.1.0
 story:
+  pitch: Campus hub queue spill under transit disruption, then lunch-hour passenger flow across the quad.
   scenes:
     - id: hub-queue-spill
       label: Hub queue spill

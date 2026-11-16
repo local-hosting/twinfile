@@ -4,6 +4,7 @@ id: slope-movement
 name: Slope movement
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - watch
   - evacuation

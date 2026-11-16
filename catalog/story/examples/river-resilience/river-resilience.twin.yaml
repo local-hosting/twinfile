@@ -1,13 +1,15 @@
 twinfile: 2
 kind: story
-id: river-operations
-name: River operations
+id: river-resilience
+name: River resilience
 version: 0.1.0
 stability: example
+mode: resilience
 links:
   - rel: involves
     href: twinfile/place/river:0.2.0
 story:
+  pitch: Dam-release hazard watch for swim safety and upstream stage thresholds.
   scenes:
     - id: swim-unsafe-known
       label: Swim unsafe after release

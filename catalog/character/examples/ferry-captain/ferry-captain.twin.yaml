@@ -15,5 +15,5 @@ character:
   role: captain
   segment: waterfront-visitor
   goals:
-    - Run dawn ferry crossings
-    - Keep harbor traffic orderly
+    - Run dawn ferry crossings from Dunkirk into Buffalo Harbor
+    - Keep harbor traffic orderly when arrivals cluster on the slip

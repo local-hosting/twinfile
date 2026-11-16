@@ -4,6 +4,7 @@ id: passenger-queue
 name: Passenger queue
 version: 1.0.0
 stability: stable
+mode: daily
 phases:
   - steady
   - backlog

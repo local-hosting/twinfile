@@ -4,6 +4,7 @@ id: volcanic-ash
 name: Volcanic ash
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - advisory
   - ashfall
