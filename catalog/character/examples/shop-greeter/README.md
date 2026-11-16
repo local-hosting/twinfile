@@ -1,3 +1,3 @@
 # Shop greeter
 
-Synthetic **character** for the shop golden place. PCM fields are minimal; full PCM lives in `packages/pcm`.
+Synthetic **character** for the shop golden place. Character fields are minimal; fuller persona libraries live under `catalog/character/libs/`.
