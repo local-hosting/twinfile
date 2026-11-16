@@ -1,0 +1,80 @@
+{
+  "cases": [
+    {
+      "id": "imdf-venue",
+      "source": "imdf",
+      "file": "conf/map/imdf-venue.json",
+      "check": true,
+      "ext": { "path": ["place", "ext", "hours"], "equals": "Mo-Su 09:00-17:00" },
+      "exportIncludes": "Mo-Su 09:00-17:00",
+      "manifestIncludes": "primary: museum"
+    },
+    {
+      "id": "gtfs-line",
+      "source": "gtfs",
+      "stops": "conf/map/gtfs/stops.txt",
+      "shapes": "conf/map/gtfs/shapes.txt",
+      "pathways": "conf/map/gtfs/pathways.txt",
+      "check": true,
+      "ext": { "path": ["stations", "0", "ext", "zone_id"], "equals": "zone-a" },
+      "exportIncludes": "zone-a",
+      "manifestIncludes": "primary: train_station"
+    },
+    {
+      "id": "gtfs-pathway-kind",
+      "source": "gtfs",
+      "stops": "conf/map/gtfs/stops.txt",
+      "shapes": "conf/map/gtfs/shapes.txt",
+      "pathways": "conf/map/gtfs/pathways-kinds.txt",
+      "check": true,
+      "ext": { "path": ["routes", "0", "kind"], "equals": "escalator" },
+      "exportIncludes": "zone-a"
+    },
+    {
+      "id": "brick-point",
+      "source": "brick",
+      "file": "conf/map/brick-point.json",
+      "check": true,
+      "ext": { "path": ["sensors", "0", "ext", "timeseries"], "equals": "ts-9" },
+      "exportIncludes": "ts-9"
+    },
+    {
+      "id": "bot-storey",
+      "source": "bot",
+      "file": "conf/map/bot-storey.json",
+      "check": true,
+      "ext": { "path": ["spaces", "0", "ext", "usage"], "equals": "office" },
+      "exportIncludes": "office"
+    },
+    {
+      "id": "sosa-observation",
+      "source": "sosa",
+      "file": "conf/map/sosa-observation.json",
+      "check": false,
+      "ext": { "path": ["ext", "wasAttributedTo"], "equals": "lab-tech" },
+      "exportIncludes": "lab-tech"
+    },
+    {
+      "id": "gltf-scene",
+      "source": "gltf",
+      "file": "conf/map/gltf-scene.json",
+      "check": true,
+      "ext": { "path": ["spaces", "0", "geometry", "ref"], "equals": "sources/arena.glb#seats" }
+    },
+    {
+      "id": "ifc-building",
+      "source": "ifc",
+      "file": "conf/map/ifc-building.json",
+      "check": true,
+      "ext": { "path": ["spaces", "0", "ext", "usage"], "equals": "office" }
+    },
+    {
+      "id": "indoorgml-building",
+      "source": "indoorgml",
+      "file": "conf/map/indoorgml-building.json",
+      "check": true,
+      "ext": { "path": ["spaces", "0", "ext", "indoorgml", "state"], "equals": "lobby-state" },
+      "exportIncludes": "cellSpaces"
+    }
+  ]
+}

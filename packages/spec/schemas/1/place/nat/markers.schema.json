@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/nat/markers.schema.json",
+  "type": "object",
+  "required": ["markers"],
+  "properties": {
+    "markers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "name": { "type": "string" },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "step_free": { "type": "boolean" },
+          "state": { "type": "string" },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

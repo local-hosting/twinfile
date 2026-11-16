@@ -1,0 +1,4 @@
+tracks:
+  - id: stage
+    source: feed
+    property: stage

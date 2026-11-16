@@ -1,0 +1,9 @@
+{
+  "cases": [
+    { "ref": "twinfile/arena:1.2.0", "expect": { "name": "arena", "tag": "1.2.0" } },
+    { "ref": "twinfile/scenario/arena-flood-shelter-standup:1.0.0", "expect": { "name": "arena-flood-shelter-standup", "tag": "1.0.0" } },
+    { "ref": "oci:ghcr.io/local-hosting/twinfile/shop:0.2.0", "expect": { "name": "shop", "tag": "0.2.0" } },
+    { "ref": "github:twinfile/examples@main/places/arena", "expect": { "rawPrefix": "github:" } },
+    { "ref": "not-a-ref", "expectInvalid": true }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "type": "sosa:Observation",
+  "sosa:madeBySensor": "sonde-eddy-pool",
+  "sosa:hasFeatureOfInterest": "eddy-pool",
+  "sosa:observedProperty": "turbidity",
+  "sosa:hasResult": { "qudt:numericValue": 48, "qudt:unit": "NTU" },
+  "sosa:phenomenonTime": "2026-06-12T14:00:00Z",
+  "sosa:resultTime": "2026-06-12T15:00:00Z",
+  "prov:wasAttributedTo": "lab-tech"
+}

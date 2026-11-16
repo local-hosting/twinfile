@@ -1,0 +1,190 @@
+{
+  "cases": [
+    {
+      "id": "curve-linear-midpoint",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T09:30:00-04:00", "duration": "PT1H", "step": "PT30M" },
+      "place": {
+        "tracks": [
+          { "id": "footfall", "source": "curve", "points": { "07:00": 0.1, "12:00": 0.8, "22:00": 0.2 } }
+        ]
+      },
+      "expect": [
+        { "t": 0, "tracks": { "footfall": 0.45 } },
+        { "t": 3600, "tracks": { "footfall": 0.59 } }
+      ]
+    },
+    {
+      "id": "curve-wraps-midnight",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T02:30:00-04:00", "duration": "PT1H", "step": "PT1H" },
+      "place": {
+        "tracks": [
+          { "id": "footfall", "source": "curve", "points": { "07:00": 0.1, "22:00": 0.4 } }
+        ]
+      },
+      "expect": [{ "t": 0, "tracks": { "footfall": 0.25 } }]
+    },
+    {
+      "id": "schedule-active-window",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T06:00:00-04:00", "duration": "PT2H", "step": "PT10M" },
+      "place": {
+        "schedules": [
+          { "id": "produce-delivery", "when": "Mo,We,Fr 06:00-06:45", "uses": { "space": "stockroom" } }
+        ],
+        "tracks": [{ "id": "deliveries", "source": "schedule", "schedule": "produce-delivery" }]
+      },
+      "expect": [
+        { "t": 600, "active": ["produce-delivery"], "tracks": { "deliveries": 1 } },
+        { "t": 3000, "active": [], "tracks": { "deliveries": 0 } }
+      ]
+    },
+    {
+      "id": "schedule-skips-other-days",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-13T06:00:00-04:00", "duration": "PT1H", "step": "PT10M" },
+      "place": {
+        "schedules": [{ "id": "produce-delivery", "when": "Mo,We,Fr 06:00-06:45" }]
+      },
+      "expect": [{ "t": 600, "active": [] }]
+    },
+    {
+      "id": "feed-known-lags-value",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T09:00:00-04:00", "duration": "PT1H", "step": "PT30M" },
+      "place": {
+        "tracks": [
+          { "id": "turbidity", "source": "feed", "device": "sonde", "property": "turbidity", "interpolate": "step" }
+        ]
+      },
+      "feeds": [
+        { "device_id": "sonde", "observed_property": "turbidity", "value": 1, "observed_at": "2026-06-12T09:00:00-04:00", "available_at": "2026-06-12T10:00:00-04:00" },
+        { "device_id": "sonde", "observed_property": "turbidity", "value": 3, "observed_at": "2026-06-12T09:30:00-04:00", "available_at": "2026-06-12T10:00:00-04:00" }
+      ],
+      "expect": [
+        { "t": 1800, "tracks": { "turbidity": 3 }, "known": { "turbidity": null } },
+        { "t": 3600, "tracks": { "turbidity": 3 }, "known": { "turbidity": 3 } }
+      ]
+    },
+    {
+      "id": "feed-linear-and-quality-gap",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T09:00:00-04:00", "duration": "PT20M", "step": "PT5M" },
+      "place": {
+        "tracks": [{ "id": "stage", "source": "feed", "device": "gauge", "property": "stage" }]
+      },
+      "feeds": [
+        { "device_id": "gauge", "observed_property": "stage", "value": 4, "observed_at": "2026-06-12T09:00:00-04:00" },
+        { "device_id": "gauge", "observed_property": "stage", "value": 99, "observed_at": "2026-06-12T09:05:00-04:00", "quality": "fouled" },
+        { "device_id": "gauge", "observed_property": "stage", "value": 8, "observed_at": "2026-06-12T09:10:00-04:00" }
+      ],
+      "expect": [
+        { "t": 300, "tracks": { "stage": 6 }, "known": { "stage": 4 } },
+        { "t": 1200, "tracks": { "stage": 8 } }
+      ]
+    },
+    {
+      "id": "solar-noon-and-night",
+      "timezone": "America/New_York",
+      "location": { "lat": 40.758, "lng": -73.9855 },
+      "clock": { "starts_at": "2026-06-21T00:00:00-04:00", "duration": "PT13H", "step": "PT1H" },
+      "place": { "tracks": [{ "id": "daylight", "source": "solar" }] },
+      "expect": [
+        { "t": 0, "range": { "track": "daylight", "min": -30, "max": -20 } },
+        { "t": 46800, "range": { "track": "daylight", "min": 70, "max": 74 } }
+      ]
+    },
+    {
+      "id": "schedule-gated-by-daylight",
+      "timezone": "America/New_York",
+      "location": { "lat": 41.309, "lng": -74.152 },
+      "clock": { "starts_at": "2026-06-12T02:00:00-04:00", "duration": "PT8H", "step": "PT1H" },
+      "place": {
+        "schedules": [
+          {
+            "id": "shore-work",
+            "when": "Mo-Su 06:00-20:00",
+            "uses": { "space": "eddy-pool" },
+            "activeWhen": { "track": "daylight", "min": 0 }
+          }
+        ],
+        "tracks": [
+          { "id": "daylight", "source": "solar" },
+          { "id": "working", "source": "schedule", "schedule": "shore-work" }
+        ]
+      },
+      "expect": [
+        { "t": 0, "active": [], "tracks": { "working": 0 }, "occupancy": [] },
+        {
+          "t": 21600,
+          "active": ["shore-work"],
+          "tracks": { "working": 1 },
+          "occupancy": [{ "schedule": "shore-work", "space": "eddy-pool" }]
+        }
+      ]
+    },
+    {
+      "id": "simulate-uplink-known-lag",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T09:00:00-04:00", "duration": "PT2H", "step": "PT30M" },
+      "situations": [{ "phases": ["release"], "args": { "releaseAt": { "type": "time" } } }],
+      "place": {
+        "sensors": [
+          {
+            "id": "sonde",
+            "observes": "pool",
+            "properties": ["turbidity"],
+            "simulate": {
+              "every": "PT30M",
+              "uplink": "PT1H",
+              "turbidity": { "baseline": 10 }
+            }
+          }
+        ],
+        "tracks": [
+          {
+            "id": "turbidity",
+            "source": "feed",
+            "device": "sonde",
+            "property": "turbidity",
+            "interpolate": "step"
+          }
+        ]
+      },
+      "expect": [
+        { "t": 1800, "tracks": { "turbidity": 10 }, "known": { "turbidity": null } },
+        { "t": 3600, "tracks": { "turbidity": 10 }, "known": { "turbidity": 10 } }
+      ]
+    },
+    {
+      "id": "coverage-served-same-space-and-hop",
+      "timezone": "America/New_York",
+      "clock": { "starts_at": "2026-06-12T09:00:00-04:00", "duration": "PT1H", "step": "PT30M" },
+      "place": {
+        "spaces": [
+          { "id": "ap-room", "kind": "room", "exposure": "indoor" },
+          { "id": "hall", "kind": "corridor", "exposure": "indoor" },
+          { "id": "yard", "kind": "yard", "exposure": "outdoor" }
+        ],
+        "assets": [
+          { "id": "ap", "kind": "network", "space": "ap-room", "radio": { "protocol": "wifi", "tx_power_dbm": 20 } }
+        ],
+        "routes": [
+          { "id": "r1", "from": "ap-room", "to": "hall", "length_m": 10, "kind": "corridor", "step_free": true }
+        ],
+        "openings": [
+          { "id": "o1", "kind": "door", "connects": ["hall", "yard"], "width_m": 2, "state": "open" }
+        ],
+        "tracks": [
+          { "id": "served-ap", "source": "coverage", "radio": "ap", "space": "ap-room", "metric": "served" },
+          { "id": "served-yard", "source": "coverage", "radio": "ap", "space": "yard", "metric": "served", "threshold_dbm": -75 },
+          { "id": "rssi-yard", "source": "coverage", "radio": "ap", "space": "yard", "metric": "rssi_dbm" }
+        ]
+      },
+      "expect": [
+        { "t": 0, "tracks": { "served-ap": 1, "served-yard": 0, "rssi-yard": -82.381813 }, "known": { "served-ap": 1, "served-yard": 0, "rssi-yard": -82.381813 } }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,7 @@
+twinfile: 1
+kind: widget
+id: bad-kind
+name: Bad Kind
+version: 1.0.0
+stability: example
+layers: []

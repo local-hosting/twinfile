@@ -1,0 +1,5 @@
+{
+  "base": { "items": [{ "id": "a", "label": "A" }] },
+  "patch": { "items": [{ "id": "a", "label": "B" }] },
+  "expect": { "items": [{ "id": "a", "label": "B" }] }
+}

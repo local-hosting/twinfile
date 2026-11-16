@@ -1,0 +1,17 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: site-demo
+name: Site Demo
+version: 0.1.0
+stability: example
+steps:
+  - place:
+      name: Site demo
+      kind: campus
+      timezone: UTC
+  - spaces:
+      - id: terminal-a
+        kind: terminal
+  - copy: ./parts/terminal-a
+    into: terminal-a

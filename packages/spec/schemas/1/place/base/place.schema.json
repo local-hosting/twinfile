@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/place.schema.json",
+  "type": "object",
+  "required": ["place"],
+  "properties": {
+    "place": {
+      "type": "object",
+      "required": ["name", "kind", "timezone"],
+      "properties": {
+        "name": { "type": "string" },
+        "kind": { "type": "string" },
+        "timezone": { "type": "string" },
+        "location": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/location" },
+        "address": { "type": "string" },
+        "gers": { "type": "string" },
+        "footprint": {
+          "type": "object",
+          "required": ["ref"],
+          "properties": { "ref": { "type": "string" } },
+          "additionalProperties": false
+        },
+        "published": { "type": "boolean" },
+        "archetype": {
+          "enum": ["single_level", "indoor_stack", "campus", "open_area", "linear"]
+        },
+        "authoring_scale": {
+          "type": "object",
+          "properties": {
+            "linear_unit": { "enum": ["m", "ft"] },
+            "h3_resolution": { "type": "integer", "minimum": 0, "maximum": 15 },
+            "space_granularity": { "enum": ["room", "zone", "building"] }
+          },
+          "additionalProperties": false
+        },
+        "ext": { "type": "object" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

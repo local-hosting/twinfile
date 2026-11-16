@@ -1,0 +1,10 @@
+twinfile: 1
+kind: place
+id: arena
+name: Arena
+version: 1.2.0
+stability: example
+layers:
+  - place/place.yaml
+  - place/spaces.yaml
+  - plans/severe-weather.yaml

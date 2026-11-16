@@ -1,0 +1,46 @@
+{
+  "cases": [
+    {
+      "id": "closed-opening-and-stair",
+      "place": {
+        "spaces": [
+          { "id": "lobby" },
+          { "id": "hall", "roles": ["shelter"] },
+          { "id": "roof" }
+        ],
+        "openings": [
+          {
+            "id": "door",
+            "kind": "door",
+            "connects": ["lobby", "hall"],
+            "width_m": 1,
+            "state": "closed"
+          }
+        ],
+        "routes": [
+          { "id": "stair", "from": "lobby", "to": "roof", "length_m": 4, "kind": "stair", "step_free": false },
+          { "id": "ramp", "from": "lobby", "to": "roof", "length_m": 12, "kind": "ramp", "step_free": true }
+        ]
+      },
+      "blocked": { "from": "lobby", "to": "hall" },
+      "openedPlaceDoor": "open",
+      "opened": {
+        "from": "lobby",
+        "to": "hall",
+        "expect": { "spaces": ["lobby", "hall"], "openings": ["door"], "routes": [], "length_m": 0 }
+      },
+      "stair": {
+        "from": "lobby",
+        "to": "roof",
+        "expect": { "routes": ["stair"], "length_m": 4 }
+      },
+      "stepFree": {
+        "from": "lobby",
+        "to": "roof",
+        "step_free": true,
+        "expect": { "routes": ["ramp"], "length_m": 12 }
+      },
+      "reachable": { "role": "shelter", "spaces": ["hall"] }
+    }
+  ]
+}

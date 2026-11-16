@@ -1,0 +1,11 @@
+visits:
+  - id: visit-arrival
+    kind: arrival
+    name: Arrive at curb
+    space: curb-zone
+    order: 0
+  - id: visit-shop
+    kind: activity
+    name: Browse sales floor
+    space: sales-floor
+    order: 1

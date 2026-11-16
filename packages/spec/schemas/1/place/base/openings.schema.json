@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/openings.schema.json",
+  "type": "object",
+  "required": ["openings"],
+  "properties": {
+    "openings": {
+      "type": "array",
+      "items": {
+        "oneOf": [
+          {
+        "type": "object",
+        "required": ["id", "kind", "connects", "width_m"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "name": { "type": "string" },
+          "kind": { "type": "string" },
+          "connects": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" }
+          },
+          "width_m": { "type": "number", "exclusiveMinimum": 0 },
+          "state": { "enum": ["open", "closed"] },
+          "step_free": { "type": "boolean" },
+          "level": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "service_s": { "type": "number", "minimum": 0 },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+          },
+          { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/mergeDeletePatch" }
+        ]
+      }
+    }
+  },
+  "additionalProperties": false
+}

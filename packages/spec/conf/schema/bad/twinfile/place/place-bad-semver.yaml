@@ -1,0 +1,8 @@
+twinfile: 1
+kind: place
+id: arena
+name: Arena
+version: not-semver
+stability: example
+layers:
+  - place/place.yaml

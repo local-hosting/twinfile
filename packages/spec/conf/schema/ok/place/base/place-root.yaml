@@ -1,0 +1,5 @@
+place:
+  name: Demo Arena
+  kind: arena
+  timezone: America/New_York
+  published: false

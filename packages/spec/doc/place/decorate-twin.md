@@ -1,0 +1,181 @@
+# Decorate a twin (combine pre-defined elements)
+
+Customize a digital twin by **stacking published units and YAML patches**—same compose model as [Composition](../build/composition.md), framed for **decoration** rather than greenfield authoring.
+
+**Layout mode** (`archetype`, spaces, exposure) → [Place recipe](place-recipe.md).  
+**This page** → **what to stack on top**: skeletons, capability packs, and asset/sensor layers.
+
+## Three element kinds
+
+| Kind | Ref / path | What it adds | Mix via |
+| --- | --- | --- | --- |
+| **Archetype base** | `twinfile/base-*:0.1.0` | Map-shape skeleton: starter spaces, openings, default **`plans`** hooks | **`from:`** on place `Twinfile.yaml` |
+| **Situation** | `twinfile/severe-weather:1.0.0`, … | Shared story contract (`phases`, **`expects`** roles) | Scenario **`layers:`** + place **`plans/*.yaml`** (role → space ids) |
+| **Place layer module** | Files under **`place/`** | Patches: extra spaces, assets, sensors, visit moments (`visits`), routes | Child **`layers:`** (merge on top of base) |
+
+Bases and situations ship from **`examples`** (OCI / `twin.local.yaml`). Your site only authors **deltas**: rename site, add zones, wire **`plans`**, drop in **`assets.yaml`**.
+
+## Dockerfile-style decorate recipe
+
+```yaml
+# 1) FROM — layout contract (archetype, scale, default levels)
+from: twinfile/base-campus:0.1.0
+
+twinfile: 1
+kind: place
+name: my-site
+geotype:
+  primary: convention_center
+  registry: "@local-hosting/geotypes@0.1.2"
+
+# 2) PATCH — your geometry & narrative (coarse → fine)
+layers:
+  - place/place.yaml
+  - place/spaces.yaml
+  - place/openings.yaml
+  - place/assets.yaml
+  - place/sensors.yaml
+  - place/visits.yaml
+  - plans/severe-weather.yaml
+  - plans/transit-disruption.yaml
+```
+
+**Run** (scene `run.yaml`, not a Twinfile) copies situation/event refs at build time:
+
+```yaml
+# story/examples/<story>/scenes/<scene>/run.yaml
+role: run
+from: twinfile/place/expo:0.2.0
+id: expo-outdoor-shelter-cap
+name: Outdoor shelter capacity
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/situation/severe-weather:1.0.0
+args:
+  occupancy: 4200
+  target_role: shelter
+```
+
+See [Composition](../build/composition.md) for full compose order (place → events → situations → scenario patches → **`args:`**).
+
+## Pre-defined catalog (`examples`)
+
+### Archetype bases (pick one `from:`)
+
+| Ref | Use when |
+| --- | --- |
+| `twinfile/base-campus:0.1.0` | Multi-building site; `archetype: campus`, zone granularity |
+| `twinfile/base-indoor-stack:0.1.0` | One pin, multi-floor; default `levels`, room granularity |
+| `twinfile/base-single-level:0.1.0` | One pin, single floor plan |
+| `twinfile/base-open-area:0.1.0` | Open land (park, field, farm); outdoor zones, no buildings |
+| `twinfile/base-linear:0.1.0` | Path / corridor; **`visit_order`** spaces |
+
+Paths: [`examples/`](../../../catalog/place/examples/). Map-first pick: [Place archetypes](place-archetypes.md#axes--archetype).
+
+### Situations (reuse across places)
+
+| Unit | Role vocabulary (excerpt) | Example places |
+| --- | --- | --- |
+| `severe-weather` | `shelter`, `exit`, `outdoor` | expo, arena, shop |
+| `transit-disruption` | transit-specific roles | shop, airport, expo, transit-hub-campus |
+| `dam-release` | water / stage safety | river |
+| `flood` | refuge, crossing, gauge | (mixin; river/coastal sites) |
+| `earthquake` | `shelter`, `exit`, `outdoor` | (mixin) |
+| `wildfire` | `shelter`, `exit`, `safe-access` | (mixin) |
+| `tsunami` | refuge, evacuation route | (mixin; coastal sites) |
+| `volcanic-ash` | `shelter`, `exit`, `survey-station` | (mixin) |
+| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | (mixin; avalanche, landslide, lahar) |
+| `drought` | `gauge`, `collection-point`, optional `shelter` | (mixin) |
+| `power-outage` | `shelter`, `safe-access`, `alternative` | (mixin; utilities sites) |
+| `field-damage` | `hotspot`, `safe-access`, `collection-point` | (mixin; post-event reports) |
+| `litter-pollution` | outdoor program / cleanup | port, park |
+
+Common **natural hazard** labels map to these units in [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml) — see [Natural hazards](../kinds/natural-hazards.md).
+
+Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../catalog/place/examples/expo/plans/severe-weather.yaml) on expo). Resolve refs with **`TF_SIMULATOR_ROOT`** + [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
+
+### Decoration layer files (copy patterns)
+
+| File | Decorates with |
+| --- | --- |
+| **`place/assets.yaml`** | Devices, kiosks, signage, DTPR metadata ([shop example](../../../catalog/place/examples/shop/place/assets.yaml)) |
+| **`place/sensors.yaml`** | Sensor placements (when scenarios need them) |
+| **`place/ai.yaml`** | Agent / AI bindings (when used) |
+| **`place/visits.yaml`** | Visit moments (layout TOC; runtime movement is host-owned) |
+| **`place/routes.yaml`** | Named paths between regions |
+| **`place/openings.yaml`** | Passages — doors / gates between two spaces (also **`exit`** roles for weather plans) |
+
+Merge rules: RFC 7396 objects; **`id`** arrays merge by **`id`** ([Layers](../build/layers.md)). Add a new asset row in a later layer file to extend without editing the base.
+
+## Hooks: `roles` on spaces
+
+Shared **`plans`** do not hard-code your ids. Tag spaces (and openings) so plans stay portable:
+
+```yaml
+spaces:
+  - id: hall-shelter
+    exposure: indoor
+    roles: [shelter]
+  - id: quad-outdoor
+    exposure: outdoor
+    roles: [outdoor]
+```
+
+See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/plan-scaffold-campus/) for a minimal role-tag sample used by `twin add plan`. Custom places wire situations by tagging **their** ids and authoring **`plans/*.yaml`**.
+
+## Minimal customize paths
+
+| Goal | Mix |
+| --- | --- |
+| “Campus like the example, different name/coords” | **`from: base-campus`** + patch **`place/place.yaml`** only |
+| “Add retail tech to a floor” | Add **`place/assets.yaml`** layer |
+| “Enable storm scenario” | Add **`plans/severe-weather.yaml`** + space **`roles`** + scenario unit |
+| “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`plans`** ([expo](../../../catalog/place/examples/expo/)) |
+
+Thin derived examples: [`mobility-hub/campus`](../../../catalog/place/examples/mobility-hub/campus/) — **`from:`** campus base, `place.kind: mobility_hub`, site `steps:`, **`copy: ./parts/transit-hub`**, **`transit-disruption`** plan. Building + floor: [`places/airport`](../../../catalog/place/examples/airport/) (the building copies `./floors/airside`). Single building: [`expo`](../../../catalog/place/examples/expo/), [`arena`](../../../catalog/place/examples/arena/), [`port`](../../../catalog/place/examples/port/). **`open_area`** [`park`](../../../catalog/place/examples/park/) stays site-only ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). When geotypes **`suggest_building_import`** is true for the resolved archetype (today **`campus`** only), `twin init place --geotype` writes `PARTS.md`.
+
+## Geotype decorations
+
+Every `@local-hosting/geotypes` slug carries suggested decorators next to its archetype ([Place archetypes](place-archetypes.md#decorations)): **`situations`** (which shared situations to wire) and **`layers`** (decoration layer files such as `assets`, `sensors`, `routes`, `visits`). Look them up with `placeDecorationsForSlug('stadium')`.
+
+**`twin init place <dir> --geotype <slug>`** applies them on top of the golden base (skip with **`--no-decorate`**):
+
+1. **`from:`** the archetype base (role hooks: `shelter`, `exit`, `outdoor`, … already tagged).
+2. **`axes:`** for any axis the archetype leaves open (e.g. `vertical: stacked` on a hospital campus).
+3. **`with:`** one golden mixin per suggested situation (`twinfile/mixin-severe-weather:0.1.0`, …) plus `mixin-assets` / `mixin-sensors` when suggested ([RFC 0004](../../rfcs/0004-composed-bases.md)). Each situation mixin brings its own role-tagged rows and a wired plan, so `twin check --strict` passes immediately.
+4. Prints remaining suggested layers (`next: add layers …`) that need real geometry (routes, optional visit moments).
+
+Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To bind a situation to your own rows, add a local `plans/<situation>.yaml` (the child wins over mixins).
+
+## CLI (decorate)
+
+From a **place unit** directory (with `TF_EXAMPLES_ROOT` pointing at `examples`):
+
+```bash
+# Wire a shared situation to your tagged spaces/openings
+twin add plan severe-weather
+
+# Starter device/signage layer (edit space ids)
+twin add assets
+```
+
+`twin add plan` merges the place, matches **`roles:`** tags to each situation **`expects`** role, writes **`plans/<situation>.yaml`**, and appends that path to manifest **`layers:`** (via **`twin fmt`**). Fix gaps (`warn:` lines), then **`twin check --strict`**.
+
+## What is not automatic yet
+
+| Desired | Today | Direction |
+| --- | --- | --- |
+| Pick decorations from a UI | `twin init place --geotype` applies geotype-suggested decorators; otherwise author YAML refs manually | Catalog in examples + this doc; tooling can list refs |
+| `twin add plan severe-weather` | **Implemented** — see [Decorate a twin](../place/decorate-twin.md#cli-decorate) | Scaffold **`plans/`** from situation **`expects`** + role tags |
+| Multiple **`from:`** bases | Single **`from:`** per place | Chain bases sparingly, or publish composite bases |
+| Asset “sprite pack” ref | Patch **`assets.yaml`** or merge layer file | Optional published **`twinfile/decor-retail-kit:*`** place layer bundle |
+
+Decoration **does not** change **`archetype`** rules—stack **layout** (recipe doc) and **behavior/capability** (this doc).
+
+## Related
+
+- [Place recipe](place-recipe.md) — `FROM` + layout + exposure  
+- [Composition](../build/composition.md) — merge order and OCI  
+- [Layout navigation](layout-navigation.md) — coarse → fine layer files  
+- [Golden catalog README](../../../catalog/place/examples/README.md) — place ↔ situation ↔ scenario matrix  

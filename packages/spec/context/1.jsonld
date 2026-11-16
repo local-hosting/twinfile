@@ -1,0 +1,7 @@
+{
+  "@context": {
+    "twinfile": "https://twinfile.org/schemas/1/",
+    "id": "@id",
+    "type": "@type"
+  }
+}

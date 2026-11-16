@@ -1,0 +1,11 @@
+twinfile: 1
+kind: place
+id: patch-bad
+name: Patch Bad
+version: 0.1.0
+stability: example
+layers:
+  - place/spaces.yaml
+processors:
+  - id: bad id
+    type: twinfile/mod.map-sink@0.1.0

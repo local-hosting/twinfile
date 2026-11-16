@@ -1,0 +1,13 @@
+twinfile: 1
+kind: event
+id: game-day
+name: Game Day
+version: 1.0.0
+stability: maybe
+layers: []
+timetable:
+  start: PT0S
+expects:
+  gate:
+    kind: opening
+    min: 1

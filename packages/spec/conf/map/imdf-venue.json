@@ -1,0 +1,56 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": "hall",
+      "feature_type": "venue",
+      "properties": {
+        "name": "Hall",
+        "category": "museum",
+        "timezone": "UTC",
+        "hours": "Mo-Su 09:00-17:00",
+        "restriction": "employeesonly"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "level-0",
+      "feature_type": "level",
+      "properties": { "ordinal": 0, "name": "Ground", "outdoor": false }
+    },
+    {
+      "type": "Feature",
+      "id": "unit-lobby",
+      "feature_type": "unit",
+      "properties": { "level_id": "level-0", "category": "room", "name": "Lobby", "restriction": "public" }
+    },
+    {
+      "type": "Feature",
+      "id": "unit-hall",
+      "feature_type": "unit",
+      "properties": { "level_id": "level-0", "category": "room", "name": "Hall" }
+    },
+    {
+      "type": "Feature",
+      "id": "opening-door",
+      "feature_type": "opening",
+      "properties": {
+        "category": "pedestrian",
+        "unit_ids": ["unit-lobby", "unit-hall"],
+        "width": 1.2,
+        "door": { "type": "swinging" }
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "opening-egress",
+      "feature_type": "opening",
+      "properties": {
+        "category": "egress",
+        "unit_ids": ["unit-lobby", "unit-hall"],
+        "width": 1.2
+      }
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+twinfile: 2
+kind: scenario
+id: missing-from
+name: Missing from
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/event/arena-game-day:1.0.0
+use:
+  runner: npm:@local-hosting/twinfile-runner-hydraulic@^0

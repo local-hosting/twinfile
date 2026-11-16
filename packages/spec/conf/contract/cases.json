@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "id": "pass-minimal",
+      "place": { "spaces": [{ "id": "s1", "kind": "room", "roles": ["shelter"] }], "openings": [{ "id": "o1", "kind": "door", "roles": ["exit"] }, { "id": "o2", "kind": "door", "roles": ["exit"] }] },
+      "expects": { "shelter": { "kind": "space", "min": 1 }, "exit": { "kind": "opening", "min": 2 } },
+      "planRoles": { "shelter": ["s1"], "exit": ["o1", "o2"] },
+      "expectPass": true
+    },
+    {
+      "id": "E_NO_PLAN",
+      "place": { "spaces": [{ "id": "s1", "kind": "room" }] },
+      "expects": { "shelter": { "kind": "space", "min": 1 } },
+      "planRoles": {},
+      "expectCodes": ["E_NO_PLAN"],
+      "situationName": "severe-weather"
+    },
+    {
+      "id": "E_ROLE_MISSING",
+      "place": { "spaces": [{ "id": "s1", "kind": "room" }] },
+      "expects": { "shelter": { "kind": "space", "min": 1 } },
+      "planRoles": { "exit": ["o1"] },
+      "expectCodes": ["E_ROLE_MISSING"]
+    },
+    {
+      "id": "E_ROLE_MIN",
+      "place": { "openings": [{ "id": "o1", "kind": "door", "roles": ["exit"] }] },
+      "expects": { "exit": { "kind": "opening", "min": 2 } },
+      "planRoles": { "exit": ["o1"] },
+      "expectCodes": ["E_ROLE_MIN"]
+    },
+    {
+      "id": "E_ROLE_REF",
+      "place": { "openings": [{ "id": "o1", "kind": "door" }] },
+      "expects": { "exit": { "kind": "opening", "min": 1 } },
+      "planRoles": { "exit": ["missing-gate"] },
+      "expectCodes": ["E_ROLE_REF"]
+    }
+  ]
+}

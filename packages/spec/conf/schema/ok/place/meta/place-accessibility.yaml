@@ -1,0 +1,4 @@
+accessibility:
+  features:
+    - id: main-entrance
+      step_free: true
