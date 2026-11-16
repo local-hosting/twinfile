@@ -1,7 +1,7 @@
 node_modules/
 .npmrc
 dist/
-Twinfile.lock
+*.twin.lock
 .yarn/*
 !.yarn/patches
 !.yarn/plugins

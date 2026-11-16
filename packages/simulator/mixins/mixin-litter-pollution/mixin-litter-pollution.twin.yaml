@@ -8,7 +8,7 @@ name: Litter-pollution hooks — hotspot, safe access, collection point, survey
 layers:
   - place/markers.yaml
   - place/stations.yaml
-  - plans/litter-pollution.yaml
+  - bindings/litter-pollution.yaml
 provides:
   situations:
     - litter-pollution

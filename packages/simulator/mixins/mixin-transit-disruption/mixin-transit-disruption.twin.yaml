@@ -6,7 +6,7 @@ id: mixin-transit-disruption
 name: Transit-disruption hooks — ground-transport stop, alternative, wired plan
 layers:
   - place/spaces.yaml
-  - plans/transit-disruption.yaml
+  - bindings/transit-disruption.yaml
 provides:
   situations:
     - transit-disruption

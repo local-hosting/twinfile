@@ -1,7 +1,7 @@
-/** Default canvas = composed card preview, not the declarative Twinfile.yaml source. */
+/** Default canvas = composed card preview, not the declarative <unit>.twin.yaml source. */
 export const WORKBENCH_DEFAULT_VARIATION = 'summary';
 
-/** Declarative twinfile (`Twinfile.yaml`). */
+/** Declarative twinfile (`<unit>.twin.yaml`). */
 export const WORKBENCH_TWINFILE_VARIATION = 'twinfile';
 
 export function normalizeWorkbenchVariation(raw: string | undefined | null): string {

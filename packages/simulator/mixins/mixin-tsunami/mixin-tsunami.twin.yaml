@@ -6,7 +6,7 @@ id: mixin-tsunami
 name: Tsunami hooks — high ground, evacuation route, optional coastal access
 layers:
   - place/markers.yaml
-  - plans/tsunami.yaml
+  - bindings/tsunami.yaml
 applies_to:
   extent:
     - route

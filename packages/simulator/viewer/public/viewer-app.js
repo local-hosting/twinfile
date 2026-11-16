@@ -163,7 +163,7 @@ function renderStory(story) {
     return '<p class="text-sm text-zinc-500">Summary requires host-rendered HTML — restart the workbench server.</p>';
   }
   if (story.kind === 'twinfile' && typeof story.text === 'string') {
-    return twinfileSourceHtml(story.filename || 'Twinfile.yaml', story.text);
+    return twinfileSourceHtml(story.filename || 'twin head', story.text);
   }
   if (story.kind === 'disclosures' && Array.isArray(story.disclosures)) {
     return renderDisclosures(story.disclosures);

@@ -9,7 +9,7 @@ layers:
   - place/markers.yaml
   - place/gauges.yaml
   - place/stations.yaml
-  - plans/drought.yaml
+  - bindings/drought.yaml
 applies_to:
   extent:
     - site
