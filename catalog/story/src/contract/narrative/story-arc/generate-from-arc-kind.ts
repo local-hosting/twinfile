@@ -87,7 +87,7 @@ export function scaffoldScenesFromJourneyArc(
   });
 }
 
-export type GenerateSamEpisodeFromArcInput = {
+export type GenerateStoryEpisodeFromArcInput = {
   kind: StoryArcKind;
   journey: Journey;
   episodeId: string;
@@ -102,7 +102,7 @@ export type GenerateSamEpisodeFromArcInput = {
   characters?: StoryCharacterRef[];
 };
 
-export type GeneratedSamEpisodeDraft = {
+export type GeneratedStoryEpisodeDraft = {
   arcTemplate: StoryArcTemplate;
   scenes: StoryScene[];
   characters: StoryCharacterRef[];
@@ -113,9 +113,9 @@ export type GeneratedSamEpisodeDraft = {
  * Draft a Story episode from a Write Practice arc kind + authored Character journey
  * (acts rail + scenes). Run {@link compileStory} / {@link generateEpisodeCalendar} next.
  */
-export function generateSamEpisodeFromArc(
-  input: GenerateSamEpisodeFromArcInput,
-): GeneratedSamEpisodeDraft {
+export function generateStoryEpisodeFromArc(
+  input: GenerateStoryEpisodeFromArcInput,
+): GeneratedStoryEpisodeDraft {
   const arcTemplate = buildStoryArcTemplateFromKind({
     kind: input.kind,
     id: `arc:${input.episodeId.replace(/^story:episode:/, '')}`,
