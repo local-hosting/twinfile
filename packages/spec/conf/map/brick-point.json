@@ -1,0 +1,19 @@
+{
+  "name": "Lobby sensors",
+  "points": [
+    {
+      "id": "temp-lobby",
+      "type": "https://brickschema.org/schema/Brick#Temperature_Sensor",
+      "name": "Lobby temperature",
+      "space": "lobby",
+      "timeseries": "ts-9"
+    },
+    {
+      "id": "lamp-lobby",
+      "type": "https://brickschema.org/schema/Brick#Luminaire",
+      "name": "Lobby lamp",
+      "space": "lobby",
+      "vendor": "acme"
+    }
+  ]
+}

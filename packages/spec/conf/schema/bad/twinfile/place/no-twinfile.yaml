@@ -1,0 +1,7 @@
+kind: place
+id: arena
+name: Arena
+version: 1.0.0
+stability: example
+layers:
+  - place/place.yaml

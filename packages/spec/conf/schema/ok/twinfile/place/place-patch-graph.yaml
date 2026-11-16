@@ -1,0 +1,11 @@
+twinfile: 1
+kind: place
+id: patch-demo
+name: Patch Demo
+version: 0.1.0
+stability: example
+layers:
+  - place/spaces.yaml
+processors:
+  - id: map
+    type: twinfile/mod.map-sink@0.1.0

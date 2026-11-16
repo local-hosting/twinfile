@@ -1,0 +1,7 @@
+reaches:
+  - id: upper
+    length_m: 1200
+    flows_to: middle
+  - id: middle
+    length_m: 800
+    flows_to: lower

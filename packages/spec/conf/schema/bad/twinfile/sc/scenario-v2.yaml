@@ -1,0 +1,11 @@
+twinfile: 2
+kind: scenario
+id: scenario-v2-bad-mixed
+name: Scenario V2 Bad Mixed
+version: 0.1.0
+stability: example
+from: ..
+include:
+  - twinfile/situation/severe-weather:1.0.0
+steps:
+  - copy: twinfile/situation/severe-weather:1.0.0

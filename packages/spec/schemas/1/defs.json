@@ -1,0 +1,197 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/defs.json",
+  "$defs": {
+    "twinId": {
+      "type": "string",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,62}$"
+    },
+    "mergeDeletePatch": {
+      "type": "object",
+      "required": ["id", "$delete"],
+      "properties": {
+        "id": { "$ref": "#/$defs/twinId" },
+        "$delete": { "const": true }
+      },
+      "additionalProperties": false
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)(?:-[0-9A-Za-z.-]+)?(?:\\+[0-9A-Za-z.-]+)?$"
+    },
+    "stability": {
+      "type": "string",
+      "enum": ["stable", "example"]
+    },
+    "twinfileHead": {
+      "type": "object",
+      "required": ["twinfile", "kind", "id", "version", "stability"],
+      "properties": {
+        "twinfile": { "enum": [1, 2] },
+        "kind": { "type": "string" },
+        "id": { "$ref": "#/$defs/twinId" },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "#/$defs/semver" },
+        "stability": { "$ref": "#/$defs/stability" },
+        "domains": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "catalog": {
+          "type": "object",
+          "properties": {
+            "parent": { "$ref": "#/$defs/twinfileRef" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": true
+    },
+    "geotypeTwinfile": {
+      "type": "object",
+      "required": ["primary"],
+      "properties": {
+        "primary": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Geotype slug or acronym from @local-hosting/geotypes"
+        },
+        "registry": {
+          "type": "string",
+          "description": "Pinned taxonomy package (e.g. @local-hosting/geotypes@0.1.0)"
+        }
+      },
+      "additionalProperties": false
+    },
+    "expectsRole": {
+      "type": "object",
+      "required": ["kind", "min"],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "space",
+            "opening",
+            "asset",
+            "sensor",
+            "ai",
+            "role",
+            "marker",
+            "gauge",
+            "station"
+          ]
+        },
+        "min": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "twinfileRef": {
+      "type": "string",
+      "pattern": "^(twinfile/(?:(?:place|scenario|event|situation|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}:[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?|oci:ghcr\\.io/twinfile/(?:(?:place|scenario|event|situation|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}(?::[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?)?(?:@sha256:[a-f0-9]{64})?)$"
+    },
+    "placeAxes": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "extent": { "enum": ["footprint", "site", "area", "route"] },
+        "vertical": { "enum": ["flat", "stacked"] },
+        "movement": { "enum": ["free", "sequenced"] }
+      },
+      "additionalProperties": false
+    },
+    "placeAxesFilter": {
+      "type": "object",
+      "minProperties": 1,
+      "properties": {
+        "extent": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "enum": ["footprint", "site", "area", "route"] }
+        },
+        "vertical": { "type": "array", "minItems": 1, "items": { "enum": ["flat", "stacked"] } },
+        "movement": { "type": "array", "minItems": 1, "items": { "enum": ["free", "sequenced"] } }
+      },
+      "additionalProperties": false
+    },
+    "isoDuration": {
+      "type": "string",
+      "pattern": "^P(?=\\d|T\\d)(?:\\d+D)?(?:T(?=\\d)(?:\\d+H)?(?:\\d+M)?(?:\\d+(?:\\.\\d+)?S)?)?$"
+    },
+    "weeklyHours": {
+      "type": "string",
+      "description": "Opening-hours subset: day ranges and same-day time ranges, rules joined by '; '. Example: Mo,We,Fr 06:00-06:45; Sa 08:00-09:00",
+      "pattern": "^(?:Mo|Tu|We|Th|Fr|Sa|Su)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?(?:,(?:Mo|Tu|We|Th|Fr|Sa|Su)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?)* (?:[01]\\d|2[0-3]):[0-5]\\d-(?:(?:[01]\\d|2[0-3]):[0-5]\\d|24:00)(?:,(?:[01]\\d|2[0-3]):[0-5]\\d-(?:(?:[01]\\d|2[0-3]):[0-5]\\d|24:00))*(?:; (?:Mo|Tu|We|Th|Fr|Sa|Su)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?(?:,(?:Mo|Tu|We|Th|Fr|Sa|Su)(?:-(?:Mo|Tu|We|Th|Fr|Sa|Su))?)* (?:[01]\\d|2[0-3]):[0-5]\\d-(?:(?:[01]\\d|2[0-3]):[0-5]\\d|24:00)(?:,(?:[01]\\d|2[0-3]):[0-5]\\d-(?:(?:[01]\\d|2[0-3]):[0-5]\\d|24:00))*)*$"
+    },
+    "clock": {
+      "type": "object",
+      "required": ["starts_at", "duration", "step"],
+      "properties": {
+        "starts_at": {
+          "type": "string",
+          "format": "date-time",
+          "description": "RFC 3339 instant with an explicit offset; t = 0 for the run"
+        },
+        "duration": { "$ref": "#/$defs/isoDuration" },
+        "step": { "$ref": "#/$defs/isoDuration" }
+      },
+      "additionalProperties": false
+    },
+    "location": {
+      "type": "object",
+      "required": ["lat", "lng"],
+      "properties": {
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lng": { "type": "number", "minimum": -180, "maximum": 180 }
+      },
+      "additionalProperties": false
+    },
+    "argDef": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["integer", "number", "string", "boolean", "duration", "time", "enum"]
+        },
+        "default": {},
+        "enum": { "type": "array" }
+      },
+      "additionalProperties": false
+    },
+    "placeLayerCollectionKey": {
+      "type": "string",
+      "enum": [
+        "place",
+        "spaces",
+        "levels",
+        "openings",
+        "routes",
+        "assets",
+        "services",
+        "sensors",
+        "ai",
+        "reaches",
+        "gauges",
+        "stations",
+        "markers",
+        "situationBindings",
+        "events",
+        "situations",
+        "visits",
+        "hours",
+        "roles",
+        "policies",
+        "accessibility",
+        "tracks",
+        "schedules",
+        "coverage_profiles"
+      ]
+    },
+    "mergedPlace": {
+      "type": "object",
+      "description": "Merged place/ YAML collections keyed by collection name (`Place.data`; wire field `place` on `twin://place`).",
+      "propertyNames": { "$ref": "#/$defs/placeLayerCollectionKey" },
+      "additionalProperties": true
+    }
+  }
+}

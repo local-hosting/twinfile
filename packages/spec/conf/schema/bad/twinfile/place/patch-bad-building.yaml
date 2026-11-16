@@ -1,0 +1,17 @@
+twinfile: 2
+kind: place
+id: patch-bad-building
+name: Patch Bad Building
+version: 0.1.0
+stability: example
+steps:
+  - spaces:
+      - id: hub
+        kind: transit
+  - copy: ./parts/hub
+    into: hub
+processors:
+  - id: scope
+    type: twinfile/mod.building-scope@0.1.0
+    bind:
+      anchor: ref:building:missing

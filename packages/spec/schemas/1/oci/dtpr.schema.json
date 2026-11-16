@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/oci/dtpr.schema.json",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["datachain"],
+      "properties": {
+        "datachain": { "type": "string", "format": "uri" }
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["schema", "type", "elements", "accountable"],
+      "properties": {
+        "schema": { "type": "string" },
+        "type": { "enum": ["device", "ai"] },
+        "elements": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^[a-z0-9_]+$" }
+          }
+        },
+        "accountable": { "type": "string" },
+        "sign": {
+          "type": "object",
+          "properties": { "qr": { "type": "string" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    }
+  ]
+}

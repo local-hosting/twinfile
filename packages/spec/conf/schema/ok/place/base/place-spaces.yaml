@@ -1,0 +1,19 @@
+spaces:
+  - id: bowl
+    name: Bowl
+    kind: seating
+    exposure: outdoor
+    area_m2: 12000
+    roles:
+      - seating
+  - id: concourse-lower
+    name: Lower concourse
+    kind: concourse
+    exposure: indoor
+    roles:
+      - shelter
+  - id: suite-a
+    name: Suite A
+    kind: suite
+    exposure: indoor
+    parent: concourse-lower

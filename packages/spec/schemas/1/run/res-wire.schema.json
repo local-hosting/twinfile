@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/res-wire.schema.json",
+  "title": "ResourceWire",
+  "description": "Wire JSON for resource twins (equipment, material, product) — MCP and OCI config.",
+  "type": "object",
+  "required": ["meta", "resource", "digest"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "additionalProperties": true
+    },
+    "resource": { "type": "object", "additionalProperties": true },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,25 @@
+twinfile: 1
+kind: situation
+id: severe-weather
+name: Severe Weather
+version: 1.1.0
+stability: stable
+layers: []
+phases:
+  - watch
+  - warning
+  - all-clear
+args:
+  warningAt:
+    type: time
+    default: PT0S
+expects:
+  shelter:
+    kind: space
+    min: 1
+  exit:
+    kind: opening
+    min: 2
+  outdoor:
+    kind: space
+    min: 0

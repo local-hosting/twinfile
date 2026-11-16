@@ -1,0 +1,13 @@
+from: ..
+twinfile: 2
+kind: scenario
+id: bad-ref
+name: Bad Ref
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/event/arena-game-day:1.0.0
+args:
+  warningAt: not-included.halftime
+use:
+  runner: npm:@twinfile/runner-hydraulic@^0

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/patch/twin-message.schema.json",
+  "title": "TwinMessageV1",
+  "description": "Envelope for host patch runtimes moving payloads between module ports (validation only in core).",
+  "type": "object",
+  "required": ["twinfile", "kind", "v", "wire", "payload"],
+  "properties": {
+    "twinfile": { "const": 1 },
+    "kind": { "const": "message" },
+    "v": { "const": 1 },
+    "wire": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Wire type from conf/patch-module-types.yaml (e.g. place:merged, twin:metrics)."
+    },
+    "at": { "type": "string", "format": "date-time" },
+    "seq": { "type": "integer", "minimum": 0 },
+    "from": { "$ref": "#/$defs/portRef" },
+    "to": { "$ref": "#/$defs/portRef" },
+    "payload": { "type": "object" },
+    "ext": { "type": "object" }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "portRef": {
+      "type": "object",
+      "required": ["module", "port"],
+      "properties": {
+        "module": { "type": "string", "minLength": 1 },
+        "port": { "type": "string", "minLength": 1 }
+      },
+      "additionalProperties": false
+    }
+  }
+}

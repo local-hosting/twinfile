@@ -1,0 +1,15 @@
+layout_index:
+  version: 1
+  regions:
+    - id: central
+      title: Central plaza
+      granularity: zone
+      space_ids: [al-wasl-plaza]
+      detail_layers: [place/spaces.yaml]
+    - id: arrival
+      title: Metro arrival
+      space_ids: [metro-arrival]
+      children:
+        - id: arrival-detail
+          granularity: room
+          space_ids: [metro-arrival]

@@ -1,0 +1,11 @@
+schedules:
+  - id: produce-delivery
+    name: Produce delivery
+    when: Mo,We,Fr 06:00-06:45
+    uses:
+      opening: door-back
+      space: stockroom
+    variance:
+      start: PT15M
+  - id: cleaning
+    when: Mo-Su 21:00-22:00; Sa 07:00-08:00,13:00-13:30

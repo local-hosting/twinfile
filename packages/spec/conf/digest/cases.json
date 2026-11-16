@@ -1,0 +1,23 @@
+{
+  "cases": [
+    { "value": { "title": "café" }, "expectSameAsSelf": true },
+    { "value": { "n": 1.0 }, "expectSameAsSelf": true },
+    { "value": { "z": "日本語" }, "expectSameAsSelf": true },
+    {
+      "chain": { "parent": null, "content": "sha256:aa", "kind": "place", "ref": "place/place.yaml" },
+      "expectChainStable": true
+    },
+    {
+      "chain": { "parent": "sha256:parent", "content": "sha256:bb", "kind": "event", "ref": "twinfile/arena-game-day:1" },
+      "expectChainStable": true
+    },
+    {
+      "bundle": {
+        "meta": { "name": "arena", "kind": "place", "version": "1.0.0" },
+        "place": { "spaces": [{ "id": "main" }] },
+        "layers": ["sha256:111", "sha256:222"]
+      },
+      "expectBundleStable": true
+    }
+  ]
+}

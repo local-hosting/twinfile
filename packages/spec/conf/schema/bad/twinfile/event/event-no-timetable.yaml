@@ -1,0 +1,11 @@
+twinfile: 1
+kind: event
+id: peak
+name: Peak
+version: 1.0.0
+stability: stable
+layers: []
+expects:
+  gate:
+    kind: opening
+    min: 1

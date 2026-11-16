@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/run.schema.json",
+  "type": "object",
+  "required": ["t", "type"],
+  "properties": {
+    "t": { "type": "number" },
+    "type": { "enum": ["state", "phase", "metric"] },
+    "patch": { "type": "object" },
+    "mark": { "type": "string" },
+    "id": { "type": "string" },
+    "value": {},
+    "unit": { "type": "string" }
+  },
+  "additionalProperties": true
+}

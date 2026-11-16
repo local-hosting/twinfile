@@ -1,0 +1,22 @@
+twinfile: 1
+kind: situation
+id: dam-release
+name: Dam Release
+version: 1.0.0
+stability: stable
+layers: []
+phases:
+  - notice
+  - release
+expects:
+  water-launch:
+    kind: marker
+    min: 1
+  gauge:
+    kind: gauge
+    min: 1
+args:
+  releaseAt:
+    type: time
+  threshold:
+    type: number

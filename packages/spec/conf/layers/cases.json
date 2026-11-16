@@ -1,0 +1,12 @@
+{
+  "cases": [
+    { "id": "place-only", "kinds": ["place"], "minLayers": 1 },
+    { "id": "event-plan", "kinds": ["place", "event", "binding"], "minLayers": 3 },
+    { "id": "situation", "kinds": ["place", "situation"], "minLayers": 2 },
+    { "id": "scenario-patch", "kinds": ["place", "event", "binding", "situation", "patch"], "minLayers": 5 },
+    { "id": "two-events", "kinds": ["place", "event", "binding", "event", "binding"], "minLayers": 5 },
+    { "id": "fork-inherits", "kinds": ["scenario", "patch"], "minLayers": 2 },
+    { "id": "shared-prefix", "note": "equal chain digests when prefix matches", "minLayers": 2 },
+    { "id": "timetable-args", "note": "args resolve from event marks", "minLayers": 1 }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "twinfile": 1,
+  "kind": "message",
+  "v": 1,
+  "wire": "place:building",
+  "at": "2026-11-10T18:00:00Z",
+  "from": { "module": "concourse-scope", "port": "scoped" },
+  "to": { "module": "map-concourse", "port": "building" },
+  "payload": { "spaces": [] }
+}

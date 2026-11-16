@@ -1,0 +1,7 @@
+twinfile: 1
+kind: place
+name: Bad_ID
+version: 1.0.0
+stability: example
+layers:
+  - place/place.yaml

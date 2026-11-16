@@ -1,0 +1,11 @@
+openings:
+  - id: gate-1
+    kind: gate
+    connects:
+      - concourse-lower
+      - bowl
+    width_m: 3
+    state: open
+    roles:
+      - exit
+      - gate

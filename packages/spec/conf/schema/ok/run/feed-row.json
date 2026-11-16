@@ -1,0 +1,9 @@
+{
+  "device_id": "sonde-swim-area",
+  "observed_property": "turbidity",
+  "value": 42.5,
+  "unit": "NTU",
+  "observed_at": "2026-06-12T09:10:00-04:00",
+  "available_at": "2026-06-12T10:00:00-04:00",
+  "quality": "ok"
+}

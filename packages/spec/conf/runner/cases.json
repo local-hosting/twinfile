@@ -1,0 +1,25 @@
+{
+  "cases": [
+    {
+      "id": "payload-shape",
+      "stdin": {
+        "bundle": { "digest": "sha256:abc", "place": {} },
+        "layers": [],
+        "scenario": { "name": "test", "args": {}, "metrics": [] },
+        "plans": {},
+        "seed": 1
+      },
+      "expectKeys": ["bundle", "scenario", "seed"]
+    },
+    {
+      "id": "record-line",
+      "stdoutLine": { "t": 0, "type": "phase", "mark": "warning" },
+      "expectTypes": ["phase", "state", "metric"]
+    },
+    {
+      "id": "metric-record",
+      "stdoutLine": { "t": 10, "type": "metric", "id": "clearance_time_s", "value": 120, "unit": "s" },
+      "expectTypes": ["metric"]
+    }
+  ]
+}
