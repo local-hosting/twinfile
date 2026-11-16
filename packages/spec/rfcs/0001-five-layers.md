@@ -5,7 +5,7 @@ Created: 2026-11-04
 
 ## Summary
 
-Twinfile 1.0 defines four **unit kinds** (`place`, `event`, `situation`, `scenario`) and place-local **plans**, composed in a fixed **layer order** like Docker images.
+Twinfile 1.0 defines four **unit kinds** (`place`, `event`, `event`, `scenario`) and place-local **plans**, composed in a fixed **layer order** like Docker images.
 
 ## Motivation
 
@@ -14,7 +14,7 @@ Older single-file venue layouts conflate static geometry with operational scenar
 ## Specification
 
 - Manifest field `twinfile: 1`; IDs `^[a-z0-9][a-z0-9-]{0,62}$`.
-- **Layer order:** **place** → each included event (event layers + plan role layer) → each situation → scenario patches → resolved args.
+- **Layer order:** **place** → each included event (event layers + plan role layer) → each event → scenario patches → resolved args.
 - **Merge:** RFC 7396 on objects; arrays of `{ id }` merge by id; other arrays replace.
 - **Contract errors:** `E_NO_PLAN`, `E_ROLE_MISSING`, `E_ROLE_KIND`, `E_ROLE_REF`, `E_ROLE_MIN`, `E_TIMETABLE_REF`.
 - **Digests:** layer content SHA-256 (JCS), chain digest, `Place.digest` over `{ meta, place, layer chains }`.

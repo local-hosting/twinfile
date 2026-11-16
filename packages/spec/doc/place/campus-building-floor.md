@@ -105,7 +105,7 @@ steps:
 2. **Site first** — anchor building space id, outdoor/covered zones, `levels` if more than one slice matters on the map.
 3. **`twin init place parts/<name> --geotype …`** for each building, then `twin fmt --upgrade=2 --recursive`.
 4. **Copy** — append `copy: ./parts/<name>` with `into: <anchor>` after the patch that declares the anchor. Floors: the building appends `copy: ./floors/<floor>` with a `prefix:`.
-5. **Plans** — map situation roles to ids at the **lowest tier** needed for the story (zone for weather; gate for surge).
+5. **Plans** — map event roles to ids at the **lowest tier** needed for the story (zone for weather; gate for surge).
 6. **`twin build` / `twin check --strict`** — `no space "<id>" to copy into` means the anchor is missing or typo’d.
 
 ## Pattern C — single building (`copy:`)
@@ -128,7 +128,7 @@ One `copy: ./parts/<name>` with `into:` when the interior is large or reused. Sm
 
 Provenance refs are `copy/<into or name>/…` in the build layer list (`twin layers`).
 
-**Plans and roles:** bind situation roles to **merged** ids in `plan:` items. Scenario tests may target site-tier ids only (weather on zones) or prefixed room ids (surge at gates) — pick the tier the story needs ([layout-navigation](layout-navigation.md)).
+**Plans and roles:** bind event roles to **merged** ids in `plan:` items. Scenario tests may target site-tier ids only (weather on zones) or prefixed room ids (surge at gates) — pick the tier the story needs ([layout-navigation](layout-navigation.md)).
 
 ## Host tools (map, patch UI, modules)
 

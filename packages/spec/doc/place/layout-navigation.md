@@ -4,7 +4,7 @@ How to author and **read** a place so humans and agents get the **whole site in 
 
 **Scope:** Twinfile supplies the merged spatial graph and optional **visit moments** (`visits[]`). **Runtime movement and user-specific paths are out of scope** — consumers use `spaces`, `openings`, `routes`, role tags, and their own planners.
 
-Normative place layer shape: [Place layers](place.md). Operational roles: [Situation roles](../kinds/situation-roles.md). Vocabulary: [Visit moments](../glossary.md#visit-moments-visits).
+Normative place layer shape: [Place layers](place.md). Operational roles: [Event roles](../kinds/event-roles.md). Vocabulary: [Visit moments](../glossary.md#visit-moments-visits).
 
 ## Problem
 
@@ -30,7 +30,7 @@ Read in this order before opening every space row:
 | 5 | `place/levels.yaml` | **Floor / airside** axis for indoor_stack and multi-level sites |
 | 6 | `place/spaces*.yaml` | Start with the **first** spaces layer (usually site/zone grain) |
 | 7 | `place/openings.yaml`, `place/routes.yaml` | Connectivity between regions and into interiors |
-| 8 | `bindings/*.yaml` | Which space ids matter for each situation |
+| 8 | `bindings/*.yaml` | Which space ids matter for each event |
 
 Built built `Place` (after `twin build`) is the single merged truth for tools; the list above is for **authoring and discovery**.
 
@@ -117,7 +117,7 @@ Suggested sections:
 3. **Region table** — region name → primary space ids → exposure → layer file.
 4. **Floor table** — `level` id → name → which spaces use it.
 5. **Drill-down index** — “Terminal A detail → `place/spaces-terminal-a.yaml`”.
-6. **Situation pins** — which roles/plans touch which regions.
+6. **Event pins** — which roles/plans touch which regions.
 
 Agents should read this **before** scanning full `spaces.yaml`.
 
@@ -138,7 +138,7 @@ For **campus** sites, keep **`visits`** at zone/outdoor program grain; add room 
 - [ ] Author **`levels.yaml`** when floors or airside/landside splits matter.
 - [ ] Split **`spaces`** layers coarse → fine; use consistent id prefixes.
 - [ ] Wire **`openings`** / **`routes`** at the same tier you connect regions (then refine).
-- [ ] Keep **situation plans** at the **lowest id tier** you need for that scenario (gate-level for surge; zone-level for weather).
+- [ ] Keep **event plans** at the **lowest id tier** you need for that scenario (gate-level for surge; zone-level for weather).
 
 ## Topology taxonomy
 

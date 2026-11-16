@@ -26,7 +26,7 @@ The **ref string** is flat (`twinfile/<name>:<tag>`). **Kind** is always manifes
 | `place` (nested stage, unpublished) | `{site}-{part}` | `arena-concourse` (`places/arena/parts/concourse`) |
 | `base` | `base-{archetype}` | `base-campus` |
 | `mixin` | `mixin-{topic}` | `mixin-assets` |
-| `situation` | shared fiction slug | `severe-weather` |
+| `event` | shared fiction slug | `severe-weather` |
 | `event` | `{site}-{story}` | `arena-game-day` |
 | `scenario` | `{site}-{question}` | `arena-flood-shelter-standup` |
 

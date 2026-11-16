@@ -4,9 +4,9 @@ Retail **place** twin (`twinfile/shop:0.2.0`) pinned on the **Starbucks at 1912 
 
 ## Live controls (preferred)
 
-After `twin build`, **`Place.meta.placeType.controls`** lists programme buttons wired to **`signal:trigger`** (`passenger-queue`, `severe-weather`, `transit-disruption`). Hosts and workbench publish **`twin:situation`** / trigger pulses — same situations as in the simulator package README, not separate shop child units.
+After `twin build`, **`Place.meta.placeType.controls`** lists programme buttons wired to **`signal:trigger`** (`passenger-queue`, `severe-weather`, `transit-disruption`). Hosts and workbench publish **`twin:event`** / trigger pulses — same events as in the simulator package README, not separate shop child units.
 
-See [patch graph](../../../../packages/spec/doc/pack/patch.md#situation-pulses-twinsituation).
+See [patch graph](../../../../packages/spec/doc/pack/patch.md#event-pulses-twinevent).
 
 ## Offline run (CI / MCP)
 

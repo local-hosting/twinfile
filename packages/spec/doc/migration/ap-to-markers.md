@@ -6,7 +6,7 @@ Twinfile 1.0 draft renames the place collection to avoid confusion with Wi‑Fi 
 | --- | --- |
 | `place/access_points.yaml` | `place/markers.yaml` |
 | YAML key `access_points:` | `markers:` |
-| Situation `expects.*.kind: access-point` | `kind: marker` |
+| Event `expects.*.kind: access-point` | `kind: marker` |
 | Schedule `uses.access_point` | `uses.marker` |
 | Schema `access-points.schema.json` | `markers.schema.json` |
 
