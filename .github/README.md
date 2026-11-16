@@ -20,4 +20,4 @@ Per-package `.github/` under `packages/*` was removed — those workflows target
 | `TF_EXAMPLES_ROOT` | Same as `TF_PLACE_CATALOG` (legacy name) |
 | `TF_SIMULATOR_ROOT` | `packages/simulator` |
 
-See [`catalog/manifest.yaml`](../catalog/manifest.yaml) and [glossary — repository layout](../packages/spec/doc/glossary.md#repository-layout-prose).
+See [`catalog-layout.ts`](../packages/core/src/paths/catalog-layout.ts) and [glossary — repository layout](../packages/spec/doc/glossary.md#repository-layout-prose).

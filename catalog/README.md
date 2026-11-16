@@ -15,8 +15,6 @@ Each twin type is one tree: **`catalog/<type>/`** = `@doppler-group/twinfile-<ty
 
 **Env:** `TF_TWINFILE_ROOT`; `TF_PLACE_CATALOG` (or legacy `TF_EXAMPLES_ROOT`) → `catalog/place/examples`; `TF_SIMULATOR_ROOT` → `packages/simulator`; `TF_CHARACTER_CATALOGS_ROOT` → `catalog/character/libs` (optional).
 
-Hub manifest: [`manifest.yaml`](manifest.yaml).
-
 ## Simulator (not a catalog type)
 
 **`@doppler-group/twinfile-simulator`** lives at **`packages/simulator/`**. It **operates on** the twin catalogs (built **place**, story **runs**, refs) via `TF_EXAMPLES_ROOT` / `resolveTypeExamplesRoot` — it does **not** live under `catalog/`. Situation and timetable modules use **`catalogKind: situation` | `event`** in the simulator registry, not typed twin heads.
