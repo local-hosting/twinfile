@@ -1,12 +1,12 @@
 import { readdirSync, statSync } from 'node:fs';
-import { basename, join, resolve } from 'node:path';
+import { join, resolve } from 'node:path';
 
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 import { isRecord } from '../doc/is-record.js';
 
 import { isAllowedTwinfileRootEntry } from './twinfile-allowlist.js';
-import { findTwinfileYamlPath, listTwinfileYamlPaths } from './twinfile-locator.js';
+import { findTwinfileYamlPath, twinHeadFileName } from './twinfile-locator.js';
 import { checkCatalogParent } from '../check/catalog-parent.js';
 import {
   getDefaultValidator,
@@ -28,10 +28,6 @@ export type LoadedTwinfile = {
   twinfilePath: string;
   twinfile: Record<string, unknown>;
 };
-
-function findTwinfilePath(root: string): string | undefined {
-  return findTwinfileYamlPath(root);
-}
 
 function collectUnknownRootEntries(root: string): TwinError[] {
   const errors: TwinError[] = [];
@@ -86,13 +82,13 @@ function validateInlinePatches(
       const ref = item.copy.trim();
       if (!ref.startsWith('./') && !ref.startsWith('../')) return [];
       const candidates = [ref, ...copyRefAlternates(ref)];
-      const found = candidates.some((candidate) => findTwinfilePath(resolve(root, candidate)));
+      const found = candidates.some((candidate) => findTwinfileYamlPath(resolve(root, candidate)));
       return found
         ? []
         : [
             {
               code: 'E_MISSING_FILE' as const,
-              message: `steps[${index}] copy: no Twinfile.yaml at ${ref}`,
+              message: `steps[${index}] copy: no twin head at ${ref}`,
               file: twinfilePath,
             },
           ];
@@ -121,23 +117,12 @@ export function loadTwinfile(unitRoot: string): Result<LoadedTwinfile> {
   const unknown = collectUnknownRootEntries(root);
   if (unknown.length > 0) return err(unknown);
 
-  const twinfilePaths = listTwinfileYamlPaths(root);
-  if (twinfilePaths.length > 1) {
-    return err([
-      {
-        code: 'E_CATALOG',
-        message: `Multiple Twinfile.yaml names in one directory: ${twinfilePaths.map((p) => basename(p)).join(', ')}`,
-        file: root,
-      },
-    ]);
-  }
-
-  const twinfilePath = findTwinfilePath(root);
+  const twinfilePath = findTwinfileYamlPath(root);
   if (!twinfilePath) {
     return err([
       {
         code: 'E_NO_MANIFEST',
-        message: 'Missing Twinfile.yaml',
+        message: `Missing ${twinHeadFileName(root)}`,
         file: root,
       },
     ]);
@@ -174,8 +159,8 @@ export function loadTwinfile(unitRoot: string): Result<LoadedTwinfile> {
         code: 'E_SCHEMA',
         message:
           declared === 'scenario'
-            ? 'Runs use story scene run.yaml — Twinfile.yaml is always a place'
-            : `Twinfile.yaml is always a place (got kind "${declared}"); use a story scene run.yaml or the event catalog`,
+            ? 'Runs use story scene run.yaml — this loader only reads places'
+            : `Expected a place head (got kind "${declared}"); use a story scene run.yaml or the event catalog`,
         file: twinfilePath,
       },
     ]);

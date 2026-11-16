@@ -6,9 +6,10 @@ import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 
 import { formatTwinfilePath, twinfileYamlPaths } from '../src/cli/fmt-twinfiles.js';
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 describe('fmt-manifests', () => {
-  it('formats a manifest file path and lifts plans into layers', () => {
+  it('formats a manifest file path and orders bindings after place layers', () => {
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-'));
     const path = join(dir, 'place-arena.yaml');
     writeFileSync(
@@ -18,9 +19,8 @@ kind: place
 id: arena
 name: Arena
 version: 1.0.0
-plans:
-  - plans/severe-weather.yaml
 layers:
+  - bindings/severe-weather.yaml
   - place/spaces.yaml
 `,
     );
@@ -31,14 +31,14 @@ layers:
     rmSync(dir, { recursive: true });
   });
 
-  it('--upgrade=2 inlines layers, plans, mixins, and buildings into patches', () => {
+  it('--upgrade=2 inlines layers, bindings, mixins, and buildings into patches', () => {
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-upgrade-'));
     mkdirSync(join(dir, 'place'));
-    mkdirSync(join(dir, 'plans', 'site'), { recursive: true });
+    mkdirSync(join(dir, 'bindings', 'site'), { recursive: true });
     writeFileSync(join(dir, 'place', 'place.yaml'), 'place:\n  name: Site\n');
     writeFileSync(join(dir, 'place', 'spaces.yaml'), 'spaces:\n  - id: hall\n');
-    writeFileSync(join(dir, 'plans', 'site', 'storm.yaml'), 'for: storm\n');
-    const path = join(dir, 'Twinfile.yaml');
+    writeFileSync(join(dir, 'bindings', 'site', 'storm.yaml'), 'for: storm\n');
+    const path = twinHeadPath(dir);
     writeFileSync(
       path,
       `twinfile: 1
@@ -54,7 +54,7 @@ layers:
   - place/place.yaml
   - path: place/spaces.yaml
     mode: replace
-  - plans/site/storm.yaml
+  - bindings/site/storm.yaml
 `,
     );
     expect(formatTwinfilePath(path, { upgrade: 2 })).toBe(0);
@@ -71,14 +71,14 @@ layers:
       { copy: './buildings/hall', into: 'hall' },
     ]);
     expect(existsSync(join(dir, 'place'))).toBe(false);
-    expect(existsSync(join(dir, 'plans'))).toBe(false);
+    expect(existsSync(join(dir, 'bindings'))).toBe(false);
     expect(formatTwinfilePath(path, { check: true })).toBe(0);
     rmSync(dir, { recursive: true });
   });
 
   it('--upgrade=2 converts scenario include to typed copy steps', () => {
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-scenario-'));
-    const path = join(dir, 'Twinfile.yaml');
+    const path = twinHeadPath(dir);
     writeFileSync(
       path,
       `from: ..
@@ -106,7 +106,7 @@ use:
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-tree-'));
     mkdirSync(join(dir, 'nested'), { recursive: true });
     writeFileSync(
-      join(dir, 'nested', 'Twinfile.yaml'),
+      twinHeadPath(join(dir, 'nested')),
       'twinfile: 1\nkind: place\nname: x\nversion: 0.1.0\nlayers: []\n',
     );
     const found = twinfileYamlPaths(dir, true);

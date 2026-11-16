@@ -5,6 +5,7 @@ import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 import type { Result } from '../types/twin-error.js';
 import { ok } from '../types/twin-error.js';
+import { findTwinfileYamlPath } from '../load/twinfile-locator.js';
 import { normalizeManifestStack, orderPlaceTwinfileKeys } from './format-twinfile.js';
 import { upgradeTwinfileToPatches, type UpgradedManifest } from './upgrade-twinfile.js';
 
@@ -24,11 +25,8 @@ export function twinfileYamlPaths(root: string, recursive: boolean): string[] {
   const out: string[] = [];
 
   if (!recursive) {
-    for (const name of ['Place.yaml', 'place.yaml', 'Twinfile.yaml', 'twinfile.yaml']) {
-      const path = join(abs, name);
-      if (existsSync(path)) out.push(path);
-    }
-    return out;
+    const head = findTwinfileYamlPath(abs);
+    return head ? [head] : [];
   }
 
   walkDir(abs, out);

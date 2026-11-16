@@ -1,6 +1,6 @@
 import type { TwinKind } from './twin-kind.js';
 
-/** Fields every published twin head shares (`Place.yaml`, `Resource.yaml`, …). */
+/** Fields every published twin head (`<unit>/<unit>.twin.yaml`) shares. */
 export type TwinHead = Record<string, unknown> & {
   readonly kind: string;
   readonly id: string;

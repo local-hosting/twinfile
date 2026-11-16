@@ -8,23 +8,16 @@ import {
 } from '../src/load/twinfile-paths.js';
 
 describe('manifest stack paths', () => {
-  it('merges legacy plans into layers list', () => {
+  it('reads bindings from layers and orders them after place layers', () => {
     const twinfile = {
-      layers: ['place/place.yaml', 'place/spaces.yaml'],
-      plans: ['plans/severe-weather.yaml'],
+      layers: ['place/place.yaml', 'bindings/severe-weather.yaml', 'place/spaces.yaml'],
     };
-    expect(twinfileBindingPaths(twinfile)).toEqual(['plans/severe-weather.yaml']);
-    expect(twinfileStackPaths(twinfile)).toEqual([
+    expect(twinfileBindingPaths(twinfile)).toEqual(['bindings/severe-weather.yaml']);
+    expect(twinfileStackPaths(twinfile)).toEqual(twinfile.layers);
+    expect(normalizeManifestStack(twinfile).layers).toEqual([
       'place/place.yaml',
       'place/spaces.yaml',
-      'plans/severe-weather.yaml',
-    ]);
-    const normalized = normalizeManifestStack(twinfile);
-    expect(normalized.plans).toBeUndefined();
-    expect(normalized.layers).toEqual([
-      'place/place.yaml',
-      'place/spaces.yaml',
-      'plans/severe-weather.yaml',
+      'bindings/severe-weather.yaml',
     ]);
   });
 

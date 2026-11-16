@@ -4,6 +4,7 @@ import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 import { findTwinHead, parseTwinHead } from '../src/twinfile/twin-head.js';
 import { createHeadTwinTypeModule } from '../src/twinfile/twin-type-module.js';
 import { createTwinTypeRegistry } from '../src/twinfile/twin-type-registry.js';
@@ -17,14 +18,14 @@ links:
     href: twinfile/place/shop:0.2.0
 `;
 
-function unitDir(files: Record<string, string>): string {
+function unitDir(head?: string): string {
   const dir = mkdtempSync(join(tmpdir(), 'twin-type-'));
-  for (const [name, body] of Object.entries(files)) writeFileSync(join(dir, name), body);
+  if (head !== undefined) writeFileSync(twinHeadPath(dir), head);
   return dir;
 }
 
 describe('parseTwinHead', () => {
-  const opts = { headFile: 'Resource.yaml', kinds: ['resource'] };
+  const opts = { headFile: 'kiosk.twin.yaml', kinds: ['resource'] };
 
   it('accepts the shared head fields', () => {
     const head = parseTwinHead({ kind: 'resource', id: 'kiosk', name: 'Kiosk', links: [] }, opts);
@@ -49,18 +50,19 @@ describe('parseTwinHead', () => {
 });
 
 describe('findTwinHead', () => {
-  it('finds typed and legacy place heads', () => {
-    expect(findTwinHead(unitDir({ 'Resource.yaml': RESOURCE_HEAD }))?.kind).toBe('resource');
-    expect(findTwinHead(unitDir({ 'Twinfile.yaml': 'kind: place\n' }))?.kind).toBe('place');
-    expect(findTwinHead(unitDir({}))).toBeUndefined();
+  it('types the folder-named head by its kind', () => {
+    expect(findTwinHead(unitDir(RESOURCE_HEAD))?.kind).toBe('resource');
+    expect(findTwinHead(unitDir('kind: mixin\n'))?.kind).toBe('place');
+    expect(findTwinHead(unitDir('kind: unknown\n'))).toBeUndefined();
+    expect(findTwinHead(unitDir())).toBeUndefined();
   });
 });
 
 describe('createHeadTwinTypeModule', () => {
-  const module = createHeadTwinTypeModule({ kind: 'resource', headFile: 'Resource.yaml' });
+  const module = createHeadTwinTypeModule({ kind: 'resource' });
 
   it('builds from the head file and round-trips through JSON', async () => {
-    const dir = unitDir({ 'Resource.yaml': RESOURCE_HEAD });
+    const dir = unitDir(RESOURCE_HEAD);
     const built = await module.build(dir, {});
     expect(built.ok).toBe(true);
     if (!built.ok) return;
@@ -70,14 +72,13 @@ describe('createHeadTwinTypeModule', () => {
   });
 
   it('fails fast when the head file is missing', async () => {
-    const built = await module.build(unitDir({}), {});
+    const built = await module.build(unitDir(), {});
     expect(!built.ok && built.errors[0]?.code).toBe('E_MISSING_FILE');
   });
 
   it('normalizes legacy fields before the shared check', () => {
     const story = createHeadTwinTypeModule({
       kind: 'story',
-      headFile: 'Story.yaml',
       normalize: (raw) => ({ ...raw, id: 'normalized' }),
     });
     const head = story.parse({ kind: 'story' });
@@ -86,7 +87,7 @@ describe('createHeadTwinTypeModule', () => {
 });
 
 describe('createTwinTypeRegistry', () => {
-  const resource = createHeadTwinTypeModule({ kind: 'resource', headFile: 'Resource.yaml' });
+  const resource = createHeadTwinTypeModule({ kind: 'resource' });
 
   it('looks modules up by kind', () => {
     const registry = createTwinTypeRegistry([resource]);

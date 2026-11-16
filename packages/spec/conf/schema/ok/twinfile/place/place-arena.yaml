@@ -7,4 +7,4 @@ stability: example
 layers:
   - place/place.yaml
   - place/spaces.yaml
-  - plans/severe-weather.yaml
+  - bindings/severe-weather.yaml

@@ -6,6 +6,9 @@ export type PlaceRow = Record<string, unknown>;
 
 const GEOTYPE_REGISTRY = '@doppler-group/geotypes@0.1.2';
 
+/** Unit head suffix; `writeImportedFiles` renames the head to `<dir>.twin.yaml`. */
+export const TWIN_HEAD_SUFFIX = '.twin.yaml';
+
 export function twinId(raw: string): string {
   const slug = raw
     .toLowerCase()
@@ -54,7 +57,7 @@ export function packPlaceUnit(name: string, geotype: string, docs: PlaceRow[]): 
     return `place/${key === 'place' ? 'place' : key}.yaml`;
   });
   const files: Record<string, string> = {
-    'Twinfile.yaml': stringify({
+    [`${name}${TWIN_HEAD_SUFFIX}`]: stringify({
       twinfile: 1,
       kind: 'place',
       id: name,

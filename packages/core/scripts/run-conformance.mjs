@@ -32,6 +32,9 @@ const {
   writeImportedFiles,
   loadTwinfile,
   assertCrosswalkPlacement,
+  TWIN_HEAD_SUFFIX,
+  twinHeadFileName,
+  twinHeadPath,
 } = await import(join(root, 'dist/index.js'));
 const { composePlace } = await import('@doppler-group/twinfile-place');
 
@@ -305,9 +308,9 @@ function composeCase(examplesRoot, c, withList) {
     ...(withList.length ? { with: withList.map((name) => `twinfile/${name}:0.1.0`) } : {}),
     layers: Object.keys(files),
   };
-  writeJsonTree(dir, { 'Twinfile.yaml': manifest, ...files });
+  writeJsonTree(dir, { [twinHeadFileName(dir)]: manifest, ...files });
   return composePlace(
-    { root: dir, twinfilePath: join(dir, 'Twinfile.yaml'), twinfile: manifest },
+    { root: dir, twinfilePath: twinHeadPath(dir), twinfile: manifest },
     { examplesRoot },
   );
 }
@@ -351,7 +354,7 @@ function runComposeVector(vector) {
   try {
     for (const [name, mixin] of Object.entries(data.mixins)) {
       writeJsonTree(join(examplesRoot, 'mixins', name), {
-        'Twinfile.yaml': { ...unitHead('mixin', name), ...(mixin.manifest ?? mixin.twinfile ?? {}) },
+        [twinHeadFileName(name)]: { ...unitHead('mixin', name), ...(mixin.manifest ?? mixin.twinfile ?? {}) },
         ...mixin.files,
       });
     }
@@ -450,7 +453,8 @@ function runMapVector(vector) {
       failVector(vector.id, `${c.id}: ${error instanceof Error ? error.message : String(error)}`);
       return;
     }
-    if (c.manifestIncludes && !String(imported.files['Twinfile.yaml'] ?? '').includes(c.manifestIncludes)) {
+    const importedHead = Object.entries(imported.files).find(([rel]) => rel.endsWith(TWIN_HEAD_SUFFIX))?.[1] ?? '';
+    if (c.manifestIncludes && !importedHead.includes(c.manifestIncludes)) {
       failVector(vector.id, `${c.id}: manifest missing ${c.manifestIncludes}`);
       return;
     }

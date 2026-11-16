@@ -80,19 +80,7 @@ function situationExpectsFromBuiltin(situation) {
   return expects;
 }
 
-function situationManifestPath(situation) {
-  for (const root of [simulatorRoot, examplesRoot]) {
-    const dir = join(root, 'situations', situation);
-    for (const name of ['Twinfile.yaml', 'twinfile.yaml']) {
-      const path = join(dir, name);
-      if (statSync(path, { throwIfNoEntry: false })?.isFile()) return path;
-    }
-  }
-  return undefined;
-}
-
 function situationCatalogPresent(situation) {
-  if (situationManifestPath(situation)) return true;
   if (situationExpectsFromBuiltin(situation)) return true;
   const built = join(simulatorRoot, 'situations', situation, '.twin');
   if (statSync(built, { throwIfNoEntry: false })?.isDirectory()) return true;
@@ -108,12 +96,6 @@ function scanSituationDirs(root, labelPrefix) {
   const sitDir = join(root, 'situations');
   if (!statSync(sitDir, { throwIfNoEntry: false })?.isDirectory()) return;
   for (const name of readdirSync(sitDir)) {
-    const twinfilePath = situationManifestPath(name);
-    if (twinfilePath) {
-      const doc = parseYaml(readFileSync(twinfilePath, 'utf8'));
-      scanExpects(doc, `${labelPrefix}situations/${name}`);
-      continue;
-    }
     const builtinExpects = situationExpectsFromBuiltin(name);
     if (builtinExpects) scanExpects({ expects: builtinExpects }, `${labelPrefix}builtin/${name}`);
   }
@@ -121,23 +103,6 @@ function scanSituationDirs(root, labelPrefix) {
 
 scanSituationDirs(simulatorRoot, 'simulator/');
 scanSituationDirs(examplesRoot, 'examples/');
-
-function walkEventTwinfiles(dir) {
-  for (const name of readdirSync(dir)) {
-    if (name === 'node_modules' || name === '.git') continue;
-    const p = join(dir, name);
-    if (!statSync(p, { throwIfNoEntry: false })?.isDirectory()) continue;
-    const twinfile = join(p, 'Twinfile.yaml');
-    if (statSync(twinfile, { throwIfNoEntry: false })?.isFile()) {
-      const doc = parseYaml(readFileSync(twinfile, 'utf8'));
-      if (doc?.kind === 'event') scanExpects(doc, p.slice(examplesRoot.length + 1));
-    }
-    walkEventTwinfiles(p);
-  }
-}
-if (statSync(examplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
-  walkEventTwinfiles(examplesRoot);
-}
 
 const catalogPath = join(specRoot, 'conf', 'hazard-catalog.yaml');
 if (statSync(catalogPath, { throwIfNoEntry: false })?.isFile()) {

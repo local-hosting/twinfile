@@ -9,10 +9,11 @@ import { buildProcessorsResourceFromTwinfile } from '../src/patch/build-processo
 import { TWINFILE_PROCESSORS_RESOURCE_SCHEMA } from '../src/types/processors-resource.js';
 import { TWINFILE_PATCH_UI_SCHEMA } from '../src/types/processor-ui.js';
 import { testExamplesRoot } from './catalog-test-roots.js';
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 const arenaManifest = parseYaml(
   readFileSync(
-    join(testExamplesRoot(dirname(fileURLToPath(import.meta.url))), 'arena/Twinfile.yaml'),
+    twinHeadPath(join(testExamplesRoot(dirname(fileURLToPath(import.meta.url))), 'arena')),
     'utf8',
   ),
 ) as Record<string, unknown>;

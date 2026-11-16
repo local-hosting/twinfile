@@ -1,11 +1,7 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/catalog-layout.js';
-
-export const TWIN_EXAMPLE_TYPES = ['place', 'resource', 'character', 'story'] as const;
-
-export type TwinExampleType = (typeof TWIN_EXAMPLE_TYPES)[number];
+import { resolveTwinfileRoot, resolveTypeExamplesRoot, type TwinCatalogType } from '../paths/catalog-layout.js';
 
 function isUnitDir(dir: string): boolean {
   try {
@@ -15,7 +11,7 @@ function isUnitDir(dir: string): boolean {
   }
 }
 
-export function listExampleUnitIds(type: TwinExampleType, root?: string): string[] {
+export function listExampleUnitIds(type: TwinCatalogType, root?: string): string[] {
   const base = root ?? resolveTwinfileRoot();
   const examples = resolveTypeExamplesRoot(type, base);
   try {

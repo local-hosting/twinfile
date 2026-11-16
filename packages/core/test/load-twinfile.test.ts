@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile, validateTwinfileYamlPath, validatePlaceYamlPath } from '../src/load/load-twinfile.js';
 import { testExamplesRoot } from './catalog-test-roots.js';
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 const require = createRequire(import.meta.url);
 const specConf = join(dirname(require.resolve('@doppler-group/twinfile-spec/package.json')), 'conf');
@@ -46,7 +47,7 @@ describe('loadTwinfile', () => {
   it('loads a minimal place unit directory', () => {
     const root = mkdtempSync(join(tmpdir(), 'twinfile-unit-'));
     writeFileSync(
-      join(root, 'twinfile.yaml'),
+      twinHeadPath(root),
       `twinfile: 1
 kind: place
 id: demo
@@ -82,7 +83,7 @@ layers:
     }
   });
 
-  it('rejects scenario Twinfile.yaml (runs use scene run.yaml)', () => {
+  it('rejects a scenario head (runs use scene run.yaml)', () => {
     const result = loadTwinfile(
       resolve(examplesRoot, '../../../catalog/story/examples/shop-visit/scenes/shop-shelter-at-cap'),
     );
@@ -92,7 +93,7 @@ layers:
   it('rejects unknown top-level files', () => {
     const root = mkdtempSync(join(tmpdir(), 'twinfile-unit-'));
     writeFileSync(
-      join(root, 'twinfile.yaml'),
+      twinHeadPath(root),
       `twinfile: 1
 kind: place
 id: demo
@@ -139,7 +140,7 @@ layers:
   it('accepts twinfile 2 patches: alias (normalized to steps:)', () => {
     const root = mkdtempSync(join(tmpdir(), 'twinfile-patches-'));
     writeFileSync(
-      join(root, 'twinfile.yaml'),
+      twinHeadPath(root),
       `twinfile: 2
 kind: place
 id: demo
