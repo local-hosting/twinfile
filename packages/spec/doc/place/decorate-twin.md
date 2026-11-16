@@ -93,7 +93,7 @@ Paths: [`examples/`](../../../../catalog/place/examples/). Map-first pick: [Plac
 
 Common **natural hazard** labels map to these units in [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml) — see [Natural hazards](../kinds/natural-hazards.md).
 
-Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/plans/severe-weather.yaml) on expo). Resolve refs with **`TF_SIMULATOR_ROOT`** + [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
+Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/plans/severe-weather.yaml) on expo). Resolve refs with [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
 
 ### Decoration layer files (copy patterns)
 
@@ -150,7 +150,7 @@ Nothing is copied into the unit: improve a golden mixin and every place that pin
 
 ## CLI (decorate)
 
-From a **place unit** directory (with `TF_EXAMPLES_ROOT` pointing at `examples`):
+From a **place unit** directory:
 
 ```bash
 # Wire a shared situation to your tagged spaces/openings

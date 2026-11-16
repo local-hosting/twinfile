@@ -1,7 +1,6 @@
 import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { fileURLToPath } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
@@ -78,9 +77,6 @@ layers:
   });
 
   it('--upgrade=2 converts scenario include to typed copy steps', () => {
-    const examplesRoot = join(dirname(fileURLToPath(import.meta.url)), '../../../catalog/place/examples');
-    const prev = process.env.TF_EXAMPLES_ROOT;
-    process.env.TF_EXAMPLES_ROOT = examplesRoot;
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-scenario-'));
     const path = join(dir, 'Twinfile.yaml');
     writeFileSync(
@@ -104,7 +100,6 @@ use:
     expect(out.include).toBeUndefined();
     expect(out.steps).toEqual([{ copy: 'twinfile/situation/severe-weather:1.0.0' }]);
     rmSync(dir, { recursive: true });
-    process.env.TF_EXAMPLES_ROOT = prev;
   });
 
   it('finds manifests recursively under a tree', () => {

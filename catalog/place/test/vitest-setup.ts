@@ -3,14 +3,10 @@ import { fileURLToPath } from 'node:url';
 
 import { registerCatalogTwinfileResolver } from '@local-hosting/twinfile-core';
 
-import { testCatalogRoots } from './test-examples-root.js';
+import { testSimulatorRoot } from './test-examples-root.js';
 
-const testDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(testDir);
+const simulatorRoot = testSimulatorRoot(dirname(fileURLToPath(import.meta.url)));
 
 // Dynamic import: the simulator resolver lives outside this package and is test-only wiring.
 const { resolveCatalogTwinfileRef } = await import(resolve(simulatorRoot, 'src/ref/catalog-twinfile-resolve.js'));
 registerCatalogTwinfileResolver(resolveCatalogTwinfileRef);
-
-if (!process.env.TF_EXAMPLES_ROOT?.trim()) process.env.TF_EXAMPLES_ROOT = examplesRoot;
-if (!process.env.TF_SIMULATOR_ROOT?.trim()) process.env.TF_SIMULATOR_ROOT = simulatorRoot;

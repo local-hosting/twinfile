@@ -8,4 +8,4 @@ Analyst questions for example **runs** live here, not in `preset.yaml`.
 - **Schema:** `twinfile.mcp.run-test-prompts.v1`
 - **Keys:** preset manifest `id` (e.g. `shop-shelter-at-cap`)
 
-Simulator MCP tools `run_test_prompt` and `run_test_prompts` resolve this file when `TF_EXAMPLES_ROOT` points at `examples/`. `run_fork` may pass `test_prompt` explicitly, or use the catalog entry for the served run.
+Simulator MCP tools `run_test_prompt` and `run_test_prompts` resolve this file from the monorepo place catalog. `run_fork` may pass `test_prompt` explicitly, or use the catalog entry for the served run.

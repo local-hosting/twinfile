@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import { parse } from 'yaml';
 
 import { resolveExamplesRoot } from '../paths/resolve-examples-root.js';
-import { resolveTwinfileRoot } from '../paths/resolve-twinfile-root.js';
+import { resolveTwinfileRoot } from '../paths/catalog-layout.js';
 import { isRecord } from '../doc/is-record.js';
 
 export const MCP_RUN_TEST_PROMPTS_REL = 'mcp/run-test-prompts.yaml';

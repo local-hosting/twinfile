@@ -10,7 +10,7 @@ export type ResolvedExamplePlace = {
 };
 
 export type ResolveExamplePlaceOptions = {
-  /** Flat place catalog root (defaults to {@link defaultExamplesRoot}). */
+  /** Flat place catalog root (defaults to {@link resolvePlaceExamplesCatalogRoot}). */
   examplesRoot?: string;
   resolver?: RefResolver;
 };

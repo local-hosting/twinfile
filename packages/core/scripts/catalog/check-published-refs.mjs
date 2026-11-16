@@ -5,9 +5,9 @@ import { readFileSync, statSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot } from '../../dist/index.js';
 
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
 
 const refsPath = join(examplesRoot, 'published-refs.json');
 if (!statSync(refsPath, { throwIfNoEntry: false })?.isFile()) {
@@ -19,11 +19,6 @@ const before = JSON.parse(readFileSync(refsPath, 'utf8'));
 const scriptsDir = dirname(fileURLToPath(import.meta.url));
 const gen = spawnSync(process.execPath, [join(scriptsDir, 'record-published-refs.mjs')], {
   encoding: 'utf8',
-  env: {
-    ...process.env,
-    TF_EXAMPLES_ROOT: examplesRoot,
-    TF_SIMULATOR_ROOT: resolveSimulatorCatalogRoot(import.meta.url),
-  },
 });
 
 if (gen.status !== 0) {
