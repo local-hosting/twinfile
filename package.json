@@ -1,0 +1,33 @@
+{
+  "name": "@local-hosting/twinfile-workspace",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/local-hosting/twinfile.git"
+  },
+  "packageManager": "yarn@4.9.2",
+  "workspaces": [
+    "packages/*",
+    "catalog/*"
+  ],
+  "scripts": {
+    "workbench": "node packages/simulator/viewer/scripts/run-view.mjs",
+    "check": "yarn run check:twinfile",
+    "check:twinfile": "node packages/tooling/scripts/check-nested-yarn.mjs && node packages/tooling/scripts/check-workspace.mjs",
+    "sync:vendor-neutral-lib": "node packages/tooling/scripts/sync-vendor-neutral-lib.mjs",
+    "sync:ci-tooling": "node packages/tooling/scripts/sync-ci-tooling.mjs",
+    "refresh:scenario-expected": "node packages/tooling/scripts/refresh-scenario-expected.mjs",
+    "rename:scope": "node packages/tooling/scripts/rename-scope.mjs",
+    "sync:story-scenes": "node packages/tooling/scripts/sync-story-scenes.mjs",
+    "hygiene": "node packages/tooling/scripts/repo-hygiene.mjs"
+  },
+  "resolutions": {
+    "@local-hosting/twinfile": "workspace:packages/spec",
+    "@local-hosting/twinfile-bridge": "workspace:packages/bridge",
+    "@local-hosting/twinfile-core": "workspace:packages/core",
+    "@local-hosting/twinfile-simulator": "workspace:packages/simulator",
+    "@local-hosting/twinfile-cli": "workspace:packages/cli",
+    "@local-hosting/frameworks": "link:../frameworks/packages/frameworks",
+    "@local-hosting/geotypes": "portal:../geotypes"
+  }
+}

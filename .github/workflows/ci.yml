@@ -1,0 +1,29 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  twinfile:
+    runs-on: ubuntu-latest
+    env:
+      TF_TWINFILE_ROOT: ${{ github.workspace }}
+      TF_PLACE_CATALOG: ${{ github.workspace }}/catalog/place/examples
+      TF_EXAMPLES_ROOT: ${{ github.workspace }}/catalog/place/examples
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+
+      - run: corepack enable && corepack prepare yarn@4.9.2 --activate
+
+      - run: yarn install --no-immutable
+
+      - run: yarn run check:twinfile
