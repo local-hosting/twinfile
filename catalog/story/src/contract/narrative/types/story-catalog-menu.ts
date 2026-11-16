@@ -1,30 +1,30 @@
 /**
- * Org-published **user** catalog menu — Character + Story mounted on the org catalog.
+ * Project-published **user** catalog menu — Character + Story on the project locker.
  * Place mounts are optional (`places`) and are not part of user-specific planning menus.
  */
-export type SamCatalogCharacterRef = {
+export type StoryCatalogCharacterRef = {
   characterId: string;
   label: string;
   journeyIds: readonly string[];
 };
 
-export type SamCatalogEpisodeRef = {
+export type StoryCatalogEpisodeRef = {
   id: string;
   title: string;
   focalCharacterId: string;
   journeyId?: string;
 };
 
-export type SamCatalogPlaceRef = {
+export type StoryCatalogPlaceRef = {
   placeRef: string;
   title: string;
 };
 
 export type StoryCatalogMenuV1 = {
-  characters: readonly SamCatalogCharacterRef[];
-  episodes: readonly SamCatalogEpisodeRef[];
+  characters: readonly StoryCatalogCharacterRef[];
+  episodes: readonly StoryCatalogEpisodeRef[];
   /** Host-only place plane — omit for story.plan / user NL extraction. */
-  places?: readonly SamCatalogPlaceRef[];
+  places?: readonly StoryCatalogPlaceRef[];
 };
 
 /** Resolved ids for one story run (before compile). Character spine is on the episode binding. */

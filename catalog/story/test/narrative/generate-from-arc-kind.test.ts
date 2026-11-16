@@ -4,7 +4,7 @@ import type { Journey } from '@local-hosting/twinfile-character/persona';
 import { compileStory } from '../../src/contract/narrative/contract/compile-story-narrative.js';
 import {
   buildStoryArcTemplateFromKind,
-  generateSamEpisodeFromArc,
+  generateStoryEpisodeFromArc,
 } from '../../src/contract/narrative/story-arc/generate-from-arc-kind.js';
 import { STORY_ARC_KINDS } from '../../src/contract/narrative/types/story-arc-kind.js';
 import { parseStory } from '../../src/contract/narrative/schemas/story-narrative.schema.js';
@@ -33,7 +33,7 @@ const commute = {
   ],
 } as Journey;
 
-describe('generateSamEpisodeFromArc', () => {
+describe('generateStoryEpisodeFromArc', () => {
   it('builds arc templates for all six Write Practice kinds', () => {
     for (const kind of STORY_ARC_KINDS) {
       const arc = buildStoryArcTemplateFromKind({ kind });
@@ -44,7 +44,7 @@ describe('generateSamEpisodeFromArc', () => {
 
   it('scaffolds scenes and compiles calendar for any arc kind', () => {
     for (const kind of ['man_in_a_hole', 'cinderella', 'icarus'] as const) {
-      const draft = generateSamEpisodeFromArc({
+      const draft = generateStoryEpisodeFromArc({
         kind,
         journey: commute,
         episodeId: 'story:episode:test',
