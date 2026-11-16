@@ -138,7 +138,7 @@ describe('place copy: nested building units (RFC 0009)', () => {
     rmSync(dir, { recursive: true });
   });
 
-  it('--upgrade=2 turns with: mixins into copies with the same place, axes, and plans', () => {
+  it('--upgrade=2 keeps the same place, axes, and plans', () => {
     const tmp = mkdtempSync(join(tmpdir(), 'twin-upgrade-'));
     const dir = join(tmp, 'shop');
     try {
@@ -151,7 +151,6 @@ describe('place copy: nested building units (RFC 0009)', () => {
       const after = loadTwinfile(dir);
       expect(after.ok ? [] : after.errors).toEqual([]);
       if (!before.ok || !after.ok) return;
-      expect(after.value.twinfile.with).toBeUndefined();
 
       const v1 = composePlace(before.value, options);
       const v2 = composePlace(after.value, options);

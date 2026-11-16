@@ -8,5 +8,5 @@ export { upgradeTypedHeadFiles, collectHeadUpgradePaths } from './format-head-fi
 export { distRootFromCli, resolveRunnerCommand } from './resolve-runner.js';
 export { addAssetsLayerToPlace } from './add-assets-layer.js';
 export { formatPlaceManifestFile, orderPlaceTwinfileKeys } from './format-twinfile.js';
-export { readTwinfileDoc, upsertStepItem, writeTwinfileDoc, addLeadingCopies } from './twinfile-steps.js';
+export { readTwinfileDoc, upsertStepItem, writeTwinfileDoc } from './twinfile-steps.js';
 export { writeCampusBuildingScaffold } from './campus-building-scaffold.js';

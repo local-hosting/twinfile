@@ -1,55 +1,19 @@
 {
-  "note": "RFC 0004 composed bases. Each case builds a place (default archetype single_level) with `with:` refs to the mixins below (twinfile/<name>:0.1.0 under mixins/).",
-  "mixins": {
-    "mixin-a": {
-      "manifest": { "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "a-room", "kind": "zone" }] } }
-    },
-    "mixin-b": {
-      "manifest": { "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "b-room", "kind": "zone" }] } }
-    },
-    "mixin-dup": {
-      "manifest": { "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "a-room", "kind": "hall" }] } }
-    },
-    "mixin-flat": {
-      "manifest": { "axes": { "vertical": "flat" }, "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "flat-room", "kind": "zone" }] } }
-    },
-    "mixin-stacked": {
-      "manifest": { "axes": { "vertical": "stacked" }, "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "stacked-room", "kind": "zone", "level": "ground" }] } }
-    },
-    "mixin-route-only": {
-      "manifest": { "applies_to": { "extent": ["route"] }, "layers": ["place/spaces.yaml"] },
-      "files": { "place/spaces.yaml": { "spaces": [{ "id": "route-room", "kind": "zone" }] } }
-    }
-  },
+  "note": "RFC 0004 place axes. Each case builds a place (default archetype single_level) and checks the archetype derived from its axes.",
   "cases": [
-    { "id": "order-irrelevant", "with": ["mixin-a", "mixin-b"], "sameRowsAs": ["mixin-b", "mixin-a"] },
-    { "id": "row-conflict", "with": ["mixin-a", "mixin-dup"], "expectCodes": ["E_MIXIN_CONFLICT"] },
-    {
-      "id": "row-conflict-child-resolves",
-      "with": ["mixin-a", "mixin-dup"],
-      "spaces": [{ "id": "a-room", "kind": "zone", "name": "Child wins" }]
-    },
-    { "id": "axis-conflict", "with": ["mixin-flat", "mixin-stacked"], "expectCodes": ["E_MIXIN_CONFLICT"] },
-    { "id": "applies-to", "with": ["mixin-route-only"], "expectCodes": ["E_MIXIN_AXES"] },
-    {
-      "id": "mixin-axes-derive",
-      "with": ["mixin-stacked"],
-      "archetype": null,
-      "axes": { "extent": "footprint", "movement": "free" },
-      "expectArchetype": "indoor_stack"
-    },
     {
       "id": "axes-derive",
       "archetype": null,
       "axes": { "extent": "area", "vertical": "flat", "movement": "free" },
       "expectArchetype": "open_area"
     },
-    { "id": "axes-incomplete", "with": ["mixin-stacked"], "archetype": null, "expectCodes": ["E_ARCHETYPE_AXES"] },
+    {
+      "id": "axes-derive-stacked",
+      "archetype": null,
+      "axes": { "extent": "footprint", "vertical": "stacked", "movement": "free" },
+      "expectArchetype": "indoor_stack"
+    },
+    { "id": "axes-incomplete", "archetype": null, "axes": { "vertical": "stacked" }, "expectCodes": ["E_ARCHETYPE_AXES"] },
     { "id": "archetype-mismatch", "archetype": "indoor_stack", "axes": { "extent": "site" }, "expectCodes": ["E_ARCHETYPE_AXES_MISMATCH"] }
   ]
 }

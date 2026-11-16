@@ -110,7 +110,7 @@ function upgradeScenarioToSteps(
   return ok({ twinfile: out, inlined });
 }
 
-/** Rewrite a twinfile 1 place manifest as twinfile 2: `with:` copies, inline steps, plans, then building copies. */
+/** Rewrite a twinfile 1 place manifest as twinfile 2: inline steps, plans, then building copies. */
 export function upgradeTwinfileToPatches(
   twinfilePath: string,
   twinfile: Record<string, unknown>,
@@ -118,6 +118,11 @@ export function upgradeTwinfileToPatches(
   if (twinfile.twinfile === 2) return ok({ twinfile, inlined: [] });
   if (twinfile.kind === 'scenario') return upgradeScenarioToSteps(twinfilePath, twinfile);
   if (twinfile.kind !== 'place') return ok({ twinfile, inlined: [] });
+  if (twinfile.with !== undefined) {
+    return err([
+      { code: 'E_SCHEMA', message: 'with: is not supported; put the rows in the place or its base', file: twinfilePath },
+    ]);
+  }
 
   const root = dirname(twinfilePath);
   const buildings = buildingCopies(twinfile, twinfilePath);
@@ -125,8 +130,6 @@ export function upgradeTwinfileToPatches(
 
   const inlined: string[] = [];
   const steps: Record<string, unknown>[] = [];
-  const mixins = Array.isArray(twinfile.with) ? (twinfile.with as string[]) : [];
-  for (const ref of mixins) steps.push({ copy: ref });
 
   for (const entry of parseManifestLayerEntries(twinfile)) {
     if (isBindingLayerPath(entry.path)) continue;

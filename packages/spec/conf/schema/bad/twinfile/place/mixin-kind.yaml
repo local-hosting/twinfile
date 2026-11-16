@@ -1,0 +1,8 @@
+twinfile: 1
+kind: mixin
+id: mixin-assets
+name: Mixin Assets
+version: 0.1.0
+stability: example
+layers:
+  - place/assets.yaml

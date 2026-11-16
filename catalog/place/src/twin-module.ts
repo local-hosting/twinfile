@@ -4,7 +4,7 @@ import { buildTwinfile } from './build/build-twinfile.js';
 
 export const kind = 'place' as const;
 
-const head = createHeadTwinTypeModule({ kind, kinds: ['place', 'mixin'] });
+const head = createHeadTwinTypeModule({ kind, kinds: ['place'] });
 
 export const module: TwinTypeModule<TwinHead, PlaceWireJson> = {
   kind,

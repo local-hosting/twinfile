@@ -153,7 +153,7 @@ export function loadTwinfile(unitRoot: string): Result<LoadedTwinfile> {
   if (catalogErrors.length > 0) return err(catalogErrors);
 
   const declared = String(twinfile.kind ?? '').trim();
-  const keepsKind = declared === 'mixin' || declared === 'event';
+  const keepsKind = declared === 'event';
   if (declared && declared !== TWINFILE_UNIT_ROLE && !keepsKind) {
     return err([
       {
