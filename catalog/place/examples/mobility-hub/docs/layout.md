@@ -37,7 +37,7 @@ Hierarchy: programme template → geo instance; within the bundle, `parent` roll
 
 ## Services (mobility + community boards)
 
-Canonical `kind` values live in [`mob-hub-services.yaml`](../../../../spec/conf/mob-hub-services.yaml). Step **`services:`** in `Twinfile.yaml` binds each `kind` to a **space** (the cell). **`assets[]`** remain physical resources (chargers, displays).
+Canonical `kind` values live in [`mob-hub-services.yaml`](../../../../../packages/spec/conf/mob-hub-services.yaml). Step **`services:`** in `Twinfile.yaml` binds each `kind` to a **space** (the cell). **`assets[]`** remain physical resources (chargers, displays).
 
 Urban **community wireframe** modules: bakery, bank/post, café, delivery, energy, event, restaurant, garden, indoor public space, meeting, co-working, outdoor seating — mostly under `urban-community`. Indoor programme is **`copy: ./parts/urban-services-building`** (own Twinfile; room ids like `urban-services-building-hall`).
 
@@ -53,9 +53,9 @@ Urban **community wireframe** modules: bakery, bank/post, café, delivery, energ
 
 ## Part index
 
-See strategy-board groupings in step 3 of `Twinfile.yaml` (rural node, rural hub, suburban hub, urban mobility / community / landscape). IndoorGML interchange is optional via the [`indoorgml`](../../../../spec/doc/pack/bridges.md#indoorgml-ogc-cell-space) bridge.
+See strategy-board groupings in step 3 of `Twinfile.yaml` (rural node, rural hub, suburban hub, urban mobility / community / landscape). IndoorGML interchange is optional via the [`indoorgml`](../../../../../packages/spec/doc/pack/bridges.md#indoorgml-ogc-cell-space) bridge.
 
 ## Related
 
-- [Mobility hub kit of parts](../../../../spec/doc/place/mobility/parts.md)
-- [Place topology taxonomy](../../../../spec/doc/place/topology-taxonomy.md)
+- [Mobility hub kit of parts](../../../../../packages/spec/doc/place/mobility/parts.md)
+- [Place topology taxonomy](../../../../../packages/spec/doc/place/topology-taxonomy.md)

@@ -12,4 +12,4 @@ Map-centric humanitarian apps often tag pins with short codes (resource, site, r
 
 **CI:** `check-role-vocab.mjs` validates report situations exist and site roles are in [`role-vocabulary.yaml`](../../conf/role-vocabulary.yaml).
 
-Relief stock on a twin is **declarative** (see golden [`arena` concourse](../../../catalog/place/examples/arena/parts/concourse/) assets). Live inventory sync stays on the host.
+Relief stock on a twin is **declarative** (see golden [`arena` concourse](../../../../catalog/place/examples/arena/parts/concourse/) assets). Live inventory sync stays on the host.

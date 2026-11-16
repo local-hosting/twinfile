@@ -61,6 +61,7 @@ const STEPS = [
         },
       ]
     : []),
+  { id: 'doc-links', run: () => runNodeScript('packages/tooling', 'check-doc-links.mjs') },
   { id: 'spec', run: () => runWorkspaceScript('@local-hosting/twinfile', ['check']) },
   { id: 'bridge', run: () => runWorkspaceScript('@local-hosting/twinfile-bridge', ['check']) },
   { id: 'core', run: () => runWorkspaceScript('@local-hosting/twinfile-core', ['check:openstack']) },

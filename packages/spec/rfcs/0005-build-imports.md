@@ -61,16 +61,16 @@ Plan paths from imported units union with site and mixin plans (same rules as mi
 
 Authoring patterns (single vs `floors:` child, checklist): [Campus → building → floor](../doc/place/campus-building-floor.md).
 
-Golden catalog (see [`examples/README.md`](../../catalog/place/examples/README.md)):
+Golden catalog (see [`examples/README.md`](../../../catalog/place/examples/README.md)):
 
 | Site | Pattern | Child unit(s) |
 | --- | --- | --- |
-| [`airport`](../../catalog/place/examples/airport) | `buildings` + nested `floors` | `terminal-a`, `terminal-a-airside` |
-| [`transit-hub-campus`](../../catalog/place/examples/mobility-hub/campus) | single building | `transit-hub-interior` |
-| [`expo`](../../catalog/place/examples/expo) | single pavilion | `expo-pavilion-opportunity` |
-| [`arena`](../../catalog/place/examples/arena) | concourse interior | `arena-concourse` |
-| [`port`](../../catalog/place/examples/port) | warehouse | `port-warehouse` |
-| [`park`](../../catalog/place/examples/park) | *(none — `open_area`)* | — |
+| [`airport`](../../../catalog/place/examples/airport) | `buildings` + nested `floors` | `terminal-a`, `terminal-a-airside` |
+| [`transit-hub-campus`](../../../catalog/place/examples/mobility-hub/campus) | single building | `transit-hub-interior` |
+| [`expo`](../../../catalog/place/examples/expo) | single pavilion | `expo-pavilion-opportunity` |
+| [`arena`](../../../catalog/place/examples/arena) | concourse interior | `arena-concourse` |
+| [`port`](../../../catalog/place/examples/port) | warehouse | `port-warehouse` |
+| [`park`](../../../catalog/place/examples/park) | *(none — `open_area`)* | — |
 
 ## Drawbacks
 
