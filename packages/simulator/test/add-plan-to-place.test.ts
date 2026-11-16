@@ -6,16 +6,12 @@ import { fileURLToPath } from 'node:url';
 import { parse as parseYaml, stringify } from 'yaml';
 import { describe, expect, it } from 'vitest';
 
-import {
-  addBindToPlace,
-  buildPlanRolesFromPlace,
-  collectPlaceIdsForRole,
-} from '@local-hosting/twinfile-simulator';
+import { addBindToPlace } from '@local-hosting/twinfile-simulator';
 import { testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 import {
   createPlace,
 } from '@local-hosting/twinfile-place';
-import { twinHeadPath } from '@local-hosting/twinfile-core';
+import { collectPlaceIdsForRole, planRolesFromPlace, twinHeadPath } from '@local-hosting/twinfile-core';
 
 describe('add plan to place', () => {
   it('collects ids by role tag on spaces and openings', () => {
@@ -87,7 +83,7 @@ describe('add plan to place', () => {
   });
 
   it('warns when required roles are missing tags', () => {
-    const { roles, warnings } = buildPlanRolesFromPlace(
+    const { roles, warnings } = planRolesFromPlace(
       { spaces: [{ id: 'only-outdoor', roles: ['outdoor'] }] },
       {
         shelter: { kind: 'space', min: 1 },

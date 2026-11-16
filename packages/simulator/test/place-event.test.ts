@@ -36,7 +36,7 @@ describe('place events', () => {
       definePlaceEvent({ id: 'flood', name: 'Flood', phases: ['advisory'] }),
     );
     registerEventCatalog(catalog);
-  const hit = resolveRegisteredPlaceEventRef('twinfile/situation/flood:1.0.0');
+  const hit = resolveRegisteredPlaceEventRef('twinfile/event/flood:1.0.0');
     expect(hit?.id).toBe('flood');
     clearRegisteredEventCatalogs();
   });

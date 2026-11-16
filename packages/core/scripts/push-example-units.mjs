@@ -8,13 +8,13 @@ import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { findTwinfileDirs } from './catalog/find-twinfile-dirs.mjs';
 import { resolveTwinfileHeadPath } from './catalog/resolve-twinfile-dir.mjs';
-import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../dist/index.js';
+import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../dist/index.js';
 
 const twinCli = resolveTwinCli(import.meta.url);
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const resolvedTwinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamplesRoot = resolveTypeExamplesRoot('story', resolvedTwinfileRoot);
-const simulatorRoot = resolveSimulatorRoot();
+const eventExamplesRoot = resolveTypeExamplesRoot('event', resolvedTwinfileRoot);
 
 function runTwin(args) {
   return spawnSync(process.execPath, [twinCli, ...args], {
@@ -73,8 +73,8 @@ let failed = pushCatalog(examplesRoot);
 if (statSync(storyExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
   failed += pushCatalog(storyExamplesRoot);
 }
-if (statSync(simulatorRoot, { throwIfNoEntry: false })?.isDirectory()) {
-  failed += pushCatalog(simulatorRoot);
+if (statSync(eventExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
+  failed += pushCatalog(eventExamplesRoot);
 }
 
 if (failed > 0) {

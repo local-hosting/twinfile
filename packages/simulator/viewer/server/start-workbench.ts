@@ -6,10 +6,7 @@ import '@local-hosting/twinfile-simulator';
 import {
   buildTwinfile,
 } from '@local-hosting/twinfile-place';
-import {
-  resolveExamplesRoot,
-  resolveSimulatorRoot,
-} from '@local-hosting/twinfile-core';
+import { resolveExamplesRoot } from '@local-hosting/twinfile-core';
 
 import { readTwinfileOutputCss } from '../styles/read-twinfile-output-css.js';
 import {
@@ -151,11 +148,7 @@ export function startWorkbench(unitDir: string, port = 4173, options: StartWorkb
       ? viewerRootsFromPaths(options.incorporate)
       : (() => {
           const examplesRoot = resolveExamplesRoot(unitDir);
-          const simulatorRoot = resolveSimulatorRoot(unitDir);
-          return {
-            examplesRoots: examplesRoot ? [examplesRoot] : [],
-            simulatorRoots: simulatorRoot ? [simulatorRoot] : [],
-          };
+          return { examplesRoots: examplesRoot ? [examplesRoot] : [] };
         })();
 
   const resolvedUnitDir = resolveDefaultCatalogDir(unitDir, roots);
@@ -167,11 +160,7 @@ export function startWorkbench(unitDir: string, port = 4173, options: StartWorkb
 
   const loadBuilt = (activeUnitDir: string) => {
     const buildRoots = viewerBuildRootsForDir(activeUnitDir, roots);
-    return buildTwinfile(activeUnitDir, {
-      examplesRoot: buildRoots.examplesRoot,
-      simulatorRoot: buildRoots.simulatorRoot,
-            writeLock: false,
-          });
+    return buildTwinfile(activeUnitDir, { examplesRoot: buildRoots.examplesRoot, writeLock: false });
   };
 
   const unitDirFromRequest = (url: URL) =>

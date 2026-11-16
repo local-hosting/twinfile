@@ -1,8 +1,6 @@
 import { readFileSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
-
 import { parse as parseYaml } from 'yaml';
 
 export type TwinLocalMap = Map<string, string>;
@@ -51,12 +49,4 @@ export function mergeTwinLocalMaps(...maps: TwinLocalMap[]): TwinLocalMap {
 
 export function resolveTwinLocalPath(ref: string, map: TwinLocalMap): string | undefined {
   return map.get(normalizeRefKey(ref));
-}
-
-/** Examples ref map merged with the simulator package catalog. */
-export function loadTwinLocalMapMerged(examplesRoot: string, simulatorRoot?: string): TwinLocalMap {
-  const simulator = simulatorRoot ?? resolveSimulatorRoot(examplesRoot);
-  const maps = [loadTwinLocalMapFromRoot(examplesRoot)];
-  if (simulator) maps.push(loadTwinLocalMapFromRoot(simulator));
-  return mergeTwinLocalMaps(...maps);
 }

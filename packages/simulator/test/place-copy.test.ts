@@ -22,7 +22,7 @@ import { formatTwinfilePath } from '@local-hosting/twinfile-core/cli';
 import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 import { twinHeadPath } from '@local-hosting/twinfile-core';
 
-const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
+const { examplesRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 
 function unwrapBindings(result: Result<SituationBindingDoc[]>): SituationBindingDoc[] {
   if (!result.ok) throw new Error(result.errors.map((e) => e.message).join('; '));
@@ -144,7 +144,7 @@ describe('place copy: nested building units (RFC 0009)', () => {
     try {
       const source = join(examplesRoot, 'shop');
       cpSync(source, dir, { recursive: true });
-      const options = { examplesRoot, simulatorRoot };
+      const options = { examplesRoot };
       const before = loadTwinfile(source);
       expect(before.ok).toBe(true);
       expect(formatTwinfilePath(twinHeadPath(dir), { upgrade: 2 })).toBe(0);

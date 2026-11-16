@@ -5,7 +5,7 @@ name: Visitor surge
 version: 1.0.0
 stability: example
 steps:
-  - copy: twinfile/situation/passenger-queue:1.0.0
+  - copy: twinfile/event/passenger-queue:1.0.0
 domains:
   - mobility
 args:
