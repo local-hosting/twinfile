@@ -1,0 +1,5 @@
+place:
+  id: example-place
+  name: Example place
+  kind: venue
+  timezone: UTC
