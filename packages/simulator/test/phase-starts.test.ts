@@ -8,7 +8,7 @@ describe('resolvePhaseStarts', () => {
   it('defaults release to t=0 when releaseAt is omitted', () => {
     const starts = resolvePhaseStarts({
       clock,
-      situations: [{ phases: ['notice', 'release'], args: { releaseAt: { type: 'time' } } }],
+      events: [{ phases: ['notice', 'release'], args: { releaseAt: { type: 'time' } } }],
       resolvedArgs: {},
     });
     expect(starts.release).toBe(0);
@@ -18,7 +18,7 @@ describe('resolvePhaseStarts', () => {
   it('accepts duration offsets from starts_at', () => {
     const starts = resolvePhaseStarts({
       clock,
-      situations: [{ phases: ['release'], args: { releaseAt: { type: 'time' } } }],
+      events: [{ phases: ['release'], args: { releaseAt: { type: 'time' } } }],
       resolvedArgs: { releaseAt: 'PT1H' },
     });
     expect(starts.release).toBe(3600);

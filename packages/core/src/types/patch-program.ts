@@ -1,14 +1,14 @@
 import type { PatchGraphV1 } from './patch-graph.js';
 import type { TwinMessageV1 } from './twin-message.js';
-import type { SituationPulseKind } from './situation-pulse.js';
+import type { EventPulseKind } from './event-pulse.js';
 
 export type PatchCordId = string;
 
-export type ContextSituationState = {
+export type ContextEventState = {
   ref: string;
   enabled: boolean;
   phase?: string;
-  pulse?: SituationPulseKind;
+  pulse?: EventPulseKind;
   args?: Record<string, unknown>;
   /** Default inlet for pulses (module.port). */
   target?: { module: string; port: string };
@@ -17,7 +17,7 @@ export type ContextSituationState = {
 /** Workbench session / host project slice (JSON-serializable). */
 export type ContextSlice = {
   signals?: Record<string, unknown>;
-  situations?: ContextSituationState[];
+  events?: ContextEventState[];
   cuts?: PatchCordId[];
   feeds?: Array<{
     virtualModule: string;
@@ -47,7 +47,7 @@ export type PatchNodeHandler = (
 export type PatchProgramBuiltInput = {
   twinfile: Record<string, unknown>;
   place: Record<string, unknown>;
-  situations?: Record<string, unknown>[];
+  events?: Record<string, unknown>[];
 };
 
 export type PatchGraphWireView = PatchGraphV1;

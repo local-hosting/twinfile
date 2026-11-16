@@ -9,7 +9,7 @@ import {
   resolvePreviewCatalogId,
 } from './workbench-host-place-scope.js';
 
-/** Host site + optional programme lens (run / situation / event) + layout focus. */
+/** Host site + optional programme lens (run / event) + layout focus. */
 export type WorkbenchHostContext = {
   unitId: string | null;
   hostPlaceCatalogId: string | null;

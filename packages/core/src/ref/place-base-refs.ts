@@ -16,7 +16,7 @@ export function placeBaseRefForArchetype(archetype: PlaceArchetype): string {
   return DEFAULT_PLACE_BASE_REFS[archetype];
 }
 
-/** Golden mixin for a situation or decoration layer kit (see examples mixin-*). */
+/** Golden mixin for an event or decoration layer kit (see examples mixin-*). */
 export function placeMixinRef(name: string): string {
   return `twinfile/mixin-${name}:0.1.0`;
 }

@@ -42,7 +42,7 @@ export function isBindingLayerPath(rel: string): boolean {
   return rel.startsWith('bindings/');
 }
 
-/** Place graph layer files (excludes situation binding files under `bindings/`). */
+/** Place graph layer files (excludes event binding files under `bindings/`). */
 export function twinfilePlaceLayerPaths(twinfile: Record<string, unknown>): ManifestLayerEntry[] {
   return parseManifestLayerEntries(twinfile).filter((e) => !isBindingLayerPath(e.path));
 }

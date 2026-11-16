@@ -39,7 +39,7 @@ export type WorldSession = {
 /** Live **session** over a built place — shared clock with runners and scrub. */
 export function createWorldSession(options: WorldSessionOptions): WorldSession {
   const resolvedArgs = options.resolvedArgs ?? {};
-  const weathers = createWeathersFromPlace(options.clock, options.situations, resolvedArgs);
+  const weathers = createWeathersFromPlace(options.clock, options.events, resolvedArgs);
   const phaseStarts = mergeWeatherPhaseStarts(weathers);
   const phaseEnds = mergeWeatherPhaseEnds(weathers);
   const timeline = openTimelineForPlace({ ...options, resolvedArgs });

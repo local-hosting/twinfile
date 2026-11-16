@@ -9,14 +9,14 @@ import { stringify } from 'yaml';
 import {
   buildTwinfile,
   composePlace,
-  listPlaceSituationBindings,
+  listPlaceEventBindings,
   loadTwinfileStrict,
   mergePlaceFromTwinfile,
 } from '@local-hosting/twinfile-place';
 import {
   loadTwinfile,
   type Result,
-  type SituationBindingDoc,
+  type EventBindingDoc,
 } from '@local-hosting/twinfile-core';
 import { formatTwinfilePath } from '@local-hosting/twinfile-core/cli';
 import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
@@ -24,7 +24,7 @@ import { twinHeadPath } from '@local-hosting/twinfile-core';
 
 const { examplesRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 
-function unwrapBindings(result: Result<SituationBindingDoc[]>): SituationBindingDoc[] {
+function unwrapBindings(result: Result<EventBindingDoc[]>): EventBindingDoc[] {
   if (!result.ok) throw new Error(result.errors.map((e) => e.message).join('; '));
   return result.value;
 }
@@ -160,7 +160,7 @@ describe('place copy: nested building units (RFC 0009)', () => {
       expect(v2.value.place).toEqual(v1.value.place);
       expect(v2.value.axes).toEqual(v1.value.axes);
       const planFor = (unit: typeof before.value) =>
-        unwrapBindings(listPlaceSituationBindings(unit, options)).map((row) => row.doc.for).sort();
+        unwrapBindings(listPlaceEventBindings(unit, options)).map((row) => row.doc.for).sort();
       expect(planFor(after.value)).toEqual(planFor(before.value));
     } finally {
       rmSync(tmp, { recursive: true, force: true });

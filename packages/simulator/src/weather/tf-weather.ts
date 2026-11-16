@@ -6,15 +6,15 @@ import {
   mergeWeatherPhaseStarts,
 } from './weather.js';
 
-/** Hazard programme on the session timeline (situation phases vs clock). */
+/** Hazard programme on the session timeline (event phases vs clock). */
 export { Weather as TFWeather };
 
 export function createTFWeathersFromPlace(
   clock: ClockSpec,
-  situations: Record<string, unknown>[] | undefined,
+  events: Record<string, unknown>[] | undefined,
   resolvedArgs: Record<string, unknown>,
 ): Weather[] {
-  return createWeathersFromPlace(clock, situations, resolvedArgs);
+  return createWeathersFromPlace(clock, events, resolvedArgs);
 }
 
 export { mergeWeatherPhaseEnds, mergeWeatherPhaseStarts };

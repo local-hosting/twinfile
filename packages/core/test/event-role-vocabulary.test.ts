@@ -4,19 +4,19 @@ import {
   checkExpectsAgainstVocabulary,
   checkPlanRolesExact,
   checkPlaceRoleTags,
-  loadSituationRoleVocabulary,
-} from '../src/check/situation-role-vocabulary.js';
+  loadEventRoleVocabulary,
+} from '../src/check/event-role-vocabulary.js';
 
-describe('situation role vocabulary', () => {
+describe('event role vocabulary', () => {
   it('loads global roles including water-launch', () => {
-    const vocab = loadSituationRoleVocabulary();
+    const vocab = loadEventRoleVocabulary();
     expect(vocab.get('shelter')?.kind).toBe('space');
     expect(vocab.get('water-launch')?.kind).toBe('marker');
     expect(vocab.has('put-in')).toBe(false);
   });
 
   it('rejects unknown expects keys', () => {
-    const vocab = loadSituationRoleVocabulary();
+    const vocab = loadEventRoleVocabulary();
     const errors = checkExpectsAgainstVocabulary(
       { 'not-a-role': { kind: 'space', min: 1 } },
       vocab,

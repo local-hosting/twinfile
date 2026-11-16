@@ -1,5 +1,5 @@
 # Local ref map (flat layout under examples/).
-# Hazard situations: @local-hosting/twinfile-simulator.
+# Hazard events: @local-hosting/twinfile-simulator.
 refs:
   twinfile/shop:0.2.0: shop
   twinfile/airport:0.2.0: airport

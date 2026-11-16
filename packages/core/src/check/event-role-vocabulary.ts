@@ -7,20 +7,20 @@ import { parse as parseYaml } from 'yaml';
 
 import type { ContractError } from '../build/contract-checker.js';
 import type { ExpectsRole, PlanRoles, PlaceData } from '../build/contract-checker.js';
-export type SituationRoleVocabularyEntry = {
+export type EventRoleVocabularyEntry = {
   id: string;
   kind: string;
   title?: string;
   domain?: string;
 };
 
-export type SituationRoleVocabulary = Map<string, SituationRoleVocabularyEntry>;
+export type EventRoleVocabulary = Map<string, EventRoleVocabularyEntry>;
 
 const require = createRequire(import.meta.url);
 
-let cached: SituationRoleVocabulary | undefined;
+let cached: EventRoleVocabulary | undefined;
 
-export function situationRoleVocabularyPath(): string {
+export function eventRoleVocabularyPath(): string {
   const fromPkg = join(
     dirname(require.resolve('@local-hosting/twinfile/package.json')),
     'conf',
@@ -44,15 +44,15 @@ export function situationRoleVocabularyPath(): string {
   return fromPkg;
 }
 
-export function loadSituationRoleVocabulary(): SituationRoleVocabulary {
+export function loadEventRoleVocabulary(): EventRoleVocabulary {
   if (cached) return cached;
-  const raw = readFileSync(situationRoleVocabularyPath(), 'utf8');
+  const raw = readFileSync(eventRoleVocabularyPath(), 'utf8');
   const doc = parseYaml(raw) as { roles?: unknown };
   const roles = doc.roles;
   if (!Array.isArray(roles)) {
-    throw new Error('situation-role-vocabulary: missing roles array');
+    throw new Error('event-role-vocabulary: missing roles array');
   }
-  const map: SituationRoleVocabulary = new Map();
+  const map: EventRoleVocabulary = new Map();
   for (const row of roles) {
     if (!row || typeof row !== 'object' || Array.isArray(row)) continue;
     const entry = row as Record<string, unknown>;
@@ -60,7 +60,7 @@ export function loadSituationRoleVocabulary(): SituationRoleVocabulary {
     const kind = String(entry.kind ?? '').trim();
     if (!id || !kind) continue;
     if (map.has(id)) {
-      throw new Error(`situation-role-vocabulary: duplicate id ${id}`);
+      throw new Error(`event-role-vocabulary: duplicate id ${id}`);
     }
     map.set(id, {
       id,
@@ -70,13 +70,13 @@ export function loadSituationRoleVocabulary(): SituationRoleVocabulary {
     });
   }
   if (map.size === 0) {
-    throw new Error('situation-role-vocabulary: empty roles');
+    throw new Error('event-role-vocabulary: empty roles');
   }
   cached = map;
   return map;
 }
 
-export function clearSituationRoleVocabularyCacheForTests(): void {
+export function clearEventRoleVocabularyCacheForTests(): void {
   cached = undefined;
 }
 
@@ -107,7 +107,7 @@ const TAGGED_COLLECTIONS: (keyof PlaceData)[] = [
 
 export function checkExpectsAgainstVocabulary(
   expects: Record<string, ExpectsRole>,
-  vocabulary: SituationRoleVocabulary,
+  vocabulary: EventRoleVocabulary,
 ): ContractError[] {
   const errors: ContractError[] = [];
   for (const [roleName, spec] of Object.entries(expects)) {
@@ -139,7 +139,7 @@ export function checkPlanRolesExact(
     if (!expectKeys.has(key)) {
       errors.push({
         code: 'E_ROLE_VOCAB',
-        message: `Plan role ${key} is not declared on situation expects`,
+        message: `Plan role ${key} is not declared on event expects`,
       });
     }
   }
@@ -172,7 +172,7 @@ export function checkPlaceRoleTags(
 
 export function checkPlaceRolesInVocabulary(
   place: PlaceData,
-  vocabulary: SituationRoleVocabulary,
+  vocabulary: EventRoleVocabulary,
 ): ContractError[] {
   const errors: ContractError[] = [];
   for (const collection of TAGGED_COLLECTIONS) {

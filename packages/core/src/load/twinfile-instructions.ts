@@ -4,7 +4,7 @@ import { join } from 'node:path';
 import type { LoadedTwinfile } from './load-twinfile.js';
 import { twinfilePlaceLayerPaths, twinfileBindingPaths } from './twinfile-paths.js';
 import { readYamlDocument } from '../validate/validate-yaml.js';
-import type { SituationBindingDoc, TwinfileInstruction } from '../types/twinfile-instructions.js';
+import type { EventBindingDoc, TwinfileInstruction } from '../types/twinfile-instructions.js';
 import { twinfileStepItems } from './twinfile-compose.js';
 import { isRecord } from '../doc/is-record.js';
 
@@ -19,13 +19,13 @@ function bindingDocFromStepItem(item: Record<string, unknown>): Record<string, u
   return undefined;
 }
 
-/** Parse `steps:` into ordered compose steps and situation binding documents (no filesystem access). */
+/** Parse `steps:` into ordered compose steps and event binding documents (no filesystem access). */
 export function parseManifestPatches(twinfile: Record<string, unknown>): {
   instructions: TwinfileInstruction[];
-  situationBindings: SituationBindingDoc[];
+  eventBindings: EventBindingDoc[];
 } {
   const instructions: TwinfileInstruction[] = [];
-  const situationBindings: SituationBindingDoc[] = [];
+  const eventBindings: EventBindingDoc[] = [];
   const items = twinfileStepItems(twinfile);
   items.forEach((item, index) => {
     if (!isRecord(item)) return;
@@ -41,7 +41,7 @@ export function parseManifestPatches(twinfile: Record<string, unknown>): {
     }
     const binding = bindingDocFromStepItem(item);
     if (binding) {
-      situationBindings.push({ rel: `bind/${String(binding.for ?? index)}`, doc: binding });
+      eventBindings.push({ rel: `bind/${String(binding.for ?? index)}`, doc: binding });
       return;
     }
     const { mode, ...doc } = item;
@@ -52,7 +52,7 @@ export function parseManifestPatches(twinfile: Record<string, unknown>): {
       mergeMode: mode === 'replace' ? 'replace' : 'patch',
     });
   });
-  return { instructions, situationBindings };
+  return { instructions, eventBindings };
 }
 
 /** Ordered build steps for a unit: inline `steps:` or v1 `layers:` files. */
@@ -74,15 +74,15 @@ export function listTwinfilePatchDocs(unit: LoadedTwinfile): Record<string, unkn
 }
 
 /**
- * Situation bindings a unit declares. v1 binding files are looked up in the unit, then in `fallbackRoots`
+ * Event bindings a unit declares. v1 binding files are looked up in the unit, then in `fallbackRoots`
  * (higher-precedence units first), matching the inherit stack.
  */
-export function listTwinfileSituationBindings(
+export function listTwinfileEventBindings(
   unit: LoadedTwinfile,
   fallbackRoots: readonly string[] = [],
-): SituationBindingDoc[] {
-  if (isPatchesTwinfile(unit.twinfile)) return parseManifestPatches(unit.twinfile).situationBindings;
-  const out: SituationBindingDoc[] = [];
+): EventBindingDoc[] {
+  if (isPatchesTwinfile(unit.twinfile)) return parseManifestPatches(unit.twinfile).eventBindings;
+  const out: EventBindingDoc[] = [];
   for (const rel of twinfileBindingPaths(unit.twinfile)) {
     const root = [unit.root, ...fallbackRoots].find(
       (dir) => statSync(join(dir, rel), { throwIfNoEntry: false })?.isFile(),

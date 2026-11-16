@@ -1,6 +1,6 @@
 # Open module types for declarative patch graphs (config + port shapes; no host runtime).
 # Wire tiers: place:merged (= bundle.place), place:site, place:building (RFC 0005 anchor slice).
-# Situation types arrive on `twin:situation` / `signal:*` wires (host context), not catalog modes.
+# Event types arrive on `twin:event` / `signal:*` wires (host context), not catalog modes.
 module_types:
   twinfile/mod.map-sink@0.1.0:
     ports:
@@ -23,9 +23,9 @@ module_types:
     ports:
       source: { direction: in, wire: bridge:source }
       place: { direction: out, wire: place:merged }
-  twinfile/mod.situation-in@0.1.0:
+  twinfile/mod.event-in@0.1.0:
     ports:
-      in: { direction: in, wire: twin:situation }
+      in: { direction: in, wire: twin:event }
       alert: { direction: out, wire: signal:alert }
       trigger: { direction: out, wire: signal:trigger }
   twinfile/mod.signal-hub@0.1.0:

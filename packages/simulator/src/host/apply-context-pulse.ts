@@ -7,15 +7,15 @@ import {
 import {
   PatchContext,
   PatchProgram,
-  buildSituationMessage,
-  situationPulseHandler,
+  buildEventMessage,
+  eventPulseHandler,
   type ContextSlice,
   type PatchTrace,
 } from '@local-hosting/twinfile-core';
 
 import type { PlayerContextPulse } from './types/player-context.js';
 
-function defaultSituationHead(ref: string): Record<string, unknown> {
+function defaultEventHead(ref: string): Record<string, unknown> {
   const slug = ref.includes('/') ? ref.split('/').pop()! : ref;
   return { id: slug, version: '0.1.0', phases: ['warning', 'all-clear', 'notice', 'release'] };
 }
@@ -25,12 +25,12 @@ function headsFromBuild(result: BuildTwinfileResult, ref: string): Record<string
   const slug = ref.includes('/') ? ref.split('/').pop()! : ref;
   const fromBundle = bundled.find((h) => h.id === slug || h.id === ref);
   if (fromBundle) return bundled;
-  return [...bundled, defaultSituationHead(ref)];
+  return [...bundled, defaultEventHead(ref)];
 }
 
 function sliceFromPlayer(body: PlayerContextPulse): ContextSlice {
   return {
-    situations: body.situations,
+    events: body.events,
     signals: body.signals,
     feeds: body.feeds?.map((row) => ({ ...row })),
   };
@@ -75,46 +75,46 @@ export function applyPlayerContextPulse(
   const program = PatchProgram.fromBuilt({
     twinfile,
     place: result.data as Record<string, unknown>,
-    situations: headsFromBuild(result, body.situations?.[0]?.ref ?? 'severe-weather'),
+    events: headsFromBuild(result, body.events?.[0]?.ref ?? 'severe-weather'),
   });
   if (!program) {
     return { ok: false, error: 'Place has no processor graph' };
   }
   const graph = program.graph.raw;
-  const routesSituationToAlert = (graph.connections ?? []).some(
-    (c) => c.from.module === 'context-situations' && c.from.port === 'alert',
+  const routesEventToAlert = (graph.connections ?? []).some(
+    (c) => c.from.module === 'context-events' && c.from.port === 'alert',
   );
-  if (routesSituationToAlert) {
+  if (routesEventToAlert) {
     program.setHandler(
-      'context-situations',
-      situationPulseHandler({ alertTo: { module: 'context-signals', port: 'alert' } }),
+      'context-events',
+      eventPulseHandler({ alertTo: { module: 'context-signals', port: 'alert' } }),
     );
-  } else if (graph.modules.some((m) => m.id === 'context-situations')) {
-    program.setHandler('context-situations', situationPulseHandler({}));
+  } else if (graph.modules.some((m) => m.id === 'context-events')) {
+    program.setHandler('context-events', eventPulseHandler({}));
   }
   const slice = sliceFromPlayer({
     ...body,
-    situations: body.situations?.map((row) => ({
+    events: body.events?.map((row) => ({
       ...row,
       enabled: true,
-      target: row.target ?? { module: 'context-situations', port: 'in' },
+      target: row.target ?? { module: 'context-events', port: 'in' },
     })),
   });
   const trace: PatchTrace = { entries: [] };
 
-  const heads = headsFromBuild(result, body.pulses?.[0]?.ref ?? body.situations?.[0]?.ref ?? 'severe-weather');
+  const heads = headsFromBuild(result, body.pulses?.[0]?.ref ?? body.events?.[0]?.ref ?? 'severe-weather');
   const headByRef = new Map<string, Record<string, unknown>>();
   for (const h of heads) {
     const id = typeof h.id === 'string' ? h.id : '';
     if (id) headByRef.set(id, h);
   }
 
-  const target = { module: 'context-situations', port: 'in' as const };
+  const target = { module: 'context-events', port: 'in' as const };
   for (const pulse of body.pulses ?? []) {
     const slug = pulse.ref.includes('/') ? pulse.ref.split('/').pop()! : pulse.ref;
-    const head = headByRef.get(slug) ?? defaultSituationHead(slug);
-    const built = buildSituationMessage({
-      situationHead: head,
+    const head = headByRef.get(slug) ?? defaultEventHead(slug);
+    const built = buildEventMessage({
+      eventHead: head,
       phase: pulse.phase,
       pulse: pulse.pulse ?? 'fast',
       edge: pulse.edge,
@@ -130,7 +130,7 @@ export function applyPlayerContextPulse(
   }
 
   const hasAmbient =
-    (body.situations?.length ?? 0) > 0 || (body.feeds?.length ?? 0) > 0 || Object.keys(body.signals ?? {}).length > 0;
+    (body.events?.length ?? 0) > 0 || (body.feeds?.length ?? 0) > 0 || Object.keys(body.signals ?? {}).length > 0;
   if (hasAmbient) {
     trace.entries.push(...program.curry(new PatchContext(slice)).flush().entries);
   }

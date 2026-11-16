@@ -16,7 +16,7 @@ import { twinHeadFileName, twinHeadPath } from '@local-hosting/twinfile-core';
 const { examplesRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 const catalogOpts = { examplesRoot };
 
-/** One geotype per archetype, plus a slug with no situations. */
+/** One geotype per archetype, plus a slug with no events. */
 const SLUGS = ['convenience_store', 'hotel', 'stadium', 'public_park', 'creek', 'food_truck'];
 
 describe('decoratePlaceFromGeotype', () => {
@@ -41,10 +41,10 @@ describe('decoratePlaceFromGeotype', () => {
 
     const result = decoratePlaceFromGeotype(unitDir, slug, catalogOpts);
 
-    const situations = placeDecorationsForSlug(slug)!.situations;
-    expect(result.situationHints).toEqual(situations);
+    const events = placeDecorationsForSlug(slug)!.situations;
+    expect(result.eventHints).toEqual(events);
     const strict = loadTwinfileStrict(unitDir, catalogOpts);
-    if (situations.length === 0) {
+    if (events.length === 0) {
       expect(strict.ok, strict.ok ? '' : JSON.stringify(strict.errors)).toBe(true);
     }
   });
@@ -59,7 +59,7 @@ describe('decoratePlaceFromGeotype', () => {
     });
     const result = decoratePlaceFromGeotype(unitDir, 'convenience_store', catalogOpts);
     expect(result.mixins).toEqual(['twinfile/mixin-assets:0.1.0']);
-    expect(result.situationHints).toEqual(['severe-weather']);
+    expect(result.eventHints).toEqual(['severe-weather']);
     expect(existsSync(join(unitDir, 'plans'))).toBe(false);
     const twinfile = parseYaml(readFileSync(twinHeadPath(unitDir), 'utf8')) as {
       steps: Array<{ copy?: string; bind?: { for?: string } }>;

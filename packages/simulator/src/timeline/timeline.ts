@@ -50,7 +50,7 @@ export type TFPlaceTimelineOptions = {
   place: Record<string, unknown>;
   placeRoot: string;
   seed: number;
-  situations?: Record<string, unknown>[];
+  events?: Record<string, unknown>[];
   resolvedArgs?: Record<string, unknown>;
   mode?: TwinfileUseMode;
 };
@@ -136,15 +136,15 @@ export function openTimelineForPlace(options: TFPlaceTimelineOptions): Timeline 
   const site = (mergedPlace.place ?? {}) as { timezone?: string; location?: GeoLocation };
   if (!site.timezone) throw new Error('clock needs place.timezone on the merged place');
   const resolvedArgs = options.resolvedArgs ?? {};
-  const weathers = createWeathersFromPlace(options.clock, options.situations, resolvedArgs);
+  const weathers = createWeathersFromPlace(options.clock, options.events, resolvedArgs);
   const phaseStarts =
     weathers.length > 0
       ? mergeWeatherPhaseStarts(weathers)
-      : resolvePhaseStarts({ clock: options.clock, situations: [], resolvedArgs });
+      : resolvePhaseStarts({ clock: options.clock, events: [], resolvedArgs });
   const phaseEnds =
     weathers.length > 0
       ? mergeWeatherPhaseEnds(weathers)
-      : resolvePhaseEnds({ clock: options.clock, situations: [], resolvedArgs });
+      : resolvePhaseEnds({ clock: options.clock, events: [], resolvedArgs });
   return createTimeline({
     clock: options.clock,
     timezone: site.timezone,
@@ -172,15 +172,15 @@ export function createPlaceTimelinePayload(options: TFPlaceTimelineOptions): Tim
     if (track.unit) units[track.id] = track.unit;
   }
   const resolvedArgs = options.resolvedArgs ?? {};
-  const weathers = createWeathersFromPlace(options.clock, options.situations, resolvedArgs);
+  const weathers = createWeathersFromPlace(options.clock, options.events, resolvedArgs);
   const phaseStarts =
     weathers.length > 0
       ? mergeWeatherPhaseStarts(weathers)
-      : resolvePhaseStarts({ clock: options.clock, situations: [], resolvedArgs });
+      : resolvePhaseStarts({ clock: options.clock, events: [], resolvedArgs });
   const phaseEnds =
     weathers.length > 0
       ? mergeWeatherPhaseEnds(weathers)
-      : resolvePhaseEnds({ clock: options.clock, situations: [], resolvedArgs });
+      : resolvePhaseEnds({ clock: options.clock, events: [], resolvedArgs });
   return {
     clock: options.clock,
     units,

@@ -19,7 +19,7 @@ export function publishSessionEdgesToPatch(
     (slice.pulses?.length ?? 0) > 0 ||
     (slice.signals && Object.keys(slice.signals).length > 0) ||
     (slice.feeds?.length ?? 0) > 0 ||
-    (slice.situations?.length ?? 0) > 0;
+    (slice.events?.length ?? 0) > 0;
   if (!hasSlice) return undefined;
   const applied = applyPlayerContextPulse(result, slice);
   if (applied.ok) {

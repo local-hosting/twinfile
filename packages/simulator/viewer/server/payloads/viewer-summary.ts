@@ -115,7 +115,7 @@ export function viewerShowsSummarySections(
   if (loaded && isRunUnit(loaded)) return false;
   if (isRunComposeHead(twinfile)) return false;
   const kind = typeof twinfile.kind === 'string' ? twinfile.kind : '';
-  if (kind === 'situation' || kind === 'event' || kind === 'mixin' || kind === 'scenario' || kind === 'run') {
+  if (kind === 'event' || kind === 'mixin' || kind === 'scenario' || kind === 'run') {
     return false;
   }
   return (kind || 'place') === 'place';

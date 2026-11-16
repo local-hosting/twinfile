@@ -95,7 +95,7 @@ export type TwinfileSummaryV1 = {
   };
   header: TwinfileSummaryHeader;
   /**
-   * Compose / manifest audit (runs, situations, mixins). Omitted on built **sites** — live state is `io` only.
+   * Compose / manifest audit (runs, events, mixins). Omitted on built **sites** — live state is `io` only.
    */
   fixed: TwinfileSummaryAspect[];
   /** Run-time and merged-place rollups (presets, mixins). Empty for `kind: place` site cards. */
@@ -104,7 +104,7 @@ export type TwinfileSummaryV1 = {
     inputs: TwinfileSummaryIoPort[];
     outputs: TwinfileSummaryIoPort[];
   };
-  /** Place layout for host renderers (situations arrive via processor inputs). */
+  /** Place layout for host renderers (events arrive via processor inputs). */
   layouts: Record<TwinfileUseMode, TwinfileSummaryLayoutV1>;
 };
 
@@ -130,8 +130,7 @@ export type BuildTwinfileSummaryInput = {
   place?: Record<string, unknown>;
   /** When set, site summary I/O is taken from `Place.meta.placeType` (post-`twin build`). */
   placeType?: unknown;
-  situationBindings?: Record<string, Record<string, unknown>>;
-  situations?: Record<string, unknown>[];
+  eventBindings?: Record<string, Record<string, unknown>>;
   events?: Record<string, unknown>[];
   resolvedArgs?: Record<string, unknown>;
 };

@@ -9,7 +9,7 @@ export type PlaceRunPreset = {
   stability?: string;
   from?: string;
   steps?: Array<Record<string, unknown>>;
-  role?: 'run' | 'situation' | 'timetable';
+  role?: 'run' | 'event' | 'timetable';
   domains?: string[];
   args?: Record<string, unknown>;
   schedule?: SceneSchedule;

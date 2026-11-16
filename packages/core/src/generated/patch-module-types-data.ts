@@ -14,9 +14,9 @@ export const PATCH_WIRES = [
   "signal:status",
   "signal:trigger",
   "signal:volume",
+  "twin:event",
   "twin:layer",
-  "twin:metrics",
-  "twin:situation"
+  "twin:metrics"
 ] as const;
 
 export type PatchWire = (typeof PATCH_WIRES)[number];
@@ -24,11 +24,11 @@ export type PatchWire = (typeof PATCH_WIRES)[number];
 export const PATCH_MODULE_TYPE_IDS = [
   "twinfile/mod.bridge-import@0.1.0",
   "twinfile/mod.building-scope@0.1.0",
+  "twinfile/mod.event-in@0.1.0",
   "twinfile/mod.map-sink@0.1.0",
   "twinfile/mod.shelter-standup@0.1.0",
   "twinfile/mod.signal-hub@0.1.0",
-  "twinfile/mod.site-scope@0.1.0",
-  "twinfile/mod.situation-in@0.1.0"
+  "twinfile/mod.site-scope@0.1.0"
 ] as const;
 
 export type PatchModuleTypeId = (typeof PATCH_MODULE_TYPE_IDS)[number];

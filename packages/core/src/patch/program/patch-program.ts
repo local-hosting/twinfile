@@ -1,6 +1,6 @@
 import { ProcessorGraph } from '../processor-graph.js';
 import { createPatchMessageBus, type PatchMessageBus } from '../patch-message-bus.js';
-import { validateSituationMessageTarget } from '../validate-situation-message.js';
+import { validateEventMessageTarget } from '../validate-event-message.js';
 import type { PatchNodeHandler, PatchProgramBuiltInput, PatchTrace, PatchTraceEntry } from '../../types/patch-program.js';
 import type { TwinMessageV1 } from '../../types/twin-message.js';
 import type { Result } from '../../types/twin-error.js';
@@ -14,19 +14,19 @@ export class PatchProgram {
   readonly graph: PatchGraphModel;
   readonly bus: PatchMessageBus;
   readonly place: Record<string, unknown>;
-  readonly situations: Record<string, unknown>[];
+  readonly events: Record<string, unknown>[];
   private handlers = new Map<string, PatchNodeHandler>();
   private seq = 0;
 
   constructor(
     graph: PatchGraphModel,
     place: Record<string, unknown>,
-    options: { bus?: PatchMessageBus; situations?: Record<string, unknown>[] } = {},
+    options: { bus?: PatchMessageBus; events?: Record<string, unknown>[] } = {},
   ) {
     this.graph = graph;
     this.bus = options.bus ?? createPatchMessageBus();
     this.place = place;
-    this.situations = options.situations ?? [];
+    this.events = options.events ?? [];
   }
 
   static fromBuilt(input: PatchProgramBuiltInput, bus?: PatchMessageBus): PatchProgram | undefined {
@@ -34,7 +34,7 @@ export class PatchProgram {
     if (!graphV1) return undefined;
     return new PatchProgram(new PatchGraphModel(graphV1), input.place, {
       bus,
-      situations: input.situations,
+      events: input.events,
     });
   }
 
@@ -43,8 +43,8 @@ export class PatchProgram {
   }
 
   publish(message: TwinMessageV1): Result<PatchTraceEntry, TwinError[]> {
-    if (message.wire === 'twin:situation' && message.to) {
-      const v = validateSituationMessageTarget(this.graph.raw, message);
+    if (message.wire === 'twin:event' && message.to) {
+      const v = validateEventMessageTarget(this.graph.raw, message);
       if (!v.ok) return v as Result<PatchTraceEntry, TwinError[]>;
     }
     this.seq += 1;
@@ -62,9 +62,9 @@ export class PatchProgram {
     return new CurriedPatchProgram(this, context);
   }
 
-  situationHeadsByRef(): Map<string, Record<string, unknown>> {
+  eventHeadsByRef(): Map<string, Record<string, unknown>> {
     const map = new Map<string, Record<string, unknown>>();
-    for (const head of this.situations) {
+    for (const head of this.events) {
       const id = typeof head.id === 'string' ? head.id : '';
       if (id) {
         map.set(id, head);
@@ -101,7 +101,7 @@ export class CurriedPatchProgram {
       push(feed.toMessage());
     }
 
-    for (const pulse of this.context.situationPulses(this.program.situationHeadsByRef())) {
+    for (const pulse of this.context.eventPulses(this.program.eventHeadsByRef())) {
       const built = pulse.pulse === 'long' ? pulse.pair() : pulse.enter();
       if (!built.ok) continue;
       const batch = Array.isArray(built.value) ? built.value : [built.value];

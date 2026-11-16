@@ -128,7 +128,7 @@
       "id": "simulate-uplink-known-lag",
       "timezone": "America/New_York",
       "clock": { "starts_at": "2026-06-12T09:00:00-04:00", "duration": "PT2H", "step": "PT30M" },
-      "situations": [{ "phases": ["release"], "args": { "releaseAt": { "type": "time" } } }],
+      "events": [{ "phases": ["release"], "args": { "releaseAt": { "type": "time" } } }],
       "place": {
         "sensors": [
           {
