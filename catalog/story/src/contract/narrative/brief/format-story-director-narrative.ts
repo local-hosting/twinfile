@@ -8,9 +8,9 @@ import {
 } from './storyboard-scene-context.js';
 import { resolveStoryEpisodePresentation } from './resolve-story-episode-presentation.js';
 import {
-  buildStoryJsmNarrativeContext,
+  buildStorySituationsNarrativeContext,
   formatJsmJobBullet,
-} from './story-jsm-narrative-context.js';
+} from './story-situations-narrative-context.js';
 import { touchpointScriptScene } from './storyboard-touchpoint-scenes.js';
 import { buildProtagonistWhoBlurbLines } from './protagonist-identity.js';
 import { formatStoryReaderSynopsisLines } from './format-story-reader-synopsis.js';
@@ -57,7 +57,7 @@ function formatCalendarDate(isoDate: string | undefined): string | undefined {
 function resolveEpisodeTitle(input: FormatStoryDirectorNarrativeInput): string {
   const pitch = input.snapshot.storyPitch?.trim();
   if (pitch) return pitch.replace(/\.$/, '');
-  const fromWhat = humanizeStoryWireLabel(input.snapshot.what?.samEpisodeId);
+  const fromWhat = humanizeStoryWireLabel(input.snapshot.what?.episodeId);
   if (fromWhat) return fromWhat;
   const storyId = input.snapshot.storyId?.trim();
   if (storyId) return humanizeToken(storyId);
@@ -144,7 +144,7 @@ export function buildDirectorScriptScenes(input: FormatStoryDirectorNarrativeInp
   const arc = input.snapshot.when?.storyArc;
   const presentation =
     input.presentation ??
-    resolveStoryEpisodePresentation({ journey: input.journey, sam: input.sam, arc });
+    resolveStoryEpisodePresentation({ journey: input.journey, story: input.story, arc });
   const ids = presentation.scriptTouchpointIds.map((id) => id.trim()).filter(Boolean);
   const scheduleArc =
     presentation.mode === 'session' && arc
@@ -284,7 +284,7 @@ function formatProtagonistLeadSection(
   }
   const jsmNarrative =
     input.jsmNarrative ??
-    buildStoryJsmNarrativeContext({
+    buildStorySituationsNarrativeContext({
       jsm: input.jsm,
       journey: input.journey,
       character: input.character,
@@ -293,7 +293,7 @@ function formatProtagonistLeadSection(
       personaQuote: input.personaQuote,
     });
   if (jsmNarrative.situationPackSituation) {
-    motivation.push(`**Situation (JSM):** ${jsmNarrative.situationPackSituation}`);
+    motivation.push(`**Situation (Situations):** ${jsmNarrative.situationPackSituation}`);
   }
   if (jsmNarrative.journeyGoal) {
     motivation.push(`**Journey goal:** ${jsmNarrative.journeyGoal}`);
@@ -347,10 +347,10 @@ function formatProtagonistLeadSection(
   const first = scriptScenes[0];
   const firstTouchpointId = snapshot.when?.storyArc?.objectiveTouchpointIds?.[0]?.trim();
   if (first && firstTouchpointId) {
-    const openSam = findSamSceneForTouchpoint(ctx.sam, firstTouchpointId);
+    const openSam = findSamSceneForTouchpoint(ctx.story, firstTouchpointId);
     const openPlace = resolveScenePlaceForReader({
       touchpointId: firstTouchpointId,
-      sam: ctx.sam,
+      story: ctx.story,
       samScene: openSam,
       journey: input.journey,
       slugline: first.slugline,
@@ -360,8 +360,8 @@ function formatProtagonistLeadSection(
     whereBits.push(`The camera meets her at **${first.slugline}** (${first.storyboard.time}).`);
   }
   const openSam =
-    (firstTouchpointId ? findSamSceneForTouchpoint(ctx.sam, firstTouchpointId) : undefined) ??
-    ctx.sam?.scenes?.[0];
+    (firstTouchpointId ? findSamSceneForTouchpoint(ctx.story, firstTouchpointId) : undefined) ??
+    ctx.story?.scenes?.[0];
   if (openSam?.situation?.trim()) {
     whereBits.push(openSam.situation.trim());
   }
@@ -433,7 +433,7 @@ export function formatStoryDirectorNarrative(input: FormatStoryDirectorNarrative
   const scriptScenes = buildDirectorScriptScenes(input);
   const jsmNarrative =
     input.jsmNarrative ??
-    buildStoryJsmNarrativeContext({
+    buildStorySituationsNarrativeContext({
       jsm: input.jsm,
       journey: input.journey,
       character: input.character,
@@ -443,7 +443,7 @@ export function formatStoryDirectorNarrative(input: FormatStoryDirectorNarrative
     });
   const episodeTiming = resolveEffectiveEpisodeTiming({
     journey: input.journey,
-    sam: input.sam,
+    story: input.story,
     arc,
     rankedJobCount: jsmNarrative.rankedJobs.length,
   });

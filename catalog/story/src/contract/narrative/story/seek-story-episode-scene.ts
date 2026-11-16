@@ -36,7 +36,7 @@ function orderedScenes(scenes: readonly StoryScene[]): StoryScene[] {
   return [...scenes].sort((left, right) => left.order - right.order);
 }
 
-/** Normalize SAM storyboard rows for scene seek (order, labels, job ids). */
+/** Normalize Story storyboard rows for scene seek (order, labels, job ids). */
 export function storySceneSeekRowsFromSam(
   scenes: readonly StoryScene[] | undefined,
 ): StorySceneSeekRow[] {

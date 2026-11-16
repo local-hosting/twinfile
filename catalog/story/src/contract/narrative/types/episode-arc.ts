@@ -6,7 +6,7 @@ export type EpisodeTouchpointScheduleEntry = {
   hour: number;
   touchpointId: string;
   phase: EpisodePhaseId;
-  /** Storyboard scene when compiled from SAM `scenes`. */
+  /** Storyboard scene when compiled from Story `scenes`. */
   sceneId?: string;
   /** Place setting for this beat (scene `placeRef` / mounted place). */
   placeRef?: string;
@@ -17,7 +17,7 @@ export type EpisodeTouchpointScheduleEntry = {
 
 /**
  * Compiled episode calendar — host wire shape (`StoryEpisodeArcV1`).
- * Produced from a validated {@link import('@local-hosting/twinfile-character/pcm').Journey} plus touchpoint index.
+ * Produced from a validated {@link import('@local-hosting/twinfile-character/persona').Journey} plus touchpoint index.
  */
 export type EpisodeArcV1 = {
   version: 1;

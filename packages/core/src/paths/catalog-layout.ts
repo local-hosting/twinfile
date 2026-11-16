@@ -28,7 +28,7 @@ export function catalogTypeExamplesDir(twinfileRoot: string, type: TwinCatalogTy
   return join(catalogTypeDir(twinfileRoot, type), 'examples');
 }
 
-/** PCM/JSM YAML libraries (`libs/audience|journey|psychology/`) — not twin heads. */
+/** Character/situations YAML libraries (`libs/audience|journey|psychology/`) — not twin heads. */
 export function catalogCharacterLibsDir(twinfileRoot: string): string {
   return join(catalogTypeDir(twinfileRoot, 'character'), 'libs');
 }
@@ -67,7 +67,7 @@ export function resolvePlaceExamplesCatalogRoot(root?: string): string {
   return resolveTypeExamplesRoot('place', root);
 }
 
-/** Character PCM/JSM YAML under `catalog/character/libs/`. */
+/** Character Character/situations YAML under `catalog/character/libs/`. */
 export function resolveCharacterCatalogRoot(seed?: string): string {
   return catalogCharacterLibsDir(resolveTwinfileRoot(seed));
 }

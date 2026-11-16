@@ -1,5 +1,5 @@
-import type { Job } from '@local-hosting/twinfile-character/jsm';
-import type { JobSituationModel } from '@local-hosting/twinfile-character/jsm';
+import type { Job } from '@local-hosting/twinfile-character/situations';
+import type { JobSituationModel } from '@local-hosting/twinfile-character/situations';
 
 function uniqueJobs(jobs: readonly Job[]): Job[] {
   const byId = new Map<string, Job>();
@@ -13,7 +13,7 @@ function uniqueJobs(jobs: readonly Job[]): Job[] {
   return [...byId.values()].sort((left, right) => left.id.localeCompare(right.id));
 }
 
-/** Union org-mounted JSM packs into one lookup surface for brief + plan. */
+/** Union org-mounted Situations packs into one lookup surface for brief + plan. */
 export function mergeJobSituationModels(
   models: readonly JobSituationModel[],
 ): JobSituationModel | undefined {

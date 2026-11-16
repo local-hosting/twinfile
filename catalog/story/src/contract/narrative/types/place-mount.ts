@@ -1,4 +1,4 @@
-/** Place layout mount wire for SAM/AXM. */
+/** Place layout mount wire for Story/AXM. */
 import type { TwinfileRef } from '@local-hosting/twinfile-core/ref';
 
 export type PlaceMountLayoutLevel = {
@@ -39,4 +39,4 @@ export type PlaceMount = {
 export type TwinfilePlaceMount = PlaceMount;
 
 /** @deprecated Use {@link PlaceMount}. */
-export type SAMPlaceMount = PlaceMount;
+export type StoryPlaceMount = PlaceMount;

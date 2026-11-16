@@ -32,7 +32,7 @@ export function resolvePackageRoot(moduleUrl: string, depth = 3): string {
   return dir;
 }
 
-/** PCM/JSM YAML under `catalog/character/libs/`. */
+/** Character/Situations YAML under `catalog/character/libs/`. */
 export function resolveCharacterCatalogsRoot(moduleUrl: string): string {
   const packageRoot = resolvePackageRoot(moduleUrl);
   return resolveCharacterCatalogRoot(resolveTwinfileRoot(packageRoot));

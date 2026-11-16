@@ -1,6 +1,6 @@
 import type { EpisodeActivityKind } from '../types/episode-activity.js';
 
-/** Minimal activity row on `when.timeline` (SAM-owned parser). */
+/** Minimal activity row on `when.timeline` (Story-owned parser). */
 export type StoryTimelineActivityWire = {
   id?: string;
   kind: EpisodeActivityKind | string;

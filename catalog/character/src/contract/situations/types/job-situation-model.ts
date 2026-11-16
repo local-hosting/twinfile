@@ -1,7 +1,7 @@
 import type { Job } from './job.js';
 
 /**
- * Job Situation Model (JSM) — one mountable pack of JTBD jobs (+ nested obstacles)
+ * Job Situation Model (Situations) — one mountable pack of JTBD jobs (+ nested obstacles)
  * for a situation. Not every persona/story hits every situation; mount selectively.
  */
 export type JobSituationModel = {

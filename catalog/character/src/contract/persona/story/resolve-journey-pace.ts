@@ -16,7 +16,7 @@ export function resolvePersonaJourneyPace(
   return normalizeJourneyPaceId(persona?.journeyPace);
 }
 
-/** AXM / story-planning segment profile (projected from PCM or org packs). */
+/** AXM / story-planning segment profile (projected from Character or org packs). */
 export type PlanningSegmentJourneyPaceSource = {
   journeyPace?: string;
   overview?: { journeyPace?: string };

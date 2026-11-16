@@ -1,5 +1,5 @@
 import type { CustomerCatalog } from '../people/customer/profile/customer.js';
-import type { JtbdCatalog } from '@local-hosting/twinfile-character/jsm/catalog/jtbd.schema.js';
+import type { JtbdCatalog } from '@local-hosting/twinfile-character/situations/catalog/jtbd.schema.js';
 import {
   ActivityBlockSchema,
   ActivityScheduleCatalogSchema,

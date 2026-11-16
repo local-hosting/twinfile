@@ -1,9 +1,9 @@
 import { parseTwinfileRef } from '@local-hosting/twinfile-core/ref';
 
-import type { SamStoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
+import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 
 export type SamStoryCatalogTextMatchV1 = {
-  pcmId?: string;
+  characterId?: string;
   episodeId?: string;
   placeRef?: string;
   storeSlug?: string;
@@ -78,9 +78,9 @@ export function placeSlugFromPlaceRef(placeRef: string): string {
 /** Keyword match user catalog menu (+ optional fleet slugs) against natural language. */
 export function matchSamStoryCatalogIdsFromText(input: {
   text: string;
-  menu: SamStoryCatalogMenuV1;
+  menu: StoryCatalogMenuV1;
   fleetPlaces?: readonly SamStoryCatalogFleetPlaceRef[];
-  focalPcmId?: string;
+  focalCharacterId?: string;
   /** When false (default), do not infer placeRef from place mount titles — places are not user content. */
   includePlaces?: boolean;
 }): SamStoryCatalogTextMatchV1 {
@@ -89,17 +89,17 @@ export function matchSamStoryCatalogIdsFromText(input: {
     return {};
   }
 
-  const pcmId = bestIdFromCandidates(
+  const characterId = bestIdFromCandidates(
     scenario,
     input.menu.characters.map((row) => ({
-      id: row.pcmId,
-      labels: [row.pcmId, row.label, row.pcmId.replace(/^persona:/, '')],
+      id: row.characterId,
+      labels: [row.characterId, row.label, row.characterId.replace(/^persona:/, '')],
     })),
   );
 
-  const focalPcmId = input.focalPcmId?.trim() || pcmId;
-  const episodePool = focalPcmId
-    ? input.menu.episodes.filter((row) => row.focalPcmId === focalPcmId)
+  const focalCharacterId = input.focalCharacterId?.trim() || characterId;
+  const episodePool = focalCharacterId
+    ? input.menu.episodes.filter((row) => row.focalCharacterId === focalCharacterId)
     : input.menu.episodes;
   const episodeId = bestIdFromCandidates(
     scenario,
@@ -139,7 +139,7 @@ export function matchSamStoryCatalogIdsFromText(input: {
     : undefined;
 
   return {
-    ...(pcmId ? { pcmId } : {}),
+    ...(characterId ? { characterId } : {}),
     ...(episodeId ? { episodeId } : {}),
     ...(placeRef ? { placeRef } : {}),
     ...(storeSlug ? { storeSlug } : {}),

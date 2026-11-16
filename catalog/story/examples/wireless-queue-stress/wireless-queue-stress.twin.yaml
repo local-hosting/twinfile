@@ -1,0 +1,27 @@
+twinfile: 2
+kind: story
+id: wireless-queue-stress
+name: Wireless queue stress
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/wireless-mobile:0.1.0
+  - rel: involves
+    href: twinfile/character/wireless-greeter:0.1.0
+story:
+  pitch: Queue surge overloads waiting area and greeter kiosk.
+  scenes:
+    - id: queue-at-cap
+      label: Waiting area at capacity
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        clock:
+          starts_at: '2026-06-01T14:00:00Z'
+          duration: PT2H
+          step: PT5M
+        args:
+          occupancy: 60
+          target_role: ground-transport

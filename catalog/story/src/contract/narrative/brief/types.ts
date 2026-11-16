@@ -14,12 +14,12 @@ export type BriefV1 = {
 
 export type StoryBriefWhoV1 = {
   segmentId?: string;
-  pcmId?: string;
+  characterId?: string;
   displayName?: string;
 };
 
 export type StoryBriefWhatV1 = {
-  samEpisodeId?: string;
+  episodeId?: string;
   startStoreVisitJourney?: boolean;
 };
 
@@ -87,7 +87,7 @@ export type StoryBriefCharacterV1 = {
   occupation?: string;
   storyIds?: string[];
   psychology?: {
-    pcmId?: string;
+    characterId?: string;
     segmentId?: string;
     segmentLabel?: string;
     mindset?: string;

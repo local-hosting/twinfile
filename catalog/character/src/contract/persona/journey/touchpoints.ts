@@ -1,4 +1,4 @@
-import type { KpiDefinition, KpiRegistry } from '@local-hosting/twinfile-character/jsm/types/kpi-definition-wire.js';
+import type { KpiDefinition, KpiRegistry } from '@local-hosting/twinfile-character/situations/types/kpi-definition-wire.js';
 import type {
   TouchpointDefinition,
   TouchpointGraphSpec,

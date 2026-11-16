@@ -1,0 +1,15 @@
+twinfile: 2
+kind: character
+id: shopper
+name: Shopper (retail baseline)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Thin retail shopper head — segment mix lives in retail-consumer libs.
+character:
+  role: visitor
+  segment: retail-consumer
+  goals:
+    - Complete a considered retail purchase with minimal friction

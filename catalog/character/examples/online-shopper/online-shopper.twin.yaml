@@ -1,0 +1,17 @@
+twinfile: 2
+kind: character
+id: online-shopper
+name: Online shopper (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Exemplar digital shopper for cart-to-checkout stories.
+character:
+  role: visitor
+  segment: default
+  exemplar:
+    name: Alex Kim
+  goals:
+    - Complete checkout or schedule in-store pickup

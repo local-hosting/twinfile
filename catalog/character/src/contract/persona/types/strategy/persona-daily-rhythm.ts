@@ -29,7 +29,7 @@ export type PersonaDailyRhythmBlock = {
 };
 
 /**
- * Persona-level weekday rhythm — authored on PCM before instance materialization.
+ * Persona-level weekday rhythm — authored on Character before instance materialization.
  * Hosts jitter blocks per story instance (see {@link samplePersonaDailyRhythm}).
  */
 export type PersonaDailyRhythm = {

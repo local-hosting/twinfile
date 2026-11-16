@@ -37,7 +37,7 @@ function groupValues(
   return Object.keys(out).length > 0 ? out : undefined;
 }
 
-/** Rebuild the segment attitudes facet from PCM `signalValues` joined with AXM signal dimensions. */
+/** Rebuild the segment attitudes facet from Character `signalValues` joined with AXM signal dimensions. */
 export function segmentAttitudesFromSignalValues(
   values: Readonly<Record<string, number>>,
   dimensions: readonly SignalDimension[],

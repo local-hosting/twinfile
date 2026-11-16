@@ -1,0 +1,28 @@
+storySpec: 1
+id: story:episode:rider-commute-demo
+title: Rider commute demo episode
+revision: 1
+summary: Multi-cast commute — rider focal journey with driver and two place mounts
+arcTemplate:
+  id: arc:five-act-commute
+  label: Commute story arc
+  kind: man_in_a_hole
+  description: Intent → commit → relief (Write Practice beats in acts/*.yml)
+characters:
+  - characterId: persona:rider
+    primary: true
+    role: protagonist
+  - characterId: persona:driver
+    role: counterpart
+places:
+  - placeRef: twinfile/place/urban-curbside:0.0.0
+    role: pickup
+    label: Curbside pickup
+  - placeRef: twinfile/place/office-dropoff:0.0.0
+    role: destination
+binding:
+  characterId: persona:rider
+  journeyId: journey:rider-commute
+  simulationEpochStart: 2026-01-06
+  planningHorizonDays: 56
+  visitDayIndex: 28

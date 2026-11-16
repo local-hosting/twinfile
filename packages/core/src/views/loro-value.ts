@@ -1,5 +1,5 @@
 /**
- * Loro / Loro pack pack view — JSON values safe to `pack.set` into a LoroMap.
+ * Host pack view — JSON values safe to `pack.set` into a map document.
  * Does not import `loro-crdt` / `loro.js`; hosts own WASM and sync.
  */
 

@@ -1,8 +1,8 @@
 import { omitNullishDeep } from './omit-nullish-deep.js';
-import { parseSAM } from '../schemas/sam.schema.js';
-import type { SAM } from '../types/sam.js';
+import { parseStory } from '../schemas/story-narrative.schema.js';
+import type { Story } from '../types/story-narrative.js';
 
-export type SamJson = {
+export type StoryJson = {
   document: Record<string, unknown>;
   characters: unknown[];
   places?: unknown[];
@@ -12,8 +12,8 @@ export type SamJson = {
   episodeArc?: Record<string, unknown>;
 };
 
-/** JSON export of a SAM document. */
-export function samToJSON(sam: SAM): Record<string, unknown> {
+/** JSON export of a Story document. */
+export function storyToJSON(story: Story): Record<string, unknown> {
   const {
     id,
     title,
@@ -26,7 +26,7 @@ export function samToJSON(sam: SAM): Record<string, unknown> {
     scenes,
     binding,
     episodeArc,
-  } = sam;
+  } = story;
 
   const document: Record<string, unknown> = { version, id, title, revision };
   if (summary !== undefined) document.summary = summary;
@@ -42,15 +42,15 @@ export function samToJSON(sam: SAM): Record<string, unknown> {
   });
 }
 
-export function samFromJSON(json: unknown): SAM {
-  const raw = json as SamJson & Record<string, unknown>;
+export function storyFromJSON(json: unknown): Story {
+  const raw = json as StoryJson & Record<string, unknown>;
   const doc = raw.document ?? {};
 
-  return parseSAM({
+  return parseStory({
     ...doc,
     characters: raw.characters,
     places: raw.places,
-    arcTemplate: (raw as SamJson).arcTemplate,
+    arcTemplate: (raw as StoryJson).arcTemplate,
     scenes: raw.scenes,
     binding: raw.binding,
     episodeArc: raw.episodeArc,

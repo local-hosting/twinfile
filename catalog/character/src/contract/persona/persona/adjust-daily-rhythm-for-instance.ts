@@ -1,8 +1,8 @@
-import type { PCMCharacter } from '../types/pcm-character.js';
+import type { CharacterPersona } from '../types/character-persona.js';
 import type { PersonaDailyRhythm, PersonaDailyRhythmBlock } from '../types/strategy/persona-daily-rhythm.js';
 
 export type AdjustDailyRhythmForInstanceInput = {
-  persona: PCMCharacter;
+  persona: CharacterPersona;
   demographics?: Readonly<Record<string, string>>;
 };
 
@@ -29,7 +29,7 @@ function shiftBlocks(
   return blocks.map((block) => withStartMinutes(block, blockStartMinutes(block) + shiftMinutes));
 }
 
-function readScheduleAttribute(persona: PCMCharacter): string | undefined {
+function readScheduleAttribute(persona: CharacterPersona): string | undefined {
   const attributes = persona.attributes ?? {};
   const keys = [
     'work_schedule',
@@ -66,7 +66,7 @@ function shiftFromScheduleAttribute(schedule: string | undefined): number {
   return 0;
 }
 
-function shiftFromJourneyPace(pace: PCMCharacter['journeyPace']): number {
+function shiftFromJourneyPace(pace: CharacterPersona['journeyPace']): number {
   if (pace === 'fast') {
     return -20;
   }

@@ -1,12 +1,12 @@
 /**
- * @local-hosting/twinfile-character/pcm — Persona Character Model (one portable character).
+ * @local-hosting/twinfile-character/persona — Persona Character Model (one portable character).
  *
  * @packageDocumentation
  */
 
 export * from './browser.js';
 
-export { pcmCatalogId, pcmCatalogLabel, pcmCatalogSegment } from './contract/pcm-catalog-display.js';
+export { characterCatalogId, characterCatalogLabel, characterCatalogSegment } from './contract/character-catalog-display.js';
 
 export {
   ProductObjectiveSchema,
@@ -18,7 +18,7 @@ export type {
   StrategyEntityLifecycle,
 } from './types/strategy/strategy.js';
 
-/** @deprecated Import from `@local-hosting/twinfile-character/jsm`. */
+/** @deprecated Import from `@local-hosting/twinfile-character/situations`. */
 export { JobSchema, parseJob } from '../situations/index.js';
 
 export {
@@ -26,22 +26,22 @@ export {
   JourneyObstacleEncounterSchema,
 } from './schemas/story/obstacle.schema.js';
 
-export { pcmToContribution, type PcmAxmContribution } from './contract/to-contribution.js';
-export { loadPCM, type LoadPCMResult } from './contract/load-pcm.js';
-export { savePCM } from './contract/save-pcm.js';
+export { characterToContribution, type CharacterAxmContribution } from './contract/to-contribution.js';
+export { loadCharacter, type LoadCharacterResult } from './contract/load-character.js';
+export { saveCharacter } from './contract/save-character.js';
 export {
-  PCM_MENTAL_MODEL_SCOPE_FILE,
-  PCM_OBJECTIVES_FILE,
-  PCM_SEGMENT_FACET_FILES,
-} from './contract/pcm-segment-topics.js';
-export type { PcmSegmentFacets, PcmSegmentStrategy } from './types/pcm-segment-facets.js';
-export type { PCMEmpathy, PCMExemplar } from './types/pcm-character.js';
+  CHARACTER_MENTAL_MODEL_SCOPE_FILE,
+  CHARACTER_OBJECTIVES_FILE,
+  CHARACTER_SEGMENT_FACET_FILES,
+} from './contract/character-segment-topics.js';
+export type { CharacterSegmentFacets, CharacterSegmentStrategy } from './types/character-segment-facets.js';
+export type { CharacterEmpathy, CharacterExemplar } from './types/character-persona.js';
 
 export {
-  demographicProfileFromPcm,
-  personaProfileFromPcm,
-  psychographicSegmentProfileFromPcm,
-} from './people/customer/profile/profiles-from-pcm.js';
+  demographicProfileFromCharacter,
+  personaProfileFromCharacter,
+  psychographicSegmentProfileFromCharacter,
+} from './people/customer/profile/profiles-from-character.js';
 export {
   segmentAttitudesFromSignalValues,
   type SegmentAttitudesBody,
@@ -56,7 +56,7 @@ export {
   URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM,
 } from './persona/persona-daily-rhythm-presets.js';
 export { resolvePersonaDailyRhythm } from './persona/resolve-persona-daily-rhythm.js';
-export { resolvePcmPersonaDisplayName } from './persona/resolve-persona-display-name.js';
+export { resolveCharacterPersonaDisplayName } from './persona/resolve-persona-display-name.js';
 export { pickPersonaDailyRhythmTemplate } from './persona/pick-persona-daily-rhythm-template.js';
 export { adjustDailyRhythmForInstance } from './persona/adjust-daily-rhythm-for-instance.js';
 export {
@@ -76,7 +76,7 @@ export {
   resolvePsychographic,
 } from './psychographic/resolve-psychographic.js';
 
-export * from './pcm-audience.js';
+export * from './character-audience.js';
 export * from './journey/index.js';
 export { JourneyEmotionValenceSchema, type JourneyEmotionValence } from './browser.js';
 export * from './people/customer/customer.js';

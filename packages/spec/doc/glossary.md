@@ -55,11 +55,12 @@ A **place does not run**. **Runs** + **player** execute on a built place (runner
 
 | Term | Role | Not |
 | --- | --- | --- |
-| **View** | One-way presentation of a twin (`TwinfileSummaryV1` → ascii/json/yaml/markdown; place → Schema.org **JSON-LD**; trees → **loro** pack JSON) | Round-trip format I/O |
+| **View** | One-way presentation of a twin (`TwinfileSummaryV1` → ascii/json/yaml/markdown; place → Schema.org **JSON-LD**; trees → **loro** pack JSON) | Round-trip class ↔ map I/O |
+| **Loro map I/O** | Document `import`/`export` against a host-passed PackMap / LoroMap-like object (`importTwinfileFromLoroMap` / `exportTwinfileToLoroMap`) | Owning loro WASM or locker sync |
 | **Bridge** | Authoring-time import/export of place layers (IMDF, GTFS, …) | Card/HTML rendering |
 | **Host adapter** | Host runtime contracts (patch bus, map sink, locker) | Spec/kernel presentation |
 
-Kernel API: `renderTwinfileSummaryView`, `renderTwinfilePlaceView` (`jsonld`), `renderTwinfileLoroView` (`loro` — LoroMap-safe JSON; no `loro.js` WASM in core). CLI: `twin summary`, `twin export jsonld`.
+Kernel API: `renderTwinfileSummaryView`, `renderTwinfilePlaceView` (`jsonld`), `renderTwinfileLoroView` (`loro` — LoroMap-safe JSON; no `loro.js` WASM in core); `@local-hosting/twinfile-core/loro` for map import/export. CLI: `twin summary`, `twin export jsonld`.
 
 ## Site stack (prose)
 

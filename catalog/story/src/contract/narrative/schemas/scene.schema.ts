@@ -4,7 +4,7 @@ import { z } from 'zod';
 import { coalesceJobIdsFields } from './coalesce-job-ids.js';
 import { SceneBeatIdSchema } from './dramatic-beat.schema.js';
 
-/** Twinfile place unit ref; scenes and `sam.places` match on kind + name. */
+/** Twinfile place unit ref; scenes and `story.places` match on kind + name. */
 export const PlaceRefSchema = z.string().trim().refine(isTwinfileRef, 'placeRef must be a Twinfile ref');
 
 export const SceneEmotionBandSchema = z.enum(['low', 'mid', 'high']);
@@ -31,7 +31,7 @@ const withCoalescedSceneFields = <T extends z.ZodTypeAny>(schema: T) =>
 
 export const SceneCharacterBeatSchema = withCoalescedSceneFields(
   z.object({
-    pcmId: z.string().min(1),
+    characterId: z.string().min(1),
     jobIds: z.array(z.string().min(1)).optional(),
     emotions: SceneEmotionsSchema.optional(),
     pain: z.string().min(1).optional(),

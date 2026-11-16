@@ -1,7 +1,7 @@
 import type { Job } from '../types/job.js';
 import type { JobSituationModel } from '../types/job-situation-model.js';
 
-/** Resolve JTBD jobs referenced by SAM scene or activity `jobIds`. */
+/** Resolve JTBD jobs referenced by Story scene or activity `jobIds`. */
 export function pickJobsByIds(
   model: JobSituationModel,
   jobIds: readonly string[],

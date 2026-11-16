@@ -1,20 +1,20 @@
 import type { EpisodeArcV1 } from './episode-arc.js';
 import type { DramaticBeatId } from './dramatic-beat.js';
 
-/** SAM-owned slice of “who” — PCM ref + cast; display names come from PCM materialization on the host. */
-export type SamStoryDimensionWhoV1 = {
-  pcmId: string;
-  /** PCMs appearing in `scenes` (includes focal `pcmId` when present in cast). */
+/** Story-owned slice of “who” — Character ref + cast; display names come from Character materialization on the host. */
+export type StoryDimensionWhoV1 = {
+  characterId: string;
+  /** PCMs appearing in `scenes` (includes focal `characterId` when present in cast). */
   characterIds: string[];
 };
 
-export type SamStoryDimensionWhatV1 = {
-  samEpisodeId: string;
+export type StoryDimensionWhatV1 = {
+  episodeId: string;
   journeyId: string;
   arcKind?: string;
 };
 
-export type SamStoryDimensionWhereV1 = {
+export type StoryDimensionWhereV1 = {
   /** Distinct place mounts used across scenes (`place:*`). */
   placeRefs: string[];
   /** First scene place unless overridden by host fleet binding. */
@@ -22,7 +22,7 @@ export type SamStoryDimensionWhereV1 = {
   spaceIds?: string[];
 };
 
-export type SamStoryDimensionWhenV1 = {
+export type StoryDimensionWhenV1 = {
   simulationEpochStart: string;
   planningHorizonDays: number;
   visitDayIndex: number;
@@ -30,27 +30,27 @@ export type SamStoryDimensionWhenV1 = {
 };
 
 /** Motivation spine from scenes (needs/jobs); engagement levels remain host catalog policy. */
-export type SamStoryDimensionWhyV1 = {
+export type StoryDimensionWhyV1 = {
   jobIds?: string[];
   situation?: string;
   narrativeBeat?: string;
 };
 
-export type SamStoryDimensionHowV1 = {
+export type StoryDimensionHowV1 = {
   journeyPace?: string;
   dramaticBeatIds?: DramaticBeatId[];
 };
 
 /**
- * Portable 5W+H contract projected from a compiled SAM episode.
- * Hosts merge PCM instance overlays on `who` and fleet/geo on `where`.
+ * Portable 5W+H contract projected from a compiled Story episode.
+ * Hosts merge Character instance overlays on `who` and fleet/geo on `where`.
  */
-export type SamStoryDimensionsV1 = {
+export type StoryDimensionsV1 = {
   specVersion: '1.0';
-  who: SamStoryDimensionWhoV1;
-  what: SamStoryDimensionWhatV1;
-  where: SamStoryDimensionWhereV1;
-  when: SamStoryDimensionWhenV1;
-  why?: SamStoryDimensionWhyV1;
-  how?: SamStoryDimensionHowV1;
+  who: StoryDimensionWhoV1;
+  what: StoryDimensionWhatV1;
+  where: StoryDimensionWhereV1;
+  when: StoryDimensionWhenV1;
+  why?: StoryDimensionWhyV1;
+  how?: StoryDimensionHowV1;
 };

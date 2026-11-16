@@ -1,0 +1,68 @@
+import { describe, expect, it } from 'vitest';
+import { matchSamStoryCatalogIdsFromText } from '../../../src/contract/narrative/story-catalog/match-story-catalog-from-text.js';
+import type { StoryCatalogMenuV1 } from '../../../src/contract/narrative/types/story-catalog-menu.js';
+
+const menu: StoryCatalogMenuV1 = {
+  characters: [
+    { characterId: 'persona:rider', label: 'Rider', journeyIds: ['journey:rider-commute'] },
+    { characterId: 'persona:driver', label: 'Driver', journeyIds: ['journey:driver-offer'] },
+  ],
+  episodes: [
+    {
+      id: 'story:episode:rider-commute',
+      title: 'Rider commute episode',
+      focalCharacterId: 'persona:rider',
+      journeyId: 'journey:rider-commute',
+    },
+    {
+      id: 'story:episode:driver-offer',
+      title: 'Driver offer episode',
+      focalCharacterId: 'persona:driver',
+      journeyId: 'journey:driver-offer',
+    },
+  ],
+  places: [
+    { placeRef: 'twinfile/place/demo-airport:0.0.0', title: 'Airport pickup' },
+    { placeRef: 'twinfile/place/demo-home:0.0.0', title: 'Home dropoff' },
+  ],
+};
+
+describe('matchSamStoryCatalogIdsFromText', () => {
+  it('matches rider commute without inferring place from NL by default', () => {
+    const hints = matchSamStoryCatalogIdsFromText({
+      text: 'Rider morning commute from home dropoff',
+      menu,
+    });
+    expect(hints.characterId).toBe('persona:rider');
+    expect(hints.episodeId).toBe('story:episode:rider-commute');
+    expect(hints.placeRef).toBeUndefined();
+  });
+
+  it('matches place mount when includePlaces is true', () => {
+    const hints = matchSamStoryCatalogIdsFromText({
+      text: 'Rider morning commute from home dropoff',
+      menu,
+      includePlaces: true,
+    });
+    expect(hints.placeRef).toBe('twinfile/place/demo-home:0.0.0');
+  });
+
+  it('matches driver offer episode when driver is mentioned', () => {
+    const hints = matchSamStoryCatalogIdsFromText({
+      text: 'Driver receives an offer notification during shift',
+      menu,
+      focalCharacterId: 'persona:driver',
+    });
+    expect(hints.characterId).toBe('persona:driver');
+    expect(hints.episodeId).toBe('story:episode:driver-offer');
+  });
+
+  it('matches airport place when airport is mentioned and place matching enabled', () => {
+    const hints = matchSamStoryCatalogIdsFromText({
+      text: 'Vacation landing at airport pickup',
+      menu,
+      includePlaces: true,
+    });
+    expect(hints.placeRef).toBe('twinfile/place/demo-airport:0.0.0');
+  });
+});

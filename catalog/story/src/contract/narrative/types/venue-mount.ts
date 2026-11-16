@@ -3,6 +3,6 @@ export type {
   PlaceMountLayoutLevel,
   PlaceMountLayoutPathway,
   PlaceMountLayoutSpace,
-  SAMPlaceMount,
+  StoryPlaceMount,
   TwinfilePlaceMount,
 } from './place-mount.js';

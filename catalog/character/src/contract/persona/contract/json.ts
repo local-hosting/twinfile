@@ -1,8 +1,8 @@
 import { omitNullishDeep } from '../axm/omit-nullish-deep.js';
-import { parsePCM } from '../schemas/pcm.schema.js';
-import type { PCM } from '../types/pcm.js';
+import { parseCharacter } from '../schemas/character.schema.js';
+import type { Character } from '../types/character.js';
 
-export type PcmJson = {
+export type CharacterJson = {
   document: Record<string, unknown>;
   persona: Record<string, unknown>;
   jobs?: unknown[];
@@ -13,7 +13,7 @@ export type PcmJson = {
 };
 
 /** Storage-neutral JSON export. */
-export function pcmToJSON(pcm: PCM): Record<string, unknown> {
+export function characterToJSON(character: Character): Record<string, unknown> {
   const {
     persona,
     jobs,
@@ -30,7 +30,7 @@ export function pcmToJSON(pcm: PCM): Record<string, unknown> {
     revision,
     version,
     summary,
-  } = pcm;
+  } = character;
 
   const document: Record<string, unknown> = { version, id, title, revision };
   if (summary !== undefined) document.summary = summary;
@@ -63,14 +63,14 @@ export function pcmToJSON(pcm: PCM): Record<string, unknown> {
   });
 }
 
-export function pcmFromJSON(json: unknown): PCM {
-  const raw = json as PcmJson & Record<string, unknown>;
+export function characterFromJSON(json: unknown): Character {
+  const raw = json as CharacterJson & Record<string, unknown>;
   const doc = raw.document ?? {};
   const story = (raw.story ?? {}) as Record<string, unknown>;
   const strategy = (raw.strategy ?? {}) as Record<string, unknown>;
   const jobs = raw.jobs ?? raw.userNeeds ?? [];
 
-  return parsePCM({
+  return parseCharacter({
     ...doc,
     persona: raw.persona,
     jobs,
