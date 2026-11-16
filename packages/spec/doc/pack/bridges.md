@@ -69,7 +69,7 @@ glTF/GLB does not replace the place graph. The glTF bridge writes a minimal plac
 | Mechanism | Extends |
 | --- | --- |
 | **Bridge** | Authoring-time import/export and geometry attachment |
-| **View** | One-way presentation (`twin summary`, `twin export jsonld`) — not a bridge |
+| **View** | One-way presentation (`twin summary`, `twin export jsonld`, `renderTwinfileLoroView`) — not a bridge |
 | **Runner** (`use.runner: npm:…`) | Offline answer on a built bundle (stdout JSONL) |
 | **Player** (host) | Same **timeline** as runners; publishes on patch module bus — [World session](../place/world-session.md) |
 
