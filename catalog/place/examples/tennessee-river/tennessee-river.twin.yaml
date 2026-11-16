@@ -1,0 +1,144 @@
+from: twinfile/base-linear:0.1.0
+twinfile: 2
+kind: place
+id: tennessee-river
+name: Tennessee River — Chattanooga
+version: 0.1.0
+stability: example
+geotype:
+  primary: creek
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Tennessee River — Chattanooga
+      kind: creek
+      timezone: America/New_York
+      location:
+        lat: 35.085
+        lng: -85.35
+      ext:
+        h3: 8944db6b2b7ffff
+      published: false
+  - spaces:
+      - id: mountain-creek
+        name: Mountain Creek confluence
+        kind: reach
+        exposure: outdoor
+        visit_order: 1
+      - id: williams-island
+        name: Williams Island State Archaeological Park
+        kind: reach
+        exposure: outdoor
+        visit_order: 2
+      - id: moccasin-bend
+        name: Moccasin Bend National Archaeological District
+        kind: reach
+        exposure: outdoor
+        visit_order: 3
+  - reaches:
+      - id: mountain-creek
+        length_m: 900
+        flows_to: williams-island
+      - id: williams-island
+        length_m: 1400
+        flows_to: moccasin-bend
+      - id: moccasin-bend
+        length_m: 1100
+        flows_to: below-bend
+  - markers:
+      - id: creek-outfall
+        name: Mountain Creek outfall
+        roles:
+          - hotspot
+          - water-launch
+        step_free: false
+        state: open
+      - id: island-access
+        name: Williams Island access
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: bend-collection
+        name: Bend collection bay
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: field-survey
+        name: Field survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: creek-to-island
+        name: Mountain Creek to Williams Island
+        from: mountain-creek
+        to: williams-island
+        length_m: 1400
+        kind: path
+        step_free: false
+      - id: island-to-bend
+        name: Williams Island to Moccasin Bend
+        from: williams-island
+        to: moccasin-bend
+        length_m: 1100
+        kind: path
+        step_free: false
+  - visits:
+      - id: visit-creek
+        kind: activity
+        name: Mountain Creek check
+        space: mountain-creek
+        order: 0
+      - id: visit-island
+        kind: activity
+        name: Williams Island check
+        space: williams-island
+        order: 1
+      - id: visit-bend
+        kind: activity
+        name: Moccasin Bend check
+        space: moccasin-bend
+        order: 2
+  - bind:
+      for: monitor-round
+      roles:
+        water-launch:
+          - creek-outfall
+        survey-station:
+          - field-survey
+      actions:
+        - at: patrol
+          set: {}
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - creek-outfall
+        safe-access:
+          - island-access
+        collection-point:
+          - bend-collection
+        survey-station:
+          - field-survey
+      actions:
+        - at: post-storm-surge
+          set:
+            creek-outfall:
+              state: closed
+  - bind:
+      for: water-quality-alert
+      roles:
+        hotspot:
+          - creek-outfall
+        safe-access:
+          - island-access
+        collection-point:
+          - bend-collection
+        survey-station:
+          - field-survey
+      actions:
+        - at: exceedance
+          set:
+            creek-outfall:
+              state: closed

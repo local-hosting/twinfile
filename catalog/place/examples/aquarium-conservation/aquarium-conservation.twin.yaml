@@ -1,0 +1,47 @@
+from: twinfile/base-single-level:0.1.0
+twinfile: 2
+kind: place
+id: aquarium-conservation
+name: Aquarium Conservation Institute
+version: 0.1.0
+stability: example
+geotype:
+  primary: aquarium
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Aquarium Conservation Institute
+      kind: aquarium
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 35.0805
+        lon: -85.3482
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: wet-lab
+        name: Wet lab
+        kind: lab
+        level: ground
+        exposure: indoor
+      - id: river-deck
+        name: River deck
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+  - stations:
+      - id: conservation-survey
+        name: Conservation survey desk
+        roles:
+          - survey-station
+  - visits:
+      - id: visit-wet-lab
+        kind: activity
+        name: Wet lab intake
+        space: wet-lab
+        order: 0

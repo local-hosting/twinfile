@@ -1,0 +1,47 @@
+from: twinfile/base-single-level:0.1.0
+twinfile: 2
+kind: place
+id: red-bank-high
+name: Red Bank High School
+version: 0.1.0
+stability: example
+geotype:
+  primary: high_school
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Red Bank High School
+      kind: school
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 35.1126
+        lon: -85.2941
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: science-lab
+        name: Watershed science lab
+        kind: classroom
+        level: ground
+        exposure: indoor
+      - id: courtyard
+        name: Courtyard
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+  - stations:
+      - id: student-sample-desk
+        name: Student sample desk
+        roles:
+          - survey-station
+  - visits:
+      - id: visit-lab
+        kind: activity
+        name: Lab briefing
+        space: science-lab
+        order: 0

@@ -1,0 +1,29 @@
+twinfile: 2
+kind: resource
+id: water-quality-sensor
+name: Water quality sensor
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/tennessee-river:0.1.0
+    anchor: mountain-creek
+resource:
+  kind: sensor
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-watershed-district
+    elements:
+      purpose:
+        - public_safety
+      collection:
+        - connected_device_telemetry
+      affected:
+        - environment
+  ext:
+    lat: 35.1002
+    lon: -85.3625
+    observes: turbidity
+    unit: NTU

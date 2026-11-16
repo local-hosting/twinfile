@@ -1,0 +1,29 @@
+twinfile: 2
+kind: story
+id: tennessee-river-operations
+name: Tennessee River operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/tennessee-river:0.1.0
+  - rel: involves
+    href: twinfile/place/aquarium-conservation:0.1.0
+  - rel: involves
+    href: twinfile/place/baylor-school:0.1.0
+  - rel: involves
+    href: twinfile/character/watershed-steward:0.1.0
+story:
+  pitch: Clear-day monitor round from Mountain Creek through Williams Island, then school and aquarium sample handoff.
+  scenes:
+    - id: confluence-round
+      label: Confluence monitor round
+      run:
+        from: twinfile/place/tennessee-river:0.1.0
+        steps:
+          - copy: twinfile/event/monitor-round:1.0.0
+    - id: school-handoff
+      label: School sample handoff
+      run:
+        from: twinfile/place/baylor-school:0.1.0

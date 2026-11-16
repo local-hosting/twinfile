@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: watershed-steward
+name: Watershed steward (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional steward persona for the Chattanooga Tennessee River example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/water-quality-sensor:0.1.0
+character:
+  role: steward
+  segment: watershed-ops
+  goals:
+    - Read bank sensors and river buoys on a clear-day monitor round
+    - Escalate when turbidity or bacteria cues cross pollution thresholds

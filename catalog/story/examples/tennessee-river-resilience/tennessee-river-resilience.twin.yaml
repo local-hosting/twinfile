@@ -1,0 +1,41 @@
+twinfile: 2
+kind: story
+id: tennessee-river-resilience
+name: Tennessee River resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/tennessee-river:0.1.0
+  - rel: involves
+    href: twinfile/place/aquarium-conservation:0.1.0
+  - rel: involves
+    href: twinfile/place/red-bank-high:0.1.0
+  - rel: involves
+    href: twinfile/place/normal-park:0.1.0
+  - rel: involves
+    href: twinfile/character/watershed-steward:0.1.0
+story:
+  pitch: Post-storm litter and pollution at the Mountain Creek outfall, then a water-quality exceedance advisory.
+  scenes:
+    - id: creek-pollution
+      label: Creek pollution surge
+      run:
+        from: twinfile/place/tennessee-river:0.1.0
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        args:
+          peakArrivals: 40
+          lanes: 1
+          service_s: 120
+          stagingCap: 15
+    - id: quality-exceedance
+      label: Water quality exceedance
+      run:
+        from: twinfile/place/tennessee-river:0.1.0
+        steps:
+          - copy: twinfile/event/water-quality-alert:1.0.0
+        args:
+          exceedanceAt: water-quality-alert.exceedance
+          threshold: 50
