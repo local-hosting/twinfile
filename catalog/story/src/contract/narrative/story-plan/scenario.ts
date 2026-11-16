@@ -15,7 +15,7 @@ function formatList(label: string, items: string[] | undefined): string | undefi
   return `${label}: ${items.join('; ')}`;
 }
 
-/** Build a planning brief from a short user hint + org narrative (no LLM). */
+/** Build a planning brief from a short user hint + planning narrative (no LLM). */
 export function composeStoryPlanWorkingScenario(input: {
   hints: StoryPlanScenarioHintsV1;
   narrative: StoryPlanNarrativeContextV1;
@@ -32,7 +32,7 @@ export function composeStoryPlanWorkingScenario(input: {
   ].filter(Boolean) as string[];
 
   if (input.narrative.storyPlanningGuide?.trim()) {
-    lines.push('## Org customer context (who they are, what they do)');
+    lines.push('## Customer context (who they are, what they do)');
     lines.push(input.narrative.storyPlanningGuide.trim());
   }
 
@@ -40,11 +40,11 @@ export function composeStoryPlanWorkingScenario(input: {
   lines.push(
     userLines.length > 0
       ? userLines.join('\n')
-      : 'Plan a customer journey episode grounded in org segment needs and objectives.',
+      : 'Plan a customer journey episode grounded in segment needs and objectives.',
   );
 
   if (input.narrative.segments.length > 1) {
-    lines.push('', '## Org segments (match user need to psychology)');
+    lines.push('', '## Segments (match user need to psychology)');
     const maxSegments = 12;
     for (const segment of input.narrative.segments.slice(0, maxSegments)) {
       const title = segment.label ?? segment.topic ?? segment.id;
@@ -129,7 +129,7 @@ export function composeStoryPlanWorkingScenario(input: {
       lines.push(
         job
           ? `- ${job.id}${job.label ? `: ${job.label}` : ''}`
-          : `- ${jobId} (id not found in org JTBD catalog — pick closest from corpus)`,
+          : `- ${jobId} (id not found in JTBD catalog — pick closest from corpus)`,
       );
     }
   }
@@ -137,7 +137,7 @@ export function composeStoryPlanWorkingScenario(input: {
   if (jobs.length > 0) {
     lines.push(
       '',
-      '## JTBD (org sample)',
+      '## JTBD (catalog sample)',
       ...jobs.map((row) => `- ${row.id}${row.label ? `: ${row.label}` : ''}`),
     );
   }

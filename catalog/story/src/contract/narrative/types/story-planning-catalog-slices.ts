@@ -49,5 +49,6 @@ export type StoryPlanningCatalogsFromCharactersV1 = {
   customerCatalog?: StoryPlanningCustomerCatalogV1;
   jtbdCatalog?: StoryPlanningJtbdCatalogV1;
   obstacleCatalog?: StoryPlanningObstacleCatalogV1;
+  /** Customer context brief derived from mounted Character personas (not org/account lockers). */
   storyPlanningGuide?: string;
 };

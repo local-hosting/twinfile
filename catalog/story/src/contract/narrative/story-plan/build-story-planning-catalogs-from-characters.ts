@@ -63,6 +63,18 @@ export function buildStoryPlanningCatalogsFromCharacters(
     needId: job.id,
   }));
 
+  const storyPlanningGuide =
+    personas.length > 0
+      ? personas
+          .map((persona) => {
+            const name = persona.label?.trim() || persona.id;
+            const mindset = persona.mindset?.trim() || persona.who?.trim();
+            return mindset ? `${name}: ${mindset}` : name;
+          })
+          .filter(Boolean)
+          .join('\n')
+      : undefined;
+
   const personaCatalog = {
     specVersion: '1.0' as const,
     personas: personas.map((persona) => ({
@@ -83,6 +95,7 @@ export function buildStoryPlanningCatalogsFromCharacters(
 
   return {
     storyJourneyRefs: storyJourneyRefsFromCharacters(characters),
+    ...(storyPlanningGuide ? { storyPlanningGuide } : {}),
     segmentCatalog: {
       specVersion: '1.0',
       segments,

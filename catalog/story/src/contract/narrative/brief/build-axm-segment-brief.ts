@@ -1,7 +1,7 @@
 import { briefSection, joinBriefSections } from './format-brief.js';
 import type { AxmSegmentBriefRowV1, BriefV1 } from './types.js';
 
-/** Experience-segment brief for org catalog tools (human terms only). */
+/** Experience-segment brief for planning tools (human terms only). */
 export function buildAxmSegmentBrief(input: {
   segments: readonly AxmSegmentBriefRowV1[];
 }): BriefV1 {
@@ -9,7 +9,7 @@ export function buildAxmSegmentBrief(input: {
   const segmentBullets =
     ids.length > 0
       ? ids.map((id) => `\`${id}\` — experience segment for story character placement`)
-      : ['No experience segments in the org catalog'];
+      : ['No experience segments in the planning catalog'];
 
   return joinBriefSections('Experience brief — org segment catalog', [
     briefSection('Summary', [

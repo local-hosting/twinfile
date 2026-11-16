@@ -29,7 +29,7 @@ export function buildFleetBrief(input: BuildFleetBriefInput): BriefV1 {
   const limit = input.sampleLimit ?? 8;
   const withGeo = input.members.filter((m) => m.geo?.lat != null && m.geo?.lon != null).length;
   const summaryBullets = [
-    `${input.totalCount} store(s) in org fleet`,
+    `${input.totalCount} store(s) in fleet catalog`,
     ...(input.matchedLabel ? [input.matchedLabel] : []),
     `${withGeo} with resolved coordinates in this view`,
   ];
