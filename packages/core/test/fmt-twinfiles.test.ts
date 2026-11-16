@@ -31,7 +31,7 @@ layers:
     rmSync(dir, { recursive: true });
   });
 
-  it('--upgrade=2 inlines layers, bindings, mixins, and buildings into patches', () => {
+  it('--upgrade=2 inlines layers, bindings, and buildings into patches', () => {
     const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-upgrade-'));
     mkdirSync(join(dir, 'place'));
     mkdirSync(join(dir, 'bindings', 'site'), { recursive: true });
@@ -46,7 +46,6 @@ kind: place
 id: site
 name: Site
 version: 0.1.0
-with: [twinfile/mixin-assets:0.1.0]
 buildings:
   - id: hall
     from: ./buildings/hall
@@ -61,10 +60,8 @@ layers:
     const out = parseYaml(readFileSync(path, 'utf8')) as Record<string, unknown>;
     expect(out.twinfile).toBe(2);
     expect(out.layers).toBeUndefined();
-    expect(out.with).toBeUndefined();
     expect(out.buildings).toBeUndefined();
     expect(out.steps).toEqual([
-      { copy: 'twinfile/mixin-assets:0.1.0' },
       { place: { name: 'Site' } },
       { spaces: [{ id: 'hall' }], mode: 'replace' },
       { bind: { for: 'storm' } },
@@ -73,6 +70,26 @@ layers:
     expect(existsSync(join(dir, 'place'))).toBe(false);
     expect(existsSync(join(dir, 'bindings'))).toBe(false);
     expect(formatTwinfilePath(path, { check: true })).toBe(0);
+    rmSync(dir, { recursive: true });
+  });
+
+  it('--upgrade=2 refuses with: mixins', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'twin-fmt-with-'));
+    mkdirSync(join(dir, 'place'));
+    writeFileSync(join(dir, 'place', 'place.yaml'), 'place:\n  name: Site\n');
+    const path = twinHeadPath(dir);
+    const head = `twinfile: 1
+kind: place
+id: site
+name: Site
+version: 0.1.0
+with: [twinfile/mixin-assets:0.1.0]
+layers:
+  - place/place.yaml
+`;
+    writeFileSync(path, head);
+    expect(formatTwinfilePath(path, { upgrade: 2 })).not.toBe(0);
+    expect(readFileSync(path, 'utf8')).toBe(head);
     rmSync(dir, { recursive: true });
   });
 

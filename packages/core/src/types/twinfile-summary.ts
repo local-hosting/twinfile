@@ -95,10 +95,10 @@ export type TwinfileSummaryV1 = {
   };
   header: TwinfileSummaryHeader;
   /**
-   * Compose / manifest audit (runs, events, mixins). Omitted on built **sites** — live state is `io` only.
+   * Compose / manifest audit (runs, events). Omitted on built **sites** — live state is `io` only.
    */
   fixed: TwinfileSummaryAspect[];
-  /** Run-time and merged-place rollups (presets, mixins). Empty for `kind: place` site cards. */
+  /** Run-time and merged-place rollups (presets). Empty for `kind: place` site cards. */
   variables: TwinfileSummaryAspect[];
   io: {
     inputs: TwinfileSummaryIoPort[];

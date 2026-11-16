@@ -10,7 +10,7 @@ import { LayerCache } from '@doppler-group/twinfile-core';
 import { layerChainDigest, placeImageDigest, sha256Digest } from '@doppler-group/twinfile-core';
 import { mergeObjects, type MergeOptions, type LayerMergeMode } from '@doppler-group/twinfile-core';
 
-export type BuildLayerKind = 'place' | 'mixin' | 'copy' | 'patch' | 'binding' | 'args';
+export type BuildLayerKind = 'place' | 'copy' | 'patch' | 'binding' | 'args';
 
 export type ComposedBuildLayer = {
   ref: string;
@@ -87,7 +87,6 @@ export class TwinfileBuilder {
 
       if (
         layer.kind === 'place' ||
-        layer.kind === 'mixin' ||
         layer.kind === 'copy' ||
         layer.kind === 'patch'
       ) {

@@ -18,7 +18,7 @@ const inheritOpts = { examplesRoot };
 
 function listSiteDirs() {
   const top = readdirSync(examplesRoot)
-    .filter((name) => !name.startsWith('.') && !name.startsWith('base-') && !name.startsWith('mixin-'))
+    .filter((name) => !name.startsWith('.') && !name.startsWith('base-'))
     .map((name) => join(examplesRoot, name))
     .filter(
       (dir) =>

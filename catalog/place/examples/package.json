@@ -3,7 +3,7 @@
   "version": "0.2.0",
   "private": true,
   "packageManager": "yarn@4.9.2",
-  "description": "Golden Twinfile place catalog — sites, bases, programmes, mixins, and scenario presets",
+  "description": "Golden Twinfile place catalog — sites, bases, programmes, and scenario presets",
   "repository": {
     "type": "git",
     "url": "https://github.com/doppler-group/twinfile.git",

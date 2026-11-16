@@ -31,7 +31,6 @@ function catalogPlaceRoots(root: string): string[] {
       (name) =>
         !name.startsWith('.') &&
         !name.startsWith('base-') &&
-        !name.startsWith('mixin-') &&
         !name.endsWith('-programme') &&
         name !== 'mobility-hub' &&
         !['conf', 'presets', 'fixtures', 'docs'].includes(name),

@@ -17,8 +17,6 @@ import { copyRefAlternates, isRecord } from '@doppler-group/twinfile-core';
 export type CopyResult = {
   place: PlaceData;
   layers: PlaceComposeLayer[];
-  /** Set when the copied unit is a mixin, so compose can apply its `axes:` and `applies_to`. */
-  mixin?: LoadedTwinfile;
 };
 
 export function isLocalCopyRef(ref: string): boolean {
@@ -102,34 +100,6 @@ function copyPlace(
   return ok({ place: mergeObjects(merged, rows) as PlaceData, layers });
 }
 
-function copyMixin(
-  owner: LoadedTwinfile,
-  step: TwinfileCopyInstruction,
-  source: LoadedTwinfile,
-  merged: PlaceData,
-): Result<CopyResult> {
-  const label = copyLabel(step, source);
-  const layers: PlaceComposeLayer[] = [];
-  let next = merged;
-  for (const instruction of listTwinfileInstructions(source)) {
-    if (instruction.type !== 'patch') continue;
-    if ('place' in instruction.doc) {
-      return err([
-        { code: 'E_MIXIN', message: `Mixin ${step.copy} must not patch place (${instruction.ref})`, file: owner.twinfilePath },
-      ]);
-    }
-    const layer: PlaceComposeLayer = {
-      ref: `copy/${label}/${instruction.ref}`,
-      kind: 'mixin',
-      patch: instruction.doc,
-      ...(instruction.mergeMode !== 'patch' ? { mergeMode: instruction.mergeMode } : {}),
-    };
-    layers.push(layer);
-    next = mergeObjects(next, layer.patch, layer.mergeMode ? { mode: layer.mergeMode } : {}) as PlaceData;
-  }
-  return ok({ place: next, layers, mixin: source });
-}
-
 /** Run one `copy:` instruction on top of the place built so far. */
 export function applyCopyInstruction(
   owner: LoadedTwinfile,
@@ -140,21 +110,12 @@ export function applyCopyInstruction(
   const source = resolveCopySource(owner, step.copy, options);
   if (!source.ok) return source;
   const kind = String(source.value.twinfile.kind ?? '');
-  switch (kind) {
-    case 'place':
-      return copyPlace(owner, step, source.value, merged, options);
-    case 'mixin':
-      if (step.into || step.prefix) {
-        return err([
-          { code: 'E_BUILD', message: `copy ${step.copy}: into/prefix apply to place units only`, file: owner.twinfilePath },
-        ]);
-      }
-      return copyMixin(owner, step, source.value, merged);
-    default:
-      return err([
-        { code: 'E_BUILD', message: `copy ${step.copy}: expected a place or mixin unit, got ${kind}`, file: owner.twinfilePath },
-      ]);
+  if (kind !== 'place') {
+    return err([
+      { code: 'E_BUILD', message: `copy ${step.copy}: expected a place unit, got ${kind}`, file: owner.twinfilePath },
+    ]);
   }
+  return copyPlace(owner, step, source.value, merged, options);
 }
 
 /** Every unit a place copies in, depth-first (copied units' own copies included). */

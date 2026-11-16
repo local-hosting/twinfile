@@ -8,9 +8,8 @@ import type { ComposedPlace, PlaceComposeEntry, PlaceComposeLayer } from '@doppl
 import type { EventBindingDoc } from '@doppler-group/twinfile-core';
 import type { Result } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
-import { getPlaceArchetype, getPlaceAxes, resolveComposedAxes } from './place-axes.js';
+import { getPlaceArchetype, resolveComposedAxes } from './place-axes.js';
 import { applyCopyInstruction, listCopiedTwinfiles } from './place-copy.js';
-import { checkMixinAppliesTo, getMixinUnits } from './place-mixins.js';
 
 export type PlaceInheritOptions = Pick<TwinfileResolveOptions, 'examplesRoot'>;
 
@@ -60,7 +59,7 @@ function getFromChain(place: LoadedTwinfile, options: PlaceInheritOptions | unde
   return ok(chain);
 }
 
-/** Compose order (RFC 0004): for each unit in the `from:` chain (root first), its `with:` mixins, then the unit. */
+/** Compose order (RFC 0004): each unit in the `from:` chain, root first. */
 export function getPlaceComposeStack(
   place: LoadedTwinfile,
   options: PlaceInheritOptions | undefined,
@@ -69,9 +68,11 @@ export function getPlaceComposeStack(
   if (!chain.ok) return chain;
   const stack: PlaceComposeEntry[] = [];
   for (const unit of chain.value) {
-    const mixins = getMixinUnits(unit, options);
-    if (!mixins.ok) return mixins;
-    stack.push(...mixins.value.map((mixin) => ({ loaded: mixin, role: 'mixin' as const })));
+    if (unit.twinfile.with !== undefined) {
+      return err([
+        { code: 'E_BUILD', message: 'with: is not supported; put the rows in the place or its base', file: unit.twinfilePath },
+      ]);
+    }
     stack.push({ loaded: unit, role: unit.root === place.root ? 'self' : 'from' });
   }
   return ok(stack);
@@ -84,8 +85,6 @@ function getLayerPrefix({ loaded, role }: PlaceComposeEntry): string {
       return '';
     case 'from':
       return `from/${name}/`;
-    case 'mixin':
-      return `with/${name}/`;
     default: {
       const unreachable: never = role;
       return unreachable;
@@ -94,16 +93,14 @@ function getLayerPrefix({ loaded, role }: PlaceComposeEntry): string {
 }
 
 /**
- * Build layers and merged place, Dockerfile-style: walk the `from:` chain root first; at each unit apply its
- * `with:` mixins, then its instructions in order (each patch or copy is one or more layers).
+ * Build layers and merged place, Dockerfile-style: walk the `from:` chain root first and apply each unit's
+ * instructions in order (each patch or copy is one or more layers).
  */
 export function composePlace(place: LoadedTwinfile, options: PlaceInheritOptions | undefined): Result<ComposedPlace> {
   const stack = getPlaceComposeStack(place, options);
   if (!stack.ok) return stack;
 
   const composeLayers: PlaceComposeLayer[] = [];
-  /** The stack plus mixins copied by `copy:`, each placed before its owner (like `with:`). */
-  const axesStack: PlaceComposeEntry[] = [];
   let merged: PlaceData = {};
   let ownArchetype: ReturnType<typeof getPlaceArchetype>;
   for (const entry of stack.value) {
@@ -114,12 +111,11 @@ export function composePlace(place: LoadedTwinfile, options: PlaceInheritOptions
         if (!copied.ok) return copied;
         composeLayers.push(...copied.value.layers.map((layer) => ({ ...layer, ref: `${prefix}${layer.ref}` })));
         merged = copied.value.place;
-        if (copied.value.mixin) axesStack.push({ loaded: copied.value.mixin, role: 'mixin' });
         continue;
       }
       const layer: PlaceComposeLayer = {
         ref: `${prefix}${step.ref}`,
-        kind: entry.role === 'mixin' ? 'mixin' : 'place',
+        kind: 'place',
         patch: step.doc,
         ...(step.mergeMode !== 'patch' ? { mergeMode: step.mergeMode } : {}),
       };
@@ -127,10 +123,9 @@ export function composePlace(place: LoadedTwinfile, options: PlaceInheritOptions
       merged = mergeObjects(merged, layer.patch, layer.mergeMode ? { mode: layer.mergeMode } : {}) as PlaceData;
       if (entry.role === 'self') ownArchetype = getPlaceArchetype(step.doc) ?? ownArchetype;
     }
-    axesStack.push(entry);
   }
 
-  const axes = resolveComposedAxes(axesStack, getPlaceArchetype(merged), ownArchetype, place.twinfilePath);
+  const axes = resolveComposedAxes(stack.value, getPlaceArchetype(merged), ownArchetype, place.twinfilePath);
   if (!axes.ok) return axes;
   if (axes.value) {
     const patch = { place: { archetype: axes.value.archetype } };
@@ -138,14 +133,10 @@ export function composePlace(place: LoadedTwinfile, options: PlaceInheritOptions
     merged = mergeObjects(merged, patch) as PlaceData;
   }
 
-  const mixins = axesStack.filter((entry) => entry.role === 'mixin').map((entry) => entry.loaded);
-  const appliesErrors = checkMixinAppliesTo(mixins, getPlaceAxes(merged, axes.value), place.twinfilePath);
-  if (appliesErrors.length > 0) return err(appliesErrors);
-
   return ok({ stack: stack.value, layers: composeLayers, place: merged, ...(axes.value ? { axes: axes.value } : {}) });
 }
 
-/** Merge base `from` chain, `with:` mixins, then this place's layer files (same rules as build). */
+/** Merge base `from` chain, then this place's layer files (same rules as build). */
 export function mergePlaceFromTwinfile(place: LoadedTwinfile, options: PlaceInheritOptions | undefined): Result<PlaceData> {
   const composed = composePlace(place, options);
   return composed.ok ? ok(composed.value.place) : composed;
@@ -153,7 +144,7 @@ export function mergePlaceFromTwinfile(place: LoadedTwinfile, options: PlaceInhe
 
 /**
  * Effective event bindings for a place: the nearest unit in the `from:` chain (child replaces base),
- * then every mixin's bindings, then bindings of copied units. First occurrence of a `rel` wins.
+ * then bindings of copied units. First occurrence of a `rel` wins.
  */
 export function listPlaceEventBindings(
   place: LoadedTwinfile,
@@ -163,19 +154,17 @@ export function listPlaceEventBindings(
   if (!stack.ok) return stack;
   const lookupRoots = stack.value.map((entry) => entry.loaded.root).reverse();
   let placeBindings: EventBindingDoc[] = [];
-  const mixinBindings: EventBindingDoc[] = [];
   const copiedBindings: EventBindingDoc[] = [];
-  for (const { loaded: unit, role } of stack.value) {
+  for (const { loaded: unit } of stack.value) {
     const bindings = listTwinfileEventBindings(unit, lookupRoots);
-    if (role === 'mixin') mixinBindings.push(...bindings);
-    else if (bindings.length > 0) placeBindings = bindings;
+    if (bindings.length > 0) placeBindings = bindings;
     const copied = listCopiedTwinfiles(unit, options);
     if (!copied.ok) return copied;
     for (const source of copied.value) copiedBindings.push(...listTwinfileEventBindings(source));
   }
   const seen = new Set<string>();
   return ok(
-    [...placeBindings, ...mixinBindings, ...copiedBindings].filter((row) => {
+    [...placeBindings, ...copiedBindings].filter((row) => {
       if (seen.has(row.rel)) return false;
       seen.add(row.rel);
       return true;

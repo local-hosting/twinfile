@@ -96,7 +96,6 @@ function listSiteUnitDirs() {
       const slug = nameFromPath(dir);
       return (
         !slug.startsWith('base-') &&
-        !slug.startsWith('mixin-') &&
         !slug.endsWith('-programme')
       );
     });

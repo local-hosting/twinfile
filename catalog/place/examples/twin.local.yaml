@@ -16,8 +16,6 @@ refs:
   twinfile/base-single-level:0.1.0: base-single-level
   twinfile/base-open-area:0.1.0: base-open-area
   twinfile/base-linear:0.1.0: base-linear
-  twinfile/mixin-assets:0.1.0: mixin-assets
-  twinfile/mixin-sensors:0.1.0: mixin-sensors
   twinfile/shop-shelter-at-cap:1.0.0: ../../story/examples/shop-visit/scenes/shop-shelter-at-cap
   twinfile/airport-morning-checkpoint:1.0.0: ../../story/examples/airport-operations/scenes/airport-morning-checkpoint
   twinfile/arena-gate-open-ramp:1.0.0: ../../story/examples/arena-operations/scenes/arena-gate-open-ramp

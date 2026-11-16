@@ -12,7 +12,7 @@ import { twinHeadPath } from '@doppler-group/twinfile-core';
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
 const plannedPlaces = readdirSync(examplesRoot).filter((name) => {
-  if (name.startsWith('base-') || name.startsWith('mixin-') || name.endsWith('-programme')) return false;
+  if (name.startsWith('base-') || name.endsWith('-programme')) return false;
   const twinfile = twinHeadPath(join(examplesRoot, name));
   if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) return false;
   const raw = readFileSync(twinfile, 'utf8');

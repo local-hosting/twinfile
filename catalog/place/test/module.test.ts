@@ -8,9 +8,9 @@ describe('@doppler-group/twinfile-place', () => {
     expect(module.kind).toBe('place');
   });
 
-  it('accepts place and mixin heads', () => {
+  it('accepts place heads only', () => {
     expect(module.parse({ kind: 'place', id: 'shop' }).ok).toBe(true);
-    expect(module.parse({ kind: 'mixin', id: 'decor' }).ok).toBe(true);
+    expect(module.parse({ kind: 'mixin', id: 'decor' }).ok).toBe(false);
     expect(module.parse({ kind: 'story', id: 'shop' }).ok).toBe(false);
   });
 

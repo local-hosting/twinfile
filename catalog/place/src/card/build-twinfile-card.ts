@@ -153,7 +153,7 @@ function placeGeotypeAspects(slug: string | undefined, place?: Record<string, un
   return fixed;
 }
 
-/** Shown only when the manifest has no `with:` mixins — scaffold hints, not composed state. */
+/** Geotype scaffold hints, not composed state. */
 function geotypeInitHintAspects(slug: string | undefined): TwinfileSummaryAspect[] {
   if (!slug) return [];
   const deco = placeDecorationsForSlug(slug);
@@ -215,9 +215,7 @@ function summaryUnitKind(input: BuildTwinfileSummaryInput): string {
   if (input.unitPath && isRunPresetPath(input.unitPath)) return 'run';
   if (isRunComposeHead(input.twinfile)) return 'run';
   const catalogKind = manifestStr(input.twinfile, 'kind');
-  if (catalogKind === 'event' || catalogKind === 'mixin') {
-    return catalogKind;
-  }
+  if (catalogKind === 'event') return catalogKind;
   return 'place';
 }
 
@@ -290,10 +288,6 @@ export function buildTwinfileSummary(
         kind: 'binding',
         detail: 'Embedded on built place as eventBindings (bindings/<event>.yaml or matched role tags)',
       });
-      break;
-    case 'mixin':
-      fixed = fixedForPlace(slug, place);
-      inputs.push(...expectsIo(twinfile));
       break;
     default:
       fixed = [{ id: 'kind', label: 'Manifest kind', value: kind }];

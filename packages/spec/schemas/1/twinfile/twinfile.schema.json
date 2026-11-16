@@ -4,12 +4,11 @@
   "oneOf": [
     { "$ref": "#/$defs/placeTwinfile" },
     { "$ref": "#/$defs/eventTwinfile" },
-    { "$ref": "#/$defs/scenarioTwinfile" },
-    { "$ref": "#/$defs/mixinTwinfile" }
+    { "$ref": "#/$defs/scenarioTwinfile" }
   ],
-  "if": { "properties": { "kind": { "enum": ["place", "scenario", "mixin"] } }, "required": ["kind"] },
+  "if": { "properties": { "kind": { "enum": ["place", "scenario"] } }, "required": ["kind"] },
   "else": {
-    "$comment": "twinfile 2 (RFC 0009) is for place, scenario, and mixin Twinfiles only.",
+    "$comment": "twinfile 2 (RFC 0009) is for place and scenario Twinfiles only.",
     "properties": { "twinfile": { "const": 1 } }
   },
   "$defs": {
@@ -74,7 +73,9 @@
           },
           "else": {
             "required": ["layers"],
-            "not": { "anyOf": [{ "required": ["steps"] }, { "required": ["patches"] }, { "required": ["buildings"] }] }
+            "not": {
+              "anyOf": [{ "required": ["steps"] }, { "required": ["patches"] }, { "required": ["buildings"] }, { "required": ["with"] }]
+            }
           }
         },
         {
@@ -86,12 +87,6 @@
             "kind": { "const": "place" },
             "from": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" },
             "axes": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxes" },
-            "with": {
-              "type": "array",
-              "minItems": 1,
-              "uniqueItems": true,
-              "items": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileRef" }
-            },
             "layers": {
               "type": "array",
               "minItems": 1,
@@ -140,34 +135,6 @@
               "$ref": "https://twinfile.org/schemas/1/patch/patch-graph.schema.json",
               "description": "Deprecated: use processors: with outlets: on each processor."
             }
-          }
-        }
-      ]
-    },
-    "mixinTwinfile": {
-      "allOf": [
-        { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinfileHead" },
-        {
-          "if": { "properties": { "twinfile": { "const": 2 } }, "required": ["twinfile"] },
-          "then": {
-            "required": ["steps"],
-            "not": { "required": ["layers"] }
-          },
-          "else": {
-            "required": ["layers"],
-            "not": { "required": ["steps"] }
-          }
-        },
-        {
-          "type": "object",
-          "anyOf": [{ "required": ["layers"] }, { "required": ["steps"] }],
-          "not": { "anyOf": [{ "required": ["from"] }, { "required": ["with"] }] },
-          "properties": {
-            "kind": { "const": "mixin" },
-            "axes": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxes" },
-            "applies_to": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/placeAxesFilter" },
-            "layers": { "type": "array", "minItems": 1, "items": { "type": "string" } },
-            "steps": { "$ref": "#/$defs/placeSteps" }
           }
         }
       ]

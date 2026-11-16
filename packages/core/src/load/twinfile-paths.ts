@@ -78,18 +78,3 @@ export function manifestScenarioComposeRefs(twinfile: Record<string, unknown>): 
   });
 }
 
-/** Mixin refs in compose order: v1 `with:`, or leading non-local `copy:` steps. */
-export function twinfileMixinRefs(twinfile: Record<string, unknown>): string[] {
-  const fromWith = stringList(twinfile.with);
-  if (twinfile.twinfile !== 2) return fromWith;
-  const steps = twinfileStepItems(twinfile);
-  const fromCopies = steps.flatMap((item) => {
-    if (!item || typeof item !== 'object') return [];
-    const copy = (item as { copy?: unknown }).copy;
-    if (typeof copy !== 'string') return [];
-    const trimmed = copy.trim();
-    if (trimmed.startsWith('./') || trimmed.startsWith('.\\')) return [];
-    return [trimmed];
-  });
-  return fromCopies.length ? fromCopies : fromWith;
-}

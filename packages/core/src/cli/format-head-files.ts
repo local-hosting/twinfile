@@ -9,7 +9,7 @@ import { readYamlDocument } from '../validate/validate-yaml.js';
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'expected', 'runs']);
 
-const TWIN_HEAD_KINDS = new Set<string>([...TWIN_CATALOG_TYPES, 'mixin']);
+const TWIN_HEAD_KINDS = new Set<string>(TWIN_CATALOG_TYPES);
 
 const LEGACY_TWIN_HEADS = [
   'Twinfile.yaml',

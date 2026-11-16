@@ -10,7 +10,20 @@ import {
 import type { PlaceComposeEntry, ResolvedPlaceAxes } from '@doppler-group/twinfile-core';
 import type { Result } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
-import { twinfileAxes } from './place-mixins.js';
+
+const AXIS_NAMES: readonly (keyof PlaceAxes)[] = ['extent', 'vertical', 'movement'];
+
+/** Declared `axes:` on a place twinfile. */
+export function twinfileAxes(twinfile: Record<string, unknown>): Partial<PlaceAxes> {
+  const raw = twinfile.axes;
+  if (!raw || typeof raw !== 'object' || Array.isArray(raw)) return {};
+  const out: Record<string, string> = {};
+  for (const name of AXIS_NAMES) {
+    const value = (raw as Record<string, unknown>)[name];
+    if (typeof value === 'string') out[name] = value;
+  }
+  return out as Partial<PlaceAxes>;
+}
 
 export function getPlaceArchetype(place: unknown): PlaceArchetype | undefined {
   const site = (place as { place?: { archetype?: unknown } } | undefined)?.place;

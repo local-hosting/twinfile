@@ -130,7 +130,7 @@ export type CreatePlaceResult = {
   dir: string;
   unitName: string;
   geotype: string;
-  mixins: string[];
+  starterLayers: PlaceLayerKind[];
   bindings: string[];
   suggestedLayers: PlaceLayerKind[];
   suggestBuildingImport?: boolean;
@@ -154,7 +154,7 @@ function unitNameForDir(target: string, unitName?: string): string {
   return dirName || 'example-place';
 }
 
-/** Same scaffold `twin init place --geotype` writes, including optional golden mixins. */
+/** Same scaffold `twin init place --geotype` writes, including starter decoration rows. */
 export function createPlace(targetDir: string, options: CreatePlaceOptions): CreatePlaceResult {
   const target = resolve(targetDir);
   const geotype = options.geotype.trim().toLowerCase();
@@ -174,7 +174,7 @@ export function createPlace(targetDir: string, options: CreatePlaceOptions): Cre
     dir: target,
     unitName,
     geotype,
-    mixins: [],
+    starterLayers: [],
     bindings: [],
     suggestedLayers: [],
     ...(suggestBuildings ? { suggestBuildingImport: true } : {}),
@@ -191,7 +191,7 @@ export function createPlace(targetDir: string, options: CreatePlaceOptions): Cre
   const decorated = decoratePlaceFromGeotype(target, geotype, {
     examplesRoot,
   });
-  created.mixins = decorated.mixins;
+  created.starterLayers = decorated.starterLayers;
   created.bindings = decorated.bindings;
   created.suggestedLayers = decorated.suggestedLayers;
   return created;

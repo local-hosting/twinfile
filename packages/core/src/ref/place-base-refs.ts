@@ -15,8 +15,3 @@ export const DEFAULT_PLACE_BASE_REFS: Record<PlaceArchetype, string> = {
 export function placeBaseRefForArchetype(archetype: PlaceArchetype): string {
   return DEFAULT_PLACE_BASE_REFS[archetype];
 }
-
-/** Golden mixin for an event or decoration layer kit (see examples mixin-*). */
-export function placeMixinRef(name: string): string {
-  return `twinfile/mixin-${name}:0.1.0`;
-}
