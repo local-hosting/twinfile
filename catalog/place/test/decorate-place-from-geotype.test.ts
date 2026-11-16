@@ -49,7 +49,7 @@ describe('decoratePlaceFromGeotype', () => {
     }
   });
 
-  it('references golden mixins as copy patches instead of copying stubs and plans', () => {
+  it('writes starter rows as steps instead of copying stubs and plans', () => {
     const unitDir = join(dir, 'corner-shop');
     initPlaceFromGeotype(unitDir, {
       geotype: 'convenience_store',
@@ -58,13 +58,14 @@ describe('decoratePlaceFromGeotype', () => {
       useFrom: true,
     });
     const result = decoratePlaceFromGeotype(unitDir, 'convenience_store', catalogOpts);
-    expect(result.mixins).toEqual(['twinfile/mixin-assets:0.1.0']);
+    expect(result.starterLayers).toEqual(['assets']);
     expect(result.eventHints).toEqual(['severe-weather']);
     expect(existsSync(join(unitDir, 'plans'))).toBe(false);
     const twinfile = parseYaml(readFileSync(twinHeadPath(unitDir), 'utf8')) as {
-      steps: Array<{ copy?: string; bind?: { for?: string } }>;
+      steps: Array<{ copy?: string; assets?: Array<{ id: string }> }>;
     };
-    expect(twinfile.steps.flatMap((item) => (item.copy ? [item.copy] : []))).toEqual(result.mixins);
+    expect(twinfile.steps.some((item) => item.copy?.includes('mixin'))).toBe(false);
+    expect(twinfile.steps.flatMap((item) => item.assets ?? []).map((row) => row.id)).toEqual(['starter-kiosk']);
     expect(readdirSync(unitDir)).toEqual([twinHeadFileName(unitDir)]);
   });
 

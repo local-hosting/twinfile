@@ -1,6 +1,6 @@
 import type { LayerMergeMode } from '../load/twinfile-paths.js';
 
-export type BuildLayerKind = 'place' | 'mixin' | 'copy' | 'patch' | 'binding' | 'args';
+export type BuildLayerKind = 'place' | 'copy' | 'patch' | 'binding' | 'args';
 
 export type ComposedBuildLayer = {
   ref: string;

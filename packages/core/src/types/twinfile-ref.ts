@@ -1,7 +1,7 @@
 /** Published unit ref (`twinfile/name:tag` or pinned `oci:…`). */
 export type TwinfileRef = string;
 
-const TWINFILE_KIND = '(?:place|scenario|event|mixin|base)';
+const TWINFILE_KIND = '(?:place|scenario|event|base)';
 const TWINFILE_UNIT = `[a-z0-9][a-z0-9-]{0,62}`;
 const TWINFILE_TAG = `[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?`;
 
@@ -13,11 +13,11 @@ export const TWINFILE_REF_PATTERN = new RegExp(
   `^(twinfile/(?:${TWINFILE_KIND}/)?${TWINFILE_UNIT}:${TWINFILE_TAG}|${OCI_GHCR})$`,
 );
 
-export type TwinfileRefKind = 'place' | 'scenario' | 'event' | 'mixin' | 'base';
+export type TwinfileRefKind = 'place' | 'scenario' | 'event' | 'base';
 
 export function parseTwinfileRef(ref: string): { kind?: TwinfileRefKind; name: string; tag: string } | undefined {
   const trimmed = ref.trim();
-  const short = /^twinfile\/(?:(place|scenario|event|mixin|base)\/)?([^:]+):(.+)$/.exec(trimmed);
+  const short = /^twinfile\/(?:(place|scenario|event|base)\/)?([^:]+):(.+)$/.exec(trimmed);
   if (short) {
     return {
       kind: short[1] as TwinfileRefKind | undefined,
@@ -26,7 +26,7 @@ export function parseTwinfileRef(ref: string): { kind?: TwinfileRefKind; name: s
     };
   }
   const oci =
-    /^oci:ghcr\.io\/(?:twinfile|local-hosting\/twinfile)\/(?:(place|scenario|event|mixin|base)\/)?([^:@]+)(?::([^@]+))?(?:@sha256:([a-f0-9]{64}))?$/.exec(
+    /^oci:ghcr\.io\/(?:twinfile|local-hosting\/twinfile)\/(?:(place|scenario|event|base)\/)?([^:@]+)(?::([^@]+))?(?:@sha256:([a-f0-9]{64}))?$/.exec(
       trimmed,
     );
   if (oci) {

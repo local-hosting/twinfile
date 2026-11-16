@@ -41,16 +41,6 @@
       "kind": "place",
       "path": "catalog/place/examples/expo"
     },
-    "twinfile/place/mixin-assets:0.1.0": {
-      "digest": "sha256:9b017fbdd4ab7094d054c6b8afbc3619e6c4ebd6935f63b36ba576264d8cbddd",
-      "kind": "mixin",
-      "path": "catalog/place/examples/mixin-assets"
-    },
-    "twinfile/place/mixin-sensors:0.1.0": {
-      "digest": "sha256:eb5ef5b8d163012856790be77261ea4b14ff5a9e1cc79acd01b31e19023df09e",
-      "kind": "mixin",
-      "path": "catalog/place/examples/mixin-sensors"
-    },
     "twinfile/place/mobility-hub:0.2.0": {
       "digest": "sha256:48cf6a87ec87b86dc8a56ff7db7d2bf3f256f8dffa633d3db85392886ff8cef9",
       "kind": "place",
@@ -210,10 +200,6 @@
         "twinfile/place/river:0.2.0",
         "twinfile/place/shop:0.2.0",
         "twinfile/place/transit-hub-campus:0.1.0"
-      ],
-      "mixin": [
-        "twinfile/place/mixin-assets:0.1.0",
-        "twinfile/place/mixin-sensors:0.1.0"
       ],
       "story": [
         "twinfile/story/airport-operations:0.1.0",

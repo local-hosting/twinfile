@@ -715,7 +715,7 @@ async function runInit(): Promise<number> {
   try {
     if (geotype) {
       const created = createPlace(target, { geotype, unitName, useFrom, decorate });
-      for (const mixin of created.mixins) console.log(`ok copy ${mixin}`);
+      for (const kind of created.starterLayers) console.log(`ok starter ${kind}`);
       for (const binding of created.bindings) console.log(`ok bind ${binding}`);
       if (created.suggestedLayers.length > 0) {
         console.log(

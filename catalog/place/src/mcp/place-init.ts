@@ -25,7 +25,7 @@ export function createPlaceFromMcp(
       dir: created.dir,
       name: created.unitName,
       geotype: created.geotype,
-      mixins: created.mixins,
+      starterLayers: created.starterLayers,
       bindings: created.bindings,
       suggestedLayers: created.suggestedLayers,
       layerHints: suggestedLayerHints(created.suggestedLayers),

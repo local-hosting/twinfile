@@ -15,7 +15,7 @@ import { collectTwinfileSourcePaths } from './twinfile-tree.js';
 const OCI_CFG_SCHEMA = 'https://twinfile.org/schemas/1/oci/oci-cfg.schema.json';
 
 /** Head kinds that map 1:1 to an OCI config `kind`; scenes become `run`, everything else `place`. */
-const OCI_UNIT_KINDS: ReadonlySet<string> = new Set(['resource', 'character', 'story', 'event', 'mixin', 'base']);
+const OCI_UNIT_KINDS: ReadonlySet<string> = new Set(['resource', 'character', 'story', 'event', 'base']);
 
 export type OciPackResult = {
   treePath: string;

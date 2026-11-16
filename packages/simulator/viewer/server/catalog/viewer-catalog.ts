@@ -18,7 +18,6 @@ export type ViewerCatalogGroup =
   | 'sites'
   | 'scenarios'
   | 'events'
-  | 'mixins'
   | 'bases';
 
 /** Golden bases are compose parents — browse sites/runs in the viewer, not `bases/`. */
@@ -181,15 +180,10 @@ function navGroupForRecipe(kind: string | undefined, unitPath: string): ViewerCa
       return 'events';
     case 'scenario':
       return 'scenarios';
-    case 'mixin':
-      return 'mixins';
     case 'place': {
       const slug = basename(unitPath);
       if (unitPath.includes(`${sep}bases${sep}`) || unitPath.includes('/bases/') || slug.startsWith('base-')) {
         return 'bases';
-      }
-      if (unitPath.includes(`${sep}mixins${sep}`) || unitPath.includes('/mixins/') || slug.startsWith('mixin-')) {
-        return 'mixins';
       }
       return 'sites';
     }
@@ -425,11 +419,6 @@ export function viewerRootsFromPaths(paths: string[]): ViewerRoots {
       continue;
     }
 
-    if (isDir(join(abs, 'mixins'))) {
-      pushUniqueRoots(examplesRoots, abs);
-      continue;
-    }
-
     const ex = discoverExamplesCatalogRoot(abs);
     if (ex) pushUniqueRoots(examplesRoots, ex);
   }
@@ -597,7 +586,7 @@ function findCatalogEntry(unitId: string | undefined, units: ViewerCatalogEntry[
       if (place) return place;
     }
   }
-  const groupPrefixes = ['scenarios', 'events', 'mixins', 'bases'] as const;
+  const groupPrefixes = ['scenarios', 'events', 'bases'] as const;
   for (const prefix of groupPrefixes) {
     if (trimmed.startsWith(`${prefix}/`)) continue;
     const candidate = units.find((u) => u.id === `${prefix}/${trimmed}`);
