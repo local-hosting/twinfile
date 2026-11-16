@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: park-ranger
+name: Park ranger (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional ranger persona for the Central Park example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/trail-station:0.1.0
+character:
+  role: ranger
+  segment: park-visitor
+  goals:
+    - Keep the meadow–trailhead loop clear for daily visitors
+    - Flag litter and boardwalk damage before paths close

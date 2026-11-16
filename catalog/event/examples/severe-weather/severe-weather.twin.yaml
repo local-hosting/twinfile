@@ -4,6 +4,7 @@ id: severe-weather
 name: Severe weather
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - watch
   - warning

@@ -24,6 +24,92 @@ steps:
   - spaces:
       - id: dock-apron
         name: Dock apron
-        kind: plaza
+        kind: pier
         level: ground
         exposure: outdoor
+        roles:
+          - ground-transport
+      - id: crane-yard
+        name: Crane yard
+        kind: yard
+        level: ground
+        exposure: outdoor
+        parent: dock-apron
+      - id: passenger-shed
+        name: Passenger shed
+        kind: shelter
+        level: ground
+        exposure: covered
+        roles:
+          - shelter
+          - alternative
+  - markers:
+      - id: berth-mouth
+        name: Berth mouth
+        roles:
+          - hotspot
+        state: open
+      - id: gangway-n
+        name: North gangway
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: gear-bay
+        name: Gear collection bay
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: dock-survey
+        name: Dock survey booth
+        roles:
+          - survey-station
+  - routes:
+      - id: apron-shed
+        name: Apron to passenger shed
+        from: dock-apron
+        to: passenger-shed
+        length_m: 80
+        kind: path
+        step_free: true
+      - id: apron-yard
+        name: Apron to crane yard
+        from: dock-apron
+        to: crane-yard
+        length_m: 45
+        kind: path
+        step_free: false
+  - visits:
+      - id: visit-apron
+        kind: activity
+        name: Dock apron arrival
+        space: dock-apron
+        order: 0
+      - id: visit-shed
+        kind: activity
+        name: Passenger shed
+        space: passenger-shed
+        order: 1
+  - assets:
+      - id: berth-sensor
+        name: Berth load sensor
+        kind: sensor
+        space: dock-apron
+        state: active
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - berth-mouth
+        safe-access:
+          - gangway-n
+        collection-point:
+          - gear-bay
+        survey-station:
+          - dock-survey
+      actions:
+        - at: post-storm-surge
+          set:
+            berth-mouth:
+              state: closed

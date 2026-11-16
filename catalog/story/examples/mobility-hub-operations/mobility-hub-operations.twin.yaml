@@ -4,10 +4,12 @@ id: mobility-hub-operations
 name: Mobility Hub operations
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/mobility-hub:0.2.0
 story:
+  pitch: Intermodal disruption at the hub, then lunch-hour passenger queue spill across ground-transport lanes.
   scenes:
     - id: hub-disruption
       label: Hub disruption
@@ -19,3 +21,10 @@ story:
           lanes: 2
           service_s: 60
           stagingCap: 40
+    - id: lunch-queue
+      label: Lunch-hour queue
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2

@@ -4,10 +4,14 @@ id: airport-operations
 name: Airport operations
 version: 0.1.0
 stability: example
+mode: daily
 links:
   - rel: involves
     href: twinfile/place/airport:0.2.0
+  - rel: involves
+    href: twinfile/character/airport-liaison:0.1.0
 story:
+  pitch: Morning curb-to-gate flow and a terminal surge where traveler purchase and queue journeys stall.
   scenes:
     - id: morning-checkpoint
       label: Morning checkpoint

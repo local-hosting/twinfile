@@ -1,0 +1,25 @@
+twinfile: 2
+kind: resource
+id: terminal-kiosk
+name: Terminal kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/airport:0.2.0
+    anchor: terminal-a
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-airport
+    elements:
+      purpose:
+        - wayfinding
+        - commerce
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people

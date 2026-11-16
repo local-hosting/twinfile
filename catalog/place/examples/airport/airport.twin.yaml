@@ -34,6 +34,7 @@ steps:
         capacity: 5000
         roles:
           - ground-transport
+          - shelter
       - id: curb-arrivals
         name: Arrivals curb
         kind: curb
@@ -41,6 +42,7 @@ steps:
         exposure: outdoor
         roles:
           - ground-transport
+          - outdoor
       - id: bus-gates
         name: Ground transport gates
         kind: bus
@@ -55,6 +57,7 @@ steps:
         exposure: outdoor
         roles:
           - alternative
+          - outdoor
   - openings:
       - id: door-terminal-curb
         kind: door
@@ -63,6 +66,8 @@ steps:
           - curb-arrivals
         width_m: 6
         state: open
+        roles:
+          - exit
       - id: gate-terminal-bus
         kind: gate
         connects:
@@ -70,6 +75,9 @@ steps:
           - bus-gates
         width_m: 4
         state: open
+        roles:
+          - exit
+
   - routes:
       - id: curb-buses
         name: Curb to ground transport
@@ -115,5 +123,22 @@ steps:
       actions:
         - at: steady
           set: {}
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - terminal-a
+        exit:
+          - door-terminal-curb
+          - gate-terminal-bus
+        outdoor:
+          - curb-arrivals
+          - remote-stand
+      actions:
+        - at: warning
+          set:
+            curb-arrivals:
+              state: closed
   - copy: ./parts/terminal-a
     into: terminal-a
+

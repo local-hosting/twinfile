@@ -1,0 +1,24 @@
+twinfile: 2
+kind: resource
+id: concession-cart
+name: Concession cart
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/arena:1.2.0
+    anchor: concourse
+resource:
+  kind: cart
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-arena
+    elements:
+      purpose:
+        - commerce
+      manifestation:
+        - point_of_sale
+      affected:
+        - people

@@ -4,6 +4,7 @@ id: litter-pollution
 name: Litter and pollution
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - baseline
   - post-storm-surge

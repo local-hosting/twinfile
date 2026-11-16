@@ -27,3 +27,97 @@ steps:
         kind: plaza
         level: ground
         exposure: outdoor
+        roles:
+          - outdoor
+      - id: ferry-slip
+        name: Ferry slip
+        kind: pier
+        level: ground
+        exposure: outdoor
+        parent: harbor-basin
+        roles:
+          - ground-transport
+      - id: boardwalk
+        name: Harbor boardwalk
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        parent: harbor-basin
+        roles:
+          - outdoor
+          - alternative
+  - markers:
+      - id: slip-mouth
+        name: Slip mouth
+        roles:
+          - hotspot
+        state: open
+      - id: boardwalk-ramp
+        name: Boardwalk ramp
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: recycle-bay
+        name: Boardwalk recycle bay
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: harbor-survey
+        name: Harbor survey booth
+        roles:
+          - survey-station
+  - routes:
+      - id: basin-slip
+        name: Basin to ferry slip
+        from: harbor-basin
+        to: ferry-slip
+        length_m: 120
+        kind: path
+        step_free: true
+      - id: slip-boardwalk
+        name: Slip to boardwalk
+        from: ferry-slip
+        to: boardwalk
+        length_m: 90
+        kind: path
+        step_free: true
+  - visits:
+      - id: visit-basin
+        kind: activity
+        name: Harbor basin arrival
+        space: harbor-basin
+        order: 0
+      - id: visit-slip
+        kind: activity
+        name: Ferry slip berth
+        space: ferry-slip
+        order: 1
+      - id: visit-boardwalk
+        kind: activity
+        name: Boardwalk stroll
+        space: boardwalk
+        order: 2
+  - assets:
+      - id: slip-sensor
+        name: Slip occupancy sensor
+        kind: sensor
+        space: ferry-slip
+        state: active
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - slip-mouth
+        safe-access:
+          - boardwalk-ramp
+        collection-point:
+          - recycle-bay
+        survey-station:
+          - harbor-survey
+      actions:
+        - at: post-storm-surge
+          set:
+            slip-mouth:
+              state: closed

@@ -1,0 +1,29 @@
+twinfile: 2
+kind: story
+id: airport-resilience
+name: Airport resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/airport:0.2.0
+story:
+  pitch: Terminal shelter stand-up when severe weather closes the curb, then recovery staging.
+  scenes:
+    - id: terminal-shelter
+      label: Terminal shelter
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 2500
+          target_role: shelter
+          warningAt: severe-weather.warning
+    - id: post-hazard-recovery
+      label: Post-hazard recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H

@@ -1,0 +1,21 @@
+twinfile: 2
+kind: story
+id: expo-resilience
+name: Expo resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/expo:0.2.0
+story:
+  pitch: Outdoor shelter capacity under severe weather on the expo grounds.
+  scenes:
+    - id: outdoor-shelter-cap
+      label: Outdoor shelter capacity
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 4200
+          target_role: shelter

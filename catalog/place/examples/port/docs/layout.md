@@ -1,6 +1,6 @@
 # Port of New Orleans — layout map
 
-Illustrative pier campus pinned at the **Port of New Orleans** (Napoleon Avenue container terminal — logistics) for **`litter-pollution`** → **`gangway-backup`**. Layout is fiction.
+Illustrative pier campus pinned at the **Port of New Orleans** (Napoleon Avenue container terminal — logistics). **Daily:** pier/warehouse visit (`port-operations`). **Resilience:** `litter-pollution` / `field-damage` → `gangway-backup` / `pier-damage` (`port-resilience`). Layout is fiction.
 
 ## Site (one glance)
 

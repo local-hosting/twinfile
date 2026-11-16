@@ -4,6 +4,7 @@ id: power-outage
 name: Power outage
 version: 1.0.0
 stability: stable
+mode: resilience
 phases:
   - outage
   - partial-restore

@@ -4,6 +4,7 @@ id: recovery-resilience
 name: Post-hazard recovery — staging relief, surveying damage, standing down shelters
 version: 0.1.0
 stability: example
+mode: resilience
 phases:
   - recovery
   - restoration
