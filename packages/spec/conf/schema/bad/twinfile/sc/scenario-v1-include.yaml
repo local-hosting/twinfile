@@ -6,4 +6,4 @@ name: Legacy Include
 version: 1.0.0
 stability: example
 include:
-  - twinfile/situation/severe-weather:1.0.0
+  - twinfile/event/severe-weather:1.0.0

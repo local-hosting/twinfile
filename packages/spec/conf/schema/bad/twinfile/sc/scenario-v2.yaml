@@ -6,6 +6,6 @@ version: 0.1.0
 stability: example
 from: ..
 include:
-  - twinfile/situation/severe-weather:1.0.0
+  - twinfile/event/severe-weather:1.0.0
 steps:
-  - copy: twinfile/situation/severe-weather:1.0.0
+  - copy: twinfile/event/severe-weather:1.0.0

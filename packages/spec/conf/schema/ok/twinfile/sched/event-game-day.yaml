@@ -7,11 +7,11 @@ catalog:
 version: 1.0.0
 stability: stable
 layers: []
-timetable:
-  gates-open: -PT1H30M
-  kickoff: PT0S
-  halftime: PT1H5M
-  final: PT2H20M
+phases:
+  - gates-open
+  - kickoff
+  - halftime
+  - final
 args:
   attendance:
     type: integer

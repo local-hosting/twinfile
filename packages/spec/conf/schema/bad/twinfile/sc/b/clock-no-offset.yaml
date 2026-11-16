@@ -6,7 +6,7 @@ name: Clock No Offset
 version: 1.0.0
 stability: example
 steps:
-  - copy: twinfile/situation/dam-release:1.0.0
+  - copy: twinfile/event/dam-release:1.0.0
 clock:
   starts_at: "2026-06-12T09:00:00"
   duration: PT30M
