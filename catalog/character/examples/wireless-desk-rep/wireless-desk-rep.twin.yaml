@@ -1,0 +1,26 @@
+twinfile: 2
+kind: character
+id: wireless-desk-rep
+name: Wireless store desk rep (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional store service staff — not a shopper segment or visitor persona.
+links:
+  - rel: involves
+    href: twinfile/place/wireless-mobile:0.1.0
+  - rel: operates
+    href: twinfile/resource/greeter-kiosk:0.1.0
+character:
+  role: service_rep
+  title: Welcome and service desk associate
+  stationIds:
+    - welcome-desk
+    - waiting-area
+    - service-desk
+  goals:
+    - Check visitors in at the welcome desk and set queue expectations
+    - Route visitors to solution floor or service desk by visit type
+    - Complete activation, billing, and equipment work before the visitor leaves
