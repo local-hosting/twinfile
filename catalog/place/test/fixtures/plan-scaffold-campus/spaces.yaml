@@ -1,0 +1,17 @@
+spaces:
+  - id: hall-shelter
+    name: Main hall (shelter)
+    kind: hall
+    level: ground
+    exposure: indoor
+    capacity: 500
+    roles:
+      - shelter
+  - id: quad-outdoor
+    name: Central quad
+    kind: plaza
+    level: ground
+    exposure: outdoor
+    capacity: 2000
+    roles:
+      - outdoor

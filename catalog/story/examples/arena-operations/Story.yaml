@@ -1,0 +1,21 @@
+twinfile: 2
+kind: story
+id: arena-operations
+name: Arena operations
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/arena:1.2.0
+story:
+  arc: operations
+  scenes:
+    - id: arena-flood-shelter-standup
+      label: arena flood shelter standup
+      run: ./scenes/arena-flood-shelter-standup
+    - id: arena-gate-open-ramp
+      label: arena gate open ramp
+      run: ./scenes/arena-gate-open-ramp
+    - id: arena-storm-at-halftime
+      label: arena storm at halftime
+      run: ./scenes/arena-storm-at-halftime

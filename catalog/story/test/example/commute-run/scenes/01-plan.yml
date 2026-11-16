@@ -1,0 +1,13 @@
+id: scene:rider-plan
+label: Plan commute
+order: 0
+actId: exposition
+characterIds:
+  - persona:rider
+venueKey: venue:urban-curbside
+journeyPhaseId: phase:rider-plan
+touchpointIds:
+  - touchpoint:rider-open-home
+emotions:
+  band: mid
+  valence: neutral

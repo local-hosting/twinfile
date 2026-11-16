@@ -1,0 +1,69 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: urban-services-building
+name: Urban Services Building
+version: 0.1.0
+stability: example
+geotype:
+  primary: town_hall
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Community services building (interior)
+      kind: town_hall
+      timezone: Europe/London
+      published: false
+  - spaces:
+      - id: hall
+        name: Indoor public space (multipurpose hall)
+        kind: indoor_public_space
+        level: ground
+        exposure: indoor
+      - id: wc
+        name: WC and baby change
+        kind: restroom
+        level: ground
+        parent: hall
+        exposure: indoor
+      - id: coworking
+        name: Co-working spaces
+        kind: coworking
+        level: ground
+        parent: hall
+        exposure: indoor
+      - id: event
+        name: Event and exhibition space
+        kind: event_space
+        level: ground
+        parent: hall
+        exposure: indoor
+      - id: meeting
+        name: Meeting rooms
+        kind: meeting_space
+        level: ground
+        parent: hall
+        exposure: indoor
+      - id: bakery
+        name: Bakery
+        kind: bakery
+        level: ground
+        exposure: indoor
+      - id: bank
+        name: Bank, post, and dry-cleaner counter
+        kind: services_counter
+        level: ground
+        exposure: indoor
+      - id: restaurant
+        name: Food and restaurant
+        kind: restaurant
+        level: ground
+        exposure: indoor
+  - openings:
+      - id: hall-coworking
+        kind: door
+        connects:
+          - hall
+          - coworking
+        width_m: 2
+        state: open

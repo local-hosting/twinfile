@@ -1,0 +1,360 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: expo
+name: Expo City Dubai
+version: 0.2.0
+stability: example
+geotype:
+  primary: theme_park
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Expo City Dubai
+      kind: expo
+      timezone: Asia/Dubai
+      published: false
+      ext:
+        lat: 24.9607
+        lon: 55.1509
+        h3: 8943a1385b7ffff
+  - levels:
+      - id: ground
+        name: Site grade
+        ordinal: 0
+  - spaces:
+      - id: metro-arrival
+        name: Metro and exhibition centre arrival
+        kind: transit
+        level: ground
+        exposure: covered
+        capacity: 12000
+        roles:
+          - ground-transport
+      - id: al-wasl-plaza
+        name: Central plaza and dome trellis
+        kind: plaza
+        level: ground
+        exposure: covered
+        capacity: 25000
+        roles:
+          - ground-transport
+      - id: district-opportunity
+        name: Opportunity thematic district concourse
+        kind: district
+        level: ground
+        exposure: covered
+        capacity: 8000
+        visit_order: 1
+        roles:
+          - alternative
+      - id: district-mobility
+        name: Mobility thematic district concourse
+        kind: district
+        level: ground
+        exposure: covered
+        capacity: 8000
+        visit_order: 2
+        roles:
+          - alternative
+      - id: district-sustainability
+        name: Sustainability thematic district concourse
+        kind: district
+        level: ground
+        exposure: covered
+        capacity: 8000
+        visit_order: 3
+        roles:
+          - alternative
+      - id: pavilion-opportunity
+        name: Opportunity thematic pavilion
+        kind: pavilion
+        level: ground
+        parent: district-opportunity
+        exposure: indoor
+        roles:
+          - shelter
+      - id: pavilion-mobility
+        name: Mobility thematic pavilion gallery
+        kind: pavilion
+        level: ground
+        parent: district-mobility
+        exposure: indoor
+        capacity: 2400
+        roles:
+          - shelter
+      - id: pavilion-sustainability
+        name: Sustainability thematic pavilion gallery
+        kind: pavilion
+        level: ground
+        parent: district-sustainability
+        exposure: indoor
+        capacity: 2400
+        roles:
+          - shelter
+      - id: uae-pavilion
+        name: Host country pavilion
+        kind: pavilion
+        level: ground
+        parent: district-sustainability
+        exposure: indoor
+        capacity: 1800
+        roles:
+          - shelter
+      - id: al-forsan-park
+        name: Al Forsan park and amphitheatre zone
+        kind: park
+        level: ground
+        exposure: outdoor
+        capacity: 15000
+        roles:
+          - outdoor
+      - id: jubilee-park
+        name: Jubilee park and festival lawn
+        kind: park
+        level: ground
+        exposure: outdoor
+        capacity: 12000
+        roles:
+          - outdoor
+      - id: wasl-stage
+        name: Plaza outdoor stage apron
+        kind: stage
+        level: ground
+        exposure: outdoor
+        capacity: 5000
+        roles:
+          - outdoor
+  - spaces:
+      - id: pavilion-opportunity-gallery
+        name: Main gallery hall
+        kind: hall
+        level: ground
+        parent: pavilion-opportunity
+        exposure: indoor
+        capacity: 2400
+        roles:
+          - shelter
+  - openings:
+      - id: gate-metro-wasl
+        kind: gate
+        connects:
+          - metro-arrival
+          - al-wasl-plaza
+        width_m: 12
+        state: open
+        roles:
+          - exit
+      - id: gate-wasl-forsan
+        kind: gate
+        connects:
+          - al-wasl-plaza
+          - al-forsan-park
+        width_m: 8
+        state: open
+        roles:
+          - exit
+      - id: door-opportunity
+        kind: door
+        connects:
+          - district-opportunity
+          - pavilion-opportunity
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: door-mobility
+        kind: door
+        connects:
+          - district-mobility
+          - pavilion-mobility
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: door-sustainability
+        kind: door
+        connects:
+          - district-sustainability
+          - pavilion-sustainability
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: door-uae-wasl
+        kind: door
+        connects:
+          - al-wasl-plaza
+          - uae-pavilion
+        width_m: 5
+        state: open
+  - routes:
+      - id: path-metro-wasl
+        name: Arrival concourse to central plaza
+        from: metro-arrival
+        to: al-wasl-plaza
+        length_m: 320
+        kind: corridor
+        step_free: true
+      - id: path-wasl-opportunity
+        name: Plaza to opportunity district
+        from: al-wasl-plaza
+        to: district-opportunity
+        length_m: 240
+        kind: path
+        step_free: true
+      - id: path-wasl-mobility
+        name: Plaza to mobility district
+        from: al-wasl-plaza
+        to: district-mobility
+        length_m: 260
+        kind: path
+        step_free: true
+      - id: path-wasl-sustainability
+        name: Plaza to sustainability district
+        from: al-wasl-plaza
+        to: district-sustainability
+        length_m: 250
+        kind: path
+        step_free: true
+      - id: path-opportunity-pavilion
+        name: Opportunity concourse to pavilion entry
+        from: district-opportunity
+        to: pavilion-opportunity
+        length_m: 45
+        kind: corridor
+        step_free: true
+      - id: path-mobility-pavilion
+        name: Mobility concourse to pavilion entry
+        from: district-mobility
+        to: pavilion-mobility
+        length_m: 50
+        kind: corridor
+        step_free: true
+      - id: path-sustainability-pavilion
+        name: Sustainability concourse to pavilion entry
+        from: district-sustainability
+        to: pavilion-sustainability
+        length_m: 48
+        kind: corridor
+        step_free: true
+      - id: path-wasl-jubilee
+        name: Plaza to jubilee park
+        from: al-wasl-plaza
+        to: jubilee-park
+        length_m: 380
+        kind: path
+        step_free: true
+      - id: path-forsan-jubilee
+        name: Park connector
+        from: al-forsan-park
+        to: jubilee-park
+        length_m: 520
+        kind: path
+        step_free: true
+      - id: path-wasl-stage
+        name: Plaza to outdoor stage apron
+        from: al-wasl-plaza
+        to: wasl-stage
+        length_m: 60
+        kind: path
+        step_free: true
+  - visits:
+      - id: visit-arrival
+        kind: arrival
+        name: Arrive via metro
+        space: metro-arrival
+        order: 0
+      - id: visit-wasl
+        kind: entry
+        name: Enter central plaza
+        space: al-wasl-plaza
+        order: 1
+      - id: visit-opportunity
+        kind: activity
+        name: Explore opportunity pavilion
+        space: pavilion-opportunity
+        order: 2
+      - id: visit-mobility
+        kind: activity
+        name: Explore mobility pavilion
+        space: pavilion-mobility
+        order: 3
+      - id: visit-sustainability
+        kind: activity
+        name: Explore sustainability pavilion
+        space: pavilion-sustainability
+        order: 4
+      - id: visit-outdoor
+        kind: activity
+        name: Outdoor program at jubilee park
+        space: jubilee-park
+        order: 5
+      - id: visit-departure
+        kind: return
+        name: Return to metro
+        space: metro-arrival
+        order: 6
+  - assets:
+      - id: screen-wasl-dome
+        name: Plaza 360 projection surface
+        kind: display
+        space: al-wasl-plaza
+        state: active
+      - id: kiosk-metro
+        name: Wayfinding kiosk
+        kind: kiosk
+        space: metro-arrival
+        state: active
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - pavilion-opportunity
+          - pavilion-opportunity-gallery
+          - pavilion-mobility
+          - pavilion-sustainability
+          - uae-pavilion
+        exit:
+          - gate-metro-wasl
+          - gate-wasl-forsan
+          - door-opportunity
+          - door-mobility
+          - door-sustainability
+        outdoor:
+          - al-forsan-park
+          - jubilee-park
+          - wasl-stage
+      actions:
+        - at: warning
+          set:
+            wasl-stage:
+              state: closed
+            jubilee-park:
+              state: restricted
+            al-forsan-park:
+              state: restricted
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - metro-arrival
+          - al-wasl-plaza
+        alternative:
+          - district-opportunity
+          - district-mobility
+          - district-sustainability
+      actions:
+        - at: disrupted
+          set:
+            metro-arrival:
+              state: closed
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - metro-arrival
+          - al-wasl-plaza
+      actions:
+        - at: steady
+          set: {}

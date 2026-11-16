@@ -1,0 +1,15 @@
+twinfile: 2
+kind: story
+id: port-operations
+name: Port operations
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/port:0.2.0
+story:
+  arc: operations
+  scenes:
+    - id: port-gangway-backup
+      label: port gangway backup
+      run: ./scenes/port-gangway-backup

@@ -1,0 +1,19 @@
+layout_index:
+  version: 1
+  regions:
+    - id: pier
+      title: Main pier
+      granularity: zone
+      space_ids: [pier-main]
+      detail_layers: [spaces, markers, routes]
+    - id: warehouse
+      title: Warehouse campus
+      granularity: zone
+      space_ids: [warehouse]
+      detail_layers: [spaces]
+      children:
+        - id: warehouse-interior
+          title: Warehouse interior
+          granularity: room
+          space_ids: [warehouse-main]
+          detail_layers: [spaces]

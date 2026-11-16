@@ -1,0 +1,4 @@
+{
+  "strictBindings": 3,
+  "bindings": [{ "for": "transit-disruption" }, { "for": "severe-weather" }, { "for": "passenger-queue" }]
+}

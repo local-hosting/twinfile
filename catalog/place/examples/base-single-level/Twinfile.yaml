@@ -1,0 +1,28 @@
+twinfile: 2
+kind: place
+id: base-single-level
+name: Single-level archetype base
+version: 0.1.0
+stability: example
+geotype:
+  primary: convenience_store
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Single-level layout base
+      kind: shop
+      timezone: UTC
+      published: false
+      archetype: single_level
+      authoring_scale:
+        linear_unit: m
+        h3_resolution: 10
+        space_granularity: room
+      ext:
+        lat: 0
+        lon: 0
+        h3: 893a4484a6bffff
+  - levels:
+      - id: ground
+        name: Main floor
+        ordinal: 0

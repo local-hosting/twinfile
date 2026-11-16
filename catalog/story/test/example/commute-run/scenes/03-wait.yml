@@ -1,0 +1,16 @@
+id: scene:rider-wait
+label: Wait and ride
+order: 2
+actId: denouement
+characterIds:
+  - persona:rider
+venueKey: venue:office-dropoff
+journeyPhaseId: phase:rider-wait
+jobIds:
+  - job:wait-eta
+touchpoints:
+  - id: touchpoint:rider-live-map
+    venueKey: venue:office-dropoff
+emotions:
+  band: high
+  valence: positive

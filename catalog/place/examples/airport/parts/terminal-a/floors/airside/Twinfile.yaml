@@ -1,0 +1,24 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: terminal-a-airside
+name: Terminal A Airside
+version: 0.1.0
+stability: example
+geotype:
+  primary: office_building
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Terminal A airside slice
+      kind: office_building
+      timezone: America/New_York
+      published: false
+  - spaces:
+      - id: hold-room
+        name: Airside hold room
+        kind: hold
+        level: airside
+        exposure: indoor
+        roles:
+          - alternative

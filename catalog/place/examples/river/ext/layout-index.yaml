@@ -1,0 +1,19 @@
+layout_index:
+  version: 1
+  regions:
+    - id: upper-reach
+      title: Upper reach
+      granularity: zone
+      space_ids: [reach-upper]
+      detail_layers: [spaces, reaches, gauges]
+    - id: eddy
+      title: Eddy pool
+      granularity: zone
+      space_ids: [eddy-pool]
+      detail_layers: [spaces, sensors, schedules]
+      children:
+        - id: eddy-access
+          title: Launch and levee
+          granularity: site
+          space_ids: []
+          detail_layers: [markers]

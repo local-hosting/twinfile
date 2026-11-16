@@ -1,0 +1,5 @@
+spaces:
+  - id: only-zone
+    name: Only zone
+    kind: retail
+    exposure: indoor

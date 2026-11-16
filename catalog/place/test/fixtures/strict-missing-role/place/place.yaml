@@ -1,0 +1,5 @@
+place:
+  name: Strict check fixture
+  kind: shop
+  timezone: America/New_York
+  published: false

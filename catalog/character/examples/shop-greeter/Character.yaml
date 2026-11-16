@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: shop-greeter
+name: Shop greeter (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional kiosk persona for the Pike Place Market shop example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/greeter-kiosk:0.1.0
+character:
+  role: greeter
+  segment: retail-visitor
+  goals:
+    - Welcome visitors
+    - Answer wayfinding questions

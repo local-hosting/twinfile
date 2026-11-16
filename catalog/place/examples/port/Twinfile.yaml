@@ -1,0 +1,94 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: port
+name: Port of New Orleans
+version: 0.2.0
+stability: example
+geotype:
+  primary: port
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Port of New Orleans
+      kind: port
+      timezone: America/Chicago
+      ext:
+        lat: 29.9178
+        lon: -90.0295
+        h3: 89444651bb3ffff
+      published: false
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: pier-main
+        name: Main pier
+        kind: pier
+        level: ground
+        exposure: outdoor
+      - id: warehouse
+        name: Warehouse building
+        kind: warehouse
+        level: ground
+        exposure: indoor
+  - spaces:
+      - id: warehouse-main
+        name: Warehouse row
+        kind: warehouse
+        level: ground
+        parent: warehouse
+        exposure: indoor
+  - markers:
+      - id: pier-mouth
+        name: Pier mouth
+        roles:
+          - hotspot
+        state: open
+      - id: gangway-a
+        name: Gangway A
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: dumpster-bay
+        name: Collection bay
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: eco-booth
+        name: Harbor survey booth
+        roles:
+          - survey-station
+  - routes:
+      - id: pier-warehouse
+        name: Pier to warehouse row
+        from: pier-main
+        to: warehouse-main
+        length_m: 350
+        kind: path
+        step_free: false
+  - assets:
+      - id: gangway-sensor
+        name: Gangway load sensor
+        kind: sensor
+        space: pier-main
+        state: active
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - pier-mouth
+        safe-access:
+          - gangway-a
+        collection-point:
+          - dumpster-bay
+        survey-station:
+          - eco-booth
+      actions:
+        - at: post-storm-surge
+          set:
+            pier-mouth:
+              state: closed

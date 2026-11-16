@@ -1,0 +1,28 @@
+specVersion: "1.0"
+methodId: mobility-hub
+types:
+  - slug: train_station
+    id: PTT
+    activityKindHints: [commute, dwell]
+    jobIds: [plan-intermodal-route, transfer-modes, dwell-at-hub]
+    journeyPhaseIds: [pre_visit, arrival, navigation, on_site, egress]
+  - slug: parking_lot
+    id: ASP
+    activityKindHints: [commute]
+    jobIds: [plan-intermodal-route, transfer-modes]
+    journeyPhaseIds: [pre_visit, arrival]
+  - slug: cafe
+    id: FDC
+    activityKindHints: [dwell]
+    jobIds: [dwell-at-hub, take-break]
+    journeyPhaseIds: [on_site, concessions]
+  - slug: shopping_mall
+    id: RSM
+    activityKindHints: [dwell, transaction]
+    jobIds: [dwell-at-hub, run-weekly-errands]
+    journeyPhaseIds: [navigation, on_site]
+  - slug: gas_station
+    id: ASG
+    activityKindHints: [transaction]
+    jobIds: [refuel-and-go, transfer-modes]
+    journeyPhaseIds: [on_site, egress]

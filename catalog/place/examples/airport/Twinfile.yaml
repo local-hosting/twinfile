@@ -1,0 +1,119 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: airport
+name: John F. Kennedy International Airport
+version: 0.2.0
+stability: example
+geotype:
+  primary: airport
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: John F. Kennedy International Airport
+      kind: airport
+      timezone: America/New_York
+      ext:
+        lat: 40.6413
+        lon: -73.7781
+        h3: 892a103b1cfffff
+      published: false
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+      - id: airside
+        name: Airside
+        ordinal: 1
+  - spaces:
+      - id: terminal-a
+        name: Terminal A
+        kind: terminal
+        level: ground
+        exposure: indoor
+        capacity: 5000
+        roles:
+          - ground-transport
+      - id: curb-arrivals
+        name: Arrivals curb
+        kind: curb
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+      - id: bus-gates
+        name: Ground transport gates
+        kind: bus
+        level: ground
+        exposure: covered
+        roles:
+          - ground-transport
+      - id: remote-stand
+        name: Remote stand
+        kind: apron
+        level: airside
+        exposure: outdoor
+        roles:
+          - alternative
+  - openings:
+      - id: door-terminal-curb
+        kind: door
+        connects:
+          - terminal-a
+          - curb-arrivals
+        width_m: 6
+        state: open
+      - id: gate-terminal-bus
+        kind: gate
+        connects:
+          - terminal-a
+          - bus-gates
+        width_m: 4
+        state: open
+  - routes:
+      - id: curb-buses
+        name: Curb to ground transport
+        from: curb-arrivals
+        to: bus-gates
+        length_m: 45
+        kind: path
+        step_free: true
+      - id: bus-remote
+        name: Bus gate to remote stand
+        from: bus-gates
+        to: remote-stand
+        length_m: 800
+        kind: path
+        step_free: false
+  - assets:
+      - id: gate-reader-bus
+        name: Bus gate reader
+        kind: reader
+        space: bus-gates
+        state: active
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - terminal-a
+          - bus-gates
+          - curb-arrivals
+        alternative:
+          - remote-stand
+      actions:
+        - at: disrupted
+          set:
+            bus-gates:
+              state: closed
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - terminal-a
+          - curb-arrivals
+          - bus-gates
+      actions:
+        - at: steady
+          set: {}
+  - copy: ./parts/terminal-a
+    into: terminal-a

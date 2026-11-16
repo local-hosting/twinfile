@@ -1,0 +1,149 @@
+specVersion: "1.0"
+frameworkId: myers_briggs
+label: Myers-Briggs Type Indicator
+dimensions:
+  - id: energy
+    label: Energy
+    question: Extraversion vs introversion — where attention and energy flow.
+    poles:
+      - id: E
+        label: Extraversion
+      - id: I
+        label: Introversion
+  - id: perception
+    label: Perception
+    question: Sensing vs intuition — how information is gathered.
+    poles:
+      - id: S
+        label: Sensing
+      - id: N
+        label: Intuition
+  - id: deciding
+    label: Deciding
+    question: Thinking vs feeling — how choices are evaluated.
+    poles:
+      - id: T
+        label: Thinking
+      - id: F
+        label: Feeling
+  - id: lifestyle
+    label: Lifestyle
+    question: Judging vs perceiving — how structure and spontaneity are preferred.
+    poles:
+      - id: J
+        label: Judging
+      - id: P
+        label: Perceiving
+types:
+  - id: INTJ
+    label: Architect
+    dimensions:
+      energy: I
+      perception: N
+      deciding: T
+      lifestyle: J
+  - id: INTP
+    label: Logician
+    dimensions:
+      energy: I
+      perception: N
+      deciding: T
+      lifestyle: P
+  - id: ENTJ
+    label: Commander
+    dimensions:
+      energy: E
+      perception: N
+      deciding: T
+      lifestyle: J
+  - id: ENTP
+    label: Debater
+    dimensions:
+      energy: E
+      perception: N
+      deciding: T
+      lifestyle: P
+  - id: INFJ
+    label: Advocate
+    dimensions:
+      energy: I
+      perception: N
+      deciding: F
+      lifestyle: J
+  - id: INFP
+    label: Mediator
+    dimensions:
+      energy: I
+      perception: N
+      deciding: F
+      lifestyle: P
+  - id: ENFJ
+    label: Protagonist
+    dimensions:
+      energy: E
+      perception: N
+      deciding: F
+      lifestyle: J
+  - id: ENFP
+    label: Campaigner
+    dimensions:
+      energy: E
+      perception: N
+      deciding: F
+      lifestyle: P
+  - id: ISTJ
+    label: Logistician
+    dimensions:
+      energy: I
+      perception: S
+      deciding: T
+      lifestyle: J
+  - id: ISFJ
+    label: Defender
+    dimensions:
+      energy: I
+      perception: S
+      deciding: F
+      lifestyle: J
+  - id: ESTJ
+    label: Executive
+    dimensions:
+      energy: E
+      perception: S
+      deciding: T
+      lifestyle: J
+  - id: ESFJ
+    label: Consul
+    dimensions:
+      energy: E
+      perception: S
+      deciding: F
+      lifestyle: J
+  - id: ISTP
+    label: Virtuoso
+    dimensions:
+      energy: I
+      perception: S
+      deciding: T
+      lifestyle: P
+  - id: ISFP
+    label: Adventurer
+    dimensions:
+      energy: I
+      perception: S
+      deciding: F
+      lifestyle: P
+  - id: ESTP
+    label: Entrepreneur
+    dimensions:
+      energy: E
+      perception: S
+      deciding: T
+      lifestyle: P
+  - id: ESFP
+    label: Entertainer
+    dimensions:
+      energy: E
+      perception: S
+      deciding: F
+      lifestyle: P

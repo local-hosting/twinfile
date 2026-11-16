@@ -1,0 +1,121 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: transit-hub-campus
+name: Mobility hub campus
+version: 0.1.0
+stability: example
+geotype:
+  primary: intermodal_facility
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Mobility hub campus (extends base-campus)
+      kind: mobility_hub
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 40.7506
+        lon: -73.9937
+        h3: 892a100d2cbffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: transit-hub
+        name: Mobility hub
+        kind: transit
+        level: ground
+        exposure: covered
+        capacity: 800
+        roles:
+          - ground-transport
+      - id: quad
+        name: Main quad
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - alternative
+      - id: shuttle-loop
+        name: Shuttle loop
+        kind: roadway
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+  - openings:
+      - id: gate-hub-quad
+        kind: gate
+        connects:
+          - transit-hub
+          - quad
+        width_m: 4
+        state: open
+      - id: gate-hub-shuttle
+        kind: gate
+        connects:
+          - transit-hub
+          - shuttle-loop
+        width_m: 3
+        state: open
+  - routes:
+      - id: hub-quad
+        name: Hub to main quad
+        from: transit-hub
+        to: quad
+        length_m: 180
+        kind: path
+        step_free: true
+      - id: loop-hub
+        name: Shuttle loop to hub
+        from: shuttle-loop
+        to: transit-hub
+        length_m: 60
+        kind: path
+        step_free: true
+  - assets:
+      - id: kiosk-transit
+        name: Transit info kiosk
+        kind: kiosk
+        space: transit-hub
+        state: active
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - transit-hub
+          - shuttle-loop
+        alternative:
+          - quad
+      actions:
+        - at: disrupted
+          set:
+            shuttle-loop:
+              state: closed
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - transit-hub
+          - shuttle-loop
+      actions:
+        - at: steady
+          set: {}
+  - copy: ./parts/transit-hub
+    into: transit-hub
+processors:
+  - id: hub-scope
+    type: twinfile/mod.building-scope@0.1.0
+    bind:
+      anchor: ref:building:transit-hub
+    outlets:
+      - port: scoped
+        to:
+          processor: map-hub
+          port: building
+  - id: map-campus
+    type: twinfile/mod.map-sink@0.1.0
+  - id: map-hub
+    type: twinfile/mod.map-sink@0.1.0

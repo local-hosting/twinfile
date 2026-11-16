@@ -1,0 +1,39 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: transit-hub-interior
+name: Transit Hub Interior
+version: 0.1.0
+stability: example
+geotype:
+  primary: train_station
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Transit hub interior
+      kind: train_station
+      timezone: UTC
+      published: false
+  - spaces:
+      - id: ticket-hall
+        name: Ticket hall
+        kind: lobby
+        level: ground
+        exposure: indoor
+        roles:
+          - ground-transport
+      - id: platform-shelter
+        name: Platform shelter
+        kind: shelter
+        level: ground
+        exposure: covered
+        roles:
+          - shelter
+  - openings:
+      - id: door-hall-platform
+        kind: door
+        connects:
+          - ticket-hall
+          - platform-shelter
+        width_m: 3
+        state: open

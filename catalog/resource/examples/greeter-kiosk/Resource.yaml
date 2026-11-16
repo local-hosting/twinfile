@@ -1,0 +1,24 @@
+twinfile: 2
+kind: resource
+id: greeter-kiosk
+name: Greeter kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/shop:0.2.0
+    anchor: greeter-kiosk
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-retailer
+    elements:
+      purpose:
+        - commerce
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people

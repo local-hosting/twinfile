@@ -1,0 +1,123 @@
+specVersion: "1.0"
+methodId: general-audience
+focusAreas:
+  primary:
+    - id: safety
+      label: Safety
+      description: Risk, trust, and harm avoidance
+      primaryRank: 10
+    - id: schedule
+      label: Schedule
+      description: Time pressure, connections, and turnaround
+      primaryRank: 20
+    - id: price
+      label: Price
+      description: Cost, value, and total ownership
+      primaryRank: 30
+    - id: experience
+      label: Experience
+      description: How the visit feels, not just what was bought
+      primaryRank: 40
+    - id: equipment
+      label: Equipment
+      description: Tools, parts, and readiness to complete the job
+      primaryRank: 50
+    - id: routing
+      label: Routing
+      description: Route efficiency and deadhead time
+      primaryRank: 60
+  secondary:
+    - id: wifi
+      label: Connectivity
+      description: Situational need for reliable Wi-Fi or mobile data
+      primaryRank: 90
+
+extensions:
+  retail_consumer:
+    primary:
+      - id: loyalty
+        label: Loyalty
+        description: Rewards, perks, and relationship benefits
+        primaryRank: 35
+  field_worker:
+    primary:
+      - id: compliance
+        label: Compliance
+        description: Procedures, documentation, and audit readiness
+        primaryRank: 25
+  air_traveler:
+    primary:
+      - id: baggage
+        label: Baggage
+        description: Carry-on limits, checked bags, and overhead space
+        primaryRank: 35
+  hospital_visitor:
+    primary:
+      - id: care-navigation
+        label: Care navigation
+        description: Finding the right department, clinician, and next step in care
+        primaryRank: 15
+      - id: wait-time
+        label: Wait time
+        description: Queue length, appointment delays, and uncertainty while waiting
+        primaryRank: 25
+      - id: privacy
+        label: Privacy
+        description: Confidentiality, personal space, and sensitive conversations
+        primaryRank: 35
+      - id: wayfinding
+        label: Wayfinding
+        description: Entrances, floors, parking, and clinical routing
+        primaryRank: 45
+  sports_stadium_fan:
+    primary:
+      - id: seating
+        label: Seating
+        description: Section location, sightlines, and group seating
+        primaryRank: 20
+      - id: concessions
+        label: Concessions
+        description: Food, beverage, and in-venue ordering during events
+        primaryRank: 30
+      - id: atmosphere
+        label: Atmosphere
+        description: Crowd energy, presentation, and shared event rituals
+        primaryRank: 40
+      - id: parking
+        label: Parking
+        description: Lots, garages, rideshare zones, and post-event egress
+        primaryRank: 50
+  mobility_hub_traveler:
+    primary:
+      - id: place
+        label: Place
+        description: Hub discovery, maps, route planning, and vehicle inventory
+        primaryRank: 12
+      - id: time
+        label: Time
+        description: Live departures, connection windows, and upcoming events
+        primaryRank: 18
+      - id: real-time-info
+        label: Real-time info
+        description: Live departures, delays, and platform changes
+        primaryRank: 22
+      - id: fare
+        label: Fare
+        description: Tickets, passes, zones, and payment friction
+        primaryRank: 28
+      - id: wayfinding
+        label: Wayfinding
+        description: In-hub navigation, signage, and directory routing
+        primaryRank: 32
+      - id: accessibility
+        label: Accessibility
+        description: Step-free paths, elevators, and priority accommodations
+        primaryRank: 38
+      - id: mode-selection
+        label: Mode selection
+        description: Comparing routes, vehicles, timing, and safety before boarding
+        primaryRank: 42
+      - id: transfers
+        label: Transfers
+        description: Cross-mode connections and interchange dwell time
+        primaryRank: 48

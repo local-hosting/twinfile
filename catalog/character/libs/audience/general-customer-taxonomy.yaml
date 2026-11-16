@@ -1,0 +1,335 @@
+specVersion: "1.0"
+userTypes:
+  - id: user
+    label: User
+    description: Anyone in the addressable audience before relationship classification.
+    engagementLevelIds: []
+    opportunityIds: []
+    lifecycleStageIds: []
+    defaultIntentIds: []
+  - id: lead
+    label: Lead
+    parentTypeId: user
+    kind: lead
+    description: Identified interest without an active service relationship.
+    engagementLevelIds:
+      - stranger
+    lifecycleStageIds:
+      - awareness
+    opportunityIds:
+      - prospect
+    defaultIntentIds:
+      - learn
+  - id: prospect
+    label: Prospect
+    parentTypeId: user
+    kind: prospect
+    description: Pre-purchase audience evaluating, activating, or rejoining.
+    engagementLevelIds:
+      - stranger
+      - explorer
+      - rejoiner
+    lifecycleStageIds:
+      - evaluation
+      - activation
+    opportunityIds:
+      - prospect
+      - reclaimer
+    defaultIntentIds:
+      - learn
+      - purchase
+      - switch
+      - setup
+      - rejoin
+  - id: customer
+    label: Customer
+    parentTypeId: user
+    kind: customer
+    description: Active service relationship with ongoing adoption and expansion.
+    engagementLevelIds:
+      - beginner
+      - regular
+      - champion
+    lifecycleStageIds:
+      - adoption
+      - expansion
+      - advocacy
+    opportunityIds:
+      - fixer
+      - upgrader
+      - retention
+      - reclaimer
+    defaultIntentIds:
+      - fix
+      - upgrade
+      - downgrade
+      - cancel
+opportunities:
+  - id: prospect
+    label: Prospect
+    userKind: prospect
+    intentIds:
+      - learn
+      - purchase
+      - switch
+      - setup
+      - rejoin
+  - id: fixer
+    label: Fixer
+    userKind: customer
+    intentIds:
+      - fix
+  - id: upgrader
+    label: Upgrade
+    userKind: customer
+    intentIds:
+      - upgrade
+  - id: reclaimer
+    label: Reclaimer
+    userKind: prospect
+    intentIds:
+      - rejoin
+  - id: retention
+    label: Retention
+    userKind: customer
+    intentIds:
+      - downgrade
+      - cancel
+intents:
+  - id: learn
+    label: Learn
+    verb: learning about
+    opportunityId: prospect
+  - id: purchase
+    label: Purchase
+    verb: purchasing
+    opportunityId: prospect
+  - id: switch
+    label: Switch
+    verb: switching to
+    opportunityId: prospect
+  - id: setup
+    label: Setup
+    verb: setting up
+    opportunityId: prospect
+  - id: rejoin
+    label: Rejoin
+    verb: rejoining
+    opportunityId: prospect
+  - id: fix
+    label: Fix
+    verb: fixing an issue with
+    opportunityId: fixer
+  - id: upgrade
+    label: Upgrade
+    verb: adding
+    opportunityId: upgrader
+  - id: downgrade
+    label: Downgrade
+    verb: downgrading
+    opportunityId: retention
+  - id: cancel
+    label: Cancel
+    verb: cancelling
+    opportunityId: retention
+lifecycleStages:
+  - id: awareness
+    label: Awareness
+  - id: evaluation
+    label: Evaluation
+  - id: activation
+    label: Activation
+  - id: adoption
+    label: Adoption
+  - id: expansion
+    label: Expansion
+  - id: advocacy
+    label: Advocacy
+engagementLevels:
+  - id: stranger
+    label: Stranger
+    userKind: lead
+    lifecycleStageId: evaluation
+    lifecycleAction: Evaluate
+    nextLevelId: explorer
+    validIntentIds:
+      - learn
+      - purchase
+      - setup
+      - switch
+  - id: explorer
+    label: Explorer
+    userKind: prospect
+    lifecycleStageId: activation
+    lifecycleAction: Activate
+    nextLevelId: beginner
+    validIntentIds:
+      - learn
+      - purchase
+      - setup
+      - switch
+  - id: beginner
+    label: Beginner
+    userKind: customer
+    lifecycleStageId: adoption
+    lifecycleAction: Adopt
+    nextLevelId: regular
+    validIntentIds:
+      - fix
+      - learn
+      - setup
+      - upgrade
+  - id: regular
+    label: Regular
+    userKind: customer
+    lifecycleStageId: expansion
+    lifecycleAction: Expand
+    nextLevelId: champion
+    validIntentIds:
+      - cancel
+      - downgrade
+      - fix
+      - upgrade
+  - id: champion
+    label: Champion
+    userKind: customer
+    lifecycleStageId: advocacy
+    lifecycleAction: Advocate
+    nextLevelId: stranger
+    validIntentIds:
+      - fix
+      - upgrade
+  - id: rejoiner
+    label: Rejoiner
+    userKind: prospect
+    lifecycleStageId: evaluation
+    lifecycleAction: Reclaim
+    nextLevelId: beginner
+    validIntentIds:
+      - learn
+      - rejoin
+      - setup
+shoppingMethods:
+  - id: passive-observer
+    label: Passive Observer
+    location: outside
+    behaviors: []
+  - id: mission-based
+    label: Mission Based
+    location: inside
+    behaviors: []
+  - id: validate
+    label: Validation Shopper
+    location: inside
+    behaviors: []
+  - id: experiential-buyer
+    label: Experiential Buyer
+    location: inside
+    behaviors: []
+  - id: discovery-shopper
+    label: Discovery Shopper
+    location: inside
+    behaviors: []
+links:
+  opportunityIntents:
+    prospect:
+      - learn
+      - purchase
+      - switch
+      - setup
+      - rejoin
+    fixer:
+      - fix
+    upgrader:
+      - upgrade
+    reclaimer:
+      - rejoin
+    retention:
+      - downgrade
+      - cancel
+  levelUserKind:
+    stranger: lead
+    explorer: prospect
+    beginner: customer
+    regular: customer
+    champion: customer
+    rejoiner: prospect
+  levelLifecycleStage:
+    stranger: evaluation
+    explorer: activation
+    beginner: adoption
+    regular: expansion
+    champion: advocacy
+    rejoiner: evaluation
+  lifecycleStageIds:
+    - awareness
+    - evaluation
+    - activation
+    - adoption
+    - expansion
+    - advocacy
+  heartDimensionByLifecycleStage:
+    awareness: adoption
+    evaluation: adoption
+    activation: adoption
+    adoption: adoption
+    expansion: retention
+    advocacy: happiness
+  intentDerivationRules: []
+  levelShoppingMethods:
+    stranger:
+      primaryMethodId: passive-observer
+      secondaryMethodIds:
+        - discovery-shopper
+      weights:
+        passive-observer: 0.6
+        discovery-shopper: 0.3
+        validate: 0.1
+    explorer:
+      primaryMethodId: discovery-shopper
+      secondaryMethodIds:
+        - validate
+        - passive-observer
+      weights:
+        discovery-shopper: 0.45
+        validate: 0.3
+        passive-observer: 0.15
+        mission-based: 0.1
+    beginner:
+      primaryMethodId: mission-based
+      secondaryMethodIds:
+        - validate
+        - discovery-shopper
+      weights:
+        mission-based: 0.4
+        validate: 0.25
+        discovery-shopper: 0.2
+        experiential-buyer: 0.15
+    regular:
+      primaryMethodId: mission-based
+      secondaryMethodIds:
+        - experiential-buyer
+        - validate
+      weights:
+        mission-based: 0.45
+        experiential-buyer: 0.25
+        validate: 0.25
+        discovery-shopper: 0.05
+    champion:
+      primaryMethodId: mission-based
+      secondaryMethodIds:
+        - experiential-buyer
+      weights:
+        mission-based: 0.55
+        experiential-buyer: 0.3
+        validate: 0.15
+    rejoiner:
+      primaryMethodId: validate
+      secondaryMethodIds:
+        - discovery-shopper
+        - passive-observer
+      weights:
+        validate: 0.4
+        discovery-shopper: 0.25
+        passive-observer: 0.2
+        mission-based: 0.15

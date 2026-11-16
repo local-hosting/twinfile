@@ -1,0 +1,31 @@
+import { mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
+
+import { parse as parseYaml } from 'yaml';
+import { describe, expect, it } from 'vitest';
+
+import { addAssetsLayerToPlace } from '@doppler-group/twinfile-core/cli';
+import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
+
+describe('add assets layer', () => {
+  it('appends an inline assets patch for v2 places', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'twin-add-assets-'));
+    try {
+      initPlaceFromGeotype(dir, {
+        geotype: 'shopping_mall',
+        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        unitName: 'decor-test',
+        useFrom: true,
+      });
+      const result = addAssetsLayerToPlace(dir);
+      expect(result.location).toMatch(/^steps\[\d+\]$/);
+      const twinfile = parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as {
+        steps: Array<Record<string, unknown>>;
+      };
+      expect(twinfile.steps.some((item) => 'assets' in item)).toBe(true);
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});

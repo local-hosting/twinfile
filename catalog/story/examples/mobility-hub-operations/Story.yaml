@@ -1,0 +1,15 @@
+twinfile: 2
+kind: story
+id: mobility-hub-operations
+name: Mobility Hub operations
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/mobility-hub:0.2.0
+story:
+  arc: operations
+  scenes:
+    - id: mobility-hub-hub-disruption
+      label: mobility hub hub disruption
+      run: ./scenes/mobility-hub-hub-disruption

@@ -1,0 +1,48 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: terminal-a
+name: Terminal A
+version: 0.1.0
+stability: example
+geotype:
+  primary: office_building
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Terminal A (interior)
+      kind: office_building
+      timezone: America/New_York
+      published: false
+  - spaces:
+      - id: concourse
+        name: Main concourse
+        kind: concourse
+        level: ground
+        exposure: indoor
+        capacity: 4000
+        roles:
+          - ground-transport
+      - id: security-hall
+        name: Security hall
+        kind: security
+        level: ground
+        exposure: indoor
+        roles:
+          - ground-transport
+  - openings:
+      - id: door-concourse-security
+        kind: door
+        connects:
+          - concourse
+          - security-hall
+        width_m: 3
+        state: open
+  - assets:
+      - id: board-departures
+        name: Departures board
+        kind: display
+        space: concourse
+        state: active
+  - copy: ./floors/airside
+    prefix: airside-

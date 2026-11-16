@@ -1,0 +1,766 @@
+from: twinfile/base-open-area:0.1.0
+twinfile: 2
+kind: place
+id: mobility-hub
+name: Mobility Hub
+version: 0.1.0
+stability: example
+geotype:
+  primary: intermodal_facility
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Future mobility hubs
+      kind: mobility_hub
+      timezone: Europe/London
+      published: false
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: mobility-network
+        name: Mobility hub network
+        kind: network
+        level: ground
+        exposure: outdoor
+      - id: tier-rural
+        name: Rural tier
+        kind: network_tier
+        level: ground
+        parent: mobility-network
+      - id: tier-suburban
+        name: Suburban tier
+        kind: network_tier
+        level: ground
+        parent: mobility-network
+      - id: tier-urban
+        name: Urban tier
+        kind: network_tier
+        level: ground
+        parent: mobility-network
+      - id: rural-node
+        name: Rural node — a safe shelter
+        kind: mobility_site
+        level: ground
+        parent: tier-rural
+        exposure: outdoor
+        roles:
+          - ground-transport
+        ext:
+          typology: node
+          analysis:
+            urban_context: rural
+            density: low
+            land_use:
+              - civic
+            trip_purpose:
+              - destination
+            modes:
+              - walk
+              - cycle
+              - bus
+            car_dependence: high
+          design_intent:
+            - user_focus
+            - dwell_quality
+      - id: rural-hub
+        name: Rural hub — park, play, and ride
+        kind: mobility_site
+        level: ground
+        parent: tier-rural
+        exposure: outdoor
+        roles:
+          - ground-transport
+        ext:
+          typology: hub
+          analysis:
+            urban_context: rural
+            density: low
+            land_use:
+              - residential
+              - recreation
+            trip_purpose:
+              - entry
+              - destination
+            modes:
+              - walk
+              - cycle
+              - bus
+              - car
+          design_intent:
+            - placemaking
+            - active_mobility
+      - id: suburban-hub
+        name: Suburban mobility hub
+        kind: mobility_site
+        level: ground
+        parent: tier-suburban
+        exposure: outdoor
+        roles:
+          - ground-transport
+        ext:
+          typology: hub
+          analysis:
+            urban_context: suburban
+            density: medium
+            land_use:
+              - residential
+              - employment
+            trip_purpose:
+              - transfer
+              - destination
+            modes:
+              - walk
+              - cycle
+              - bus
+              - rail
+          design_intent:
+            - transit_integration
+            - network_connectivity
+      - id: urban-hub
+        name: Urban mobility hub (kit of parts)
+        kind: mobility_site
+        level: ground
+        parent: tier-urban
+        exposure: outdoor
+        ext:
+          typology: hub
+          analysis:
+            urban_context: urban_centre
+            density: high
+            land_use:
+              - retail
+              - employment
+              - civic
+            trip_purpose:
+              - entry
+              - transfer
+              - destination
+            modes:
+              - walk
+              - cycle
+              - bus
+              - tram
+              - rail
+          design_intent:
+            - dwell_quality
+            - transit_integration
+            - public_realm
+            - sustainability
+            - adaptability
+      - id: urban-mobility-modules
+        name: Mobility modules
+        kind: programme_zone
+        level: ground
+        parent: urban-hub
+        exposure: outdoor
+        ext:
+          programme: mobility
+      - id: urban-core-modules
+        name: Core modules
+        kind: programme_zone
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+        ext:
+          programme: mobility
+          programme_detail: transit_core
+      - id: urban-community
+        name: Community components
+        kind: programme_zone
+        level: ground
+        parent: urban-hub
+        exposure: outdoor
+        ext:
+          programme: community
+      - id: urban-environmental
+        name: Environmental elements
+        kind: programme_zone
+        level: ground
+        parent: urban-hub
+        exposure: outdoor
+        ext:
+          programme: landscape
+  - spaces:
+      - id: node-bus-shelter
+        name: Inclusive bus shelter
+        kind: bus_shelter
+        level: ground
+        parent: rural-node
+        exposure: covered
+        ext:
+          use: passenger_waiting
+      - id: node-cycle-parking
+        name: Cycle parking and repair
+        kind: cycle_parking
+        level: ground
+        parent: rural-node
+        exposure: outdoor
+      - id: node-journey-kiosk
+        name: Interactive map and journey planning
+        kind: kiosk_zone
+        level: ground
+        parent: node-bus-shelter
+        exposure: covered
+        ext:
+          use: wayfinding
+      - id: node-pudo
+        name: Pick-up and drop-off bay
+        kind: pudo
+        level: ground
+        parent: rural-node
+        exposure: outdoor
+      - id: hub-shared-ev
+        name: Shared electric vehicles
+        kind: ev_share
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-ev-parking
+        name: Electric vehicle parking
+        kind: ev_parking
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-cycle-storage
+        name: Cycle storage
+        kind: cycle_storage
+        level: ground
+        parent: rural-hub
+        exposure: covered
+      - id: hub-cycle-parking
+        name: Cycle parking (standard, adapted, cargo)
+        kind: cycle_parking
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-escooter-dock
+        name: Shared e-scooters
+        kind: micromobility_dock
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-pudo-a
+        name: Pick-up and drop-off bay A
+        kind: pudo
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-pudo-b
+        name: Pick-up and drop-off bay B
+        kind: pudo
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+      - id: hub-park-playground
+        name: Park and playground
+        kind: pocket_park
+        level: ground
+        parent: rural-hub
+        exposure: outdoor
+        roles:
+          - alternative
+        ext:
+          use: recreation
+          activation: farmers_market_weekends
+      - id: hub-farmers-market
+        name: Farmer's market
+        kind: market
+        level: ground
+        parent: hub-park-playground
+        exposure: outdoor
+      - id: hub-lockers
+        name: Delivery lockers and vending machines
+        kind: locker_bank
+        level: ground
+        parent: rural-hub
+        exposure: covered
+      - id: hub-wc
+        name: WC and baby changing
+        kind: restroom
+        level: ground
+        parent: rural-hub
+        exposure: indoor
+      - id: suburban-pavilion
+        name: Indoor public pavilion (waiting and services)
+        kind: indoor_public_space
+        level: ground
+        parent: suburban-hub
+        exposure: indoor
+      - id: suburban-cycle-hub
+        name: Cycle parking and bike share
+        kind: cycle_parking
+        level: ground
+        parent: suburban-hub
+        exposure: covered
+      - id: suburban-bus-bay
+        name: Bus interchange bays
+        kind: bus_stop
+        level: ground
+        parent: suburban-hub
+        exposure: outdoor
+        roles:
+          - ground-transport
+      - id: suburban-rail-concourse
+        name: Rail concourse
+        kind: rail_concourse
+        level: ground
+        parent: suburban-hub
+        exposure: covered
+      - id: suburban-rail-platform
+        name: Suburban rail platform
+        kind: rail_platform
+        level: ground
+        parent: suburban-rail-concourse
+        exposure: outdoor
+      - id: suburban-parking
+        name: Park and ride parking
+        kind: parking
+        level: ground
+        parent: suburban-hub
+        exposure: outdoor
+      - id: suburban-info
+        name: Passenger information
+        kind: information
+        level: ground
+        parent: suburban-pavilion
+        exposure: indoor
+      - id: suburban-cafe
+        name: Café kiosk
+        kind: cafe
+        level: ground
+        parent: suburban-pavilion
+        exposure: covered
+      - id: suburban-lockers
+        name: Parcel lockers
+        kind: locker_bank
+        level: ground
+        parent: suburban-hub
+        exposure: covered
+      - id: urban-bus-shelter-large
+        name: Bus stop shelter (Large)
+        kind: bus_shelter
+        level: ground
+        parent: urban-core-modules
+        exposure: covered
+        ext:
+          use: passenger_waiting
+          module:
+            footprint_m:
+              width: 1.75
+              length: 4
+      - id: urban-bus-shelter-small
+        name: Bus stop shelter (Small)
+        kind: bus_shelter
+        level: ground
+        parent: urban-core-modules
+        exposure: covered
+        ext:
+          use: passenger_waiting
+          module:
+            footprint_m:
+              width: 1.3
+              length: 2.5
+      - id: urban-bus-stop
+        name: Bus stop and bus pick-up point
+        kind: bus_stop
+        level: ground
+        parent: urban-core-modules
+        exposure: outdoor
+        roles:
+          - ground-transport
+      - id: urban-cycle-parking
+        name: Cycle parking
+        kind: cycle_parking
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+        ext:
+          use: bicycle_parking
+          programme_family: active_travel
+      - id: urban-cycle-storage
+        name: Cycle storage (two-tier)
+        kind: cycle_storage
+        level: ground
+        parent: urban-mobility-modules
+        exposure: covered
+      - id: urban-bike-pump
+        name: Bike pump station
+        kind: bike_pump
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+      - id: urban-bike-repair
+        name: Bike shop and repair module
+        kind: bike_repair
+        level: ground
+        parent: urban-mobility-modules
+        exposure: covered
+      - id: urban-bike-share
+        name: Bike sharing station
+        kind: bike_sharing
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+      - id: urban-ev-hire
+        name: E-car hire
+        kind: ev_share
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+        ext:
+          use: car_share
+          programme_family: electric_mobility
+      - id: urban-ev-charging
+        name: EV charging stations
+        kind: ev_charging
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+      - id: urban-car-parking
+        name: Car parking
+        kind: parking
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+      - id: urban-info-hall
+        name: Passenger information and wayfinding
+        kind: information
+        level: ground
+        parent: urban-mobility-modules
+        exposure: covered
+      - id: urban-micromobility
+        name: Shared e-scooters and cycles docking station
+        kind: micromobility_dock
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+      - id: urban-loading-bay
+        name: Drop-off and loading bay
+        kind: loading_bay
+        level: ground
+        parent: urban-mobility-modules
+        exposure: outdoor
+        ext:
+          use: goods_handling
+          programme_family: last_mile_logistics
+      - id: urban-services-building
+        name: Community services building
+        kind: building
+        level: ground
+        parent: urban-community
+        exposure: indoor
+      - id: urban-mural
+        name: Mural / art
+        kind: public_art
+        level: ground
+        parent: urban-community
+        exposure: outdoor
+      - id: urban-playground
+        name: Playground
+        kind: playground
+        level: ground
+        parent: urban-community
+        exposure: outdoor
+      - id: urban-food-truck
+        name: Food truck / pop-up market
+        kind: market
+        level: ground
+        parent: urban-community
+        exposure: outdoor
+      - id: urban-lockers
+        name: Delivery lockers and vending machines
+        kind: locker_bank
+        level: ground
+        parent: urban-community
+        exposure: covered
+      - id: urban-outdoor-seating
+        name: Outdoor seating terrace
+        kind: outdoor_seating
+        level: ground
+        parent: urban-community
+        exposure: outdoor
+      - id: urban-cafe
+        name: Café kiosk
+        kind: cafe
+        level: ground
+        parent: urban-community
+        exposure: covered
+      - id: urban-delivery-hub
+        name: Delivery and pickup hub
+        kind: delivery_hub
+        level: ground
+        parent: urban-community
+        exposure: covered
+      - id: urban-lighting
+        name: Smart street lighting
+        kind: street_lighting
+        level: ground
+        parent: urban-community
+        exposure: outdoor
+      - id: urban-planters
+        name: Planters and green pockets
+        kind: planter
+        level: ground
+        parent: urban-environmental
+        exposure: outdoor
+      - id: urban-community-garden
+        name: Community garden
+        kind: community_garden
+        level: ground
+        parent: urban-environmental
+        exposure: outdoor
+      - id: urban-pocket-park
+        name: Pocket parks
+        kind: pocket_park
+        level: ground
+        parent: urban-environmental
+        exposure: outdoor
+        roles:
+          - alternative
+      - id: urban-energy
+        name: Local energy hub (solar canopy)
+        kind: energy_hub
+        level: ground
+        parent: urban-environmental
+        exposure: outdoor
+  - copy: ./parts/urban-services-building
+    into: urban-services-building
+  - openings:
+      - id: node-shelter-pudo
+        kind: gate
+        connects:
+          - node-bus-shelter
+          - node-pudo
+        width_m: 3
+        state: open
+      - id: hub-park-market
+        kind: gate
+        connects:
+          - hub-park-playground
+          - hub-farmers-market
+        width_m: 12
+        state: open
+      - id: rural-node-hub
+        kind: gate
+        connects:
+          - rural-node
+          - rural-hub
+        width_m: 6
+        state: open
+      - id: suburban-pavilion-plaza
+        kind: door
+        connects:
+          - suburban-pavilion
+          - suburban-bus-bay
+        width_m: 4
+        state: open
+      - id: suburban-pavilion-rail
+        kind: door
+        connects:
+          - suburban-pavilion
+          - suburban-rail-concourse
+        width_m: 5
+        state: open
+      - id: suburban-platform-concourse
+        kind: gate
+        connects:
+          - suburban-rail-concourse
+          - suburban-rail-platform
+        width_m: 8
+        state: open
+      - id: urban-hall-plaza
+        kind: door
+        connects:
+          - urban-services-building-hall
+          - urban-pocket-park
+        width_m: 6
+        state: open
+      - id: urban-building-cafe
+        kind: door
+        connects:
+          - urban-services-building
+          - urban-cafe
+        width_m: 3
+        state: open
+  - routes:
+      - id: tier-rural-suburban
+        name: Rural to suburban network
+        from: tier-rural
+        to: tier-suburban
+        length_m: 12000
+        kind: path
+        step_free: true
+      - id: tier-suburban-urban
+        name: Suburban to urban network
+        from: tier-suburban
+        to: tier-urban
+        length_m: 8000
+        kind: path
+        step_free: true
+      - id: node-internal
+        name: Shelter to cycle parking
+        from: node-bus-shelter
+        to: node-cycle-parking
+        length_m: 25
+        kind: path
+        step_free: true
+      - id: suburban-internal
+        name: Pavilion to cycle hub
+        from: suburban-pavilion
+        to: suburban-cycle-hub
+        length_m: 40
+        kind: path
+        step_free: true
+  - assets:
+      - id: node-map-display
+        name: Journey planning display
+        kind: info_display
+        space: node-journey-kiosk
+        state: active
+      - id: hub-charger-1
+        name: EV charger 1
+        kind: ev_charger
+        space: hub-ev-parking
+        state: active
+      - id: urban-charger-a
+        name: Urban fast charger A
+        kind: ev_charger
+        space: urban-ev-charging
+        state: active
+      - id: urban-wayfinding
+        name: Wayfinding totem
+        kind: info_display
+        space: urban-info-hall
+        state: active
+      - id: suburban-info-display
+        name: Suburban wayfinding screen
+        kind: info_display
+        space: suburban-info
+        state: active
+  - services:
+      - id: node-waiting-shelter
+        kind: waiting_shelter
+        space: node-bus-shelter
+      - id: node-bike-parking
+        kind: bike_parking
+        space: node-cycle-parking
+      - id: node-information
+        kind: information
+        space: node-journey-kiosk
+      - id: hub-car-sharing
+        kind: car_sharing
+        space: hub-shared-ev
+      - id: hub-parking
+        kind: parking
+        space: hub-ev-parking
+      - id: hub-charging
+        kind: charging
+        space: hub-ev-parking
+      - id: hub-micro-mobility
+        kind: micro_mobility
+        space: hub-escooter-dock
+      - id: suburban-waiting
+        kind: waiting_shelter
+        space: suburban-pavilion
+      - id: suburban-bike-parking
+        kind: bike_parking
+        space: suburban-cycle-hub
+      - id: suburban-bike-sharing
+        kind: bike_sharing
+        space: suburban-cycle-hub
+      - id: suburban-parking-svc
+        kind: parking
+        space: suburban-parking
+      - id: suburban-information
+        kind: information
+        space: suburban-info
+      - id: suburban-delivery
+        kind: delivery_pickup
+        space: suburban-lockers
+      - id: urban-waiting-large
+        kind: waiting_shelter
+        space: urban-bus-shelter-large
+      - id: urban-bike-parking
+        kind: bike_parking
+        space: urban-cycle-parking
+      - id: urban-bike-repair
+        kind: bike_repair
+        space: urban-bike-repair
+      - id: urban-bike-sharing
+        kind: bike_sharing
+        space: urban-bike-share
+      - id: urban-car-sharing
+        kind: car_sharing
+        space: urban-ev-hire
+      - id: urban-charging
+        kind: charging
+        space: urban-ev-charging
+      - id: urban-parking
+        kind: parking
+        space: urban-car-parking
+      - id: urban-information
+        kind: information
+        space: urban-info-hall
+      - id: urban-micro-mobility
+        kind: micro_mobility
+        space: urban-micromobility
+      - id: urban-svc-bakery
+        kind: bakery
+        space: urban-services-building-bakery
+      - id: urban-svc-bank
+        kind: bank_post
+        space: urban-services-building-bank
+      - id: urban-svc-cafe
+        kind: cafe_kiosk
+        space: urban-cafe
+      - id: urban-svc-delivery
+        kind: delivery_pickup
+        space: urban-delivery-hub
+      - id: urban-svc-energy
+        kind: energy
+        space: urban-energy
+      - id: urban-svc-event
+        kind: event_exhibition
+        space: urban-services-building-event
+      - id: urban-svc-restaurant
+        kind: food_restaurant
+        space: urban-services-building-restaurant
+      - id: urban-svc-garden
+        kind: garden
+        space: urban-community-garden
+      - id: urban-svc-indoor-public
+        kind: indoor_public_space
+        space: urban-services-building-hall
+      - id: urban-svc-meeting
+        kind: meeting
+        space: urban-services-building-meeting
+      - id: urban-svc-coworking
+        kind: coworking
+        space: urban-services-building-coworking
+      - id: urban-svc-outdoor-seating
+        kind: outdoor_seating
+        space: urban-outdoor-seating
+      - id: suburban-svc-cafe
+        kind: cafe_kiosk
+        space: suburban-cafe
+      - id: suburban-svc-indoor-public
+        kind: indoor_public_space
+        space: suburban-pavilion
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - rural-node
+          - rural-hub
+          - suburban-hub
+          - urban-bus-stop
+        alternative:
+          - hub-park-playground
+          - urban-pocket-park
+      actions:
+        - at: disrupted
+          set:
+            hub-escooter-dock:
+              state: unavailable

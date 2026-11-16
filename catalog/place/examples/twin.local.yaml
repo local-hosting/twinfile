@@ -1,0 +1,28 @@
+# Local ref map (flat layout under examples/).
+# Hazard situations: @doppler-group/twinfile-simulator (TF_SIMULATOR_ROOT).
+refs:
+  twinfile/shop:0.2.0: shop
+  twinfile/airport:0.2.0: airport
+  twinfile/river:0.2.0: river
+  twinfile/port:0.2.0: port
+  twinfile/park:0.3.0: park
+  twinfile/mobility-hub:0.1.0: mobility-hub/programme
+  twinfile/mobility-hub:0.2.0: mobility-hub
+  twinfile/arena:1.2.0: arena
+  twinfile/expo:0.2.0: expo
+  twinfile/transit-hub-campus:0.1.0: mobility-hub/campus
+  twinfile/base-campus:0.1.0: base-campus
+  twinfile/base-indoor-stack:0.1.0: base-indoor-stack
+  twinfile/base-single-level:0.1.0: base-single-level
+  twinfile/base-open-area:0.1.0: base-open-area
+  twinfile/base-linear:0.1.0: base-linear
+  twinfile/mixin-assets:0.1.0: mixin-assets
+  twinfile/mixin-sensors:0.1.0: mixin-sensors
+  twinfile/shop-shelter-at-cap:1.0.0: shop/scenarios/shelter-at-cap
+  twinfile/airport-morning-checkpoint:1.0.0: airport/scenarios/morning-checkpoint
+  twinfile/arena-gate-open-ramp:1.0.0: arena/scenarios/gate-open-ramp
+  twinfile/transit-hub-campus-lunch-flow:1.0.0: mobility-hub/campus/scenarios/lunch-flow
+  twinfile/expo-visitor-surge:1.0.0: expo/scenarios/visitor-surge
+  twinfile/transit-hub-campus-hub-queue-spill:1.0.0: mobility-hub/campus/scenarios/hub-queue-spill
+  twinfile/expo-outdoor-shelter-cap:1.0.0: expo/scenarios/outdoor-shelter-cap
+  twinfile/mobility-hub-hub-disruption:1.0.0: mobility-hub/scenarios/hub-disruption

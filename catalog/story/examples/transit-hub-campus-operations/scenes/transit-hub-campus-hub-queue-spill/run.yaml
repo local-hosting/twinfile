@@ -1,0 +1,19 @@
+role: run
+from: twinfile/place/transit-hub-campus:0.1.0
+id: transit-hub-campus-hub-queue-spill
+name: Hub queue spill
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/situation/transit-disruption:1.0.0
+domains:
+  - mobility
+args:
+  peakArrivals: 200
+  lanes: 2
+  service_s: 90
+  stagingCap: 40
+use:
+  runner: npm:@twinfile/runner-queue@^0
+catalog:
+  parent: twinfile/transit-hub-campus:0.1.0

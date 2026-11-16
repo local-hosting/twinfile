@@ -1,0 +1,24 @@
+twinfile: 2
+kind: place
+id: base-linear
+name: Linear archetype base
+version: 0.1.0
+stability: example
+geotype:
+  primary: creek
+  registry: "@doppler-group/geotypes@0.1.2"
+steps:
+  - place:
+      name: Linear layout base (visit_order on each space)
+      kind: trail
+      timezone: UTC
+      published: false
+      archetype: linear
+      authoring_scale:
+        linear_unit: m
+        h3_resolution: 9
+        space_granularity: zone
+      ext:
+        lat: 0
+        lon: 0
+        h3: 893a4484a67ffff
