@@ -15,7 +15,7 @@ import { runReplayLines } from '@local-hosting/twinfile-core';
 import { createRunPayload } from '@local-hosting/twinfile-simulator';
 import { loadFeedRows, resolveTrackFeeds } from '@local-hosting/twinfile-simulator';
 import { pullFeedRows, feedRowsToJsonl } from '@local-hosting/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const examplesRoot = testExamplesRoot(importDir);
@@ -32,8 +32,10 @@ const sensorthings = {
 
 describe('feed pull', () => {
   it('writes SensorThings rows a replay scenario can run without changing the scenario', async () => {
-    const scenarioDir = goldenSceneRunDir(importDir, 'river-until-stage-unsafe');
-    const before = readFileSync(join(scenarioDir, 'run.yaml'), 'utf8');
+    const scenarioDir = goldenSceneRun(importDir, 'river-until-stage-unsafe');
+    const storyHead = loadRunUnit(scenarioDir);
+    if (!storyHead.ok) throw new Error('river scene failed to load');
+    const before = readFileSync(storyHead.value.twinfilePath, 'utf8');
     const rows = await pullFeedRows(
       {
         protocol: 'sensorthings',
@@ -77,7 +79,7 @@ describe('feed pull', () => {
     });
     const lines = runReplayLines(payload as Parameters<typeof runReplayLines>[0]);
     expect(lines.some((line) => line.includes('"time_until_unsafe_s"'))).toBe(true);
-    expect(readFileSync(join(scenarioDir, 'run.yaml'), 'utf8')).toBe(before);
+    expect(readFileSync(storyHead.value.twinfilePath, 'utf8')).toBe(before);
   });
 
   it('samples a sensorthings device from its replay file', () => {

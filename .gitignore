@@ -28,3 +28,6 @@ npmrc.local
 _archive/
 
 *.tsbuildinfo
+
+# twin run / verify output
+catalog/story/examples/*/runs/

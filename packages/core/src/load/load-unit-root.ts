@@ -1,11 +1,9 @@
 import type { Result } from '../types/twin-error.js';
 
-import { loadRunUnit } from './load-run-preset.js';
+import { isSceneAddress, loadRunUnit } from './load-scene-run.js';
 import { loadTwinfile, type LoadedTwinfile } from './load-twinfile.js';
 
-/** Load a place Twinfile or a run preset directory. */
+/** Load a place Twinfile or a story scene run (`<story-dir>#<scene-id>`). */
 export function loadUnitRoot(unitRoot: string): Result<LoadedTwinfile> {
-  const place = loadTwinfile(unitRoot);
-  if (place.ok) return place;
-  return loadRunUnit(unitRoot);
+  return isSceneAddress(unitRoot) ? loadRunUnit(unitRoot) : loadTwinfile(unitRoot);
 }

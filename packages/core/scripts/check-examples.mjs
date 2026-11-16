@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { spawnSync } from 'node:child_process';
-import { readFileSync, readdirSync, rmSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import {
@@ -167,57 +167,6 @@ for (const dir of siteDirs) {
       failed += 1;
     } else {
       console.log(`ok build ${name}`);
-    }
-  }
-}
-
-function findScenarioDirs(rootDir) {
-  const out = [];
-  function walk(dir) {
-    const twinfile = twinHeadPath(dir);
-    if (statSync(twinfile, { throwIfNoEntry: false })?.isFile()) {
-      const manifest = parseYaml(readFileSync(twinfile, 'utf8'));
-      if (manifest?.kind === 'scenario') {
-        out.push(dir);
-        return;
-      }
-    }
-    for (const name of readdirSync(dir)) {
-      const child = join(dir, name);
-      if (statSync(child).isDirectory()) walk(child);
-    }
-  }
-  walk(rootDir);
-  return out;
-}
-
-for (const scenario of findScenarioDirs(examplesRoot)) {
-  const rel = scenario.slice(examplesRoot.length + 1);
-  const scenarioCheck = runTwin(['check', scenario, '--strict', '--json']);
-  if (scenarioCheck.status !== 0) {
-    console.error(scenarioCheck.stderr || scenarioCheck.stdout);
-    failed += 1;
-    continue;
-  }
-  console.log(`ok check ${rel} scenario --strict`);
-
-  const scenarioBuild = runTwin(['build', scenario, '--no-lock']);
-  if (scenarioBuild.status !== 0) {
-    console.error(scenarioBuild.stderr || scenarioBuild.stdout);
-    failed += 1;
-    continue;
-  }
-  console.log(`ok build ${rel} scenario`);
-  rmSync(join(scenario, '.twin'), { recursive: true, force: true });
-
-  const expectedDigest = join(scenario, 'expected/digest.txt');
-  if (statSync(expectedDigest, { throwIfNoEntry: false })?.isFile()) {
-    const scenarioVerify = runTwin(['verify', scenario]);
-    if (scenarioVerify.status !== 0) {
-      console.error(scenarioVerify.stderr || scenarioVerify.stdout);
-      failed += 1;
-    } else {
-      console.log(`ok verify ${rel} scenario`);
     }
   }
 }

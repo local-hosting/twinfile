@@ -1,14 +1,13 @@
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
-import { resolveGoldenSceneRunDir } from '../src/paths/golden-scene-runs.js';
 import { checkCatalogParent } from '../src/check/catalog-parent.js';
 
 const twinfileRoot = resolve(import.meta.dirname, '../../..');
 
 describe('checkCatalogParent', () => {
   it('accepts matching parent ref and id prefix', () => {
-    const scenarioRoot = resolveGoldenSceneRunDir('arena-storm-at-halftime', twinfileRoot);
+    const scenarioRoot = resolve(twinfileRoot, 'catalog/story/examples/arena-operations');
     expect(
       checkCatalogParent(scenarioRoot, {
         kind: 'scenario',

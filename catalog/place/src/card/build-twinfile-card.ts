@@ -18,7 +18,7 @@ import type {
 } from '@local-hosting/twinfile-core';
 import { PlaceType } from '../place/place-type.js';
 import { regionNavFromTwinfile } from '../place/region-nav.js';
-import { isRunComposeHead, isRunPresetPath } from '@local-hosting/twinfile-core';
+import { isRunComposeHead } from '@local-hosting/twinfile-core';
 import { twinfileDisplayName, twinfileRefId } from '@local-hosting/twinfile-core';
 import { sanitizeHostIo } from '../place/host-signal-ports.js';
 import { finishTwinfileSummary } from './render-card-layout.js';
@@ -212,7 +212,6 @@ function scenarioSummaryRows(
 
 /** Build {@link TwinfileSummaryV1} from manifest + optional merged bundle fields. */
 function summaryUnitKind(input: BuildTwinfileSummaryInput): string {
-  if (input.unitPath && isRunPresetPath(input.unitPath)) return 'run';
   if (isRunComposeHead(input.twinfile)) return 'run';
   const catalogKind = manifestStr(input.twinfile, 'kind');
   if (catalogKind === 'event') return catalogKind;

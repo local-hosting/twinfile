@@ -11,5 +11,19 @@ story:
   arc: operations
   scenes:
     - id: mobility-hub-hub-disruption
-      label: mobility hub hub disruption
-      run: ./scenes/mobility-hub-hub-disruption
+      label: Hub disruption
+      run:
+        from: twinfile/place/mobility-hub:0.2.0
+        steps:
+          - copy: twinfile/event/transit-disruption:1.0.0
+        domains:
+          - mobility
+        args:
+          peakArrivals: 200
+          lanes: 2
+          service_s: 60
+          stagingCap: 40
+        use:
+          runner: npm:@twinfile/runner-queue@^0
+        expected:
+          digest: sha256:33f6ee4fce99b846055692efeb0be196b2c685b75f1987d7b326b93f246480cb

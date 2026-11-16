@@ -10,8 +10,7 @@ import { composeSingleTwinfileLayers, loadEventBindingDocuments } from './compos
 import { digestFileBytes } from '@local-hosting/twinfile-core';
 import { LayerCache } from '@local-hosting/twinfile-core';
 import { TwinfileBuilder } from './twinfile-builder.js';
-import { loadTwinfile } from '@local-hosting/twinfile-core';
-import { loadRunUnit } from '@local-hosting/twinfile-core';
+import { loadUnitRoot, type LoadedTwinfile } from '@local-hosting/twinfile-core';
 import { isRunUnit } from '@local-hosting/twinfile-core';
 import { ProcessorGraph } from '@local-hosting/twinfile-core';
 import {
@@ -89,16 +88,53 @@ function validatePlaceWire(wire: PlaceWireJson, fileHint: string): Result<PlaceW
   return ok(wire);
 }
 
+type UnitLockInput = {
+  refKey: string;
+  manifestDigest: string;
+  treeDigest: string;
+  layerChains: string[];
+};
+
+/** `--frozen` drift check, then lock write; scene runs carry their pin in `run.expected.digest` instead. */
+function syncUnitLock(unit: LoadedTwinfile, options: BuildTwinfileOptions, input: UnitLockInput): Result<void> {
+  const frozen = options.frozen ?? false;
+  const writeLock = options.writeLock ?? !frozen;
+  const version = String(unit.twinfile.version);
+  const lockRead = readTwinfileLock(unit.root);
+  if (!lockRead.ok) return lockRead;
+
+  if (frozen) {
+    if (!lockRead.value) {
+      return err([
+        {
+          code: 'E_LOCK_DRIFT',
+          message: `${twinLockFileName(unit.root)} required for --frozen`,
+          file: twinLockPath(unit.root),
+        },
+      ]);
+    }
+    const drift = verifyLockEntry(lockRead.value, { ...input, manifestVersion: version });
+    if (drift.length > 0) return err(drift);
+  }
+
+  if (writeLock) {
+    const nextLock = mergeLockEntry(lockRead.value, input.refKey, {
+      version,
+      twinfile: input.manifestDigest,
+      tree: input.treeDigest,
+      layers: input.layerChains,
+    });
+    writeTwinfileLock(unit.root, nextLock);
+  }
+  return ok(undefined);
+}
+
 export async function buildTwinfile(
   unitRoot: string,
   options: BuildTwinfileOptions = {},
 ): Promise<Result<Place>> {
-  let loaded = loadTwinfile(unitRoot);
-  if (!loaded.ok) {
-    const run = loadRunUnit(unitRoot);
-    if (run.ok) loaded = run;
-    else return loaded;
-  }
+  const loaded = loadUnitRoot(unitRoot);
+  if (!loaded.ok) return loaded;
 
   const unit = loaded.value;
   const runUnit = isRunUnit(unit);
@@ -213,46 +249,18 @@ export async function buildTwinfile(
   if (!wireValid.ok) return wireValid;
 
   const manifestDigest = digestFileBytes(unit.twinfilePath);
-  const frozen = options.frozen ?? false;
-  const writeLock = options.writeLock ?? !frozen;
-
   const { digestTwinfileTree } = await import('@local-hosting/twinfile-core');
   const treeDigest = (await digestTwinfileTree(unit.root)).treeDigest;
-
   const refKey = lockRefKeyFromTwinfile(unit.twinfile);
-  const layerChains = built.layers.map((l) => l.chain);
 
-  const lockRead = readTwinfileLock(unit.root);
-  if (!lockRead.ok) return lockRead;
-
-  if (frozen) {
-    if (!lockRead.value) {
-      return err([
-        {
-          code: 'E_LOCK_DRIFT',
-          message: `${twinLockFileName(unit.root)} required for --frozen`,
-          file: twinLockPath(unit.root),
-        },
-      ]);
-    }
-    const drift = verifyLockEntry(lockRead.value, {
+  if (!runUnit) {
+    const locked = syncUnitLock(unit, options, {
       refKey,
       manifestDigest,
       treeDigest,
-      layerChains,
-      manifestVersion: String(unit.twinfile.version),
+      layerChains: built.layers.map((l) => l.chain),
     });
-    if (drift.length > 0) return err(drift);
-  }
-
-  if (writeLock) {
-    const nextLock = mergeLockEntry(lockRead.value, refKey, {
-      version: String(unit.twinfile.version),
-      twinfile: manifestDigest,
-      tree: treeDigest,
-      layers: layerChains,
-    });
-    writeTwinfileLock(unit.root, nextLock);
+    if (!locked.ok) return locked;
   }
 
   return ok(

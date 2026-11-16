@@ -1,4 +1,4 @@
-import type { SceneSchedule } from '../types/place-run-preset.js';
+import type { SceneSchedule } from '../types/scene-run.js';
 
 /** Parse ISO-8601 duration (subset) or integer seconds to seconds. */
 export function parseDurationToSeconds(raw: string): number | undefined {

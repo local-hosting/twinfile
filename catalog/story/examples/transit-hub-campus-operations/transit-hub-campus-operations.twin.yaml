@@ -11,8 +11,35 @@ story:
   arc: operations
   scenes:
     - id: transit-hub-campus-hub-queue-spill
-      label: transit hub campus hub queue spill
-      run: ./scenes/transit-hub-campus-hub-queue-spill
+      label: Hub queue spill
+      run:
+        from: twinfile/place/transit-hub-campus:0.1.0
+        steps:
+          - copy: twinfile/event/transit-disruption:1.0.0
+        domains:
+          - mobility
+        args:
+          peakArrivals: 200
+          lanes: 2
+          service_s: 90
+          stagingCap: 40
+        use:
+          runner: npm:@twinfile/runner-queue@^0
+        expected:
+          digest: sha256:5774303f71ac7d3392388d4784be1330a0354f9fd0292f18a15fd28c01d20382
+          metrics:
+            max_queue: 200
+            time_queue_spills_s: 7200
+            clearance_time_s: 9000
     - id: transit-hub-campus-lunch-flow
-      label: transit hub campus lunch flow
-      run: ./scenes/transit-hub-campus-lunch-flow
+      label: Lunch-hour flow
+      run:
+        from: twinfile/place/transit-hub-campus:0.1.0
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        domains:
+          - mobility
+        args:
+          lanes: 2
+        use:
+          runner: npm:@twinfile/runner-queue@^0

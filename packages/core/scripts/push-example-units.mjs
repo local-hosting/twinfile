@@ -7,8 +7,7 @@ import { parse as parseYaml } from 'yaml';
 import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { findTwinfileDirs } from './catalog/find-twinfile-dirs.mjs';
-import { resolveTwinfileHeadPath } from './catalog/resolve-twinfile-dir.mjs';
-import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../dist/index.js';
+import { findTwinfileYamlPath, resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../dist/index.js';
 
 const twinCli = resolveTwinCli(import.meta.url);
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
@@ -24,7 +23,7 @@ function runTwin(args) {
 }
 
 function pushUnitDir(dir, ref) {
-  const twinfilePath = resolveTwinfileHeadPath(dir);
+  const twinfilePath = findTwinfileYamlPath(dir);
   if (!twinfilePath) return 1;
   const manifest = parseYaml(readFileSync(twinfilePath, 'utf8'));
   const kind = String(manifest.kind ?? '');
@@ -56,7 +55,7 @@ function pushCatalog(root) {
   for (const dir of findTwinfileDirs(root).sort()) {
     if (seen.has(dir)) continue;
     seen.add(dir);
-    const twinfilePath = resolveTwinfileHeadPath(dir);
+    const twinfilePath = findTwinfileYamlPath(dir);
     if (!twinfilePath) continue;
     const manifest = parseYaml(readFileSync(twinfilePath, 'utf8'));
     const name = String(manifest.id ?? manifest.name ?? '');

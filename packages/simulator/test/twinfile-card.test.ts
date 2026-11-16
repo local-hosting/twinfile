@@ -20,14 +20,14 @@ import {
   handleMcpRequest,
   placeEventToHead,
 } from '@local-hosting/twinfile-simulator';
-import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot } = testCatalogRoots(importDir);
 
 const FIVE_UNITS = [
   { id: 'shop-place', path: join(examplesRoot, 'shop') },
-  { id: 'airport-morning-scenario', path: goldenSceneRunDir(importDir, 'airport-morning-checkpoint') },
+  { id: 'airport-morning-scenario', path: goldenSceneRun(importDir, 'airport-morning-checkpoint') },
   { id: 'expo-place', path: join(examplesRoot, 'expo') },
   { id: 'airport-place', path: join(examplesRoot, 'airport') },
   { id: 'arena-place', path: join(examplesRoot, 'arena') },
@@ -115,7 +115,7 @@ describe('TwinfileSummaryV1', () => {
   });
 
   it('scenario card uses manifest name, not ref id', async () => {
-    const runDir = goldenSceneRunDir(importDir, 'airport-morning-checkpoint');
+    const runDir = goldenSceneRun(importDir, 'airport-morning-checkpoint');
     const wifi = await summaryForUnit(runDir);
     const loaded = loadRunUnit(runDir);
     expect(loaded.ok).toBe(true);
@@ -128,7 +128,7 @@ describe('TwinfileSummaryV1', () => {
   it('scenario card omits question block (MCP catalog holds test prompts)', async () => {
     const hasQuestion = (card: TwinfileSummaryV1) =>
       card.layouts.place.blocks.some((b) => b.type === 'list' && b.rows.some((r) => r.id === 'question'));
-    const morning = await summaryForUnit(goldenSceneRunDir(importDir, 'airport-morning-checkpoint'));
+    const morning = await summaryForUnit(goldenSceneRun(importDir, 'airport-morning-checkpoint'));
     expect(hasQuestion(morning)).toBe(false);
   });
 

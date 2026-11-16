@@ -11,11 +11,76 @@ story:
   arc: operations
   scenes:
     - id: arena-flood-shelter-standup
-      label: arena flood shelter standup
-      run: ./scenes/arena-flood-shelter-standup
+      label: Flood shelter stand-up
+      run:
+        from: twinfile/place/arena:1.2.0
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        domains:
+          - safety
+        args:
+          attendance: 4000
+          target_role: shelter
+          resources:
+            cots: 600
+            water_liters: 8000
+          warningAt: severe-weather.warning
+        use:
+          runner: npm:@twinfile/runner-hydraulic@^0
+        expected:
+          digest: sha256:d674b27f710efc133fe699dda8e1a91dc03073f682340c45a459a725c6b53ee8
+          metrics:
+            time_to_shelter_s: 161
+            shelter_overflow: 0
+            resource_shortfall_cots: 3400
+            resource_shortfall_water_liters: 0
     - id: arena-gate-open-ramp
-      label: arena gate open ramp
-      run: ./scenes/arena-gate-open-ramp
+      label: Gate open ramp
+      run:
+        from: twinfile/place/arena:1.2.0
+        steps:
+          - copy: twinfile/event/arena-game-day:1.0.0
+          - copy: twinfile/event/venue-turnstile-flow:1.0.0
+        domains:
+          - events
+        schedule:
+          arena-game-day:
+            gates-open: -PT1H30M
+            kickoff: PT0S
+            halftime: PT1H5M
+            final: PT2H20M
+        args:
+          doorsAt: arena-game-day.gates-open
+          kickoffAt: arena-game-day.kickoff
+          attendance: 15000
+        use:
+          runner: npm:@twinfile/runner-replay@^0
     - id: arena-storm-at-halftime
-      label: arena storm at halftime
-      run: ./scenes/arena-storm-at-halftime
+      label: Storm at halftime
+      run:
+        from: twinfile/place/arena:1.2.0
+        steps:
+          - copy: twinfile/event/arena-game-day:1.0.0
+          - copy: twinfile/event/severe-weather:1.0.0
+        domains:
+          - safety
+        clock:
+          starts_at: 2026-09-15T13:00:00-04:00
+          duration: PT3H30M
+          step: PT5M
+        schedule:
+          arena-game-day:
+            gates-open: -PT1H30M
+            kickoff: PT0S
+            halftime: PT1H5M
+            final: PT2H20M
+        args:
+          attendance: 18000
+          warningAt: arena-game-day.halftime
+        use:
+          runner: npm:@twinfile/runner-hydraulic@^0
+        expected:
+          digest: sha256:68998a6534c3bdfbe5648c18e07462814e10c93ee580506a3cd62aba15cbb69b
+          metrics:
+            clearance_time_s: 722
+            peak_queue: 2572

@@ -11,5 +11,23 @@ story:
   arc: operations
   scenes:
     - id: park-trailhead-backup
-      label: park trailhead backup
-      run: ./scenes/park-trailhead-backup
+      label: Trailhead backup
+      run:
+        from: twinfile/place/park:0.3.0
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        domains:
+          - operations
+        args:
+          peakArrivals: 80
+          lanes: 1
+          service_s: 120
+          stagingCap: 20
+        use:
+          runner: npm:@twinfile/runner-queue@^0
+        expected:
+          digest: sha256:4d280d7ec654c8413039df0b0d330319f6dc7f8108289a20e81b54292cb2a2fa
+          metrics:
+            max_queue: 80
+            time_queue_spills_s: 7200
+            clearance_time_s: 9600

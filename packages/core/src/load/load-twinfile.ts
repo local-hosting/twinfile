@@ -1,6 +1,7 @@
 import { readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
+import type { LoadedScene } from '../types/scene-run.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 import { isRecord } from '../doc/is-record.js';
@@ -27,6 +28,8 @@ export type LoadedTwinfile = {
   root: string;
   twinfilePath: string;
   twinfile: Record<string, unknown>;
+  /** Set when the unit is a story scene run (`<story-dir>#<scene-id>`). */
+  scene?: LoadedScene;
 };
 
 function collectUnknownRootEntries(root: string): TwinError[] {
@@ -160,8 +163,8 @@ export function loadTwinfile(unitRoot: string): Result<LoadedTwinfile> {
         code: 'E_SCHEMA',
         message:
           declared === 'scenario'
-            ? 'Runs use story scene run.yaml — this loader only reads places'
-            : `Expected a place or event head (got kind "${declared}"); use a story scene run.yaml`,
+            ? 'Runs are story scenes (<story-dir>#<scene-id>) — this loader only reads places'
+            : `Expected a place or event head (got kind "${declared}"); runs are story scenes (<story-dir>#<scene-id>)`,
         file: twinfilePath,
       },
     ]);

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import '@local-hosting/twinfile-simulator';
-import { existsSync, mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 
@@ -64,7 +64,7 @@ import {
 import { runTwinTypeBuild } from './build-twin-type.js';
 import { runFeedPull } from './feed-pull.js';
 import { runFeedSimulate } from './feed-simulate.js';
-import { evalRunPreset } from '../eval/index.js';
+import { evalSceneRun } from '../eval/index.js';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -512,7 +512,7 @@ async function runRunScenario(scenarioDir: string): Promise<number> {
   }
   const runner = String((loaded.value.twinfile.use as { runner?: string } | undefined)?.runner ?? '');
   const distRoot = distRootFromCli();
-  const anchor = resolveTwinfileAnchor(dir, {
+  const anchor = resolveTwinfileAnchor(loaded.value.root, {
     ...loaded.value.twinfile,
     twinfilePath: loaded.value.twinfilePath,
   });
@@ -529,7 +529,7 @@ async function runRunScenario(scenarioDir: string): Promise<number> {
       placeRoot: anchor,
       seed: 1,
     }),
-    runsDir: join(dir, 'runs'),
+    runsDir: join(loaded.value.root, 'runs'),
     runName: String(built.value.loaded.twinfile.id),
   });
   console.log(`ok run ${runResult.recordsPath}`);
@@ -557,24 +557,17 @@ async function runVerify(): Promise<number> {
     console.error(formatTwinErrors(dir, built.errors).join('\n'));
     return 1;
   }
-  const expectedDir = join(dir, 'expected');
-  const digestPath = join(expectedDir, 'digest.txt');
-  if (existsSync(digestPath)) {
-    const expectedDigest = readFileSync(digestPath, 'utf8').trim();
-    if (expectedDigest !== built.value.digest) {
-      console.error(`verify: digest mismatch expected ${expectedDigest} got ${built.value.digest}`);
-      return 1;
-    }
+  const expected = built.value.loaded.scene?.expected;
+  if (expected?.digest && expected.digest !== built.value.digest) {
+    console.error(`verify: digest mismatch expected ${expected.digest} got ${built.value.digest}`);
+    return 1;
   }
-  await runRunScenario(dir);
-  const metricsPath = join(expectedDir, 'metrics.json');
-  if (existsSync(metricsPath)) {
-    const expected = JSON.parse(readFileSync(metricsPath, 'utf8')) as Record<string, number>;
-    const actual = JSON.parse(readFileSync(join(dir, 'runs', `${built.value.loaded.twinfile.id}.metrics.json`), 'utf8')) as Record<
-      string,
-      number
-    >;
-    for (const [key, val] of Object.entries(expected)) {
+  const ran = await runRunScenario(dir);
+  if (ran !== 0) return ran;
+  if (expected?.metrics) {
+    const metricsPath = join(built.value.loaded.root, 'runs', `${built.value.loaded.twinfile.id}.metrics.json`);
+    const actual = JSON.parse(readFileSync(metricsPath, 'utf8')) as Record<string, number>;
+    for (const [key, val] of Object.entries(expected.metrics)) {
       if (actual[key] !== val) {
         console.error(`verify: metric ${key} expected ${val} got ${actual[key]}`);
         return 1;
@@ -775,14 +768,14 @@ async function runDisclose(): Promise<number> {
 function runEval(args: string[]): number {
   const dirArg = args.find((a) => !a.startsWith('-'));
   if (!dirArg) {
-    console.error('twin eval: scenario directory required');
+    console.error('twin eval: scene required (<story-dir>#<scene-id>)');
     return 2;
   }
   let runsDir: string | undefined;
   for (let i = 0; i < args.length; i += 1) {
     if (args[i] === '--runs') runsDir = resolve(args[i + 1] ?? '');
   }
-  const result = evalRunPreset(resolve(dirArg), runsDir);
+  const result = evalSceneRun(resolve(dirArg), runsDir);
   for (const line of result.messages) console.log(line);
   console.log(result.pass ? 'ok eval' : 'eval failed');
   return result.pass ? 0 : 1;
