@@ -1,0 +1,15 @@
+twinfile: 2
+kind: resource
+id: dock-crane
+name: Dock Crane
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/dunkirk-dock:0.1.0
+resource:
+  kind: crane
+  state: active
+  ext:
+    lat: 42.468
+    lon: -79.3185

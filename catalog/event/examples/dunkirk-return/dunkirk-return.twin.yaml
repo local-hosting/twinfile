@@ -1,0 +1,18 @@
+twinfile: 1
+kind: event
+id: dunkirk-return
+name: Dunkirk return
+version: 0.1.0
+stability: example
+mode: daily
+canvas:
+  dayIndex: "3"
+phases:
+  - return
+expects:
+  hotspot:
+    kind: marker
+    min: 0
+args:
+  startsAt:
+    type: time

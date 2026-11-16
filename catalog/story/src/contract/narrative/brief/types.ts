@@ -26,6 +26,7 @@ export type StoryBriefWhatV1 = {
 export type StoryBriefWhereV1 = {
   storeSlug?: string;
   placeSlug?: string;
+  placeRef?: string;
   lat?: number;
   lon?: number;
   h3Cell?: string;
@@ -47,7 +48,18 @@ export type StoryBriefWhyV1 = {
   interestIds?: string[];
 };
 
-export type StoryBriefHowV1 = Record<string, never>;
+export type StoryBriefHowV1 = {
+  journeyPace?: string;
+  dramaticBeatIds?: Array<
+    | 'exposition'
+    | 'inciting_incident'
+    | 'rising_action'
+    | 'dilemma'
+    | 'climax'
+    | 'denouement'
+  >;
+  segmentPresetId?: string;
+};
 
 /** Story dimension snapshot (input to {@link buildStoryBrief}). */
 export type StoryBriefSnapshotV1 = {

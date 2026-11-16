@@ -1,0 +1,29 @@
+from: twinfile/base-open-area:0.1.0
+twinfile: 2
+kind: place
+id: buffalo-harbor
+name: Buffalo Harbor
+version: 0.1.0
+stability: example
+geotype:
+  primary: public_park
+  registry: "@local-hosting/geotypes@0.2.0"
+steps:
+  - place:
+      name: Buffalo Harbor
+      kind: harbor
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 42.8864
+        lon: -78.8784
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: harbor-basin
+        name: Harbor basin
+        kind: plaza
+        level: ground
+        exposure: outdoor
