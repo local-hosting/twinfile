@@ -15,7 +15,7 @@ describe('add assets layer', () => {
     try {
       initPlaceFromGeotype(dir, {
         geotype: 'shopping_mall',
-        geotypeRegistry: '@local-hosting/geotypes@0.1.2',
+        geotypeRegistry: '@local-hosting/geotypes@0.2.0',
         unitName: 'decor-test',
         useFrom: true,
       });

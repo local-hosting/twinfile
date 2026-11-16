@@ -60,7 +60,7 @@ version: 0.2.0
 stability: example
 geotype:
   primary: shopping_mall
-  registry: "@local-hosting/geotypes@0.1.2"
+  registry: "@local-hosting/geotypes@0.2.0"
 layers:
   - place/place.yaml
   - path: place/spaces.yaml
@@ -80,7 +80,7 @@ version: 0.1.0
 stability: example
 geotype:
   primary: university
-  registry: "@local-hosting/geotypes@0.1.2"
+  registry: "@local-hosting/geotypes@0.2.0"
 steps:
   - place: { name: Mobility hub campus, kind: mobility_hub, timezone: America/New_York }
   - spaces:

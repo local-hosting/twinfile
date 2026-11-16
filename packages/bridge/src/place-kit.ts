@@ -4,7 +4,7 @@ import type { ImportResult } from './types.js';
 
 export type PlaceRow = Record<string, unknown>;
 
-const GEOTYPE_REGISTRY = '@local-hosting/geotypes@0.1.2';
+const GEOTYPE_REGISTRY = '@local-hosting/geotypes@0.2.0';
 
 /** Unit head suffix; `writeImportedFiles` renames the head to `<dir>.twin.yaml`. */
 export const TWIN_HEAD_SUFFIX = '.twin.yaml';

@@ -6,7 +6,7 @@ version: 0.1.0
 stability: example
 geotype:
   primary: shopping_mall
-  registry: "@local-hosting/geotypes@0.1.2"
+  registry: "@local-hosting/geotypes@0.2.0"
 layers:
   - place/place.yaml
   - place/spaces.yaml
