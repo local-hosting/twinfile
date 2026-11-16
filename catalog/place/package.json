@@ -89,7 +89,7 @@
     "check": "yarn build && yarn typecheck && yarn test"
   },
   "dependencies": {
-    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/geotypes": "0.2.0",
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
     "@doppler-group/twinfile-core": "workspace:packages/core"
   },

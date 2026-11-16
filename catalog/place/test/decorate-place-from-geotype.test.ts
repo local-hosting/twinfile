@@ -34,7 +34,7 @@ describe('decoratePlaceFromGeotype', () => {
     const unitDir = join(dir, slug.replace(/_/g, '-'));
     initPlaceFromGeotype(unitDir, {
       geotype: slug,
-      geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+      geotypeRegistry: '@doppler-group/geotypes@0.2.0',
       unitName: slug.replace(/_/g, '-'),
       useFrom: true,
     });
@@ -53,7 +53,7 @@ describe('decoratePlaceFromGeotype', () => {
     const unitDir = join(dir, 'corner-shop');
     initPlaceFromGeotype(unitDir, {
       geotype: 'convenience_store',
-      geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+      geotypeRegistry: '@doppler-group/geotypes@0.2.0',
       unitName: 'corner-shop',
       useFrom: true,
     });
@@ -73,7 +73,7 @@ describe('decoratePlaceFromGeotype', () => {
     const unitDir = join(dir, 'hospital');
     initPlaceFromGeotype(unitDir, {
       geotype: 'hospital',
-      geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+      geotypeRegistry: '@doppler-group/geotypes@0.2.0',
       unitName: 'hospital',
       useFrom: true,
     });
@@ -85,7 +85,7 @@ describe('decoratePlaceFromGeotype', () => {
     expect(() =>
       initPlaceFromGeotype(join(dir, 'stop-sign'), {
         geotype: 'stop_sign',
-        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        geotypeRegistry: '@doppler-group/geotypes@0.2.0',
         unitName: 'stop-sign',
         useFrom: true,
       }),

@@ -35,7 +35,7 @@
     "README.md"
   ],
   "dependencies": {
-    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/geotypes": "0.2.0",
     "@doppler-group/twinfile-spec": "workspace:packages/spec",
     "web-ifc": "^0.0.78",
     "yaml": "^2.6.1"
@@ -46,7 +46,7 @@
     "vitest": "^4.1.12"
   },
   "twinfilePinnedDependencies": {
-    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/geotypes": "0.2.0",
     "@doppler-group/twinfile-spec": "1.0.0-draft.2"
   }
 }

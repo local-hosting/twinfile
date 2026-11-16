@@ -26,7 +26,7 @@ kind: place
 name: my-site
 geotype:
   primary: convention_center
-  registry: "@doppler-group/geotypes@0.1.2"
+  registry: "@doppler-group/geotypes@0.2.0"
 
 # 2) PATCH — your geometry & narrative (coarse → fine)
 layers:

@@ -17,7 +17,7 @@ describe('initPlaceFromGeotype', () => {
     try {
       initPlaceFromGeotype(dir, {
         geotype: 'shopping_mall',
-        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        geotypeRegistry: '@doppler-group/geotypes@0.2.0',
         unitName: 'my-mall',
         useFrom: true,
       });
@@ -33,7 +33,7 @@ describe('initPlaceFromGeotype', () => {
       expect(twinfile.from).toBe(placeBaseRefForArchetype(scaffold!.archetype));
       expect(twinfile.geotype).toEqual({
         primary: 'shopping_mall',
-        registry: '@doppler-group/geotypes@0.1.2',
+        registry: '@doppler-group/geotypes@0.2.0',
       });
       expect(twinfile.layers).toBeUndefined();
       const steps = twinfile.steps as Array<Record<string, unknown>>;
@@ -55,7 +55,7 @@ describe('initPlaceFromGeotype', () => {
     try {
       initPlaceFromGeotype(dir, {
         geotype: 'university',
-        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        geotypeRegistry: '@doppler-group/geotypes@0.2.0',
         unitName: 'campus-demo',
         useFrom: true,
       });
@@ -72,7 +72,7 @@ describe('initPlaceFromGeotype', () => {
     try {
       initPlaceFromGeotype(dir, {
         geotype: 'shopping_mall',
-        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        geotypeRegistry: '@doppler-group/geotypes@0.2.0',
         unitName: 'my-mall',
         useFrom: true,
       });
@@ -87,7 +87,7 @@ describe('initPlaceFromGeotype', () => {
     try {
       initPlaceFromGeotype(dir, {
         geotype: 'creek',
-        geotypeRegistry: '@doppler-group/geotypes@0.1.2',
+        geotypeRegistry: '@doppler-group/geotypes@0.2.0',
         unitName: 'creek-demo',
         useFrom: false,
       });

@@ -143,7 +143,7 @@ export function pinnedGeotypeRegistry(): string {
   const corePkg = JSON.parse(readFileSync(corePkgPath, 'utf8')) as {
     twinfilePinnedDependencies?: Record<string, string>;
   };
-  const version = corePkg.twinfilePinnedDependencies?.['@doppler-group/geotypes'] ?? '0.1.2';
+  const version = corePkg.twinfilePinnedDependencies?.['@doppler-group/geotypes'] ?? '0.2.0';
   return `@doppler-group/geotypes@${version}`;
 }
 

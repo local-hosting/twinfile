@@ -291,7 +291,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@doppler-group/twinfile-bridge@workspace:packages/bridge"
   dependencies:
-    "@doppler-group/geotypes": "npm:0.1.2"
+    "@doppler-group/geotypes": "npm:0.2.0"
     "@doppler-group/twinfile-spec": "workspace:packages/spec"
     "@types/node": "npm:^24.0.0"
     typescript: "npm:^5.8.2"
@@ -346,7 +346,7 @@ __metadata:
   dependencies:
     "@doppler-group/frameworks-core": "link:../../../frameworks/packages/core"
     "@doppler-group/frameworks-presets": "link:../../../frameworks/packages/presets"
-    "@doppler-group/geotypes": "npm:0.1.2"
+    "@doppler-group/geotypes": "npm:0.2.0"
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge"
     "@doppler-group/twinfile-spec": "workspace:packages/spec"
     "@types/node": "npm:^24.0.0"
@@ -422,7 +422,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@doppler-group/twinfile-place@workspace:catalog/place"
   dependencies:
-    "@doppler-group/geotypes": "npm:0.1.2"
+    "@doppler-group/geotypes": "npm:0.2.0"
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge"
     "@doppler-group/twinfile-core": "workspace:packages/core"
     typescript: "npm:^5.8.3"

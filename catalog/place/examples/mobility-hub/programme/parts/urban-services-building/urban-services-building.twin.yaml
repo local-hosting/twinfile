@@ -7,7 +7,7 @@ version: 0.1.0
 stability: example
 geotype:
   primary: town_hall
-  registry: "@doppler-group/geotypes@0.1.2"
+  registry: "@doppler-group/geotypes@0.2.0"
 steps:
   - place:
       name: Community services building (interior)

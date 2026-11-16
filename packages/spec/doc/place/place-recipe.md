@@ -53,7 +53,7 @@ kind: place
 name: my-expo
 geotype:
   primary: convention_center
-  registry: "@doppler-group/geotypes@0.1.2"
+  registry: "@doppler-group/geotypes@0.2.0"
 layers:
   - place/place.yaml      # LAYOUT + site ext
   - place/visits.yaml     # default tour beats

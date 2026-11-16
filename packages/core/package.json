@@ -83,7 +83,7 @@
   "dependencies": {
     "@doppler-group/frameworks-core": "link:../../../frameworks/packages/core",
     "@doppler-group/frameworks-presets": "link:../../../frameworks/packages/presets",
-    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/geotypes": "0.2.0",
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
     "@doppler-group/twinfile-spec": "workspace:packages/spec",
     "ajv": "^8.17.1",
@@ -98,7 +98,7 @@
   },
   "twinfilePinnedDependencies": {
     "@doppler-group/twinfile-bridge": "0.1.1",
-    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/geotypes": "0.2.0",
     "@doppler-group/twinfile-spec": "1.0.0-draft.2"
   }
 }

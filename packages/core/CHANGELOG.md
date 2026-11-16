@@ -2,6 +2,7 @@
 
 ## Unreleased
 
+- Pins **`@doppler-group/geotypes@0.2.0`**: geotype decorations suggest **`events`** (was `situations`)
 - **Breaking:** `twinfile: 2` place units ([spec RFC 0009](../spec/rfcs/0009-dockerfile-model/index.md)): ordered **`steps:`** (`plan:`, `copy:`, inline place collections); **`processors:`** + **`outlets:`** for host wiring (RFC 0007). `twin fmt` normalizes legacy `patches:`, `patch:`, `inputs`/`outputs`/`connections`. Manifest `buildings:` / `floors:` removed; `twin fmt --upgrade=2` converts v1 places. Compose readers: `listTwinfileInstructions`, `parseManifestPatches`, `parseModuleGraphFromTwinfile`, `twinfileStepItems`
 - **Breaking:** core no longer renders or serves HTML; dependencies run one way (`@twinfile/editor` → `@doppler-group/twinfile-core`). `twin view` is now `twin-workbench` in `@twinfile/editor`; card, DTPR disclosure HTML, `twinfile-output.css`, and the viewer assets moved to `@twinfile/editor/render`. `twin card` prints ASCII, `--json`, `--yaml`, or `--markdown`; `twin disclose` prints `--json` or `--yaml`; MCP `place.card` drops `html` / `htmlPreview`. Removed viewer exports (`buildViewerCatalog`, `listViewerUnits`, `buildLayoutOverview`, `viewerSampleAt`, …); added `resolveTwinfileAnchor`, `patchModuleUseMode`, `patchModuleWireIo`, `elementLabelsForInlineDtpr`, `fetchDtprLabelsForDisclosures`
 - **`twin fmt [path] [--recursive] [--check]`** — format one manifest file, one unit dir, or every `twinfile: 1` YAML under a tree; lifts legacy **`plans:`** into **`layers:`**

@@ -7,7 +7,7 @@ version: 0.2.0
 stability: example
 geotype:
   primary: intermodal_facility
-  registry: "@doppler-group/geotypes@0.1.2"
+  registry: "@doppler-group/geotypes@0.2.0"
 steps:
   - place:
       name: King's Cross, London
