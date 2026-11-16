@@ -41,7 +41,7 @@ type TFPlaceFields = {
 };
 
 /**
- * Built spatial twin — {@link TFPlace.load} from {@link Twinfile} (`Twinfile.yaml`).
+ * Built spatial twin — {@link TFPlace.load} from {@link Twinfile} (`<unit>.twin.yaml`).
  * `TF*` is the formal type prefix (distinct from operational `TF_` env vars).
  */
 export class TFPlace {

@@ -15,6 +15,7 @@ import { testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 import {
   createPlace,
 } from '@doppler-group/twinfile-place';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 describe('add plan to place', () => {
   it('collects ids by role tag on spaces and openings', () => {
@@ -52,14 +53,14 @@ describe('add plan to place', () => {
       });
       const spacesDoc = parseYaml(baseSpaces) as Record<string, unknown>;
       const openingsDoc = parseYaml(baseOpenings) as Record<string, unknown>;
-      const twinfile = parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as Record<
+      const twinfile = parseYaml(readFileSync(twinHeadPath(dir), 'utf8')) as Record<
         string,
         unknown
       >;
       const steps = Array.isArray(twinfile.steps) ? [...(twinfile.steps as unknown[])] : [];
       steps.push(spacesDoc, { ...openingsDoc, mode: 'replace' });
       twinfile.steps = steps;
-      writeFileSync(join(dir, 'Twinfile.yaml'), stringify(twinfile));
+      writeFileSync(twinHeadPath(dir), stringify(twinfile));
 
       const result = await addBindToPlace(dir, 'severe-weather', { examplesRoot });
       expect(result.location).toMatch(/^steps\[\d+\]$/);
@@ -70,7 +71,7 @@ describe('add plan to place', () => {
       const bind =
         result.location.startsWith('steps[')
           ? (
-              parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as {
+              parseYaml(readFileSync(twinHeadPath(dir), 'utf8')) as {
                 steps: Array<{ bind?: { for: string; roles: Record<string, string[]> } }>;
               }
             ).steps.find((item) => item.bind?.for === 'severe-weather')?.bind

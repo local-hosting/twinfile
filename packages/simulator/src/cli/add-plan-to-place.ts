@@ -1,4 +1,4 @@
-import { existsSync, mkdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
@@ -8,7 +8,9 @@ import {
 } from '@doppler-group/twinfile-place';
 import {
   isPatchesTwinfile,
+  findTwinfileYamlPath,
   loadTwinfile,
+  twinHeadPath,
   resolveExamplesRoot,
   resolveSimulatorRoot,
 } from '@doppler-group/twinfile-core';
@@ -104,9 +106,7 @@ function loadSituationManifestFromExamples(
   let twinfilePath: string | undefined;
   for (const root of roots) {
     const situationDir = join(resolve(root), 'situations', normalized);
-    const candidate = ['Twinfile.yaml', 'twinfile.yaml']
-      .map((name) => join(situationDir, name))
-      .find((p) => statSync(p, { throwIfNoEntry: false })?.isFile());
+    const candidate = findTwinfileYamlPath(situationDir);
     if (!candidate) continue;
     twinfilePath = candidate;
     break;
@@ -211,7 +211,7 @@ export function buildPlanDocument(
 }
 
 function writeBindingPatch(unitDir: string, bindDoc: Record<string, unknown>, force: boolean): string {
-  const twinfilePath = join(unitDir, 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(unitDir);
   const twinfile = readTwinfileDoc(twinfilePath);
   const isSameBinding = (item: Record<string, unknown>) => {
     const doc =
@@ -233,7 +233,7 @@ function writeBindingFile(unitDir: string, name: string, bindDoc: Record<string,
   mkdirSync(join(unitDir, 'bindings'), { recursive: true });
   const header = `# Wired by twin add bind — tag spaces/openings with roles: [...] then twin check --strict\n`;
   writeFileSync(bindAbsPath, header + stringifyYaml(bindDoc));
-  appendBindingToTwinfile(join(unitDir, 'Twinfile.yaml'), bindRelPath);
+  appendBindingToTwinfile(twinHeadPath(unitDir), bindRelPath);
   return bindRelPath;
 }
 

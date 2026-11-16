@@ -20,6 +20,7 @@ import {
 } from '@doppler-group/twinfile-core';
 import { formatTwinfilePath } from '@doppler-group/twinfile-core/cli';
 import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 
@@ -32,7 +33,7 @@ function writeUnit(dir: string, patches: Record<string, unknown>[]): void {
   mkdirSync(dir, { recursive: true });
   const id = dir.split('/').pop()!.toLowerCase().replace(/[^a-z0-9-]/g, '-');
   writeFileSync(
-    join(dir, 'Twinfile.yaml'),
+    twinHeadPath(dir),
     stringify({
       twinfile: 2,
       kind: 'place',
@@ -128,7 +129,7 @@ describe('place copy: nested building units (RFC 0009)', () => {
     rmSync(dir, { recursive: true });
   });
 
-  it('fails load when a ./ copy has no Twinfile.yaml', () => {
+  it('fails load when a ./ copy has no twin head', () => {
     const dir = mkdtempSync(join(tmpdir(), 'twin-copy-'));
     writeUnit(dir, [{ place: { name: 'Site', kind: 'campus', timezone: 'UTC' } }, { copy: './nowhere' }]);
     const loaded = loadTwinfile(dir);
@@ -138,14 +139,15 @@ describe('place copy: nested building units (RFC 0009)', () => {
   });
 
   it('--upgrade=2 turns with: mixins into copies with the same place, axes, and plans', () => {
-    const dir = mkdtempSync(join(tmpdir(), 'twin-upgrade-'));
+    const tmp = mkdtempSync(join(tmpdir(), 'twin-upgrade-'));
+    const dir = join(tmp, 'shop');
     try {
       const source = join(examplesRoot, 'shop');
       cpSync(source, dir, { recursive: true });
       const options = { examplesRoot, simulatorRoot };
       const before = loadTwinfile(source);
       expect(before.ok).toBe(true);
-      expect(formatTwinfilePath(join(dir, 'Twinfile.yaml'), { upgrade: 2 })).toBe(0);
+      expect(formatTwinfilePath(twinHeadPath(dir), { upgrade: 2 })).toBe(0);
       const after = loadTwinfile(dir);
       expect(after.ok ? [] : after.errors).toEqual([]);
       if (!before.ok || !after.ok) return;
@@ -161,7 +163,7 @@ describe('place copy: nested building units (RFC 0009)', () => {
         unwrapBindings(listPlaceSituationBindings(unit, options)).map((row) => row.doc.for).sort();
       expect(planFor(after.value)).toEqual(planFor(before.value));
     } finally {
-      rmSync(dir, { recursive: true, force: true });
+      rmSync(tmp, { recursive: true, force: true });
     }
   });
 

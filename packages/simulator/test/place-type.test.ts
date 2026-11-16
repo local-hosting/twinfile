@@ -20,6 +20,7 @@ import { getDefaultValidator } from '@doppler-group/twinfile-core';
 import { TFPlace } from '../src/types/tf-runtime.js';
 
 import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
@@ -37,14 +38,14 @@ function catalogPlaceRoots(root: string): string[] {
     )
     .map((name) => join(root, name));
   const mobilityCampus = join(root, 'mobility-hub', 'campus');
-  if (statSync(join(mobilityCampus, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile()) {
+  if (statSync(twinHeadPath(mobilityCampus), { throwIfNoEntry: false })?.isFile()) {
     dirs.push(mobilityCampus);
   }
   return dirs
     .filter((placeRoot) => statSync(placeRoot, { throwIfNoEntry: false })?.isDirectory())
-    .filter((placeRoot) => statSync(join(placeRoot, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile())
+    .filter((placeRoot) => statSync(twinHeadPath(placeRoot), { throwIfNoEntry: false })?.isFile())
     .filter((placeRoot) => {
-      const raw = readFileSync(join(placeRoot, 'Twinfile.yaml'), 'utf8');
+      const raw = readFileSync(twinHeadPath(placeRoot), 'utf8');
       const kind = raw.match(/^\s*kind:\s*(\S+)/m)?.[1];
       return kind === undefined || kind === 'place';
     });

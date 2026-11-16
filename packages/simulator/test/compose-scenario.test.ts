@@ -12,6 +12,7 @@ import {
   loadRunUnit,
 } from '@doppler-group/twinfile-core';
 import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { twinLockPath } from '@doppler-group/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
@@ -52,5 +53,5 @@ describe('buildTwinfile scenario', () => {
 });
 
 function cleanup(): void {
-  rmSync(join(scenarioRoot, 'Twinfile.lock'), { force: true });
+  rmSync(twinLockPath(scenarioRoot), { force: true });
 }

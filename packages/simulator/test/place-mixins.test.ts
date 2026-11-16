@@ -11,13 +11,14 @@ import {
   buildTwinfile,
   loadTwinfileStrict,
 } from '@doppler-group/twinfile-place';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 
 function writePlace(dir: string, from: string, mixins: string[]): void {
   mkdirSync(join(dir, 'place'), { recursive: true });
   writeFileSync(
-    join(dir, 'Twinfile.yaml'),
+    twinHeadPath(dir),
     stringify({
       twinfile: 1,
       kind: 'place',

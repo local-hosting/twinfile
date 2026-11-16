@@ -8,6 +8,7 @@ import {
   resolveTypeExamplesRoot,
   twinfileDisplayName,
 } from '@doppler-group/twinfile-core';
+import { findTwinfileYamlPath } from '@doppler-group/twinfile-core';
 import { parse as parseYaml } from 'yaml';
 
 import { attachHostPlaceCatalogIds, attachSituationHostPlaceScopes } from './viewer-host-place-scope.js';
@@ -87,11 +88,10 @@ function isNestedSiteBundlePath(relKey: string): boolean {
 }
 
 function unitManifestPath(dir: string): string | undefined {
-  for (const name of ['Twinfile.yaml', 'twinfile.yaml', 'run.yaml', 'preset.yaml', 'Preset.yaml']) {
-    const path = join(dir, name);
-    if (existsSync(path)) return path;
-  }
-  return undefined;
+  const head = findTwinfileYamlPath(dir);
+  if (head) return head;
+  const run = join(dir, 'run.yaml');
+  return existsSync(run) ? run : undefined;
 }
 
 function hasTwinfile(dir: string): boolean {
@@ -379,7 +379,7 @@ function sortViewerCatalog(units: ViewerCatalogEntry[]): ViewerCatalogEntry[] {
 export type ViewerRoots = {
   examplesRoots?: string[];
   simulatorRoots?: string[];
-  /** Standalone unit folders (Twinfile.yaml) not under a scanned catalog. */
+  /** Standalone unit folders (<unit>.twin.yaml) not under a scanned catalog. */
   extraRecipeDirs?: string[];
 };
 
@@ -512,7 +512,7 @@ function isValidUnitDir(dir: string): boolean {
   return isDir(dir) && hasTwinfile(dir);
 }
 
-/** Pick a unit directory that exists and contains Twinfile.yaml. */
+/** Pick a unit directory that exists and contains <unit>.twin.yaml. */
 export function resolveDefaultCatalogDir(preferred: string, roots: ViewerRoots): string {
   const abs = resolve(preferred);
   if (isValidUnitDir(abs)) return abs;

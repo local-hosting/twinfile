@@ -79,7 +79,7 @@ export function buildViewerCatalog(result: BuildTwinfileResult): ViewerCatalog {
     { id: 'layout.overview', label: 'Layout', group: 'place', kind: 'layout' },
     {
       id: 'manifest',
-      label: unit.twinfilePath.split(/[/\\]/).pop() ?? 'Twinfile.yaml',
+      label: unit.twinfilePath.split(/[/\\]/).pop() ?? 'twin head',
       group: 'twinfile',
       kind: 'document',
     },

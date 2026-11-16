@@ -20,7 +20,7 @@ function stormSessionFixture(): BuildTwinfileResult {
     loaded: {
       twinfile: { clock },
       root: '/tmp',
-      twinfilePath: '/tmp/Twinfile.yaml',
+      twinfilePath: '/tmp/unit/unit.twin.yaml',
     },
     data: {
       place: { timezone: 'America/New_York', location: { lat: 41.309, lng: -74.152 } },
