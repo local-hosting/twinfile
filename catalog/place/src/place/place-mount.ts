@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolveGeotypeRef, schemaOrgTypeForGeotypeRef } from '@doppler-group/geotypes';
 
 import type { TwinfileRef } from '@doppler-group/twinfile-core';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 import { parseGeotypeTwinfile } from '@doppler-group/twinfile-core';
 import type {
   ResolvePlaceMountOptions,
@@ -195,18 +196,18 @@ function normalizeRef(ref: string): TwinfileRef {
 }
 
 function findPulledUnitRoot(outDir: string): string {
-  const direct = join(outDir, 'Twinfile.yaml');
+  const direct = twinHeadPath(outDir);
   if (statSync(direct, { throwIfNoEntry: false })?.isFile()) {
     return outDir;
   }
   for (const name of readdirSync(outDir)) {
     const child = join(outDir, name);
     if (!statSync(child).isDirectory()) continue;
-    if (statSync(join(child, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile()) {
+    if (statSync(twinHeadPath(child), { throwIfNoEntry: false })?.isFile()) {
       return child;
     }
   }
-  throw new Error(`resolvePlaceMountAsync: no Twinfile.yaml under ${outDir}`);
+  throw new Error(`resolvePlaceMountAsync: no <unit>.twin.yaml under ${outDir}`);
 }
 
 function pullCachePath(ref: TwinfileRef, options: ResolvePlaceMountOptions): string {
@@ -247,7 +248,7 @@ export async function resolvePlaceMountAsync(
   }
 
   const outDir = pullCachePath(normalized, options);
-  if (!statSync(join(outDir, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile()) {
+  if (!statSync(twinHeadPath(outDir), { throwIfNoEntry: false })?.isFile()) {
     mkdirSync(outDir, { recursive: true });
     const pulled = await pullTwinfileFromRegistry({
       ref: normalized,

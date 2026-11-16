@@ -1,7 +1,6 @@
 import type { BuiltTwinHead } from '@doppler-group/twinfile-core';
 import { createHeadTwinTypeModule, isRecord } from '@doppler-group/twinfile-core';
 
-export const headFile = 'Story.yaml';
 export const kind = 'story' as const;
 
 export type StoryBuilt = BuiltTwinHead;
@@ -20,4 +19,4 @@ export function normalizeStoryHead(doc: Record<string, unknown>): Record<string,
   };
 }
 
-export const module = createHeadTwinTypeModule({ kind, headFile, normalize: normalizeStoryHead });
+export const module = createHeadTwinTypeModule({ kind, normalize: normalizeStoryHead });

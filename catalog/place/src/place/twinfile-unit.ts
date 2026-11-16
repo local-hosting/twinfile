@@ -1,8 +1,8 @@
 import { join, resolve } from 'node:path';
 
 import {
-  findTwinfileYamlPath,
   loadTwinfile,
+  twinHeadPath,
   type LoadedTwinfile,
   type Result,
 } from '@doppler-group/twinfile-core';
@@ -11,7 +11,7 @@ import { buildTwinfile, type BuildTwinfileOptions } from '../build/build-twinfil
 import type { Place } from './built-place.js';
 
 /**
- * Handle to a Twinfile unit on disk (`Twinfile.yaml` + layer tree).
+ * Handle to a Twinfile unit on disk (`<unit>.twin.yaml` + layer tree).
  * Call {@link Twinfile.build} to produce a {@link Place}; wrap with `TFPlace` in `@doppler-group/twinfile-simulator` for playback.
  */
 export class Twinfile {
@@ -21,13 +21,13 @@ export class Twinfile {
     this.root = resolve(root);
   }
 
-  /** Unit directory (folder containing `Twinfile.yaml`). */
+  /** Unit directory (folder containing `<unit>.twin.yaml`). */
   static at(unitDir: string): Twinfile {
     return new Twinfile(unitDir);
   }
 
   get yamlPath(): string {
-    return findTwinfileYamlPath(this.root) ?? join(this.root, 'Twinfile.yaml');
+    return twinHeadPath(this.root);
   }
 
   load(): Result<LoadedTwinfile> {

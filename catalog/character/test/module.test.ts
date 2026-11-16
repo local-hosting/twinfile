@@ -3,15 +3,13 @@ import { join } from 'node:path';
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@doppler-group/twinfile-core';
 import { describe, expect, it } from 'vitest';
 
-import { headFile, kind, module } from '../src/index.js';
+import { kind, module } from '../src/index.js';
 
 const exampleDir = join(resolveTypeExamplesRoot('character', resolveTwinfileRoot()), 'shop-greeter');
 
 describe('@doppler-group/twinfile-character', () => {
   it('exports TwinTypeModule with PCM wire', () => {
     expect(kind).toBe('character');
-    expect(headFile).toBe('Character.yaml');
-    expect(module.headFile).toBe('Character.yaml');
   });
 
   it('builds the shop-greeter example head', async () => {

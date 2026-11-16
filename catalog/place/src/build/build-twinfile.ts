@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 
 import { checkGeotypeTwinfile } from '@doppler-group/twinfile-core';
+import { twinHeadPath, twinLockFileName, twinLockPath } from '@doppler-group/twinfile-core';
 import type { PlaceWireJson } from '@doppler-group/twinfile-core';
 import { placeImageDigest } from '@doppler-group/twinfile-core';
 import { Place } from '../place/built-place.js';
@@ -211,7 +212,7 @@ export async function buildTwinfile(
   });
 
   const wire: PlaceWireJson = { meta, place: mergedPlace, digest };
-  const wireValid = validatePlaceWire(wire, join(unit.root, 'Twinfile.yaml'));
+  const wireValid = validatePlaceWire(wire, twinHeadPath(unit.root));
   if (!wireValid.ok) return wireValid;
 
   const manifestDigest = digestFileBytes(unit.twinfilePath);
@@ -232,8 +233,8 @@ export async function buildTwinfile(
       return err([
         {
           code: 'E_LOCK_DRIFT',
-          message: 'Twinfile.lock required for --frozen',
-          file: join(unit.root, 'Twinfile.lock'),
+          message: `${twinLockFileName(unit.root)} required for --frozen`,
+          file: twinLockPath(unit.root),
         },
       ]);
     }

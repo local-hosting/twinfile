@@ -17,6 +17,7 @@ import { stringify } from 'yaml';
 
 import { PLACE_DEMO_EXT_H3 } from '../place/demo-ext-h3.js';
 import { resolveExamplesRoot } from '@doppler-group/twinfile-core';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 import { resolveSimulatorRoot } from '@doppler-group/twinfile-core';
 import { placeBaseRefForArchetype } from '@doppler-group/twinfile-core';
 import { decoratePlaceFromGeotype } from './decorate-place-from-geotype.js';
@@ -53,8 +54,8 @@ export function initPlaceFromGeotype(
   targetDir: string,
   options: InitPlaceFromGeotypeOptions,
 ): void {
-  if (existsSync(join(targetDir, 'Twinfile.yaml'))) {
-    throw new Error(`Twinfile already exists: ${join(targetDir, 'Twinfile.yaml')}`);
+  if (existsSync(twinHeadPath(targetDir))) {
+    throw new Error(`Twinfile already exists: ${twinHeadPath(targetDir)}`);
   }
 
   const slug = options.geotype.trim().toLowerCase();
@@ -113,7 +114,7 @@ export function initPlaceFromGeotype(
 
   twinfile.steps = [{ place }];
   mkdirSync(targetDir, { recursive: true });
-  const twinfilePath = join(targetDir, 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(targetDir);
   writeFileSync(twinfilePath, stringify(twinfile));
   formatPlaceManifestFile(twinfilePath);
   writeCampusBuildingScaffold(targetDir, options.unitName, suggestBuildingImportForSlug(slug));

@@ -1,6 +1,7 @@
 import { join } from 'node:path';
 
 import { checkGeotypeTwinfile } from '@doppler-group/twinfile-core';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 import {
   checkExpectsAgainstVocabulary,
   checkPlanRolesExact,
@@ -35,7 +36,7 @@ export function mergePlaceDataFromTwinfileAtRoot(
 ): PlaceData {
   const loaded: LoadedTwinfile = {
     root: placeRoot,
-    twinfilePath: join(placeRoot, 'Twinfile.yaml'),
+    twinfilePath: twinHeadPath(placeRoot),
     twinfile,
   };
   const merged = mergePlaceFromTwinfile(loaded, options);

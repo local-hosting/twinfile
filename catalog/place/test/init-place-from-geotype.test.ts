@@ -9,6 +9,7 @@ import { describe, expect, it } from 'vitest';
 import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
 import { PLACE_DEMO_EXT_H3 } from '../src/place/demo-ext-h3.js';
 import { placeBaseRefForArchetype } from '@doppler-group/twinfile-core';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 describe('initPlaceFromGeotype', () => {
   it('scaffolds a v2 place with geotype, scaffold, and from base', () => {
@@ -21,7 +22,7 @@ describe('initPlaceFromGeotype', () => {
         useFrom: true,
       });
 
-      const twinfile = parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as Record<
+      const twinfile = parseYaml(readFileSync(twinHeadPath(dir), 'utf8')) as Record<
         string,
         unknown
       >;
@@ -90,7 +91,7 @@ describe('initPlaceFromGeotype', () => {
         unitName: 'creek-demo',
         useFrom: false,
       });
-      const twinfile = parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as Record<
+      const twinfile = parseYaml(readFileSync(twinHeadPath(dir), 'utf8')) as Record<
         string,
         unknown
       >;

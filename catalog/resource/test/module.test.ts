@@ -3,14 +3,13 @@ import { join } from 'node:path';
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@doppler-group/twinfile-core';
 import { describe, expect, it } from 'vitest';
 
-import { headFile, kind, module } from '../src/index.js';
+import { kind, module } from '../src/index.js';
 
 const exampleDir = join(resolveTypeExamplesRoot('resource', resolveTwinfileRoot()), 'greeter-kiosk');
 
 describe('@doppler-group/twinfile-resource', () => {
   it('exports the resource module', () => {
     expect(kind).toBe('resource');
-    expect(headFile).toBe('Resource.yaml');
     expect(module.kind).toBe('resource');
   });
 

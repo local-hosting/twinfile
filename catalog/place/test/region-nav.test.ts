@@ -17,12 +17,12 @@ function loadTwinfile(rel: string): Record<string, unknown> {
 
 describe('regionNavFromTwinfile', () => {
   it('lists park meadow and trailhead', () => {
-    const rows = regionNavFromTwinfile(loadTwinfile('examples/park/Twinfile.yaml'));
+    const rows = regionNavFromTwinfile(loadTwinfile('examples/park/park.twin.yaml'));
     expect(rows.map((r) => r.id).sort()).toEqual(['meadow', 'trailhead']);
   });
 
   it('omits copy anchors on campus twins', () => {
-    const twinfile = loadTwinfile('examples/airport/Twinfile.yaml');
+    const twinfile = loadTwinfile('examples/airport/airport.twin.yaml');
     const into = copyIntoAnchorsFromTwinfile(twinfile);
     expect(into.has('terminal-a')).toBe(true);
     const rows = regionNavFromTwinfile(twinfile);
@@ -30,7 +30,7 @@ describe('regionNavFromTwinfile', () => {
   });
 
   it('reads spaces from manifest steps', () => {
-    const twinfile = loadTwinfile('examples/park/Twinfile.yaml');
+    const twinfile = loadTwinfile('examples/park/park.twin.yaml');
     expect(spacesFromTwinfileSteps(twinfile).length).toBe(2);
   });
 });

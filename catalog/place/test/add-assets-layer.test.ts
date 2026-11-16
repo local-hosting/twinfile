@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 
 import { addAssetsLayerToPlace } from '@doppler-group/twinfile-core/cli';
 import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
+import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 describe('add assets layer', () => {
   it('appends an inline assets patch for v2 places', () => {
@@ -20,7 +21,7 @@ describe('add assets layer', () => {
       });
       const result = addAssetsLayerToPlace(dir);
       expect(result.location).toMatch(/^steps\[\d+\]$/);
-      const twinfile = parseYaml(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')) as {
+      const twinfile = parseYaml(readFileSync(twinHeadPath(dir), 'utf8')) as {
         steps: Array<Record<string, unknown>>;
       };
       expect(twinfile.steps.some((item) => 'assets' in item)).toBe(true);

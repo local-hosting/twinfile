@@ -3,7 +3,7 @@ node_modules/
 .DS_Store
 .twin/
 **/.twin/
-Twinfile.lock
+*.twin.lock
 .yarn/*
 !.yarn/patches
 !.yarn/plugins
