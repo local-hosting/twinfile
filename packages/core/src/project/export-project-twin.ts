@@ -1,16 +1,21 @@
 import { statSync } from 'node:fs';
-import { resolveTwinfileRoot, resolveTypeExamplesRoot, TWIN_CATALOG_TYPES } from '../paths/catalog-layout.js';
+import {
+  resolveTwinfileRoot,
+  resolveTypeExamplesRoot,
+  TWIN_CATALOG_TYPES,
+  type TwinCatalogType,
+} from '../paths/catalog-layout.js';
 import { listExampleUnitIds } from './list-example-units.js';
 
 export type ProjectTwinManifest = {
   twinfile: 1;
-  types: Array<'place' | 'resource' | 'character' | 'story'>;
+  types: TwinCatalogType[];
   roots: Record<string, string>;
 };
 
 export type ProjectTwinBundle = {
   manifest: ProjectTwinManifest;
-  units: Record<'place' | 'resource' | 'character' | 'story', string[]>;
+  units: Record<TwinCatalogType, string[]>;
 };
 
 export function loadProjectTwinManifest(root?: string): ProjectTwinManifest {
@@ -30,11 +35,8 @@ export { listExampleUnitIds } from './list-example-units.js';
 /** Storage-neutral project index (`twin project export`, JSON/YAML). */
 export function exportProjectTwinBundle(root?: string): ProjectTwinBundle {
   const manifest = loadProjectTwinManifest(root);
-  const units = {
-    place: listExampleUnitIds('place', root),
-    resource: listExampleUnitIds('resource', root),
-    character: listExampleUnitIds('character', root),
-    story: listExampleUnitIds('story', root),
-  };
+  const units = Object.fromEntries(
+    TWIN_CATALOG_TYPES.map((type) => [type, listExampleUnitIds(type, root)]),
+  ) as ProjectTwinBundle['units'];
   return { manifest, units };
 }

@@ -71,6 +71,7 @@ const STEPS = [
   { id: 'resource-type', run: () => runWorkspaceScript('@local-hosting/twinfile-resource', ['check']) },
   { id: 'character-type', run: () => runWorkspaceScript('@local-hosting/twinfile-character', ['check']) },
   { id: 'story-type', run: () => runWorkspaceScript('@local-hosting/twinfile-story', ['check']) },
+  { id: 'event-type', run: () => runWorkspaceScript('@local-hosting/twinfile-event', ['check']) },
 ];
 
 function parseOnly(argv) {

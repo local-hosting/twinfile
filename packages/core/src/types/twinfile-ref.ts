@@ -13,7 +13,7 @@ export const TWINFILE_REF_PATTERN = new RegExp(
   `^(twinfile/(?:${TWINFILE_KIND}/)?${TWINFILE_UNIT}:${TWINFILE_TAG}|${OCI_GHCR})$`,
 );
 
-export type TwinfileRefKind = 'place' | 'scenario' | 'event' | 'situation' | 'mixin' | 'base';
+export type TwinfileRefKind = 'place' | 'scenario' | 'event' | 'mixin' | 'base';
 
 export function parseTwinfileRef(ref: string): { kind?: TwinfileRefKind; name: string; tag: string } | undefined {
   const trimmed = ref.trim();

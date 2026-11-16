@@ -8,8 +8,6 @@ export function twinfileManifestKindLabel(kind: string | undefined): string {
       return 'Site';
     case 'scenario':
       return 'Scenario';
-    case 'situation':
-      return 'Situation';
     case 'event':
       return 'Event';
     case 'mixin':

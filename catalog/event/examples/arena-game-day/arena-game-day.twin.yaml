@@ -1,0 +1,24 @@
+twinfile: 1
+kind: event
+id: arena-game-day
+name: Arena game day
+version: 1.0.0
+stability: example
+phases:
+  - gates-open
+  - kickoff
+  - halftime
+  - final
+expects:
+  seating:
+    kind: space
+    min: 1
+  gate:
+    kind: opening
+    min: 1
+args:
+  attendance:
+    type: integer
+    default: 15000
+catalog:
+  parent: twinfile/arena:1.2.0

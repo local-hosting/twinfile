@@ -1,11 +1,12 @@
 import { createTwinTypeRegistry, type TwinError, type TwinKind } from '@local-hosting/twinfile-core';
 import { formatTwinErrors } from '@local-hosting/twinfile-core/cli';
 import { module as characterModule } from '@local-hosting/twinfile-character/module';
+import { module as eventModule } from '@local-hosting/twinfile-event/module';
 import { module as placeModule } from '@local-hosting/twinfile-place/module';
 import { module as resourceModule } from '@local-hosting/twinfile-resource/module';
 import { module as storyModule } from '@local-hosting/twinfile-story/module';
 
-const twinTypes = createTwinTypeRegistry([placeModule, resourceModule, characterModule, storyModule]);
+const twinTypes = createTwinTypeRegistry([placeModule, resourceModule, characterModule, storyModule, eventModule]);
 
 function printBuildErrors(unitDir: string, errors: TwinError[], json: boolean): number {
   const lines = json ? [JSON.stringify({ ok: false, errors }, null, 2)] : formatTwinErrors(unitDir, errors);
