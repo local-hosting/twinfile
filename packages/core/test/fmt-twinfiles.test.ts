@@ -101,7 +101,7 @@ layers:
       `from: ..
 twinfile: 1
 kind: scenario
-id: shop-shelter-at-cap
+id: shelter-at-cap
 name: Shop Shelter At Cap
 version: 1.0.0
 stability: example

@@ -17,7 +17,7 @@ const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
 describe('compose runners', () => {
   it('runs hydraulic and queue on one clock and tags each record', async () => {
-    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
+    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shelter-at-cap');
     const built = await buildTwinfile(dir, { examplesRoot, writeLock: false, noCache: true });
     const loaded = loadRunUnit(dir);
     if (!built.ok || !loaded.ok) {
@@ -29,7 +29,7 @@ describe('compose runners', () => {
       built: built.value,
       layers: built.value.layers,
       twinfile: loaded.value.twinfile,
-      runName: 'shop-shelter-at-cap',
+      runName: 'shelter-at-cap',
       args: resolvedArgs,
       placeRoot: join(examplesRoot, 'shop'),
       seed: 1,

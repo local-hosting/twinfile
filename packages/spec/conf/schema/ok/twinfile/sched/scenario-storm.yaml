@@ -1,7 +1,7 @@
 from: ../arena
 twinfile: 2
 kind: scenario
-id: arena-storm-at-halftime
+id: storm-at-halftime
 name: Arena Storm At Halftime
 catalog:
   parent: twinfile/arena:1.2.0

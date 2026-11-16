@@ -1,6 +1,6 @@
 # Madison Square Garden — layout map
 
-Illustrative stadium campus pinned at **Madison Square Garden** for **`severe-weather`** + **`arena-game-day`** → **`arena-storm-at-halftime`**, and **`arena-flood-shelter-standup`** under `scenarios/flood-shelter-standup/` (shelter capacity + concourse cot/water assets). Layout is fiction; the map pin is real.
+Illustrative stadium campus pinned at **Madison Square Garden** for **`severe-weather`** + **`arena-game-day`** → **`storm-at-halftime`**, and **`flood-shelter-standup`** under `scenarios/flood-shelter-standup/` (shelter capacity + concourse cot/water assets). Layout is fiction; the map pin is real.
 
 Pattern C — [campus-building-floor.md](../../../../../packages/spec/doc/place/campus-building-floor.md) (one `copy: ./parts/concourse`).
 
@@ -51,4 +51,4 @@ Manifest **`processors:`** scopes the concourse building into **`map-concourse`*
 ## Related
 
 - Child: [`parts/concourse`](../parts/concourse/) — `ext.shelter_resource` on cot/water assets
-- Scenario: [`arena-flood-shelter-standup`](../../../../story/examples/arena-operations/arena-operations.twin.yaml) (`catalog/story/examples/arena-operations#arena-flood-shelter-standup`)
+- Scenario: [`flood-shelter-standup`](../../../../story/examples/arena-operations/arena-operations.twin.yaml) (`catalog/story/examples/arena-operations#flood-shelter-standup`)

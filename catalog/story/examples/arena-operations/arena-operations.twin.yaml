@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/arena:1.2.0
 story:
-  arc: operations
   scenes:
-    - id: arena-flood-shelter-standup
+    - id: flood-shelter-standup
       label: Flood shelter stand-up
       run:
         steps:
@@ -22,7 +21,7 @@ story:
             cots: 600
             water_liters: 8000
           warningAt: severe-weather.warning
-    - id: arena-gate-open-ramp
+    - id: gate-open-ramp
       label: Gate open ramp
       run:
         steps:
@@ -38,7 +37,7 @@ story:
           doorsAt: arena-game-day.gates-open
           kickoffAt: arena-game-day.kickoff
           attendance: 15000
-    - id: arena-storm-at-halftime
+    - id: storm-at-halftime
       label: Storm at halftime
       run:
         steps:
