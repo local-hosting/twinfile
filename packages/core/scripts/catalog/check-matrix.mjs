@@ -6,7 +6,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
-import { resolveTwinCli } from '../../../packages/tooling/scripts/resolve-twin-cli.mjs';
+import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
 
 const scriptsDir = dirname(fileURLToPath(import.meta.url));

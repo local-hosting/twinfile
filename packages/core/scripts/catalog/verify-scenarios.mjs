@@ -4,7 +4,7 @@ import { spawnSync } from 'node:child_process';
 import { readdirSync, statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
-import { resolveTwinCli } from '../../../packages/tooling/scripts/resolve-twin-cli.mjs';
+import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { isRunHeadPath, resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
 import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
