@@ -1,0 +1,19 @@
+layout_index:
+  version: 1
+  regions:
+    - id: meadow
+      title: Central meadow
+      granularity: zone
+      space_ids: [meadow]
+      detail_layers: [spaces]
+    - id: trailhead
+      title: Trailhead plaza
+      granularity: zone
+      space_ids: [trailhead]
+      detail_layers: [spaces]
+      children:
+        - id: crossing
+          title: Creek crossing and boardwalk
+          granularity: site
+          space_ids: []
+          detail_layers: [markers, stations]

@@ -1,0 +1,19 @@
+role: run
+from: twinfile/place/arena:1.2.0
+id: arena-gate-open-ramp
+name: Gate open ramp
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/event/arena-game-day:1.0.0
+  - copy: twinfile/situation/venue-turnstile-flow:1.0.0
+domains:
+  - events
+args:
+  doorsAt: arena-game-day.gates-open
+  kickoffAt: arena-game-day.kickoff
+  attendance: 15000
+use:
+  runner: npm:@twinfile/runner-replay@^0
+catalog:
+  parent: twinfile/arena:1.2.0

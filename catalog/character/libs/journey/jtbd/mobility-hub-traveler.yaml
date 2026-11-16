@@ -1,0 +1,32 @@
+specVersion: "1.0"
+methodId: mobility-hub
+jobs:
+  - id: plan-intermodal-route
+    label: Plan intermodal route
+    granularity: theme
+    situation: When my trip spans more than one mode or operator
+    motivation: choose a route that balances time, cost, and reliability
+    desiredOutcome: I know which lines, stops, and transfers to use
+    visitationGoal: converge
+    visitationSubGoal: explore
+    heartDimensionId: taskSuccess
+  - id: transfer-modes
+    label: Transfer modes
+    granularity: story
+    parentJobId: plan-intermodal-route
+    situation: When I must switch between bus, rail, ride-hail, or parking
+    motivation: make the connection without missing the next leg
+    desiredOutcome: I transition modes smoothly and stay on schedule
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: dwell-at-hub
+    label: Dwell at hub
+    granularity: story
+    parentJobId: plan-intermodal-route
+    situation: When I have time between connections at a mobility hub
+    motivation: use the wait productively or comfortably
+    desiredOutcome: I am ready for the next leg without feeling stranded
+    visitationGoal: converge
+    visitationSubGoal: explore
+    heartDimensionId: engagement

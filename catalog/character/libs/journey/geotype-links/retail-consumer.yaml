@@ -1,0 +1,38 @@
+specVersion: "1.0"
+methodId: retail
+types:
+  - slug: department_store
+    id: RSD
+    activityKindHints: [transaction, dwell]
+    jobIds: [run-weekly-errands, browse-new-arrivals, complete-purchase]
+    journeyPhaseIds: [arrival, navigation, on_site]
+  - slug: electronics_store
+    id: RSE
+    activityKindHints: [transaction, dwell]
+    jobIds: [compare-options, find-product-fast, complete-purchase]
+    journeyPhaseIds: [navigation, on_site]
+  - slug: clothing_store
+    id: RSA
+    activityKindHints: [transaction, dwell]
+    jobIds: [browse-new-arrivals, compare-options, complete-purchase]
+    journeyPhaseIds: [navigation, on_site]
+  - slug: shopping_mall
+    id: RSM
+    activityKindHints: [dwell, transaction]
+    jobIds: [browse-new-arrivals, run-weekly-errands]
+    journeyPhaseIds: [arrival, navigation, on_site]
+  - slug: hardware_store
+    id: RSH
+    activityKindHints: [transaction, service]
+    jobIds: [find-product-fast, complete-purchase]
+    journeyPhaseIds: [navigation, on_site]
+  - slug: convenience_store
+    id: RCS
+    activityKindHints: [transaction]
+    jobIds: [run-weekly-errands, pick-up-essentials]
+    journeyPhaseIds: [on_site]
+  - slug: grocery_store
+    id: RSG
+    activityKindHints: [transaction]
+    jobIds: [run-weekly-errands, compare-prices, stock-up-pantry, complete-purchase]
+    journeyPhaseIds: [pre_visit, navigation, on_site, post_visit]

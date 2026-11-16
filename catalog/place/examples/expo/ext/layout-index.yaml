@@ -1,0 +1,44 @@
+layout_index:
+  version: 1
+  regions:
+    - id: arrival
+      title: Metro and exhibition centre arrival
+      granularity: zone
+      space_ids: [metro-arrival]
+      detail_layers: [spaces]
+    - id: central
+      title: Central plaza
+      granularity: zone
+      space_ids: [al-wasl-plaza]
+      detail_layers: [spaces]
+    - id: opportunity
+      title: Opportunity district
+      granularity: zone
+      space_ids: [district-opportunity, pavilion-opportunity]
+      detail_layers: [spaces]
+      children:
+        - id: opportunity-interior
+          title: Opportunity pavilion gallery
+          granularity: room
+          space_ids: [pavilion-opportunity-gallery]
+    - id: mobility
+      title: Mobility district
+      space_ids: [district-mobility, pavilion-mobility]
+      detail_layers: [spaces]
+      children:
+        - id: mobility-interior
+          granularity: room
+          space_ids: [pavilion-mobility]
+    - id: sustainability
+      title: Sustainability district
+      space_ids: [district-sustainability, pavilion-sustainability, uae-pavilion]
+      detail_layers: [spaces]
+      children:
+        - id: sustainability-interiors
+          granularity: room
+          space_ids: [pavilion-sustainability, uae-pavilion]
+    - id: outdoor-program
+      title: Parks and outdoor stages
+      granularity: zone
+      space_ids: [al-forsan-park, jubilee-park, wasl-stage]
+      detail_layers: [spaces]

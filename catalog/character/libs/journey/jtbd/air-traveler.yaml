@@ -1,0 +1,41 @@
+specVersion: "1.0"
+methodId: air-travel
+jobs:
+  - id: reach-gate-on-time
+    label: Reach gate on time
+    granularity: theme
+    situation: When I have a flight departure to make
+    motivation: arrive at the gate before boarding closes
+    desiredOutcome: I board without stress or rebooking
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: clear-security-efficiently
+    label: Clear security efficiently
+    granularity: story
+    parentJobId: reach-gate-on-time
+    situation: When airport security is the main bottleneck
+    motivation: pass screening with minimal delay
+    desiredOutcome: I am through security and headed to the gate
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: find-gate-and-amenities
+    label: Find gate and amenities
+    granularity: story
+    parentJobId: reach-gate-on-time
+    situation: When I am unfamiliar with the terminal layout
+    motivation: locate my gate, restrooms, and food without backtracking
+    desiredOutcome: I know where to go and what is nearby
+    visitationGoal: converge
+    visitationSubGoal: explore
+  - id: manage-layover-time
+    label: Manage layover time
+    granularity: story
+    parentJobId: reach-gate-on-time
+    situation: When I have a connection or long layover
+    motivation: use the time productively without missing the next flight
+    desiredOutcome: I reach the next gate relaxed and on schedule
+    visitationGoal: converge
+    visitationSubGoal: explore
+    heartDimensionId: engagement

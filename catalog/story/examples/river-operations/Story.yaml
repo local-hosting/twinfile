@@ -1,0 +1,18 @@
+twinfile: 2
+kind: story
+id: river-operations
+name: River operations
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/river:0.2.0
+story:
+  arc: operations
+  scenes:
+    - id: river-swim-unsafe-known
+      label: river swim unsafe known
+      run: ./scenes/river-swim-unsafe-known
+    - id: river-until-stage-unsafe
+      label: river until stage unsafe
+      run: ./scenes/river-until-stage-unsafe

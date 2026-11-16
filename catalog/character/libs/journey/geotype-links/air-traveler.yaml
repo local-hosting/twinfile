@@ -1,0 +1,28 @@
+specVersion: "1.0"
+methodId: air-travel
+types:
+  - slug: airport
+    id: AVA
+    activityKindHints: [commute, dwell]
+    jobIds: [reach-gate-on-time, clear-security-efficiently, find-gate-and-amenities]
+    journeyPhaseIds: [pre_visit, arrival, navigation, on_site, egress]
+  - slug: restaurant
+    id: FDR
+    activityKindHints: [dwell]
+    jobIds: [grab-meal, manage-layover-time]
+    journeyPhaseIds: [concessions, on_site]
+  - slug: cafe
+    id: FDC
+    activityKindHints: [dwell]
+    jobIds: [take-break, manage-layover-time]
+    journeyPhaseIds: [concessions, on_site]
+  - slug: parking_lot
+    id: ASP
+    activityKindHints: [commute]
+    jobIds: [reach-gate-on-time]
+    journeyPhaseIds: [pre_visit, arrival]
+  - slug: shopping_mall
+    id: RSM
+    activityKindHints: [dwell]
+    jobIds: [manage-layover-time]
+    journeyPhaseIds: [navigation, on_site]

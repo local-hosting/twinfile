@@ -1,0 +1,94 @@
+{
+  "name": "@local-hosting/twinfile-place",
+  "version": "0.0.1",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/local-hosting/twinfile.git",
+    "directory": "catalog/place"
+  },
+  "type": "module",
+  "exports": {
+    ".": {
+      "development": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./module": {
+      "development": "./src/twin-module.ts",
+      "types": "./dist/twin-module.d.ts",
+      "import": "./dist/twin-module.js",
+      "default": "./dist/twin-module.js"
+    },
+    "./place/*": {
+      "development": "./src/place/*",
+      "types": "./dist/place/*",
+      "import": "./dist/place/*",
+      "default": "./dist/place/*"
+    },
+    "./build/*": {
+      "development": "./src/build/*",
+      "types": "./dist/build/*",
+      "import": "./dist/build/*",
+      "default": "./dist/build/*"
+    },
+    "./check/*": {
+      "development": "./src/check/*",
+      "types": "./dist/check/*",
+      "import": "./dist/check/*",
+      "default": "./dist/check/*"
+    },
+    "./query/*": {
+      "development": "./src/query/*",
+      "types": "./dist/query/*",
+      "import": "./dist/query/*",
+      "default": "./dist/query/*"
+    },
+    "./card/*": {
+      "development": "./src/card/*",
+      "types": "./dist/card/*",
+      "import": "./dist/card/*",
+      "default": "./dist/card/*"
+    },
+    "./cli/*": {
+      "development": "./src/cli/*",
+      "types": "./dist/cli/*",
+      "import": "./dist/cli/*",
+      "default": "./dist/cli/*"
+    },
+    "./mounts/*": {
+      "development": "./src/mounts/*",
+      "types": "./dist/mounts/*",
+      "import": "./dist/mounts/*",
+      "default": "./dist/mounts/*"
+    },
+    "./types/*": {
+      "development": "./src/types/*",
+      "types": "./dist/types/*",
+      "import": "./dist/types/*",
+      "default": "./dist/types/*"
+    },
+    "./mcp/*": {
+      "development": "./src/mcp/*",
+      "types": "./dist/mcp/*",
+      "import": "./dist/mcp/*",
+      "default": "./dist/mcp/*"
+    }
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "check": "yarn build && yarn typecheck && yarn test"
+  },
+  "dependencies": {
+    "@local-hosting/geotypes": "0.1.2",
+    "@local-hosting/twinfile-bridge": "workspace:packages/bridge",
+    "@local-hosting/twinfile-core": "workspace:packages/core"
+  },
+  "devDependencies": {
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.12"
+  }
+}

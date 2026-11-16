@@ -1,0 +1,16 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "declaration": true,
+    "noEmit": false,
+    "paths": {
+      "@local-hosting/twinfile-core": ["../packages/core/dist/index.d.ts"],
+      "@local-hosting/twinfile-core/cli": ["../packages/core/dist/cli/twinfile-cli.d.ts"],
+      "@local-hosting/twinfile-core/*": ["../packages/core/dist/*"]
+    }
+  },
+  "include": ["src/**/*.ts"],
+  "exclude": ["src/.DS_Store"]
+}

@@ -1,0 +1,31 @@
+specVersion: "1.0"
+methodId: hospital-visit
+jobs:
+  - id: support-loved-one
+    label: Support loved one
+    granularity: theme
+    situation: When someone I care about is in the hospital
+    motivation: be present, informed, and helpful during their stay
+    desiredOutcome: They feel supported and I understand the care plan
+    visitationGoal: connect
+    visitationSubGoal: friends
+    heartDimensionId: happiness
+  - id: find-way-to-department
+    label: Find way to department
+    granularity: story
+    parentJobId: support-loved-one
+    situation: When the campus layout is unfamiliar
+    motivation: reach the correct wing or room without getting lost
+    desiredOutcome: I arrive at the right place on the first try
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: wait-comfortably
+    label: Wait comfortably
+    granularity: story
+    parentJobId: support-loved-one
+    situation: When procedures or visits run longer than expected
+    motivation: stay nearby without added stress
+    desiredOutcome: I can wait without feeling stranded or anxious
+    visitationGoal: converge
+    visitationSubGoal: visit

@@ -1,0 +1,11 @@
+twinfile: 1
+kind: place
+id: bad-missing-role
+name: Bad missing role
+version: 0.1.0
+stability: example
+layers:
+  - place/place.yaml
+  - place/spaces.yaml
+plans:
+  - plans/incomplete.yaml

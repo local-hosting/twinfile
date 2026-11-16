@@ -1,0 +1,1221 @@
+specVersion: "1.0"
+methodId: mobility-hub
+presetId: mobility_hub_traveler
+zones:
+  A1-place:
+    - id: find-my-hub
+      name: Find My Hub
+      label: finding my hub
+      channel: map
+      description: Locates the correct hub, entrance, or interchange for the planned trip.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - place
+          - routing
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: price-an-option
+      name: Price an Option
+      label: pricing a trip option
+      channel: app
+      description: Compares fare, pass, and mode pricing before committing to a route.
+      duration: 2
+      tags:
+        intents:
+          - learn
+          - purchase
+        focus:
+          - place
+          - fare
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: reserve-ride
+      name: Reserve Ride
+      label: reserving a ride
+      channel: app
+      description: Books a seat, vehicle, or timed connection before arrival.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+          - setup
+        focus:
+          - place
+          - schedule
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: city-map
+      name: City Map
+      label: the city map
+      channel: map
+      description: Reviews city-scale context around the hub and destination area.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - place
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: vehicle-inventory
+      name: Vehicle Inventory
+      label: available vehicle inventory
+      channel: app
+      description: Checks bikes, scooters, cars, or shared fleet availability near the hub.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - place
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: map-route
+      name: Map Route
+      label: mapping the route
+      channel: map
+      description: Plans door-to-hub and hub-to-destination routing before leaving.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - place
+          - routing
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+  A2-time:
+    - id: check-next-bus-arrival
+      name: Check Next Bus Arrival
+      label: the next bus arrival
+      channel: app
+      description: Confirms live bus departure or arrival timing before reaching the hub.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - real-time-info
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: check-next-train-arrival
+      name: Check Next Train Arrival
+      label: the next train arrival
+      channel: app
+      description: Confirms live rail departure or platform timing before arrival.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - real-time-info
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: check-next-ferry-arrival
+      name: Check Next Ferry Arrival
+      label: the next ferry arrival
+      channel: app
+      description: Confirms live ferry sailing time and gate assignment before arrival.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - real-time-info
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: find-upcoming-events
+      name: Find Upcoming Events
+      label: upcoming hub events
+      channel: website
+      description: Discovers programming, closures, or events that may affect the visit.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+  Z1-spontaneous:
+    - id: check-the-weather
+      name: Check the Weather
+      label: the weather
+      channel: app
+      description: Checks local weather to decide whether to pause inside or keep moving.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: check-local-news
+      name: Check Local News
+      label: local news
+      channel: media
+      description: Skims local headlines or alerts while passing through the hub.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: see-whats-on
+      name: See What's On
+      label: what's on at the hub
+      channel: store
+      description: Notices programming, promotions, or activations during a brief pass-through.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: take-a-seat
+      name: Take a Seat
+      label: taking a seat
+      channel: store
+      description: Pauses in a waiting area without committing to a longer stay.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: break-from-elements
+      name: Break from the Sun/Rain
+      label: shelter from the elements
+      channel: store
+      description: Seeks cover from heat, rain, or wind during a short hub stop.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: hub-city-map
+      name: City Map
+      label: the in-hub city map
+      channel: store
+      description: Uses on-site maps or directories for quick orientation while passing through.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+    - id: recommended-nearby
+      name: Recommended
+      label: nearby recommendations
+      channel: app
+      description: Surfaces suggested food, services, or destinations near the current location.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: social-calendar
+      name: Social Calendar
+      label: the social calendar
+      channel: app
+      description: Checks friends' plans or shared events tied to the hub visit.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: upcoming-events-on-site
+      name: Upcoming Events
+      label: on-site upcoming events
+      channel: store
+      description: Reviews event boards or screens for what is happening soon in the hub.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+  Z2-errands:
+    - id: pick-up-mail
+      name: Pick Up Mail
+      label: picking up mail
+      channel: store
+      description: Retrieves packages or mail from a hub locker or service counter.
+      duration: 2
+      tags:
+        intents:
+          - learn
+          - purchase
+        focus:
+          - wayfinding
+        segments:
+          - regular
+          - champion
+          - beginner
+    - id: prescription-pickup
+      name: Prescription Pickup
+      label: a prescription pickup
+      channel: store
+      description: Collects a pharmacy order during a brief hub stop.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+        focus:
+          - wayfinding
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: store-pickup
+      name: Store Pickup
+      label: a store pickup
+      channel: store
+      description: Retrieves an online order from a retail or locker pickup point.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+        focus:
+          - wayfinding
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: restaurant-pickup
+      name: Restaurant Pickup
+      label: a restaurant pickup
+      channel: store
+      description: Grabs a prepared meal or mobile order while moving through the hub.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+        focus:
+          - wayfinding
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: park-my-vehicle
+      name: Park My Vehicle
+      label: parking my vehicle
+      channel: store
+      description: Finds short- or long-term parking for a personal or shared vehicle.
+      duration: 2
+      tags:
+        intents:
+          - setup
+          - learn
+        focus:
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: in-hub-wayfinding
+      name: In-Hub Wayfinding
+      label: in-hub wayfinding
+      channel: store
+      description: Uses signage, directories, or staff to reach a quick errand destination.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - wayfinding
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+  Z3-vehicle-services:
+    - id: fix-my-vehicle
+      name: Fix My Vehicle
+      label: fixing my vehicle
+      channel: store
+      description: Schedules or waits for mechanical repair or maintenance at the hub.
+      duration: 3
+      tags:
+        intents:
+          - fix
+        focus:
+          - equipment
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: clean-my-vehicle
+      name: Clean My Vehicle
+      label: cleaning my vehicle
+      channel: store
+      description: Uses wash, detail, or cleaning services during an extended stop.
+      duration: 2
+      tags:
+        intents:
+          - fix
+          - purchase
+        focus:
+          - equipment
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: charge-my-vehicle
+      name: Charge My Vehicle
+      label: charging my vehicle
+      channel: store
+      description: Plugs into EV charging while dwelling at the hub.
+      duration: 3
+      tags:
+        intents:
+          - setup
+          - fix
+        focus:
+          - equipment
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: pump-gas
+      name: Pump Gas
+      label: pumping gas
+      channel: store
+      description: Refuels a personal or fleet vehicle at an on-site fuel station.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+        focus:
+          - equipment
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: service-directory
+      name: Service Directory
+      label: the service directory
+      channel: store
+      description: Browses available maintenance, retail, and amenity providers in the hub.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - equipment
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+  Z4-visit:
+    - id: meet-my-team
+      name: Meet My Team
+      label: meeting my team
+      channel: store
+      description: Coordinates an in-person team meetup within the hub footprint.
+      duration: 3
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - regular
+          - champion
+    - id: view-a-map
+      name: View a Map
+      label: viewing a map
+      channel: store
+      description: Studies hub or campus maps during a longer visit.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+    - id: walk-in-park
+      name: Walk in Park
+      label: walking in the park
+      channel: store
+      description: Takes a restorative walk in adjacent green space during dwell time.
+      duration: 3
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: meet-friend
+      name: Meet Friend
+      label: meeting a friend
+      channel: store
+      description: Waits for or meets a companion during an extended hub stay.
+      duration: 3
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: read-a-book
+      name: Read a Book
+      label: reading a book
+      channel: store
+      description: Uses quiet seating or a reading area while waiting for the next leg.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: sit-on-bench
+      name: Sit on Bench
+      label: sitting on a bench
+      channel: store
+      description: Rests in a public seating area during a longer dwell period.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+  Z5-pick:
+    - id: compare-routes
+      name: Compare Routes
+      label: comparing routes
+      channel: app
+      description: Evaluates multimodal route options for the next leg of the journey.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - mode-selection
+          - routing
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: compare-vehicles
+      name: Compare Vehicles
+      label: comparing vehicles
+      channel: app
+      description: Compares bike, scooter, car, or transit options before choosing a mode.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: check-timing
+      name: Check Timing
+      label: checking timing
+      channel: app
+      description: Confirms departure windows and connection buffers for the next leg.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - time
+          - real-time-info
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: learn-ride-safety
+      name: Learn How to Ride/Safety
+      label: ride and safety guidance
+      channel: app
+      description: Reviews mode-specific safety rules, tutorials, or first-ride guidance.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - mode-selection
+          - safety
+        segments:
+          - stranger
+          - explorer
+          - beginner
+    - id: check-eco
+      name: Check Eco
+      label: environmental impact
+      channel: app
+      description: Compares emissions or sustainability profiles across mode options.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: check-pricing
+      name: Check Pricing
+      label: checking pricing
+      channel: app
+      description: Compares fare, rental, or pass pricing before selecting the next vehicle.
+      duration: 1
+      tags:
+        intents:
+          - learn
+          - purchase
+        focus:
+          - fare
+          - mode-selection
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: map-to-go
+      name: Map To-Go
+      label: the to-go map
+      channel: map
+      description: Saves or opens a turn-by-turn map for the selected next leg.
+      duration: 1
+      tags:
+        intents:
+          - learn
+          - setup
+        focus:
+          - routing
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: live-time-tables
+      name: Live Time Tables
+      label: live timetables
+      channel: store
+      description: Reads departure boards or live timetable screens before boarding.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - real-time-info
+          - time
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+          - rejoiner
+    - id: vehicle-inventory-on-site
+      name: Vehicle Inventory
+      label: on-site vehicle inventory
+      channel: store
+      description: Checks available shared vehicles or bays at the pickup point.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+  Z6-take:
+    - id: rent-bike
+      name: Rent Bike
+      label: renting a bike
+      channel: store
+      description: Checks out a shared or rental bike for the next leg.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+          - setup
+        focus:
+          - transfers
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: rent-scooter
+      name: Rent Scooter
+      label: renting a scooter
+      channel: store
+      description: Unlocks a shared scooter or micromobility device for departure.
+      duration: 2
+      tags:
+        intents:
+          - purchase
+          - setup
+        focus:
+          - transfers
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: rent-car
+      name: Rent Car
+      label: renting a car
+      channel: store
+      description: Picks up a rental or car-share vehicle at the hub.
+      duration: 3
+      tags:
+        intents:
+          - purchase
+          - setup
+        focus:
+          - transfers
+          - mode-selection
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: unlock-vehicle
+      name: Unlock Vehicle
+      label: unlocking a vehicle
+      channel: app
+      description: Uses an app or card to unlock a reserved shared vehicle.
+      duration: 1
+      tags:
+        intents:
+          - setup
+        focus:
+          - transfers
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: find-a-bus
+      name: Find a Bus
+      label: finding a bus
+      channel: store
+      description: Locates the correct bus bay, stop, or gate for boarding.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - transfers
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: find-a-train
+      name: Find a Train
+      label: finding a train
+      channel: store
+      description: Locates the correct platform or track for rail departure.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - transfers
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: find-a-ferry
+      name: Find a Ferry
+      label: finding a ferry
+      channel: store
+      description: Locates the ferry terminal, gate, or loading area for departure.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - transfers
+          - wayfinding
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+    - id: destination-progress
+      name: Destination Progress
+      label: destination progress
+      channel: app
+      description: Tracks live progress toward the destination after departure.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - real-time-info
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: way-in-payment
+      name: Way in Payment
+      label: payment on the way
+      channel: app
+      description: Completes fare payment or tap-to-pay during boarding or exit.
+      duration: 1
+      tags:
+        intents:
+          - purchase
+          - setup
+        focus:
+          - fare
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: physical-guides
+      name: Physical Guides
+      label: physical guides
+      channel: store
+      description: Uses printed maps, floor decals, or staff guidance to board correctly.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - wayfinding
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+    - id: health-stats
+      name: Health Stats
+      label: health stats
+      channel: app
+      description: Reviews activity, steps, or wellness metrics tied to the active trip.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - regular
+          - champion
+    - id: mobile-wallet
+      name: Mobile Wallet
+      label: the mobile wallet
+      channel: app
+      description: Uses a stored pass, ticket, or payment credential for boarding.
+      duration: 1
+      tags:
+        intents:
+          - setup
+          - purchase
+        focus:
+          - fare
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: safety-guidance
+      name: Safety Guidance
+      label: safety guidance
+      channel: store
+      description: Follows platform, vehicle, or mode-specific safety instructions before departure.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - safety
+          - accessibility
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+  P1-up-next:
+    - id: get-suggestions
+      name: Get Suggestions
+      label: trip suggestions
+      channel: app
+      description: Receives recommended routes, hubs, or modes for the next trip.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - schedule
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: contribute-to-community
+      name: Contribute to Community
+      label: contributing to the community
+      channel: app
+      description: Shares tips, crowdfunded fixes, or rider-generated hub improvements.
+      duration: 2
+      tags:
+        intents:
+          - setup
+        focus:
+          - experience
+        segments:
+          - regular
+          - champion
+    - id: set-reminders
+      name: Set Reminders
+      label: setting reminders
+      channel: app
+      description: Schedules alerts for the next departure, pickup, or return trip.
+      duration: 1
+      tags:
+        intents:
+          - setup
+        focus:
+          - schedule
+          - time
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: report-vehicle-problem
+      name: Report Vehicle Problem
+      label: reporting a vehicle problem
+      channel: app
+      description: Flags maintenance, safety, or availability issues with a shared vehicle.
+      duration: 2
+      tags:
+        intents:
+          - fix
+        focus:
+          - equipment
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: switch-vehicles-unexpectedly
+      name: Switch Vehicles Unexpectedly
+      label: switching vehicles unexpectedly
+      channel: app
+      description: Re-plans the trip after a cancellation, breakdown, or missed connection.
+      duration: 2
+      tags:
+        intents:
+          - switch
+          - learn
+        focus:
+          - transfers
+          - real-time-info
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: select-next-hub
+      name: Select Next Hub
+      label: selecting the next hub
+      channel: app
+      description: Chooses an alternate hub or interchange for a future trip leg.
+      duration: 2
+      tags:
+        intents:
+          - learn
+          - switch
+        focus:
+          - routing
+          - place
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: post-visit-calendar
+      name: Calendar
+      label: the calendar
+      channel: app
+      description: Aligns the next trip with calendar commitments after leaving the hub.
+      duration: 1
+      tags:
+        intents:
+          - learn
+          - setup
+        focus:
+          - schedule
+        segments:
+          - beginner
+          - regular
+          - champion
+    - id: post-visit-alert
+      name: Alert
+      label: service alerts
+      channel: app
+      description: Reviews delay, closure, or disruption alerts after departure.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - real-time-info
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: post-visit-recommended
+      name: Recommended
+      label: post-visit recommendations
+      channel: app
+      description: Surfaces suggested return routes, amenities, or destinations after the visit.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+    - id: post-visit-social-calendar
+      name: Social Calendar
+      label: the post-visit social calendar
+      channel: app
+      description: Coordinates shared plans or meetups for the next hub visit.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - regular
+          - champion
+    - id: post-visit-city-map
+      name: City Map
+      label: the post-visit city map
+      channel: map
+      description: Reviews city context for the return trip or next destination.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - place
+        segments:
+          - stranger
+          - explorer
+          - beginner
+          - regular
+  P2-reflect:
+    - id: rate-my-experience
+      name: Rate My Experience
+      label: rating my experience
+      channel: app
+      description: Submits a star rating or quick satisfaction score for the hub visit.
+      duration: 1
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion
+    - id: review-restaurant
+      name: Review Restaurant
+      label: reviewing a restaurant
+      channel: app
+      description: Leaves a review for food or beverage experienced during the visit.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - regular
+          - champion
+    - id: report-art
+      name: Report Art
+      label: reporting public art
+      channel: app
+      description: Shares or documents public art, installations, or cultural features at the hub.
+      duration: 2
+      tags:
+        intents:
+          - learn
+          - setup
+        focus:
+          - experience
+        segments:
+          - explorer
+          - regular
+          - champion
+    - id: explore-history
+      name: Explore History
+      label: exploring hub history
+      channel: website
+      description: Reads historical context, architecture, or heritage content about the hub.
+      duration: 2
+      tags:
+        intents:
+          - learn
+        focus:
+          - experience
+        segments:
+          - explorer
+          - beginner
+          - regular
+          - champion

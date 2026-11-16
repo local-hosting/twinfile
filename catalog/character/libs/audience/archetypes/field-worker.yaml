@@ -1,0 +1,215 @@
+presetId: field_worker
+label: Field worker
+segmentMix:
+  field-technician: 0.6
+  route-dispatcher: 0.2
+  safety-lead: 0.2
+specVersion: "1.0"
+methodId: field-worker
+segments:
+  - id: default
+    overview:
+      name: Field Worker
+      mindset: Task-focused and schedule-driven
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Prep for Visit:
+              thinking:
+                - Do I have the right parts and safety gear for this job?
+            Engage:
+              thinking:
+                - The customer needs a fix, not a sales pitch.
+        feelings:
+          positive:
+            - Satisfaction when the job closes on the first visit
+          negative:
+            - Frustration when site access or parts slow me down
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: finish-the-route
+            label: Finish the Route
+            innerThinking:
+              - Every stop needs a clear outcome before I move on.
+            guidingPrinciples:
+              - Time on the road is lost productivity
+            supportingCapabilities:
+              services: []
+        byObjective:
+          fix:
+            mentalSpaces:
+              - id: resolve-on-site
+                label: Resolve On Site
+                innerThinking:
+                  - Can I close this ticket without a second visit?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Work order details on my device
+            - Safety signage at the site
+          othersObserved:
+            - Whether the customer looks rushed or patient
+    hear:
+      hear:
+        baseline:
+          others:
+            - Dispatch calling with the next stop
+          colleagues:
+            - Technicians comparing notes on a tricky repair
+  - id: field-technician
+    overview:
+      name: Field Technician
+      mindset: Hands-on problem solver under time pressure
+      journeyPace: fast
+    empathy:
+      empathy:
+        phases:
+          service:
+            Arrival:
+              thinking:
+                - I need site access and hazard info before I start.
+            Dwell:
+              thinking:
+                - Document everything — photos help if this escalates.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: diagnose-first
+            label: Diagnose First
+            innerThinking:
+              - Symptoms on the ticket rarely tell the whole story.
+            guidingPrinciples:
+              - Verify before replace
+            supportingCapabilities:
+              services: []
+        byFocus:
+          safety:
+            mentalSpaces:
+              - id: safety-checklist
+                label: Safety Checklist
+                innerThinking:
+                  - No shortcut is worth an incident report.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          equipment:
+            mentalSpaces:
+              - id: tool-readiness
+                label: Tool Readiness
+                innerThinking:
+                  - Missing one adapter can waste half a day.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          regular:
+            mentalSpaces:
+              - id: trusted-fix
+                label: Trusted Fix
+                innerThinking:
+                  - My reputation is built on jobs that stay fixed.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          champion:
+            mentalSpaces:
+              - id: mentor-on-site
+                label: Mentor On Site
+                innerThinking:
+                  - Junior techs learn faster when I narrate my checks.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: fix
+        validLevelIds:
+          - beginner
+          - regular
+          - champion
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - beginner
+  - id: route-dispatcher
+    overview:
+      name: Route Dispatcher
+      mindset: Orchestrates crews, SLAs, and exceptions
+      journeyPace: medium
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: balance-the-board
+            label: Balance the Board
+            innerThinking:
+              - One late job ripples through the whole territory.
+            guidingPrinciples:
+              - Prioritize by SLA and drive time
+            supportingCapabilities:
+              services: []
+        byFocus:
+          routing:
+            mentalSpaces:
+              - id: minimize-deadhead
+                label: Minimize Deadhead
+                innerThinking:
+                  - Empty van miles are pure cost.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - regular
+          - champion
+      - intentId: fix
+        validLevelIds:
+          - regular
+          - champion
+  - id: safety-lead
+    overview:
+      name: Safety Lead
+      mindset: Risk-aware and compliance-first
+      journeyPace: slow
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: prevent-incidents
+            label: Prevent Incidents
+            innerThinking:
+              - Most failures are predictable if you look for patterns.
+            guidingPrinciples:
+              - Stop work authority is non-negotiable
+            supportingCapabilities:
+              services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: refresh-certification
+                label: Refresh Certification
+                innerThinking:
+                  - Training lapses show up in the field first.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - regular
+          - champion

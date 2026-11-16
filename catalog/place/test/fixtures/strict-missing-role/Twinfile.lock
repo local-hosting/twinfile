@@ -1,0 +1,14 @@
+{
+  "twinfile": 1,
+  "refs": {
+    "twinfile/bad-missing-role:0.1.0": {
+      "version": "0.1.0",
+      "twinfile": "sha256:53a1d99772115d6389f8e1eaa3db87a63ab48af23ec2c9bcde57414e9c045f7b",
+      "tree": "sha256:f93db9bd46700102143e6771cabecdedceeab0d979e72963a26d1b0b002df789",
+      "layers": [
+        "sha256:d96e91132039bf5e15ce1f5459a5c331afbe01694696056a87cdcc848ba5a6f8",
+        "sha256:68dc4ad5ba103a1473253547925f53d351d3d84639fdbf59a9ae396f91f60a4e"
+      ]
+    }
+  }
+}

@@ -1,0 +1,13 @@
+layout_index:
+  version: 1
+  regions:
+    - id: landside
+      title: Landside ground transport
+      granularity: zone
+      space_ids: [curb-arrivals, bus-gates, terminal-a]
+      detail_layers: [spaces]
+    - id: airside
+      title: Airside apron
+      granularity: zone
+      space_ids: [remote-stand]
+      detail_layers: [spaces]

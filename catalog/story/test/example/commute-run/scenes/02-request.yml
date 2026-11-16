@@ -1,0 +1,14 @@
+id: scene:rider-request
+label: Request ride
+order: 1
+actId: rising_action
+characterIds:
+  - persona:rider
+venueKey: venue:urban-curbside
+journeyPhaseId: phase:rider-request
+touchpointIds:
+  - touchpoint:rider-set-dest
+  - touchpoint:rider-confirm-dest
+emotions:
+  band: mid
+  valence: neutral
