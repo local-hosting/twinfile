@@ -1,9 +1,0 @@
-spaces:
-  - id: slope-movement-shelter
-    name: Temporary refuge
-    kind: hall
-    level: ground
-    visit_order: 99
-    exposure: indoor
-    roles:
-      - shelter
