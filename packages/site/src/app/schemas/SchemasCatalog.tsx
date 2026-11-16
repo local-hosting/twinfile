@@ -65,7 +65,7 @@ function SchemaTable({ rows }: { rows: Row[] }) {
 
 const unit: Row[] = [
   {
-    label: 'unit Twinfile (Twinfile.yaml)',
+    label: 'unit head (<unit>.twin.yaml)',
     description: 'Root unit Twinfile',
     path: 'manifest/twinfile.schema.json',
   },
