@@ -1,0 +1,22 @@
+# Example workbench (`twin-view`)
+
+Local dev host for golden [`catalog/place/examples/`](../../catalog/place/examples/) and simulator place events.
+
+```bash
+yarn workbench    # monorepo root → http://localhost:4173
+```
+
+## HTTP surface (minimal)
+
+| Route | Role |
+| --- | --- |
+| `GET /api/catalog` | Browse catalog `entries` (+ `defaultEntryId`). `?scope=place`: site Twinfiles only. |
+| `GET /api/preview?entry=` | Build place; `view=index` \| `variation`; optional `lens=` for a run. |
+| `GET /api/source?entry=` | Raw `Twinfile.yaml` / `preset.yaml` (studio). |
+| `GET /api/time/clock`, `GET /api/time/at`, `POST /api/time/advance` | Session clock scrub when a run has `clock:` (uses `@doppler-group/twinfile-simulator/host`). |
+
+**Context pulses** (`applyPlayerContextPulse`, situation/signal drives) are **`@doppler-group/twinfile-simulator/host`** — not HTTP on this server.
+
+Static: `index.html`, `viewer-app.js`. Catalog listing without HTTP: `listViewerCatalog` from `@doppler-group/twinfile-simulator/viewer`.
+
+Env: **`TF_EXAMPLES_ROOT`**, **`TF_SIMULATOR_ROOT`**.

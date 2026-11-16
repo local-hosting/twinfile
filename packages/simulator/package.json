@@ -1,0 +1,78 @@
+{
+  "name": "@doppler-group/twinfile-simulator",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "yarn@4.9.2",
+  "type": "module",
+  "description": "Twinfile simulator — timeline, session clock bus, playback, and place-event catalog",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doppler-group/twinfile.git",
+    "directory": "packages/simulator"
+  },
+  "twinfilePinnedDependencies": {
+    "@doppler-group/twinfile-spec": "1.0.0-draft.1"
+  },
+  "bin": {
+    "twin": "./dist/cli/twin.js",
+    "twin-view": "./viewer/dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "build:viewer": "tsc -p viewer/tsconfig.build.json && node viewer/scripts/copy-static.mjs",
+    "build:viewer-assets": "node viewer/scripts/build-viewer-assets.mjs",
+    "workbench": "node viewer/scripts/run-view.mjs",
+    "check": "node ../tooling/scripts/check-vendor-neutral.mjs && node scripts/check-all.mjs && yarn build && yarn workspace @doppler-group/twinfile-cli build && yarn build:viewer && yarn typecheck && yarn test",
+    "sync:events": "node scripts/sync-place-events.mjs",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "typecheck:viewer": "tsc -p viewer/tsconfig.json --noEmit"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./viewer": {
+      "types": "./viewer/dist/index.d.ts",
+      "import": "./viewer/dist/index.js",
+      "default": "./viewer/dist/index.js"
+    },
+    "./viewer/workbench": {
+      "types": "./viewer/dist/workbench/index.d.ts",
+      "import": "./viewer/dist/workbench/index.js",
+      "default": "./viewer/dist/workbench/index.js"
+    },
+    "./viewer/server": {
+      "types": "./viewer/dist/server/index.d.ts",
+      "import": "./viewer/dist/server/index.js",
+      "default": "./viewer/dist/server/index.js"
+    },
+    "./viewer/render": {
+      "types": "./viewer/dist/render/index.d.ts",
+      "import": "./viewer/dist/render/index.js",
+      "default": "./viewer/dist/render/index.js"
+    },
+    "./host": {
+      "types": "./dist/host/index.d.ts",
+      "import": "./dist/host/index.js",
+      "default": "./dist/host/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "dependencies": {
+    "@doppler-group/twinfile-core": "workspace:packages/core",
+    "@doppler-group/twinfile-place": "workspace:catalog/place",
+    "@doppler-group/twinfile-spec": "workspace:packages/spec"
+  },
+  "devDependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "esbuild": "^0.25.0",
+    "highlight.js": "^11.11.1",
+    "js-yaml": "^4.1.0",
+    "typescript": "^5.8.3",
+    "vitest": "^4.1.12"
+  }
+}

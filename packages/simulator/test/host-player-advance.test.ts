@@ -1,0 +1,27 @@
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { describe, expect, it } from 'vitest';
+
+
+import { twinfilePlayerAdvance } from '@doppler-group/twinfile-simulator/host';
+
+import { goldenSceneRunDir, testCatalogRoots } from './test-examples-root.js';
+import {
+  buildTwinfile,
+} from '@doppler-group/twinfile-place';
+
+const testDir = dirname(fileURLToPath(import.meta.url));
+const { examplesRoot, simulatorRoot } = testCatalogRoots(testDir);
+
+describe('host session advance', () => {
+  it('moves playhead and records clock bus notes', async () => {
+    const dir = goldenSceneRunDir(dirname(fileURLToPath(import.meta.url)), 'arena-storm-at-halftime');
+    const built = await buildTwinfile(dir, { examplesRoot, simulatorRoot, writeLock: false });
+    expect(built.ok, built.ok ? '' : JSON.stringify(built.errors)).toBe(true);
+    if (!built.ok) return;
+
+    const moved = twinfilePlayerAdvance(built.value, { fromT: 0, toT: 300, publish: false }, 1);
+    expect(moved.playheadT).toBe(300);
+    expect(moved.clockEvents?.some((row) => row.type === 'note')).toBe(true);
+  });
+});

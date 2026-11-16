@@ -1,0 +1,22 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "transit-disruption",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "ground-transport": {
+      "kind": "space",
+      "min": 1
+    },
+    "alternative": {
+      "kind": "space",
+      "min": 0
+    }
+  },
+  "phases": [
+    "disrupted",
+    "restored"
+  ]
+}

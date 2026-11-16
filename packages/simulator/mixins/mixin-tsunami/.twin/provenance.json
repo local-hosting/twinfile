@@ -1,0 +1,9 @@
+{
+  "layers": [
+    {
+      "ref": "place/markers.yaml",
+      "index": 0,
+      "kind": "place"
+    }
+  ]
+}

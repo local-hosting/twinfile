@@ -1,0 +1,8 @@
+[
+  {
+    "ref": "place/spaces.yaml",
+    "kind": "place",
+    "content": "sha256:9f082bd7ee4120ce911a90f004e0e4eb1a78feb65be8d1814a445f77ecb85b2b",
+    "chain": "sha256:982dac72c7bb79537afcf9e7311d875f88c742983fb8feda291511f21f3d487d"
+  }
+]

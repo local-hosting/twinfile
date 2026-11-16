@@ -1,0 +1,5 @@
+stations:
+  - id: recovery-survey-post
+    name: Damage survey post
+    roles:
+      - survey-station

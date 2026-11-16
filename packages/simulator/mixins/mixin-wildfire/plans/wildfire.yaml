@@ -1,0 +1,16 @@
+for: wildfire
+roles:
+  shelter:
+    - wildfire-shelter
+  exit:
+    - wildfire-exit-a
+    - wildfire-exit-b
+  safe-access:
+    - wildfire-evac-route
+actions:
+  - at: evacuation-order
+    set:
+      wildfire-shelter:
+        state: open
+      wildfire-evac-route:
+        state: restricted

@@ -1,0 +1,48 @@
+{
+  "meta": {
+    "id": "mixin-field-damage",
+    "name": "Field-damage hooks — damage hotspot, debris staging, safe lane, survey",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "markers": [
+      {
+        "id": "field-damage-hotspot",
+        "name": "Reported damage focal point",
+        "state": "open",
+        "roles": [
+          "hotspot"
+        ]
+      },
+      {
+        "id": "field-debris-staging",
+        "name": "Debris collection staging",
+        "state": "open",
+        "roles": [
+          "collection-point"
+        ]
+      },
+      {
+        "id": "field-safe-lane",
+        "name": "Maintained safe lane",
+        "state": "open",
+        "roles": [
+          "safe-access"
+        ]
+      }
+    ],
+    "stations": [
+      {
+        "id": "field-damage-survey",
+        "name": "Damage assessment post",
+        "roles": [
+          "survey-station"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:f21b578b2b68fbcfafada53cbf60821cd022305b71e97c68102e8c69b230314d"
+}

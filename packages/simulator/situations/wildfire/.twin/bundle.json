@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "wildfire",
+    "name": "Wildfire",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:fdd3a04469a0d395ee9c63a0075aa8b7cebcace70925c835a9b63fde4c46bf53"
+}

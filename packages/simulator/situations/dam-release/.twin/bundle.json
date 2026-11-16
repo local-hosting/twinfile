@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "dam-release",
+    "name": "Dam release",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:da247e36e057426bd21638dba166eb0775bfe24574fe2713ea35a93bcb77050f"
+}

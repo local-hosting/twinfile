@@ -1,0 +1,17 @@
+for: field-damage
+roles:
+  hotspot:
+    - field-damage-hotspot
+  safe-access:
+    - field-safe-lane
+  collection-point:
+    - field-debris-staging
+  survey-station:
+    - field-damage-survey
+actions:
+  - at: active
+    set:
+      field-safe-lane:
+        state: restricted
+      field-debris-staging:
+        state: open
