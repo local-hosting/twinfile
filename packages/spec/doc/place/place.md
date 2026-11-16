@@ -24,7 +24,7 @@ Each archetype is a named combination of three axes — **extent**, **vertical**
 | **Open land** with no buildings that matter (park, field, farm, campground) | `open_area` | At most one level; site needs **`footprint`** or **`ext` lat/lon**. |
 | A **line or path** (trail, creek reach, corridor, pipe, rail yard) | `linear` | Each space MUST set **`visit_order`**. |
 
-`@doppler-group/geotypes` suggests an archetype per slug using map-first rules (materialized as **`extent`**, **`vertical`**, **`movement`**, and **`archetype`** on each registry slug at sync). Override in **`place.yaml`** when your twin deliberately models a finer grain than the map. **`shopping_mall`** and **`examples/shop`** both scaffold **`indoor_stack`** with **`from: twinfile/base-indoor-stack`**; the shop adds stacked **`layers:`** for spaces, routes, and situational plans — see [Composition](../build/composition.md).
+`@doppler-group/geotypes` suggests an archetype per slug using map-first rules (materialized as **`extent`**, **`vertical`**, **`movement`**, and **`archetype`** on each registry slug at sync). Override in **`place.yaml`** when your twin deliberately models a finer grain than the map. **`shopping_mall`** and **`examples/shop`** both scaffold **`indoor_stack`** with **`from: twinfile/base-indoor-stack`**; the shop adds stacked **`layers:`** for spaces, routes, and event plans — see [Composition](../build/composition.md).
 
 Optional **`place.authoring_scale`**: `linear_unit` (`m` \| `ft`), `h3_resolution`, `space_granularity` (`room` \| `zone` \| `building`).
 
