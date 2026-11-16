@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/time/schedules.schema.json",
+  "type": "object",
+  "required": ["schedules"],
+  "properties": {
+    "schedules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "when"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "name": { "type": "string" },
+          "when": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/weeklyHours" },
+          "uses": {
+            "type": "object",
+            "minProperties": 1,
+            "properties": {
+              "space": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+              "opening": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+              "route": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+              "marker": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" }
+            },
+            "additionalProperties": false
+          },
+          "variance": {
+            "type": "object",
+            "required": ["start"],
+            "properties": {
+              "start": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/isoDuration" }
+            },
+            "additionalProperties": false
+          },
+          "activeWhen": {
+            "type": "object",
+            "required": ["track"],
+            "properties": {
+              "track": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+              "min": { "type": "number" },
+              "max": { "type": "number" }
+            },
+            "additionalProperties": false
+          },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

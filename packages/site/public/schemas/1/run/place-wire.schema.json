@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/place-wire.schema.json",
+  "title": "PlaceWire",
+  "description": "Wire JSON for MCP twin://place (root) and OCI config (`Place.toWire()`).",
+  "type": "object",
+  "required": ["meta", "place", "digest"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "placeType": {
+          "$ref": "https://twinfile.org/schemas/1/place/place-type.schema.json"
+        }
+      },
+      "additionalProperties": true
+    },
+    "place": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/mergedPlace" },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,104 @@
+export const metadata = {
+  title: 'Author a place',
+  description: 'Inherit a base, patch layers, attach mixins, and wire plans.',
+}
+
+# Author a place
+
+A place unit is one real site: a manifest, place layers, and plans that bind shared situations to that site. {{ className: 'lead' }}
+
+Normative field lists live in the spec ([place layers](https://github.com/twinfile/spec/blob/main/doc/place/place.md), [topology taxonomy](https://github.com/twinfile/spec/blob/main/doc/place/topology-taxonomy.md), [composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)). This page is the order you write them in.
+
+## Geotype {{ anchor: false }}
+
+`geotype.primary` is a slug from a pinned `@local-hosting/geotypes` registry. The slug picks an archetype and a golden base. `twin check` fails when the slug is missing from that pin.
+
+| Map surface | Archetype | Base |
+| --- | --- | --- |
+| One pin, one floor | `single_level` | `twinfile/base-single-level:0.1.0` |
+| One pin, floors the map hides | `indoor_stack` | `twinfile/base-indoor-stack:0.1.0` |
+| Several buildings on one site | `campus` | `twinfile/base-campus:0.1.0` |
+| Open land | `open_area` | `twinfile/base-open-area:0.1.0` |
+| A line or path | `linear` | `twinfile/base-linear:0.1.0` |
+
+Indoor, covered, and outdoor program is `exposure` on each space. It does not change the archetype.
+
+```bash
+export TF_EXAMPLES_ROOT=/path/to/examples
+twin init place ./my-mall --geotype shopping_mall --name my-mall
+```
+
+That command writes `from:`, `geotype`, a thin starter `place/place.yaml` (site identity only — `archetype` and `authoring_scale` come from the **`from:`** base), and `with:` mixins. When `@local-hosting/geotypes` **`suggestBuildingImportForSlug`** is true for your slug (today: resolved **campus** archetype), init also writes `place/parts/README.md` (RFC 0009 nested-part checklist). Override `archetype` in `place/place.yaml` only when the twin is finer than the map default.
+
+## Inherit and patch {{ anchor: false }}
+
+A Twinfile reads like a Dockerfile ([RFC 0009](https://github.com/twinfile/spec/blob/main/rfcs/0009-dockerfile-model/index.md)). `from:` is `FROM`: the parent's built layers (archetype, authoring scale, default `levels`) come through read-only. Each item in `steps:` is one build step and produces one content-addressed layer; later steps override earlier ones for the same `id`. A step is inline place data (`spaces:`, `openings:`, …), a `plan:`, or a `copy:`. Optional `processors:` declares host module wiring (Max-style objects and `outlets:`) beside the image build. A campus is a stack of building cards: each building is its own Twinfile under `parts/`, copied in with `copy: ./parts/<name>` and `into: <space id>`. Floors nest the same way under their part. Legacy `copy: ./buildings/…` still resolves for one release. Run `twin fmt --upgrade=2` to convert a `twinfile: 1` manifest.
+
+Normative compose order: [Composition — authoring compose order](https://github.com/twinfile/spec/blob/main/doc/build/composition.md#authoring-compose-order-canonical).
+
+`place/examples/mobility-hub/campus` is the worked example (site steps, then `copy: ./parts/transit-hub`):
+
+```yaml
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: transit-hub-campus
+name: Mobility hub campus
+version: 0.1.0
+stability: example
+geotype:
+  primary: intermodal_facility
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place: { name: Mobility hub campus, kind: mobility_hub, timezone: America/New_York }
+  - levels:
+      - { id: ground, name: Ground, ordinal: 0 }
+  - spaces:
+      - id: transit-hub
+        kind: transit
+        # …
+  - plan:
+      for: transit-disruption
+      # …
+  - copy: ./parts/transit-hub
+    into: transit-hub
+```
+
+`spaces:` defines your topology; the base does not ship demo spaces you must remove. `twin layers` prints the full stack, including copied parts (same chain as build). The editor inlines `with:` mixins and `copy: ./…` nested units in the stack rail; `from:` stays a ref on the manifest.
+
+## Mixins {{ anchor: false }}
+
+`with:` attaches published mixin units. Each mixin brings role-tagged rows and a wired plan. `twin init` adds one mixin per situation the geotype suggests, plus `mixin-assets` or `mixin-sensors` when that slug asks for them.
+
+| Mixin | Adds |
+| --- | --- |
+| `twinfile/mixin-severe-weather:0.1.0` | Shelter, outdoor assembly, two exits, `severe-weather` plan |
+| `twinfile/mixin-transit-disruption:0.1.0` | A stop, an alternative pickup, `transit-disruption` plan |
+| `twinfile/mixin-dam-release:0.1.0` | Launch, flood refuge, stage gauge, `dam-release` plan |
+| `twinfile/mixin-flood:0.1.0` | General flood refuge, crossing, gauge, `flood` plan |
+| `twinfile/mixin-earthquake:0.1.0` | Shelter, exits, survey zone, `earthquake` plan |
+| `twinfile/mixin-wildfire:0.1.0` | Shelter, exits, evac route, `wildfire` plan |
+| `twinfile/mixin-tsunami:0.1.0` | High ground, inland route, coastal lookout, `tsunami` plan |
+| `twinfile/mixin-volcanic-ash:0.1.0` | Ashfall shelter, egress, air-quality station, `volcanic-ash` plan |
+| `twinfile/mixin-slope-movement:0.1.0` | Evac route, high-ground refuge, `slope-movement` plan |
+| `twinfile/mixin-drought:0.1.0` | Reservoir gauge, water pickup, `drought` plan |
+| `twinfile/mixin-power-outage:0.1.0` | Shelter, egress path, stair lobby, `power-outage` plan |
+| `twinfile/mixin-field-damage:0.1.0` | Damage hotspot, debris staging, safe lane, `field-damage` plan |
+| `twinfile/mixin-litter-pollution:0.1.0` | Hotspot, access, collection point, `litter-pollution` plan |
+| `twinfile/mixin-assets:0.1.0` | Starter `assets` layer |
+| `twinfile/mixin-sensors:0.1.0` | Starter `sensors` layer |
+
+A local `plans/<situation>.yaml` wins over the mixin plan. Tag your own spaces with `roles:` (`shelter`, `outdoor`, `exit`) and run:
+
+```bash
+twin add plan severe-weather
+twin check --strict --examples-root "$TF_EXAMPLES_ROOT"
+```
+
+## Plans {{ anchor: false }}
+
+A plan names a situation and lists this place’s ids under each role the situation `expects`. The transit hub binds `transit-disruption` in `twinfile/transit-hub-campus:0.1.0`.
+
+Open **transit-hub-campus** (and every catalog ref) in the [examples editor](/examples).
+
+The situation itself is a separate unit. Scenarios that run the plan are covered in [Situations](/situations).

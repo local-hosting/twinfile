@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/ops/assets.schema.json",
+  "type": "object",
+  "required": [
+    "assets"
+  ],
+  "properties": {
+    "assets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "kind"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "space": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "state": {
+            "type": "string"
+          },
+          "radio": {
+            "type": "object",
+            "required": [
+              "protocol"
+            ],
+            "properties": {
+              "protocol": {
+                "enum": [
+                  "wifi",
+                  "ble",
+                  "lora"
+                ]
+              },
+              "tx_power_dbm": {
+                "type": "number"
+              }
+            },
+            "additionalProperties": false
+          },
+          "brick": {
+            "type": "string"
+          },
+          "s223": {
+            "type": "string"
+          },
+          "dtpr": {
+            "$ref": "https://twinfile.org/schemas/1/oci/dtpr.schema.json"
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

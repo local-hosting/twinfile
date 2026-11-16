@@ -1,0 +1,52 @@
+export const metadata = {
+  title: 'Quickstart',
+  description: 'Install the CLI, scaffold a place from a geotype, and check it.',
+}
+
+# Quickstart
+
+Install `@local-hosting/twinfile-core`, point it at the examples checkout, and scaffold a place that already checks. {{ className: 'lead' }}
+
+<Note>
+  Packages publish to GitHub Packages. Core depends on `@local-hosting/twinfile`, so a normal install
+  brings the schemas with it. You still need a local `examples` checkout: `twin init`
+  resolves golden bases and mixins from disk.
+</Note>
+
+## Install {{ anchor: false }}
+
+```ini
+# ~/.npmrc
+@twinfile:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+```bash
+yarn add @local-hosting/twinfile-core
+git clone https://github.com/twinfile/twinfile.git
+export TF_EXAMPLES_ROOT="$PWD/twinfile/examples"
+export TF_SIMULATOR_ROOT="$PWD/twinfile/simulator"
+```
+
+`TF_EXAMPLES_ROOT` is how the CLI finds refs such as `twinfile/base-campus:0.1.0`. `examples/twin.local.yaml` is the same map, checked in.
+
+## Scaffold and check {{ anchor: false }}
+
+```bash
+yarn twin init place ./my-mall --geotype shopping_mall --name my-mall
+yarn twin check ./my-mall --examples-root "$TF_EXAMPLES_ROOT"
+yarn twin build ./my-mall
+```
+
+`twin init place` writes `Twinfile.yaml` with `geotype.primary`, a `from:` base, and a `with:` list of mixins for the situations that slug suggests. `twin check` validates the folder. `twin build` builds a `Place` in memory and writes `Twinfile.lock` when lock write is enabled.
+
+Pass `--no-from` for a skeleton with no base, or `--no-decorate` to skip mixins.
+
+## Read the recipe {{ anchor: false }}
+
+- [Author a place](/author) is the `from:` → `layers:` → `with:` → `plans/` order.
+- [Situations](/situations) is how a shared story binds to your space ids.
+- [Examples](/examples) opens golden place twins in the editor.
+- [twin CLI](/cli) covers `run`, `pack`, `push`, and `pull`.
+
+Workspace contributors run `yarn run check:twinfile` from the monorepo root. That command is the CI gate, and this page is the adopter path.
