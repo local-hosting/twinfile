@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: expo-host
+name: Expo host (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional pavilion host for the Expo City example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/pavilion-kiosk:0.1.0
+character:
+  role: host
+  segment: expo-visitor
+  goals:
+    - Guide visitors from metro arrival through pavilion beats
+    - Keep plaza wayfinding clear when queues build

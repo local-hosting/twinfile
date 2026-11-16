@@ -8,8 +8,10 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/river:0.2.0
+  - rel: involves
+    href: twinfile/character/river-guide:0.1.0
 story:
-  pitch: Dam-release hazard watch for swim safety and upstream stage thresholds.
+  pitch: Dam-release swim and stage watches, flood crest, then drought restriction.
   scenes:
     - id: swim-unsafe-known
       label: Swim unsafe after release
@@ -35,3 +37,17 @@ story:
         args:
           track: stage
           threshold: 10
+    - id: reach-flood
+      label: Reach flood crest
+      run:
+        steps:
+          - copy: twinfile/event/flood:1.0.0
+        args:
+          crestAt: flood.crest
+    - id: reach-drought
+      label: Reach drought restriction
+      run:
+        steps:
+          - copy: twinfile/event/drought:1.0.0
+        args:
+          restrictionAt: drought.restriction

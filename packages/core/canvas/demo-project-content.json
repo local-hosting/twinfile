@@ -60,6 +60,15 @@
       "orgStoryboardId": "",
       "mapSlug": "niagara-falls",
       "storyPitch": "Guided loop from the harbor to Niagara Falls Visitor."
+    },
+    {
+      "id": "harbor-resilience",
+      "cardTitle": "Harbor resilience",
+      "title": "Harbor resilience",
+      "personaId": "visitor-host",
+      "orgStoryboardId": "",
+      "mapSlug": "buffalo-harbor",
+      "storyPitch": "Tsunami advisory at Dunkirk, then field-damage clearance on the apron."
     }
   ],
   "resources": [
@@ -112,6 +121,18 @@
       "cardTitle": "Dunkirk return",
       "label": "Dunkirk return",
       "dayIndex": "3"
+    },
+    {
+      "id": "tsunami",
+      "cardTitle": "Tsunami",
+      "label": "Tsunami",
+      "dayIndex": ""
+    },
+    {
+      "id": "field-damage",
+      "cardTitle": "Field damage",
+      "label": "Field damage",
+      "dayIndex": ""
     }
   ],
   "storyEventIds": {
@@ -122,6 +143,10 @@
     "falls-day-tour": [
       "falls-loop",
       "dunkirk-return"
+    ],
+    "harbor-resilience": [
+      "tsunami",
+      "field-damage"
     ]
   }
 }

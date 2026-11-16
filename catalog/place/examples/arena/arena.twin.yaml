@@ -112,6 +112,13 @@ steps:
         roles:
           - exit
           - gate
+  - markers:
+      - id: egress-rally
+        name: Egress rally point
+        roles:
+          - safe-access
+        step_free: true
+        state: open
   - routes:
       - id: tunnel-plaza-east
         name: Tunnel to east plaza
@@ -155,6 +162,48 @@ steps:
           set:
             gate-4:
               state: closed
+            plaza-east:
+              state: closed
+  - bind:
+      for: earthquake
+      roles:
+        shelter:
+          - concourse-lower
+          - concourse-tunnel-north
+        exit:
+          - gate-1
+          - gate-2
+          - gate-3
+          - concourse-gate-5
+          - concourse-gate-6
+          - gate-tunnel-plaza
+        outdoor:
+          - plaza-east
+          - plaza-west
+          - lot-c
+      actions:
+        - at: shaking
+          set:
+            gate-4:
+              state: closed
+  - bind:
+      for: wildfire
+      roles:
+        shelter:
+          - concourse-lower
+          - concourse-tunnel-north
+        exit:
+          - gate-1
+          - gate-2
+          - gate-3
+          - concourse-gate-5
+          - concourse-gate-6
+          - gate-tunnel-plaza
+        safe-access:
+          - egress-rally
+      actions:
+        - at: evacuation-order
+          set:
             plaza-east:
               state: closed
   - bind:

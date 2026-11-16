@@ -73,6 +73,18 @@ steps:
         state: open
         roles:
           - exit
+  - markers:
+      - id: service-alley
+        name: Service alley
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+  - stations:
+      - id: stock-survey
+        name: Stockroom survey post
+        roles:
+          - survey-station
   - routes:
       - id: aisle-main
         name: Main aisle to stock
@@ -192,6 +204,22 @@ steps:
           - curb-zone
       actions:
         - at: warning
+          set:
+            curb-zone:
+              state: closed
+  - bind:
+      for: power-outage
+      roles:
+        shelter:
+          - stockroom
+        safe-access:
+          - service-alley
+        alternative:
+          - stockroom
+        survey-station:
+          - stock-survey
+      actions:
+        - at: outage
           set:
             curb-zone:
               state: closed

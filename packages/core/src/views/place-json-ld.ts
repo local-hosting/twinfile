@@ -33,6 +33,25 @@ export function buildPlaceJsonLdFromTwinfile(
   return buildPlaceJsonLd(unit.twinfile, listTwinfilePatchDocs(unit), options);
 }
 
+/** Place presentation formats (Schema.org disclosure). Distinct from summary card views and from bridges. */
+export type TwinfilePlaceViewFormat = 'jsonld';
+
+/** Render a place twin view (`jsonld`). Returns `null` when the unit cannot emit that view. */
+export function renderTwinfilePlaceView(
+  unit: LoadedTwinfile,
+  format: TwinfilePlaceViewFormat,
+  options: BuildPlaceJsonLdOptions = {},
+): PlaceJsonLdDocument | null {
+  switch (format) {
+    case 'jsonld':
+      return buildPlaceJsonLdFromTwinfile(unit, options);
+    default: {
+      const unhandled: never = format;
+      throw new Error(`unknown place view format: ${String(unhandled)}`);
+    }
+  }
+}
+
 export function buildPlaceJsonLd(
   twinfile: Record<string, unknown>,
   layers: readonly Record<string, unknown>[],

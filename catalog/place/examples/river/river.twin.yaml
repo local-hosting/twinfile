@@ -30,6 +30,14 @@ steps:
         kind: pool
         exposure: outdoor
         visit_order: 3
+      - id: gauge-hut
+        name: Gauge hut
+        kind: shelter
+        level: ground
+        exposure: covered
+        visit_order: 1
+        roles:
+          - shelter
   - reaches:
       - id: reach-upper
         length_m: 1200
@@ -50,6 +58,17 @@ steps:
           - flood-refuge
         step_free: false
         state: open
+      - id: access-stair
+        name: Levee access stair
+        roles:
+          - safe-access
+        step_free: false
+        state: open
+      - id: sample-bay
+        name: Sample collection bay
+        roles:
+          - collection-point
+        state: open
   - gauges:
       - id: gauge-upstream
         observes: stage
@@ -58,6 +77,11 @@ steps:
           url: sources/gauges/upstream.jsonl
         roles:
           - gauge
+  - stations:
+      - id: reach-survey
+        name: Reach survey post
+        roles:
+          - survey-station
   - sensors:
       - id: sonde-eddy-pool
         name: Eddy pool water quality probe
@@ -166,3 +190,31 @@ steps:
           set:
             launch-ramp:
               state: closed
+  - bind:
+      for: flood
+      roles:
+        flood-refuge:
+          - levee-top
+        safe-access:
+          - access-stair
+        gauge:
+          - gauge-upstream
+      actions:
+        - at: crest
+          set:
+            launch-ramp:
+              state: closed
+  - bind:
+      for: drought
+      roles:
+        gauge:
+          - gauge-upstream
+        collection-point:
+          - sample-bay
+        shelter:
+          - gauge-hut
+        survey-station:
+          - reach-survey
+      actions:
+        - at: restriction
+          set: {}

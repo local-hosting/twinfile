@@ -1,6 +1,6 @@
 # Madison Square Garden — layout map
 
-Illustrative stadium campus pinned at **Madison Square Garden**. **Daily:** `arena-game-day` → `gate-open-ramp` (`arena-operations`). **Resilience:** `severe-weather` → `storm-at-halftime` / `flood-shelter-standup` (`arena-resilience`). Layout is fiction; the map pin is real.
+Illustrative stadium campus pinned at **Madison Square Garden**. **Daily:** `arena-game-day` → `gate-open-ramp` (`arena-operations`). **Resilience:** `severe-weather` / `earthquake` → `storm-at-halftime` / `flood-shelter-standup` / `bowl-quake` (`arena-resilience`). Layout is fiction; the map pin is real.
 
 Pattern C — [campus-building-floor.md](../../../../../packages/spec/doc/place/campus-building-floor.md) (one `copy: ./parts/concourse`).
 

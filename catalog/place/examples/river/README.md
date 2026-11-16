@@ -9,9 +9,8 @@
 
 ## Runs
 
-| Run | Intent doc |
-| --- | --- |
-| [`until-stage-unsafe`](../../../story/examples/river-resilience/river-resilience.twin.yaml) | `river-resilience#until-stage-unsafe` (`mode: resilience`) |
-| [`swim-unsafe-known`](../../../story/examples/river-resilience/river-resilience.twin.yaml) | `river-resilience#swim-unsafe-known` (`mode: resilience`) |
+**Daily:** [`river-operations`](../../../story/examples/river-operations/river-operations.twin.yaml) — reach and eddy visit (`mode: daily`).
+
+**Resilience:** [`river-resilience`](../../../story/examples/river-resilience/river-resilience.twin.yaml) — dam-release swim/stage watches, flood crest, and drought restriction (`mode: resilience`).
 
 Presets wire **clock**, **args**, and **runners** only — no `question:` on the run manifest.

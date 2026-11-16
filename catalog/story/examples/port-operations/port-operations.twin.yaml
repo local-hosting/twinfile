@@ -8,10 +8,17 @@ mode: daily
 links:
   - rel: involves
     href: twinfile/place/port:0.2.0
+  - rel: involves
+    href: twinfile/character/port-clerk:0.1.0
 story:
-  pitch: Everyday pier arrival and warehouse transfer on a clear harbor day.
+  pitch: Everyday pier arrival queue and warehouse transfer on a clear harbor day.
   scenes:
-    - id: pier-arrival
-      label: Pier arrival
+    - id: pier-queue
+      label: Pier queue
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2
     - id: warehouse-transfer
       label: Warehouse transfer

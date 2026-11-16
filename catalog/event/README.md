@@ -8,5 +8,5 @@ Tag every event with **`mode: daily`** or **`mode: resilience`** (default when o
 
 | Mode | Examples |
 | --- | --- |
-| **daily** | `arena-game-day`, `dawn-cast-off`, `dunkirk-return`, `falls-loop`, `harbor-berth`, `passenger-queue`, `transit-disruption`, `venue-turnstile-flow` |
+| **daily** | `arena-game-day`, `dawn-cast-off`, `dunkirk-return`, `falls-loop`, `harbor-berth`, `passenger-queue`, `reach-patrol`, `transit-disruption`, `venue-turnstile-flow` |
 | **resilience** | `dam-release`, `drought`, `earthquake`, `field-damage`, `flood`, `litter-pollution`, `power-outage`, `recovery-resilience`, `severe-weather`, `slope-movement`, `tsunami`, `volcanic-ash`, `wildfire` |

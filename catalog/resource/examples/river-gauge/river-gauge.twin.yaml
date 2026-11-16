@@ -1,0 +1,27 @@
+twinfile: 2
+kind: resource
+id: river-gauge
+name: River gauge
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/river:0.2.0
+    anchor: gauge-upstream
+resource:
+  kind: gauge
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-watershed-district
+    elements:
+      purpose:
+        - public_safety
+      collection:
+        - connected_device_telemetry
+      affected:
+        - environment
+  ext:
+    lat: 35.4197
+    lon: -84.2578
