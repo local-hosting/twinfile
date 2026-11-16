@@ -1,4 +1,4 @@
-# Natural hazards → shared situation units (@doppler-group/twinfile-simulator situations/).
+# Natural hazards → shared event units (catalog/event/examples).
 # Power-outage is grid infrastructure but listed here for all-hazards playbooks.
 # Out of scope v1: pandemic, hazmat spill, rip currents (see doc/kinds/natural-hazards.md).
 version: 1

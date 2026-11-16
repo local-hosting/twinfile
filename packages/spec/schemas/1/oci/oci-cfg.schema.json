@@ -15,7 +15,6 @@
         "story",
         "event",
         "run",
-        "situation",
         "scenario"
       ]
     },
@@ -25,7 +24,6 @@
     "spec": { "type": "string" },
     "domains": { "type": "array", "items": { "type": "string" } },
     "expects": { "type": "object" },
-    "timetable": { "type": "object" },
     "phases": { "type": "array" }
   },
   "additionalProperties": false

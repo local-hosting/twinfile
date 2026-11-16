@@ -1,5 +1,5 @@
 twinfile: 1
-kind: situation
+kind: event
 id: severe-weather
 name: Severe Weather
 version: 1.1.0

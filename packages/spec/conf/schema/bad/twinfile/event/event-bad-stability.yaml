@@ -5,8 +5,8 @@ name: Game Day
 version: 1.0.0
 stability: maybe
 layers: []
-timetable:
-  start: PT0S
+phases:
+  - start
 expects:
   gate:
     kind: opening
