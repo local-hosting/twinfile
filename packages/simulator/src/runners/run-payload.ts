@@ -24,7 +24,7 @@ export type RunPayloadFromTFPlaceOptions = {
   runName: string;
   args?: Record<string, unknown>;
   runners?: unknown[];
-  /** MCP/CI analyst prompt — not authored on run.yaml */
+  /** MCP/CI analyst prompt — not authored on the scene run */
   testPrompt?: string;
 };
 

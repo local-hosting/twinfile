@@ -4,7 +4,6 @@ import { join, resolve } from 'node:path';
 import { isRecord } from '../doc/is-record.js';
 import { twinHeadPath, twinLockPath } from '../load/twinfile-locator.js';
 import { TWIN_CATALOG_TYPES } from '../paths/catalog-layout.js';
-import { RUN_PRESET_NAMES } from '../types/twin-kind.js';
 import { readYamlDocument } from '../validate/validate-yaml.js';
 
 const SKIP_DIRS = new Set(['node_modules', '.git', 'dist', 'expected', 'runs']);
@@ -23,8 +22,6 @@ const LEGACY_TWIN_HEADS = [
   'Story.yaml',
   'story.yaml',
 ];
-
-const LEGACY_RUN_HEADS = ['Run.yaml', 'Event.yaml', 'event.yaml', 'preset.yaml', 'Preset.yaml'];
 
 const LEGACY_LOCK = 'Twinfile.lock';
 
@@ -53,7 +50,6 @@ function firstMove(
 
 function headMoves(dir: string): HeadMove[] {
   const twin = firstMove(dir, LEGACY_TWIN_HEADS, twinHeadPath(dir), declaresTwinKind);
-  const run = firstMove(dir, LEGACY_RUN_HEADS, join(dir, RUN_PRESET_NAMES[0]), () => true);
   const lock = firstMove(dir, [LEGACY_LOCK], twinLockPath(dir), () => true);
   const plans = join(dir, 'plans');
   const bindings = join(dir, 'bindings');
@@ -62,7 +58,7 @@ function headMoves(dir: string): HeadMove[] {
     hasHead && statSync(plans, { throwIfNoEntry: false })?.isDirectory() && !existsSync(bindings)
       ? { from: plans, to: bindings }
       : undefined;
-  return [twin, run, lock, bindingMove].filter((m): m is HeadMove => m !== undefined);
+  return [twin, lock, bindingMove].filter((m): m is HeadMove => m !== undefined);
 }
 
 function collectMoves(dir: string, recursive: boolean, out: HeadMove[]): void {
@@ -95,7 +91,7 @@ function rewriteBindingRefs(unitDir: string): void {
   if (next !== text) writeFileSync(head, next);
 }
 
-/** Rename legacy heads to `<unit>.twin.yaml` / `run.yaml`, locks to `<unit>.twin.lock`, and `plans/` to `bindings/`. */
+/** Rename legacy heads to `<unit>.twin.yaml`, locks to `<unit>.twin.lock`, and `plans/` to `bindings/`. */
 export function upgradeTypedHeadFiles(root: string, options: { check?: boolean; recursive?: boolean } = {}): number {
   const moves = listMoves(root, options.recursive ?? true);
   if (options.check) {

@@ -3,19 +3,14 @@ import type { LoadedTwinfile } from './load-twinfile.js';
 /** A spatial twin — the only role allowed on a place head. */
 export const TWINFILE_UNIT_ROLE = 'place' as const;
 
-/** Timeline playlist — scene `run.yaml`, not a Twinfile. */
+/** Story scene run — compose head built from `story.scenes[].run`. */
 export const RUN_PRESET_ROLE = 'run' as const;
 
-export function isRunPresetPath(twinfilePath: string): boolean {
-  const norm = twinfilePath.replaceAll('\\', '/');
-  return /(^|\/)preset\.ya?ml$/i.test(norm) || /(^|\/)run\.ya?ml$/i.test(norm);
+export function isRunUnit(loaded: Pick<LoadedTwinfile, 'scene'>): boolean {
+  return loaded.scene !== undefined;
 }
 
-export function isRunUnit(loaded: Pick<LoadedTwinfile, 'twinfilePath'>): boolean {
-  return isRunPresetPath(loaded.twinfilePath);
-}
-
-export function isPlaceTwinfileUnit(loaded: Pick<LoadedTwinfile, 'twinfilePath'>): boolean {
+export function isPlaceTwinfileUnit(loaded: Pick<LoadedTwinfile, 'scene'>): boolean {
   return !isRunUnit(loaded);
 }
 

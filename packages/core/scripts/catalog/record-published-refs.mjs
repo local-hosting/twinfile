@@ -8,11 +8,15 @@ import { join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';
-import { resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
-import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
+import {
+  findTwinfileYamlPath,
+  resolvePlaceExamplesCatalogRoot,
+  resolveTwinfileRoot,
+  resolveTypeExamplesRoot,
+} from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const twinCli = resolveTwinCli(import.meta.url);
@@ -33,7 +37,7 @@ function typedRef(manifest, id, version) {
 
 function recordCatalogRoot(root, pathPrefix) {
   for (const dir of findTwinfileDirs(root)) {
-    const twinfilePath = resolveTwinfileHeadPath(dir);
+    const twinfilePath = findTwinfileYamlPath(dir);
     if (!twinfilePath) continue;
     const manifest = parseYaml(readFileSync(twinfilePath, 'utf8'));
     const id = String(manifest.id ?? '').trim();

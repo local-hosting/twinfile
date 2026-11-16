@@ -1,12 +1,9 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { RUN_PRESET_NAMES } from '../types/twin-kind.js';
-
 import { findTwinfileYamlPath, twinHeadFileName, twinLockFileName } from './twinfile-locator.js';
 
 export const ALLOWED_TWINFILE_ROOT_NAMES = new Set<string>([
-  ...RUN_PRESET_NAMES,
   'twin.local.yaml',
   'place',
   'bindings',
@@ -17,7 +14,6 @@ export const ALLOWED_TWINFILE_ROOT_NAMES = new Set<string>([
   'programme',
   'sources',
   'events',
-  'scenes',
   'scenarios',
   'signs',
   'metrics',

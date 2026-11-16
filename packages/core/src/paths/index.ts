@@ -20,8 +20,8 @@ export {
 export { resolveExamplesRoot } from './resolve-examples-root.js';
 export { catalogResolveOptions } from './catalog-resolve-options.js';
 export {
-  GOLDEN_SCENE_RUN_RELPATHS,
+  GOLDEN_SCENE_RUN_STORIES,
   goldenSceneRunRelPath,
-  resolveGoldenSceneRunDir,
+  resolveGoldenSceneRun,
 } from './golden-scene-runs.js';
 export { resolveSpecConfPath, resolveSpecPackageRoot } from './resolve-spec-conf.js';

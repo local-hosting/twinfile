@@ -10,7 +10,6 @@ import {
 import {
   checkProcessorGraph,
   loadTwinfile,
-  loadUnitRoot,
   queryPath,
   runScenarioRunner,
 } from '@local-hosting/twinfile-core';
@@ -198,8 +197,7 @@ export async function handleMcpRequest(
       (typeof req.params?.runId === 'string' && req.params.runId.trim()) ||
       (typeof req.params?.run_id === 'string' && req.params.run_id.trim()) ||
       '';
-    const unit = loadUnitRoot(dir);
-    const runId = paramRunId || (unit.ok ? String(unit.value.twinfile.id ?? '') : '');
+    const runId = paramRunId || String(built.loaded.twinfile.id ?? '');
     const hit = mcpRunTestPromptForRun(examplesRoot, runId);
     if (!hit) {
       return { digest, error: `no MCP test prompt for run id: ${runId}` };
@@ -220,19 +218,16 @@ export async function handleMcpRequest(
     if (!options.allowRuns) {
       return { error: 'runs disabled; restart serve with --allow-runs', digest };
     }
-    const loaded = loadUnitRoot(dir);
-    if (!loaded.ok) {
-      return { error: 'load failed', digest };
-    }
-    const runner = String((loaded.value.twinfile.use as { runner?: string } | undefined)?.runner ?? '');
+    const loaded = built.loaded;
+    const runner = String((loaded.twinfile.use as { runner?: string } | undefined)?.runner ?? '');
     const distRoot = distRootFromCli();
     const resolvedArgs = tfPlace.resolvedArgs ?? {};
     const args = { ...resolvedArgs, ...(req.params?.args as Record<string, unknown> | undefined) };
     const runName =
       method === 'run.append'
-        ? String(req.params?.runName ?? `${loaded.value.twinfile.id}-append`)
-        : String(req.params?.runName ?? loaded.value.twinfile.id);
-    const use = loaded.value.twinfile.use as { runners?: unknown } | undefined;
+        ? String(req.params?.runName ?? `${loaded.twinfile.id}-append`)
+        : String(req.params?.runName ?? loaded.twinfile.id);
+    const use = loaded.twinfile.use as { runners?: unknown } | undefined;
     const runners = Array.isArray(use?.runners) ? use.runners : undefined;
     const paramPrompt =
       typeof req.params?.test_prompt === 'string'
@@ -243,7 +238,7 @@ export async function handleMcpRequest(
     const catalogPrompt = (() => {
       const root = resolveMcpRunTestPromptsRoot(dir);
       if (!root) return undefined;
-      return mcpRunTestPromptForRun(root, String(loaded.value.twinfile.id ?? ''))?.prompt;
+      return mcpRunTestPromptForRun(root, String(loaded.twinfile.id ?? ''))?.prompt;
     })();
     const testPrompt = paramPrompt || catalogPrompt;
     const runResult = await runScenarioRunner({

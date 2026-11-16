@@ -11,13 +11,13 @@ import {
   loadRunUnit,
 } from '@local-hosting/twinfile-core';
 import { createRunPayload } from '@local-hosting/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
 describe('compose runners', () => {
   it('runs hydraulic and queue on one clock and tags each record', async () => {
-    const dir = goldenSceneRunDir(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
+    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
     const built = await buildTwinfile(dir, { examplesRoot, writeLock: false, noCache: true });
     const loaded = loadRunUnit(dir);
     if (!built.ok || !loaded.ok) {
