@@ -51,4 +51,4 @@ Manifest **`processors:`** scopes the concourse building into **`map-concourse`*
 ## Related
 
 - Child: [`parts/concourse`](../parts/concourse/) — `ext.shelter_resource` on cot/water assets
-- Scenario: [`arena-flood-shelter-standup`](../../../../story/examples/arena-operations/scenes/arena-flood-shelter-standup/) (`twinfile/arena-flood-shelter-standup:1.0.0`)
+- Scenario: [`arena-flood-shelter-standup`](../../../../story/examples/arena-operations/arena-operations.twin.yaml) (`catalog/story/examples/arena-operations#arena-flood-shelter-standup`)
