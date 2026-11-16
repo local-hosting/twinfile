@@ -1,4 +1,4 @@
-from: twinfile/base-indoor-stack:0.1.0
+from: twinfile/place/physical-store:0.1.0
 twinfile: 2
 kind: place
 id: wireless-mobile
@@ -18,111 +18,9 @@ steps:
         lat: 41.881832
         lon: -87.623177
         h3: 89266da62c7ffff
-  - spaces:
-      - id: arrival-lot
-        name: Arrival lot
-        kind: parking
-        level: ground
-        exposure: outdoor
-        roles:
-          - outdoor
-          - ground-transport
-      - id: entrance
-        name: Store entrance
-        kind: retail
-        level: ground
-        exposure: indoor
-        capacity: 80
-        roles:
-          - ground-transport
-      - id: welcome-desk
-        name: Welcome desk
-        kind: reception
-        level: ground
-        exposure: indoor
-        capacity: 20
-        roles:
-          - ground-transport
-      - id: waiting-area
-        name: Waiting area
-        kind: lounge
-        level: ground
-        exposure: indoor
-        capacity: 60
-        roles:
-          - shelter
-          - ground-transport
-      - id: solution-floor
-        name: Solution floor
-        kind: retail
-        level: ground
-        exposure: indoor
-        capacity: 150
-        roles:
-          - ground-transport
-      - id: service-desk
-        name: Service desk
-        kind: service
-        level: ground
-        exposure: indoor
-        capacity: 30
-        roles:
-          - alternative
-    mode: replace
-  - openings:
-      - id: door-main
-        kind: door
-        connects:
-          - arrival-lot
-          - entrance
-        width_m: 3
-        state: open
-        roles:
-          - exit
-      - id: door-entrance-welcome
-        kind: door
-        connects:
-          - entrance
-          - welcome-desk
-        width_m: 2
-        state: open
-      - id: door-welcome-wait
-        kind: door
-        connects:
-          - welcome-desk
-          - waiting-area
-        width_m: 2
-        state: open
-      - id: door-wait-solution
-        kind: door
-        connects:
-          - waiting-area
-          - solution-floor
-        width_m: 2.5
-        state: open
-      - id: door-solution-service
-        kind: door
-        connects:
-          - solution-floor
-          - service-desk
-        width_m: 2
-        state: open
-        roles:
-          - exit
-  - routes:
-      - id: path-queue-spine
-        name: Queue spine
-        from: welcome-desk
-        to: service-desk
-        length_m: 42
-        kind: corridor
-        step_free: true
   - assets:
       - id: greeter-kiosk
-        name: Greeter kiosk
         kind: kiosk
-        space: welcome-desk
-        state: active
         dtpr:
           schema: dtpr@2026-09-01-beta
           type: device
@@ -135,10 +33,7 @@ steps:
             affected:
               - people
       - id: queue-display
-        name: Queue display
         kind: display
-        space: waiting-area
-        state: active
         dtpr:
           schema: dtpr@2026-09-01-beta
           type: device
@@ -150,21 +45,8 @@ steps:
               - informational_display
             affected:
               - people
-      - id: device-showcase
-        name: Device showcase
-        kind: fixture
-        space: solution-floor
-        state: active
-      - id: demo-bar
-        name: Demo bar
-        kind: fixture
-        space: solution-floor
-        state: active
       - id: pay-station
-        name: Pay station
         kind: pos
-        space: service-desk
-        state: active
         dtpr:
           schema: dtpr@2026-09-01-beta
           type: device
@@ -178,9 +60,7 @@ steps:
               - people
   - sensors:
       - id: entrance-counter
-        name: Entrance counter
         observes: door-main
-        space: entrance
         unit: entries_per_hour
         dtpr:
           schema: dtpr@2026-09-01-beta
@@ -211,28 +91,3 @@ steps:
               - chatbot_voice_reply
             affected:
               - people
-  - bind:
-      for: passenger-queue
-      roles:
-        ground-transport:
-          - entrance
-          - welcome-desk
-          - waiting-area
-      actions:
-        - at: steady
-          set: {}
-  - bind:
-      for: severe-weather
-      roles:
-        shelter:
-          - waiting-area
-        exit:
-          - door-main
-          - door-solution-service
-        outdoor:
-          - arrival-lot
-      actions:
-        - at: warning
-          set:
-            arrival-lot:
-              state: closed

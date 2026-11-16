@@ -1,0 +1,318 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: physical-store
+name: Example physical retail store
+version: 0.1.0
+stability: example
+steps:
+  - place:
+      name: Example physical retail store
+      kind: shop
+      timezone: America/Chicago
+      published: false
+      ext:
+        layoutMode: single_level
+        spaceGranularity: zone
+        storeModel:
+          note: Front floor decides in solution areas (Z4); service desk (Z5) completes transactions.
+          funnel:
+            - arrival-lot
+            - entrance
+            - welcome-desk
+            - waiting-area
+            - solution-floor
+            - service-desk
+  - spaces:
+      - id: arrival-lot
+        name: Parking and arrival
+        kind: parking
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+        ext:
+          zoneId: Z1
+          zoneSlug: parking-arrival
+          jtbdStage: Z1 — Entrance
+      - id: entrance
+        name: Store entry
+        kind: retail
+        level: ground
+        exposure: indoor
+        capacity: 80
+        roles:
+          - ground-transport
+        ext:
+          zoneId: Z1
+          zoneSlug: entrance
+          jtbdStage: Z1 — Entrance
+          defaultTouchpoint: exterior-signage
+      - id: welcome-desk
+        name: Welcome desk
+        kind: reception
+        level: ground
+        exposure: indoor
+        capacity: 20
+        roles:
+          - ground-transport
+        ext:
+          zoneId: Z2
+          zoneSlug: welcome-desk
+          jtbdStage: Z2 — Welcome desk
+          defaultTouchpoint: greeter-kiosk
+      - id: waiting-area
+        name: Waiting area
+        kind: lounge
+        level: ground
+        exposure: indoor
+        capacity: 60
+        roles:
+          - shelter
+          - ground-transport
+        ext:
+          zoneId: Z3
+          zoneSlug: waiting-area
+          jtbdStage: Z3 — Waiting area
+          defaultTouchpoint: queue-display
+      - id: solution-floor
+        name: Solution areas
+        kind: retail
+        level: ground
+        exposure: indoor
+        capacity: 150
+        roles:
+          - ground-transport
+        ext:
+          zoneId: Z4
+          zoneSlug: discover-solutions
+          jtbdStage: Z4 — Discover and solutions
+          defaultTouchpoint: device-showcase
+      - id: service-desk
+        name: Service desk
+        kind: service
+        level: ground
+        exposure: indoor
+        capacity: 30
+        roles:
+          - alternative
+        ext:
+          zoneId: Z5
+          zoneSlug: service-desk
+          jtbdStage: Z5 — Service desk
+          defaultTouchpoint: rep-station
+    mode: replace
+  - stations:
+      - id: welcome-desk
+        name: Welcome desk post
+        ext:
+          space: welcome-desk
+          zoneId: Z2
+          defaultTouchpoint: greeter-kiosk
+      - id: waiting-area
+        name: Waiting area queue post
+        ext:
+          space: waiting-area
+          zoneId: Z3
+          defaultTouchpoint: queue-display
+      - id: solution-floor
+        name: Solution floor handoff
+        ext:
+          space: solution-floor
+          zoneId: Z4
+          defaultTouchpoint: device-showcase
+      - id: service-desk
+        name: Service desk post
+        ext:
+          space: service-desk
+          zoneId: Z5
+          defaultTouchpoint: rep-station
+  - visits:
+      - id: visit-arrival
+        kind: arrival
+        name: Parking and arrival
+        space: arrival-lot
+        order: 0
+      - id: visit-entry
+        kind: entry
+        name: Store entry
+        space: entrance
+        order: 1
+      - id: visit-welcome
+        kind: entry
+        name: Welcome desk
+        space: welcome-desk
+        order: 2
+      - id: visit-waiting
+        kind: waiting
+        name: Waiting area
+        space: waiting-area
+        order: 3
+      - id: visit-sales
+        kind: activity
+        name: Sales and consult
+        space: solution-floor
+        order: 4
+      - id: visit-checkout
+        kind: activity
+        name: Checkout and service
+        space: service-desk
+        order: 5
+      - id: visit-exit
+        kind: exit
+        name: Exit vestibule
+        space: entrance
+        order: 6
+      - id: visit-return
+        kind: return
+        name: Lot and return intent
+        space: arrival-lot
+        order: 7
+  - openings:
+      - id: door-main
+        kind: door
+        connects:
+          - arrival-lot
+          - entrance
+        width_m: 3
+        state: open
+        roles:
+          - exit
+      - id: door-entrance-welcome
+        kind: door
+        connects:
+          - entrance
+          - welcome-desk
+        width_m: 2
+        state: open
+      - id: door-welcome-wait
+        kind: door
+        connects:
+          - welcome-desk
+          - waiting-area
+        width_m: 2
+        state: open
+      - id: door-wait-solution
+        kind: door
+        connects:
+          - waiting-area
+          - solution-floor
+        width_m: 2.5
+        state: open
+      - id: door-solution-service
+        kind: door
+        connects:
+          - solution-floor
+          - service-desk
+        width_m: 2
+        state: open
+        roles:
+          - exit
+  - routes:
+      - id: path-queue-spine
+        name: Queue spine
+        from: welcome-desk
+        to: service-desk
+        length_m: 42
+        kind: corridor
+        step_free: true
+  - assets:
+      - id: greeter-kiosk
+        name: Greeter kiosk
+        kind: kiosk
+        space: welcome-desk
+        state: active
+      - id: queue-display
+        name: Queue display
+        kind: display
+        space: waiting-area
+        state: active
+      - id: device-showcase
+        name: Device showcase
+        kind: fixture
+        space: solution-floor
+        state: active
+      - id: demo-bar
+        name: Demo bar
+        kind: fixture
+        space: solution-floor
+        state: active
+      - id: pay-station
+        name: Pay station
+        kind: pos
+        space: service-desk
+        state: active
+      - id: exterior-signage
+        name: Exterior signage
+        kind: display
+        space: arrival-lot
+        state: active
+        ext:
+          zoneId: Z1
+      - id: rep-station
+        name: Representative station
+        kind: fixture
+        space: service-desk
+        state: active
+        ext:
+          zoneId: Z5
+      - id: accessory-wall
+        name: Accessory wall
+        kind: display
+        space: solution-floor
+        state: active
+        ext:
+          zoneId: Z4
+      - id: savings-calc-screen
+        name: Savings calculator
+        kind: kiosk
+        space: solution-floor
+        state: active
+        ext:
+          zoneId: Z4
+      - id: device-dropbox
+        name: Device dropbox
+        kind: fixture
+        space: service-desk
+        state: active
+        ext:
+          zoneId: Z5
+      - id: promo-screens
+        name: Promotion display
+        kind: display
+        space: service-desk
+        state: active
+        ext:
+          zoneId: Z5
+  - sensors:
+      - id: entrance-counter
+        name: Entrance counter
+        observes: door-main
+        space: entrance
+        unit: entries_per_hour
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - entrance
+          - welcome-desk
+          - waiting-area
+      actions:
+        - at: steady
+          set: {}
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - waiting-area
+        exit:
+          - door-main
+          - door-solution-service
+        outdoor:
+          - arrival-lot
+      actions:
+        - at: warning
+          set:
+            arrival-lot:
+              state: closed
