@@ -11,7 +11,7 @@ links:
   - rel: involves
     href: twinfile/character/shop-greeter:0.1.0
 story:
-  pitch: Retail visit from sales-floor arrival through checkout — where online cues meet in-store movement.
+  pitch: Retail visit from sales-floor arrival through checkout.
   scenes:
     - id: arrive
       label: Enter sales floor

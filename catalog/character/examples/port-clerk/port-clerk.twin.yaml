@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: port-clerk
+name: Port clerk (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional pier persona for the Port of New Orleans example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/gangway-kiosk:0.1.0
+character:
+  role: clerk
+  segment: port-ops
+  goals:
+    - Keep pier-to-warehouse transfers moving on a clear day
+    - Flag gangway backups before litter or damage closes access

@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: station-host
+name: Station host (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional station persona for the King's Cross mobility-hub example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/station-kiosk:0.1.0
+character:
+  role: host
+  segment: transit-rider
+  goals:
+    - Keep rural-to-urban hub transfers readable on a normal day
+    - Steer riders when disruption or recovery closes a dock

@@ -31,6 +31,7 @@ steps:
         capacity: 800
         roles:
           - ground-transport
+          - shelter
       - id: quad
         name: Main quad
         kind: plaza
@@ -38,6 +39,7 @@ steps:
         exposure: outdoor
         roles:
           - alternative
+          - outdoor
       - id: shuttle-loop
         name: Shuttle loop
         kind: roadway
@@ -45,6 +47,7 @@ steps:
         exposure: outdoor
         roles:
           - ground-transport
+          - outdoor
   - openings:
       - id: gate-hub-quad
         kind: gate
@@ -53,6 +56,8 @@ steps:
           - quad
         width_m: 4
         state: open
+        roles:
+          - exit
       - id: gate-hub-shuttle
         kind: gate
         connects:
@@ -60,6 +65,9 @@ steps:
           - shuttle-loop
         width_m: 3
         state: open
+        roles:
+          - exit
+
   - routes:
       - id: hub-quad
         name: Hub to main quad
@@ -103,8 +111,25 @@ steps:
       actions:
         - at: steady
           set: {}
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - transit-hub
+        exit:
+          - gate-hub-quad
+          - gate-hub-shuttle
+        outdoor:
+          - quad
+          - shuttle-loop
+      actions:
+        - at: warning
+          set:
+            shuttle-loop:
+              state: closed
   - copy: ./parts/transit-hub
     into: transit-hub
+
 processors:
   - id: hub-scope
     type: twinfile/mod.building-scope@0.1.0

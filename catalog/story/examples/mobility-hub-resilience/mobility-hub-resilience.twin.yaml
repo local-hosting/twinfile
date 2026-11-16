@@ -1,0 +1,22 @@
+twinfile: 2
+kind: story
+id: mobility-hub-resilience
+name: Mobility Hub resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/mobility-hub:0.2.0
+  - rel: involves
+    href: twinfile/character/station-host:0.1.0
+story:
+  pitch: Post-hazard recovery staging across the King's Cross hub network.
+  scenes:
+    - id: hub-network-recovery
+      label: Hub network recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H

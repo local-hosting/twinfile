@@ -10,6 +10,6 @@ Illustrative **port** campus pinned at the **Port of New Orleans** (Napoleon Ave
 
 ## Runs
 
-**Daily:** [`port-operations`](../../../story/examples/port-operations/port-operations.twin.yaml) — pier arrival and warehouse transfer (`mode: daily`).
+**Daily:** [`port-operations`](../../../story/examples/port-operations/port-operations.twin.yaml) — pier queue and warehouse transfer with [`port-clerk`](../../../character/examples/port-clerk/) (`mode: daily`).
 
 **Resilience:** [`gangway-backup`](../../../story/examples/port-resilience/port-resilience.twin.yaml) — litter / field-damage (`twin run catalog/story/examples/port-resilience#gangway-backup`).

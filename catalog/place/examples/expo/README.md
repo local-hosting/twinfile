@@ -25,3 +25,9 @@ Twinfile uses **one space graph**; indoor vs outdoor is not a separate zone laye
 **Events:** `severe-weather` closes or restricts outdoor program spaces while shelter roles stay on pavilion interiors; `transit-disruption` closes metro arrival and steers flow to district concourses.
 
 **Layout map (site → room):** [`docs/layout.md`](docs/layout.md) · machine index [`ext/layout-index.yaml`](ext/layout-index.yaml) · `twin layout summary expo`
+
+## Runs
+
+**Daily:** [`expo-operations`](../../../story/examples/expo-operations/expo-operations.twin.yaml) — pavilion arrival and visitor surge (`mode: daily`).
+
+**Resilience:** [`expo-resilience`](../../../story/examples/expo-resilience/expo-resilience.twin.yaml) — outdoor shelter capacity (`mode: resilience`).

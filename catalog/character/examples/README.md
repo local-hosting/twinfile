@@ -2,12 +2,17 @@
 
 **`<unit>.twin.yaml`** units with required **`disclosure:`** (synthetic only). Each unit is `character/examples/<id>/` → `twinfile/character/<id>:<ver>`.
 
-| Id | Resource |
-| --- | --- |
-| `shop-greeter` | greeter-kiosk |
-| `airport-liaison` | terminal-kiosk |
-| `arena-host` | concession-cart |
-| `park-ranger` | trail-station |
-| `ferry-captain` | visitor-shuttle |
-| `harbor-guide` | falls-tram |
-| `visitor-host` | dock-crane |
+| Id | Resource | Place theme |
+| --- | --- | --- |
+| `shop-greeter` | greeter-kiosk | shop |
+| `airport-liaison` | terminal-kiosk | airport |
+| `arena-host` | concession-cart | arena |
+| `park-ranger` | trail-station | park |
+| `port-clerk` | gangway-kiosk | port |
+| `expo-host` | pavilion-kiosk | expo |
+| `river-guide` | river-gauge | river |
+| `hub-attendant` | hub-kiosk | transit-hub-campus |
+| `station-host` | station-kiosk | mobility-hub (King's Cross) |
+| `ferry-captain` | visitor-shuttle | buffalo-harbor |
+| `harbor-guide` | falls-tram | niagara-falls |
+| `visitor-host` | dock-crane | dunkirk-dock |

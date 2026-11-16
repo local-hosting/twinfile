@@ -8,6 +8,8 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/port:0.2.0
+  - rel: involves
+    href: twinfile/character/port-clerk:0.1.0
 story:
   pitch: Gangway backup after litter surge, then pier field-damage clearance.
   scenes:

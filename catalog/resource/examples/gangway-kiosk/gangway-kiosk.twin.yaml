@@ -1,0 +1,28 @@
+twinfile: 2
+kind: resource
+id: gangway-kiosk
+name: Gangway kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/port:0.2.0
+    anchor: pier-main
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-port
+    elements:
+      purpose:
+        - wayfinding
+        - logistics
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people
+  ext:
+    lat: 29.9178
+    lon: -90.0295

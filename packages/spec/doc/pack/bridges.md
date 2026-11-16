@@ -64,11 +64,12 @@ See [appendix](../map/appendix.md#indoorgml-json-profile) and [topology taxonomy
 
 glTF/GLB does not replace the place graph. The glTF bridge writes a minimal place whose spaces use **`geometry.ref`**: `sources/<file>#<node-id>`. See appendix **glTF**.
 
-## Relation to runners
+## Relation to runners and views
 
 | Mechanism | Extends |
 | --- | --- |
 | **Bridge** | Authoring-time import/export and geometry attachment |
+| **View** | One-way presentation (`twin summary`, `twin export jsonld`) — not a bridge |
 | **Runner** (`use.runner: npm:…`) | Offline answer on a built bundle (stdout JSONL) |
 | **Player** (host) | Same **timeline** as runners; publishes on patch module bus — [World session](../place/world-session.md) |
 

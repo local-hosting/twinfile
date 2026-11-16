@@ -8,8 +8,10 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/park:0.3.0
+  - rel: involves
+    href: twinfile/character/park-ranger:0.1.0
 story:
-  pitch: Litter surge and field-damage response on the meadow–trailhead loop.
+  pitch: Litter surge on the meadow–trailhead loop, then slope-movement evacuation.
   scenes:
     - id: trailhead-backup
       label: Trailhead backup
@@ -21,13 +23,10 @@ story:
           lanes: 1
           service_s: 120
           stagingCap: 20
-    - id: boardwalk-damage
-      label: Boardwalk damage
+    - id: slope-watch
+      label: Slope movement watch
       run:
         steps:
-          - copy: twinfile/event/field-damage:1.0.0
+          - copy: twinfile/event/slope-movement:1.0.0
         args:
-          peakArrivals: 40
-          lanes: 1
-          service_s: 90
-          stagingCap: 15
+          evacuationAt: slope-movement.evacuation

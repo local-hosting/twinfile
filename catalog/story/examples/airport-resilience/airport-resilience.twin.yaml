@@ -8,8 +8,10 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/airport:0.2.0
+  - rel: involves
+    href: twinfile/character/airport-liaison:0.1.0
 story:
-  pitch: Terminal shelter stand-up when severe weather closes the curb, then recovery staging.
+  pitch: Terminal shelter when severe weather closes the curb, then volcanic-ash advisory.
   scenes:
     - id: terminal-shelter
       label: Terminal shelter
@@ -20,10 +22,10 @@ story:
           occupancy: 2500
           target_role: shelter
           warningAt: severe-weather.warning
-    - id: post-hazard-recovery
-      label: Post-hazard recovery
+    - id: ashfall-advisory
+      label: Ashfall advisory
       run:
         steps:
-          - copy: twinfile/event/recovery-resilience:0.1.0
+          - copy: twinfile/event/volcanic-ash:1.0.0
         args:
-          restorationAt: PT1H
+          ashfallAt: volcanic-ash.ashfall

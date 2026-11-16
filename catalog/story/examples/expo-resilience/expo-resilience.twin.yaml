@@ -8,8 +8,10 @@ mode: resilience
 links:
   - rel: involves
     href: twinfile/place/expo:0.2.0
+  - rel: involves
+    href: twinfile/character/expo-host:0.1.0
 story:
-  pitch: Outdoor shelter capacity under severe weather on the expo grounds.
+  pitch: Outdoor shelter capacity under severe weather, then post-hazard recovery on the grounds.
   scenes:
     - id: outdoor-shelter-cap
       label: Outdoor shelter capacity
@@ -19,3 +21,10 @@ story:
         args:
           occupancy: 4200
           target_role: shelter
+    - id: expo-recovery
+      label: Expo recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H

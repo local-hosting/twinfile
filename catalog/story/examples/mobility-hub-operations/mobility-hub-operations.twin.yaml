@@ -8,6 +8,8 @@ mode: daily
 links:
   - rel: involves
     href: twinfile/place/mobility-hub:0.2.0
+  - rel: involves
+    href: twinfile/character/station-host:0.1.0
 story:
   pitch: Intermodal disruption at the hub, then lunch-hour passenger queue spill across ground-transport lanes.
   scenes:

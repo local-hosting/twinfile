@@ -93,6 +93,11 @@ steps:
         length_m: 800
         kind: path
         step_free: false
+  - stations:
+      - id: ops-survey
+        name: Terminal ops survey
+        roles:
+          - survey-station
   - assets:
       - id: gate-reader-bus
         name: Bus gate reader
@@ -136,6 +141,21 @@ steps:
           - remote-stand
       actions:
         - at: warning
+          set:
+            curb-arrivals:
+              state: closed
+  - bind:
+      for: volcanic-ash
+      roles:
+        shelter:
+          - terminal-a
+        exit:
+          - door-terminal-curb
+          - gate-terminal-bus
+        survey-station:
+          - ops-survey
+      actions:
+        - at: ashfall
           set:
             curb-arrivals:
               state: closed

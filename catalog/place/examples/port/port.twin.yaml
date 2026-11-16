@@ -28,6 +28,8 @@ steps:
         kind: pier
         level: ground
         exposure: outdoor
+        roles:
+          - ground-transport
       - id: warehouse
         name: Warehouse building
         kind: warehouse

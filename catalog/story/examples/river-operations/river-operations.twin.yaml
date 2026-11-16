@@ -1,0 +1,22 @@
+twinfile: 2
+kind: story
+id: river-operations
+name: River operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/river:0.2.0
+  - rel: involves
+    href: twinfile/character/river-guide:0.1.0
+story:
+  pitch: Clear-day reach patrol and eddy visit before any release watch begins.
+  scenes:
+    - id: reach-patrol
+      label: Reach patrol
+      run:
+        steps:
+          - copy: twinfile/event/reach-patrol:0.1.0
+    - id: eddy-visit
+      label: Eddy pool visit

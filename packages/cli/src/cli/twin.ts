@@ -18,14 +18,12 @@ import {
 } from '@doppler-group/twinfile-place';
 import {
   RefResolver,
-  buildPlaceJsonLdFromTwinfile,
   checkProcessorGraph,
   defaultPushRef,
   findTwinHead,
   twinLockPath,
   formatBuildLayerScope,
   formatBuildLayerStepLabel,
-  formatTwinfileSummaryMarkdown,
   isTwinfileRef,
   lintDtprDisclosures,
   listDtprDisclosures,
@@ -36,7 +34,8 @@ import {
   pullTwinfileFromRegistry,
   pushTwinfileToRegistry,
   queryPath,
-  renderTwinfileSummaryAscii,
+  renderTwinfilePlaceView,
+  renderTwinfileSummaryView,
   resolveExamplesRoot,
   resolveTwinfileAnchor,
   runScenarioRunner,
@@ -44,6 +43,7 @@ import {
   loadCanvasDemoPack,
   TWIN_CATALOG_TYPES,
   type TwinCatalogType,
+  type TwinfileSummaryViewFormat,
 } from '@doppler-group/twinfile-core';
 import {
   addAssetsLayerToPlace,
@@ -904,7 +904,7 @@ async function runExportJsonld(): Promise<number> {
     return 1;
   }
 
-  const doc = buildPlaceJsonLdFromTwinfile(loaded.value);
+  const doc = renderTwinfilePlaceView(loaded.value, 'jsonld');
   if (!doc) {
     console.error('export jsonld: place unit needs geotype.primary (known @doppler-group/geotypes slug)');
     return 1;
@@ -951,11 +951,9 @@ async function runLayoutSummary(): Promise<number> {
   return 0;
 }
 
-type CardOutputFormat = 'ascii' | 'json' | 'yaml' | 'markdown';
-
 async function runSummary(): Promise<number> {
   let dir = '.';
-  let format: CardOutputFormat = 'ascii';
+  let format: TwinfileSummaryViewFormat = 'ascii';
   for (let i = 1; i < argv.length; i += 1) {
     const arg = argv[i]!;
     if (arg === '--json') format = 'json';
@@ -972,30 +970,8 @@ async function runSummary(): Promise<number> {
     console.error(formatTwinErrors(unitDir, opened.errors).join('\n'));
     return 1;
   }
-  const host = opened.value;
-  console.log(formatSummaryOutput(host.summary(), format));
+  console.log(renderTwinfileSummaryView(opened.value.summary(), format));
   return 0;
-}
-
-function formatSummaryOutput(summary: import('@doppler-group/twinfile-core').TwinfileSummaryV1, format: CardOutputFormat): string {
-  switch (format) {
-    case 'markdown':
-      return formatTwinfileSummaryMarkdown(summary);
-    case 'json':
-      return JSON.stringify(
-        { digest: summary.digest, summary, card: summary, ascii: renderTwinfileSummaryAscii(summary) },
-        null,
-        2,
-      );
-    case 'yaml':
-      return stringifyYaml({ digest: summary.digest, summary });
-    case 'ascii':
-      return `${renderTwinfileSummaryAscii(summary)}\n\n---\n\`twin summary --json\` · \`--yaml\` · \`--markdown\``;
-    default: {
-      const unhandled: never = format;
-      throw new Error(`unknown summary format: ${String(unhandled)}`);
-    }
-  }
 }
 
 async function runDescribe(): Promise<number> {
