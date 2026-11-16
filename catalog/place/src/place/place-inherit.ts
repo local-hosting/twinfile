@@ -12,7 +12,7 @@ import { getPlaceArchetype, getPlaceAxes, resolveComposedAxes } from './place-ax
 import { applyCopyInstruction, listCopiedTwinfiles } from './place-copy.js';
 import { checkMixinAppliesTo, getMixinUnits } from './place-mixins.js';
 
-export type PlaceInheritOptions = Pick<TwinfileResolveOptions, 'examplesRoot' | 'simulatorRoot'>;
+export type PlaceInheritOptions = Pick<TwinfileResolveOptions, 'examplesRoot'>;
 
 function resolvePlaceBaseUnit(
   place: LoadedTwinfile,
@@ -29,7 +29,7 @@ function resolvePlaceBaseUnit(
       },
     ]);
   }
-  const base = resolveTwinfileByRef(from.trim(), catalogResolveOptions(options.examplesRoot, options.simulatorRoot));
+  const base = resolveTwinfileByRef(from.trim(), catalogResolveOptions(options.examplesRoot));
   if (!base.ok) return base;
   if (base.value.loaded.twinfile.kind !== 'place') {
     return err([

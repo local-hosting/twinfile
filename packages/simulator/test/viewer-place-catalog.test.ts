@@ -11,8 +11,8 @@ import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 describe('viewer place catalog', () => {
   const testDir = dirname(fileURLToPath(import.meta.url));
-  const { examplesRoot, simulatorRoot } = testCatalogRoots(testDir);
-  const roots = { examplesRoots: [examplesRoot], simulatorRoots: [simulatorRoot] };
+  const { examplesRoot } = testCatalogRoots(testDir);
+  const roots = { examplesRoots: [examplesRoot] };
 
   it('lists run presets only on the workbench catalog', () => {
     const all = listViewerCatalog(roots);

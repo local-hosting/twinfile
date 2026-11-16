@@ -5,7 +5,7 @@ name: Outdoor shelter capacity
 version: 1.0.0
 stability: example
 steps:
-  - copy: twinfile/situation/severe-weather:1.0.0
+  - copy: twinfile/event/severe-weather:1.0.0
 domains:
   - safety
 args:

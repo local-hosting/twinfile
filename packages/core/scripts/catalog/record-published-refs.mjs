@@ -12,10 +12,9 @@ import { resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
-import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
+import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
-const simulatorRoot = resolveSimulatorRoot();
 const twinCli = resolveTwinCli(import.meta.url);
 
 const refs = {};
@@ -23,7 +22,7 @@ const refs = {};
 function typedRef(manifest, id, version) {
   const kind = String(manifest.kind ?? '');
   const role = String(manifest.role ?? '');
-  if (kind === 'resource' || kind === 'character' || kind === 'story') {
+  if (kind === 'resource' || kind === 'character' || kind === 'story' || kind === 'event') {
     return `twinfile/${kind}/${id}:${version}`;
   }
   if (role === 'run' || kind === 'scenario') {
@@ -71,7 +70,10 @@ recordCatalogRoot(examplesRoot, 'catalog/place/examples');
 if (statSync(storyExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
   recordCatalogRoot(storyExamplesRoot, 'catalog/story/examples');
 }
-recordCatalogRoot(simulatorRoot, '../simulator');
+const eventExamplesRoot = resolveTypeExamplesRoot('event', twinfileRoot);
+if (statSync(eventExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) {
+  recordCatalogRoot(eventExamplesRoot, 'catalog/event/examples');
+}
 
 const byKind = {};
 for (const [ref, row] of Object.entries(refs)) {

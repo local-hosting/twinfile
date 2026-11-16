@@ -20,7 +20,6 @@ import { catalogResolveOptions } from '@local-hosting/twinfile-core';
 
 export type StrictCheckOptions = {
   examplesRoot: string;
-  simulatorRoot?: string;
 };
 
 function asRecord(value: unknown): Record<string, unknown> | undefined {
@@ -106,8 +105,8 @@ export function strictCheckPlace(unit: LoadedTwinfile, options: StrictCheckOptio
 
     const plan = planValid.value;
     const situationName = String(plan.for ?? '');
-    const catalogOpts = catalogResolveOptions(options.examplesRoot, options.simulatorRoot);
-    const situationRef = `twinfile/situation/${situationName}:1.0.0`;
+    const catalogOpts = catalogResolveOptions(options.examplesRoot);
+    const situationRef = `twinfile/event/${situationName}:1.0.0`;
     const situationResolved = resolveTwinfileByRef(situationRef, catalogOpts);
     if (!situationResolved.ok) {
       errors.push({

@@ -1,4 +1,11 @@
-import { ContractChecker, type ContractError, type ExpectsRole, type PlanRoles } from '@local-hosting/twinfile-core';
+import {
+  ContractChecker,
+  planRolesFromPlace,
+  type ContractError,
+  type ExpectsRole,
+  type PlaceData,
+  type PlanRoles,
+} from '@local-hosting/twinfile-core';
 import { LayerCache } from '@local-hosting/twinfile-core';
 import { layerChainDigest, placeImageDigest, sha256Digest } from '@local-hosting/twinfile-core';
 import { mergeObjects, type MergeOptions, type LayerMergeMode } from '@local-hosting/twinfile-core';
@@ -25,12 +32,15 @@ export type TwinfileBuilderResult = {
   digest: string;
   metaExtras: Record<string, unknown>;
   errors: ContractError[];
+  /** Roles filled from place role tags for events the place has no binding for. */
+  matchedRoles: Record<string, PlanRoles>;
 };
 
 export type ContractPass = {
   unitName: string;
   expects: Record<string, ExpectsRole>;
-  planRoles: PlanRoles;
+  /** From `bindings/<event>.yaml`; when absent, roles are matched from place role tags. */
+  planRoles?: PlanRoles;
 };
 
 export type TwinfileBuilderInput = {
@@ -90,16 +100,16 @@ export class TwinfileBuilder {
     }
 
     const errors: ContractError[] = [];
+    const matchedRoles: Record<string, PlanRoles> = {};
     for (const pass of input.contracts ?? []) {
-      const missingPlan = this.#contract.checkPlanPresent(pass.planRoles, pass.unitName);
+      let planRoles = pass.planRoles;
+      if (!planRoles) {
+        planRoles = planRolesFromPlace(place as PlaceData, pass.expects).roles;
+        matchedRoles[pass.unitName] = planRoles;
+      }
+      const missingPlan = this.#contract.checkPlanPresent(planRoles, pass.unitName);
       if (missingPlan) errors.push(missingPlan);
-      errors.push(
-        ...this.#contract.checkExpects(
-          place as Record<string, { id: string }[]>,
-          pass.expects,
-          pass.planRoles,
-        ),
-      );
+      errors.push(...this.#contract.checkExpects(place as PlaceData, pass.expects, planRoles));
     }
 
     const meta = { ...input.meta, ...metaExtras };
@@ -109,7 +119,7 @@ export class TwinfileBuilder {
       layers: layerResults.map((l) => l.chain),
     });
 
-    return { place, layers: layerResults, digest, metaExtras, errors };
+    return { place, layers: layerResults, digest, metaExtras, errors, matchedRoles };
   }
 
   verify(result: TwinfileBuilderResult, expectedDigest: string): boolean {

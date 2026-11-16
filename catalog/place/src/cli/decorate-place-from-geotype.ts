@@ -29,7 +29,7 @@ function unwrap<T>(result: Result<T>): T {
 export function decoratePlaceFromGeotype(
   unitDir: string,
   slug: string,
-  options: { examplesRoot: string; simulatorRoot?: string },
+  options: { examplesRoot: string },
 ): DecoratePlaceResult {
   const decorations = placeDecorationsForSlug(slug);
   if (!decorations) throw new Error(`No decorations for geotype "${slug}"`);
@@ -42,7 +42,7 @@ export function decoratePlaceFromGeotype(
   writeTwinfileDoc(twinfilePath, twinfile);
 
   const unit = unwrap(loadTwinfile(unitDir));
-  const inherit = { examplesRoot: options.examplesRoot, simulatorRoot: options.simulatorRoot };
+  const inherit = { examplesRoot: options.examplesRoot };
   const place = unwrap(mergePlaceFromTwinfile(unit, inherit));
   return {
     mixins: mixinRefs,

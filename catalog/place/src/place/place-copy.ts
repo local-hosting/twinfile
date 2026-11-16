@@ -48,7 +48,7 @@ export function resolveCopySource(
       { code: 'E_BUILD', message: `copy: ${ref} requires examplesRoot to resolve`, file: owner.twinfilePath },
     ]);
   }
-  const resolved = resolveTwinfileByRef(ref, catalogResolveOptions(options.examplesRoot, options.simulatorRoot));
+  const resolved = resolveTwinfileByRef(ref, catalogResolveOptions(options.examplesRoot));
   return resolved.ok ? ok(resolved.value.loaded) : resolved;
 }
 

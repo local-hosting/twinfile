@@ -3,18 +3,11 @@ import { join } from 'node:path';
 import { goldenSceneRunRelPath } from '../src/paths/golden-scene-runs.js';
 import {
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorRoot,
   resolveTwinfileRoot,
 } from '../src/paths/catalog-layout.js';
 
 export function testExamplesRoot(importMetaDir: string): string {
   return resolvePlaceExamplesCatalogRoot(resolveTwinfileRoot(importMetaDir));
-}
-
-export function testSimulatorRoot(importMetaDir: string): string {
-  const root = resolveSimulatorRoot(importMetaDir);
-  if (!root) throw new Error(`testSimulatorRoot: no simulator package above ${importMetaDir}`);
-  return root;
 }
 
 export function testTwinfileRoot(importMetaDir: string): string {
@@ -26,9 +19,8 @@ export function goldenSceneRunDir(importMetaDir: string, runId: string): string 
   return join(testTwinfileRoot(importMetaDir), goldenSceneRunRelPath(runId));
 }
 
-export function testCatalogRoots(importMetaDir: string): { examplesRoot: string; simulatorRoot: string } {
+export function testCatalogRoots(importMetaDir: string): { examplesRoot: string } {
   return {
     examplesRoot: testExamplesRoot(importMetaDir),
-    simulatorRoot: testSimulatorRoot(importMetaDir),
   };
 }

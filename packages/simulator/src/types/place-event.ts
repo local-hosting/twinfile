@@ -28,9 +28,7 @@ export type PlaceEvent = {
   name: string;
   version?: string;
   stability?: string;
-  catalogKind?: 'situation' | 'event';
   phases?: string[];
-  timetable?: Record<string, string>;
   expects?: Record<string, ExpectsRole>;
   args?: Record<string, unknown>;
   layers?: string[];
@@ -40,7 +38,7 @@ export type PlaceEvent = {
 
 export type PlaceEventHead = Record<string, unknown> & {
   twinfile: number;
-  kind: 'situation' | 'event';
+  kind: 'event';
   id: string;
   name: string;
   version: string;

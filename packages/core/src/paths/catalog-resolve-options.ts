@@ -1,21 +1,11 @@
 import { resolve } from 'node:path';
 
 import type { TwinfileResolveOptions } from '../ref/twinfile-resolver.js';
-import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from './catalog-layout.js';
+import { resolvePlaceExamplesCatalogRoot } from './catalog-layout.js';
 
-/**
- * Twin **catalog** (place examples) + **simulator** package for compose/refs/player.
- * Situations are simulator modules (`catalogKind: situation`), not twins under `catalog/`.
- */
-export function catalogResolveOptions(
-  examplesRoot?: string,
-  simulatorRoot?: string,
-): TwinfileResolveOptions {
-  const placeExamples = examplesRoot?.trim()
-    ? resolve(examplesRoot)
-    : resolvePlaceExamplesCatalogRoot();
+/** Twin catalog roots for compose/refs/player; event units resolve from `catalog/event/examples`. */
+export function catalogResolveOptions(examplesRoot?: string): TwinfileResolveOptions {
   return {
-    examplesRoot: placeExamples,
-    simulatorRoot: simulatorRoot ?? resolveSimulatorRoot(placeExamples),
+    examplesRoot: examplesRoot?.trim() ? resolve(examplesRoot) : resolvePlaceExamplesCatalogRoot(),
   };
 }

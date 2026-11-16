@@ -21,7 +21,7 @@ function defaultSituationHead(ref: string): Record<string, unknown> {
 }
 
 function headsFromBuild(result: BuildTwinfileResult, ref: string): Record<string, unknown>[] {
-  const bundled = (result.situations ?? []) as Record<string, unknown>[];
+  const bundled = (result.events ?? []) as Record<string, unknown>[];
   const slug = ref.includes('/') ? ref.split('/').pop()! : ref;
   const fromBundle = bundled.find((h) => h.id === slug || h.id === ref);
   if (fromBundle) return bundled;

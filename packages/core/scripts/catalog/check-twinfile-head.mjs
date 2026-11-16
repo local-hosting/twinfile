@@ -1,13 +1,12 @@
 #!/usr/bin/env node
 /** Enforce place head: `id` ref slug (not display `name`). */
-import { readFileSync, statSync } from 'node:fs';
+import { readFileSync } from 'node:fs';
 import { parse as parseYaml } from 'yaml';
 
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';
-import { findTwinHead, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
+import { findTwinHead, resolvePlaceExamplesCatalogRoot } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
-const simulatorRoot = resolveSimulatorRoot();
 const ID = /^[a-z0-9][a-z0-9-]{0,62}$/;
 
 const errors = [];
@@ -34,9 +33,6 @@ function checkRoot(root, label) {
 }
 
 checkRoot(examplesRoot, '');
-if (statSync(simulatorRoot, { throwIfNoEntry: false })?.isDirectory()) {
-  checkRoot(simulatorRoot, '../simulator');
-}
 
 if (errors.length) {
   console.error('check-twinfile-head failed:\n', errors.join('\n'));

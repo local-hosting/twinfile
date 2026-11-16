@@ -69,7 +69,7 @@ export class PatchProgram {
       if (id) {
         map.set(id, head);
         const ver = typeof head.version === 'string' ? head.version : '0.0.0';
-        map.set(`twinfile/situation/${id}:${ver}`, head);
+        map.set(`twinfile/event/${id}:${ver}`, head);
       }
     }
     return map;

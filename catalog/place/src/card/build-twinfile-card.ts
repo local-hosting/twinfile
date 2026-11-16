@@ -215,7 +215,7 @@ function summaryUnitKind(input: BuildTwinfileSummaryInput): string {
   if (input.unitPath && isRunPresetPath(input.unitPath)) return 'run';
   if (isRunComposeHead(input.twinfile)) return 'run';
   const catalogKind = manifestStr(input.twinfile, 'kind');
-  if (catalogKind === 'situation' || catalogKind === 'event' || catalogKind === 'mixin') {
+  if (catalogKind === 'event' || catalogKind === 'mixin') {
     return catalogKind;
   }
   return 'place';
@@ -274,7 +274,7 @@ export function buildTwinfileSummary(
       outputs.push(...rows.outputs);
       break;
     }
-    case 'situation':
+    case 'event':
       fixed = [
         {
           id: 'phases',
@@ -286,9 +286,9 @@ export function buildTwinfileSummary(
       inputs.push(...argsIo(twinfile.args as Record<string, unknown> | undefined));
       outputs.push({
         id: 'bind.roles',
-        label: 'Situation role map',
+        label: 'Event role map',
         kind: 'binding',
-        detail: 'Embedded on built place as situationBindings (author: steps bind:)',
+        detail: 'Embedded on built place as situationBindings (bindings/<event>.yaml or matched role tags)',
       });
       break;
     case 'mixin':
