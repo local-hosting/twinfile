@@ -9,12 +9,12 @@ Twinfile units are **digital models** (authoring artifacts). Under [ISO/IEC 3017
 
 ## ISO 23247 elements → four twin types
 
-| ISO 23247 | Twinfile type | Head |
+| ISO 23247 | Twinfile type | Head (`<unit>.twin.yaml`) |
 | --- | --- | --- |
-| Facility, environment | **place** | `Place.yaml` |
-| Equipment, material, product | **resource** | `Resource.yaml` |
-| Personnel | **character** | `Character.yaml` + `disclosure:` |
-| Process (planned) | **story** | `Story.yaml` |
+| Facility, environment | **place** | `kind: place` |
+| Equipment, material, product | **resource** | `kind: resource` |
+| Personnel | **character** | `kind: character` + `disclosure:` |
+| Process (planned) | **story** | `kind: story` |
 
 **Process (actual)** maps to the host **player** + scene **`run.yaml`** presets and simulator **catalog** situations/timetable modules (`twinfile/situation/*`, `twinfile/event/*` compose refs) — not a fifth published twin kind.
 

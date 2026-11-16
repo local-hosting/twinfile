@@ -2,12 +2,12 @@
 
 Twinfile hosts **four published twin types**: **place**, **resource**, **character**, **story**. Each has a typed head under `catalog/<type>/examples/<id>/` (character libs under `catalog/character/`). Wire JSON under `schemas/1/`.
 
-| Type | Head file | Wire schema | Notes |
+| Type | Head `kind:` (in `<unit>.twin.yaml`) | Wire schema | Notes |
 | --- | --- | --- | --- |
-| **place** | `Place.yaml` (legacy `Twinfile.yaml`) | [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json) | Spatial twin |
-| **resource** | `Resource.yaml` | [`res-wire.schema.json`](../../schemas/1/run/res-wire.schema.json) | Equipment, material, product |
-| **character** | `Character.yaml` | [PCM / SAM](pcm-sam.md) | **`disclosure:`** required |
-| **story** | `Story.yaml` | SAM JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |
+| **place** | `place` or `mixin` | [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json) | Spatial twin |
+| **resource** | `resource` | [`res-wire.schema.json`](../../schemas/1/run/res-wire.schema.json) | Equipment, material, product |
+| **character** | `character` | [PCM / SAM](pcm-sam.md) | **`disclosure:`** required |
+| **story** | `story` | SAM JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |
 
 **Runs are not twins.** Executable presets live under **`story/.../scenes/<id>/run.yaml`** (`role: run`, `clock:`, `use.runner`). Hosts pass **`twinfile/story/<id>:<ver>`** to the player; the player walks **`story.scenes`** and loads scene runs.
 

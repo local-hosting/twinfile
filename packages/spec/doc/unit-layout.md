@@ -21,13 +21,13 @@ Every twin under `catalog/<type>/examples/<id>/` shares:
 
 ```text
 catalog/story/examples/<story-id>/
-  Story.yaml
+  <story-id>.twin.yaml
   scenes/<scene-id>/
     run.yaml          # role: run — clock, runner, situation copies
     expected/         # optional verify digest
 ```
 
-`story.scenes[]` lists scene ids; use **`run: ./scenes/<scene-id>`** on each row when a `run.yaml` exists. Legacy **`beats`** loads as **`scenes`**. One-release: **`Event.yaml`** / **`preset.yaml`** in a scene folder.
+`story.scenes[]` lists scene ids; use **`run: ./scenes/<scene-id>`** on each row when a `run.yaml` exists. Legacy **`beats`** loads as **`scenes`**.
 
 Cross-type links use refs only (`links:`, `with:`, `copy: twinfile/<type>/<id>`).
 

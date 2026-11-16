@@ -4,7 +4,7 @@
 
 For **`from:`**, **`steps:`** (`copy:`, `plan:`), v1 **`with:`** / **`layers:`**, and the canonical compose order, see [Composition](composition.md#authoring-compose-order-canonical).
 
-**Place `from:`** (optional): twinfile ref to a base **place** unit. Base **`layers`** merge first; this unit’s **`layers`** merge on top (same rules as multi-file **`place/`**). Plan paths live in **`layers:`** as `plans/*.yaml`; legacy top-level **`plans:`** is normalized by **`twin fmt`**.
+**Place `from:`** (optional): twinfile ref to a base **place** unit. Base **`layers`** merge first; this unit’s **`layers`** merge on top (same rules as multi-file **`place/`**). Plan paths live in **`layers:`** as `bindings/*.yaml`.
 
 Merge: RFC 7396 on objects; id-array merge by `id`; other arrays replace.
 
@@ -14,7 +14,7 @@ Merge: RFC 7396 on objects; id-array merge by `id`; other arrays replace.
 
 **Fine patches:** multiple files on **one** unit (`spaces-zones.yaml` then `spaces-rooms.yaml`) use the same id-merge. **`mode: replace`** on a layer entry replaces whole collections in that file (Docker `COPY` over a directory). To drop a row from an earlier file on the **same** unit, patch `{ id: <same>, $delete: true }` (rare).
 
-**Authoring stack:** list `plans/<situation>.yaml` in **`layers:`** after place files (or run **`twin fmt`** to lift legacy **`plans:`**).
+**Authoring stack:** list `bindings/<situation>.yaml` in **`layers:`** after place files.
 
 Errors: `E_NO_PLAN`, `E_ROLE_MISSING`, `E_ROLE_KIND`, `E_ROLE_REF`, `E_ROLE_MIN`, `E_ROLE_VOCAB`, `E_ROLE_TAG`, `E_TIMETABLE_REF`.
 

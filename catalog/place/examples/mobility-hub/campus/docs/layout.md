@@ -22,7 +22,7 @@ Fictional **campus-shaped mobility hub** (transit hub = mobility hub in prose) f
 
 ## Building copy
 
-The last patch in [`Twinfile.yaml`](../Twinfile.yaml):
+The last patch in [`campus.twin.yaml`](../campus.twin.yaml):
 
 ```yaml
   - copy: ./parts/transit-hub

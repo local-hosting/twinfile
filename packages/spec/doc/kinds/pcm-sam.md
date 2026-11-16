@@ -9,4 +9,4 @@ Unlike place/resource/event JSON Schema wires under `schemas/1/`, **character** 
 
 Layout: [type-package-layout.md](../type-package-layout.md).
 
-Head files: **`Character.yaml`** and **`Story.yaml`**. **`disclosure:`** on character is required (synthetic personas only).
+Heads: **`<unit>.twin.yaml`** with `kind: character` or `kind: story`. **`disclosure:`** on character is required (synthetic personas only).

@@ -18,7 +18,7 @@ Hosts MUST NOT rewrite merged place geometry inside the patch editor; binds are 
 ### Canvas data flow
 
 ```text
-Twinfile.yaml processors: + outlets:
+<unit>.twin.yaml processors: + outlets:
   → buildProcessorsResourceFromTwinfile (ProcessorsResourceV1)
      or parseModuleGraphFromTwinfile + projectPatchGraphForUi
   → host canvas (Vue, React, Svelte, …) + layout (x/y)
