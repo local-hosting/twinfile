@@ -38,7 +38,7 @@ export function pickRandomEngagementLevel(
   if (picked) {
     return picked;
   }
-  throw new Error('Org customer catalog has no engagement levels');
+  throw new Error('Customer planning catalog has no engagement levels');
 }
 
 export function pickRandomIntentId(input: {
@@ -63,7 +63,7 @@ export function pickRandomIntentId(input: {
   const pool = eligible.length > 0 ? eligible : [...input.catalogIntentIds];
   const picked = pickRandomFrom(pool, random);
   if (!picked) {
-    throw new Error('No intents available in org catalog');
+    throw new Error('No intents available in planning catalog');
   }
   return picked;
 }
@@ -76,7 +76,7 @@ export function pickRandomJourneyId(
   if (picked?.id?.trim()) {
     return picked.id.trim();
   }
-  throw new Error('Org journey catalog has no journeys');
+  throw new Error('Journey catalog has no journeys');
 }
 
 export function pickRandomSegmentIdFromCatalog(
@@ -86,7 +86,7 @@ export function pickRandomSegmentIdFromCatalog(
   const picked = pickRandomFrom(segments, random);
   const id = picked?.id?.trim();
   if (!id) {
-    throw new Error('Org segment catalog has no segments');
+    throw new Error('Segment catalog has no segments');
   }
   return id;
 }

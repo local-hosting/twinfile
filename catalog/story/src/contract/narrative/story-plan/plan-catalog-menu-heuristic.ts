@@ -44,7 +44,7 @@ export function planStoryCreateCatalogMenuHeuristic(input: {
     matched.characterId ||
     input.menu.characters[0]?.characterId;
   if (!characterId || !input.menu.characters.some((row) => row.characterId === characterId)) {
-    throw new Error('Org user catalog menu has no characters');
+    throw new Error('Story catalog menu has no characters');
   }
 
   const episodesForCharacter = input.menu.episodes.filter((row) => row.focalCharacterId === characterId);
@@ -56,7 +56,7 @@ export function planStoryCreateCatalogMenuHeuristic(input: {
     episodeId = episodePool[index]?.id;
   }
   if (!episodeId) {
-    throw new Error('Org user catalog menu has no Story episodes');
+    throw new Error('Story catalog menu has no episodes');
   }
 
   const episode = input.menu.episodes.find((row) => row.id === episodeId);
@@ -82,10 +82,10 @@ export function validateStoryPlanCatalogMenuSelection(input: {
   selection: StoryPlanCatalogMenuSelectionV1;
 }): StoryPlanCatalogMenuSelectionV1 {
   if (!input.menu.characters.some((row) => row.characterId === input.selection.characterId)) {
-    throw new Error(`Invalid characterId "${input.selection.characterId}" — not in org user catalog`);
+    throw new Error(`Invalid characterId "${input.selection.characterId}" — not in story catalog menu`);
   }
   if (!input.menu.episodes.some((row) => row.id === input.selection.episodeId)) {
-    throw new Error(`Invalid episodeId "${input.selection.episodeId}" — not in org user catalog`);
+    throw new Error(`Invalid episodeId "${input.selection.episodeId}" — not in story catalog menu`);
   }
   return input.selection;
 }

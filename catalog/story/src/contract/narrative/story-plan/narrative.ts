@@ -187,12 +187,12 @@ export function formatStoryPlanLlmUserPrompt(input: {
     input.scenario.trim(),
     '',
     input.narrative.storyPlanningGuide
-      ? `## Org customer context\n${input.narrative.storyPlanningGuide.trim()}\n`
+      ? `## Customer context\n${input.narrative.storyPlanningGuide.trim()}\n`
       : '',
     input.overrides && Object.keys(input.overrides).length > 0
       ? `## Hard overrides (must respect)\n${JSON.stringify(input.overrides, null, 2)}\n`
       : '',
-    '## Org corpus (AXM segments, needs, JTBD, touchpoints, fleet)',
+    '## Planning corpus (segments, needs, JTBD, touchpoints, fleet)',
     'First: match the story scenario to the segment whose topic, needsSummary, empathy, and objectives fit.',
     'Episode topic = what that segment is trying to accomplish — not generic retail copy.',
     'Then pick engagementLevelId + intentIds from that segment objectives and the scenario-stated goals.',
