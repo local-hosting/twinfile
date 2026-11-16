@@ -4,6 +4,11 @@
 
 | Id | Resource | Place theme |
 | --- | --- | --- |
+| `shopper` | — | retail baseline |
+| `store-shopper` | — | wireless-mobile (generic segments) |
+| `online-shopper` | — | online funnel |
+| `store-shopper-visitor` | — | wireless-mobile (Jordan Blake) |
+| `wireless-greeter` | greeter-kiosk | wireless-mobile |
 | `shop-greeter` | greeter-kiosk | shop |
 | `airport-liaison` | terminal-kiosk | airport |
 | `arena-host` | concession-cart | arena |
