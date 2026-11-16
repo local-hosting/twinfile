@@ -8,7 +8,7 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 
 | Prose | On disk | One line |
 | --- | --- | --- |
-| **Place** | **`<unit>.twin.yaml`**, `kind: place` or `mixin` | Spatial twin → built **`Place`** |
+| **Place** | **`<unit>.twin.yaml`**, `kind: place` | Spatial twin → built **`Place`** |
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
 | **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — PCM/JSM; **`disclosure:`** required |
 | **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
@@ -17,7 +17,6 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
 | **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads scene **`run.yaml`**, advances **session** on the patch **module bus** |
 | **Event** | **`catalog/event/<id>/<id>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; the scene `schedule:` and the player decide when phases fire. Places host events through role tags; `bindings/<event>.yaml` is an optional override |
-| **Mixin** | `kind: mixin` place head | Decoration `with:` / `copy:` targets under **place** |
 | **`id`** | head field | Ref slug (`twinfile/<type>/<id>:<version>`) — never UI copy |
 | **`name`** | head field | Display title |
 
@@ -47,7 +46,6 @@ Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `ca
 | **Run** | Scene **`run.yaml`** — compose `kind: scenario` for verify; not **`twinfile/event/`** |
 | **Runner** | **`use.runner`** on a run — offline verify; prompts are MCP-only |
 | **Event** | **`kind: event`** under `catalog/event/` — a timed occurrence a place hosts (hazards, game days) |
-| **Mixin** | **`kind: mixin`** under place — decoration, not a spatial twin |
 
 A **place does not run**. **Runs** + **player** execute on a built place (runner offline, player live).
 
@@ -72,7 +70,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 
 | Artifact | Prose | Role |
 | --- | --- | --- |
-| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **mixin**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
+| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
 | **`run.yaml`** | **Run** (scene) | Under `story/.../scenes/` — not published |
 | **Place event (TS)** | **Event** loaded from `catalog/event` | Catalog + `request()` → patch bus |
 
@@ -114,7 +112,7 @@ Normative JSON Schema: [`schemas/1/twinfile/twinfile.schema.json`](../schemas/1/
 | **Build layer** | One compose step (`twin layers`; not persisted on disk) |
 | **Layer** | Avoid in authoring prose unless referring to build output or v1 `layers:` |
 
-Verbs: **`from:`** (base), **`with:`** (mixin), **`copy:`** (ref or `./path`) — no extra synonyms.
+Verbs: **`from:`** (base), **`copy:`** (ref or `./path`) — no extra synonyms.
 
 ## Mode (always qualify)
 

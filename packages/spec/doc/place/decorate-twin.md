@@ -40,7 +40,7 @@ layers:
   - bindings/transit-disruption.yaml
 ```
 
-**Run** (scene `run.yaml`, not a Twinfile) copies event/event refs at build time:
+**Run** (scene `run.yaml`, not a Twinfile) copies event refs at build time:
 
 ```yaml
 # story/examples/<story>/scenes/<scene>/run.yaml
@@ -150,10 +150,10 @@ Every `@doppler-group/geotypes` slug carries suggested decorators next to its ar
 
 1. **`from:`** the archetype base (role hooks: `shelter`, `exit`, `outdoor`, … already tagged).
 2. **`axes:`** for any axis the archetype leaves open (e.g. `vertical: stacked` on a hospital campus).
-3. **`with:`** `mixin-assets` / `mixin-sensors` when suggested ([RFC 0004](../../rfcs/0004-composed-bases.md)). Suggested events need no mixin: the base already tags role hooks, so scenes that copy those events match roles without a binding.
+3. Starter **`assets`** / **`sensors`** rows as `steps:` when suggested (a kiosk and an occupancy sensor to rename and place). Suggested events need no extra rows: the base already tags role hooks, so scenes that copy those events match roles without a binding.
 4. Prints remaining suggested layers (`next: add layers …`) that need real geometry (routes, optional visit moments).
 
-Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To pin an event to specific rows, add a local `bindings/<event>.yaml`.
+To pin an event to specific rows, add a local `bindings/<event>.yaml`.
 
 ## CLI (decorate)
 

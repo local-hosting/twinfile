@@ -7,11 +7,11 @@ export const metadata = {
 
 A place describes the site. An event describes a story any place can bind. A scenario runs that story against one place. {{ className: 'lead' }}
 
-Unit kinds are `place`, `event`, `event`, `scenario`, and `mixin`. Mixins are the packs `with:` attaches. Events are timetables a scenario can include (arena ships `events/game-day`).
+Unit kinds are `place`, `event`, and `scenario`. A scenario copies the events it plays (arena ships `arena-game-day`).
 
 ## Shared events {{ anchor: false }}
 
-Fourteen shared event units ship in the private [`@doppler-group/twinfile-simulator`](https://github.com/twinfile/simulator) catalog. A place opts in through a mixin or a local plan. The event declares `phases` and the roles it `expects`. Hazard label → unit mapping: [`hazard-catalog.yaml`](https://github.com/twinfile/spec/blob/main/conf/hazard-catalog.yaml). Lantern-style map pins: [`hr-marker-crosswalk.yaml`](https://github.com/twinfile/spec/blob/main/conf/hr-marker-crosswalk.yaml).
+Fourteen shared event units ship in the private [`@doppler-group/twinfile-simulator`](https://github.com/twinfile/simulator) catalog. A place opts in through the role tags it carries or a local plan. The event declares `phases` and the roles it `expects`. Hazard label → unit mapping: [`hazard-catalog.yaml`](https://github.com/twinfile/spec/blob/main/conf/hazard-catalog.yaml). Lantern-style map pins: [`hr-marker-crosswalk.yaml`](https://github.com/twinfile/spec/blob/main/conf/hr-marker-crosswalk.yaml).
 
 `twinfile/severe-weather:1.0.0`:
 
@@ -40,17 +40,17 @@ expects:
 | Event | Expects (excerpt) | Example places |
 | --- | --- | --- |
 | `severe-weather` | `shelter`, `exit`, `outdoor` | shop, arena, expo |
-| `flood` | `flood-refuge`, `safe-access`, `gauge` | mixin (sites, linear water) |
-| `earthquake` | `shelter`, `exit`, `outdoor` | mixin |
-| `wildfire` | `shelter`, `exit`, `safe-access` | mixin |
-| `tsunami` | `flood-refuge`, `safe-access`, `water-launch` | mixin (coastal) |
-| `volcanic-ash` | `shelter`, `exit`, `survey-station` | mixin |
-| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | mixin (avalanche, landslide, lahar) |
-| `drought` | `gauge`, `collection-point`, `shelter` | mixin |
-| `power-outage` | `shelter`, `safe-access`, `alternative` | mixin |
+| `flood` | `flood-refuge`, `safe-access`, `gauge` | tagged places (sites, linear water) |
+| `earthquake` | `shelter`, `exit`, `outdoor` | tagged places |
+| `wildfire` | `shelter`, `exit`, `safe-access` | tagged places |
+| `tsunami` | `flood-refuge`, `safe-access`, `water-launch` | tagged places (coastal) |
+| `volcanic-ash` | `shelter`, `exit`, `survey-station` | tagged places |
+| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | tagged places (avalanche, landslide, lahar) |
+| `drought` | `gauge`, `collection-point`, `shelter` | tagged places |
+| `power-outage` | `shelter`, `safe-access`, `alternative` | tagged places |
 | `dam-release` | `water-launch`, `flood-refuge`, `gauge` | river |
 | `transit-disruption` | `ground-transport`, `alternative` | shop, airport, expo, transit-hub-campus |
-| `field-damage` | `hotspot`, `safe-access`, `collection-point` | mixin (debris, closures, structural damage) |
+| `field-damage` | `hotspot`, `safe-access`, `collection-point` | tagged places (debris, closures, structural damage) |
 | `litter-pollution` | `hotspot`, `safe-access`, `collection-point` | port, park |
 
 Your `bindings/*.yaml` maps those role names to space and opening ids on this site. See [Author a place](/author#plans).

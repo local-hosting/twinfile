@@ -138,7 +138,7 @@ The **minimal runnable layout recipe** is **`from:`** + **`place/place.yaml`** (
 | Step | Twinfile | Docker analogy | When |
 | --- | --- | --- | --- |
 | **Registry pin** | `geotype.primary` + `registry` on `<unit>.twin.yaml` | Base image label / SBOM component | `twin init --geotype`; ties unit to `@doppler-group/geotypes` |
-| **Event hooks** | `bindings/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; mixin **`with:`** or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
+| **Event hooks** | `bindings/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; base role tags or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
 | **Map geometry** | **`sources/`** + **`geometry.ref`** on spaces | Mount external volume | Optional; builds MUST NOT require geometry |
 | **Human + agent map** | **`docs/layout.md`**, **`ext/layout-index.yaml`** | README in image | Large sites; read before full `spaces` scan ([checklist](layout-navigation.md#checklist-for-a-new-large-place)) |
 | **Hierarchy** | **`spaces[].parent`** | Nested cgroup / path prefix | Rollups zone → building → room |

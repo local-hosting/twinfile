@@ -32,6 +32,6 @@ Event units describe **reusable operational stories** (`phases`, `expects` roles
 
 Operational (non-hazard) events: `transit-disruption`, `litter-pollution`.
 
-Wire a hazard by adding the matching event mixin or `bindings/<event>.yaml` on your place — [Decorate a twin](../place/decorate-twin.md).
+A place hosts a hazard through the role tags its base already carries; add `bindings/<event>.yaml` to pin it to specific rows — [Decorate a twin](../place/decorate-twin.md).
 
 **Map pin codes:** [Humanitarian crosswalk](hr-marker-crosswalk.md).

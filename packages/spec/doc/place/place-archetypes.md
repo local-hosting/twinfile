@@ -98,11 +98,11 @@ When `place.archetype` is set, `@doppler-group/twinfile-core` checks the archety
 
 `campus` allows either vertical, so neither level rule applies unless the place declares one with **`axes:`**.
 
-## Declared axes and mixins
+## Declared axes
 
-A place MAY declare **`axes:`** on its manifest and add golden **`with:`** mixins ([RFC 0004](../../rfcs/0004-composed-bases.md)). The resolved axes overlay the inherited archetype's axes in compose order (`from:` chain → `with:` mixins → the place). The archetype is derived from them, and the rules above run on the **resolved** axes. A campus with `axes: { vertical: stacked }` therefore requires `level` on every space.
+A place MAY declare **`axes:`** on its manifest ([RFC 0004](../../rfcs/0004-composed-bases.md)). The resolved axes overlay the inherited archetype's axes in compose order (`from:` chain → the place). The archetype is derived from them, and the rules above run on the **resolved** axes. A campus with `axes: { vertical: stacked }` therefore requires `level` on every space.
 
-Golden mixin spaces sit on level **`ground`** and carry a **`visit_order`**, so they pass stacked and sequenced bases. Every golden base names its ground level `ground`.
+Every golden base names its ground level `ground`.
 
 ## Building and floor imports
 

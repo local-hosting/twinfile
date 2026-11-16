@@ -29,7 +29,7 @@ catalog/story/examples/<story-id>/
 
 `story.scenes[]` lists scene ids; use **`run: ./scenes/<scene-id>`** on each row when a `run.yaml` exists. Legacy **`beats`** loads as **`scenes`**.
 
-Cross-type links use refs only (`links:`, `with:`, `copy: twinfile/<type>/<id>`).
+Cross-type links use refs only (`links:`, `copy: twinfile/<type>/<id>`).
 
 Place nested interiors: **`parts/<id>/`** ([`PARTS.md`](../../../catalog/place/examples/PARTS.md)). Legacy **`scenarios/`** on sites → `yarn sync:story-scenes`.
 

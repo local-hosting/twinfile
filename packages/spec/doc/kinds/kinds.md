@@ -4,7 +4,7 @@ Twinfile hosts **four published twin types**: **place**, **resource**, **charact
 
 | Type | Head `kind:` (in `<unit>.twin.yaml`) | Wire schema | Notes |
 | --- | --- | --- | --- |
-| **place** | `place` or `mixin` | [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json) | Spatial twin |
+| **place** | `place` | [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json) | Spatial twin |
 | **resource** | `resource` | [`res-wire.schema.json`](../../schemas/1/run/res-wire.schema.json) | Equipment, material, product |
 | **character** | `character` | [PCM / SAM](pcm-sam.md) | **`disclosure:`** required |
 | **story** | `story` | SAM JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |

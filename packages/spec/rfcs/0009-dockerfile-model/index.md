@@ -2,7 +2,7 @@
 
 Status: Draft
 Created: 2026-11-10
-Supersedes: [RFC 0005](../0005-build-imports.md) and the `with:` field of [RFC 0004](../0004-composed-bases.md) for **`twinfile: 2`** units
+Supersedes: [RFC 0005](../0005-build-imports.md) for **`twinfile: 2`** units
 
 ## Summary
 
@@ -22,7 +22,7 @@ Optional **`processors:`** (RFC 0007) declares host module wiring beside the ima
 | Layer | Output of one `steps[]` item | Content-addressed diff; never authored directly |
 | Parent image layers | Parent's built layer chain | Inherited as-is; child cannot edit them |
 | Whiteout file (delete in upper layer) | `{ id: x, $delete: true }` in a data step | Removes a row from a lower layer |
-| `COPY --from=<image>` | `- copy: twinfile/mixin-assets:0.1.0` in `steps:` | Pulls another unit's built content in **at that position** |
+| `COPY --from=<image>` | `- copy: ./parts/terminal-a` in `steps:` | Pulls another unit's built content in **at that position** |
 | Build cache | Layer cache keyed by parent chain digest + instruction digest | Edit instruction *i* → rebuild layers *i…n* only |
 | Image digest | `Place.digest` | Pinned in `Twinfile.lock` |
 | `docker history` | `twin layers` | Parent layers first, then this unit's |
@@ -41,7 +41,7 @@ STEP   place: { name: Airport, … }
   layer  0                                                     ← this unit
 STEP   spaces: [ … ]
   layer  1
-COPY   twinfile/mixin-assets:0.1.0
+COPY   ./parts/terminal-a
   layer  2
 PLAN   for: transit-disruption
   layer  3
@@ -78,7 +78,6 @@ steps:
       - { id: terminal-a, name: Terminal A, kind: terminal, level: ground, capacity: 5000 }
   - copy: ./parts/terminal-a
     into: terminal-a
-  - copy: twinfile/mixin-assets:0.1.0
   - plan:
       for: transit-disruption
       roles: { … }
@@ -92,13 +91,11 @@ Every `steps[]` item is exactly one of:
 | --- | --- | --- |
 | **Data** | Object with place collection keys (`place`, `levels`, `spaces`, `openings`, `routes`, `assets`, `markers`, `schedules`, `visits`, …) and optional `mode: replace` | RFC 7396 merge; id-arrays merge by `id`; `mode: replace` replaces the named collections |
 | **Plan** | `{ plan: { for: <event>, roles: … } }` | Compose layer `plan/<for>` in history; **built image** stores docs under `Place.data.eventBindings` (keyed by event id), not a top-level `plans` map on the image |
-| **Copy** | `{ copy: <ref or ./path>, into?: <space id>, prefix?: <string> }` | The referenced unit's **built** content (mixin or place) |
+| **Copy** | `{ copy: <ref or ./path>, into?: <space id>, prefix?: <string> }` | The referenced place unit's **built** content |
 
 **Copy semantics (place source).** The source is built in full (its own `from:` and `steps:`). Its `place` metadata and `levels` are dropped: the copying unit owns site identity and the level table. Every copied id gets `prefix`, and references to copied ids (`parent`, `space`, `from`, `to`, …) are rewritten to match. With `into:`, an earlier instruction MUST declare that space, the default `prefix` is `<into>-`, and copied rows with no `parent` get `parent: <into>`. Without `into:`, ids are unprefixed unless `prefix` is set.
 
-**Copy semantics (mixin source).** The mixin's layers are applied in order at that position; `into:` and `prefix:` are not allowed. Its `axes:` and `applies_to` apply as they did under `with:`, and its plans join the unit's plans.
-
-`copy:` replaces both manifest `with:` (mixins at a fixed position) and `buildings:` / `floors:` (place imports under an anchor). Order is whatever the author writes, like `COPY --from` in a Dockerfile.
+`copy:` replaces `buildings:` / `floors:` (place imports under an anchor). Order is whatever the author writes, like `COPY --from` in a Dockerfile.
 
 ### Buildings and floors are their own Twinfiles
 
@@ -176,10 +173,10 @@ Do not use “layer” for authored content.
 `twin fmt --upgrade=2 [dir]`:
 
 1. Inline each v1 `layers:` file as one step, preserving order and `mode`.
-2. Rewrite `with:` refs as `copy:` steps placed **before** the unit's own steps (v1 order).
+2. Reject a manifest that still declares `with:` (mixins were withdrawn; put their rows in the place or its base).
 3. Rewrite each `buildings[]` entry as `{ copy: <from>, into: <id> }` (keeping `prefix`), placed **after** the unit's own steps (v1 order). Entries with `floors:` are rejected: move the floor into the building's own Twinfile and copy it there.
 4. Rewrite v1 plan files as `plan:` steps after the place steps.
-5. Set `twinfile: 2`; drop `layers:`, `with:`, `buildings:`, `plans:`; delete the inlined files.
+5. Set `twinfile: 2`; drop `layers:`, `buildings:`, `plans:`; delete the inlined files.
 
 `ext/layout-index.yaml` `detail_layers` entries on v2 units name collection keys (`spaces`) instead of file paths.
 
@@ -195,5 +192,5 @@ v1 builds and v2 builds of the same content MUST produce the same `Place.data`. 
 ## Alternatives considered
 
 - **`steps:` as file paths** — rejected; the manifest becomes a table of contents, not the definition.
-- **Keep `with:` and `buildings:` as separate fields** — rejected; Docker has one ordered instruction list, and position matters.
+- **Keep `buildings:` as a separate field** — rejected; Docker has one ordered instruction list, and position matters.
 - **Re-run the parent's instructions on each child build** — rejected; breaks image immutability and the cache model.
