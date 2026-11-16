@@ -2,25 +2,19 @@ import { statSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 
 import { RefResolver } from './ref-resolver.js';
-import { loadTwinLocalMapMerged, resolveTwinLocalPath } from './twin-local-map.js';
+import { loadTwinLocalMap, resolveTwinLocalPath, type TwinLocalMap } from './twin-local-map.js';
 import { flatTwinfileRef } from '../types/twinfile-ref.js';
 import { listFlatExampleUnitNames } from '../paths/examples-catalog.js';
-import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/catalog-layout.js';
 import { loadTwinfile, type LoadedTwinfile } from '../load/load-twinfile.js';
 import type { Result } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
-import type { CatalogTwinfileResolver } from './catalog-twinfile-hook.js';
-import { resolveViaCatalogHook } from './catalog-twinfile-hook.js';
 
 export type TwinfileResolveOptions = {
   examplesRoot: string;
-  /** Place event catalog root (`@doppler-group/twinfile-simulator`); defaults from `TF_TWINFILE_ROOT`. */
-  simulatorRoot?: string;
   /** Parent place when resolving from a scenario. */
   placeRoot?: string;
-  twinLocal?: ReturnType<typeof loadTwinLocalMapMerged>;
-  /** Overrides default catalog resolver from `registerCatalogTwinfileResolver`. */
-  resolveCatalogTwinfile?: CatalogTwinfileResolver;
+  twinLocal?: TwinLocalMap;
 };
 
 export type ResolvedTwinfileRef = {
@@ -48,31 +42,18 @@ function parseTwinfileManifestRef(raw: string): { name: string; tag?: string } |
 function catalogTwinfileRoots(catalogRoot: string, name: string, placeRoot?: string): string[] {
   const roots: string[] = [];
   roots.push(join(catalogRoot, name));
-  roots.push(join(catalogRoot, 'mixins', name));
-  if (placeRoot) {
-    roots.push(join(placeRoot, 'events', name));
-    roots.push(join(placeRoot, 'scenarios', name));
-  }
-  roots.push(join(catalogRoot, 'situations', name));
+  if (placeRoot) roots.push(join(placeRoot, 'scenarios', name));
   roots.push(join(catalogRoot, 'scenarios', name));
   for (const place of listFlatExampleUnitNames(catalogRoot)) {
-    roots.push(join(catalogRoot, place, 'events', name));
     roots.push(join(catalogRoot, place, 'scenarios', name));
   }
   return roots;
 }
 
-function simulatorCatalogRoot(options: TwinfileResolveOptions, examplesRoot: string): string | undefined {
-  return options.simulatorRoot ?? resolveSimulatorRoot(examplesRoot);
-}
-
+/** Place catalog first, then event units (`catalog/event/examples/<id>`). */
 function candidateRoots(name: string, options: TwinfileResolveOptions): string[] {
-  const simulatorRoot = simulatorCatalogRoot(options, options.examplesRoot);
-  const roots = catalogTwinfileRoots(options.examplesRoot, name, options.placeRoot);
-  if (simulatorRoot) {
-    roots.push(...catalogTwinfileRoots(simulatorRoot, name, options.placeRoot));
-  }
-  return roots;
+  const eventRoot = resolveTypeExamplesRoot('event', resolveTwinfileRoot(options.examplesRoot));
+  return [...catalogTwinfileRoots(options.examplesRoot, name, options.placeRoot), join(eventRoot, name)];
 }
 
 export function resolveTwinfileByRef(
@@ -89,19 +70,8 @@ export function resolveTwinfileByRef(
   const name = oci.name ?? parsed.name;
   const tag = oci.tag ?? parsed.tag;
 
-  const simulatorRoot = simulatorCatalogRoot(options, options.examplesRoot);
-  const localMap =
-    options.twinLocal ?? loadTwinLocalMapMerged(options.examplesRoot, simulatorRoot);
+  const localMap = options.twinLocal ?? loadTwinLocalMap(options.examplesRoot);
   const localRef = flatTwinfileRef(ref.includes('/') ? ref : `twinfile/${ref}`);
-
-  const catalogResolved = resolveViaCatalogHook({
-    ref,
-    name,
-    tag,
-    options,
-    resolveCatalogTwinfile: options.resolveCatalogTwinfile,
-  });
-  if (catalogResolved?.ok) return catalogResolved;
 
   const localPath =
     resolveTwinLocalPath(localRef, localMap) ?? resolveTwinLocalPath(ref, localMap);
@@ -128,7 +98,7 @@ export function resolveTwinfileByRef(
     {
       code: 'E_MISSING_FILE',
       message: `Unit not found for ref ${ref}`,
-      hint: `Searched under examples and ${options.placeRoot ?? 'no place'}/events`,
+      hint: 'Searched the place catalog and catalog/event/examples',
     },
   ]);
 }

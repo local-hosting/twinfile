@@ -23,7 +23,7 @@ import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
+const { examplesRoot } = testCatalogRoots(importDir);
 
 function catalogPlaceRoots(root: string): string[] {
   const dirs = readdirSync(root)
@@ -69,7 +69,6 @@ describe('PlaceType', () => {
     const path = join(examplesRoot, 'airport');
     const built = await buildTwinfile(path, {
       examplesRoot,
-      simulatorRoot,
             writeLock: false,
             noCache: true,
     });
@@ -110,7 +109,6 @@ describe('PlaceType', () => {
     async (_name, placeRoot) => {
       const built = await buildTwinfile(placeRoot, {
         examplesRoot,
-        simulatorRoot,
                 writeLock: false,
                 noCache: true,
       });
@@ -142,7 +140,6 @@ describe('PlaceType', () => {
   it('TFPlace.hostSurface() matches build meta and drives summary io', async () => {
     const built = await buildTwinfile(join(examplesRoot, 'shop'), {
       examplesRoot,
-      simulatorRoot,
       writeLock: false,
       noCache: true,
     });

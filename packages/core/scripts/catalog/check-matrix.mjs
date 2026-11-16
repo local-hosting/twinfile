@@ -6,16 +6,15 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
-import { loadTwinfile, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, twinHeadPath } from '../../dist/index.js';
+import { loadTwinfile, resolvePlaceExamplesCatalogRoot, twinHeadPath } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
-const simulatorRoot = resolveSimulatorRoot();
 const twinCli = resolveTwinCli(import.meta.url);
 
 const require = createRequire(import.meta.url);
 const { listPlaceSituationBindings } = require('@doppler-group/twinfile-place');
 
-const inheritOpts = { examplesRoot, simulatorRoot };
+const inheritOpts = { examplesRoot };
 
 function listSiteDirs() {
   const top = readdirSync(examplesRoot)

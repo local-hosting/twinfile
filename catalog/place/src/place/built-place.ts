@@ -4,7 +4,7 @@ import type { LoadedTwinfile } from '@doppler-group/twinfile-core';
 
 export type PlaceFields = {
   loaded: LoadedTwinfile;
-  /** Merged collections (`spaces`, `events`, `situations`, `situationBindings`, …). */
+  /** Merged collections (`spaces`, `events`, `situationBindings`, …). */
   data: Record<string, unknown>;
   meta: Record<string, unknown>;
   digest: string;
@@ -41,11 +41,6 @@ export class Place {
 
   get events(): unknown[] | undefined {
     const row = this.data.events;
-    return Array.isArray(row) ? row : undefined;
-  }
-
-  get situations(): unknown[] | undefined {
-    const row = this.data.situations;
     return Array.isArray(row) ? row : undefined;
   }
 

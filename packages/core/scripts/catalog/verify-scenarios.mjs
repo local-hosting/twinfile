@@ -7,12 +7,11 @@ import { join, resolve } from 'node:path';
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
 import { isRunHeadPath, resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
-import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
+import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const twinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamplesRoot = resolveTypeExamplesRoot('story', twinfileRoot);
-const simulatorRoot = resolveSimulatorRoot();
 const twinCli = resolveTwinCli(import.meta.url);
 
 function isRunVerifyTarget(dir) {

@@ -14,8 +14,7 @@ export function summaryInputFromBuild(result: BuildTwinfileResult): BuildTwinfil
     place: mergedPlace,
     placeType: meta?.placeType,
     situationBindings: situationBindingsFromBuilt(mergedPlace),
-    situations: (result.situations ?? []) as Record<string, unknown>[],
-    events: (result.events ?? []) as Record<string, unknown>[],
+    situations: (result.events ?? []) as Record<string, unknown>[],
     resolvedArgs: (meta?.resolvedArgs ?? undefined) as Record<string, unknown> | undefined,
   };
 }

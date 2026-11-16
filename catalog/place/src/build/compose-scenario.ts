@@ -19,7 +19,7 @@ import {
 } from '@doppler-group/twinfile-core';
 import type { Result } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
-import { resolveTimeArg } from '@doppler-group/twinfile-core';
+import { resolveTimeArg, type SceneSchedule } from '@doppler-group/twinfile-core';
 import { readYamlDocument } from '@doppler-group/twinfile-core';
 import { twinfileLayerPaths, manifestScenarioComposeRefs } from '@doppler-group/twinfile-core';
 import { isPatchesTwinfile } from '@doppler-group/twinfile-core';
@@ -30,12 +30,11 @@ export type ComposeScenarioResult = {
   layers: ComposedBuildLayer[];
   place: LoadedTwinfile;
   events: Record<string, unknown>[];
-  situations: Record<string, unknown>[];
   situationBindingDocs: Record<string, unknown>;
   contracts: Array<{
     unitName: string;
     expects: Record<string, ExpectsRole>;
-    planRoles: Record<string, string[]>;
+    planRoles?: Record<string, string[]>;
   }>;
   resolvedArgs: Record<string, unknown>;
 };
@@ -61,23 +60,18 @@ function asExpects(twinfile: Record<string, unknown>): Record<string, ExpectsRol
   return out;
 }
 
-function resolveScenarioArgs(
-  scenario: LoadedTwinfile,
-  eventsByName: Record<string, LoadedTwinfile>,
-): Record<string, unknown> {
+function getSceneSchedule(scenario: LoadedTwinfile): SceneSchedule {
+  const raw = scenario.twinfile.schedule;
+  return raw && typeof raw === 'object' && !Array.isArray(raw) ? (raw as SceneSchedule) : {};
+}
+
+function resolveScenarioArgs(scenario: LoadedTwinfile): Record<string, unknown> {
   const args = scenario.twinfile.args;
   if (!args || typeof args !== 'object' || Array.isArray(args)) return {};
-
-  const eventsWrapped: Record<string, { twinfile: Record<string, unknown> }> = {};
-  for (const [k, v] of Object.entries(eventsByName)) {
-    eventsWrapped[k] = { twinfile: v.twinfile as Record<string, unknown> };
-  }
-
-  const resolved: Record<string, unknown> = {};
-  for (const [key, value] of Object.entries(args as Record<string, unknown>)) {
-    resolved[key] = resolveTimeArg(value, eventsWrapped);
-  }
-  return resolved;
+  const schedule = getSceneSchedule(scenario);
+  return Object.fromEntries(
+    Object.entries(args as Record<string, unknown>).map(([key, value]) => [key, resolveTimeArg(value, schedule)]),
+  );
 }
 
 export function resolveScenarioPlace(
@@ -141,14 +135,12 @@ export function composeScenarioLayers(
     ]);
   }
 
-  const placeInherit = catalogResolveOptions(options.examplesRoot, options.simulatorRoot);
+  const placeInherit = catalogResolveOptions(options.examplesRoot);
   const placeLayers = composePlaceLayers(place, placeInherit);
   if (!placeLayers.ok) return placeLayers;
   const layers: ComposedBuildLayer[] = [...placeLayers.value];
   const events: Record<string, unknown>[] = [];
-  const situations: Record<string, unknown>[] = [];
   const contracts: ComposeScenarioResult['contracts'] = [];
-  const eventsByName: Record<string, LoadedTwinfile> = {};
   const resolveOpts: TwinfileResolveOptions = { ...options, placeRoot: place.root };
 
   for (const ref of composeRefs) {
@@ -169,50 +161,28 @@ export function composeScenarioLayers(
         },
       ]);
     }
-    if (kind !== 'event' && kind !== 'situation') {
+    if (kind !== 'event') {
       return err([
         {
           code: 'E_BUILD',
-          message: `Compose ref ${ref} is kind ${kind}; expected event or situation`,
+          message: `Compose ref ${ref} is kind ${kind}; expected event`,
           file: scenario.twinfilePath,
         },
       ]);
     }
 
-    if (kind === 'event') {
-      eventsByName[name] = unit;
-      events.push(unit.twinfile);
-      layers.push(...readManifestLayers(unit, `event/${name}/`, 'place'));
-      const binding = findSituationBindingForTarget(place, name, placeInherit);
-      if (binding.ok && binding.value) {
-        layers.push(situationBindingLayer(bindingLayerRef(binding.value.rel), binding.value.planRoles));
-        contracts.push({
-          unitName: name,
-          expects: asExpects(unit.twinfile),
-          planRoles: binding.value.planRoles,
-        });
-      }
-    } else {
-      situations.push(unit.twinfile);
-      layers.push(...readManifestLayers(unit, `situation/${name}/`, 'place'));
-      const binding = findSituationBindingForTarget(place, name, placeInherit);
-      if (!binding.ok) return binding;
-      if (!binding.value) {
-        return err([
-          {
-            code: 'E_NO_PLAN',
-            message: `Place has no situation binding for ${name}`,
-            file: place.twinfilePath,
-          },
-        ]);
-      }
+    events.push(unit.twinfile);
+    layers.push(...readManifestLayers(unit, `event/${name}/`, 'place'));
+    const binding = findSituationBindingForTarget(place, name, placeInherit);
+    if (!binding.ok) return binding;
+    if (binding.value) {
       layers.push(situationBindingLayer(bindingLayerRef(binding.value.rel), binding.value.planRoles));
-      contracts.push({
-        unitName: name,
-        expects: asExpects(unit.twinfile),
-        planRoles: binding.value.planRoles,
-      });
     }
+    contracts.push({
+      unitName: name,
+      expects: asExpects(unit.twinfile),
+      ...(binding.value ? { planRoles: binding.value.planRoles } : {}),
+    });
   }
 
   if (isPatchesTwinfile(scenario.twinfile)) {
@@ -232,7 +202,7 @@ export function composeScenarioLayers(
     }
   }
 
-  const resolvedArgs = resolveScenarioArgs(scenario, eventsByName);
+  const resolvedArgs = resolveScenarioArgs(scenario);
   if (Object.keys(resolvedArgs).length > 0) {
     layers.push({ ref: 'scenario/args', kind: 'args', patch: resolvedArgs });
   }
@@ -241,7 +211,6 @@ export function composeScenarioLayers(
     layers,
     place,
     events,
-    situations,
     situationBindingDocs: loadSituationBindingDocuments(place, placeInherit),
     contracts,
     resolvedArgs,

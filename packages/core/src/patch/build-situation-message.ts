@@ -7,7 +7,7 @@ function situationRef(head: Record<string, unknown>, override?: string): string 
   if (override) return override;
   const id = typeof head.id === 'string' ? head.id : 'situation';
   const version = typeof head.version === 'string' ? head.version : '0.0.0';
-  return `twinfile/situation/${id}:${version}`;
+  return `twinfile/event/${id}:${version}`;
 }
 
 export function buildSituationMessage(

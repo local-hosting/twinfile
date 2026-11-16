@@ -9,7 +9,6 @@ export {
   isTwinfileMonorepoRoot,
   resolveCharacterCatalogRoot,
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorRoot,
   resolveTwinfileRoot,
   resolveTypeExamplesRoot,
   type TwinCatalogType,

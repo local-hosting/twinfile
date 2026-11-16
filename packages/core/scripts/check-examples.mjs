@@ -9,7 +9,6 @@ import {
   loadTwinfile,
   twinHeadPath,
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorRoot,
 } from '../dist/index.js';
 import { listPlaceSituationBindings } from '@doppler-group/twinfile-place';
 
@@ -17,7 +16,6 @@ import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
 const twinCli = resolveTwinCli(import.meta.url);
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
-const simulatorRoot = resolveSimulatorRoot();
 
 function runTwin(args) {
   return spawnSync(process.execPath, [twinCli, ...args], {
@@ -35,7 +33,7 @@ function readManifest(placeDir) {
 function declaredBindingFors(placeDir) {
   const loaded = loadTwinfile(placeDir);
   if (!loaded.ok) return [];
-  const inheritOpts = { examplesRoot, simulatorRoot };
+  const inheritOpts = { examplesRoot };
   const composed = listPlaceSituationBindings(loaded.value, inheritOpts);
   if (composed.ok && composed.value.length > 0) {
     return composed.value.map((row) => String(row.doc.for ?? ''));

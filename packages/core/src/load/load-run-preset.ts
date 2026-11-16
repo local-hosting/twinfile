@@ -45,6 +45,7 @@ export function runPresetComposeHead(preset: PlaceRunPreset): Record<string, unk
     ...(preset.role ? { role: preset.role } : { role: 'run' }),
     ...(preset.domains ? { domains: [...preset.domains] } : {}),
     ...(preset.args ? { args: { ...preset.args } } : {}),
+    ...(preset.schedule ? { schedule: { ...preset.schedule } } : {}),
     ...(preset.clock ? { clock: { ...preset.clock } } : {}),
     ...(preset.use ? { use: { ...preset.use } } : {}),
     ...(preset.catalog ? { catalog: { ...preset.catalog } } : {}),

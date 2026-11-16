@@ -11,12 +11,12 @@ import {
 } from '@doppler-group/twinfile-place';
 
 const testDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(testDir);
+const { examplesRoot } = testCatalogRoots(testDir);
 
 describe('host session advance', () => {
   it('moves playhead and records clock bus notes', async () => {
     const dir = goldenSceneRunDir(dirname(fileURLToPath(import.meta.url)), 'arena-storm-at-halftime');
-    const built = await buildTwinfile(dir, { examplesRoot, simulatorRoot, writeLock: false });
+    const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
     expect(built.ok, built.ok ? '' : JSON.stringify(built.errors)).toBe(true);
     if (!built.ok) return;
 

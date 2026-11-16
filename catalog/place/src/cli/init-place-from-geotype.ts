@@ -18,7 +18,6 @@ import { stringify } from 'yaml';
 import { PLACE_DEMO_EXT_H3 } from '../place/demo-ext-h3.js';
 import { resolveExamplesRoot } from '@doppler-group/twinfile-core';
 import { twinHeadPath } from '@doppler-group/twinfile-core';
-import { resolveSimulatorRoot } from '@doppler-group/twinfile-core';
 import { placeBaseRefForArchetype } from '@doppler-group/twinfile-core';
 import { decoratePlaceFromGeotype } from './decorate-place-from-geotype.js';
 import { writeCampusBuildingScaffold } from '@doppler-group/twinfile-core/cli';
@@ -185,14 +184,12 @@ export function createPlace(targetDir: string, options: CreatePlaceOptions): Cre
 
   const examplesRoot = resolveExamplesRoot(target);
   if (!examplesRoot) {
-    created.decorateNote = 'set TF_TWINFILE_ROOT to wire situations from @doppler-group/twinfile-simulator';
+    created.decorateNote = 'set TF_TWINFILE_ROOT to wire catalog events';
     return created;
   }
 
-  const simulatorRoot = resolveSimulatorRoot(target);
   const decorated = decoratePlaceFromGeotype(target, geotype, {
     examplesRoot,
-    simulatorRoot: simulatorRoot ?? undefined,
   });
   created.mixins = decorated.mixins;
   created.bindings = decorated.bindings;

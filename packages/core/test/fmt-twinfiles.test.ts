@@ -98,7 +98,7 @@ use:
     const out = parseYaml(readFileSync(path, 'utf8')) as Record<string, unknown>;
     expect(out.twinfile).toBe(2);
     expect(out.include).toBeUndefined();
-    expect(out.steps).toEqual([{ copy: 'twinfile/situation/severe-weather:1.0.0' }]);
+    expect(out.steps).toEqual([{ copy: 'twinfile/event/severe-weather:1.0.0' }]);
     rmSync(dir, { recursive: true });
   });
 

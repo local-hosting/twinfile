@@ -121,7 +121,7 @@ export class TFPlace {
       digest: result.digest,
       clock,
       seed: options.seed ?? 1,
-      situations: (result.situations ?? []) as Record<string, unknown>[],
+      situations: (result.events ?? []) as Record<string, unknown>[],
       resolvedArgs,
       meta,
       compose: result,

@@ -79,11 +79,11 @@ export function composeSingleTwinfileLayers(
   const kind = String(unit.twinfile.kind ?? '');
   if (kind === 'place') {
     const inherit: PlaceInheritOptions | undefined = options?.examplesRoot
-      ? catalogResolveOptions(options.examplesRoot, options.simulatorRoot)
+      ? catalogResolveOptions(options.examplesRoot)
       : undefined;
     return composePlaceLayers(unit, inherit);
   }
-  if (kind === 'event' || kind === 'situation' || kind === 'mixin') {
+  if (kind === 'event' || kind === 'mixin') {
     return ok(readManifestLayers(unit, '', 'place'));
   }
   if (kind === 'scenario') {

@@ -1,13 +1,7 @@
-import { dirname, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
-
 import { describe, expect, it } from 'vitest';
 
-import { ensureSimulatorEventCatalog } from '../src/catalog/bootstrap-simulator-catalog.js';
 import { getRegisteredPlaceEvent } from '../src/catalog/event-catalog.js';
 import { Weather, createWeathersFromPlace } from '../src/weather/weather.js';
-
-ensureSimulatorEventCatalog(resolve(dirname(fileURLToPath(import.meta.url)), '..'));
 
 describe('Weather', () => {
   const clock = { starts_at: '2026-06-12T09:00:00-04:00', duration: 'PT6H', step: 'PT5M' };

@@ -39,7 +39,6 @@ export type BuildTwinfileOptions = {
   writeLock?: boolean;
   /** Required for scenario builds when examples are outside the unit tree. */
   examplesRoot?: string;
-  simulatorRoot?: string;
   noCache?: boolean;
 };
 
@@ -113,7 +112,6 @@ export async function buildTwinfile(
 
   let composedLayers;
   let scenarioEvents: unknown[] | undefined;
-  let scenarioSituations: unknown[] | undefined;
   let contracts;
   let situationBindingDocs: Record<string, unknown> = {};
 
@@ -129,18 +127,17 @@ export async function buildTwinfile(
       ]);
     }
     const scenario = composeScenarioLayers(unit, {
-      ...catalogResolveOptions(examplesRoot, options.simulatorRoot),
+      ...catalogResolveOptions(examplesRoot),
       placeRoot: undefined,
     });
     if (!scenario.ok) return scenario;
     composedLayers = scenario.value.layers;
     contracts = scenario.value.contracts;
     scenarioEvents = scenario.value.events;
-    scenarioSituations = scenario.value.situations;
     situationBindingDocs = scenario.value.situationBindingDocs;
   } else {
     const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
-    const resolveOpts = examplesRoot ? catalogResolveOptions(examplesRoot, options.simulatorRoot) : undefined;
+    const resolveOpts = examplesRoot ? catalogResolveOptions(examplesRoot) : undefined;
     if (!runUnit && (unit.twinfile.from || unit.twinfile.with) && !examplesRoot) {
       return err([
         {
@@ -181,12 +178,12 @@ export async function buildTwinfile(
     metaExtras = { ...(metaExtras ?? {}), clock: unit.twinfile.clock };
   }
   const meta = buildMeta(unit.twinfile, metaExtras, runUnit);
-  let mergedPlace = embedSituationBindings(built.place, situationBindingDocs);
+  const matchedBindingDocs = Object.fromEntries(
+    Object.entries(built.matchedRoles).map(([forId, roles]) => [`bind/${forId}`, { for: forId, roles }]),
+  );
+  let mergedPlace = embedSituationBindings(built.place, { ...matchedBindingDocs, ...situationBindingDocs });
   if (scenarioEvents?.length) {
     mergedPlace = { ...mergedPlace, events: scenarioEvents };
-  }
-  if (scenarioSituations?.length) {
-    mergedPlace = { ...mergedPlace, situations: scenarioSituations };
   }
   if (!runUnit) {
     const placeType = PlaceType.fromBuilt({

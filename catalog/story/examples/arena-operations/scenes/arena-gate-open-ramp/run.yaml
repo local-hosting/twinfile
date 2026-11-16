@@ -6,9 +6,15 @@ version: 1.0.0
 stability: example
 steps:
   - copy: twinfile/event/arena-game-day:1.0.0
-  - copy: twinfile/situation/venue-turnstile-flow:1.0.0
+  - copy: twinfile/event/venue-turnstile-flow:1.0.0
 domains:
   - events
+schedule:
+  arena-game-day:
+    gates-open: -PT1H30M
+    kickoff: PT0S
+    halftime: PT1H5M
+    final: PT2H20M
 args:
   doorsAt: arena-game-day.gates-open
   kickoffAt: arena-game-day.kickoff

@@ -9,7 +9,7 @@ import {
 
 function stormSessionFixture(): BuildTwinfileResult {
   const clock = { starts_at: '2026-06-12T09:00:00-04:00', duration: 'PT6H', step: 'PT5M' };
-  const situations = [
+  const events = [
     {
       id: 'severe-weather',
       phases: ['watch', 'warning', 'all-clear'],
@@ -24,7 +24,7 @@ function stormSessionFixture(): BuildTwinfileResult {
     },
     data: {
       place: { timezone: 'America/New_York', location: { lat: 41.309, lng: -74.152 } },
-      situations,
+      events,
     },
     meta: { clock, resolvedArgs: { warningAt: 'PT30M' } },
     digest: 'test-digest',

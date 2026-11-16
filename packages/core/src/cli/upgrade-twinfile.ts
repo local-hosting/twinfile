@@ -11,7 +11,6 @@ import {
 } from '../load/twinfile-paths.js';
 import { readYamlDocument } from '../validate/validate-yaml.js';
 import { resolveExamplesRoot } from '../paths/resolve-examples-root.js';
-import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
 import { catalogResolveOptions } from '../paths/catalog-resolve-options.js';
 import { resolveTwinfileByRef } from '../ref/twinfile-resolver.js';
 import { flatTwinfileRef, parseTwinfileRef } from '../types/twinfile-ref.js';
@@ -58,14 +57,14 @@ function typedScenarioCopyRef(
   ref: string,
   twinfilePath: string,
 ): string {
-  const normalized = ref.trim().startsWith('twinfile/') ? ref.trim() : `twinfile/${ref.trim()}`;
+  const prefixed = ref.trim().startsWith('twinfile/') ? ref.trim() : `twinfile/${ref.trim()}`;
+  const normalized = prefixed.replace(/^twinfile\/situation\//, 'twinfile/event/');
   const parsed = parseTwinfileRef(normalized);
   if (parsed?.kind) return normalized;
 
   const examplesRoot = resolveExamplesRoot(dirname(twinfilePath));
   if (examplesRoot) {
-    const simulatorRoot = resolveSimulatorRoot(examplesRoot);
-    const resolved = resolveTwinfileByRef(normalized, catalogResolveOptions(examplesRoot, simulatorRoot));
+    const resolved = resolveTwinfileByRef(normalized, catalogResolveOptions(examplesRoot));
     if (resolved.ok) {
       const kind = String(resolved.value.loaded.twinfile.kind ?? '') as TwinfileRefKind;
       if (parsed?.name && parsed.tag) {

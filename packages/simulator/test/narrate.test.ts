@@ -14,14 +14,13 @@ import { fileURLToPath } from 'node:url';
 import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
-const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);
+const { examplesRoot } = testCatalogRoots(importDir);
 
 describe('place narrative', () => {
   it('separates place, scenario, situation, and now', async () => {
     const scenarioDir = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
-      simulatorRoot,
             writeLock: false,
           });
     expect(built.ok).toBe(true);
@@ -47,7 +46,7 @@ describe('place narrative', () => {
         twinfilePath: loaded.value.twinfilePath,
       }),
       seed: 4,
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       resolvedArgs,
     });
 
@@ -56,7 +55,7 @@ describe('place narrative', () => {
       twinfile: loaded.value.twinfile,
       spaceId: 'concourse-lower',
       sample: timeline.at(0),
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       clock,
       resolvedArgs,
       viewMode: 'place',
@@ -81,7 +80,6 @@ describe('place narrative', () => {
     const scenarioDir = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
-      simulatorRoot,
             writeLock: false,
           });
     expect(built.ok).toBe(true);
@@ -101,7 +99,7 @@ describe('place narrative', () => {
         twinfilePath: loaded.value.twinfilePath,
       }),
       seed: 4,
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       resolvedArgs,
     });
     const narrative = describeTwinAt({
@@ -109,7 +107,7 @@ describe('place narrative', () => {
       twinfile: loaded.value.twinfile,
       spaceId: 'bowl-a',
       sample: timeline.at(0),
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       clock,
       viewMode: 'place',
     });
@@ -122,7 +120,6 @@ describe('place narrative', () => {
     const scenarioDir = goldenSceneRunDir(importDir, 'river-swim-unsafe-known');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
-      simulatorRoot,
             writeLock: false,
           });
     if (!built.ok) return;
@@ -137,7 +134,7 @@ describe('place narrative', () => {
       place,
       placeRoot: join(examplesRoot, 'river'),
       seed: 1,
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       resolvedArgs,
     });
     const narrative = describeTwinAt({
@@ -145,7 +142,7 @@ describe('place narrative', () => {
       twinfile: loaded.value.twinfile,
       spaceId: 'eddy-pool',
       sample: timeline.at(1800),
-      situations: (built.value.situations ?? []) as Record<string, unknown>[],
+      situations: (built.value.events ?? []) as Record<string, unknown>[],
       clock,
       resolvedArgs,
     });

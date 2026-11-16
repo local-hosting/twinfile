@@ -378,7 +378,6 @@ function sortViewerCatalog(units: ViewerCatalogEntry[]): ViewerCatalogEntry[] {
 
 export type ViewerRoots = {
   examplesRoots?: string[];
-  simulatorRoots?: string[];
   /** Standalone unit folders (<unit>.twin.yaml) not under a scanned catalog. */
   extraRecipeDirs?: string[];
 };
@@ -408,23 +407,10 @@ function discoverExamplesCatalogRoot(fromDir: string): string | undefined {
   return undefined;
 }
 
-function discoverSimulatorCatalogRoot(fromDir: string): string | undefined {
-  let dir = resolve(fromDir);
-  for (let i = 0; i < 10; i += 1) {
-    if (isDir(join(dir, 'situations'))) {
-      return dir;
-    }
-    const parent = resolve(dir, '..');
-    if (parent === dir) break;
-    dir = parent;
-  }
-  return undefined;
-}
 
-/** Classify CLI paths: examples/simulator catalogs, `places/` / `situations/` slices, or single units. */
+/** Classify CLI paths: examples catalogs or single units. */
 export function viewerRootsFromPaths(paths: string[]): ViewerRoots {
   const examplesRoots: string[] = [];
-  const simulatorRoots: string[] = [];
   const extraRecipeDirs: string[] = [];
 
   for (const raw of paths) {
@@ -434,9 +420,7 @@ export function viewerRootsFromPaths(paths: string[]): ViewerRoots {
     if (hasTwinfile(abs)) {
       pushUniqueRoots(extraRecipeDirs, abs);
       const ex = discoverExamplesCatalogRoot(abs);
-      const hz = discoverSimulatorCatalogRoot(abs);
       if (ex) pushUniqueRoots(examplesRoots, ex);
-      if (hz) pushUniqueRoots(simulatorRoots, hz);
       continue;
     }
 
@@ -445,30 +429,17 @@ export function viewerRootsFromPaths(paths: string[]): ViewerRoots {
       continue;
     }
 
-    if (isDir(join(abs, 'situations'))) {
-      pushUniqueRoots(simulatorRoots, abs);
-      continue;
-    }
-
     if (isDir(join(abs, 'mixins'))) {
       pushUniqueRoots(examplesRoots, abs);
       continue;
     }
 
-    if (basename(abs) === 'situations' && isDir(abs)) {
-      pushUniqueRoots(simulatorRoots, dirname(abs));
-      continue;
-    }
-
     const ex = discoverExamplesCatalogRoot(abs);
-    const hz = discoverSimulatorCatalogRoot(abs);
     if (ex) pushUniqueRoots(examplesRoots, ex);
-    if (hz) pushUniqueRoots(simulatorRoots, hz);
   }
 
   return {
     examplesRoots,
-    simulatorRoots,
     extraRecipeDirs,
   };
 }
@@ -589,10 +560,6 @@ export function listViewerCatalog(roots: ViewerRoots): ViewerCatalogEntry[] {
     .map((r) => resolve(r))
     .filter((r, i, a) => a.indexOf(r) === i);
 
-  const simulatorRoots = (roots.simulatorRoots ?? [])
-    .map((r) => resolve(r))
-    .filter((r, i, a) => a.indexOf(r) === i);
-
   let units: ViewerCatalogEntry[] = [];
   for (const examples of examplesRoots) {
     units = mergeCatalogEntries(units, collectUnder(examples, 6));
@@ -655,20 +622,16 @@ function findCatalogEntry(unitId: string | undefined, units: ViewerCatalogEntry[
   return undefined;
 }
 
-/** Examples/simulator catalog roots for building a unit (CLI paths + walk-up from unit dir). */
+/** Examples catalog root for building a unit (CLI paths + walk-up from unit dir). */
 export function viewerBuildRootsForDir(
   activeUnitDir: string,
   roots: ViewerRoots,
-): { examplesRoot?: string; simulatorRoot?: string } {
+): { examplesRoot?: string } {
   const examplesRoot =
     roots.examplesRoots?.find((r) => activeUnitDir.startsWith(resolve(r))) ??
     roots.examplesRoots?.[0] ??
     discoverExamplesCatalogRoot(activeUnitDir);
-  const simulatorRoot =
-    roots.simulatorRoots?.find((r) => activeUnitDir.startsWith(resolve(r))) ??
-    roots.simulatorRoots?.[0] ??
-    discoverSimulatorCatalogRoot(activeUnitDir);
-  return { examplesRoot, simulatorRoot };
+  return { examplesRoot };
 }
 
 /** Canonical catalog entry id (`?entry=` resolution). */

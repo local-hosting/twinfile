@@ -1,3 +1,5 @@
+import type { SceneSchedule } from '../types/place-run-preset.js';
+
 /** Parse ISO-8601 duration (subset) or integer seconds to seconds. */
 export function parseDurationToSeconds(raw: string): number | undefined {
   const trimmed = raw.trim();
@@ -24,33 +26,19 @@ export function parseDurationToSeconds(raw: string): number | undefined {
   return neg ? -seconds : seconds;
 }
 
-export function resolveTimeArg(
-  value: unknown,
-  eventsByName: Record<string, { twinfile: Record<string, unknown> }>,
-): unknown {
+/** Resolve `<event>.<phase>[±offset]` against the scene schedule, or an ISO duration, to seconds. */
+export function resolveTimeArg(value: unknown, schedule: SceneSchedule): unknown {
   if (typeof value !== 'string') return value;
   if (!value.includes('.') && !value.startsWith('P') && !value.startsWith('-P')) return value;
 
-  const timetableMatch = value.match(/^([a-z0-9-]+)\.([a-z0-9-]+)([+-].+)?$/);
-  if (timetableMatch) {
-    const [, eventName, mark, offset] = timetableMatch;
-    const event = eventsByName[eventName ?? ''];
-    const timetable = event?.twinfile.timetable;
-    if (timetable && typeof timetable === 'object' && !Array.isArray(timetable)) {
-      const markDur = (timetable as Record<string, unknown>)[mark ?? ''];
-      if (typeof markDur === 'string') {
-        let base = parseDurationToSeconds(markDur);
-        if (base === undefined) return value;
-        if (offset) {
-          const offSec = parseDurationToSeconds(offset);
-          if (offSec !== undefined) base += offSec;
-        }
-        return base;
-      }
-    }
+  const phaseRef = value.match(/^([a-z0-9-]+)\.([a-z0-9-]+)([+-].+)?$/);
+  const phaseDur = phaseRef ? schedule[phaseRef[1] ?? '']?.[phaseRef[2] ?? ''] : undefined;
+  if (phaseRef && typeof phaseDur === 'string') {
+    const base = parseDurationToSeconds(phaseDur);
+    if (base === undefined) return value;
+    const offset = phaseRef[3] ? parseDurationToSeconds(phaseRef[3]) : undefined;
+    return base + (offset ?? 0);
   }
 
-  const asDur = parseDurationToSeconds(value);
-  if (asDur !== undefined) return asDur;
-  return value;
+  return parseDurationToSeconds(value) ?? value;
 }

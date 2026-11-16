@@ -62,12 +62,6 @@ export {
   type TwinfileResolveOptions,
   type ResolvedTwinfileRef,
 } from './ref/twinfile-resolver.js';
-export {
-  registerCatalogTwinfileResolver,
-  type CatalogTwinfileResolveInput,
-  type CatalogTwinfileResolver,
-  type CatalogTwinfileResolveResult,
-} from './ref/catalog-twinfile-hook.js';
 export { LayerCache } from './cache/layer-cache.js';
 export { lintDtprDisclosures, type DtprLintIssue } from './dtpr/lint-disclosures.js';
 export {
@@ -207,7 +201,6 @@ export type {
 export { queryPath, type PathQueryInput, type PathQueryResult, type PlacePath } from './query/path-query.js';
 export {
   loadTwinLocalMap,
-  loadTwinLocalMapMerged,
   mergeTwinLocalMaps,
   resolveTwinLocalPath,
 } from './ref/twin-local-map.js';
@@ -281,7 +274,6 @@ export {
   isTwinfileMonorepoRoot,
   resolveCharacterCatalogRoot,
   resolvePlaceExamplesCatalogRoot,
-  resolveSimulatorRoot,
   resolveTwinfileRoot,
   resolveTypeExamplesRoot,
   type TwinCatalogType,
@@ -330,7 +322,7 @@ export {
   isRunComposeHead,
 } from './load/twinfile-unit-role.js';
 export { loadUnitRoot } from './load/load-unit-root.js';
-export type { PlaceRunPreset } from './types/place-run-preset.js';
+export type { PlaceRunPreset, SceneSchedule } from './types/place-run-preset.js';
 export {
   validateDocumentAtPath,
   readYamlDocument,
@@ -400,6 +392,7 @@ export {
   type SituationRoleVocabulary,
   type SituationRoleVocabularyEntry,
 } from './check/situation-role-vocabulary.js';
+export { collectPlaceIdsForRole, planRolesFromPlace } from './check/event-roles.js';
 export { runScenarioRunner, digestFile, type RunHostResult } from './runners/runner-host.js';
 export { composeRunners, type ComposePayload, type ComposeResult } from './runners/compose-runners.js';
 export { assembleRunRecords, sendRunCommands } from './runners/run-commands.js';

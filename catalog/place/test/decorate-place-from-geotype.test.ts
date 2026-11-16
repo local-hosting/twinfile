@@ -13,8 +13,8 @@ import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
 import { testCatalogRoots } from '../../../packages/core/test/catalog-test-roots.js';
 import { twinHeadFileName, twinHeadPath } from '@doppler-group/twinfile-core';
 
-const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
-const catalogOpts = { examplesRoot, simulatorRoot };
+const { examplesRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
+const catalogOpts = { examplesRoot };
 
 /** One geotype per archetype, plus a slug with no situations. */
 const SLUGS = ['convenience_store', 'hotel', 'stadium', 'public_park', 'creek', 'food_truck'];

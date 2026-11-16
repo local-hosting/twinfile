@@ -55,7 +55,7 @@ export function createRunPayloadFromTFPlace(options: RunPayloadFromTFPlaceOption
 /** Runner stdin payload; adds a precomputed `timeline` when the scenario declares a `clock`. */
 export function createRunPayload(options: RunPayloadOptions): Record<string, unknown> {
   const clock = options.twinfile.clock as ClockSpec | undefined;
-  const situations = (options.built.situations ?? []) as Record<string, unknown>[];
+  const situations = (options.built.events ?? []) as Record<string, unknown>[];
   const use = options.twinfile.use as { runners?: unknown } | undefined;
   const runners = Array.isArray(use?.runners) ? use.runners : undefined;
   const situationBindings = situationBindingsFromBuilt(options.built.data);
