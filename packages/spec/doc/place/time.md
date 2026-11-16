@@ -27,7 +27,7 @@ Implementations expose this as **`openTimelineForPlace`** / **`timeline.at(t)`**
 A **session** is a built `Place` plus scenario **`clock:`** and a playhead **`t`**. The host **player** advances `t` (scrub, play, or speed multiplier) and steers the live twin:
 
 1. Read **`sample = timeline.at(t)`** (schedules, tracks, phases, occupancy — same as runner input).
-2. On schedule or phase **edges**, publish **`TwinMessageV1`** on the patch **module bus** (see [Patch](../pack/patch.md): `signal:trigger`, `twin:situation`, data-lane `signal:*`).
+2. On schedule or phase **edges**, publish **`TwinMessageV1`** on the patch **module bus** (see [Patch](../pack/patch.md): `signal:trigger`, `twin:event`, data-lane `signal:*`).
 
 That is **playback** — not **`twin run`**. Product buttons use the same payloads as **play**; see glossary **Player**.
 
@@ -131,9 +131,9 @@ Network **`assets`** MAY declare **`radio`**: `{ protocol: wifi | ble | lora, tx
 
 Optional **`coverage_profiles.yaml`** → `coverage_profiles[]` patches loss constants by profile id. Compare **`coverage`** tracks to probe **`feed`** tracks on the same timeline for expectation vs observation.
 
-## Situation phases on the clock
+## Event phases on the clock
 
-Situations declare ordered **`phases`**. For each phase id `foo`, the situation MAY declare a time arg **`fooAt`** (e.g. **`releaseAt`** for phase `release`). Scenario **`args`** supply values: seconds since `clock.starts_at`, an ISO 8601 duration (same as track offsets), or an RFC 3339 instant. When a declared time arg is omitted, phase **`release`** defaults to **`t = 0`**.
+Events declare ordered **`phases`**. For each phase id `foo`, the event MAY declare a time arg **`fooAt`** (e.g. **`releaseAt`** for phase `release`). Scenario **`args`** supply values: seconds since `clock.starts_at`, an ISO 8601 duration (same as track offsets), or an RFC 3339 instant. When a declared time arg is omitted, phase **`release`** defaults to **`t = 0`**.
 
 The precomputed timeline includes **`phaseStarts`**: `{ "<phase>": <t seconds>, … }`. Runners emit phase events at the mapped `t` (e.g. `{ type: "phase", phase: "release", t: … }`).
 
@@ -145,7 +145,7 @@ When a scenario declares a clock, the runner payload includes:
 { "timeline": { "clock": { … }, "kinds": { "stage": "m" }, "phaseStarts": { "release": 0 }, "samples": [ { "t": 0, "at": "…", "mode": "place", "tracks": {}, "known": {}, "active": [], "occupancy": [], "visit_beats": [] } ] } }
 ```
 
-**`mode`** on each sample is the summary layout id (**`place`**). Hazard and recovery fiction appear in **`phaseStarts`**, **`active`**, **`occupancy`**, and host **`twin:situation`** pulses — not a catalog **`mode:`** field on presets.
+**`mode`** on each sample is the summary layout id (**`place`**). Hazard and recovery fiction appear in **`phaseStarts`**, **`active`**, **`occupancy`**, and host **`twin:event`** pulses — not a catalog **`mode:`** field on presets.
 
 `active` lists schedules active at `t` with their `uses` and actual `starts_at` / `ends_at`, sorted by id.
 

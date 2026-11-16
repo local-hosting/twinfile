@@ -7,7 +7,7 @@
        ↓
 @doppler-group/twinfile-core     load · validate · build · lock · OCI · twin CLI
        ↓
-examples catalog (sites, runs, bases, mixins) + @doppler-group/twinfile-simulator situations
+examples catalog (sites, runs, bases, mixins) + @doppler-group/twinfile-simulator events
 ```
 
 **Authoritative model:** Twinfile units → **`Place`** (`Place.data`); runs via `run.yaml`; place events in TS catalog. **Not** archived venue YAML trees, **not** AXM six-plane docs.

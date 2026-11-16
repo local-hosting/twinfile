@@ -17,7 +17,7 @@ Each twin type is one tree: **`catalog/<type>/`** = `@doppler-group/twinfile-<ty
 
 ## Simulator (not a catalog type)
 
-**`@doppler-group/twinfile-simulator`** lives at **`packages/simulator/`**. It **operates on** the twin catalogs (built **place**, story **runs**, refs) via `resolveTypeExamplesRoot` — it does **not** live under `catalog/`. Situation and timetable modules use **`catalogKind: situation` | `event`** in the simulator registry, not typed twin heads.
+**`@doppler-group/twinfile-simulator`** lives at **`packages/simulator/`**. It **operates on** the twin catalogs (built **place**, story **runs**, refs) via `resolveTypeExamplesRoot` — it does **not** live under `catalog/`. Event and timetable modules use **`catalogKind: event` | `event`** in the simulator registry, not typed twin heads.
 
 **Path API (code):** `packages/core/src/paths/catalog-layout.ts` — `resolveTypeExamplesRoot`, `resolvePlaceExamplesCatalogRoot`, `resolveCharacterCatalogRoot`, `TWIN_CATALOG_HUB`.
 

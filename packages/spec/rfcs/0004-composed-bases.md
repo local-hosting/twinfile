@@ -9,9 +9,9 @@ Created: 2026-11-06
 
 ## Motivation
 
-[Place archetypes](../doc/place/place-archetypes.md) splits every place into three axes (extent, vertical, movement) and suggests decorations per geotype (situations and layer kits). Today a unit can only inherit one `from:` base, so:
+[Place archetypes](../doc/place/place-archetypes.md) splits every place into three axes (extent, vertical, movement) and suggests decorations per geotype (events and layer kits). Today a unit can only inherit one `from:` base, so:
 
-- **Combinations need a base each.** A stacked hospital building on a campus with river sensors and litter markers is `base-campus` plus hand-copied layers. Covering every archetype × situation × layer kit with golden bases grows multiplicatively.
+- **Combinations need a base each.** A stacked hospital building on a campus with river sensors and litter markers is `base-campus` plus hand-copied layers. Covering every archetype × event × layer kit with golden bases grows multiplicatively.
 - **Decorations are copied, not referenced.** `twin init place --geotype` writes role-tagged stubs and plans into the child. When the shared hooks for `dam-release` improve, existing places do not pick up the change.
 - **Axes are implicit.** `place.archetype` names the result, but nothing records which axis made a place `campus` rather than `indoor_stack`, so reviewers cannot see what changed when a base is swapped.
 
@@ -54,7 +54,7 @@ version: 0.1.0
 applies_to:
   extent: [route, area, site]
 provides:
-  situations: [dam-release]
+  events: [dam-release]
 layers:
   - place/gauges.yaml
   - place/markers.yaml
@@ -66,9 +66,9 @@ layers:
 | `from:` / `with:` | MUST NOT be set; mixins do not chain |
 | `axes:` | Optional; sets axis values (e.g. `vertical: stacked`) |
 | `applies_to:` | Optional; allowed values per axis. Checked against the resolved axes after composition (`E_MIXIN_AXES`); an axis left `any` by the archetype always passes |
-| `provides.situations` | Situations whose `expects` roles this mixin's layers satisfy |
+| `provides.events` | Events whose `expects` roles this mixin's layers satisfy |
 | `layers:` | Layer files with the same shape as place layers. A layer with a `place` key fails with `E_MIXIN` |
-| `layers:` (plans) | `plans/<situation>.yaml` paths in the mixin manifest **`layers:`** stack, wired to role-tagged rows (legacy top-level **`plans:`** is lifted by **`twin fmt`**) |
+| `layers:` (plans) | `plans/<event>.yaml` paths in the mixin manifest **`layers:`** stack, wired to role-tagged rows (legacy top-level **`plans:`** is lifted by **`twin fmt`**) |
 
 ### Compose order and conflicts
 
@@ -96,14 +96,14 @@ Order between two mixins is arbitrary to authors, so it MUST NOT silently decide
 
 ### Golden mixins
 
-- Golden mixins live under `examples/` and resolve as `twinfile/mixin-<name>:0.1.0`: one per catalog situation (weather, transit, dam-release, litter, flood, earthquake, wildfire, tsunami, volcanic-ash mixins, …) and one per decoration layer kit (`mixin-assets`, `mixin-sensors`).
+- Golden mixins live under `examples/` and resolve as `twinfile/mixin-<name>:0.1.0`: one per catalog event (weather, transit, dam-release, litter, flood, earthquake, wildfire, tsunami, volcanic-ash mixins, …) and one per decoration layer kit (`mixin-assets`, `mixin-sensors`).
 - Row ids are prefixed with the mixin's subject (`severe-weather-shelter`), so mixins never collide with each other.
 - Mixin spaces sit on level `ground` and carry a `visit_order`, so they satisfy stacked and sequenced bases. Every golden base names its ground level `ground`.
 - Axis values are set with the place's own `axes:`; no axis-only mixins ship, though a mixin MAY set `axes:`.
 
 ### Tooling
 
-- `twin init place --geotype <slug>` writes `axes:` only for the axes the base archetype leaves open or sets differently, and emits one `with:` entry per suggested situation and decoration layer kit, instead of stub files and copied plans. `--no-decorate` omits `with:`.
+- `twin init place --geotype <slug>` writes `axes:` only for the axes the base archetype leaves open or sets differently, and emits one `with:` entry per suggested event and decoration layer kit, instead of stub files and copied plans. `--no-decorate` omits `with:`.
 
 ### Not yet implemented
 
@@ -121,13 +121,13 @@ Fixtures: [`conf/compose/cases.json`](../conf/compose/cases.json) (category `com
 
 ## Drawbacks
 
-- One more composition mechanism alongside `from:`, layers, and situations. [Composition](../doc/build/composition.md) gets longer.
+- One more composition mechanism alongside `from:`, layers, and events. [Composition](../doc/build/composition.md) gets longer.
 - Mixin authors must pick globally distinct row ids (`dam-release-gauge-1`, not `gauge-1`) or children will see conflicts.
 - Upgrading a mixin changes every place that uses it; pinned versions in `with:` refs are the only guard.
 
 ## Alternatives
 
-- **More golden bases.** Simple, but grows with every archetype × situation pair and still copies decorations.
+- **More golden bases.** Simple, but grows with every archetype × event pair and still copies decorations.
 - **Space-level `from:`** (a campus building space inheriting `base-indoor-stack`). Superseded for campuses by nested building units added with **`copy:`** ([RFC 0009](0009-dockerfile-model/index.md)).
 - **Multiple `from:` entries.** Same expressive power, but blurs the single-parent model that `from:` children, locks, and reviewers rely on.
 - **Keep copying stubs at init.** Works today (all place geotypes pass `twin check --strict`), but decorations drift from their source.

@@ -27,7 +27,7 @@ catalog/<type>/
 | **place** | `place/`, `build/`, `check/` | `Place` compose/build, archetype checks, venue mounts |
 | **resource** | `asset/` *(planned)* | Resource rows when lifted from place |
 | **character** | `persona/` | PCM — `contract/`, `journey/`, `empathy/`, `people/`, `schemas/` |
-| **character** | `situations/` | JSM — `contract/`, `catalog/`, `job/`, `jtbd/` |
+| **character** | `events/` | JSM — `contract/`, `catalog/`, `job/`, `jtbd/` |
 | **story** | `narrative/` | SAM — `contract/`, `scene/`, `episode/`, `story-arc/` |
 
 ## Twin module
@@ -40,7 +40,7 @@ npm subpaths (stable):
 
 - `@doppler-group/twinfile-<type>/module` → `catalog/<type>/src/twin-module.ts`
 - `@doppler-group/twinfile-character/pcm` → `catalog/character/src/contract/persona/`
-- `@doppler-group/twinfile-character/jsm` → `catalog/character/src/contract/situations/`
+- `@doppler-group/twinfile-character/jsm` → `catalog/character/src/contract/events/`
 - `@doppler-group/twinfile-story/sam` → `catalog/story/src/contract/narrative/`
 
 ## Rules

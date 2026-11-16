@@ -79,7 +79,7 @@ Each slug also materializes suggested decorators ([Decorate a twin](decorate-twi
 
 | Field | Resolution |
 | --- | --- |
-| **`situations`** | slug override (replaces) → category **`situations`** → none. Must be listed in `place-archetype-rules.yml` → **`situations:`** |
+| **`events`** | slug override (replaces) → category **`events`** → none. Must be listed in `place-archetype-rules.yml` → **`events:`** |
 | **`layers`** | `archetype_layers[archetype]` ∪ category **`layers`** ∪ slug **`layers`**, in canonical order (`levels` → `spaces` → `openings` → `markers` → `stations` → `gauges` → `sensors` → `routes` → `visits` → `assets`) |
 | **`suggest_building_import`** | `suggest_building_import[archetype]` in `place-archetype-rules.yml` (today **`campus: true`**). Materialized per slug; `suggestBuildingImportForSlug` drives init **`place/BUILDINGS.md`** |
 

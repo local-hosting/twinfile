@@ -14,7 +14,7 @@ Optional on **`place/place.yaml`** → `place.archetype` (venue YAML before Twin
 
 Each archetype is a named combination of three axes — **extent**, **vertical**, **movement** — defined in [Place archetypes](place-archetypes.md).
 
-**Dockerfile-style recipe:** [Place recipe](place-recipe.md) (`from:` → **`archetype`** → **`layers:`** → per-space **`exposure`**). **Mix pre-defined bases, situations, and asset layers:** [Decorate a twin](decorate-twin.md). **Campus site + building + floor imports:** [Campus → building → floor](campus-building-floor.md).
+**Dockerfile-style recipe:** [Place recipe](place-recipe.md) (`from:` → **`archetype`** → **`layers:`** → per-space **`exposure`**). **Mix pre-defined bases, events, and asset layers:** [Decorate a twin](decorate-twin.md). **Campus site + building + floor imports:** [Campus → building → floor](campus-building-floor.md).
 
 | Map surface | Archetype | Authoring rule |
 | --- | --- | --- |

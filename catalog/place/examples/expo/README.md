@@ -18,10 +18,10 @@ Twinfile uses **one space graph**; indoor vs outdoor is not a separate zone laye
 **Movement:**
 
 - **`routes`** — concourse and park **`path`** edges outdoors; short **`corridor`** edges into pavilion thresholds.
-- **`openings`** — doors between each district concourse and its pavilion; gates between plaza, metro, and parks (mark **`exit`** where egress matters for situations).
+- **`openings`** — doors between each district concourse and its pavilion; gates between plaza, metro, and parks (mark **`exit`** where egress matters for events).
 
 **Virtual visit path:** the `visits:` patch mirrors a digital expo tour: arrival → plaza → three pavilion beats → outdoor park → return.
 
-**Situations:** `severe-weather` closes or restricts outdoor program spaces while shelter roles stay on pavilion interiors; `transit-disruption` closes metro arrival and steers flow to district concourses.
+**Events:** `severe-weather` closes or restricts outdoor program spaces while shelter roles stay on pavilion interiors; `transit-disruption` closes metro arrival and steers flow to district concourses.
 
 **Layout map (site → room):** [`docs/layout.md`](docs/layout.md) · machine index [`ext/layout-index.yaml`](ext/layout-index.yaml) · `twin layout summary expo`

@@ -153,7 +153,7 @@ export const navigation: Array<NavGroup> = [
       { title: 'Introduction', href: '/' },
       { title: 'Quickstart', href: '/quickstart' },
       { title: 'Author a place', href: '/author' },
-      { title: 'Situations', href: '/situations' },
+      { title: 'Events', href: '/events' },
       { title: 'twin CLI', href: '/cli' },
       { title: 'Examples', href: '/examples' },
     ],

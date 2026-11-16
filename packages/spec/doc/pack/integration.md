@@ -10,7 +10,7 @@ Any application can depend on the **open stack** alone. Hosts add realtime UI, l
 | Build & verify | `twin build`, `twin check`, `twin layers` |
 | Publish | OCI unit, `<unit>.twin.lock` |
 | External formats | `@doppler-group/twinfile-bridge`, `twin import` / `export` |
-| Scenarios | Situations, `clock`, optional runners (`use.runner`); timeline in `@doppler-group/twinfile-core` |
+| Scenarios | Events, `clock`, optional runners (`use.runner`); timeline in `@doppler-group/twinfile-core` |
 | World session | — | Host **player** (not open package yet): `timeline.at(t)` → module bus — [World session](../place/world-session.md) |
 | Agents | MCP — see [MCP coverage](#mcp-coverage) |
 | Taxonomy | `@doppler-group/geotypes` (pinned on twinfile) |

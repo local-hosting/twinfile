@@ -9,7 +9,7 @@ Maintainer note. The public docs site no longer publishes this page. Adopters st
        ↓
 @doppler-group/twinfile-core     load · validate · build · lock · OCI · twin CLI
        ↓
-examples (golden catalog) + @doppler-group/twinfile-simulator (situations / viewer)
+examples (golden catalog) + @doppler-group/twinfile-simulator (events / viewer)
 ```
 
 **Authoritative model:** Twinfile units (`twinfile/name:semver`, `place/` layers, `Place.data`, plans, scenarios). **Not** archived venue YAML trees, **not** AXM six-plane docs.

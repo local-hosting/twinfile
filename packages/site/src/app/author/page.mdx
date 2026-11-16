@@ -5,7 +5,7 @@ export const metadata = {
 
 # Author a place
 
-A place unit is one real site: a manifest, place layers, and plans that bind shared situations to that site. {{ className: 'lead' }}
+A place unit is one real site: a manifest, place layers, and plans that bind shared events to that site. {{ className: 'lead' }}
 
 Normative field lists live in the spec ([place layers](https://github.com/twinfile/spec/blob/main/doc/place/place.md), [topology taxonomy](https://github.com/twinfile/spec/blob/main/doc/place/topology-taxonomy.md), [composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md)). This page is the order you write them in.
 
@@ -83,8 +83,8 @@ twin check --strict
 
 ## Plans {{ anchor: false }}
 
-A plan names a situation and lists this place’s ids under each role the situation `expects`. The transit hub binds `transit-disruption` in `twinfile/transit-hub-campus:0.1.0`.
+A plan names an event and lists this place’s ids under each role the event `expects`. The transit hub binds `transit-disruption` in `twinfile/transit-hub-campus:0.1.0`.
 
 Open **transit-hub-campus** (and every catalog ref) in the [examples editor](/examples).
 
-The situation itself is a separate unit. Scenarios that run the plan are covered in [Situations](/situations).
+The event itself is a separate unit. Scenarios that run the plan are covered in [Events](/events).
