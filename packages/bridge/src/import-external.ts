@@ -1,6 +1,7 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
-import { dirname, join } from 'node:path';
+import { basename, dirname, join, resolve } from 'node:path';
 
+import { TWIN_HEAD_SUFFIX } from './place-kit.js';
 import { resolveBridgeRef } from './resolve-bridge.js';
 import type { ImportResult } from './types.js';
 
@@ -21,9 +22,14 @@ export function importExternal(source: ExternalSource, input: unknown): ImportRe
   return out;
 }
 
+function isHeadKey(rel: string): boolean {
+  return !rel.includes('/') && rel.endsWith(TWIN_HEAD_SUFFIX);
+}
+
 export function writeImportedFiles(dir: string, files: Record<string, string>): void {
+  const head = `${basename(resolve(dir))}${TWIN_HEAD_SUFFIX}`;
   for (const [rel, body] of Object.entries(files)) {
-    const path = join(dir, rel);
+    const path = join(dir, isHeadKey(rel) ? head : rel);
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, body.endsWith('\n') ? body : `${body}\n`);
   }

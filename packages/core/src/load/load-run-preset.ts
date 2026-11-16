@@ -7,7 +7,6 @@ import type { LoadedTwinfile } from './load-twinfile.js';
 import type { Result } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 
-import { findTwinfileYamlPath } from './twinfile-locator.js';
 import { RUN_PRESET_NAMES } from '../types/twin-kind.js';
 
 function findPresetPath(root: string): string | undefined {
@@ -53,46 +52,14 @@ export function runPresetComposeHead(preset: PlaceRunPreset): Record<string, unk
   };
 }
 
-/** Load a scene run directory (`run.yaml`) or legacy scenario `Twinfile.yaml`. */
+/** Load a scene run directory (`run.yaml`). */
 export function loadRunUnit(root: string): Result<LoadedTwinfile> {
   const dir = resolve(root);
   const presetPath = findPresetPath(dir);
-  if (presetPath) {
-    const preset = readPlaceRunPresetFile(presetPath);
-    if (!preset.ok) return preset;
-    return ok({
-      root: dir,
-      twinfilePath: presetPath,
-      twinfile: runPresetComposeHead(preset.value),
-    });
+  if (!presetPath) {
+    return err([{ code: 'E_MISSING_FILE', message: 'Run unit requires run.yaml', file: dir }]);
   }
-
-  const twinPath = findTwinfileYamlPath(dir);
-  if (!twinPath) {
-    return err([
-      {
-        code: 'E_MISSING_FILE',
-        message: 'Run unit requires run.yaml or Twinfile.yaml',
-        file: dir,
-      },
-    ]);
-  }
-
-  const parsed = readYamlDocument(twinPath);
-  const twinfile = parsed.value;
-  if (!twinfile || typeof twinfile !== 'object' || Array.isArray(twinfile)) {
-    return err([{ code: 'E_SCHEMA', message: 'invalid Twinfile.yaml', file: twinPath }]);
-  }
-  const head = twinfile as Record<string, unknown>;
-  const { kind: legacyKind, ...rest } = head;
-  if (legacyKind === 'place') {
-    return err([
-      {
-        code: 'E_SCHEMA',
-        message: 'Run units use run.yaml — Twinfile.yaml is place-only',
-        file: twinPath,
-      },
-    ]);
-  }
-  return ok({ root: dir, twinfilePath: twinPath, twinfile: rest });
+  const preset = readPlaceRunPresetFile(presetPath);
+  if (!preset.ok) return preset;
+  return ok({ root: dir, twinfilePath: presetPath, twinfile: runPresetComposeHead(preset.value) });
 }

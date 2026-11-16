@@ -1,19 +1,15 @@
 import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { RUN_PRESET_NAMES, TWIN_HEAD_FILES } from '../types/twin-kind.js';
+import { RUN_PRESET_NAMES } from '../types/twin-kind.js';
 
-import { findTwinfileYamlPath, TWINFILE_YAML_NAMES } from './twinfile-locator.js';
+import { findTwinfileYamlPath, twinHeadFileName, twinLockFileName } from './twinfile-locator.js';
 
 export const ALLOWED_TWINFILE_ROOT_NAMES = new Set<string>([
-  ...Object.values(TWIN_HEAD_FILES),
   ...RUN_PRESET_NAMES,
-  ...TWINFILE_YAML_NAMES,
-  'Twinfile.lock',
   'twin.local.yaml',
   'place',
   'bindings',
-  'plans',
   'parts',
   'buildings',
   'floors',
@@ -38,6 +34,7 @@ export const ALLOWED_TWINFILE_ROOT_NAMES = new Set<string>([
 export function isAllowedTwinfileRootEntry(name: string, unitRoot?: string): boolean {
   if (ALLOWED_TWINFILE_ROOT_NAMES.has(name)) return true;
   if (!unitRoot) return false;
+  if (name === twinHeadFileName(unitRoot) || name === twinLockFileName(unitRoot)) return true;
   const child = join(unitRoot, name);
   if (!statSync(child, { throwIfNoEntry: false })?.isDirectory()) return false;
   return findTwinfileYamlPath(child) !== undefined;

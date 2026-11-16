@@ -23,6 +23,7 @@ export {
   packPlaceUnit,
   readImportName,
   twinId,
+  TWIN_HEAD_SUFFIX,
   withImportExt,
 } from './place-kit.js';
 export {

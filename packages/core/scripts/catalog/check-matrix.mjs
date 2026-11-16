@@ -6,7 +6,7 @@ import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
-import { loadTwinfile, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
+import { loadTwinfile, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, twinHeadPath } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const simulatorRoot = resolveSimulatorRoot();
@@ -24,11 +24,11 @@ function listSiteDirs() {
     .filter(
       (dir) =>
         statSync(dir, { throwIfNoEntry: false })?.isDirectory() &&
-        statSync(join(dir, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile(),
+        statSync(twinHeadPath(dir), { throwIfNoEntry: false })?.isFile(),
     );
   const nestedCampus = join(examplesRoot, 'mobility-hub', 'campus');
   if (
-    statSync(join(nestedCampus, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile() &&
+    statSync(twinHeadPath(nestedCampus), { throwIfNoEntry: false })?.isFile() &&
     !top.includes(nestedCampus)
   ) {
     top.push(nestedCampus);

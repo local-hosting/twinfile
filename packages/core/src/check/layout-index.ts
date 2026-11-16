@@ -119,8 +119,8 @@ export function checkPlaceLayoutIndex(
           errors.push({
             code: 'E_LAYOUT',
             message: inline
-              ? `layout_index region "${region.id}" detail_layers entry is not a collection in Twinfile.yaml steps: ${rel}`
-              : `layout_index region "${region.id}" detail_layers entry not in Twinfile.yaml layers: ${rel}`,
+              ? `layout_index region "${region.id}" detail_layers entry is not a collection in head steps: ${rel}`
+              : `layout_index region "${region.id}" detail_layers entry not in head layers: ${rel}`,
             file: path,
           });
           continue;

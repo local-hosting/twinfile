@@ -22,6 +22,7 @@ import {
   checkProcessorGraph,
   defaultPushRef,
   findTwinHead,
+  twinLockPath,
   formatBuildLayerScope,
   formatBuildLayerStepLabel,
   formatTwinfileSummaryMarkdown,
@@ -426,7 +427,7 @@ async function runLock(): Promise<number> {
     console.error(formatTwinErrors(dir, result.errors).join('\n'));
     return 1;
   }
-  console.log(`ok lock ${join(dir, 'Twinfile.lock')}`);
+  console.log(`ok lock ${twinLockPath(dir)}`);
   return 0;
 }
 

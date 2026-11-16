@@ -1,4 +1,4 @@
-/** Parsed `Twinfile.lock` (see spec `twinfile/lock.schema.json`). */
+/** Parsed `<unit>.twin.lock` (see spec `twinfile/lock.schema.json`). */
 export type TwinfileLockRefEntry = {
   version: string;
   manifest?: string;
@@ -12,7 +12,8 @@ export type TwinfileLockDocument = {
   meta?: { overridden?: boolean };
 };
 
-export const TWINFILE_LOCK_FILENAME = 'Twinfile.lock';
+/** Unit lock suffix: `<unit>/<unit>.twin.lock`. */
+export const TWIN_LOCK_SUFFIX = '.twin.lock';
 
 export function lockRefKeyFromTwinfile(twinfile: Record<string, unknown>): string {
   const id = String(twinfile.id ?? 'unknown');

@@ -2,35 +2,18 @@ import { statSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { isRecord } from '../doc/is-record.js';
-import { PLACE_HEAD_NAMES } from '../load/twinfile-locator.js';
-import { RUN_PRESET_NAMES, TWIN_HEAD_FILES, type TwinKind } from '../types/twin-kind.js';
+import { findTwinfileYamlPath } from '../load/twinfile-locator.js';
+import { TWIN_CATALOG_TYPES } from '../paths/catalog-layout.js';
+import { RUN_PRESET_NAMES, type TwinKind } from '../types/twin-kind.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
 import type { TwinHead, TwinHeadPath } from '../types/twin-head.js';
+import { readYamlDocument } from '../validate/validate-yaml.js';
 
 export type ParseTwinHeadOptions = {
   readonly headFile: string;
   /** Accepted `kind:` values — place heads also accept `mixin`. */
   readonly kinds: readonly string[];
-};
-
-/** Every publishable twin head filename (catalog scripts, publish walk). */
-export const DISCOVER_TWIN_HEAD_YAML_NAMES = [
-  ...PLACE_HEAD_NAMES,
-  TWIN_HEAD_FILES.resource,
-  'resource.yaml',
-  TWIN_HEAD_FILES.character,
-  'character.yaml',
-  TWIN_HEAD_FILES.story,
-  'story.yaml',
-  ...RUN_PRESET_NAMES,
-] as const;
-
-const HEAD_NAMES_BY_KIND: Record<TwinKind, readonly string[]> = {
-  place: PLACE_HEAD_NAMES,
-  resource: [TWIN_HEAD_FILES.resource],
-  character: [TWIN_HEAD_FILES.character],
-  story: [TWIN_HEAD_FILES.story],
 };
 
 function headErrors(raw: Record<string, unknown>, opts: ParseTwinHeadOptions): TwinError[] {
@@ -51,13 +34,22 @@ export function parseTwinHead(raw: unknown, opts: ParseTwinHeadOptions): Result<
   return errors.length > 0 ? err(errors) : ok(raw as TwinHead);
 }
 
-/** First twin head in `dir` (place includes legacy `Twinfile.yaml`). */
+function twinKindOf(declared: unknown): TwinKind | undefined {
+  if (declared === 'mixin') return 'place';
+  return TWIN_CATALOG_TYPES.find((kind) => kind === declared);
+}
+
+/** Unit head in `dir` (`<dir>/<dir>.twin.yaml`), typed by its `kind:` field. */
 export function findTwinHead(dir: string): TwinHeadPath | undefined {
-  for (const kind of Object.keys(HEAD_NAMES_BY_KIND) as TwinKind[]) {
-    for (const name of HEAD_NAMES_BY_KIND[kind]) {
-      const path = join(dir, name);
-      if (statSync(path, { throwIfNoEntry: false })?.isFile()) return { kind, path };
-    }
-  }
-  return undefined;
+  const path = findTwinfileYamlPath(dir);
+  if (!path) return undefined;
+  const { value } = readYamlDocument(path);
+  const kind = twinKindOf(isRecord(value) ? value.kind : undefined);
+  return kind ? { kind, path } : undefined;
+}
+
+/** Publishable unit folder: a twin head or a scene run head. */
+export function isTwinUnitDir(dir: string): boolean {
+  if (findTwinfileYamlPath(dir)) return true;
+  return RUN_PRESET_NAMES.some((name) => statSync(join(dir, name), { throwIfNoEntry: false })?.isFile());
 }

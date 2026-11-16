@@ -1,19 +1,17 @@
-/** Resolve `Twinfile.yaml` in a Twinfile directory (one recipe tree). */
+/** Resolve the head of a unit directory: `<dir>.twin.yaml` or a scene `run.yaml`. */
 import { statSync } from 'node:fs';
-import { join } from 'node:path';
+import { basename, join } from 'node:path';
 
-import { DISCOVER_TWIN_HEAD_YAML_NAMES } from '../../dist/index.js';
+import { findTwinfileYamlPath, RUN_PRESET_NAMES } from '../../dist/index.js';
 
 export function resolveTwinfileHeadPath(twinfileDir) {
-  for (const name of DISCOVER_TWIN_HEAD_YAML_NAMES) {
-    const path = join(twinfileDir, name);
-    if (statSync(path, { throwIfNoEntry: false })?.isFile()) return path;
-  }
-  return undefined;
+  const head = findTwinfileYamlPath(twinfileDir);
+  if (head) return head;
+  return RUN_PRESET_NAMES.map((name) => join(twinfileDir, name)).find(
+    (path) => statSync(path, { throwIfNoEntry: false })?.isFile(),
+  );
 }
 
-
 export function isRunHeadPath(headPath) {
-  const base = headPath.split('/').pop() ?? '';
-  return /^(run|Run|Event|event|preset|Preset)\.yaml$/.test(base);
+  return RUN_PRESET_NAMES.includes(basename(headPath));
 }

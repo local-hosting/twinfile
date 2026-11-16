@@ -7,6 +7,7 @@ import { importExternal, writeImportedFiles } from '@local-hosting/twinfile-brid
 import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile } from '../src/load/load-twinfile.js';
+import { TWIN_HEAD_SUFFIX } from '../src/types/twin-kind.js';
 
 const specRoot = join(dirname(fileURLToPath(import.meta.url)), '../../spec');
 
@@ -15,7 +16,7 @@ function readSpec(rel: string): string {
 }
 
 function withManifestId(files: Record<string, string>): Record<string, string> {
-  const key = 'Twinfile.yaml' in files ? 'Twinfile.yaml' : 'twinfile.yaml' in files ? 'twinfile.yaml' : undefined;
+  const key = Object.keys(files).find((rel) => !rel.includes('/') && rel.endsWith(TWIN_HEAD_SUFFIX));
   if (!key) return files;
   const raw = files[key];
   if (/^id:/m.test(raw)) return files;

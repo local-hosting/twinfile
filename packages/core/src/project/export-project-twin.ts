@@ -1,6 +1,6 @@
 import { statSync } from 'node:fs';
-import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '../paths/catalog-layout.js';
-import { listExampleUnitIds, TWIN_EXAMPLE_TYPES } from './list-example-units.js';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot, TWIN_CATALOG_TYPES } from '../paths/catalog-layout.js';
+import { listExampleUnitIds } from './list-example-units.js';
 
 export type ProjectTwinManifest = {
   twinfile: 1;
@@ -16,13 +16,13 @@ export type ProjectTwinBundle = {
 export function loadProjectTwinManifest(root?: string): ProjectTwinManifest {
   const base = root ?? resolveTwinfileRoot();
   const roots: Record<string, string> = {};
-  for (const type of TWIN_EXAMPLE_TYPES) {
+  for (const type of TWIN_CATALOG_TYPES) {
     const examples = resolveTypeExamplesRoot(type, base);
     if (statSync(examples, { throwIfNoEntry: false })?.isDirectory()) {
       roots[type] = examples;
     }
   }
-  return { twinfile: 1, types: [...TWIN_EXAMPLE_TYPES], roots };
+  return { twinfile: 1, types: [...TWIN_CATALOG_TYPES], roots };
 }
 
 export { listExampleUnitIds } from './list-example-units.js';

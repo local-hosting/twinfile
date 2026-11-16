@@ -5,6 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { bridge, exportPlace, importPlace } from '../src/builtins/imdf/index.js';
 import { specRoot } from './spec-root.js';
+import { TWIN_HEAD_SUFFIX } from '../src/place-kit.js';
 
 function readSpec(rel: string): string {
   return readFileSync(join(specRoot(), rel), 'utf8');
@@ -17,7 +18,7 @@ describe('built-in imdf', () => {
     const site = imported.place.place as { ext?: { hours?: string; restriction?: string } };
     expect(site.ext?.hours).toBe('Mo-Su 09:00-17:00');
     expect(site.ext?.restriction).toBe('employeesonly');
-    expect(imported.files['Twinfile.yaml']).toContain('primary: museum');
+    expect(Object.entries(imported.files).find(([rel]) => rel.endsWith(TWIN_HEAD_SUFFIX))?.[1]).toContain('primary: museum');
     expect(exportPlace(imported.place)['venue.json']).toContain('Mo-Su 09:00-17:00');
     expect(bridge.crosswalkSource).toBe('imdf');
   });

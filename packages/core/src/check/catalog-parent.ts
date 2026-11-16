@@ -1,9 +1,9 @@
 import { readFileSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { resolve } from 'node:path';
 
 import { parse as parseYaml } from 'yaml';
 
-import { findTwinfileYamlPath } from '../load/twinfile-locator.js';
+import { findTwinfileYamlPath, twinHeadPath } from '../load/twinfile-locator.js';
 import type { TwinError } from '../types/twin-error.js';
 import { lockRefKeyFromTwinfile } from '../types/twinfile-lock.js';
 import { isTwinfileRef } from '../types/twinfile-ref.js';
@@ -28,7 +28,7 @@ export function checkCatalogParent(unitRoot: string, twinfile: Record<string, un
   const parentRef = typeof catalog?.parent === 'string' ? catalog.parent.trim() : '';
   if (!parentRef) return [];
 
-  const twinfilePath = findTwinfileYamlPath(resolve(unitRoot)) ?? join(resolve(unitRoot), 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(resolve(unitRoot));
   if (!isTwinfileRef(parentRef)) {
     return [
       {
