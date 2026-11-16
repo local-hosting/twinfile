@@ -97,7 +97,7 @@ steps:
 | **Copies** | 1 building | 1 building, which copies 1 floor |
 | **Nested bases** | `base-indoor-stack` | `base-indoor-stack` (building and floor) |
 | **Site `levels`** | yes | yes (`ground`, `airside`) |
-| **Typical scenario** | `mobility-hub/campus-hub-queue-spill` | `airport-terminal-surge` |
+| **Typical scenario** | `mobility-hub/campus-hub-queue-spill` | `terminal-surge` |
 
 ## Authoring checklist
 

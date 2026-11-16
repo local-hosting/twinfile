@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/expo:0.2.0
 story:
-  arc: operations
   scenes:
-    - id: expo-outdoor-shelter-cap
+    - id: outdoor-shelter-cap
       label: Outdoor shelter capacity
       run:
         steps:
@@ -18,7 +17,7 @@ story:
         args:
           occupancy: 4200
           target_role: shelter
-    - id: expo-visitor-surge
+    - id: visitor-surge
       label: Visitor surge
       run:
         steps:

@@ -4,7 +4,7 @@
 
 **Map pin:** [`mobility-hub.twin.yaml`](../mobility-hub.twin.yaml) (**King's Cross, London**) — `from: twinfile/mobility-hub:0.1.0`, one step patches **`place.ext`** only. **Campus-shaped mobility hub** (same type, nested building): [`campus/`](../campus/) — `from: twinfile/base-campus`, `place.kind: mobility_hub`, ref id `transit-hub-campus` for the published catalog entry.
 
-**Scenario:** [`mobility-hub-hub-disruption`](../../../../story/examples/mobility-hub-operations/mobility-hub-operations.twin.yaml) — `transit-disruption` queue on suburban rail/bus feed (`catalog/story/examples/mobility-hub-operations#mobility-hub-hub-disruption`).
+**Scenario:** [`hub-disruption`](../../../../story/examples/mobility-hub-operations/mobility-hub-operations.twin.yaml) — `transit-disruption` queue on suburban rail/bus feed (`catalog/story/examples/mobility-hub-operations#hub-disruption`).
 
 Hierarchy: programme template → geo instance; within the bundle, `parent` rollup (network → site → `programme_zone` / `building` → parts); **`services[]`** links board kinds to space cells; **`assets[]`** are equipment at those cells.
 

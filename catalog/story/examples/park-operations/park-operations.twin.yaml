@@ -8,9 +8,8 @@ links:
   - rel: involves
     href: twinfile/place/park:0.3.0
 story:
-  arc: operations
   scenes:
-    - id: park-trailhead-backup
+    - id: trailhead-backup
       label: Trailhead backup
       run:
         steps:

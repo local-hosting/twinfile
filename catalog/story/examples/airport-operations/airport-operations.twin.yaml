@@ -8,16 +8,15 @@ links:
   - rel: involves
     href: twinfile/place/airport:0.2.0
 story:
-  arc: operations
   scenes:
-    - id: airport-morning-checkpoint
+    - id: morning-checkpoint
       label: Morning checkpoint
       run:
         steps:
           - copy: twinfile/event/passenger-queue:1.0.0
         args:
           lanes: 3
-    - id: airport-terminal-surge
+    - id: terminal-surge
       label: Terminal surge
       run:
         steps:
