@@ -19,26 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Checkout geotypes (sibling)
-        uses: actions/checkout@v4
-        with:
-          repository: doppler-group/geotypes
-          path: ../geotypes
-          token: ${{ secrets.TF_PACKAGES_TOKEN || github.token }}
-
-      - name: Checkout frameworks (sibling)
-        uses: actions/checkout@v4
-        with:
-          repository: doppler-group/frameworks
-          path: ../frameworks
-          token: ${{ secrets.TF_PACKAGES_TOKEN || github.token }}
-
-      - name: Checkout geokit (sibling)
-        uses: actions/checkout@v4
-        with:
-          repository: doppler-group/geokit
-          path: ../geokit
-          token: ${{ secrets.TF_PACKAGES_TOKEN || github.token }}
+      - name: Clone sibling repositories (portal/link deps)
+        env:
+          GH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN || github.token }}
+        run: |
+          set -euo pipefail
+          parent="$(dirname "$GITHUB_WORKSPACE")"
+          for repo in geotypes frameworks geokit; do
+            git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/doppler-group/${repo}.git" "${parent}/${repo}"
+          done
 
       - uses: actions/setup-node@v4
         with:
