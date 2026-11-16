@@ -16,7 +16,7 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 | **Runner** | `use.runner` | Offline **ENTRYPOINT** (`npm:` ref) for `twin run` — MCP / host supplies the analyst prompt; see [Runners](pack/runners.md) |
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
 | **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads scene **`run.yaml`**, advances **session** on the patch **module bus** |
-| **Situation** / **timetable event** | Simulator **catalog** (`catalogKind: situation` \| `event`) | `PlaceEvent.request()` → `TwinMessageV1`; compose **`copy: twinfile/situation/...`** / **`twinfile/event/...`** — not twin heads |
+| **Event** | **`catalog/event/<id>/<id>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; the scene `schedule:` and the player decide when phases fire. Places host events through role tags; `bindings/<event>.yaml` is an optional override |
 | **Mixin** | `kind: mixin` place head | Decoration `with:` / `copy:` targets under **place** |
 | **`id`** | head field | Ref slug (`twinfile/<type>/<id>:<version>`) — never UI copy |
 | **`name`** | head field | Display title |
@@ -31,7 +31,7 @@ Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-la
 | **Ref map** | `catalog/place/examples/` | `twin.local.yaml` (local refs) + `published-refs.json` (golden digests) — **not** normative spec |
 | **Spec conf** | `packages/spec/conf/` | Conformance vectors, role vocabulary, crosswalk — **not** twin ops |
 | **Kernel** | `packages/{spec,core,cli,bridge}/` | Format, load/merge, CLI |
-| **Player** | `packages/simulator/` | Situations, playback — operates on catalogs |
+| **Player** | `packages/simulator/` | Events, playback — operates on catalogs |
 
 Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `catalog/place/examples`, `packages/simulator` and `catalog/character/libs` derive from it. Path API: [`catalog-layout.ts`](../../core/src/paths/catalog-layout.ts).
 
@@ -46,7 +46,7 @@ Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `ca
 | **Place** (build) | Output of `twin build` on a place unit |
 | **Run** | Scene **`run.yaml`** — compose `kind: scenario` for verify; not **`twinfile/event/`** |
 | **Runner** | **`use.runner`** on a run — offline verify; prompts are MCP-only |
-| **Situation** / **Event** (catalog) | Simulator modules — not authored twin types |
+| **Event** | **`kind: event`** under `catalog/event/` — a timed occurrence a place hosts (hazards, game days) |
 | **Mixin** | **`kind: mixin`** under place — decoration, not a spatial twin |
 
 A **place does not run**. **Runs** + **player** execute on a built place (runner offline, player live).
@@ -72,9 +72,9 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 
 | Artifact | Prose | Role |
 | --- | --- | --- |
-| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **mixin**, **Resource**, **Character**, or **Story** (by `kind:`) | Twin head |
+| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **mixin**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
 | **`run.yaml`** | **Run** (scene) | Under `story/.../scenes/` — not published |
-| **Place event (TS)** | **Situation** / timetable **event** | Catalog + `request()` → patch bus |
+| **Place event (TS)** | **Event** loaded from `catalog/event` | Catalog + `request()` → patch bus |
 
 ## Twin head (all types)
 
@@ -100,7 +100,7 @@ One **timeline** is authoritative: scenario **`clock:`**, place **tracks** / **s
 
 **Consolidate at the session, not in YAML:** the **player** owns the clock step; a **runner** is a pluggable **answer step** (batch at end of run, or in-process for built-ins). Untrusted **`npm:`** runners stay subprocesses ([`gov/security.md`](gov/security.md)). Do not publish `twinfile/player` as a compose unit — player is host code; **`use.runner`** stays the manifest pin.
 
-**`kind: event`** (timetable stage packs) ≠ the patch **module bus**. Say **module bus** or **patch bus**, not “event bus”, in new prose.
+**`kind: event`** (catalog twin) ≠ the patch **module bus**. Say **module bus** or **patch bus**, not “event bus”, in new prose.
 
 Live controls: [`pack/patch.md`](pack/patch.md) (**`Place.meta.placeType.controls`**). Offline answers: [`pack/runners.md`](pack/runners.md). Host alignment (product hosts, workbench): [`place/world-session.md`](place/world-session.md).
 
@@ -127,9 +127,9 @@ Verbs: **`from:`** (base), **`with:`** (mixin), **`copy:`** (ref or `./path`) �
 
 Optional **visit moments** in **`visits[]`** (v1 `place/visits.yaml`, v2 a `steps:` item): ordered beats bound to `space` ids (`visitMomentId` on each row). Use them for layout skim, cards, and tools like `twin layout summary`. **Not** end-user movement or persona routing — other projects own that on top of `Place.data` (`spaces`, `openings`, `routes`, roles).
 
-## Situation roles
+## Event roles
 
-Situation `expects` keys and `roles[]` on place rows must be ids from **`spec/conf/role-vocabulary.yaml`** — extend that file first, then situations and plans.
+Event `expects` keys and `roles[]` on place rows must be ids from **`spec/conf/role-vocabulary.yaml`** — extend that file first, then events and bindings.
 
 ## Refs
 
