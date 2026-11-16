@@ -21,23 +21,22 @@ Every twin under `catalog/<type>/examples/<id>/` shares:
 
 ```yaml
 # catalog/story/examples/<story-id>/<story-id>.twin.yaml
+links:
+  - rel: involves
+    href: twinfile/place/shop:0.2.0
 story:
   scenes:
     - id: shop-shelter-at-cap
       label: Shelter at capacity
       run:                      # optional — makes the scene runnable
-        from: twinfile/place/shop:0.2.0
+        # from: defaults to the story's single involves place
         steps:
           - copy: twinfile/event/severe-weather:1.0.0
         clock: { starts_at: 2026-06-12T18:00:00-07:00, duration: PT30M, step: PT5M }
         args: { occupancy: 180 }
-        use: { runner: npm:@twinfile/runner-hydraulic@^0 }
-        expected:               # optional — what `twin verify` pins
-          digest: sha256:…
-          metrics: { time_to_shelter_s: 27 }
 ```
 
-Each scene's **`run:`** is an inline mapping (`from`, `steps`, `domains`, `clock`, `schedule`, `args`, `use`, `expected`). Address a scene as **`<story-dir>#<scene-id>`** (`twin run catalog/story/examples/shop-visit#shop-shelter-at-cap`); run output goes to `<story-dir>/runs/`. A string `run:` (old scene folder) fails to load. Legacy **`beats`** loads as **`scenes`**.
+Each scene's **`run:`** is an inline mapping (`from?`, `steps`, `clock`, `schedule`, `args`, optional `use.runner` for offline `twin run`). **`from:`** defaults to the story's single **`links` `involves` place** ref; set it only to override. Address a scene as **`<story-dir>#<scene-id>`** (`twin run catalog/story/examples/shop-visit#shop-shelter-at-cap`). A string `run:` (old scene folder) fails to load. Legacy **`beats`** loads as **`scenes`**.
 
 Cross-type links use refs only (`links:`, `copy: twinfile/<type>/<id>`).
 

@@ -21,9 +21,9 @@ const menu: SamStoryCatalogMenuV1 = {
       journeyId: 'journey:driver-offer',
     },
   ],
-  placeVenues: [
-    { venueKey: 'venue:demo-airport', title: 'Airport pickup' },
-    { venueKey: 'venue:demo-home', title: 'Home dropoff' },
+  places: [
+    { placeRef: 'twinfile/place/demo-airport:0.0.0', title: 'Airport pickup' },
+    { placeRef: 'twinfile/place/demo-home:0.0.0', title: 'Home dropoff' },
   ],
 };
 
@@ -35,16 +35,16 @@ describe('matchSamStoryCatalogIdsFromText', () => {
     });
     expect(hints.pcmId).toBe('persona:rider');
     expect(hints.episodeId).toBe('story:episode:rider-commute');
-    expect(hints.venueKey).toBeUndefined();
+    expect(hints.placeRef).toBeUndefined();
   });
 
-  it('matches place mount when includePlaceVenues is true', () => {
+  it('matches place mount when includePlaces is true', () => {
     const hints = matchSamStoryCatalogIdsFromText({
       text: 'Rider morning commute from home dropoff',
       menu,
-      includePlaceVenues: true,
+      includePlaces: true,
     });
-    expect(hints.venueKey).toBe('venue:demo-home');
+    expect(hints.placeRef).toBe('twinfile/place/demo-home:0.0.0');
   });
 
   it('matches driver offer episode when driver is mentioned', () => {
@@ -57,12 +57,12 @@ describe('matchSamStoryCatalogIdsFromText', () => {
     expect(hints.episodeId).toBe('story:episode:driver-offer');
   });
 
-  it('matches airport venue when airport is mentioned and place matching enabled', () => {
+  it('matches airport place when airport is mentioned and place matching enabled', () => {
     const hints = matchSamStoryCatalogIdsFromText({
       text: 'Vacation landing at airport pickup',
       menu,
-      includePlaceVenues: true,
+      includePlaces: true,
     });
-    expect(hints.venueKey).toBe('venue:demo-airport');
+    expect(hints.placeRef).toBe('twinfile/place/demo-airport:0.0.0');
   });
 });

@@ -8,7 +8,7 @@ export const EpisodeTouchpointScheduleEntrySchema = z.object({
   touchpointId: z.string().min(1),
   phase: EpisodePhaseIdSchema,
   sceneId: z.string().min(1).optional(),
-  venueKey: z.string().min(1).optional(),
+  placeRef: z.string().min(1).optional(),
   spaceId: z.string().min(1).optional(),
   visitMomentId: z.string().min(1).optional(),
   characterIds: z.array(z.string().min(1)).optional(),

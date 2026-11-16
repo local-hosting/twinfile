@@ -24,7 +24,7 @@ const catalog: SamStoryPlanCatalogSnapshotV1 = {
   pcmIds: [],
   samEpisodeIds: [],
   jobIds: [],
-  fleetVenues: [
+  fleetPlaces: [
     { slug: 'airport-kiosk', name: 'Airport kiosk' },
     { slug: 'downtown-flagship', name: 'Downtown flagship' },
   ],

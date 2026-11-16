@@ -42,7 +42,7 @@ const pcm: PCM = {
 };
 
 const curbsideMount = placeMountFixture({
-  venueKey: 'venue:curbside',
+  placeRef: 'twinfile/place/curbside:0.0.0',
   title: 'Curbside',
   spaceIds: ['space:curb'],
 });

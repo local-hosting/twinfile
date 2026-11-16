@@ -5,13 +5,13 @@ import type { SAM } from '../types/sam.js';
 import { validateSAMAssociations, type ValidateSAMAssociationsResult } from './validate-sam-associations.js';
 import { validateSAMScenes } from './validate-sam-scenes.js';
 import { validateSAMStoryArc } from './validate-sam-story-arc.js';
-import { validateSAMTouchpointVenues } from './validate-sam-touchpoint-venues.js';
+import { validateSAMTouchpointPlaces } from './validate-sam-touchpoint-places.js';
 import type { SAMTouchpointCatalog } from '../types/touchpoint-catalog.js';
 
 export type ValidateSAMContext = {
   journey?: Journey;
   knownPcmIds?: readonly string[];
-  knownVenueKeys?: readonly string[];
+  knownPlaceRefs?: readonly string[];
   touchpointCatalog?: SAMTouchpointCatalog;
 };
 
@@ -39,9 +39,9 @@ export function validateSAM(sam: SAM, context?: ValidateSAMContext): ValidateSAM
     return associationCheck;
   }
 
-  const venueIssues = validateSAMTouchpointVenues(normalized, context?.touchpointCatalog);
-  if (venueIssues.length > 0) {
-    return { ok: false, issues: venueIssues };
+  const placeIssues = validateSAMTouchpointPlaces(normalized, context?.touchpointCatalog);
+  if (placeIssues.length > 0) {
+    return { ok: false, issues: placeIssues };
   }
 
   return { ok: true, sam: normalized };

@@ -1,6 +1,6 @@
 import type { SamStoryCatalogMenuV1 } from './story-catalog-menu.js';
 
-export type SamStoryPlanFleetVenueSnapshotV1 = {
+export type SamStoryPlanFleetPlaceSnapshotV1 = {
   slug: string;
   name?: string;
   lat?: number;
@@ -33,7 +33,7 @@ export type SamStoryPlanCatalogSnapshotV1 = {
   samEpisodeIds: string[];
   storyMenu?: SamStoryCatalogMenuV1;
   jobIds: string[];
-  fleetVenues: SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: string[];

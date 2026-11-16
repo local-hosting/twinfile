@@ -5,7 +5,7 @@ import { validateSAMStoryArc } from '../../src/contract/narrative/contract/valid
 
 const baseSceneboard = {
   characters: [{ pcmId: 'persona:rider', primary: true }],
-  venues: [{ venueKey: 'venue:curbside' }],
+  places: [{ placeRef: 'twinfile/place/curbside:0.0.0' }],
   binding: {
     pcmId: 'persona:rider',
     journeyId: 'journey:fixture',
@@ -36,7 +36,7 @@ describe('validateSAMStoryArc', () => {
           order: 0,
           actId: 'exposition',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
           touchpointIds: ['touchpoint:a'],
         },
         {
@@ -45,7 +45,7 @@ describe('validateSAMStoryArc', () => {
           order: 1,
           actId: 'denouement',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
           touchpointIds: ['touchpoint:b'],
         },
       ],
@@ -77,7 +77,7 @@ describe('validateSAMStoryArc', () => {
           order: 0,
           actId: 'climax',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
         },
         {
           id: 'scene:setup',
@@ -85,7 +85,7 @@ describe('validateSAMStoryArc', () => {
           order: 1,
           actId: 'exposition',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
         },
       ],
     });
@@ -120,7 +120,7 @@ describe('validateSAMStoryArc', () => {
           order: 0,
           actId: 'exposition',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
         },
         {
           id: 'scene:end',
@@ -128,7 +128,7 @@ describe('validateSAMStoryArc', () => {
           order: 1,
           actId: 'denouement',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:curbside',
+          placeRef: 'twinfile/place/curbside:0.0.0',
         },
       ],
     });

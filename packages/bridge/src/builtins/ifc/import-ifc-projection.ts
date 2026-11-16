@@ -43,12 +43,12 @@ export function importIfcProjection(input: unknown): ImportResult {
     );
   });
 
-  const venueName = readImportName(root.name, 'IFC building');
+  const placeName = readImportName(root.name, 'IFC building');
   const archetype = levels.length > 1 ? 'indoor_stack' : 'single_level';
   const ifcFile = typeof root.file === 'string' ? root.file : undefined;
   const site: Row = withImportExt(
     {
-      name: venueName,
+      name: placeName,
       kind: 'building',
       timezone: 'UTC',
       published: false,
@@ -60,5 +60,5 @@ export function importIfcProjection(input: unknown): ImportResult {
     },
   );
 
-  return packPlaceUnit(twinId(venueName), 'museum', [{ place: site }, { levels }, { spaces }]);
+  return packPlaceUnit(twinId(placeName), 'museum', [{ place: site }, { levels }, { spaces }]);
 }

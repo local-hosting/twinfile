@@ -14,7 +14,7 @@ describe('viewer place catalog', () => {
   const { examplesRoot } = testCatalogRoots(testDir);
   const roots = { examplesRoots: [examplesRoot] };
 
-  it('lists run presets only on the workbench catalog', () => {
+  it('lists story scene runs only on the workbench catalog', () => {
     const all = listViewerCatalog(roots);
     const places = listViewerPlaceCardCatalog(roots);
     expect(places.length).toBeGreaterThan(0);

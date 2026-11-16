@@ -3,13 +3,13 @@ import { classifyTouchpointType } from './touchpoint-type.js';
 import {
   JourneyTouchpointListFileSchema,
   JourneyTouchpointZoneCatalogFileSchema,
-  VenueFixtureFileSchema,
-  VenueZoneFileSchema,
+  PlaceFixtureFileSchema,
+  PlaceZoneFileSchema,
   type JourneyTouchpointListFile,
   type JourneyTouchpointRecord,
   type JourneyTouchpointZoneCatalogFile,
-  type VenueFixtureFile,
-  type VenueZoneFile,
+  type PlaceFixtureFile,
+  type PlaceZoneFile,
 } from './journey-touchpoint-catalog.schema.js';
 import type { KpiDefinition } from '../../situations/types/kpi-definition-wire.js';
 
@@ -46,12 +46,12 @@ export function parseJourneyTouchpointZoneCatalogFile(
   );
 }
 
-export function parseVenueZoneFile(input: unknown): VenueZoneFile {
-  return parseWithSchema(VenueZoneFileSchema, input, 'venue zone file');
+export function parsePlaceZoneFile(input: unknown): PlaceZoneFile {
+  return parseWithSchema(PlaceZoneFileSchema, input, 'place zone file');
 }
 
-export function parseVenueFixtureFile(input: unknown): VenueFixtureFile {
-  return parseWithSchema(VenueFixtureFileSchema, input, 'venue fixture file');
+export function parsePlaceFixtureFile(input: unknown): PlaceFixtureFile {
+  return parseWithSchema(PlaceFixtureFileSchema, input, 'place fixture file');
 }
 
 export interface JourneyTouchpointCatalogIssue {

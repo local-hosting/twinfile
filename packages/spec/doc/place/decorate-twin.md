@@ -44,10 +44,10 @@ layers:
 
 ```yaml
 # story/examples/expo-operations/expo-operations.twin.yaml (story.scenes[])
+# from: defaults to links involves place (twinfile/place/expo:0.2.0)
 - id: expo-outdoor-shelter-cap
   label: Outdoor shelter capacity
   run:
-    from: twinfile/place/expo:0.2.0
     steps:
       - copy: twinfile/event/severe-weather:1.0.0
     args:

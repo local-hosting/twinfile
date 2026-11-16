@@ -34,7 +34,7 @@ export function planEpisodeCalendarFromArc(
           journeyPhaseId: activity.journeyPhaseId,
           label: activity.label,
           jobId: activity.jobId,
-          venueOpportunityId: activity.venueOpportunityId ?? activity.venueKey,
+          placeOpportunityId: activity.placeOpportunityId ?? activity.placeRef,
         })),
       },
     };

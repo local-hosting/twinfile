@@ -28,7 +28,7 @@ The **ref string** is flat (`twinfile/<name>:<tag>`). **Kind** is always manifes
 | `event` | shared fiction slug, or `{site}-{story}` | `severe-weather`, `arena-game-day` |
 | `scenario` | `{site}-{question}` | `arena-flood-shelter-standup` |
 
-Runs live at `story/examples/<story>/scenes/<id>/`; the scene id carries the site prefix (e.g. `arena-flood-shelter-standup`).
+Runs are inline **`run:`** blocks on story scenes (`story/examples/<story>/<story>.twin.yaml`); address as `<story-dir>#<scene-id>`. The scene id carries the site prefix (e.g. `arena-flood-shelter-standup`).
 
 ## `catalog.parent`
 
@@ -70,6 +70,6 @@ Flat refs remain valid. Typed and flat forms MUST resolve to the same digest whe
 
 ## Downstream mounts (hosts)
 
-Host experience models reference place layout with **`placeRef`** (`twinfile/shop:1.2.0` or pinned `oci:…`). Hosts resolve catalogs, embed **`placeMount`** on packs, and bind scenes with **`venueKey`**. See [Archived venue → place migration](../migration/venue-to-place.md) for hand-porting archived venue YAML.
+Host experience models reference place layout with **`placeRef`** (`twinfile/shop:1.2.0` or pinned `oci:…`). Hosts resolve catalogs, embed **`placeMount`** on packs, and bind scenes with the same **`placeRef`** (matched on kind + name). See [Archived venue → place migration](../migration/venue-to-place.md) for hand-porting archived venue YAML.
 
 Runners: `npm:` refs only in `use.runner`. `use.runners[]` lists further `npm:` refs when the entrypoint is `npm:@twinfile/runner-compose@^0` (see [Runners](runners.md#several-runners-one-clock)).

@@ -32,7 +32,7 @@ function formatWhereBullets(where: StoryBriefWhereV1 | undefined): string[] {
   if (!where) return ['No `where` dimension on story'];
   return [
     ...(where.storeSlug ? [`Store \`${where.storeSlug}\``] : []),
-    ...(where.venueSlug ? [`Venue \`${where.venueSlug}\``] : []),
+    ...(where.placeSlug ? [`Place \`${where.placeSlug}\``] : []),
     ...(typeof where.lat === 'number' && typeof where.lon === 'number'
       ? [`Coordinates ${where.lat}, ${where.lon}`]
       : []),

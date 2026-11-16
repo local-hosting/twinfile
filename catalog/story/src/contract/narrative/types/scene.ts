@@ -15,7 +15,7 @@ export type SceneEmotions = {
 
 export type StorySceneTouchpointRef = {
   id: string;
-  venueKey?: string;
+  placeRef?: string;
   spaceId?: string;
 };
 
@@ -29,7 +29,7 @@ export type SceneCharacterBeat = {
 };
 
 /**
- * One storyboard frame — cast at a venue, with optional touchpoints and PCM journey links.
+ * One storyboard frame — cast at a place, with optional touchpoints and PCM journey links.
  * Authoritative runtime story spine when `scenes` is present on {@link import('./sam.js').SAM}.
  */
 export type StoryScene = {
@@ -42,18 +42,18 @@ export type StoryScene = {
   situation?: string;
   /** PCM ids present in this scene — subset of {@link import('./sam.js').SAM.characters}. */
   characterIds: string[];
-  /** Mounted place venue key — must appear on {@link import('./sam.js').SAM.venues}. */
-  venueKey: string;
-  /** Primary `space:*` on the mounted place — defaults from venue mount when omitted. */
+  /** Mounted place place key — must appear on {@link import('./sam.js').SAM.places}. */
+  placeRef: string;
+  /** Primary `space:*` on the mounted place — defaults from place mount when omitted. */
   spaceId?: string;
   /** Optional `moments:*` beat on the mounted place visit arc. */
   visitMomentId?: string;
   /**
-   * Touchpoints in this frame — use `venueKey` / `spaceId` on each row when the org graph
+   * Touchpoints in this frame — use `placeRef` / `spaceId` on each row when the org graph
    * marks the touchpoint `physical` or `blended` and it differs from the scene default.
    */
   touchpoints?: StorySceneTouchpointRef[];
-  /** Shorthand when every touchpoint shares the scene `venueKey`. */
+  /** Shorthand when every touchpoint shares the scene `placeRef`. */
   touchpointIds?: string[];
   /** Optional link back to authored PCM/AXM journey rows during migration. */
   journeyPhaseId?: string;

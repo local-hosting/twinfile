@@ -16,8 +16,8 @@ export const SamStoryDimensionWhatSchema = z.object({
 });
 
 export const SamStoryDimensionWhereSchema = z.object({
-  venueKeys: z.array(z.string().min(1)),
-  primaryVenueKey: z.string().min(1).optional(),
+  placeRefs: z.array(z.string().min(1)),
+  primaryPlaceRef: z.string().min(1).optional(),
   spaceIds: z.array(z.string().min(1)).optional(),
 });
 

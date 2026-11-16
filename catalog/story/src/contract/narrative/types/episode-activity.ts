@@ -26,9 +26,9 @@ export type EpisodeScheduledActivity = {
   journeyPhaseId?: EpisodePhaseId;
   jobId?: string;
   label?: string;
-  /** Venue catalog id — doppler `venueOpportunityId` / fleet slug host mapping. */
-  venueOpportunityId?: string;
-  venueKey?: string;
+  /** Place catalog id — doppler `placeOpportunityId` / fleet slug host mapping. */
+  placeOpportunityId?: string;
+  placeRef?: string;
   spaceId?: string;
   sceneId?: string;
 };

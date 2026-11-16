@@ -2,14 +2,14 @@ import { describe, expect, it } from 'vitest';
 
 import { generateEpisodeCalendar } from '../../src/contract/narrative/calendar/generate-episode-calendar.js';
 import { touchpointCatalogFromWire } from '../../src/contract/narrative/touchpoint/touchpoint-catalog.js';
-import { resolveTouchpointVenueAtScene } from '../../src/contract/narrative/touchpoint/resolve-touchpoint-venue.js';
+import { resolveTouchpointPlaceAtScene } from '../../src/contract/narrative/touchpoint/resolve-touchpoint-place.js';
 
 describe('physical touchpoint → place', () => {
-  it('uses catalog venueKey for physical touchpoints when scene omits override', () => {
+  it('uses catalog placeRef for physical touchpoints when scene omits override', () => {
     const catalog = touchpointCatalogFromWire({
       touchpoints: [
         { id: 'touchpoint:open', locus: 'digital' },
-        { id: 'touchpoint:kiosk', locus: 'physical', venueKey: 'venue:store' },
+        { id: 'touchpoint:kiosk', locus: 'physical', placeRef: 'twinfile/place/store:0.0.0' },
       ],
     });
     const scene = {
@@ -18,15 +18,15 @@ describe('physical touchpoint → place', () => {
       order: 0,
       actId: 'exposition' as const,
       characterIds: ['persona:a'],
-      venueKey: 'venue:default',
+      placeRef: 'twinfile/place/default:0.0.0',
       touchpointIds: ['touchpoint:kiosk'],
     };
-    const venue = resolveTouchpointVenueAtScene({
+    const place = resolveTouchpointPlaceAtScene({
       touchpointId: 'touchpoint:kiosk',
       scene,
       touchpointCatalog: catalog,
     });
-    expect(venue.venueKey).toBe('venue:store');
+    expect(place.placeRef).toBe('twinfile/place/store:0.0.0');
   });
 
   it('scene touchpoint ref overrides catalog and scene default', () => {
@@ -38,15 +38,15 @@ describe('physical touchpoint → place', () => {
           label: 'A',
           order: 0,
           actId: 'exposition',
-          venueKey: 'venue:home',
+          placeRef: 'twinfile/place/home:0.0.0',
           characterIds: ['persona:rider'],
           touchpoints: [
-            { id: 'touchpoint:map', venueKey: 'venue:car' },
+            { id: 'touchpoint:map', placeRef: 'twinfile/place/car:0.0.0' },
           ],
         },
       ],
       touchpointCatalog: touchpointCatalogFromWire({
-        touchpoints: [{ id: 'touchpoint:map', locus: 'physical', venueKey: 'venue:wrong' }],
+        touchpoints: [{ id: 'touchpoint:map', locus: 'physical', placeRef: 'twinfile/place/wrong:0.0.0' }],
       }),
       simulationEpochStart: '2026-01-06',
       visitDayIndex: 5,
@@ -54,6 +54,6 @@ describe('physical touchpoint → place', () => {
     });
 
     const row = result.episodeArc.touchpointSchedule.find((e) => e.touchpointId === 'touchpoint:map');
-    expect(row?.venueKey).toBe('venue:car');
+    expect(row?.placeRef).toBe('twinfile/place/car:0.0.0');
   });
 });
