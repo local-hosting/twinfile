@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/cov-profiles.schema.json",
+  "type": "object",
+  "required": [
+    "coverage_profiles"
+  ],
+  "properties": {
+    "coverage_profiles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "protocol"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "engine": {
+            "enum": [
+              "graph-v0"
+            ]
+          },
+          "protocol": {
+            "enum": [
+              "wifi",
+              "ble",
+              "lora"
+            ]
+          },
+          "pl0": {
+            "type": "number"
+          },
+          "path_loss_n": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "exposure_db": {
+            "type": "object",
+            "propertyNames": {
+              "enum": [
+                "outdoor",
+                "covered",
+                "indoor",
+                "(unset)"
+              ]
+            },
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "route_kind_db": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "opening_db": {
+            "type": "number"
+          },
+          "opening_path_m": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "same_space_offset_db": {
+            "type": "number"
+          },
+          "default_tx_power_dbm": {
+            "type": "number"
+          },
+          "max_range_m": {
+            "type": "number",
+            "exclusiveMinimum": 0
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

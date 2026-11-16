@@ -1,0 +1,157 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/time/tracks.schema.json",
+  "type": "object",
+  "required": [
+    "tracks"
+  ],
+  "properties": {
+    "tracks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "source"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "source": {
+            "enum": [
+              "solar",
+              "curve",
+              "feed",
+              "schedule",
+              "coverage"
+            ]
+          },
+          "unit": {
+            "type": "string"
+          },
+          "interpolate": {
+            "enum": [
+              "linear",
+              "step",
+              "none"
+            ]
+          },
+          "points": {
+            "type": "object",
+            "minProperties": 1,
+            "propertyNames": {
+              "pattern": "^([01]\\d|2[0-3]):[0-5]\\d$"
+            },
+            "additionalProperties": {
+              "type": "number"
+            }
+          },
+          "device": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "property": {
+            "type": "string",
+            "minLength": 1
+          },
+          "schedule": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "value": {
+            "type": "number"
+          },
+          "radio": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "space": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "metric": {
+            "enum": [
+              "served",
+              "rssi_dbm"
+            ]
+          },
+          "threshold_dbm": {
+            "type": "number"
+          },
+          "profile": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "engine": {
+            "type": "string",
+            "minLength": 1
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "source": {
+                  "const": "curve"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "points"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "source": {
+                  "const": "feed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "device",
+                "property"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "source": {
+                  "const": "schedule"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "schedule"
+              ]
+            }
+          },
+          {
+            "if": {
+              "properties": {
+                "source": {
+                  "const": "coverage"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "radio",
+                "space"
+              ]
+            }
+          }
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

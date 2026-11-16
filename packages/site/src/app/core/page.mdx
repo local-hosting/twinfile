@@ -1,0 +1,36 @@
+export const metadata = {
+  title: '@doppler-group/twinfile-core',
+  description: 'Reference implementation: validate, build, and package Twinfile units.',
+}
+
+# @doppler-group/twinfile-core
+
+Core loads units, validates them against the pinned spec, merges layers, and packages OCI artifacts. The `twin` CLI calls those functions. {{ className: 'lead' }}
+
+Source: [github.com/twinfile/core](https://github.com/twinfile/core). Commands: [twin CLI](/cli).
+
+## Install {{ anchor: false }}
+
+```ini
+# ~/.npmrc
+@twinfile:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=YOUR_GITHUB_TOKEN
+```
+
+```bash
+yarn add @doppler-group/twinfile-core
+yarn twin check ./my-place
+```
+
+Developing core itself: clone `spec` beside it, then `yarn install`, `yarn check`, `yarn conformance`, `yarn build`.
+
+## API {{ anchor: false }}
+
+| Job | Functions |
+| --- | --- |
+| Load and validate | `loadTwinfile`, `validateTwinfileYamlPath`, `createTwinValidator` |
+| Examples and local refs | `resolveExamplePlace`, `listExamplePlaceRefs`, `loadTwinLocalMap` |
+| Build | `buildTwinfile`, `composeScenarioLayers`, `mergeObjects`, `ContractChecker` |
+| Registry | `packUnitOci`, `pushUnitToRegistry`, `pullUnitFromRegistry` |
+
+Core stays free of closed-host imports. `core/scripts/check-open-standard.mjs` fails CI when one appears.

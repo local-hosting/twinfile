@@ -1,0 +1,101 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/ops/sensors.schema.json",
+  "type": "object",
+  "required": [
+    "sensors"
+  ],
+  "properties": {
+    "sensors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "observes"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "name": {
+            "type": "string"
+          },
+          "observes": {
+            "type": "string"
+          },
+          "space": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "feed": {
+            "type": "object",
+            "required": [
+              "protocol",
+              "url"
+            ],
+            "properties": {
+              "protocol": {
+                "enum": [
+                  "file",
+                  "sensorthings",
+                  "ngsi-ld"
+                ]
+              },
+              "url": {
+                "type": "string"
+              },
+              "replay": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          },
+          "simulate": {
+            "type": "object",
+            "required": [
+              "every"
+            ],
+            "properties": {
+              "every": {
+                "type": "string",
+                "minLength": 1
+              },
+              "uplink": {
+                "type": "string",
+                "minLength": 1
+              },
+              "dropout": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1
+              }
+            },
+            "additionalProperties": true
+          },
+          "unit": {
+            "type": "string"
+          },
+          "brick": {
+            "type": "string"
+          },
+          "properties": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "minLength": 1
+            }
+          },
+          "dtpr": {
+            "$ref": "https://twinfile.org/schemas/1/oci/dtpr.schema.json"
+          },
+          "ext": {
+            "type": "object"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,29 @@
+export const metadata = {
+  title: '@doppler-group/twinfile-spec',
+  description: 'Where the normative text, schemas, and conformance vectors live.',
+}
+
+# @doppler-group/twinfile-spec
+
+The spec is the source of truth: prose, JSON Schema (2020-12), and conformance vectors. It has no runtime. `@doppler-group/twinfile-core` pins a spec version and passes its vectors. {{ className: 'lead' }}
+
+Current draft: `1.0.0-draft.1`. Manifest field: `twinfile: 1`. Source: [github.com/twinfile/spec](https://github.com/twinfile/spec).
+
+## Read the standard {{ anchor: false }}
+
+Start at [doc/index.md](https://github.com/twinfile/spec/blob/main/doc/index.md).
+
+| Topic | Document |
+| --- | --- |
+| Place Twinfile | [Place Twinfile](https://github.com/twinfile/spec/blob/main/doc/kinds/kinds.md) |
+| Place layers and archetypes | [Place layers](https://github.com/twinfile/spec/blob/main/doc/place/place.md) |
+| Authoring order | [Composition](https://github.com/twinfile/spec/blob/main/doc/build/composition.md) |
+| Merge order | [Build layers](https://github.com/twinfile/spec/blob/main/doc/build/layers.md) |
+| Build output | [Built Place](https://github.com/twinfile/spec/blob/main/doc/build/built-place.md) |
+| Registries | [Packaging](https://github.com/twinfile/spec/blob/main/doc/pack/refs.md) |
+
+Schemas on this site are the `$id` URLs: [JSON Schema](/schemas). A format change lands in spec first. Core and examples follow.
+
+```bash
+cd spec && yarn install && yarn check
+```

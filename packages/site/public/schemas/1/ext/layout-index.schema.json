@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/ext/layout-index.schema.json",
+  "type": "object",
+  "required": [
+    "layout_index"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "layout_index": {
+      "type": "object",
+      "required": [
+        "regions"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 1
+        },
+        "regions": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/region"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "region": {
+      "type": "object",
+      "required": [
+        "id"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+        },
+        "title": {
+          "type": "string"
+        },
+        "granularity": {
+          "enum": [
+            "site",
+            "zone",
+            "floor",
+            "room"
+          ]
+        },
+        "space_ids": {
+          "type": "array",
+          "items": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          }
+        },
+        "detail_layers": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "children": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/region"
+          }
+        }
+      }
+    }
+  }
+}

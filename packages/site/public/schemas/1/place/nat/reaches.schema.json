@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/nat/reaches.schema.json",
+  "type": "object",
+  "required": [
+    "reaches"
+  ],
+  "properties": {
+    "reaches": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "length_m",
+          "flows_to"
+        ],
+        "properties": {
+          "id": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          },
+          "length_m": {
+            "type": "number"
+          },
+          "flows_to": {
+            "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId"
+          }
+        }
+      }
+    }
+  }
+}
