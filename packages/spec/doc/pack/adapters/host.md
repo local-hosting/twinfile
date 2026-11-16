@@ -10,7 +10,7 @@ Open Twinfile ships **validation and artifacts** in `@doppler-group/twinfile-cor
 | World session / player | `openTimelineForPlace`, scenario `clock:` | Advance `t`, scrub, play; publish IN messages from `timeline` edges and `placeType.controls` — not `use.runner` stdout |
 | Canvas UI | `twin://processors` (`graph` + `ui`), `loadPatchModuleTypeCatalog()` | Edit `manifest.processors`, save to unit tree |
 | Unit / module summary | MCP `place_card`, `twin summary`, `twin://place` | Host renders HTML from `TwinfileSummaryV1` (product UI pack in the host repo) |
-| Catalog preview | MCP + `twin build` / `twin describe` | Open stack has no catalog web app. Product hosts MAY expose preview HTTP; **`entry`** = spatial host place; optional programme **lens** for session clock ([World session](../place/world-session.md)). |
+| Catalog preview | MCP + `twin build` / `twin describe` | Open stack has no catalog web app. Product hosts MAY expose preview HTTP; **`entry`** = spatial host place; optional programme **lens** for session clock ([World session](../../place/world-session.md)). |
 | Validation | `twin check --profile processors`, MCP `processors_validate` | Fail before wiring |
 
 Hosts MUST NOT rewrite merged place geometry inside the patch editor; binds are **`ref:space`**, **`ref:asset`**, **`ref:building`** only.

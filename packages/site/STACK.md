@@ -21,7 +21,7 @@ examples (golden catalog) + @doppler-group/twinfile-simulator (situations / view
 | URL | GitHub | Role |
 | --- | --- | --- |
 | [twinfile.org](https://twinfile.org) | [`packages/site/`](.) in `doppler-group/twinfile` | Guides and JSON Schema URLs |
-| [accord.fm](https://accord.fm) | [`accord-labs/accord.fm`](../../accord-labs/accord.fm) | Accord Labs — local-first AI |
+| [accord.fm](https://accord.fm) | `accord-labs/accord.fm` | Accord Labs — local-first AI |
 
 CLI static output (disclose HTML, viewer) shares CSS via [`src/styles/twinfile-output.css`](src/styles/twinfile-output.css) when `@doppler-group/twinfile-core` is checked out beside this tree.
 

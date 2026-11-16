@@ -20,7 +20,7 @@ twinfile/
 | **Site** | [`packages/site/`](packages/site/) | [twinfile.org](https://twinfile.org) |
 | **Tooling** | [`packages/tooling/`](packages/tooling/) | `check:twinfile`, hygiene, sync scripts |
 
-Manifest: [`catalog/manifest.yaml`](catalog/manifest.yaml). Agent map: [`AGENTS.md`](AGENTS.md). Consumer cutover: [`packages/tooling/FIELDWISE-MIGRATION.md`](packages/tooling/FIELDWISE-MIGRATION.md).
+Layout: [`catalog/README.md`](catalog/README.md). Agent map: [`AGENTS.md`](AGENTS.md).
 
 Sibling repos (portal deps): **`../geotypes`**, **`../geokit`**, **`../geokit-swift`**, **`../frameworks`**.
 
@@ -55,7 +55,7 @@ const place = resolveExamplePlace('twinfile/shop:0.2.0', { examplesRoot });
 const built = await buildTwinfile(place.rootDir, { examplesRoot });
 ```
 
-Local ref overrides: [`catalog/conf/twin.local.yaml`](catalog/conf/twin.local.yaml) (also via `catalog/place/examples/twin.local.yaml`). Ops env: **`TF_TWINFILE_ROOT`**; **`TF_PLACE_CATALOG`** / **`TF_EXAMPLES_ROOT`** → `catalog/place/examples`; **`TF_SIMULATOR_ROOT`** → `packages/simulator` (see [glossary — repository layout](packages/spec/doc/glossary.md#repository-layout-prose)).
+Local ref overrides: [`catalog/place/examples/twin.local.yaml`](catalog/place/examples/twin.local.yaml); golden digests in [`published-refs.json`](catalog/place/examples/published-refs.json). Ops env: **`TF_TWINFILE_ROOT`**; **`TF_PLACE_CATALOG`** / **`TF_EXAMPLES_ROOT`** → `catalog/place/examples`; **`TF_SIMULATOR_ROOT`** → `packages/simulator` (see [glossary — repository layout](packages/spec/doc/glossary.md#repository-layout-prose)).
 
 Hygiene: `yarn hygiene` (`packages/tooling/scripts/repo-hygiene.mjs`).
 
@@ -73,11 +73,11 @@ See [`packages/site/STACK.md`](packages/site/STACK.md) and [`packages/site/ROADM
 
 Classification and simulation are different packages.
 
-**[`geotypes/`](geotypes/) classifies.** A registry slug (`hotel`, `public_park`, `fire_hydrant`) resolves to three axes — extent, vertical, movement — and those axes look up one archetype (`single_level`, `indoor_stack`, `campus`, `open_area`, `linear`). `placeScaffoldForSlug` returns the archetype and a suggested `authoring_scale`. `placeDecorationsForSlug` suggests situations and layer files. `isAssetGeotype` marks a point with no interior (hydrant, meter, pole) as an asset row, not a place. Provider crosswalks cover Foursquare, Google, OSM, and HERE. The map picture is the oracle: a pin, a site boundary, open land, or a line.
+**`../geotypes` classifies.** A registry slug (`hotel`, `public_park`, `fire_hydrant`) resolves to three axes — extent, vertical, movement — and those axes look up one archetype (`single_level`, `indoor_stack`, `campus`, `open_area`, `linear`). `placeScaffoldForSlug` returns the archetype and a suggested `authoring_scale`. `placeDecorationsForSlug` suggests situations and layer files. `isAssetGeotype` marks a point with no interior (hydrant, meter, pole) as an asset row, not a place. Provider crosswalks cover Foursquare, Google, OSM, and HERE. The map picture is the oracle: a pin, a site boundary, open land, or a line.
 
-**Twinfile builds the simulation for that class.** A place unit records the archetype geotypes already resolved and inherits a golden base (`from: twinfile/base-campus:0.1.0` and the other `base-*` units). `@doppler-group/twinfile-core` checks the archetype's axes at load (stacked places set `level` on every space, sequenced places set `visit_order`). A scenario then stacks portable units in a fixed order: place, events, situations, plan role bindings, scenario patches, args ([RFC 0001](spec/rfcs/0001-five-layers.md)). A situation names phases and the roles it expects. A plan binds those roles to this place. A runner reads the built bundle and writes a timeline ([Runners](spec/doc/pack/runners.md)). Indoor, covered, and outdoor stay on each space as `exposure`. Geometry is a reference.
+**Twinfile builds the simulation for that class.** A place unit records the archetype geotypes already resolved and inherits a golden base (`from: twinfile/base-campus:0.1.0` and the other `base-*` units). `@doppler-group/twinfile-core` checks the archetype's axes at load (stacked places set `level` on every space, sequenced places set `visit_order`). A scenario then stacks portable units in a fixed order: place, events, situations, plan role bindings, scenario patches, args ([RFC 0001](packages/spec/rfcs/0001-five-layers.md)). A situation names phases and the roles it expects. A plan binds those roles to this place. A runner reads the built bundle and writes a timeline ([Runners](packages/spec/doc/pack/runners.md)). Indoor, covered, and outdoor stay on each space as `exposure`. Geometry is a reference.
 
-Axis rules are written in the spec ([Place archetypes](spec/doc/place/place-archetypes.md)) and executed in `@doppler-group/geotypes`. Field-level crosswalks to IMDF, BOT, Brick, SOSA, GTFS, and DTPR stay in the [appendix](spec/doc/map/appendix.md).
+Axis rules are written in the spec ([Place archetypes](packages/spec/doc/place/place-archetypes.md)) and executed in `@doppler-group/geotypes`. Field-level crosswalks to IMDF, BOT, Brick, SOSA, GTFS, and DTPR stay in the [appendix](packages/spec/doc/map/appendix.md).
 
 | Precedent | What it standardizes | Geotypes (classify) | Twinfile (build the simulation) |
 | --- | --- | --- | --- |
@@ -91,7 +91,7 @@ Axis rules are written in the spec ([Place archetypes](spec/doc/place/place-arch
 | [OGC IMDF](https://www.ogc.org/standards/indoor-mapping-data-format/) | Venue, level, unit, opening, amenity categories | Extent and vertical decide whether the place is a footprint, a stack, or a site | `levels`, `spaces`, `openings` authored on the unit |
 | [BOT](https://w3c-lbd-cg.github.io/bot/) | Site, building, storey, space, and topology relations | Same spatial scale, expressed as three axes | `levels` and `spaces` with load-time rules for the resolved archetype |
 | [Brick](https://brickschema.org/) | Equipment and point classes | Resource slugs and asset slugs; no Brick class tree | `sensors` and `assets` layers; situation roles are a separate vocabulary |
-| [W3C SOSA](https://www.w3.org/TR/vocab-ssn/) / [OGC SensorThings](https://www.ogc.org/standards/sensorthings/) | Sensors, observed properties, datastreams | Sensor-bearing categories suggest a `sensors` layer | Sensor rows on the place; a runner reads them on the scenario clock. Published sensors carry [DTPR](spec/doc/gov/transparency.md) disclosures |
+| [W3C SOSA](https://www.w3.org/TR/vocab-ssn/) / [OGC SensorThings](https://www.ogc.org/standards/sensorthings/) | Sensors, observed properties, datastreams | Sensor-bearing categories suggest a `sensors` layer | Sensor rows on the place; a runner reads them on the scenario clock. Published sensors carry [DTPR](packages/spec/doc/gov/transparency.md) disclosures |
 | [ETSI NGSI-LD](https://www.etsi.org/committee/cim) | Context entity types and subscriptions | Registry slugs and provider crosswalks | Unit refs, built and digested, then run |
 | [FMI](https://fmi-standard.org/) | Numerical model exchange and co-simulation | — | The runner is the solver. The bundle is the scenario contract it reads |
 | [IEEE 1516 HLA](https://standards.ieee.org/standard/1516-2010.html) | Federated simulators and managed time | — | One bundle, one runner. Composition is an authoring-time merge |

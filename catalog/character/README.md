@@ -1,6 +1,6 @@
 # @doppler-group/twinfile-character
 
-Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../packages/spec/doc/type-package-layout.md).
+Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../../packages/spec/doc/type-package-layout.md).
 
 ```text
 src/

@@ -156,7 +156,7 @@ You do **not** need extra archetype steps for indoor and outdoor on one site —
 | Geotype suggests `single_level`, you need floor-by-floor nav | **`from: base-indoor-stack`**, **`archetype: indoor_stack`**, add **`levels.yaml`** |
 | Outdoor property with many indoor pavilions | **`archetype: campus`**, indoor pavilions as spaces with **`exposure: indoor`** + **`openings`** |
 
-Golden examples: [`examples/expo`](../../../catalog/place/examples/expo/) (**campus** with indoor and outdoor spaces), [`examples/shop`](../../../catalog/place/examples/shop/) (**indoor_stack** mall story).
+Golden examples: [`examples/expo`](../../../../catalog/place/examples/expo/) (**campus** with indoor and outdoor spaces), [`examples/shop`](../../../../catalog/place/examples/shop/) (**indoor_stack** mall story).
 
 **Customize by combining catalog elements** (bases, situations, assets): [Decorate a twin](decorate-twin.md).
 

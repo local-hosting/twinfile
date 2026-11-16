@@ -2,7 +2,7 @@
 
 Documentation for [Twinfile](https://twinfile.org): guides, reference, and the canonical JSON Schema tree (`/schemas/1/…`, the `$id` URLs in `@doppler-group/twinfile-spec`).
 
-The Accord Labs site lives in [`accord-labs/accord.fm`](../../accord-labs/accord.fm). Brand code (fonts, tokens, logo) is copied into this app under `src/brand` and `src/styles`. It is not shared with that site.
+The Accord Labs site lives in `accord-labs/accord.fm`. Brand code (fonts, tokens, logo) is copied into this app under `src/brand` and `src/styles`. It is not shared with that site.
 
 ## Local development
 

@@ -60,4 +60,4 @@ Open-standard guards: `packages/tooling/scripts/check-vendor-neutral.mjs` (vendo
 
 ## Release
 
-Tag **`v0.1.0`** on `main` to run [publish.yml](.github/workflows/publish.yml) (npm `@doppler-group/twinfile-core@0.1.0`). The workflow needs repo secret **`TF_PACKAGES_TOKEN`** (PAT with `repo` + `write:packages`) to check out `twinfile/spec` and publish. **`@doppler-group/twinfile-spec@1.0.0-draft.1`** must exist on GitHub Packages (tag `v1.0.0-draft.1` on spec — already published if the tag workflow returned 409).
+Tag **`v0.1.0`** on `main` to run [publish.yml](../../.github/workflows/publish-doppler-group.yml) (npm `@doppler-group/twinfile-core@0.1.0`). The workflow needs repo secret **`TF_PACKAGES_TOKEN`** (PAT with `repo` + `write:packages`) to check out `twinfile/spec` and publish. **`@doppler-group/twinfile-spec@1.0.0-draft.1`** must exist on GitHub Packages (tag `v1.0.0-draft.1` on spec — already published if the tag workflow returned 409).
