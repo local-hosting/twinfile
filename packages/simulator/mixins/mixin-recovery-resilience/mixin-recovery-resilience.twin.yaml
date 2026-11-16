@@ -7,7 +7,7 @@ name: Recovery hooks — relief staging, survey post, optional shelter wind-down
 layers:
   - place/spaces.yaml
   - place/stations.yaml
-  - plans/recovery-resilience.yaml
+  - bindings/recovery-resilience.yaml
 provides:
   situations:
     - recovery-resilience

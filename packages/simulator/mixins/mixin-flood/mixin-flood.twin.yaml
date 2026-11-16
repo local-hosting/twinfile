@@ -2,17 +2,18 @@ twinfile: 1
 kind: mixin
 version: 0.1.0
 stability: example
-id: mixin-dam-release
-name: Dam-release hooks — water launch, flood refuge, stage gauge, wired plan
+id: mixin-flood
+name: Flood hooks — refuge, maintained crossing, stage gauge, wired plan
 layers:
   - place/markers.yaml
   - place/gauges.yaml
-  - plans/dam-release.yaml
+  - bindings/flood.yaml
 applies_to:
   extent:
     - route
     - area
     - site
+    - footprint
 provides:
   situations:
-    - dam-release
+    - flood

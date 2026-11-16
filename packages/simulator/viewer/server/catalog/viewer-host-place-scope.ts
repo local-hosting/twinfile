@@ -1,5 +1,6 @@
 import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { findTwinfileYamlPath } from '@local-hosting/twinfile-core';
 
 import { parse as parseYaml } from 'yaml';
 
@@ -27,9 +28,7 @@ function hostPlaceFromCatalogParent(twinfile: Record<string, unknown> | undefine
 
 function readTwinfileDoc(unitDir: string): Record<string, unknown> | undefined {
   try {
-    const manifestFile = ['Twinfile.yaml', 'twinfile.yaml']
-      .map((name) => join(unitDir, name))
-      .find((p) => statSync(p, { throwIfNoEntry: false })?.isFile());
+    const manifestFile = findTwinfileYamlPath(unitDir);
     if (!manifestFile) return undefined;
     const doc = parseYaml(readFileSync(manifestFile, 'utf8'));
     return doc && typeof doc === 'object' && !Array.isArray(doc) ? (doc as Record<string, unknown>) : undefined;

@@ -7,7 +7,7 @@ name: Earthquake hooks — shelter, exits, outdoor survey zone, wired plan
 layers:
   - place/spaces.yaml
   - place/openings.yaml
-  - plans/earthquake.yaml
+  - bindings/earthquake.yaml
 provides:
   situations:
     - earthquake

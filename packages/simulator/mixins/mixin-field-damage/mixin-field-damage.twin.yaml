@@ -7,7 +7,7 @@ name: Field-damage hooks — damage hotspot, debris staging, safe lane, survey
 layers:
   - place/markers.yaml
   - place/stations.yaml
-  - plans/field-damage.yaml
+  - bindings/field-damage.yaml
 provides:
   situations:
     - field-damage

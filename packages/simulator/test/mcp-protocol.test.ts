@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 
 import { handleMcpProtocolMessage, type McpSession } from '@local-hosting/twinfile-simulator';
 import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
+import { twinHeadPath } from '@local-hosting/twinfile-core';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 const shop = join(examplesRoot, 'shop');
@@ -105,7 +106,7 @@ describe('MCP protocol', () => {
       expect(body.error).toBeUndefined();
       expect(body.ok).toBe(true);
       expect(body.name).toBe('mall-demo');
-      expect(readFileSync(join(dir, 'Twinfile.yaml'), 'utf8')).toContain('shopping_mall');
+      expect(readFileSync(twinHeadPath(dir), 'utf8')).toContain('shopping_mall');
 
       const still = await rpc(shop, state, 'tools/call', {
         name: 'place_path',
@@ -135,7 +136,7 @@ describe('MCP protocol', () => {
       expect(body.error).toBeUndefined();
       expect(body.ok).toBe(true);
       expect(body.dir).toBe(empty);
-      const twinfile = readFileSync(join(empty, 'Twinfile.yaml'), 'utf8');
+      const twinfile = readFileSync(twinHeadPath(empty), 'utf8');
       expect(twinfile).toContain('creek');
       expect(twinfile).not.toContain('from:');
     } finally {
@@ -229,7 +230,7 @@ describe('MCP protocol', () => {
   it('reads a run record written under the place', async () => {
     const root = mkdtempSync(join(tmpdir(), 'twinfile-mcp-'));
     writeFileSync(
-      join(root, 'Twinfile.yaml'),
+      twinHeadPath(root),
       `twinfile: 1
 kind: place
 id: demo

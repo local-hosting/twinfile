@@ -1,5 +1,6 @@
 import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { findTwinfileYamlPath } from '@local-hosting/twinfile-core';
 
 import { parse } from 'yaml';
 
@@ -10,15 +11,7 @@ import {
 } from '@local-hosting/twinfile-place';
 
 function readManifest(unitDir: string): Record<string, unknown> | undefined {
-  const manifestFile = ['Twinfile.yaml', 'twinfile.yaml']
-    .map((name) => join(unitDir, name))
-    .find((p) => {
-      try {
-        return statSync(p).isFile();
-      } catch {
-        return false;
-      }
-    });
+  const manifestFile = findTwinfileYamlPath(unitDir);
   if (!manifestFile) return undefined;
   try {
     const doc = parse(readFileSync(manifestFile, 'utf8'));

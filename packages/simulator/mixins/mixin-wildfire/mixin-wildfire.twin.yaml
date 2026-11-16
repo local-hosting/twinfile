@@ -8,7 +8,7 @@ layers:
   - place/spaces.yaml
   - place/openings.yaml
   - place/markers.yaml
-  - plans/wildfire.yaml
+  - bindings/wildfire.yaml
 provides:
   situations:
     - wildfire

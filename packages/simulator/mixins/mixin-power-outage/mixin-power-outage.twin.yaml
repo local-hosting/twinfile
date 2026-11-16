@@ -8,7 +8,7 @@ layers:
   - place/spaces.yaml
   - place/markers.yaml
   - place/stations.yaml
-  - plans/power-outage.yaml
+  - bindings/power-outage.yaml
 provides:
   situations:
     - power-outage
