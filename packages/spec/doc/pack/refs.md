@@ -6,7 +6,7 @@ OCI: `oci:ghcr.io/local-hosting/twinfile/<name>:<tag>@sha256:<digest>` for pinne
 
 JSON Schema: `#/$defs/twinfileRef` in [`defs.json`](../../schemas/1/defs.json).
 
-Relative paths and `github:` refs are allowed inside a unit repo. Published scenarios use **`twinfile: 2`** with **`steps: [{ copy: … }]`** (typed refs recommended: `twinfile/situation/severe-weather:1.0.0`, `twinfile/event/arena-game-day:1.0.0`; flat `twinfile/severe-weather:1.0.0` still resolves — [RFC 0008](../../rfcs/0008-typed-unit-refs/index.md)). Migrate v1 **`include:`** with `twin fmt --upgrade=2`.
+Relative paths and `github:` refs are allowed inside a unit repo. Published scenarios use **`twinfile: 2`** with **`steps: [{ copy: … }]`** (typed refs recommended: `twinfile/event/severe-weather:1.0.0`, `twinfile/event/arena-game-day:1.0.0`; flat `twinfile/severe-weather:1.0.0` still resolves — [RFC 0008](../../rfcs/0008-typed-unit-refs/index.md)). Migrate v1 **`include:`** with `twin fmt --upgrade=2`.
 
 ## Three hierarchies (do not overload one ref string)
 
@@ -25,7 +25,7 @@ The **ref string** is flat (`twinfile/<name>:<tag>`). **Kind** is always manifes
 | `place` (site) | venue slug | `arena`, `transit-hub-campus` |
 | `place` (nested stage, unpublished) | `{site}-{part}` | `arena-concourse` (`places/arena/parts/concourse`) |
 | `base` | `base-{archetype}` | `base-campus` |
-| `mixin` | `mixin-{topic}` | `mixin-severe-weather` |
+| `mixin` | `mixin-{topic}` | `mixin-assets` |
 | `situation` | shared fiction slug | `severe-weather` |
 | `event` | `{site}-{story}` | `arena-game-day` |
 | `scenario` | `{site}-{question}` | `arena-flood-shelter-standup` |
