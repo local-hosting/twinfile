@@ -8,9 +8,8 @@ node_modules/
 !.yarn/versions
 
 dist/
-build/
-!**/src/**/build/
-!**/doc/**/build/
+# Only ignore repo-root build output — not package src/**/build/ (merge, journey, etc.)
+/build/
 coverage/
 !**/src/**/coverage/
 .next/

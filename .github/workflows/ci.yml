@@ -63,4 +63,9 @@ jobs:
 
       - run: yarn install --no-immutable
 
+      - name: Verify tracked src/build trees (gitignore regression guard)
+        run: |
+          test -f packages/core/src/build/merge.ts
+          test -f catalog/story/src/contract/narrative/journey/build/build-journey.ts
+
       - run: yarn run check:twinfile
