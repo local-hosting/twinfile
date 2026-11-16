@@ -53,7 +53,7 @@ function pickIntent(
   const pool = segment?.intentIds.length ? segment.intentIds : catalog.intentIds;
   const picked = pickRandomFrom(pool, random ?? Math.random);
   if (!picked) {
-    throw new Error('No intents available in org catalog');
+    throw new Error('No intents available in planning catalog');
   }
   return picked;
 }
@@ -111,12 +111,12 @@ export function planStoryCreateHeuristic(input: {
 }): StoryPlanHeuristicSelectionV1 {
   const scenario = input.scenario.trim();
   if (input.catalog.segments.length === 0) {
-    throw new Error('Org AXM catalog has no segments — publish segment catalog first');
+    throw new Error('Planning catalog has no segments — publish segment catalog first');
   }
 
   const explicitSegmentId = input.segmentId?.trim();
   if (explicitSegmentId && !input.catalog.segments.some((row) => row.id === explicitSegmentId)) {
-    throw new Error(`segmentId "${explicitSegmentId}" is not in org catalog`);
+    throw new Error(`segmentId "${explicitSegmentId}" is not in planning catalog`);
   }
   const random = resolveStoryPlanRandom({ random: input.random, seed: input.seed });
   const segmentId = pickSegmentId(
@@ -129,7 +129,7 @@ export function planStoryCreateHeuristic(input: {
   const places = input.catalog.fleetPlaces;
   let storeSlug = input.storeSlug?.trim();
   if (storeSlug && !places.some((row) => row.slug === storeSlug)) {
-    throw new Error(`storeSlug "${storeSlug}" is not in org fleet catalog`);
+    throw new Error(`storeSlug "${storeSlug}" is not in fleet place catalog`);
   }
   if (!storeSlug && places.length > 0) {
     let best: (typeof places)[number] | undefined;
@@ -149,7 +149,7 @@ export function planStoryCreateHeuristic(input: {
   }
 
   if (input.catalog.engagementLevelIds.length === 0) {
-    throw new Error('Org customer catalog has no engagement levels');
+    throw new Error('Customer planning catalog has no engagement levels');
   }
   const engagementLevelId = pickEngagement(scenario, input.catalog.engagementLevelIds, random);
   const resolvedEngagement = input.engagementLevelId ?? engagementLevelId;

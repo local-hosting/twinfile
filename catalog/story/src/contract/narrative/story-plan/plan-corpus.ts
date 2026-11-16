@@ -170,8 +170,8 @@ export function buildStoryPlanChecklist(input: {
       ok: input.catalog.segments.length > 0,
       detail:
         input.catalog.segments.length > 0
-          ? `${input.catalog.segments.length} segment(s) in AXM catalog`
-          : 'No segments — run admin publish, then retry after sync',
+          ? `${input.catalog.segments.length} segment(s) in planning catalog`
+          : 'No segments — publish planning catalog, then retry',
     },
     {
       id: 'fleet',
