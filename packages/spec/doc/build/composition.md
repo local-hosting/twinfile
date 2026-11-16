@@ -70,7 +70,7 @@ layers:
   # … routes, assets, plans/*.yaml …
 ```
 
-**Campus + nested building** (`twinfile: 2`) — site patches, then a copy of the building Twinfile under `parts/`. Pattern guide: [Campus → building → floor](../place/campus-building-floor.md). Examples: [`transit-hub-campus`](../../../catalog/place/examples/mobility-hub/campus/), [`airport`](../../../catalog/place/examples/airport/) (building copies `./floors/airside`), [`arena`](../../../catalog/place/examples/arena/).
+**Campus + nested building** (`twinfile: 2`) — site patches, then a copy of the building Twinfile under `parts/`. Pattern guide: [Campus → building → floor](../place/campus-building-floor.md). Examples: [`transit-hub-campus`](../../../../catalog/place/examples/mobility-hub/campus/), [`airport`](../../../../catalog/place/examples/airport/) (building copies `./floors/airside`), [`arena`](../../../../catalog/place/examples/arena/).
 
 ```yaml
 from: twinfile/base-campus:0.1.0
@@ -107,7 +107,7 @@ Conventions:
 
 ## What `twin build` records
 
-For a place unit, **`twin build`** merges patches, validates contracts, and returns a **`Place`** in memory (see [Built Place](place-image.md)). **`Twinfile.lock`** pins twinfile, tree, and layer **chain** digests when lock write is enabled.
+For a place unit, **`twin build`** merges patches, validates contracts, and returns a **`Place`** in memory (see [Built Place](built-place.md)). **`Twinfile.lock`** pins twinfile, tree, and layer **chain** digests when lock write is enabled.
 
 Inspect layers without a separate on-disk artifact:
 
@@ -120,4 +120,4 @@ Scenario builds extend the stack: **place** → events → situations → scenar
 
 ## OCI
 
-**`twin pack`**, **`twin push`**, pinned refs `oci:…@sha256:…`. See [Refs](../pack/refs.md) and [Built Place](place-image.md) and [Refs](../pack/refs.md).
+**`twin pack`**, **`twin push`**, pinned refs `oci:…@sha256:…`. See [Refs](../pack/refs.md) and [Built Place](built-place.md) and [Refs](../pack/refs.md).

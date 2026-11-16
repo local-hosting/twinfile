@@ -1,6 +1,6 @@
 # Example workbench (`twin-view`)
 
-Local dev host for golden [`catalog/place/examples/`](../../catalog/place/examples/) and simulator place events.
+Local dev host for golden [`catalog/place/examples/`](../../../catalog/place/examples/) and simulator place events.
 
 ```bash
 yarn workbench    # monorepo root → http://localhost:4173

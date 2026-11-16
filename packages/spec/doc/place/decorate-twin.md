@@ -71,7 +71,7 @@ See [Composition](../build/composition.md) for full compose order (place → eve
 | `twinfile/base-open-area:0.1.0` | Open land (park, field, farm); outdoor zones, no buildings |
 | `twinfile/base-linear:0.1.0` | Path / corridor; **`visit_order`** spaces |
 
-Paths: [`examples/`](../../../catalog/place/examples/). Map-first pick: [Place archetypes](place-archetypes.md#axes--archetype).
+Paths: [`examples/`](../../../../catalog/place/examples/). Map-first pick: [Place archetypes](place-archetypes.md#axes--archetype).
 
 ### Situations (reuse across places)
 
@@ -93,13 +93,13 @@ Paths: [`examples/`](../../../catalog/place/examples/). Map-first pick: [Place a
 
 Common **natural hazard** labels map to these units in [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml) — see [Natural hazards](../kinds/natural-hazards.md).
 
-Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../catalog/place/examples/expo/plans/severe-weather.yaml) on expo). Resolve refs with **`TF_SIMULATOR_ROOT`** + [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
+Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`plans/*.yaml`** maps those roles to **your** space and opening ids ([`plans/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/plans/severe-weather.yaml) on expo). Resolve refs with **`TF_SIMULATOR_ROOT`** + [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
 
 ### Decoration layer files (copy patterns)
 
 | File | Decorates with |
 | --- | --- |
-| **`place/assets.yaml`** | Devices, kiosks, signage, DTPR metadata ([shop example](../../../catalog/place/examples/shop/place/assets.yaml)) |
+| **`place/assets.yaml`** | Devices, kiosks, signage, DTPR metadata |
 | **`place/sensors.yaml`** | Sensor placements (when scenarios need them) |
 | **`place/ai.yaml`** | Agent / AI bindings (when used) |
 | **`place/visits.yaml`** | Visit moments (layout TOC; runtime movement is host-owned) |
@@ -131,9 +131,9 @@ See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/pl
 | “Campus like the example, different name/coords” | **`from: base-campus`** + patch **`place/place.yaml`** only |
 | “Add retail tech to a floor” | Add **`place/assets.yaml`** layer |
 | “Enable storm scenario” | Add **`plans/severe-weather.yaml`** + space **`roles`** + scenario unit |
-| “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`plans`** ([expo](../../../catalog/place/examples/expo/)) |
+| “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`plans`** ([expo](../../../../catalog/place/examples/expo/)) |
 
-Thin derived examples: [`mobility-hub/campus`](../../../catalog/place/examples/mobility-hub/campus/) — **`from:`** campus base, `place.kind: mobility_hub`, site `steps:`, **`copy: ./parts/transit-hub`**, **`transit-disruption`** plan. Building + floor: [`places/airport`](../../../catalog/place/examples/airport/) (the building copies `./floors/airside`). Single building: [`expo`](../../../catalog/place/examples/expo/), [`arena`](../../../catalog/place/examples/arena/), [`port`](../../../catalog/place/examples/port/). **`open_area`** [`park`](../../../catalog/place/examples/park/) stays site-only ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). When geotypes **`suggest_building_import`** is true for the resolved archetype (today **`campus`** only), `twin init place --geotype` writes `PARTS.md`.
+Thin derived examples: [`mobility-hub/campus`](../../../../catalog/place/examples/mobility-hub/campus/) — **`from:`** campus base, `place.kind: mobility_hub`, site `steps:`, **`copy: ./parts/transit-hub`**, **`transit-disruption`** plan. Building + floor: [`places/airport`](../../../../catalog/place/examples/airport/) (the building copies `./floors/airside`). Single building: [`expo`](../../../../catalog/place/examples/expo/), [`arena`](../../../../catalog/place/examples/arena/), [`port`](../../../../catalog/place/examples/port/). **`open_area`** [`park`](../../../../catalog/place/examples/park/) stays site-only ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). When geotypes **`suggest_building_import`** is true for the resolved archetype (today **`campus`** only), `twin init place --geotype` writes `PARTS.md`.
 
 ## Geotype decorations
 
@@ -178,4 +178,4 @@ Decoration **does not** change **`archetype`** rules—stack **layout** (recipe 
 - [Place recipe](place-recipe.md) — `FROM` + layout + exposure  
 - [Composition](../build/composition.md) — merge order and OCI  
 - [Layout navigation](layout-navigation.md) — coarse → fine layer files  
-- [Golden catalog README](../../../catalog/place/examples/README.md) — place ↔ situation ↔ scenario matrix  
+- [Golden catalog README](../../../../catalog/place/examples/README.md) — place ↔ situation ↔ scenario matrix  

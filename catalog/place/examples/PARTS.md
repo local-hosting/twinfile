@@ -2,11 +2,11 @@
 
 `twin init place` points authors here when geotypes **`suggest_building_import`** is true (resolved **`campus`** archetype). This file is **authoring prose only** — not merged at `twin build`.
 
-**Patterns:** [Campus → building → floor](../spec/doc/place/campus-building-floor.md).
+**Patterns:** [Campus → building → floor](../../../packages/spec/doc/place/campus-building-floor.md).
 
 A campus is a stack of building cards. Each building is its own Twinfile under `parts/<name>/`; floors nest under `parts/<name>/floors/<floor>/`. The parent copies each one in by path. Nested units are build stages: never published, no `twinfile/` ref.
 
-Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings/…` as a one-release alias for `./parts/…` ([`place-copy.ts`](../packages/core/src/place/place-copy.ts)).
+Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings/…` as a one-release alias for `./parts/…` ([`place-copy.ts`](../src/place/place-copy.ts)).
 
 ## Checklist
 
@@ -28,7 +28,7 @@ Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings
     prefix: <floor>-
 ```
 
-5. **Mobility** — **Passages** (`openings:`) at thresholds; **paths** (`routes:`) for walks with distance. One edge per pair (see [topology taxonomy](../spec/doc/place/topology-taxonomy.md)). `copy:` / `parent` is rollup only; site `openings:` / `routes:` patch links across nested buildings (manual today).
+5. **Mobility** — **Passages** (`openings:`) at thresholds; **paths** (`routes:`) for walks with distance. One edge per pair (see [topology taxonomy](../../../packages/spec/doc/place/topology-taxonomy.md)). `copy:` / `parent` is rollup only; site `openings:` / `routes:` patch links across nested buildings (manual today).
 6. **Plans** — Bind situation **roles** to merged ids (`twin add plan …`); weather often uses zone ids, surge may use prefixed rooms.
 7. **Verify** — `twin build` on the **site**; a missing anchor fails with `no space "<id>" to copy into`.
 
