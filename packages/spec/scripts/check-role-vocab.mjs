@@ -21,7 +21,7 @@ const allowedKinds = new Set([
 const doc = parseYaml(readFileSync(vocabPath, 'utf8'));
 const roles = doc?.roles;
 if (!Array.isArray(roles) || roles.length === 0) {
-  console.error('check-situation-role-vocabulary: missing roles');
+  console.error('check-event-role-vocabulary: missing roles');
   process.exit(1);
 }
 
@@ -30,19 +30,19 @@ for (const row of roles) {
   const id = row?.id;
   const kind = row?.kind;
   if (typeof id !== 'string' || !/^[a-z0-9][a-z0-9-]{0,62}$/.test(id)) {
-    console.error(`check-situation-role-vocabulary: bad id ${JSON.stringify(id)}`);
+    console.error(`check-event-role-vocabulary: bad id ${JSON.stringify(id)}`);
     process.exit(1);
   }
   if (byId.has(id)) {
-    console.error(`check-situation-role-vocabulary: duplicate id ${id}`);
+    console.error(`check-event-role-vocabulary: duplicate id ${id}`);
     process.exit(1);
   }
   if (typeof kind !== 'string' || !allowedKinds.has(kind)) {
-    console.error(`check-situation-role-vocabulary: bad kind for ${id}`);
+    console.error(`check-event-role-vocabulary: bad kind for ${id}`);
     process.exit(1);
   }
   if (row.mode !== 'daily' && row.mode !== 'resilience') {
-    console.error(`check-situation-role-vocabulary: mode for ${id} must be daily or resilience`);
+    console.error(`check-event-role-vocabulary: mode for ${id} must be daily or resilience`);
     process.exit(1);
   }
   byId.set(id, kind);
@@ -70,12 +70,12 @@ function eventHeadPath(id) {
   return join(eventExamplesRoot, id, `${id}.twin.yaml`);
 }
 
-function situationCatalogPresent(situation) {
-  return statSync(eventHeadPath(situation), { throwIfNoEntry: false })?.isFile() === true;
+function eventCatalogPresent(event) {
+  return statSync(eventHeadPath(event), { throwIfNoEntry: false })?.isFile() === true;
 }
 
 for (const id of readdirSync(eventExamplesRoot)) {
-  if (!situationCatalogPresent(id)) continue;
+  if (!eventCatalogPresent(id)) continue;
   scanExpects(parseYaml(readFileSync(eventHeadPath(id), 'utf8')), `catalog/event/${id}`);
 }
 
@@ -84,30 +84,30 @@ if (statSync(catalogPath, { throwIfNoEntry: false })?.isFile()) {
   const catalog = parseYaml(readFileSync(catalogPath, 'utf8'));
   const hazards = catalog?.hazards;
   if (!Array.isArray(hazards) || hazards.length === 0) {
-    console.error('check-situation-role-vocabulary: hazard-catalog missing hazards');
+    console.error('check-event-role-vocabulary: hazard-catalog missing hazards');
     process.exit(1);
   }
   const seenHazard = new Set();
   for (const row of hazards) {
     const id = row?.id;
     if (typeof id !== 'string' || !id) {
-      console.error('check-situation-role-vocabulary: hazard-catalog row missing id');
+      console.error('check-event-role-vocabulary: hazard-catalog row missing id');
       process.exit(1);
     }
     if (seenHazard.has(id)) {
-      console.error(`check-situation-role-vocabulary: duplicate hazard id ${id}`);
+      console.error(`check-event-role-vocabulary: duplicate hazard id ${id}`);
       process.exit(1);
     }
     seenHazard.add(id);
-    const situation = row?.situation;
-    if (situation === null || situation === undefined) continue;
-    if (typeof situation !== 'string' || !situation) {
-      console.error(`check-situation-role-vocabulary: bad situation for hazard ${id}`);
+    const event = row?.event;
+    if (event === null || event === undefined) continue;
+    if (typeof event !== 'string' || !event) {
+      console.error(`check-event-role-vocabulary: bad event for hazard ${id}`);
       process.exit(1);
     }
-    if (!situationCatalogPresent(situation)) {
+    if (!eventCatalogPresent(event)) {
       console.error(
-        `check-situation-role-vocabulary: missing simulator situation ${situation} (hazard ${id})`,
+        `check-event-role-vocabulary: missing simulator event ${event} (hazard ${id})`,
       );
       process.exit(1);
     }
@@ -120,27 +120,27 @@ if (statSync(crosswalkPath, { throwIfNoEntry: false })?.isFile()) {
   const reports = cross?.reports;
   const sites = cross?.sites;
   if (!Array.isArray(reports) || !Array.isArray(sites)) {
-    console.error('check-situation-role-vocabulary: humanitarian crosswalk missing reports/sites');
+    console.error('check-event-role-vocabulary: humanitarian crosswalk missing reports/sites');
     process.exit(1);
   }
   for (const row of reports) {
-    const situation = row?.situation;
-    if (typeof situation !== 'string' || !situation) {
-      console.error('check-situation-role-vocabulary: crosswalk report missing situation');
+    const event = row?.event;
+    if (typeof event !== 'string' || !event) {
+      console.error('check-event-role-vocabulary: crosswalk report missing event');
       process.exit(1);
     }
-    if (!situationCatalogPresent(situation)) {
-      console.error(`check-situation-role-vocabulary: crosswalk missing simulator situation ${situation}`);
+    if (!eventCatalogPresent(event)) {
+      console.error(`check-event-role-vocabulary: crosswalk missing simulator event ${event}`);
       process.exit(1);
     }
   }
   for (const row of sites) {
     const role = row?.role;
     if (typeof role !== 'string' || !byId.has(role)) {
-      console.error(`check-situation-role-vocabulary: crosswalk site role ${JSON.stringify(role)} not in vocabulary`);
+      console.error(`check-event-role-vocabulary: crosswalk site role ${JSON.stringify(role)} not in vocabulary`);
       process.exit(1);
     }
   }
 }
 
-console.log(`check-situation-role-vocabulary ok (${byId.size} roles)`);
+console.log(`check-event-role-vocabulary ok (${byId.size} roles)`);

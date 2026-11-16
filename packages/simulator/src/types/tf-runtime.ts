@@ -33,7 +33,7 @@ type TFPlaceFields = {
   digest?: string;
   clock?: TFClock;
   seed: number;
-  situations?: Record<string, unknown>[];
+  events?: Record<string, unknown>[];
   resolvedArgs?: Record<string, unknown>;
   meta?: Record<string, unknown>;
   mode?: TwinfileUseMode;
@@ -52,7 +52,7 @@ export class TFPlace {
   readonly digest?: string;
   readonly clock?: TFClock;
   readonly seed: number;
-  readonly situations?: Record<string, unknown>[];
+  readonly events?: Record<string, unknown>[];
   readonly resolvedArgs?: Record<string, unknown>;
   readonly meta?: Record<string, unknown>;
   readonly mode?: TwinfileUseMode;
@@ -65,7 +65,7 @@ export class TFPlace {
     this.digest = fields.digest;
     this.clock = fields.clock;
     this.seed = fields.seed;
-    this.situations = fields.situations;
+    this.events = fields.events;
     this.resolvedArgs = fields.resolvedArgs;
     this.meta = fields.meta;
     this.mode = fields.mode;
@@ -121,7 +121,7 @@ export class TFPlace {
       digest: result.digest,
       clock,
       seed: options.seed ?? 1,
-      situations: (result.events ?? []) as Record<string, unknown>[],
+      events: (result.events ?? []) as Record<string, unknown>[],
       resolvedArgs,
       meta,
       compose: result,

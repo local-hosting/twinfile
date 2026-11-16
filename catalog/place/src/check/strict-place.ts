@@ -7,13 +7,13 @@ import {
   checkPlanRolesExact,
   checkPlaceRoleTags,
   checkPlaceRolesInVocabulary,
-  loadSituationRoleVocabulary,
+  loadEventRoleVocabulary,
 } from '@doppler-group/twinfile-core';
 import { ContractChecker, type ExpectsRole, type PlanRoles, type PlaceData } from '@doppler-group/twinfile-core';
 import type { Result, TwinError } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
 import { loadTwinfile, type LoadedTwinfile } from '@doppler-group/twinfile-core';
-import { listPlaceSituationBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
+import { listPlaceEventBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
 import { getDefaultValidator, inlineYamlDocument, validatePlanFile } from '@doppler-group/twinfile-core';
 import { resolveTwinfileByRef } from '@doppler-group/twinfile-core';
 import { catalogResolveOptions } from '@doppler-group/twinfile-core';
@@ -43,7 +43,7 @@ export function mergePlaceDataFromTwinfileAtRoot(
   return merged.value;
 }
 
-function expectsFromSituation(twinfile: Record<string, unknown>): Record<string, ExpectsRole> {
+function expectsFromEvent(twinfile: Record<string, unknown>): Record<string, ExpectsRole> {
   const expects = twinfile.expects;
   if (!expects || typeof expects !== 'object' || Array.isArray(expects)) return {};
   const out: Record<string, ExpectsRole> = {};
@@ -78,14 +78,14 @@ export function strictCheckPlace(unit: LoadedTwinfile, options: StrictCheckOptio
     return err([geotypeErr]);
   }
 
-  const bindings = listPlaceSituationBindings(unit, options);
+  const bindings = listPlaceEventBindings(unit, options);
   if (!bindings.ok) return bindings;
   if (bindings.value.length === 0) {
     return ok({ bindings: 0 });
   }
 
   const checker = new ContractChecker();
-  const vocabulary = loadSituationRoleVocabulary();
+  const vocabulary = loadEventRoleVocabulary();
   const mergedResult = mergePlaceFromTwinfile(unit, options);
   if (!mergedResult.ok) return mergedResult;
   const merged = mergedResult.value;
@@ -104,22 +104,22 @@ export function strictCheckPlace(unit: LoadedTwinfile, options: StrictCheckOptio
     }
 
     const plan = planValid.value;
-    const situationName = String(plan.for ?? '');
+    const eventName = String(plan.for ?? '');
     const catalogOpts = catalogResolveOptions(options.examplesRoot);
-    const situationRef = `twinfile/event/${situationName}:1.0.0`;
-    const situationResolved = resolveTwinfileByRef(situationRef, catalogOpts);
-    if (!situationResolved.ok) {
+    const eventRef = `twinfile/event/${eventName}:1.0.0`;
+    const eventResolved = resolveTwinfileByRef(eventRef, catalogOpts);
+    if (!eventResolved.ok) {
       errors.push({
         code: 'E_MISSING_FILE',
-        message: `Place event not found for binding ${rel}: ${situationName}`,
+        message: `Place event not found for binding ${rel}: ${eventName}`,
         file: join(options.examplesRoot, 'bindings', rel),
       });
       continue;
     }
 
-    const expects = expectsFromSituation(situationResolved.value.loaded.twinfile);
+    const expects = expectsFromEvent(eventResolved.value.loaded.twinfile);
     const planRoles = planRolesFromFile(plan);
-    const missingPlan = checker.checkPlanPresent(planRoles, situationName);
+    const missingPlan = checker.checkPlanPresent(planRoles, eventName);
     if (missingPlan) {
       errors.push({ code: 'E_NO_PLAN', message: missingPlan.message, file: planPath });
     }

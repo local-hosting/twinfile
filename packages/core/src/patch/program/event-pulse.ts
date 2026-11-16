@@ -1,31 +1,31 @@
-import { buildSituationMessage } from '../build-situation-message.js';
-import type { BuildSituationMessageInput, SituationPulseEdge, SituationPulseKind } from '../../types/situation-pulse.js';
+import { buildEventMessage } from '../build-event-message.js';
+import type { BuildEventMessageInput, EventPulseEdge, EventPulseKind } from '../../types/event-pulse.js';
 import type { PatchNodeHandler } from '../../types/patch-program.js';
 import type { TwinMessageV1 } from '../../types/twin-message.js';
 import type { Result } from '../../types/twin-error.js';
 import type { TwinError } from '../../types/twin-error.js';
 
-export class SituationPulse {
-  readonly situationHead: Record<string, unknown>;
+export class EventPulse {
+  readonly eventHead: Record<string, unknown>;
   readonly phase: string;
-  readonly pulse: SituationPulseKind;
-  readonly edge: SituationPulseEdge;
+  readonly pulse: EventPulseKind;
+  readonly edge: EventPulseEdge;
   readonly args?: Record<string, unknown>;
   readonly until?: string;
   readonly to?: { module: string; port: string };
 
   constructor(
-    situationHead: Record<string, unknown>,
+    eventHead: Record<string, unknown>,
     spec: {
       phase: string;
-      pulse: SituationPulseKind;
-      edge: SituationPulseEdge;
+      pulse: EventPulseKind;
+      edge: EventPulseEdge;
       args?: Record<string, unknown>;
       until?: string;
       to?: { module: string; port: string };
     },
   ) {
-    this.situationHead = situationHead;
+    this.eventHead = eventHead;
     this.phase = spec.phase;
     this.pulse = spec.pulse;
     this.edge = spec.edge;
@@ -42,9 +42,9 @@ export class SituationPulse {
     return this.message('exit', at, seq);
   }
 
-  private message(edge: SituationPulseEdge, at?: string, seq?: number): Result<TwinMessageV1, TwinError[]> {
-    const input: BuildSituationMessageInput = {
-      situationHead: this.situationHead,
+  private message(edge: EventPulseEdge, at?: string, seq?: number): Result<TwinMessageV1, TwinError[]> {
+    const input: BuildEventMessageInput = {
+      eventHead: this.eventHead,
       phase: this.phase,
       pulse: this.pulse,
       edge,
@@ -52,10 +52,10 @@ export class SituationPulse {
       until: this.until,
       at,
       seq,
-      from: { module: 'context', port: String(this.situationHead.id ?? 'situation') },
+      from: { module: 'context', port: String(this.eventHead.id ?? 'event') },
       ...(this.to ? { to: this.to } : {}),
     };
-    return buildSituationMessage(input);
+    return buildEventMessage(input);
   }
 
   /** Long pulse: enter now, exit at `until` when provided. */
@@ -71,16 +71,16 @@ export class SituationPulse {
   }
 }
 
-export type SituationPulseHandlerOptions = {
+export type EventPulseHandlerOptions = {
   /** Next hop when YAML omits an explicit `outlets` wire (tests / minimal graphs). */
   alertTo?: { module: string; port: string };
 };
 
-/** Default inlet handler for `mod.situation-in`: forward `twin:situation` as `signal:alert`. */
-export function situationPulseHandler(options: SituationPulseHandlerOptions = {}): PatchNodeHandler {
+/** Default inlet handler for `mod.event-in`: forward `twin:event` as `signal:alert`. */
+export function eventPulseHandler(options: EventPulseHandlerOptions = {}): PatchNodeHandler {
   return (port, message) => {
-    if (port !== 'in' || message.wire !== 'twin:situation') return;
-    const moduleId = message.to?.module ?? 'context-situations';
+    if (port !== 'in' || message.wire !== 'twin:event') return;
+    const moduleId = message.to?.module ?? 'context-events';
     return [
       {
         ...message,

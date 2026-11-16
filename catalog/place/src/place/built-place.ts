@@ -4,7 +4,7 @@ import type { LoadedTwinfile } from '@doppler-group/twinfile-core';
 
 export type PlaceFields = {
   loaded: LoadedTwinfile;
-  /** Merged collections (`spaces`, `events`, `situationBindings`, …). */
+  /** Merged collections (`spaces`, `events`, `eventBindings`, …). */
   data: Record<string, unknown>;
   meta: Record<string, unknown>;
   digest: string;

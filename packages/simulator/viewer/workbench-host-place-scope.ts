@@ -10,16 +10,16 @@ export const HOST_PLACE_SUB_NAV = [
 
 export type HostPlaceSubNavId = (typeof HOST_PLACE_SUB_NAV)[number]['id'];
 
-export type HostPlaceProgrammeLayerId = 'scenarios' | 'situations' | 'events';
+export type HostPlaceProgrammeLayerId = 'scenarios' | 'events';
 
 export function isWorkbenchProgrammeEntry(entry: WorkbenchCatalogEntry): boolean {
-  if (entry.group === 'scenarios' || entry.group === 'events' || entry.group === 'situations') return true;
-  return entry.kind === 'scenario' || entry.kind === 'event' || entry.kind === 'situation';
+  if (entry.group === 'scenarios' || entry.group === 'events') return true;
+  return entry.kind === 'scenario' || entry.kind === 'event';
 }
 
 /** Programme lenses on a host site — selection highlights the run/pack; preview stays on the place card. */
 export function isWorkbenchProgrammeLens(entry: WorkbenchCatalogEntry): boolean {
-  return entry.kind === 'scenario' || entry.kind === 'situation' || entry.kind === 'event';
+  return entry.kind === 'scenario' || entry.kind === 'event';
 }
 
 /** Inline `spaces[]` row in the place tree — not its own Twinfile. */
@@ -82,8 +82,9 @@ function underPlaceTree(entry: WorkbenchCatalogEntry, hostPlaceCatalogId: string
   return entry.group === 'sites' || entry.kind === 'region';
 }
 
-function situationVisibleForHost(entry: WorkbenchCatalogEntry, hostPlaceCatalogId: string): boolean {
-  if (entry.group !== 'situations') return false;
+function eventVisibleForHost(entry: WorkbenchCatalogEntry, hostPlaceCatalogId: string): boolean {
+  if (entry.group !== 'events') return false;
+  if (entry.hostPlaceCatalogId === hostPlaceCatalogId) return true;
   return entry.hostPlaceCatalogIds?.includes(hostPlaceCatalogId) ?? false;
 }
 
@@ -91,7 +92,7 @@ export function filterCatalogForHostPlaceProgramme(
   entries: WorkbenchCatalogEntry[],
   hostPlaceCatalogId: string,
 ): WorkbenchCatalogEntry[] {
-  const layers: HostPlaceProgrammeLayerId[] = ['scenarios', 'situations', 'events'];
+  const layers: HostPlaceProgrammeLayerId[] = ['scenarios', 'events'];
   const merged = layers.flatMap((layer) =>
     filterCatalogForHostPlaceSubNav(entries, hostPlaceCatalogId, layer),
   );
@@ -116,9 +117,7 @@ export function filterCatalogForHostPlaceSubNav(
     case 'scenarios':
       return entries.filter((e) => e.group === 'scenarios' && e.hostPlaceCatalogId === hostPlaceCatalogId);
     case 'events':
-      return entries.filter((e) => e.group === 'events' && e.hostPlaceCatalogId === hostPlaceCatalogId);
-    case 'situations':
-      return entries.filter((e) => situationVisibleForHost(e, hostPlaceCatalogId));
+      return entries.filter((e) => eventVisibleForHost(e, hostPlaceCatalogId));
     default: {
       const never: never = subNavId;
       return never;

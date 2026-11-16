@@ -5,76 +5,76 @@ version: 1
 hazards:
   - id: avalanche
     title: Avalanche
-    situation: slope-movement
+    event: slope-movement
   - id: blizzard
     title: Blizzard
-    situation: severe-weather
+    event: severe-weather
   - id: coastal-flooding
     title: Coastal flooding / storm surge
-    situation: flood
+    event: flood
   - id: dam-failure-flood
     title: Dam failure / controlled release
-    situation: dam-release
+    event: dam-release
   - id: debris
     title: Debris / rubble
-    situation: field-damage
+    event: field-damage
   - id: drought
     title: Drought
-    situation: drought
+    event: drought
   - id: road-closure
     title: Road or path closure
-    situation: field-damage
+    event: field-damage
   - id: structural-damage
     title: Structural damage
-    situation: field-damage
+    event: field-damage
   - id: dust-storm
     title: Dust storm / haboob
-    situation: severe-weather
+    event: severe-weather
   - id: earthquake
     title: Earthquake
-    situation: earthquake
+    event: earthquake
   - id: extreme-cold
     title: Extreme cold / cold wave
-    situation: severe-weather
+    event: severe-weather
   - id: extreme-heat
     title: Extreme heat
-    situation: severe-weather
+    event: severe-weather
   - id: flood
     title: Flood (river, pluvial)
-    situation: flood
+    event: flood
   - id: hail
     title: Hail
-    situation: severe-weather
+    event: severe-weather
   - id: hurricane
     title: Hurricane / tropical cyclone
-    situation: severe-weather
+    event: severe-weather
   - id: lahar
     title: Lahar (volcanic mudflow)
-    situation: slope-movement
+    event: slope-movement
   - id: landslide
     title: Landslide / debris flow
-    situation: slope-movement
+    event: slope-movement
   - id: lightning
     title: Lightning
-    situation: severe-weather
+    event: severe-weather
   - id: power-outage
     title: Power outage (grid failure)
-    situation: power-outage
+    event: power-outage
   - id: thunderstorm
     title: Severe thunderstorm
-    situation: severe-weather
+    event: severe-weather
   - id: tornado
     title: Tornado
-    situation: severe-weather
+    event: severe-weather
   - id: tsunami
     title: Tsunami
-    situation: tsunami
+    event: tsunami
   - id: volcanic-eruption
     title: Volcanic eruption / ashfall
-    situation: volcanic-ash
+    event: volcanic-ash
   - id: wildfire
     title: Wildfire
-    situation: wildfire
+    event: wildfire
   - id: winter-storm
     title: Winter storm / ice
-    situation: severe-weather
+    event: severe-weather

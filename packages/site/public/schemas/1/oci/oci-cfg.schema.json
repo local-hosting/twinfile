@@ -24,7 +24,6 @@
         "story",
         "event",
         "run",
-        "situation",
         "scenario"
       ]
     },
@@ -47,9 +46,6 @@
       }
     },
     "expects": {
-      "type": "object"
-    },
-    "timetable": {
       "type": "object"
     },
     "phases": {

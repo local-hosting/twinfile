@@ -205,8 +205,8 @@ steps:
         - at: steady
           set: {}
 processors:
-  - id: context-situations
-    type: twinfile/mod.situation-in@0.1.0
+  - id: context-events
+    type: twinfile/mod.event-in@0.1.0
     outlets:
       - port: alert
         to:

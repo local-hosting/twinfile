@@ -5,7 +5,7 @@ import type { TwinfileUseMode } from '@doppler-group/twinfile-core';
 
 export type { PhaseEnds, PhaseStarts };
 
-/** Legacy manifest `mode:` — ignored; runs use context situation inputs. */
+/** Legacy manifest `mode:` — ignored; runs use context event inputs. */
 export function scenarioUseMode(_twinfile: Record<string, unknown>): TwinfileUseMode | undefined {
   return undefined;
 }
@@ -15,7 +15,7 @@ export function catalogUseMode(_twinfile: Record<string, unknown>): TwinfileUseM
   return undefined;
 }
 
-/** Timeline layout id (situation phases live in `active`, not a catalog mode). */
+/** Timeline layout id (event phases live in `active`, not a catalog mode). */
 export function useModeAt(
   _t: number,
   _phaseStarts?: PhaseStarts,
@@ -44,24 +44,24 @@ function resolvePhaseInstantSeconds(raw: unknown, startMs: number, label: string
   return (ms - startMs) / 1000;
 }
 
-/** Map situation phase ids to `t` using scenario args (`releaseAt`, …) declared on situations. */
+/** Map event phase ids to `t` using scenario args (`releaseAt`, …) declared on events. */
 export function resolvePhaseStarts(options: {
   clock: ClockSpec;
-  situations: Record<string, unknown>[];
+  events: Record<string, unknown>[];
   resolvedArgs: Record<string, unknown>;
 }): PhaseStarts {
   const startMs = parseInstant(options.clock.starts_at, 'clock.starts_at');
   const phaseIds: string[] = [];
   const timeArgKeys = new Set<string>();
 
-  for (const situation of options.situations) {
-    const phases = situation.phases;
+  for (const event of options.events) {
+    const phases = event.phases;
     if (Array.isArray(phases)) {
       for (const p of phases) {
         if (typeof p === 'string') phaseIds.push(p);
       }
     }
-    const args = situation.args;
+    const args = event.args;
     if (args && typeof args === 'object' && !Array.isArray(args)) {
       for (const [key, spec] of Object.entries(args as Record<string, unknown>)) {
         if (spec && typeof spec === 'object' && !Array.isArray(spec) && (spec as { type?: string }).type === 'time') {
@@ -85,24 +85,24 @@ export function resolvePhaseStarts(options: {
   return out;
 }
 
-/** Map situation phase ids to end `t` using scenario args (`all-clearEndAt`, …). */
+/** Map event phase ids to end `t` using scenario args (`all-clearEndAt`, …). */
 export function resolvePhaseEnds(options: {
   clock: ClockSpec;
-  situations: Record<string, unknown>[];
+  events: Record<string, unknown>[];
   resolvedArgs: Record<string, unknown>;
 }): PhaseEnds {
   const startMs = parseInstant(options.clock.starts_at, 'clock.starts_at');
   const phaseIds: string[] = [];
   const timeArgKeys = new Set<string>();
 
-  for (const situation of options.situations) {
-    const phases = situation.phases;
+  for (const event of options.events) {
+    const phases = event.phases;
     if (Array.isArray(phases)) {
       for (const p of phases) {
         if (typeof p === 'string') phaseIds.push(p);
       }
     }
-    const args = situation.args;
+    const args = event.args;
     if (args && typeof args === 'object' && !Array.isArray(args)) {
       for (const [key, spec] of Object.entries(args as Record<string, unknown>)) {
         if (spec && typeof spec === 'object' && !Array.isArray(spec) && (spec as { type?: string }).type === 'time') {

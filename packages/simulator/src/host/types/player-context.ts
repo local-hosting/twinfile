@@ -6,7 +6,7 @@ export type PlayerContextPulse = {
     edge: 'enter' | 'exit';
     pulse?: 'fast' | 'long';
   }>;
-  situations?: Array<{
+  events?: Array<{
     ref: string;
     enabled: boolean;
     phase?: string;

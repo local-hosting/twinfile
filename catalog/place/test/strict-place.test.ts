@@ -33,7 +33,7 @@ describe('strictCheckPlace', () => {
     }
   });
 
-  it.each(plannedPlaces)('%s strict plan satisfies situation contract', (name) => {
+  it.each(plannedPlaces)('%s strict plan satisfies event contract', (name) => {
     const placeRoot = join(siteRoot, name);
     const result = loadTwinfileStrict(placeRoot, { examplesRoot });
     expect(result.ok).toBe(true);
@@ -50,7 +50,7 @@ describe('strictCheckPlace', () => {
     }
   });
 
-  it('rejects plan missing a required situation role', () => {
+  it('rejects plan missing a required event role', () => {
     const fixtureRoot = join(dirname(fileURLToPath(import.meta.url)), 'fixtures/strict-missing-role');
     const result = loadTwinfileStrict(fixtureRoot, { examplesRoot });
     expect(result.ok).toBe(false);

@@ -4,7 +4,7 @@ import { timelineOptionsFromTFPlace } from '../place/tf-place-timeline.js';
 import type { TFPlace } from '../types/tf-runtime.js';
 import type { ClockSpec } from '../types/twinfile-time.js';
 import {
-  situationBindingsFromBuilt,
+  eventBindingsFromBuilt,
   type Place,
 } from '@doppler-group/twinfile-place';
 
@@ -32,7 +32,7 @@ export type RunPayloadFromTFPlaceOptions = {
 export function createRunPayloadFromTFPlace(options: RunPayloadFromTFPlaceOptions): Record<string, unknown> {
   const timelineOpts = timelineOptionsFromTFPlace(options.place);
   const args = options.args ?? options.place.resolvedArgs ?? {};
-  const situationBindings = situationBindingsFromBuilt(options.place.data);
+  const eventBindings = eventBindingsFromBuilt(options.place.data);
   return {
     place: options.place.data,
     digest: options.place.digest,
@@ -44,7 +44,7 @@ export function createRunPayloadFromTFPlace(options: RunPayloadFromTFPlaceOption
       ...(options.runners?.length ? { runners: options.runners } : {}),
       ...(options.testPrompt ? { test_prompt: options.testPrompt } : {}),
     },
-    situationBindings,
+    eventBindings,
     seed: options.place.seed ?? 1,
     ...(timelineOpts
       ? { timeline: createPlaceTimelinePayload({ ...timelineOpts, resolvedArgs: args }) }
@@ -55,10 +55,10 @@ export function createRunPayloadFromTFPlace(options: RunPayloadFromTFPlaceOption
 /** Runner stdin payload; adds a precomputed `timeline` when the scenario declares a `clock`. */
 export function createRunPayload(options: RunPayloadOptions): Record<string, unknown> {
   const clock = options.twinfile.clock as ClockSpec | undefined;
-  const situations = (options.built.events ?? []) as Record<string, unknown>[];
+  const events = (options.built.events ?? []) as Record<string, unknown>[];
   const use = options.twinfile.use as { runners?: unknown } | undefined;
   const runners = Array.isArray(use?.runners) ? use.runners : undefined;
-  const situationBindings = situationBindingsFromBuilt(options.built.data);
+  const eventBindings = eventBindingsFromBuilt(options.built.data);
   return {
     digest: options.built.digest,
     meta: options.built.meta,
@@ -70,7 +70,7 @@ export function createRunPayload(options: RunPayloadOptions): Record<string, unk
       metrics: [],
       ...(runners ? { runners } : {}),
     },
-    situationBindings,
+    eventBindings,
     seed: options.seed,
     ...(clock
       ? {
@@ -79,7 +79,7 @@ export function createRunPayload(options: RunPayloadOptions): Record<string, unk
             place: options.built.data,
             placeRoot: options.placeRoot,
             seed: options.seed,
-            situations,
+            events,
             resolvedArgs: options.args,
             mode: scenarioUseMode(options.twinfile),
           }),

@@ -131,7 +131,7 @@
     },
     "twinfileRef": {
       "type": "string",
-      "pattern": "^(twinfile/(?:(?:place|scenario|event|situation|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}:[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?|oci:ghcr\\.io/twinfile/(?:(?:place|scenario|event|situation|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}(?::[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?)?(?:@sha256:[a-f0-9]{64})?)$"
+      "pattern": "^(twinfile/(?:(?:place|scenario|event|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}:[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?|oci:ghcr\\.io/twinfile/(?:(?:place|scenario|event|mixin|base)/)?[a-z0-9][a-z0-9-]{0,62}(?::[0-9]+(?:\\.[0-9]+){0,2}(?:-[0-9A-Za-z.-]+)?)?(?:@sha256:[a-f0-9]{64})?)$"
     },
     "placeAxes": {
       "type": "object",
@@ -291,9 +291,8 @@
         "gauges",
         "stations",
         "markers",
-        "situationBindings",
+        "eventBindings",
         "events",
-        "situations",
         "visits",
         "hours",
         "roles",

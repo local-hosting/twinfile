@@ -2,7 +2,7 @@ import type { ComposedBuildLayer } from './twinfile-builder.js';
 import type { LoadedTwinfile } from '@doppler-group/twinfile-core';
 import { listTwinfileInstructions } from '@doppler-group/twinfile-core';
 import type { PlanRoles } from '@doppler-group/twinfile-core';
-import { composePlace, listPlaceSituationBindings, type PlaceInheritOptions } from '../place/place-inherit.js';
+import { composePlace, listPlaceEventBindings, type PlaceInheritOptions } from '../place/place-inherit.js';
 import type { Result } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
 import type { TwinfileResolveOptions } from '@doppler-group/twinfile-core';
@@ -39,12 +39,12 @@ export function rolesFromBindingDoc(doc: Record<string, unknown>): PlanRoles {
   return out;
 }
 
-export function findSituationBindingForTarget(
+export function findEventBindingForTarget(
   place: LoadedTwinfile,
   targetName: string,
   options?: PlaceInheritOptions,
 ): Result<{ rel: string; doc: Record<string, unknown>; planRoles: PlanRoles } | undefined> {
-  const bindings = listPlaceSituationBindings(place, options);
+  const bindings = listPlaceEventBindings(place, options);
   if (!bindings.ok) return bindings;
   const match = bindings.value.find((row) => String(row.doc.for ?? '') === targetName);
   return ok(
@@ -52,15 +52,15 @@ export function findSituationBindingForTarget(
   );
 }
 
-export function situationBindingLayer(ref: string, planRoles: PlanRoles): ComposedBuildLayer {
+export function eventBindingLayer(ref: string, planRoles: PlanRoles): ComposedBuildLayer {
   return { ref, kind: 'binding', patch: { roles: planRoles } };
 }
 
-export function loadSituationBindingDocuments(
+export function loadEventBindingDocuments(
   place: LoadedTwinfile,
   options?: PlaceInheritOptions,
 ): Record<string, unknown> {
-  const bindings = listPlaceSituationBindings(place, options);
+  const bindings = listPlaceEventBindings(place, options);
   return bindings.ok ? Object.fromEntries(bindings.value.map((row) => [row.rel, row.doc])) : {};
 }
 

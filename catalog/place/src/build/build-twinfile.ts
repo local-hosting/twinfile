@@ -6,7 +6,7 @@ import type { PlaceWireJson } from '@doppler-group/twinfile-core';
 import { placeImageDigest } from '@doppler-group/twinfile-core';
 import { Place } from '../place/built-place.js';
 import { composeScenarioLayers } from './compose-scenario.js';
-import { composeSingleTwinfileLayers, loadSituationBindingDocuments } from './compose-helpers.js';
+import { composeSingleTwinfileLayers, loadEventBindingDocuments } from './compose-helpers.js';
 import { digestFileBytes } from '@doppler-group/twinfile-core';
 import { LayerCache } from '@doppler-group/twinfile-core';
 import { TwinfileBuilder } from './twinfile-builder.js';
@@ -26,7 +26,7 @@ import type { Result } from '@doppler-group/twinfile-core';
 import { err, ok } from '@doppler-group/twinfile-core';
 import { ajvErrorsToTwinErrors } from '@doppler-group/twinfile-core';
 import { getDefaultValidator } from '@doppler-group/twinfile-core';
-import { embedSituationBindings } from '../place/situation-bindings.js';
+import { embedEventBindings } from '../place/event-bindings.js';
 import { PlaceType } from '../place/place-type.js';
 import { validatePlaceTypeV1 } from '../place/place-type-defaults.js';
 import { catalogResolveOptions } from '@doppler-group/twinfile-core';
@@ -113,7 +113,7 @@ export async function buildTwinfile(
   let composedLayers;
   let scenarioEvents: unknown[] | undefined;
   let contracts;
-  let situationBindingDocs: Record<string, unknown> = {};
+  let eventBindingDocs: Record<string, unknown> = {};
 
   if (runUnit) {
     const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
@@ -134,7 +134,7 @@ export async function buildTwinfile(
     composedLayers = scenario.value.layers;
     contracts = scenario.value.contracts;
     scenarioEvents = scenario.value.events;
-    situationBindingDocs = scenario.value.situationBindingDocs;
+    eventBindingDocs = scenario.value.eventBindingDocs;
   } else {
     const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
     const resolveOpts = examplesRoot ? catalogResolveOptions(examplesRoot) : undefined;
@@ -150,7 +150,7 @@ export async function buildTwinfile(
     const layers = composeSingleTwinfileLayers(unit, resolveOpts);
     if (!layers.ok) return layers;
     composedLayers = layers.value;
-    situationBindingDocs = loadSituationBindingDocuments(unit, resolveOpts);
+    eventBindingDocs = loadEventBindingDocuments(unit, resolveOpts);
   }
 
   const built = builder.build({
@@ -181,7 +181,7 @@ export async function buildTwinfile(
   const matchedBindingDocs = Object.fromEntries(
     Object.entries(built.matchedRoles).map(([forId, roles]) => [`bind/${forId}`, { for: forId, roles }]),
   );
-  let mergedPlace = embedSituationBindings(built.place, { ...matchedBindingDocs, ...situationBindingDocs });
+  let mergedPlace = embedEventBindings(built.place, { ...matchedBindingDocs, ...eventBindingDocs });
   if (scenarioEvents?.length) {
     mergedPlace = { ...mergedPlace, events: scenarioEvents };
   }

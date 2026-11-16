@@ -61,22 +61,22 @@ function readManifestSteps(unitDir: string): unknown[] {
   return Array.isArray(steps) ? steps : [];
 }
 
-function situationSlugFromCopyRef(ref: string): string | undefined {
+function eventSlugFromCopyRef(ref: string): string | undefined {
   const trimmed = ref.trim();
-  const m = trimmed.match(/^twinfile\/(?:situation\/)?([^:@]+)/);
+  const m = trimmed.match(/^twinfile\/(?:event\/)?([^:@]+)/);
   return m?.[1];
 }
 
-/** Shared situations: visible under host sites whose runs reference them via `copy:`. */
-export function attachSituationHostPlaceScopes(entries: ViewerCatalogEntry[]): void {
-  const situationsBySlug = new Map<string, ViewerCatalogEntry[]>();
+/** Shared events: visible under host sites whose runs reference them via `copy:`. */
+export function attachEventHostPlaceScopes(entries: ViewerCatalogEntry[]): void {
+  const eventsBySlug = new Map<string, ViewerCatalogEntry[]>();
   for (const entry of entries) {
-    if (entry.group !== 'situations') continue;
+    if (entry.group !== 'events') continue;
     const slug = entry.id.split('/').pop();
     if (!slug) continue;
-    const rows = situationsBySlug.get(slug) ?? [];
+    const rows = eventsBySlug.get(slug) ?? [];
     rows.push(entry);
-    situationsBySlug.set(slug, rows);
+    eventsBySlug.set(slug, rows);
   }
 
   for (const entry of entries) {
@@ -85,12 +85,12 @@ export function attachSituationHostPlaceScopes(entries: ViewerCatalogEntry[]): v
       if (!step || typeof step !== 'object') continue;
       const copy = (step as { copy?: unknown }).copy;
       if (typeof copy !== 'string') continue;
-      const slug = situationSlugFromCopyRef(copy);
+      const slug = eventSlugFromCopyRef(copy);
       if (!slug) continue;
-      for (const situation of situationsBySlug.get(slug) ?? []) {
-        const hosts = new Set(situation.hostPlaceCatalogIds ?? []);
+      for (const event of eventsBySlug.get(slug) ?? []) {
+        const hosts = new Set(event.hostPlaceCatalogIds ?? []);
         hosts.add(entry.hostPlaceCatalogId);
-        situation.hostPlaceCatalogIds = [...hosts];
+        event.hostPlaceCatalogIds = [...hosts];
       }
     }
   }

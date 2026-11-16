@@ -122,7 +122,7 @@ export type TimelineSample = {
   /** Seconds since `clock.starts_at`. */
   t: number;
   at: string;
-  /** Summary layout id at `t` (always `place` — situations arrive via session edges). */
+  /** Summary layout id at `t` (always `place` — events arrive via session edges). */
   mode: TwinfileUseMode;
   /** What each track actually was at `t`. */
   tracks: Record<string, number | null>;
@@ -135,10 +135,10 @@ export type TimelineSample = {
   visit_beats: VisitBeatActive[];
 };
 
-/** Situation phase id → seconds since `clock.starts_at`. */
+/** Event phase id → seconds since `clock.starts_at`. */
 export type PhaseStarts = Record<string, number>;
 
-/** Situation phase id → end `t` (seconds since `clock.starts_at`) from `*EndAt` scenario args. */
+/** Event phase id → end `t` (seconds since `clock.starts_at`) from `*EndAt` scenario args. */
 export type PhaseEnds = Record<string, number>;
 
 /** Precomputed timeline sent to runners on stdin. */

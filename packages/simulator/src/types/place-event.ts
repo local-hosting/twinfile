@@ -6,14 +6,14 @@ export type ExpectsRole = {
   min: number;
 };
 
-import type { SituationPulseEdge, SituationPulseKind } from './situation-pulse.js';
+import type { EventPulseEdge, EventPulseKind } from './event-pulse.js';
 
 /** Inbound timeline / player trigger for a catalog event id. */
 export type PlaceEventRequest = {
   type: string;
   phase?: string;
-  edge?: SituationPulseEdge;
-  pulse?: SituationPulseKind;
+  edge?: EventPulseEdge;
+  pulse?: EventPulseKind;
   args?: Record<string, unknown>;
   until?: string;
   at?: string;
@@ -22,7 +22,7 @@ export type PlaceEventRequest = {
   to?: TwinMessageV1['to'];
 };
 
-/** Catalog entry: metadata + optional custom `request`; default emits `twin:situation`. */
+/** Catalog entry: metadata + optional custom `request`; default emits `twin:event`. */
 export type PlaceEvent = {
   id: string;
   name: string;

@@ -5,8 +5,6 @@ export function twinfileManifestKindLabel(kind) {
       return 'Site';
     case 'scenario':
       return 'Scenario';
-    case 'situation':
-      return 'Situation';
     case 'event':
       return 'Event';
     case 'mixin':

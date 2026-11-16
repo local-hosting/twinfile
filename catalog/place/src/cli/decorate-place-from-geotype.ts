@@ -4,7 +4,7 @@ import { placeDecorationsForSlug, type PlaceLayerKind } from '@doppler-group/geo
 
 import { loadTwinfile } from '@doppler-group/twinfile-core';
 import { twinHeadPath } from '@doppler-group/twinfile-core';
-import { listPlaceSituationBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
+import { listPlaceEventBindings, mergePlaceFromTwinfile } from '../place/place-inherit.js';
 import { placeMixinRef } from '@doppler-group/twinfile-core';
 import type { Result } from '@doppler-group/twinfile-core';
 import { addLeadingCopies, readTwinfileDoc, writeTwinfileDoc } from '@doppler-group/twinfile-core/cli';
@@ -13,8 +13,8 @@ export type DecoratePlaceResult = {
   mixins: string[];
   bindings: string[];
   suggestedLayers: PlaceLayerKind[];
-  /** Situation ids from geotypes — wire with `bind:` + simulator catalog, not golden mixin copies. */
-  situationHints?: string[];
+  /** Event ids from geotypes — wire with `bind:` + simulator catalog, not golden mixin copies. */
+  eventHints?: string[];
 };
 
 /** Decoration layers that ship as golden mixins; other suggested layers are site-specific. */
@@ -46,8 +46,8 @@ export function decoratePlaceFromGeotype(
   const place = unwrap(mergePlaceFromTwinfile(unit, inherit));
   return {
     mixins: mixinRefs,
-    bindings: unwrap(listPlaceSituationBindings(unit, inherit)).map((row) => row.rel),
+    bindings: unwrap(listPlaceEventBindings(unit, inherit)).map((row) => row.rel),
     suggestedLayers: decorations.layers.filter((kind) => !place[kind]?.length),
-    situationHints: [...decorations.situations],
+    eventHints: [...decorations.situations],
   };
 }

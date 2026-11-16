@@ -20,7 +20,7 @@ export {
   publishSessionClockRecordsToPatch,
   publishSessionEdgesToPatch,
 } from './publish-edges.js';
-export { primarySituationRef } from './situation-ref.js';
+export { primaryEventRef } from './event-ref.js';
 export {
   twinfilePlayerAdvance,
   type TwinfilePlayerAdvanceBody,

@@ -2,9 +2,9 @@ import { join, resolve } from 'node:path';
 
 import {
   composePlaceLayers,
-  findSituationBindingForTarget,
-  loadSituationBindingDocuments,
-  situationBindingLayer,
+  findEventBindingForTarget,
+  loadEventBindingDocuments,
+  eventBindingLayer,
   readManifestLayers,
 } from './compose-helpers.js';
 import { catalogResolveOptions } from '@doppler-group/twinfile-core';
@@ -30,7 +30,7 @@ export type ComposeScenarioResult = {
   layers: ComposedBuildLayer[];
   place: LoadedTwinfile;
   events: Record<string, unknown>[];
-  situationBindingDocs: Record<string, unknown>;
+  eventBindingDocs: Record<string, unknown>;
   contracts: Array<{
     unitName: string;
     expects: Record<string, ExpectsRole>;
@@ -173,10 +173,10 @@ export function composeScenarioLayers(
 
     events.push(unit.twinfile);
     layers.push(...readManifestLayers(unit, `event/${name}/`, 'place'));
-    const binding = findSituationBindingForTarget(place, name, placeInherit);
+    const binding = findEventBindingForTarget(place, name, placeInherit);
     if (!binding.ok) return binding;
     if (binding.value) {
-      layers.push(situationBindingLayer(bindingLayerRef(binding.value.rel), binding.value.planRoles));
+      layers.push(eventBindingLayer(bindingLayerRef(binding.value.rel), binding.value.planRoles));
     }
     contracts.push({
       unitName: name,
@@ -211,7 +211,7 @@ export function composeScenarioLayers(
     layers,
     place,
     events,
-    situationBindingDocs: loadSituationBindingDocuments(place, placeInherit),
+    eventBindingDocs: loadEventBindingDocuments(place, placeInherit),
     contracts,
     resolvedArgs,
   });

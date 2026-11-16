@@ -3,7 +3,7 @@ import type { TwinfileUseMode } from '@doppler-group/twinfile-core';
 import { workbenchCatalogEntryVisibleInMode, type WorkbenchCatalogEntryWithMode } from './workbench-catalog-visibility.js';
 
 /** Programme layers use even counts for demo grids; sites are root places only (sub-places stay inline). */
-export const WORKBENCH_CATALOG_PARITY_GROUPS = ['scenarios', 'situations', 'events'] as const;
+export const WORKBENCH_CATALOG_PARITY_GROUPS = ['scenarios', 'events'] as const;
 
 export const WORKBENCH_ROOT_SITE_COUNT = 11;
 

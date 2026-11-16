@@ -9,8 +9,8 @@ export type PlaceNarrativeInput = {
   sample?: TimelineSample;
   /** Scenario unit (question, name). */
   scenario?: { name?: string; question?: string };
-  /** Merged situation manifests from `Place.data`. */
-  situations?: Record<string, unknown>[];
+  /** Merged event manifests from `Place.data`. */
+  events?: Record<string, unknown>[];
   phaseStarts?: PhaseStarts;
   /** Scenario args after resolution (from image meta). */
   resolvedArgs?: Record<string, unknown>;
@@ -30,7 +30,7 @@ export type TrackReadingFact = {
 };
 
 export type NarrativeSection = {
-  id: 'place' | 'scenario' | 'situation' | 'moment';
+  id: 'place' | 'scenario' | 'event' | 'moment';
   title: string;
   bullets: string[];
   /** Same bullets joined — use {@link formatTwinMarkdown} for display. */
@@ -43,7 +43,7 @@ export type TwinNarrative = {
   sections: {
     place: NarrativeSection;
     scenario: NarrativeSection;
-    situation: NarrativeSection;
+    event: NarrativeSection;
     moment?: NarrativeSection;
   };
   /** Markdown with `##` headings and `-` bullets. */
@@ -52,7 +52,7 @@ export type TwinNarrative = {
   facts: {
     place: Record<string, unknown>;
     scenario: Record<string, unknown>;
-    situation: Record<string, unknown>;
+    event: Record<string, unknown>;
     moment?: Record<string, unknown>;
   };
 };
@@ -230,19 +230,19 @@ function momentLabel(sample: TimelineSample, timezone: string | undefined): { lo
   }
 }
 
-function situationSummaries(situations: Record<string, unknown>[]): Array<{
+function eventSummaries(events: Record<string, unknown>[]): Array<{
   name: string;
   phases: string[];
   expects: string[];
 }> {
-  return situations.map((s) => {
+  return events.map((s) => {
     const expectsRaw = s.expects;
     const expects =
       expectsRaw && typeof expectsRaw === 'object' && !Array.isArray(expectsRaw)
         ? Object.keys(expectsRaw as Record<string, unknown>)
         : [];
     return {
-      name: String(s.name ?? 'situation'),
+      name: String(s.name ?? 'event'),
       phases: Array.isArray(s.phases) ? s.phases.filter((p): p is string => typeof p === 'string') : [],
       expects,
     };
@@ -281,10 +281,10 @@ function makeSection(
   };
 }
 
-const SECTION_ORDER: Array<'place' | 'scenario' | 'situation' | 'moment'> = [
+const SECTION_ORDER: Array<'place' | 'scenario' | 'event' | 'moment'> = [
   'place',
   'scenario',
-  'situation',
+  'event',
   'moment',
 ];
 
@@ -364,8 +364,8 @@ export function buildPlaceNarrative(input: PlaceNarrativeInput): TwinNarrative {
     placeBullets.push(`Focus space id: \`${resolvedSpaceId}\`.`);
   }
 
-  const situations = input.situations ?? [];
-  const summaries = situationSummaries(situations);
+  const events = input.events ?? [];
+  const summaries = eventSummaries(events);
   const resolvedArgFacts = resolvedArgsForNarrative(input.resolvedArgs);
 
   const scenarioFacts: Record<string, unknown> = {
@@ -393,34 +393,34 @@ export function buildPlaceNarrative(input: PlaceNarrativeInput): TwinNarrative {
     scenarioBullets.push(formatResolvedArgsSentence(resolvedArgFacts));
   }
 
-  const situationFacts: Record<string, unknown> = {
-    situations: summaries,
+  const eventFacts: Record<string, unknown> = {
+    events: summaries,
     ...(input.phaseStarts ? { phaseStarts: input.phaseStarts } : {}),
   };
 
-  const situationBullets: string[] = [];
+  const eventBullets: string[] = [];
   if (summaries.length > 0) {
     for (const summary of summaries) {
       let line = `**${summary.name}**`;
       if (summary.phases.length > 0) line += ` — phases: ${joinList(summary.phases)}`;
       if (summary.expects.length > 0) line += `; expects ${joinList(summary.expects)} on the place`;
-      situationBullets.push(`${line}.`);
+      eventBullets.push(`${line}.`);
     }
     if (input.sample && input.phaseStarts) {
       const t = input.sample.t;
       for (const summary of summaries) {
         const started = phasesStartedAt(t, input.phaseStarts, summary.phases);
         if (started.length > 0) {
-          situationBullets.push(
+          eventBullets.push(
             `${summary.name}: phase${started.length === 1 ? '' : 's'} ${joinList(started)} ${started.length === 1 ? 'has' : 'have'} begun by this instant.`,
           );
         } else if (summary.phases.length > 0) {
-          situationBullets.push(`${summary.name}: no declared phase has started yet at this instant.`);
+          eventBullets.push(`${summary.name}: no declared phase has started yet at this instant.`);
         }
       }
     }
   } else {
-    situationBullets.push('No situation units are included in this built `Place`.');
+    eventBullets.push('No event units are included in this built `Place`.');
   }
 
   let momentSection: NarrativeSection | undefined;
@@ -489,7 +489,7 @@ export function buildPlaceNarrative(input: PlaceNarrativeInput): TwinNarrative {
   const sections: TwinNarrative['sections'] = {
     place: makeSection('place', 'Place', placeBullets, placeFacts),
     scenario: makeSection('scenario', 'Scenario', scenarioBullets, scenarioFacts),
-    situation: makeSection('situation', 'Situation', situationBullets, situationFacts),
+    event: makeSection('event', 'Event', eventBullets, eventFacts),
     ...(momentSection ? { moment: momentSection } : {}),
   };
 
@@ -503,7 +503,7 @@ export function buildPlaceNarrative(input: PlaceNarrativeInput): TwinNarrative {
     facts: {
       place: placeFacts,
       scenario: scenarioFacts,
-      situation: situationFacts,
+      event: eventFacts,
       ...(momentFacts ? { moment: momentFacts } : {}),
     },
   };

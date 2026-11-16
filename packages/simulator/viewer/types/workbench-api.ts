@@ -71,7 +71,7 @@ export type WorkbenchCatalogEntry = {
   region?: string;
   /** Host place Twinfile (examples folder slug) — scope for runs / events / tree. */
   hostPlaceCatalogId?: string;
-  /** Shared situations linked from this host's scenario runs. */
+  /** Shared events linked from this host's scenario runs. */
   hostPlaceCatalogIds?: string[];
 };
 

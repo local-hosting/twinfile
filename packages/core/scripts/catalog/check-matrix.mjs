@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-/** Place × situation matrix: each site with plans should pass strict check. */
+/** Place × event matrix: each site with plans should pass strict check. */
 import { spawnSync } from 'node:child_process';
 import { readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
@@ -12,7 +12,7 @@ const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const twinCli = resolveTwinCli(import.meta.url);
 
 const require = createRequire(import.meta.url);
-const { listPlaceSituationBindings } = require('@doppler-group/twinfile-place');
+const { listPlaceEventBindings } = require('@doppler-group/twinfile-place');
 
 const inheritOpts = { examplesRoot };
 
@@ -40,7 +40,7 @@ for (const dir of listSiteDirs()) {
   const name = dir.split(/[/\\]/).pop() ?? dir;
   const loaded = loadTwinfile(dir);
   if (!loaded.ok) continue;
-  const bindings = listPlaceSituationBindings(loaded.value, inheritOpts);
+  const bindings = listPlaceEventBindings(loaded.value, inheritOpts);
   const planCount = bindings.ok ? bindings.value.length : 0;
   if (planCount === 0) continue;
   const run = spawnSync(process.execPath, [twinCli, 'check', dir, '--strict', '--json'], {

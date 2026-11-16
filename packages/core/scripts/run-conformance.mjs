@@ -129,7 +129,7 @@ function runContractVector(vector) {
       continue;
     }
     if (c.expectCodes?.includes('E_NO_PLAN')) {
-      const err = checker.checkPlanPresent(c.planRoles, c.situationName ?? 'situation');
+      const err = checker.checkPlanPresent(c.planRoles, c.eventName ?? 'event');
       if (!err || err.code !== 'E_NO_PLAN') {
         failVector(vector.id, `${c.id} expected E_NO_PLAN`);
         return;
@@ -213,7 +213,7 @@ function timeCaseProblems(c) {
     c.phaseStarts ??
     resolvePhaseStarts({
       clock: c.clock,
-      situations: c.situations ?? [],
+      events: c.events ?? [],
       resolvedArgs: c.resolvedArgs ?? {},
     });
   const feeds =

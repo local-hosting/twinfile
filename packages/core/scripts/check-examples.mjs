@@ -5,12 +5,12 @@ import { join, resolve } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
 import {
-  listTwinfileSituationBindings,
+  listTwinfileEventBindings,
   loadTwinfile,
   twinHeadPath,
   resolvePlaceExamplesCatalogRoot,
 } from '../dist/index.js';
-import { listPlaceSituationBindings } from '@doppler-group/twinfile-place';
+import { listPlaceEventBindings } from '@doppler-group/twinfile-place';
 
 import { resolveTwinCli } from '../../tooling/scripts/resolve-twin-cli.mjs';
 
@@ -29,16 +29,16 @@ function readManifest(placeDir) {
   return parseYaml(raw);
 }
 
-/** `for:` of each situation binding the unit declares (`bind:` steps or binding yaml). */
+/** `for:` of each event binding the unit declares (`bind:` steps or binding yaml). */
 function declaredBindingFors(placeDir) {
   const loaded = loadTwinfile(placeDir);
   if (!loaded.ok) return [];
   const inheritOpts = { examplesRoot };
-  const composed = listPlaceSituationBindings(loaded.value, inheritOpts);
+  const composed = listPlaceEventBindings(loaded.value, inheritOpts);
   if (composed.ok && composed.value.length > 0) {
     return composed.value.map((row) => String(row.doc.for ?? ''));
   }
-  return listTwinfileSituationBindings(loaded.value).map((row) => String(row.doc.for ?? ''));
+  return listTwinfileEventBindings(loaded.value).map((row) => String(row.doc.for ?? ''));
 }
 
 function readExpectedContract(placeDir) {
@@ -67,7 +67,7 @@ function verifyExpected(placeDir, stdout) {
       return `manifest bindings count ${planFors.length} !== expected.strictBindings ${expected.strictBindings}`;
     }
     for (const row of expected.bindings) {
-      if (!planFors.includes(row.for)) return `missing binding for situation ${row.for}`;
+      if (!planFors.includes(row.for)) return `missing binding for event ${row.for}`;
     }
   }
   return null;

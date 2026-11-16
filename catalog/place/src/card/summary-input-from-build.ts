@@ -1,7 +1,7 @@
 import { loadUnitRoot, type BuildTwinfileSummaryInput } from '@doppler-group/twinfile-core';
 
 import type { BuildTwinfileResult } from '../build/build-twinfile.js';
-import { situationBindingsFromBuilt } from '../place/situation-bindings.js';
+import { eventBindingsFromBuilt } from '../place/event-bindings.js';
 
 export function summaryInputFromBuild(result: BuildTwinfileResult): BuildTwinfileSummaryInput {
   const loaded = loadUnitRoot(result.loaded.root);
@@ -13,8 +13,8 @@ export function summaryInputFromBuild(result: BuildTwinfileResult): BuildTwinfil
     digest: result.digest,
     place: mergedPlace,
     placeType: meta?.placeType,
-    situationBindings: situationBindingsFromBuilt(mergedPlace),
-    situations: (result.events ?? []) as Record<string, unknown>[],
+    eventBindings: eventBindingsFromBuilt(mergedPlace),
+    events: (result.events ?? []) as Record<string, unknown>[],
     resolvedArgs: (meta?.resolvedArgs ?? undefined) as Record<string, unknown> | undefined,
   };
 }

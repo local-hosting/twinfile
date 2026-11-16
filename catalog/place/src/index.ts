@@ -12,12 +12,12 @@ export { TwinfileBuilder, type TwinfileBuilderResult, type ComposedBuildLayer } 
 export { composeScenarioLayers } from './build/compose-scenario.js';
 export {
   composeSingleTwinfileLayers,
-  loadSituationBindingDocuments,
+  loadEventBindingDocuments,
 } from './build/compose-helpers.js';
 export { Place, type PlaceFields } from './place/built-place.js';
 export {
   composePlace,
-  listPlaceSituationBindings,
+  listPlaceEventBindings,
   mergePlaceFromTwinfile,
   type PlaceInheritOptions,
 } from './place/place-inherit.js';
@@ -33,10 +33,10 @@ export { loadTwinfile, type LoadedTwinfile } from '@doppler-group/twinfile-core'
 export { PlaceType, type BuildPlaceTypeInput } from './place/place-type.js';
 export { Twinfile } from './place/twinfile-unit.js';
 export {
-  situationBindingsFromBuilt,
-  embedSituationBindings,
-  type SituationBindingsMap,
-} from './place/situation-bindings.js';
+  eventBindingsFromBuilt,
+  embedEventBindings,
+  type EventBindingsMap,
+} from './place/event-bindings.js';
 export {
   filterPlaceRowsByUseMode,
   placeRowMatchesUseMode,

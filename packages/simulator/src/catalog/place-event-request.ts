@@ -1,5 +1,5 @@
 import {
-  buildSituationMessage,
+  buildEventMessage,
   err,
   ok,
   type Result,
@@ -24,7 +24,7 @@ export function placeEventRequestMessages(
   if (req.type && req.type !== event.id) {
     return err([
       {
-        code: 'E_SITUATION',
+        code: 'E_EVENT',
         message: `event id "${event.id}" does not match request type "${req.type}"`,
       },
     ]);
@@ -33,10 +33,10 @@ export function placeEventRequestMessages(
   const phase = defaultPhase(event, req);
   const pulse = req.pulse ?? 'fast';
   const edge = req.edge ?? 'enter';
-  const situationRef = placeEventRef(event);
-  const built = buildSituationMessage({
-    situationHead: head,
-    situationRef,
+  const eventRef = placeEventRef(event);
+  const built = buildEventMessage({
+    eventHead: head,
+    eventRef,
     phase,
     pulse,
     edge,

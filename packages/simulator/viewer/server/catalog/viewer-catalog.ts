@@ -11,14 +11,13 @@ import {
 import { findTwinfileYamlPath } from '@doppler-group/twinfile-core';
 import { parse as parseYaml } from 'yaml';
 
-import { attachHostPlaceCatalogIds, attachSituationHostPlaceScopes } from './viewer-host-place-scope.js';
+import { attachHostPlaceCatalogIds, attachEventHostPlaceScopes } from './viewer-host-place-scope.js';
 import { listViewerRegionCatalog } from './viewer-region-catalog.js';
 
 export type ViewerCatalogGroup =
   | 'sites'
   | 'scenarios'
   | 'events'
-  | 'situations'
   | 'mixins'
   | 'bases';
 
@@ -29,7 +28,6 @@ export const VIEWER_CATALOG_INCLUDE_BASES = false;
 export const VIEWER_CATALOG_NAV_GROUPS: Array<{ id: ViewerCatalogGroup; label: string }> = [
   { id: 'sites', label: 'Sites' },
   { id: 'scenarios', label: 'Scenarios' },
-  { id: 'situations', label: 'Situations' },
   { id: 'events', label: 'Events' },
 ];
 
@@ -68,7 +66,7 @@ export type ViewerCatalogEntry = {
   region?: string;
   /** Host place Twinfile catalog id (examples folder slug, e.g. `airport`). */
   hostPlaceCatalogId?: string;
-  /** Situations: host places whose runs `copy:` this pack. */
+  /** Events: host places whose runs `copy:` this pack. */
   hostPlaceCatalogIds?: string[];
 };
 
@@ -179,12 +177,10 @@ function isViewerCatalogPlace(unitDir: string, kind: string | undefined): boolea
 function navGroupForRecipe(kind: string | undefined, unitPath: string): ViewerCatalogGroup {
   const k = kind ?? 'place';
   switch (k) {
-    case 'situation':
-      return 'situations';
-    case 'scenario':
-      return 'scenarios';
     case 'event':
       return 'events';
+    case 'scenario':
+      return 'scenarios';
     case 'mixin':
       return 'mixins';
     case 'place': {
@@ -578,7 +574,7 @@ export function listViewerCatalog(roots: ViewerRoots): ViewerCatalogEntry[] {
     units = mergeCatalogEntries(units, listViewerRegionCatalog(units));
   }
   attachHostPlaceCatalogIds(units);
-  attachSituationHostPlaceScopes(units);
+  attachEventHostPlaceScopes(units);
   const sorted = sortViewerCatalog(units);
   if (VIEWER_CATALOG_INCLUDE_BASES) return sorted;
   return sorted.filter((row) => row.group !== 'bases');
@@ -601,7 +597,7 @@ function findCatalogEntry(unitId: string | undefined, units: ViewerCatalogEntry[
       if (place) return place;
     }
   }
-  const groupPrefixes = ['scenarios', 'events', 'situations', 'mixins', 'bases'] as const;
+  const groupPrefixes = ['scenarios', 'events', 'mixins', 'bases'] as const;
   for (const prefix of groupPrefixes) {
     if (trimmed.startsWith(`${prefix}/`)) continue;
     const candidate = units.find((u) => u.id === `${prefix}/${trimmed}`);

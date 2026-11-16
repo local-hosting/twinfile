@@ -13,7 +13,7 @@
       "expects": { "shelter": { "kind": "space", "min": 1 } },
       "planRoles": {},
       "expectCodes": ["E_NO_PLAN"],
-      "situationName": "severe-weather"
+      "eventName": "severe-weather"
     },
     {
       "id": "E_ROLE_MISSING",

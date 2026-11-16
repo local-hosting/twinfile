@@ -1,7 +1,7 @@
 import type { WorldSessionEdge } from '../types/world-session.js';
 
 import type { PlayerContextPulse } from './types/player-context.js';
-import { primarySituationRef } from './situation-ref.js';
+import { primaryEventRef } from './event-ref.js';
 import {
   type BuildTwinfileResult,
 } from '@doppler-group/twinfile-place';
@@ -10,7 +10,7 @@ export function worldSessionEdgesToPlayerSlice(
   result: BuildTwinfileResult,
   edges: WorldSessionEdge[],
 ): PlayerContextPulse {
-  const ref = primarySituationRef(result);
+  const ref = primaryEventRef(result);
   const pulses = edges
     .filter((edge): edge is Extract<WorldSessionEdge, { kind: 'phase.enter' }> => edge.kind === 'phase.enter')
     .map((edge) => ({

@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://twinfile.org/schemas/1/event/event-wire.schema.json",
   "title": "EventWire",
-  "description": "Wire JSON for event twins (runs, situations, timetables) — MCP and OCI config.",
+  "description": "Wire JSON for event twins (catalog events and runs) — MCP and OCI config.",
   "type": "object",
   "required": [
     "meta",
@@ -17,8 +17,7 @@
           "type": "string",
           "enum": [
             "run",
-            "situation",
-            "timetable"
+            "event"
           ]
         }
       },
