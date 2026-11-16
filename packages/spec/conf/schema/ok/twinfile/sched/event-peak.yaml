@@ -5,9 +5,9 @@ name: Saturday Peak
 version: 1.0.0
 stability: stable
 layers: []
-timetable:
-  open: PT8H
-  close: PT12H
+phases:
+  - open
+  - close
 expects:
   floor:
     kind: space
