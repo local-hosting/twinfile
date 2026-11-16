@@ -1,0 +1,16 @@
+markers:
+  - id: tsunami-high-ground
+    name: High-ground refuge
+    state: open
+    roles:
+      - flood-refuge
+  - id: tsunami-evac-route
+    name: Inland evacuation route
+    state: open
+    roles:
+      - safe-access
+  - id: tsunami-coastal-lookout
+    name: Coastal lookout
+    state: open
+    roles:
+      - water-launch

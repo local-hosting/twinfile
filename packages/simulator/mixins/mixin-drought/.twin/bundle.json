@@ -1,0 +1,54 @@
+{
+  "meta": {
+    "id": "mixin-drought",
+    "name": "Drought hooks — reservoir gauge, water pickup, optional cooling shelter",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "spaces": [
+      {
+        "id": "drought-cooling-shelter",
+        "name": "Cooling / relief shelter",
+        "kind": "hall",
+        "level": "ground",
+        "visit_order": 96,
+        "exposure": "indoor",
+        "roles": [
+          "shelter"
+        ]
+      }
+    ],
+    "markers": [
+      {
+        "id": "drought-water-pickup",
+        "name": "Water distribution point",
+        "state": "open",
+        "roles": [
+          "collection-point"
+        ]
+      }
+    ],
+    "gauges": [
+      {
+        "id": "drought-reservoir-gauge",
+        "observes": "storage",
+        "roles": [
+          "gauge"
+        ]
+      }
+    ],
+    "stations": [
+      {
+        "id": "drought-monitor",
+        "name": "Drought monitoring post",
+        "roles": [
+          "survey-station"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:7a77395b634fc1455e2e4b948b6fe8f2e14c43575b8d939289bd73b269025b7a"
+}

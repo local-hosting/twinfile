@@ -1,0 +1,31 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "power-outage",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "shelter": {
+      "kind": "space",
+      "min": 1
+    },
+    "safe-access": {
+      "kind": "marker",
+      "min": 1
+    },
+    "alternative": {
+      "kind": "space",
+      "min": 0
+    },
+    "survey-station": {
+      "kind": "station",
+      "min": 0
+    }
+  },
+  "phases": [
+    "outage",
+    "partial-restore",
+    "restored"
+  ]
+}

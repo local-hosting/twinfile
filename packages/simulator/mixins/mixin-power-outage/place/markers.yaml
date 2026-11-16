@@ -1,0 +1,6 @@
+markers:
+  - id: power-outage-safe-egress
+    name: Lit egress path
+    state: open
+    roles:
+      - safe-access

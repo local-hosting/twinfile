@@ -1,0 +1,19 @@
+for: power-outage
+roles:
+  shelter:
+    - power-outage-shelter
+  safe-access:
+    - power-outage-safe-egress
+  alternative:
+    - power-outage-stair-lobby
+  survey-station:
+    - power-outage-grid-monitor
+actions:
+  - at: outage
+    set:
+      power-outage-shelter:
+        state: open
+      power-outage-stair-lobby:
+        state: open
+      power-outage-safe-egress:
+        state: restricted

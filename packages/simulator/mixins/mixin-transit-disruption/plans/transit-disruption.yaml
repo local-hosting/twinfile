@@ -1,0 +1,11 @@
+for: transit-disruption
+roles:
+  ground-transport:
+    - transit-disruption-stop
+  alternative:
+    - transit-disruption-alternative
+actions:
+  - at: disrupted
+    set:
+      transit-disruption-stop:
+        state: closed

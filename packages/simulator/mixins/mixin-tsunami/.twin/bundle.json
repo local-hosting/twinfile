@@ -1,0 +1,39 @@
+{
+  "meta": {
+    "id": "mixin-tsunami",
+    "name": "Tsunami hooks — high ground, evacuation route, optional coastal access",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "markers": [
+      {
+        "id": "tsunami-high-ground",
+        "name": "High-ground refuge",
+        "state": "open",
+        "roles": [
+          "flood-refuge"
+        ]
+      },
+      {
+        "id": "tsunami-evac-route",
+        "name": "Inland evacuation route",
+        "state": "open",
+        "roles": [
+          "safe-access"
+        ]
+      },
+      {
+        "id": "tsunami-coastal-lookout",
+        "name": "Coastal lookout",
+        "state": "open",
+        "roles": [
+          "water-launch"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:91a010470bfb8a9eb4612298bb49e3c0dc3929ee7cfb173e9ea2ed115056d1df"
+}

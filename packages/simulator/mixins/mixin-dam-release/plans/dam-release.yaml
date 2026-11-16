@@ -1,0 +1,13 @@
+for: dam-release
+roles:
+  water-launch:
+    - dam-release-launch
+  flood-refuge:
+    - dam-release-refuge
+  gauge:
+    - dam-release-gauge
+actions:
+  - at: release
+    set:
+      dam-release-launch:
+        state: closed

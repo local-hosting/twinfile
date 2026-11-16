@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "passenger-queue",
+    "name": "Passenger queue",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:2f883a2cb7b3f4d3b0bb603852a96a67308043a933831258599acee822d7dbbc"
+}

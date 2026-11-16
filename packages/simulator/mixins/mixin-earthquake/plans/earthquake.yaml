@@ -1,0 +1,16 @@
+for: earthquake
+roles:
+  shelter:
+    - earthquake-shelter
+  exit:
+    - earthquake-exit-a
+    - earthquake-exit-b
+  outdoor:
+    - earthquake-survey-outdoor
+actions:
+  - at: shaking
+    set:
+      earthquake-shelter:
+        state: open
+      earthquake-survey-outdoor:
+        state: restricted

@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "volcanic-ash",
+    "name": "Volcanic ash",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:8f11cded51d5739625d30944394d3724dd5fa3c3dc4e25eb81b45ed28ac01ec3"
+}

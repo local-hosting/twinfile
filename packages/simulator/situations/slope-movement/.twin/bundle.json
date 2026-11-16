@@ -1,0 +1,12 @@
+{
+  "meta": {
+    "id": "slope-movement",
+    "name": "Slope movement",
+    "kind": "situation",
+    "version": "1.0.0",
+    "stability": "stable",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {},
+  "digest": "sha256:216dff7159cbf5d4bba74a1c45b6a1711bfa3e3dd3ec7d2b2325137f4ae587d9"
+}

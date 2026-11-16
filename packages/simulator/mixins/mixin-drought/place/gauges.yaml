@@ -1,0 +1,5 @@
+gauges:
+  - id: drought-reservoir-gauge
+    observes: storage
+    roles:
+      - gauge

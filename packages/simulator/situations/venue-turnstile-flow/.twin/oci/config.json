@@ -1,0 +1,23 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "venue-turnstile-flow",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "gate": {
+      "kind": "opening",
+      "min": 1
+    },
+    "seating": {
+      "kind": "space",
+      "min": 1
+    }
+  },
+  "phases": [
+    "pre-open",
+    "peak-arrival",
+    "gates-closed"
+  ]
+}

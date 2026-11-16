@@ -1,0 +1,31 @@
+{
+  "twinfile": 1,
+  "kind": "situation",
+  "name": "litter-pollution",
+  "version": "1.0.0",
+  "stability": "stable",
+  "spec": "1.0.0-draft.1",
+  "expects": {
+    "hotspot": {
+      "kind": "marker",
+      "min": 1
+    },
+    "safe-access": {
+      "kind": "marker",
+      "min": 1
+    },
+    "collection-point": {
+      "kind": "marker",
+      "min": 1
+    },
+    "survey-station": {
+      "kind": "station",
+      "min": 0
+    }
+  },
+  "phases": [
+    "baseline",
+    "post-storm-surge",
+    "cleared"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "twinfile": 1,
+  "kind": "mixin",
+  "name": "mixin-earthquake",
+  "version": "0.1.0",
+  "stability": "example",
+  "spec": "1.0.0-draft.1"
+}

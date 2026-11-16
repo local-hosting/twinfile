@@ -1,0 +1,14 @@
+twinfile: 1
+kind: mixin
+version: 0.1.0
+stability: example
+id: mixin-litter-pollution
+name: Litter-pollution hooks — hotspot, safe access, collection point, survey
+  station, wired plan
+layers:
+  - place/markers.yaml
+  - place/stations.yaml
+  - plans/litter-pollution.yaml
+provides:
+  situations:
+    - litter-pollution

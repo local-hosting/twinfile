@@ -1,0 +1,37 @@
+{
+  "meta": {
+    "id": "mixin-transit-disruption",
+    "name": "Transit-disruption hooks — ground-transport stop, alternative, wired plan",
+    "kind": "mixin",
+    "version": "0.1.0",
+    "stability": "example",
+    "spec": "1.0.0-draft.1"
+  },
+  "place": {
+    "spaces": [
+      {
+        "id": "transit-disruption-stop",
+        "name": "Ground-transport stop",
+        "kind": "platform",
+        "level": "ground",
+        "visit_order": 92,
+        "exposure": "covered",
+        "roles": [
+          "ground-transport"
+        ]
+      },
+      {
+        "id": "transit-disruption-alternative",
+        "name": "Alternative pickup",
+        "kind": "zone",
+        "level": "ground",
+        "visit_order": 93,
+        "exposure": "outdoor",
+        "roles": [
+          "alternative"
+        ]
+      }
+    ]
+  },
+  "digest": "sha256:7620ffcf1733bae2d2926034531ba6d1474fedcce2887a925c06d98ae8cfb025"
+}
