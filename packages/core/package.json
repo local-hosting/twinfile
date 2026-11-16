@@ -1,0 +1,109 @@
+{
+  "name": "@doppler-group/twinfile-core",
+  "version": "0.1.3",
+  "packageManager": "yarn@4.9.2",
+  "type": "module",
+  "description": "Reference Twinfile implementation — load, validate, merge, contract, digests, and twin CLI (pinned @doppler-group/twinfile-spec)",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doppler-group/twinfile.git",
+    "directory": "packages/core"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com",
+    "access": "restricted"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
+    "./cli": {
+      "types": "./dist/cli/twinfile-cli.d.ts",
+      "import": "./dist/cli/twinfile-cli.js",
+      "default": "./dist/cli/twinfile-cli.js"
+    },
+    "./mcp": {
+      "types": "./dist/mcp/twinfile-mcp.d.ts",
+      "import": "./dist/mcp/twinfile-mcp.js",
+      "default": "./dist/mcp/twinfile-mcp.js"
+    },
+    "./core/*": {
+      "types": "./dist/core/*.d.ts",
+      "import": "./dist/core/*.js",
+      "default": "./dist/core/*.js"
+    },
+    "./check/*": {
+      "types": "./dist/check/*.d.ts",
+      "import": "./dist/check/*.js",
+      "default": "./dist/check/*.js"
+    },
+    "./bridge/*": {
+      "types": "./dist/bridge/*.d.ts",
+      "import": "./dist/bridge/*.js",
+      "default": "./dist/bridge/*.js"
+    },
+    "./build/*": {
+      "types": "./dist/build/*.d.ts",
+      "import": "./dist/build/*.js",
+      "default": "./dist/build/*.js"
+    },
+    "./place/demo-ext-h3": {
+      "types": "./dist/place/demo-ext-h3.d.ts",
+      "import": "./dist/place/demo-ext-h3.js",
+      "default": "./dist/place/demo-ext-h3.js"
+    },
+    "./method": {
+      "types": "./dist/method/index.d.ts",
+      "import": "./dist/method/index.js",
+      "default": "./dist/method/index.js"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "prepublishOnly": "yarn build",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "sync:patch-module-types": "node scripts/sync-patch-module-types.mjs",
+    "check": "node ../tooling/scripts/check-vendor-neutral.mjs && node scripts/check-open-standard.mjs && node scripts/check-no-src-emit.mjs && node scripts/sync-patch-module-types.mjs && node scripts/build-geotypes.mjs && yarn build && yarn workspace @doppler-group/twinfile-place build && node scripts/check-no-src-emit.mjs && yarn typecheck && yarn test",
+    "check:openstack": "yarn check && yarn check:catalog-golden && yarn check:examples && yarn conformance",
+    "check:examples": "node scripts/build-geotypes.mjs && yarn build && node scripts/check-examples.mjs",
+    "check:catalog-golden": "node scripts/catalog/check-vendor-neutral.mjs && node scripts/catalog/check-twinfile-head.mjs && node scripts/catalog/check-all.mjs && node scripts/catalog/check-matrix.mjs",
+    "verify:scenarios": "node scripts/catalog/verify-scenarios.mjs",
+    "check:published-refs": "node scripts/catalog/check-published-refs.mjs",
+    "conformance": "node scripts/build-geotypes.mjs && yarn build && yarn workspace @doppler-group/twinfile-simulator build && yarn workspace @doppler-group/twinfile-cli build && node scripts/run-conformance.mjs"
+  },
+  "files": [
+    "dist",
+    "scripts/check-open-standard.mjs",
+    "scripts/build-geotypes.mjs",
+    "scripts/resolve-geotypes-root.mjs",
+    "scripts/check-npm-export-surface.mjs",
+    "CHANGELOG.md",
+    "README.md"
+  ],
+  "dependencies": {
+    "@doppler-group/frameworks-core": "link:../../../frameworks/packages/core",
+    "@doppler-group/frameworks-presets": "link:../../../frameworks/packages/presets",
+    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
+    "@doppler-group/twinfile-spec": "workspace:packages/spec",
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "tar": "^7.4.3",
+    "yaml": "^2.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "^5.8.2",
+    "vitest": "^4.1.12"
+  },
+  "twinfilePinnedDependencies": {
+    "@doppler-group/twinfile-bridge": "0.1.1",
+    "@doppler-group/geotypes": "0.1.2",
+    "@doppler-group/twinfile-spec": "1.0.0-draft.2"
+  }
+}
