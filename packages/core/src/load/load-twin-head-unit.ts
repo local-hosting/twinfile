@@ -4,7 +4,12 @@ import { join, resolve } from 'node:path';
 import { isRecord } from '../doc/is-record.js';
 import { findTwinfileYamlPath, twinHeadFileName } from './twinfile-locator.js';
 import { loadTwinLocalMap, resolveTwinLocalPath, type TwinLocalMap } from '../ref/twin-local-map.js';
-import { resolveTwinfileRoot, resolveTypeExamplesRoot, type TwinCatalogType } from '../paths/catalog-layout.js';
+import {
+  resolveTwinfileRoot,
+  resolveTypeExamplesRoot,
+  type TwinCatalogType,
+} from '../paths/catalog-layout.js';
+import { mergeTwinLocalMaps } from '../ref/twin-local-map.js';
 import { listFlatExampleUnitNames, flatExampleUnitDir } from '../paths/examples-catalog.js';
 import { normalizeComposeTwinfileKeys } from './twinfile-compose.js';
 import type { Result } from '../types/twin-error.js';
@@ -81,15 +86,15 @@ export function readTwinHeadYaml(unitRoot: string): Result<LoadedTwinHeadUnit> {
 }
 
 function catalogSearchRoots(
+  twinfileRoot: string,
   examplesRoot: string,
   parsed: { kind?: string; name: string },
 ): string[] {
-  const twinRoot = resolve(examplesRoot);
   const types = parsed.kind ? [parsed.kind as TwinCatalogType] : CATALOG_TYPES;
   const roots: string[] = [];
   for (const type of types) {
     if (!CATALOG_TYPES.includes(type)) continue;
-    const catalog = resolveTypeExamplesRoot(type, twinRoot);
+    const catalog = resolveTypeExamplesRoot(type, twinfileRoot);
     roots.push(flatExampleUnitDir(catalog, parsed.name));
   }
   // legacy flat place catalog under examples root
@@ -111,7 +116,11 @@ export function resolveCatalogUnitRef(
   const examplesRoot = options.examplesRoot;
 
   if (examplesRoot) {
-    const localMap = options.twinLocal ?? loadTwinLocalMap(examplesRoot);
+    const resolvedExamples = resolve(examplesRoot);
+    const twinfileRoot = resolveTwinfileRoot(resolvedExamples);
+    const localMap =
+      options.twinLocal ??
+      mergeTwinLocalMaps(loadTwinLocalMap(twinfileRoot), loadTwinLocalMap(resolvedExamples));
     const localPath =
       resolveTwinLocalPath(ref, localMap) ?? resolveTwinLocalPath(`twinfile/${ref.replace(/^twinfile\//, '')}`, localMap);
     if (localPath && statSync(localPath, { throwIfNoEntry: false })?.isDirectory()) {
@@ -121,7 +130,7 @@ export function resolveCatalogUnitRef(
       }
     }
 
-    for (const root of catalogSearchRoots(examplesRoot, parsed)) {
+    for (const root of catalogSearchRoots(twinfileRoot, resolvedExamples, parsed)) {
       if (!statSync(root, { throwIfNoEntry: false })?.isDirectory()) continue;
       const loaded = loadHeadAtRoot(root);
       if (!loaded.ok) continue;
