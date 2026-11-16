@@ -264,7 +264,7 @@ export async function addBindToPlace(
 ): Promise<AddBindToPlaceResult> {
   const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unitDir);
   if (!examplesRoot) {
-    throw new Error('twin add bind requires TF_EXAMPLES_ROOT or --examples-root');
+    throw new Error('twin add bind requires TF_TWINFILE_ROOT or --examples-root');
   }
 
   const loaded = loadTwinfile(unitDir);

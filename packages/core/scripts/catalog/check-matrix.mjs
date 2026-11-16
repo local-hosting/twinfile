@@ -7,11 +7,11 @@ import { fileURLToPath } from 'node:url';
 import { createRequire } from 'node:module';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
-import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
 
 const scriptsDir = dirname(fileURLToPath(import.meta.url));
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const simulatorRoot = resolveSimulatorCatalogRoot(import.meta.url);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const simulatorRoot = resolveSimulatorRoot();
 const coreRoot = process.env.TF_CORE_ROOT
   ? resolve(process.env.TF_CORE_ROOT)
   : resolve(scriptsDir, '../..');
@@ -52,11 +52,6 @@ for (const dir of listSiteDirs()) {
   if (planCount === 0) continue;
   const run = spawnSync(process.execPath, [twinCli, 'check', dir, '--strict', '--json'], {
     encoding: 'utf8',
-    env: {
-      ...process.env,
-      TF_EXAMPLES_ROOT: examplesRoot,
-      TF_SIMULATOR_ROOT: simulatorRoot,
-    },
   });
   if (run.status !== 0) {
     console.error(run.stderr || run.stdout);

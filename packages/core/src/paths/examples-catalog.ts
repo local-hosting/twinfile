@@ -25,11 +25,6 @@ export function isExamplesCatalogRoot(dir: string): boolean {
   return isFlatExamplesCatalogRoot(dir);
 }
 
-/** @deprecated Bucketed `places/` / `bases/` layouts — use flat catalog only. */
-export function isLegacyExamplesCatalogRoot(_dir: string): boolean {
-  return false;
-}
-
 function hasTwinfileHead(unitDir: string): boolean {
   for (const name of ['Place.yaml', 'place.yaml', 'Twinfile.yaml', 'twinfile.yaml']) {
     if (statSync(join(unitDir, name), { throwIfNoEntry: false })?.isFile()) {
@@ -57,13 +52,4 @@ export function listFlatExampleUnitNames(catalogRoot: string): string[] {
 
 export function flatExampleUnitDir(catalogRoot: string, slug: string): string {
   return join(resolve(catalogRoot), slug);
-}
-
-/** @deprecated Use `flatExampleUnitDir`. */
-export function legacyPlacesDir(catalogRoot: string): string {
-  return join(resolve(catalogRoot), 'places');
-}
-
-export function examplePlaceDir(catalogRoot: string, name: string): string {
-  return flatExampleUnitDir(catalogRoot, name);
 }

@@ -24,7 +24,6 @@ Normative field lists live in the spec ([place layers](https://github.com/twinfi
 Indoor, covered, and outdoor program is `exposure` on each space. It does not change the archetype.
 
 ```bash
-export TF_EXAMPLES_ROOT=/path/to/examples
 twin init place ./my-mall --geotype shopping_mall --name my-mall
 ```
 
@@ -92,7 +91,7 @@ A local `plans/<situation>.yaml` wins over the mixin plan. Tag your own spaces w
 
 ```bash
 twin add plan severe-weather
-twin check --strict --examples-root "$TF_EXAMPLES_ROOT"
+twin check --strict
 ```
 
 ## Plans {{ anchor: false }}

@@ -10,6 +10,6 @@
 | Player | `packages/simulator/` |
 | Site | `packages/site/` |
 
-**Verify:** `yarn check:twinfile` from repo root. **Env:** `TF_TWINFILE_ROOT`, `TF_PLACE_CATALOG`, `TF_SIMULATOR_ROOT`.
+**Verify:** `yarn check:twinfile` from repo root. **Env:** none inside the repo; `TF_TWINFILE_ROOT` only when running from outside it. Paths derive from [`catalog-layout.ts`](packages/core/src/paths/catalog-layout.ts).
 
 Controlled vocabulary: [`packages/spec/doc/glossary.md`](packages/spec/doc/glossary.md). Do not reintroduce root `examples/` or `conf/` symlinks.

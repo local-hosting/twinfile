@@ -55,7 +55,7 @@ const place = resolveExamplePlace('twinfile/shop:0.2.0', { examplesRoot });
 const built = await buildTwinfile(place.rootDir, { examplesRoot });
 ```
 
-Local ref overrides: [`catalog/place/examples/twin.local.yaml`](catalog/place/examples/twin.local.yaml); golden digests in [`published-refs.json`](catalog/place/examples/published-refs.json). Ops env: **`TF_TWINFILE_ROOT`**; **`TF_PLACE_CATALOG`** / **`TF_EXAMPLES_ROOT`** → `catalog/place/examples`; **`TF_SIMULATOR_ROOT`** → `packages/simulator` (see [glossary — repository layout](packages/spec/doc/glossary.md#repository-layout-prose)).
+Local ref overrides: [`catalog/place/examples/twin.local.yaml`](catalog/place/examples/twin.local.yaml); golden digests in [`published-refs.json`](catalog/place/examples/published-refs.json). Ops env: **`TF_TWINFILE_ROOT`** only, when running from outside the repo; every catalog path derives from it (see [glossary — repository layout](packages/spec/doc/glossary.md#repository-layout-prose)).
 
 Hygiene: `yarn hygiene` (`packages/tooling/scripts/repo-hygiene.mjs`).
 

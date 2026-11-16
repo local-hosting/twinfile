@@ -2,15 +2,10 @@
 
 **Playback runtime** for built **place** twins and story **runs** from the monorepo **`catalog/`** tree — not a fifth catalog type.
 
-| Root | Path |
-| --- | --- |
-| Twin catalogs (place default) | `TF_EXAMPLES_ROOT` → `catalog/place/examples` |
-| This package | `TF_SIMULATOR_ROOT` → `packages/simulator` |
+Catalogs resolve from the repo root (`catalog/place/examples`, `packages/simulator`). Outside the repo, set `TF_TWINFILE_ROOT`:
 
 ```bash
 export TF_TWINFILE_ROOT=/path/to/twinfile
-export TF_EXAMPLES_ROOT=$TF_TWINFILE_ROOT/catalog/place/examples
-export TF_SIMULATOR_ROOT=$TF_TWINFILE_ROOT/packages/simulator
 twin build catalog/place/examples/shop
 ```
 

@@ -6,7 +6,7 @@ The Accord Labs site lives in `accord-labs/accord.fm`. Brand code (fonts, tokens
 
 ## Local development
 
-In the **doppler-group/twinfile** monorepo, run `yarn dev` from **`packages/site`**. Set **`TF_TWINFILE_ROOT`**, **`TF_PLACE_CATALOG`** (or **`TF_EXAMPLES_ROOT`**), and optional **`TF_SPEC_ROOT`** → `packages/spec`. The YAML studio is under `src/twinfile-studio/`.
+In the **doppler-group/twinfile** monorepo, run `yarn dev` from **`packages/site`**. No environment setup is needed inside the monorepo; set **`TF_TWINFILE_ROOT`** only when running elsewhere. The YAML studio is under `src/twinfile-studio/`.
 
 ```bash
 cp .env.example .env.local

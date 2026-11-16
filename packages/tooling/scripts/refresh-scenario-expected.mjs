@@ -6,28 +6,13 @@ import { fileURLToPath } from 'node:url';
 
 import { resolveTwinCli } from './resolve-twin-cli.mjs';
 import { isRunHeadPath, resolveTwinfileHeadPath } from '../../../packages/core/scripts/catalog/resolve-twinfile-dir.mjs';
-import {
-  resolveExamplesCatalogRoot,
-  resolveSimulatorCatalogRoot,
-} from '../../../packages/core/scripts/catalog/resolve-examples-catalog-root.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../core/dist/index.js';
 
-import {
-  resolveTwinfileRootFromPlaceCatalog,
-  resolveTypeExamplesRoot,
-} from '../../../packages/core/scripts/catalog/resolve-twinfile-paths.mjs';
 
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const twinfileRoot = resolveTwinfileRootFromPlaceCatalog(examplesRoot);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const twinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamples = resolveTypeExamplesRoot('story', twinfileRoot);
-const simulatorRoot = resolveSimulatorCatalogRoot(import.meta.url);
 const twinCli = resolveTwinCli(import.meta.url);
-const twinEnv = {
-  ...process.env,
-  TF_EXAMPLES_ROOT: examplesRoot,
-  TF_SIMULATOR_ROOT: simulatorRoot,
-  TF_TWINFILE_ROOT: twinfileRoot,
-};
-
 function findStoryRuns(dir, acc = []) {
   if (!statSync(dir, { throwIfNoEntry: false })?.isDirectory()) return acc;
   const headPath = resolveTwinfileHeadPath(dir);
@@ -47,7 +32,6 @@ const runs = findStoryRuns(storyExamples);
 for (const dir of runs) {
   const build = spawnSync(process.execPath, [twinCli, 'build', dir, '--json', '--no-lock'], {
     encoding: 'utf8',
-    env: twinEnv,
   });
   if (build.status !== 0) {
     console.error(build.stderr || build.stdout);
@@ -60,7 +44,6 @@ for (const dir of runs) {
   writeFileSync(join(dir, 'expected/digest.txt'), `${digest}\n`, 'utf8');
   const verify = spawnSync(process.execPath, [twinCli, 'verify', dir], {
     encoding: 'utf8',
-    env: twinEnv,
   });
   if (verify.status !== 0) {
     const metricsSrc = join(dir, 'runs', `${runId}.metrics.json`);
@@ -69,7 +52,6 @@ for (const dir of runs) {
     }
     const retry = spawnSync(process.execPath, [twinCli, 'verify', dir], {
       encoding: 'utf8',
-      env: twinEnv,
     });
     if (retry.status !== 0) {
       console.error(retry.stderr || retry.stdout);

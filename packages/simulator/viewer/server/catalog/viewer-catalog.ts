@@ -4,7 +4,7 @@ import { basename, dirname, join, relative, resolve, sep } from 'node:path';
 import {
   isExamplesCatalogRoot,
   parseManifestPatches,
-  resolveTwinfileRootFromPlaceCatalog,
+  resolveTwinfileRoot,
   resolveTypeExamplesRoot,
   twinfileDisplayName,
 } from '@doppler-group/twinfile-core';
@@ -609,7 +609,7 @@ export function listViewerCatalog(roots: ViewerRoots): ViewerCatalogEntry[] {
     units = mergeCatalogEntries(units, collectRunPresets(examples));
     const storyExamples = resolveTypeExamplesRoot(
       'story',
-      resolveTwinfileRootFromPlaceCatalog(examples),
+      resolveTwinfileRoot(examples),
     );
     units = mergeCatalogEntries(units, collectStorySceneRuns(storyExamples));
   }

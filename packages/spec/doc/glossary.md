@@ -33,7 +33,7 @@ Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-la
 | **Kernel** | `packages/{spec,core,cli,bridge}/` | Format, load/merge, CLI |
 | **Player** | `packages/simulator/` | Situations, playback — operates on catalogs |
 
-Ops env: **`TF_TWINFILE_ROOT`** → repo root; **`TF_PLACE_CATALOG`** → `catalog/place/examples` (legacy **`TF_EXAMPLES_ROOT`** same path); **`TF_SIMULATOR_ROOT`** → `packages/simulator`. Path API: [`catalog-layout.ts`](../../core/src/paths/catalog-layout.ts).
+Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `catalog/place/examples`, `packages/simulator` and `catalog/character/libs` derive from it. Path API: [`catalog-layout.ts`](../../core/src/paths/catalog-layout.ts).
 
 ## Twinfile (the format)
 

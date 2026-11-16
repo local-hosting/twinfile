@@ -184,7 +184,7 @@ export function createPlace(targetDir: string, options: CreatePlaceOptions): Cre
 
   const examplesRoot = resolveExamplesRoot(target);
   if (!examplesRoot) {
-    created.decorateNote = 'set TF_EXAMPLES_ROOT and TF_SIMULATOR_ROOT to wire situations from @doppler-group/twinfile-simulator';
+    created.decorateNote = 'set TF_TWINFILE_ROOT to wire situations from @doppler-group/twinfile-simulator';
     return created;
   }
 

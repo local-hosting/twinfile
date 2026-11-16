@@ -5,7 +5,7 @@ import { RefResolver } from './ref-resolver.js';
 import { loadTwinLocalMapMerged, resolveTwinLocalPath } from './twin-local-map.js';
 import { flatTwinfileRef } from '../types/twinfile-ref.js';
 import { listFlatExampleUnitNames } from '../paths/examples-catalog.js';
-import { resolveSimulatorRoot } from '../paths/resolve-simulator-root.js';
+import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
 import { loadTwinfile, type LoadedTwinfile } from '../load/load-twinfile.js';
 import type { Result } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
@@ -14,7 +14,7 @@ import { resolveViaCatalogHook } from './catalog-twinfile-hook.js';
 
 export type TwinfileResolveOptions = {
   examplesRoot: string;
-  /** Place event catalog root (`@doppler-group/twinfile-simulator`); defaults from `TF_SIMULATOR_ROOT`. */
+  /** Place event catalog root (`@doppler-group/twinfile-simulator`); defaults from `TF_TWINFILE_ROOT`. */
   simulatorRoot?: string;
   /** Parent place when resolving from a scenario. */
   placeRoot?: string;

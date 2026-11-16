@@ -1,11 +1,7 @@
 import { readFileSync, statSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join, resolve } from 'node:path';
 
-import {
-  resolveTwinfileRoot,
-  resolveTypeExamplesRoot,
-} from '../paths/catalog-layout.js';
+import { resolveSimulatorRoot } from '../paths/catalog-layout.js';
 
 import { parse as parseYaml } from 'yaml';
 
@@ -57,36 +53,9 @@ export function resolveTwinLocalPath(ref: string, map: TwinLocalMap): string | u
   return map.get(normalizeRefKey(ref));
 }
 
-export function defaultExamplesRoot(): string {
-  const fromEnv = process.env.TF_EXAMPLES_ROOT ?? process.env.EXAMPLES_ROOT;
-  if (fromEnv) return resolve(fromEnv);
-  const corePkgRoot = resolve(dirname(fileURLToPath(import.meta.url)), '../../..');
-  const twinRoot = resolveTwinfileRoot(corePkgRoot);
-  return resolveTypeExamplesRoot('place', twinRoot);
-}
-
-function firstSimulatorCatalogRoot(examplesRoot: string): string | undefined {
-  const candidates = [
-    resolve(examplesRoot, '../simulator'),
-    resolve(examplesRoot, '../../simulator'),
-  ];
-  for (const candidate of candidates) {
-    if (statSync(join(candidate, 'twin.local.yaml'), { throwIfNoEntry: false })?.isFile()) {
-      return candidate;
-    }
-  }
-  return undefined;
-}
-
-export function defaultSimulatorRoot(): string | undefined {
-  const fromEnv = process.env.TF_SIMULATOR_ROOT ?? process.env.SIMULATOR_ROOT;
-  if (fromEnv) return resolve(fromEnv);
-  return firstSimulatorCatalogRoot(defaultExamplesRoot());
-}
-
-/** Examples ref map merged with optional simulator catalog (`TF_SIMULATOR_ROOT`). */
+/** Examples ref map merged with the simulator package catalog. */
 export function loadTwinLocalMapMerged(examplesRoot: string, simulatorRoot?: string): TwinLocalMap {
-  const simulator = simulatorRoot ?? defaultSimulatorRoot();
+  const simulator = simulatorRoot ?? resolveSimulatorRoot(examplesRoot);
   const maps = [loadTwinLocalMapFromRoot(examplesRoot)];
   if (simulator) maps.push(loadTwinLocalMapFromRoot(simulator));
   return mergeTwinLocalMaps(...maps);

@@ -1,19 +1,17 @@
-import { resolve } from 'node:path';
+import {
+  resolvePlaceExamplesCatalogRoot,
+  resolveSimulatorRoot,
+  resolveTwinfileRoot,
+} from '@doppler-group/twinfile-core';
 
-import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@doppler-group/twinfile-core';
-
-/** Examples root in monorepo (local) or CI (`TF_EXAMPLES_ROOT`). */
 export function testExamplesRoot(importMetaDir: string): string {
-  const fromEnv = process.env.TF_EXAMPLES_ROOT;
-  if (fromEnv) return resolve(fromEnv);
-  const twinRoot = resolveTwinfileRoot(resolve(importMetaDir, '../../..'));
-  return resolveTypeExamplesRoot('place', twinRoot);
+  return resolvePlaceExamplesCatalogRoot(resolveTwinfileRoot(importMetaDir));
 }
 
-/** Simulator catalog root (`TF_SIMULATOR_ROOT` or the workspace package). */
 export function testSimulatorRoot(importMetaDir: string): string {
-  const fromEnv = process.env.TF_SIMULATOR_ROOT;
-  return fromEnv ? resolve(fromEnv) : resolve(importMetaDir, '../../../packages/simulator');
+  const root = resolveSimulatorRoot(importMetaDir);
+  if (!root) throw new Error(`testSimulatorRoot: no simulator package above ${importMetaDir}`);
+  return root;
 }
 
 export function testCatalogRoots(importMetaDir: string): { examplesRoot: string; simulatorRoot: string } {

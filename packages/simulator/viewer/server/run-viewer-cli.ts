@@ -15,7 +15,7 @@ export function runViewerCli(argv: string[], options: RunViewerCliOptions = {}):
   const catalogs = explicit.length > 0 ? explicit : resolveDefaultViewerIncorporate();
   if (catalogs.length === 0) {
     console.error(
-      `${logPrefix}: no catalog roots — pass directories, or set TF_EXAMPLES_ROOT / TF_SIMULATOR_ROOT`,
+      `${logPrefix}: no catalog roots — pass directories, or set TF_TWINFILE_ROOT`,
     );
     process.exit(1);
   }

@@ -18,7 +18,7 @@ Tools (underscore names; dotted forms such as `place.query` are accepted on `too
 | `state_at` | Timeline sample at `t`, `at`, or `localAt` |
 | `twin_match` | Plan expects against the merged place |
 | `run_fork`, `run_append` | Run the scenario runner when `--allow-runs` was set. Preset Twinfiles do not carry a `question:` field — optional analyst copy comes from `run_test_prompt` or from `test_prompt` on the fork call (injected as `scenario.test_prompt` on runner stdin) |
-| `run_test_prompt` | Golden test prompt for the served run's preset `id` (`examples/mcp/run-test-prompts.yaml` under `TF_EXAMPLES_ROOT`) |
+| `run_test_prompt` | Golden test prompt for the served run's preset `id` (`examples/mcp/run-test-prompts.yaml` in the place catalog) |
 | `run_test_prompts` | List all cataloged run test prompts |
 | `processors_validate` | Validate `processors:` outlets and binds against the merged place |
 

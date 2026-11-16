@@ -46,7 +46,7 @@ export async function runFeedSimulate(argv: string[]): Promise<number> {
   const scenarioDir = resolve(dir);
   const examplesRoot = resolveExamplesRoot(scenarioDir) ?? resolveExamplesRoot(process.cwd());
   if (!examplesRoot) {
-    console.error('twin feed simulate requires TF_EXAMPLES_ROOT');
+    console.error('twin feed simulate requires TF_TWINFILE_ROOT');
     return 2;
   }
 

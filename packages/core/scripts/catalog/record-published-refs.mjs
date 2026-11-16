@@ -13,18 +13,11 @@ import { resolveTwinfileHeadPath } from './resolve-twinfile-dir.mjs';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
 
-import { resolveExamplesCatalogRoot, resolveSimulatorCatalogRoot } from './resolve-examples-catalog-root.mjs';
-import { resolveTwinfileRootFromPlaceCatalog, resolveTypeExamplesRoot } from './resolve-twinfile-paths.mjs';
+import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot, resolveTwinfileRoot, resolveTypeExamplesRoot } from '../../dist/index.js';
 
-const examplesRoot = resolveExamplesCatalogRoot(import.meta.url);
-const simulatorRoot = resolveSimulatorCatalogRoot(import.meta.url);
+const examplesRoot = resolvePlaceExamplesCatalogRoot();
+const simulatorRoot = resolveSimulatorRoot();
 const twinCli = resolveTwinCli(import.meta.url);
-
-const twinEnv = {
-  ...process.env,
-  TF_EXAMPLES_ROOT: examplesRoot,
-  TF_SIMULATOR_ROOT: simulatorRoot,
-};
 
 const refs = {};
 
@@ -52,7 +45,6 @@ function recordCatalogRoot(root, pathPrefix) {
     if (!ref) continue;
     const build = spawnSync(process.execPath, [twinCli, 'build', dir, '--no-lock', '--json'], {
     encoding: 'utf8',
-    env: twinEnv,
   });
   if (build.status !== 0) continue;
   try {
@@ -73,7 +65,7 @@ function recordCatalogRoot(root, pathPrefix) {
   }
 }
 
-const twinfileRoot = resolveTwinfileRootFromPlaceCatalog(examplesRoot);
+const twinfileRoot = resolveTwinfileRoot(examplesRoot);
 const storyExamplesRoot = resolveTypeExamplesRoot('story', twinfileRoot);
 
 recordCatalogRoot(examplesRoot, 'catalog/place/examples');

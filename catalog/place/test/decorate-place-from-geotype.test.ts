@@ -4,7 +4,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { placeAxesForSlug, placeDecorationsForSlug } from '@doppler-group/geotypes';
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it } from 'vitest';
 import { parse as parseYaml } from 'yaml';
 
 import { loadTwinfileStrict } from '../src/check/strict-place.js';
@@ -22,13 +22,10 @@ describe('decoratePlaceFromGeotype', () => {
   let dir: string;
 
   beforeEach(() => {
-    vi.stubEnv('TF_EXAMPLES_ROOT', examplesRoot);
-    vi.stubEnv('TF_SIMULATOR_ROOT', simulatorRoot);
     dir = mkdtempSync(join(tmpdir(), 'twin-decorate-'));
   });
 
   afterEach(() => {
-    vi.unstubAllEnvs();
     rmSync(dir, { recursive: true, force: true });
   });
 

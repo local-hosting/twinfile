@@ -79,7 +79,7 @@ export class TFPlace {
     const examplesRoot =
       options.examplesRoot ?? resolveExamplesRoot(dir) ?? resolveExamplesRoot(process.cwd());
     if (!examplesRoot) {
-      return err([{ code: 'E_CATALOG', message: 'TF_EXAMPLES_ROOT or examplesRoot required', file: dir }]);
+      return err([{ code: 'E_CATALOG', message: 'TF_TWINFILE_ROOT or examplesRoot required', file: dir }]);
     }
     const built = await twinfile.build({
       ...options,

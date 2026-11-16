@@ -6,7 +6,7 @@ Situation units describe **reusable operational stories** (`phases`, `expects` r
 
 **CI:** `check-role-vocab.mjs` (from `@doppler-group/twinfile-spec` `yarn check`) verifies every catalog `situation` has a unit under `[`simulator/situations/`](../../../simulator/situations/).
 
-**Package:** All shared hazard situation units live in **`@doppler-group/twinfile-simulator`** (`[`simulator/README.md`](../../../simulator/README.md)). Set **`TF_SIMULATOR_ROOT`** with **`TF_EXAMPLES_ROOT`** for local compose.
+**Package:** All shared hazard situation units live in **`@doppler-group/twinfile-simulator`** (`[`simulator/README.md`](../../../simulator/README.md)). Local compose finds it from the repo root.
 
 ## Situation units (hazard stories)
 

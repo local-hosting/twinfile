@@ -13,6 +13,7 @@ import { parse } from 'yaml';
 
 import { serializeTwinfileFiles, splitEditorBuffer } from './serialize-twinfile.js';
 
+const PLACE_CATALOG = join('catalog', 'place', 'examples');
 const SOURCE_REF = /sources\/[A-Za-z0-9_./-]+\.(?:geojson|json|ya?ml)/g;
 
 export type LoadTwinfileDocumentOptions = {
@@ -137,30 +138,32 @@ function resolveRefDir(ref: string, examplesRoot: string): string {
     const candidate = join(examplesRoot, bucket, name);
     if (findTwinfileYamlPath(candidate)) return candidate;
   }
-  const simulatorRoot = process.env.TF_SIMULATOR_ROOT?.trim();
-  if (simulatorRoot) {
-    const hazardCandidate = join(simulatorRoot, 'situations', name);
-    if (findTwinfileYamlPath(hazardCandidate)) return hazardCandidate;
-  }
+  const hazardCandidate = join(examplesRoot, '../../../packages/simulator/situations', name);
+  if (findTwinfileYamlPath(hazardCandidate)) return hazardCandidate;
   throw new Error(`loadTwinfileDocument: unknown ref ${ref}`);
 }
 
-function examplesRootFrom(options: LoadTwinfileDocumentOptions): string {
-  if (options.examplesRoot) return resolve(options.examplesRoot);
-  const fromEnv = process.env.TF_EXAMPLES_ROOT?.trim();
-  if (fromEnv) return resolve(fromEnv);
+function hasPlaceCatalog(twinfileRoot: string): boolean {
+  return statSync(join(twinfileRoot, PLACE_CATALOG, 'twin.local.yaml'), { throwIfNoEntry: false })?.isFile() ?? false;
+}
+
+/** Place catalog under `TF_TWINFILE_ROOT`, else the monorepo above `cwd`. */
+export function resolveSiteExamplesRoot(): string {
+  const fromEnv = process.env.TF_TWINFILE_ROOT?.trim();
+  if (fromEnv && hasPlaceCatalog(fromEnv)) return resolve(fromEnv, PLACE_CATALOG);
 
   let dir = process.cwd();
   for (let depth = 0; depth < 12; depth += 1) {
-    const catalogPlace = join(dir, 'catalog', 'place', 'examples');
-    if (statSync(join(catalogPlace, 'twin.local.yaml'), { throwIfNoEntry: false })?.isFile()) {
-      return catalogPlace;
-    }
+    if (hasPlaceCatalog(dir)) return join(dir, PLACE_CATALOG);
     const parent = dirname(dir);
     if (parent === dir) break;
     dir = parent;
   }
-  throw new Error('loadTwinfileDocument: set TF_EXAMPLES_ROOT or pass examplesRoot');
+  throw new Error('loadTwinfileDocument: run inside the twinfile monorepo or set TF_TWINFILE_ROOT');
+}
+
+function examplesRootFrom(options: LoadTwinfileDocumentOptions): string {
+  return options.examplesRoot ? resolve(options.examplesRoot) : resolveSiteExamplesRoot();
 }
 
 function readRequired(root: string, rel: string): string {
