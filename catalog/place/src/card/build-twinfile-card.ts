@@ -159,11 +159,11 @@ function geotypeInitHintAspects(slug: string | undefined): TwinfileSummaryAspect
   const deco = placeDecorationsForSlug(slug);
   if (!deco) return [];
   const fixed: TwinfileSummaryAspect[] = [];
-  if (deco.situations.length) {
+  if (deco.events.length) {
     fixed.push({
       id: 'events.geotype-hint',
       label: 'Geotype init hints (events)',
-      value: deco.situations.join(', '),
+      value: deco.events.join(', '),
     });
   }
   if (deco.layers.length) {
