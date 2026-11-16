@@ -29,7 +29,25 @@ function runNodeScript(relDir, scriptName) {
 const geotypesRoot = join(root, '../geotypes');
 const geotypesScript = join(geotypesRoot, 'scripts/check-all.mjs');
 
+/** Dependency order: each package typechecks against the `dist/` of the ones before it. */
+const BUILD_ORDER = [
+  '@local-hosting/twinfile-bridge',
+  '@local-hosting/twinfile-core',
+  '@local-hosting/twinfile-place',
+  '@local-hosting/twinfile-simulator',
+  '@local-hosting/twinfile-cli',
+];
+
+function buildWorkspaces() {
+  for (const name of BUILD_ORDER) {
+    const result = runWorkspaceScript(name, ['build']);
+    if (result.status !== 0) return result;
+  }
+  return { status: 0, stdout: '', stderr: '' };
+}
+
 const STEPS = [
+  { id: 'build', run: buildWorkspaces },
   ...(existsSync(geotypesScript)
     ? [
         {
@@ -43,10 +61,10 @@ const STEPS = [
         },
       ]
     : []),
-  { id: 'bridge', run: () => runWorkspaceScript('@local-hosting/twinfile-bridge', ['check']) },
-  { id: 'cli', run: () => runWorkspaceScript('@local-hosting/twinfile-cli', ['check']) },
-  { id: 'core', run: () => runWorkspaceScript('@local-hosting/twinfile-core', ['check:openstack']) },
   { id: 'spec', run: () => runWorkspaceScript('@local-hosting/twinfile', ['check']) },
+  { id: 'bridge', run: () => runWorkspaceScript('@local-hosting/twinfile-bridge', ['check']) },
+  { id: 'core', run: () => runWorkspaceScript('@local-hosting/twinfile-core', ['check:openstack']) },
+  { id: 'cli', run: () => runWorkspaceScript('@local-hosting/twinfile-cli', ['check']) },
   { id: 'simulator', run: () => runWorkspaceScript('@local-hosting/twinfile-simulator', ['check']) },
   { id: 'place-type', run: () => runWorkspaceScript('@local-hosting/twinfile-place', ['check']) },
   { id: 'resource-type', run: () => runWorkspaceScript('@local-hosting/twinfile-resource', ['check']) },
