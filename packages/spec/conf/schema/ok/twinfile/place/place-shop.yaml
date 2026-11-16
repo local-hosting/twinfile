@@ -1,0 +1,12 @@
+twinfile: 1
+kind: place
+id: shop
+name: Shop
+version: 0.1.0
+stability: example
+geotype:
+  primary: shopping_mall
+  registry: "@doppler-group/geotypes@0.1.2"
+layers:
+  - place/place.yaml
+  - place/spaces.yaml

@@ -1,0 +1,11 @@
+twinfile: 1
+kind: situation
+id: outage
+name: Outage
+version: 1.0.0
+stability: stable
+layers: []
+expects:
+  exit:
+    kind: opening
+    min: 1

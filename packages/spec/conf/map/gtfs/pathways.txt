@@ -1,0 +1,2 @@
+pathway_id,from_stop_id,to_stop_id,pathway_mode,length
+walk-1,central,north,walkway,1112

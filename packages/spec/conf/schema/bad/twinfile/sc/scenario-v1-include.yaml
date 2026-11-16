@@ -1,0 +1,9 @@
+from: ..
+twinfile: 1
+kind: scenario
+id: legacy-include
+name: Legacy Include
+version: 1.0.0
+stability: example
+include:
+  - twinfile/situation/severe-weather:1.0.0

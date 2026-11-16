@@ -1,0 +1,5 @@
+{
+  "name": "Block",
+  "storeys": [{ "id": "s0", "name": "Ground", "level": 0 }],
+  "spaces": [{ "id": "room-a", "name": "Room A", "storey": "s0", "usage": "office" }]
+}

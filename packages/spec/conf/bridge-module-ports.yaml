@@ -1,0 +1,22 @@
+# Bridge ids aligned with @doppler-group/twinfile-bridge built-ins (RFC 0006).
+bridges:
+  gtfs:
+    ports:
+      source: { direction: in, wire: bridge:gtfs }
+      place: { direction: out, wire: place:merged }
+  imdf:
+    ports:
+      source: { direction: in, wire: bridge:imdf }
+      place: { direction: out, wire: place:merged }
+  sosa:
+    ports:
+      feed: { direction: in, wire: bridge:feed }
+      place: { direction: out, wire: place:merged }
+  gltf:
+    ports:
+      scene: { direction: in, wire: bridge:gltf }
+      geometry: { direction: out, wire: place:geometry }
+  indoorgml:
+    ports:
+      source: { direction: in, wire: bridge:indoorgml }
+      place: { direction: out, wire: place:merged }

@@ -1,0 +1,5 @@
+ai:
+  - id: cam-1
+    kind: classifier
+    runs_on: cloud
+    accountable: ops

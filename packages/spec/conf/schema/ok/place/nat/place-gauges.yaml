@@ -1,0 +1,8 @@
+gauges:
+  - id: gauge-bridge
+    observes: stage
+    feed:
+      protocol: file
+      url: sources/gauges/bridge.csv
+    roles:
+      - gauge

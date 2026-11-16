@@ -1,0 +1,3 @@
+policies:
+  - id: safety-planning
+    purpose: Safety planning only

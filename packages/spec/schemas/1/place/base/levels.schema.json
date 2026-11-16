@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/levels.schema.json",
+  "type": "object",
+  "required": ["levels"],
+  "properties": {
+    "levels": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "ordinal", "name"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "ordinal": { "type": "integer" },
+          "name": { "type": "string" },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

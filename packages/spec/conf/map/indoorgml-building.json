@@ -1,0 +1,62 @@
+{
+  "schema": "twinfile.bridge.indoorgml.v1",
+  "name": "Campus hall",
+  "place": {
+    "name": "Campus hall",
+    "kind": "building"
+  },
+  "levels": [
+    { "id": "ground", "ordinal": 0, "name": "Ground" }
+  ],
+  "cellSpaces": [
+    {
+      "id": "lobby",
+      "name": "Main lobby",
+      "class": "Space",
+      "level": "ground",
+      "state": "lobby-state",
+      "layer": "topographic"
+    },
+    {
+      "id": "office-a",
+      "name": "Office A",
+      "class": "Room",
+      "level": "ground",
+      "parent": "lobby"
+    },
+    {
+      "id": "entrance",
+      "name": "Building entrance",
+      "class": "Anchor",
+      "level": "ground",
+      "layer": "topographic"
+    }
+  ],
+  "transitions": [
+    {
+      "id": "door-lobby-office",
+      "usage": "door",
+      "connects": ["lobby", "office-a"],
+      "state": "open"
+    },
+    {
+      "id": "door-outside-lobby",
+      "usage": "door",
+      "connects": ["entrance", "lobby"],
+      "state": "open"
+    }
+  ],
+  "statePaths": [
+    {
+      "id": "hallway-sweep",
+      "name": "Lobby sweep",
+      "from": "entrance",
+      "to": "office-a",
+      "length_m": 18,
+      "usage": "corridor"
+    }
+  ],
+  "layers": [
+    { "id": "topographic", "name": "Topographic layer" }
+  ]
+}

@@ -1,0 +1,80 @@
+# Global controlled vocabulary for situation `expects` keys and place `roles[]` tags.
+# Each `id` must match plan/place usage; `kind` must match expectsRole.kind in defs.json.
+# Roles tag place regions for situation plans; context situations arrive on processor inputs (`twin:situation`).
+version: 1
+roles:
+  - id: shelter
+    title: Enclosed shelter during hazard
+    kind: space
+    domain: safety
+    mode: resilience
+  - id: exit
+    title: Egress opening
+    kind: opening
+    domain: safety
+    mode: resilience
+  - id: outdoor
+    title: Outdoor program space
+    kind: space
+    domain: safety
+    mode: resilience
+  - id: ground-transport
+    title: Primary ground access and circulation
+    kind: space
+    domain: mobility
+    mode: daily
+  - id: alternative
+    title: Backup circulation when primary transport fails
+    kind: space
+    domain: mobility
+    mode: daily
+  - id: hotspot
+    title: Environmental exposure hotspot
+    kind: marker
+    domain: environment
+    mode: resilience
+  - id: safe-access
+    title: Maintained safe path or crossing
+    kind: marker
+    domain: environment
+    mode: resilience
+  - id: collection-point
+    title: Waste or debris collection point
+    kind: marker
+    domain: environment
+    mode: resilience
+  - id: staging
+    title: Operational staging area (relief, debris, equipment)
+    kind: space
+    domain: environment
+    mode: resilience
+  - id: survey-station
+    title: Monitoring or survey post
+    kind: station
+    domain: environment
+    mode: resilience
+  - id: water-launch
+    title: Boat or craft launch access
+    kind: marker
+    domain: hydrology
+    mode: resilience
+  - id: flood-refuge
+    title: High-ground refuge during rising water
+    kind: marker
+    domain: hydrology
+    mode: resilience
+  - id: gauge
+    title: Stage or level gauge
+    kind: gauge
+    domain: hydrology
+    mode: resilience
+  - id: seating
+    title: Spectator seating bowl or zone
+    kind: space
+    domain: events
+    mode: daily
+  - id: gate
+    title: Public entry gate opening
+    kind: opening
+    domain: events
+    mode: daily

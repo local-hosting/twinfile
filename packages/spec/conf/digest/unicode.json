@@ -1,0 +1,4 @@
+{
+  "note": "Reference vector for JCS digest fixtures; verified by @doppler-group/twinfile-core",
+  "payload": { "title": "café", "value": 1.0 }
+}

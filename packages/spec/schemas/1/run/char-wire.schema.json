@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/run/char-wire.schema.json",
+  "title": "CharacterWire",
+  "description": "Wire JSON for character twins (personnel / PCM) — MCP and OCI config.",
+  "type": "object",
+  "required": ["meta", "character", "disclosure", "digest"],
+  "properties": {
+    "meta": { "type": "object", "additionalProperties": true },
+    "character": { "type": "object", "additionalProperties": true },
+    "disclosure": {
+      "type": "object",
+      "required": ["synthetic", "no_pii"],
+      "properties": {
+        "synthetic": { "type": "boolean", "const": true },
+        "no_pii": { "type": "boolean", "const": true },
+        "note": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["rel", "href"],
+        "properties": {
+          "rel": { "type": "string" },
+          "href": { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+  },
+  "additionalProperties": false
+}

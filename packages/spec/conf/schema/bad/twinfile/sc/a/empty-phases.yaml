@@ -1,0 +1,12 @@
+twinfile: 1
+kind: situation
+id: severe-weather
+name: Severe Weather
+version: 1.0.0
+stability: stable
+layers: []
+phases: []
+expects:
+  exit:
+    kind: opening
+    min: 1

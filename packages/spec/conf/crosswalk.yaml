@@ -1,0 +1,212 @@
+# Field crosswalk for external files. Importers write a known term only to the
+# collection and field named here. `ext: true` means the term has no column.
+# A term absent from this file also goes in ext. Value maps use Twinfile words.
+version: 1
+rows:
+  - source: imdf
+    term: venue
+    collection: place
+  - source: imdf
+    term: level
+    collection: levels
+  - source: imdf
+    term: unit
+    collection: spaces
+  - source: imdf
+    term: opening
+    collection: openings
+  - source: imdf
+    term: category
+    collection: place
+    field: kind
+  - source: imdf
+    term: category
+    collection: spaces
+    field: kind
+  - source: imdf
+    term: category
+    collection: openings
+    field: kind
+  - source: imdf
+    term: category
+    collection: openings
+    field: roles
+    values:
+      egress: exit
+  - source: imdf
+    term: hours
+    ext: true
+  - source: imdf
+    term: restriction
+    ext: true
+  - source: imdf
+    term: outdoor
+    ext: true
+  - source: imdf
+    term: door
+    ext: true
+
+  - source: gltf
+    term: path
+    ext: true
+  - source: gltf
+    term: node
+    ext: true
+  - source: gltf
+    term: file
+    ext: true
+
+  - source: ifc
+    term: storey
+    collection: levels
+  - source: ifc
+    term: space
+    collection: spaces
+  - source: ifc
+    term: ifcType
+    ext: true
+  - source: ifc
+    term: file
+    ext: true
+
+  - source: indoorgml
+    term: CellSpace
+    collection: spaces
+  - source: indoorgml
+    term: Level
+    collection: levels
+  - source: indoorgml
+    term: Transition
+    collection: openings
+  - source: indoorgml
+    term: StateConnection
+    collection: routes
+  - source: indoorgml
+    term: class
+    collection: spaces
+    field: kind
+    values:
+      Anchor: anchor
+      Space: space
+      Room: room
+      Corridor: corridor
+      Hall: hall
+  - source: indoorgml
+    term: usage
+    collection: openings
+    field: kind
+    values:
+      door: door
+      gate: gate
+  - source: indoorgml
+    term: usage
+    collection: routes
+    field: kind
+    values:
+      corridor: corridor
+      path: path
+      stair: stair
+      elevator: elevator
+  - source: indoorgml
+    term: state
+    ext: true
+  - source: indoorgml
+    term: layer
+    ext: true
+  - source: indoorgml
+    term: interLayerConnection
+    ext: true
+
+  - source: gtfs
+    term: pathway_mode
+    collection: routes
+    field: kind
+    values:
+      walkway: corridor
+      stairs: stair
+      escalator: escalator
+      moving_sidewalk: moving_sidewalk
+      elevator: elevator
+  - source: gtfs
+    term: location_type
+    collection: stations
+    field: id
+    values:
+      "1": station
+  - source: gtfs
+    term: stop_lat
+    collection: stations
+    field: location.lat
+  - source: gtfs
+    term: stop_lon
+    collection: stations
+    field: location.lng
+  - source: gtfs
+    term: zone_id
+    ext: true
+
+  - source: brick
+    term: type
+    collection: sensors
+    field: brick
+  - source: brick
+    term: type
+    collection: assets
+    field: brick
+  - source: brick
+    term: timeseries
+    ext: true
+  - source: brick
+    term: vendor
+    ext: true
+
+  - source: bot
+    term: storey
+    collection: levels
+  - source: bot
+    term: space
+    collection: spaces
+  - source: bot
+    term: level
+    collection: levels
+    field: ordinal
+  - source: bot
+    term: usage
+    ext: true
+
+  - source: sosa
+    term: madeBySensor
+    collection: feed
+    field: device_id
+  - source: sosa
+    term: hasFeatureOfInterest
+    collection: feed
+    field: observes
+  - source: sosa
+    term: featureOfInterest
+    collection: feed
+    field: observes
+  - source: sosa
+    term: phenomenonTime
+    collection: feed
+    field: observed_at
+  - source: sosa
+    term: resultTime
+    collection: feed
+    field: available_at
+  - source: sosa
+    term: observedProperty
+    collection: feed
+    field: observed_property
+  - source: sosa
+    term: wasAttributedTo
+    ext: true
+
+  - source: ngsi-ld
+    term: observedAt
+    collection: feed
+    field: observed_at
+  - source: ngsi-ld
+    term: dateModified
+    collection: feed
+    field: available_at

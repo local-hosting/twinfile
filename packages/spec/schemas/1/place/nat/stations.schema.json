@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://twinfile.org/schemas/1/place/nat/stations.schema.json",
+  "type": "object",
+  "required": ["stations"],
+  "properties": {
+    "stations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id"],
+        "properties": {
+          "id": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/twinId" },
+          "name": { "type": "string" },
+          "location": { "$ref": "https://twinfile.org/schemas/1/defs.json#/$defs/location" },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "ext": { "type": "object" }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

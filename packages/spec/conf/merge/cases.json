@@ -1,0 +1,19 @@
+{
+  "cases": [
+    { "base": { "items": [{ "id": "a", "label": "A" }] }, "patch": { "items": [{ "id": "a", "label": "B" }] }, "expect": { "items": [{ "id": "a", "label": "B" }] } },
+    { "base": { "items": [{ "id": "a", "n": 1 }] }, "patch": { "items": [{ "id": "b", "n": 2 }] }, "expect": { "items": [{ "id": "a", "n": 1 }, { "id": "b", "n": 2 }] } },
+    { "base": { "items": [{ "id": "a", "n": 1 }, { "id": "b", "n": 2 }] }, "patch": { "items": [{ "id": "a", "$delete": true }] }, "expect": { "items": [{ "id": "b", "n": 2 }] } },
+    { "base": { "x": 1, "y": 2 }, "patch": { "x": null }, "expect": { "y": 2 } },
+    { "base": { "nested": { "a": 1 } }, "patch": { "nested": { "b": 2 } }, "expect": { "nested": { "a": 1, "b": 2 } } },
+    { "base": { "tags": ["a", "b"] }, "patch": { "tags": ["c"] }, "expect": { "tags": ["c"] } },
+    { "base": { "items": [] }, "patch": { "items": [{ "id": "z", "v": 0 }] }, "expect": { "items": [{ "id": "z", "v": 0 }] } },
+    { "base": { "items": [{ "id": "a", "roles": ["x"] }] }, "patch": { "items": [{ "id": "a", "roles": ["y"] }] }, "expect": { "items": [{ "id": "a", "roles": ["y"] }] } },
+    { "base": { "items": [{ "id": "a", "n": 1 }, { "id": "b", "n": 2 }] }, "patch": { "items": [{ "id": "b", "n": 3 }] }, "expect": { "items": [{ "id": "a", "n": 1 }, { "id": "b", "n": 3 }] } },
+    { "base": { "meta": { "v": 1 } }, "patch": { "meta": null }, "expect": {} },
+    { "base": { "a": 1 }, "patch": { "b": 2 }, "expect": { "a": 1, "b": 2 } },
+    { "base": {}, "patch": { "items": [{ "id": "only", "k": true }] }, "expect": { "items": [{ "id": "only", "k": true }] } },
+    { "base": { "items": [{ "id": "a", "deep": { "x": 1 } }] }, "patch": { "items": [{ "id": "a", "deep": { "y": 2 } }] }, "expect": { "items": [{ "id": "a", "deep": { "x": 1, "y": 2 } }] } },
+    { "base": { "items": [{ "id": "a" }, { "id": "b" }] }, "patch": { "items": [{ "id": "b", "$delete": true }, { "id": "c", "n": 1 }] }, "expect": { "items": [{ "id": "a" }, { "id": "c", "n": 1 }] } },
+    { "base": { "n": 0.5 }, "patch": { "n": 1 }, "expect": { "n": 1 } }
+  ]
+}
