@@ -1,6 +1,6 @@
 'use client';
 
-import { createElement, useMemo, useRef, type ChangeEvent, type UIEvent } from 'react';
+import { createElement, useMemo, useState, type ChangeEvent, type UIEvent } from 'react';
 
 import { draftMapFromText } from './draft-map.js';
 import { highlightYaml } from './highlight-yaml.js';
@@ -32,10 +32,9 @@ export function TwinfileSourcePane({
   className,
 }: TwinfileSourcePaneProps) {
   const parsed = useMemo(() => draftMapFromText(text), [text]);
-  const highlightRef = useRef<HTMLPreElement>(null);
-  const lastGood = useRef<MapDraft>(parsed);
-  if (!parsed.parseError) lastGood.current = parsed;
-  const draft = parsed.parseError && parsed.features.length === 0 ? lastGood.current : parsed;
+  const [lastGood, setLastGood] = useState<MapDraft>(parsed);
+  if (!parsed.parseError && parsed !== lastGood) setLastGood(parsed);
+  const draft = parsed.parseError && parsed.features.length === 0 ? lastGood : parsed;
 
   const status = parsed.parseError ?? statusLine(statusPrefix ?? unitKey, draft);
 
@@ -50,7 +49,7 @@ export function TwinfileSourcePane({
       { className: 'twinfile-editor__source' },
       createElement(
         'pre',
-        { ref: highlightRef, className: 'twinfile-editor__highlight', 'aria-hidden': true },
+        { className: 'twinfile-editor__highlight', 'aria-hidden': true },
         highlightYaml(text).map((token, index) =>
           createElement('span', { key: index, className: 'twinfile-editor__token', 'data-kind': token.kind }, token.text),
         ),
@@ -64,8 +63,8 @@ export function TwinfileSourcePane({
         value: text,
         onScroll: (event: UIEvent<HTMLTextAreaElement>) => {
           const area = event.currentTarget;
-          const highlight = highlightRef.current;
-          if (!highlight) return;
+          const highlight = area.previousElementSibling;
+          if (!(highlight instanceof HTMLElement)) return;
           highlight.style.transform = `translate(${-area.scrollLeft}px, ${-area.scrollTop}px)`;
         },
         onChange: readOnly

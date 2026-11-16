@@ -21,6 +21,12 @@
       "import": "./dist/twin-module.js",
       "default": "./dist/twin-module.js"
     },
+    "./place/demo-ext-h3": {
+      "development": "./src/place/demo-ext-h3.ts",
+      "types": "./dist/place/demo-ext-h3.d.ts",
+      "import": "./dist/place/demo-ext-h3.js",
+      "default": "./dist/place/demo-ext-h3.js"
+    },
     "./place/*": {
       "development": "./src/place/*",
       "types": "./dist/place/*",
