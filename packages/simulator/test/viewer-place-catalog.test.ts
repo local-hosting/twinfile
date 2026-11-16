@@ -7,7 +7,7 @@ import {
   listViewerCatalog,
   listViewerPlaceCardCatalog,
 } from '../viewer/dist/server/catalog/viewer-catalog.js';
-import { testCatalogRoots } from './test-examples-root.js';
+import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 describe('viewer place catalog', () => {
   const testDir = dirname(fileURLToPath(import.meta.url));

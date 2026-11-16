@@ -12,29 +12,10 @@ import { fileURLToPath } from 'node:url';
 
 const siteRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
 
-function resolveSpecSchemasDir() {
-  const fromEnv = process.env.TF_SPEC_ROOT;
-  if (fromEnv) {
-    return join(fromEnv, 'schemas', '1');
-  }
-  const candidates = [
-    join(siteRoot, '..', 'packages', 'spec', 'schemas', '1'),
-    join(siteRoot, '..', 'spec', 'schemas', '1'),
-    join(siteRoot, 'spec', 'schemas', '1'),
-  ];
-  for (const candidate of candidates) {
-    try {
-      if (statSync(candidate).isDirectory()) return candidate;
-    } catch {
-      // try next
-    }
-  }
-  throw new Error(
-    'Could not find @local-hosting/twinfile schemas. Clone twinfile/spec as a sibling, vendor under ./spec, or set TF_SPEC_ROOT.',
-  );
+const specRoot = join(siteRoot, '..', 'spec', 'schemas', '1');
+if (!statSync(specRoot, { throwIfNoEntry: false })?.isDirectory()) {
+  throw new Error(`sync-schemas: missing ${specRoot} (run from the twinfile monorepo)`);
 }
-
-const specRoot = resolveSpecSchemasDir();
 const publicSchemas = join(siteRoot, 'public', 'schemas', '1');
 const schemaIdPrefix = 'https://twinfile.org/schemas/1/';
 
