@@ -7,6 +7,8 @@ export type CharacterInstanceVariationPolicy = {
   includeMindset?: boolean;
   /** Include `persona.quote` as `voiceLine` when present (default true). */
   includeVoiceLine?: boolean;
+  /** Include `persona.personality` dramaturgy sheet when present (default true). */
+  includePersonality?: boolean;
   /**
    * Sample demographic bands from `persona.demographic` or demographic signals
    * (default true). Exemplar demographics stay locked on the catalog Character.
@@ -27,6 +29,7 @@ export const DEFAULT_CHARACTER_INSTANCE_VARIATION: CharacterInstanceVariationPol
   traitPickCount: DEFAULT_CHARACTER_INSTANCE_TRAIT_PICK_COUNT,
   includeMindset: true,
   includeVoiceLine: true,
+  includePersonality: true,
   includeDemographics: true,
   includeDailyRhythm: true,
 };

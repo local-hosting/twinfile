@@ -2,15 +2,15 @@ import { STORY_NARRATIVE_SPEC_VERSION } from '../types/story-narrative-spec.js';
 import { normalizeStoryAssociations } from './normalize-story-associations.js';
 
 function resolveStoryNarrativeSpecVersion(raw: Record<string, unknown>): number {
-  const fromSAMSpec = raw.storySpec;
+  const fromStorySpec = raw.storySpec;
   const fromVersion = raw.version;
-  const specFields = [fromSAMSpec, fromVersion].filter((value) => value !== undefined);
+  const specFields = [fromStorySpec, fromVersion].filter((value) => value !== undefined);
   if (specFields.length > 1 && new Set(specFields).size > 1) {
     throw new Error(
-      `storySpec (${fromSAMSpec}) and version (${fromVersion}) must agree (story narrative spec)`,
+      `storySpec (${fromStorySpec}) and version (${fromVersion}) must agree (story narrative spec)`,
     );
   }
-  const resolved = fromSAMSpec ?? fromVersion ?? STORY_NARRATIVE_SPEC_VERSION;
+  const resolved = fromStorySpec ?? fromVersion ?? STORY_NARRATIVE_SPEC_VERSION;
   if (typeof resolved !== 'number' || !Number.isInteger(resolved)) {
     throw new Error('storySpec must be an integer story narrative spec version');
   }

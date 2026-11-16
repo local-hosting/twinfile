@@ -1,7 +1,7 @@
 import type { Story } from '../types/story-narrative.js';
 import { scoreCatalogTextMatch } from '../story-catalog/match-story-catalog-from-text.js';
 
-/** Pick a Story episode mount when `episodeId` is omitted but several match the focal Character. */
+/** Pick a Story twin when `storyId` is omitted but several match the focal Character. */
 export function resolveStoryEpisodeForCharacter(input: {
   stories: readonly Story[];
   characterId: string;

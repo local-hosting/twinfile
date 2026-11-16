@@ -6,7 +6,7 @@ import type { StoryCharacterRef, StoryPlaceRef } from './story-refs.js';
 
 /** Document header (`story.yml`). */
 export type StoryDocument = {
-  /** SAMSpec contract version (alias on disk: `storySpec`). */
+  /** Story narrative contract version (alias on disk: `storySpec`). */
   version: 1;
   id: string;
   title: string;

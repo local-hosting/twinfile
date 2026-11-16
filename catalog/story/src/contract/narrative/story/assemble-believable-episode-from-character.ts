@@ -1,6 +1,6 @@
 import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
-import type { JobSituationModel } from '@local-hosting/twinfile-character/situations';
-import { rankJobsForPersona } from '@local-hosting/twinfile-character/situations';
+import type { JobSituationModel } from '@local-hosting/twinfile-context';
+import { rankJobsForPersona } from '@local-hosting/twinfile-context';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import type { EpisodeTimingVariation } from '../types/episode-timing-variation.js';
@@ -27,7 +27,7 @@ export type AssembleBelievableEpisodeFromCharacterInput = {
   stories: readonly Story[];
   situations?: JobSituationModel;
   touchpointCatalog?: StoryTouchpointCatalog;
-  episodeId?: string;
+  storyId?: string;
   simulationEpochStart: string;
   planningHorizonDays?: number;
   visitDayOffset?: number;
@@ -41,7 +41,7 @@ export type AssembleBelievableEpisodeFromCharacterInput = {
 };
 
 export type BelievableEpisodeAssemblyV1 = {
-  episodeId: string;
+  storyId: string;
   journeyId: string;
   rankedJobIds: string[];
   rankedPlaceRefs: string[];
@@ -63,11 +63,11 @@ function characterByIdMap(characters: readonly Character[]): Record<string, Char
 }
 
 function pickStoryMount(input: AssembleBelievableEpisodeFromCharacterInput): Story {
-  const episodeId = input.episodeId?.trim();
-  if (episodeId) {
-    const direct = input.stories.find((row) => row.id === episodeId);
+  const storyId = input.storyId?.trim();
+  if (storyId) {
+    const direct = input.stories.find((row) => row.id === storyId);
     if (!direct) {
-      throw new Error(`Story episode "${episodeId}" is not in mounted catalog`);
+      throw new Error(`Story "${storyId}" is not in mounted catalog`);
     }
     return direct;
   }
@@ -167,7 +167,7 @@ export function assembleBelievableEpisodeFromCharacter(
   return {
     ...compiled,
     assembly: {
-      episodeId: story.id,
+      storyId: story.id,
       journeyId: storyJourney.id,
       rankedJobIds: rankedJobs,
       rankedPlaceRefs,

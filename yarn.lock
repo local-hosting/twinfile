@@ -305,6 +305,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@local-hosting/twinfile-character@workspace:catalog/character"
   dependencies:
+    "@local-hosting/twinfile-context": "workspace:^"
     "@local-hosting/twinfile-core": "workspace:packages/core"
     "@types/chance": "npm:^1.1.6"
     "@types/js-yaml": "npm:^4.0.9"
@@ -324,6 +325,7 @@ __metadata:
   dependencies:
     "@local-hosting/twinfile-bridge": "workspace:packages/bridge"
     "@local-hosting/twinfile-character": "workspace:^"
+    "@local-hosting/twinfile-context": "workspace:^"
     "@local-hosting/twinfile-core": "workspace:packages/core"
     "@local-hosting/twinfile-event": "workspace:^"
     "@local-hosting/twinfile-place": "workspace:^"
@@ -337,6 +339,18 @@ __metadata:
   bin:
     twin: ./bin/twinfile.js
     twinfile: ./bin/twinfile.js
+  languageName: unknown
+  linkType: soft
+
+"@local-hosting/twinfile-context@workspace:^, @local-hosting/twinfile-context@workspace:catalog/context":
+  version: 0.0.0-use.local
+  resolution: "@local-hosting/twinfile-context@workspace:catalog/context"
+  dependencies:
+    "@local-hosting/twinfile-core": "workspace:packages/core"
+    "@types/node": "npm:^24.0.0"
+    typescript: "npm:^5.8.3"
+    vitest: "npm:^4.1.12"
+    zod: "npm:^4.1.11"
   languageName: unknown
   linkType: soft
 
@@ -475,6 +489,7 @@ __metadata:
   resolution: "@local-hosting/twinfile-story@workspace:catalog/story"
   dependencies:
     "@local-hosting/twinfile-character": "workspace:^"
+    "@local-hosting/twinfile-context": "workspace:^"
     "@local-hosting/twinfile-core": "workspace:packages/core"
     "@types/chance": "npm:^1.1.6"
     "@types/js-yaml": "npm:^4.0.9"
@@ -486,8 +501,11 @@ __metadata:
     zod: "npm:^4.1.11"
   peerDependencies:
     "@local-hosting/twinfile-character": "workspace:^"
+    "@local-hosting/twinfile-context": "workspace:^"
   peerDependenciesMeta:
     "@local-hosting/twinfile-character":
+      optional: false
+    "@local-hosting/twinfile-context":
       optional: false
   languageName: unknown
   linkType: soft

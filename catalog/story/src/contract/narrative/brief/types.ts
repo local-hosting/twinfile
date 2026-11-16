@@ -19,7 +19,7 @@ export type StoryBriefWhoV1 = {
 };
 
 export type StoryBriefWhatV1 = {
-  episodeId?: string;
+  storyId?: string;
   startStoreVisitJourney?: boolean;
 };
 
@@ -76,6 +76,21 @@ export type StoryBriefSnapshotV1 = {
 
 import type { StoryBriefDailyRhythmV1 } from './persona-daily-rhythm-format.js';
 
+/** Dramaturgy sheet on a brief character (mirrors CharacterPersonality). */
+export type StoryBriefPersonalityV1 = {
+  wants?: string;
+  fears?: string;
+  flaw?: string;
+  delivery?: {
+    patterns?: string[];
+    lines?: string[];
+  };
+  movement?: string[];
+  temperament?: string[];
+  moods?: string[];
+  signatureMoves?: string[];
+};
+
 export type StoryBriefCharacterV1 = {
   id?: string;
   personaId: string;
@@ -92,6 +107,7 @@ export type StoryBriefCharacterV1 = {
     segmentLabel?: string;
     mindset?: string;
     traits?: string[];
+    personality?: StoryBriefPersonalityV1;
   };
 };
 

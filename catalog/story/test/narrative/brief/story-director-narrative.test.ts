@@ -20,7 +20,7 @@ describe('formatStoryDirectorNarrative', () => {
         personaId: 'rider-urban-commuter-3',
         storyPitch: 'A rider threads the city from home to destination.',
         who: { characterId: 'persona:rider', displayName: 'Maya' },
-        what: { episodeId: 'story:episode:rider-commute' },
+        what: { storyId: 'story:episode:rider-commute' },
         when: {
           simulationEpochStart: '2026-01-06',
           planningHorizonDays: 56,
@@ -149,7 +149,7 @@ describe('formatStoryDirectorNarrative', () => {
           actId: 'exposition',
           characterIds: ['persona:rider'],
           placeRef: 'twinfile/place/demo-home:0.0.0',
-          situation: 'She checks the app before the morning rush.',
+          context: 'She checks the app before the morning rush.',
           narrativeBeat: 'Open the day with intention.',
           touchpointIds: ['touchpoint:rider-open-home'],
           emotions: {},

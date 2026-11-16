@@ -19,10 +19,14 @@
     "./narrative/browser": "./src/contract/narrative/browser.ts"
   },
   "peerDependencies": {
-    "@local-hosting/twinfile-character": "workspace:^"
+    "@local-hosting/twinfile-character": "workspace:^",
+    "@local-hosting/twinfile-context": "workspace:^"
   },
   "peerDependenciesMeta": {
     "@local-hosting/twinfile-character": {
+      "optional": false
+    },
+    "@local-hosting/twinfile-context": {
       "optional": false
     }
   },
@@ -39,6 +43,7 @@
   },
   "devDependencies": {
     "@local-hosting/twinfile-character": "workspace:^",
+    "@local-hosting/twinfile-context": "workspace:^",
     "@types/chance": "^1.1.6",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^24.0.0",

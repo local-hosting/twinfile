@@ -29,9 +29,9 @@ describe('loro view', () => {
     const value = renderTwinfileLoroView({
       catalogId: 'demo',
       methodId: 'x',
-      pcm: { id: 'persona:rider' },
+      character: { id: 'persona:rider' },
     });
-    expect(value).toEqual({ catalogId: 'demo', pcm: { id: 'persona:rider' } });
+    expect(value).toEqual({ catalogId: 'demo', character: { id: 'persona:rider' } });
   });
 
   it('compact and strip are independently usable', () => {

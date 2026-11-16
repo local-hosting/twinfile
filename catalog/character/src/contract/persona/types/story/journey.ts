@@ -32,7 +32,8 @@ export type JourneyMoment = {
   /** Calendar bucket, e.g. `2021-10` or `OCT 2021`. */
   period?: string;
   narrativeBeat?: string;
-  situation?: string;
+  /** Context / circumstance (JTBD). */
+  context?: string;
   /** JTBD job ids active in this moment. */
   jobIds?: string[];
   touchpointIds: string[];
@@ -48,7 +49,8 @@ export type JourneyPhase = {
   order: number;
   goal?: string;
   description?: string;
-  situation?: string;
+  /** Context / circumstance (JTBD). */
+  context?: string;
   narrativeBeat?: string;
   /** JTBD job ids this phase addresses. */
   jobIds: string[];

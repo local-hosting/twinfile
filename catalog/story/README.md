@@ -6,8 +6,8 @@ Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../..
 src/
   twin-module.ts          # story head module + normalization
   contract/
-    narrative/            # story narrative (npm subpath …/narrative — legacy name)
+    narrative/            # story narrative (npm subpath …/narrative)
 examples/*/<story>.twin.yaml  # story.scenes[].run — scene runs (not twins)
 ```
 
-Import **`@local-hosting/twinfile-story/narrative`** when compiling episodes (legacy subpath); **`<unit>.twin.yaml`** twins depend on **`@local-hosting/twinfile-core`** only.
+Import **`@local-hosting/twinfile-story/narrative`** when compiling Story runs from mounted twins; **`<unit>.twin.yaml`** heads depend on **`@local-hosting/twinfile-core`** only.

@@ -2,24 +2,20 @@ import type { Character } from '@local-hosting/twinfile-character/persona';
 import { matchStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
 import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 
-export type StoryMenuEpisodeWire = {
+export type StoryMenuStoryWire = {
   id: string;
   title?: string;
-  journeyId?: string;
   focalCharacterId?: string;
 };
 
-export function focalCharacterIdFromStoryMenuEpisode(
-  episode: Pick<StoryMenuEpisodeWire, 'focalCharacterId'>,
+export function focalCharacterIdFromStoryMenuStory(
+  story: Pick<StoryMenuStoryWire, 'focalCharacterId'>,
 ): string | undefined {
-  const id = episode.focalCharacterId?.trim();
+  const id = story.focalCharacterId?.trim();
   return id || undefined;
 }
 
-/** @deprecated Use {@link focalCharacterIdFromStoryMenuEpisode}. */
-export const personaMountIdFromStoryMenuEpisode = focalCharacterIdFromStoryMenuEpisode;
-
-export function focalCharacterFromStoryEpisodeMount(mount: { focalCharacter: Character }): Character {
+export function focalCharacterFromStoryMount(mount: { focalCharacter: Character }): Character {
   return mount.focalCharacter;
 }
 
@@ -27,17 +23,15 @@ export type StoryPlanJourneyRowWire = {
   id: string;
   label?: string;
   focalCharacterId?: string;
-  journeyId?: string;
 };
 
-export function storyPlanJourneyRowsFromMenuEpisodes(
-  episodes: readonly StoryMenuEpisodeWire[],
+export function storyPlanJourneyRowsFromMenuStories(
+  stories: readonly StoryMenuStoryWire[],
 ): StoryPlanJourneyRowWire[] {
-  return episodes.map((row) => ({
+  return stories.map((row) => ({
     id: row.id,
     label: row.title,
-    focalCharacterId: focalCharacterIdFromStoryMenuEpisode(row),
-    journeyId: row.journeyId,
+    focalCharacterId: focalCharacterIdFromStoryMenuStory(row),
   }));
 }
 
@@ -46,10 +40,9 @@ export function matchStoryCatalogIdsFromTextForPlanning(input: {
   menu: StoryCatalogMenuV1;
   fleetPlaces?: Parameters<typeof matchStoryCatalogIdsFromText>[0]['fleetPlaces'];
   focalCharacterId?: string;
-  personaMountId?: string;
   includePlaces?: boolean;
 }) {
-  const focalCharacterId = (input.focalCharacterId ?? input.personaMountId)?.trim();
+  const focalCharacterId = input.focalCharacterId?.trim();
   return matchStoryCatalogIdsFromText({
     text: input.text,
     menu: input.menu,
@@ -58,9 +51,6 @@ export function matchStoryCatalogIdsFromTextForPlanning(input: {
     ...(focalCharacterId ? { focalCharacterId } : {}),
   });
 }
-
-/** @deprecated Use {@link matchStoryCatalogIdsFromTextForPlanning}. */
-export const matchStoryCatalogIdsFromTextForPlanning = matchStoryCatalogIdsFromTextForPlanning;
 
 export function storyWireFocalCharacterArg(character: Character): { focalCharacter: Character } {
   return { focalCharacter: character };
@@ -72,18 +62,15 @@ export function storyWireFocalCharacterField(
   return { focalCharacter: character };
 }
 
-export function storyMenuEpisodeRefForTest(input: {
+export function storyMenuStoryRefForTest(input: {
   id: string;
   title?: string;
-  journeyId?: string;
   focalCharacterId?: string;
-  personaMountId?: string;
-}): StoryMenuEpisodeWire {
-  const focalCharacterId = (input.focalCharacterId ?? input.personaMountId)?.trim();
+}): StoryMenuStoryWire {
+  const focalCharacterId = input.focalCharacterId?.trim();
   return {
     id: input.id,
     title: input.title,
-    journeyId: input.journeyId,
     ...(focalCharacterId ? { focalCharacterId } : {}),
   };
 }

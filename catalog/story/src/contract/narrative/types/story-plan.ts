@@ -123,7 +123,7 @@ export type StoryPlanInputV1 = {
   focusAreaId?: string;
   interestIds?: string[];
   characterId?: string;
-  episodeId?: string;
+  storyId?: string;
   placeRef?: string;
   planningHorizonDays?: number;
   visitDayOffset?: number;
@@ -146,7 +146,7 @@ export type StoryPlanExtractedHintsV1 = {
   focusAreaId?: string;
   interestIds?: string[];
   characterId?: string;
-  episodeId?: string;
+  storyId?: string;
   placeRef?: string;
   planningHorizonDays?: number;
   visitDayOffset?: number;
@@ -170,7 +170,7 @@ export type StoryPlanExtractionSegmentBriefV1 = {
 export type StoryPlanExtractionIndexV1 = {
   storyPlanningGuide?: string;
   characters?: Array<{ characterId: string; label: string; journeyIds: string[] }>;
-  episodes?: Array<{ id: string; title: string; focalCharacterId: string; journeyId?: string }>;
+  stories?: Array<{ id: string; title: string; focalCharacterId: string }>;
   places?: Array<{ placeRef: string; title: string }>;
   segmentIds: string[];
   segmentLabels: Record<string, string | undefined>;
@@ -182,7 +182,7 @@ export type StoryPlanExtractionIndexV1 = {
   focusAreaIds: string[];
   journeyIds: string[];
   characterIds: string[];
-  episodeIds: string[];
+  storyIds: string[];
   jobIds: string[];
 };
 
@@ -208,7 +208,7 @@ export type StoryPlanCatalogBuildInputV1 = {
   focusAreaIds: string[];
   journeyIds: string[];
   characterIds: string[];
-  episodeIds: string[];
+  storyIds: string[];
   storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
   fleetPlaces: readonly StoryPlanFleetPlaceSnapshotV1[];

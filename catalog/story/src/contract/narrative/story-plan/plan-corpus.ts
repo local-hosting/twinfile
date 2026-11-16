@@ -32,7 +32,7 @@ export function buildStoryPlanCatalogSnapshot(
     focusAreaIds: input.focusAreaIds,
     journeyIds: input.journeyIds,
     characterIds: input.characterIds,
-    episodeIds: input.episodeIds,
+    storyIds: input.storyIds,
     ...(input.storyMenu ? { storyMenu: input.storyMenu } : {}),
     jobIds: input.jobIds,
     fleetPlaces: [...input.fleetPlaces],
@@ -75,13 +75,12 @@ export function buildStoryPlanExtractionIndex(
           })),
         }
       : {}),
-    ...(storyMenu?.episodes.length
+    ...(storyMenu?.stories.length
       ? {
-          episodes: storyMenu.episodes.map((row) => ({
+          stories: storyMenu.stories.map((row) => ({
             id: row.id,
             title: row.title,
             focalCharacterId: row.focalCharacterId,
-            journeyId: row.journeyId,
           })),
         }
       : {}),
@@ -95,7 +94,7 @@ export function buildStoryPlanExtractionIndex(
     focusAreaIds: catalog.focusAreaIds,
     journeyIds: catalog.journeyIds,
     characterIds: catalog.characterIds,
-    episodeIds: catalog.episodeIds,
+    storyIds: catalog.storyIds,
     jobIds: catalog.jobIds,
   };
 }
@@ -151,7 +150,7 @@ export function mergeStoryPlanInput(
     focusAreaId: pickString(body.focusAreaId, extracted.focusAreaId),
     interestIds: mergeStringArrays(body.interestIds, extracted.interestIds),
     characterId: pickString(body.characterId, extracted.characterId),
-    episodeId: pickString(body.episodeId, extracted.episodeId),
+    storyId: pickString(body.storyId, extracted.storyId),
     placeRef: pickString(body.placeRef, extracted.placeRef),
     planningHorizonDays: body.planningHorizonDays ?? extracted.planningHorizonDays,
     visitDayOffset: body.visitDayOffset ?? extracted.visitDayOffset,

@@ -10,8 +10,7 @@ export const StoryDimensionWhoSchema = z.object({
 });
 
 export const StoryDimensionWhatSchema = z.object({
-  episodeId: z.string().min(1),
-  journeyId: z.string().min(1),
+  storyId: z.string().min(1),
   arcKind: z.string().min(1).optional(),
 });
 
@@ -30,6 +29,8 @@ export const StoryDimensionWhenSchema = z.object({
 
 export const StoryDimensionWhySchema = z.object({
   jobIds: z.array(z.string().min(1)).optional(),
+  context: z.string().min(1).optional(),
+  /** @deprecated Prefer `context`. */
   situation: z.string().min(1).optional(),
   narrativeBeat: z.string().min(1).optional(),
 });

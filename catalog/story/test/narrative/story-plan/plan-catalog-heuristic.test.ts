@@ -22,7 +22,7 @@ const catalog: StoryPlanCatalogSnapshotV1 = {
   focusAreaIds: [],
   journeyIds: [],
   characterIds: [],
-  episodeIds: [],
+  storyIds: [],
   jobIds: [],
   fleetPlaces: [
     { slug: 'airport-kiosk', name: 'Airport kiosk' },

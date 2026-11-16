@@ -4,7 +4,7 @@ import {
   resolveEffectiveEpisodeTiming,
 } from './resolve-story-arc-narrative.js';
 import { buildStorySituationsNarrativeContext } from './story-situations-narrative-context.js';
-import { buildStoryboardSceneContext, findSamSceneForTouchpoint } from './storyboard-scene-context.js';
+import { buildStoryboardSceneContext, findStorySceneForTouchpoint } from './storyboard-scene-context.js';
 import type { DirectorScriptSceneV1, FormatStoryDirectorNarrativeInput } from './storyboard-types.js';
 import { resolveScenePlaceForReader, sanitizeReaderProductionPhrase } from './resolve-scene-place-for-reader.js';
 import { resolveStoryEpisodePresentation } from './resolve-story-episode-presentation.js';
@@ -34,10 +34,10 @@ export function formatStoryReaderSynopsisLines(
     resolveStoryEpisodePresentation({ journey: input.journey, story: input.story, arc });
   const touchpointIds = presentation.scriptTouchpointIds.map((id) => id.trim()).filter(Boolean);
 
-  const jsmNarrative =
-    input.jsmNarrative ??
+  const situationsNarrative =
+    input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      jsm: input.jsm,
+      situations: input.situations,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,
@@ -57,7 +57,7 @@ export function formatStoryReaderSynopsisLines(
     lines.push(`**${ctx.protagonistName}** moves through one continuous episode of this arc.`);
   }
 
-  const jobPursuit = formatJobPursuitPhrase({ journey: input.journey, jsmNarrative });
+  const jobPursuit = formatJobPursuitPhrase({ journey: input.journey, situationsNarrative });
   if (jobPursuit) {
     lines.push('');
     lines.push(`Through-line: ${jobPursuit}`);
@@ -69,7 +69,7 @@ export function formatStoryReaderSynopsisLines(
     touchpointIds.forEach((touchpointId, index) => {
       const scene = scriptScenes[index];
       if (!scene) return;
-      const samScene = findSamSceneForTouchpoint(input.story, touchpointId);
+      const samScene = findStorySceneForTouchpoint(input.story, touchpointId);
       const place = resolveScenePlaceForReader({
         touchpointId,
         story: input.story,
@@ -86,12 +86,12 @@ export function formatStoryReaderSynopsisLines(
     journey: input.journey,
     story: input.story,
     arc,
-    rankedJobCount: jsmNarrative.rankedJobs.length,
+    rankedJobCount: situationsNarrative.rankedJobs.length,
   });
   const lastTouchpointId = touchpointIds[touchpointIds.length - 1];
   const lastLabel = lastTouchpointId
     ? scriptScenes[touchpointIds.length - 1]?.storyboard.caption ||
-      findSamSceneForTouchpoint(input.story, lastTouchpointId)?.label
+      findStorySceneForTouchpoint(input.story, lastTouchpointId)?.label
     : undefined;
   const closing = formatDirectorDenouementClosing({
     timing: episodeTiming,

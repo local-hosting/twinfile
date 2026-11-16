@@ -37,7 +37,7 @@ function orderedScenes(scenes: readonly StoryScene[]): StoryScene[] {
 }
 
 /** Normalize Story storyboard rows for scene seek (order, labels, job ids). */
-export function storySceneSeekRowsFromSam(
+export function storySceneSeekRowsFromNarrative(
   scenes: readonly StoryScene[] | undefined,
 ): StorySceneSeekRow[] {
   const list = scenes ?? [];

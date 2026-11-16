@@ -59,6 +59,8 @@ export function pickCharacterInstanceCharacteristics(
     variation.includeMindset !== false ? character.persona.mindset?.trim() : undefined;
   const voiceLine =
     variation.includeVoiceLine !== false ? character.persona.quote?.trim() : undefined;
+  const personality =
+    variation.includePersonality !== false ? character.persona.personality : undefined;
   const demographics =
     variation.includeDemographics !== false ? sampleCharacterDemographicBands(character, random) : {};
   let dailyRhythm;
@@ -82,6 +84,7 @@ export function pickCharacterInstanceCharacteristics(
     ...(mindset ? { mindset } : {}),
     ...(traits.length ? { traits } : {}),
     ...(voiceLine ? { voiceLine } : {}),
+    ...(personality ? { personality } : {}),
     ...(Object.keys(demographics).length ? { demographics } : {}),
     ...(dailyRhythm ? { dailyRhythm } : {}),
   };

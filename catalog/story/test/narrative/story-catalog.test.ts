@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import type { Character } from '@local-hosting/twinfile-character/persona';
 
-import { buildStoryCatalogMenu, storyCatalogMenuHasEpisodes } from '../../src/contract/narrative/story-catalog/build-story-catalog-menu.js';
+import { buildStoryCatalogMenu, storyCatalogMenuHasStories } from '../../src/contract/narrative/story-catalog/build-story-catalog-menu.js';
 import { compileStoriesForCatalog } from '../../src/contract/narrative/story-catalog/compile-stories-for-catalog.js';
 import { resolveStoryEpisode } from '../../src/contract/narrative/story-catalog/resolve-story-episode.js';
 import { placeMountFixture } from './helpers/place-mount-fixture.js';
@@ -55,8 +55,8 @@ describe('story catalog (org models)', () => {
       placeMounts: [curbsideMount],
       stories: [story],
     });
-    expect(storyCatalogMenuHasEpisodes(menu)).toBe(true);
-    expect(menu.episodes[0]?.journeyId).toBe('journey:fixture');
+    expect(storyCatalogMenuHasStories(menu)).toBe(true);
+    expect(menu.stories[0]?.focalCharacterId).toBe('persona:rider');
   });
 
   it('resolves episode by id', () => {
@@ -64,7 +64,7 @@ describe('story catalog (org models)', () => {
     const mount = resolveStoryEpisode({
       stories: [story],
       characters: [character],
-      selection: { episodeId: story.id },
+      selection: { storyId: story.id },
     });
     expect(mount.journey.id).toBe('journey:fixture');
   });

@@ -7,6 +7,7 @@ Each twin type is one tree: **`catalog/<type>/`** = `@local-hosting/twinfile-<ty
 | place | `catalog/place/examples/<id>/` | — |
 | resource | `catalog/resource/examples/<id>/` | — |
 | character | `catalog/character/examples/<id>/` | `catalog/character/libs/{audience,journey,psychology}/` |
+| context | `catalog/context/examples/<id>/` | `catalog/context/libs/jtbd/` — JTBD: context → goal → outcome |
 | story | `catalog/story/examples/<id>/` | — |
 
 **Runs:** inline `run:` on `story.scenes[]` in `catalog/story/examples/<story>/<story>.twin.yaml` only.

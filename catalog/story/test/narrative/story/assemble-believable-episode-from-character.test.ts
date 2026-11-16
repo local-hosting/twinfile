@@ -88,14 +88,14 @@ describe('assembleBelievableEpisodeFromCharacter', () => {
       situations: {
         id: 'jsm:commute',
         label: 'Commute',
-        situation: 'daily',
+        context: 'daily',
         jobs: [
           {
             id: 'job:commute',
             text: 'Commute',
-            when: 'morning',
-            want: 'get to work',
-            so: 'earn a living',
+            context: 'morning',
+            goal: 'get to work',
+            outcome: 'earn a living',
           },
         ],
       },
@@ -106,7 +106,7 @@ describe('assembleBelievableEpisodeFromCharacter', () => {
       simulationEpochStart: '2026-03-01',
       scenario: 'morning commute',
     });
-    expect(result.assembly.episodeId).toBe('story:episode:commute');
+    expect(result.assembly.storyId).toBe('story:episode:commute');
     expect(result.assembly.rankedJobIds).toContain('job:commute');
     expect(result.dimensions.when.storyArc).toBeDefined();
   });

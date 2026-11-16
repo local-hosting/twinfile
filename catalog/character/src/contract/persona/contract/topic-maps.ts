@@ -12,7 +12,7 @@ export const CHARACTER_STRATEGY_TOPIC_MAP = {
   signals: 'signals',
 } as const;
 
-export const PCM_STORY_TOPIC_MAP = {
+export const CHARACTER_STORY_TOPIC_MAP = {
   journeys: 'journeys',
   quotes: 'quotes',
 } as const;

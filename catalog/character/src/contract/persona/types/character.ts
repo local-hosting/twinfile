@@ -22,12 +22,12 @@ export type CharacterDocument = {
 
 /**
  * Persona Character Model — one portable character (persona + story spine).
- * JTBD jobs live on Situations mounts; optional `jobs` here are character-local only.
- * Product cohorts / audiences stay on AXM, not character.
+ * JTBD jobs live on Context mounts (situation → goal → outcome); optional `jobs`
+ * here are character-local only. Product cohorts / audiences stay on AXM, not character.
  */
 export type Character = CharacterDocument & CharacterSegmentFacets & {
   persona: CharacterPersona;
-  /** Optional character-local JTBD jobs (prefer org Situations mounts). */
+  /** Optional character-local JTBD jobs (prefer org Context mounts). */
   jobs?: Job[];
   journeys?: Journey[];
   quotes?: ResearchQuote[];

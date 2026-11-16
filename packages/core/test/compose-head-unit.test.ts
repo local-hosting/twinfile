@@ -17,7 +17,7 @@ function writeUnit(dir: string, id: string, body: string): string {
 describe('composeHeadUnitDocument', () => {
   it('merges from chain and steps for character heads', () => {
     const root = join(tmpdir(), `compose-head-${Date.now()}`);
-    for (const type of ['place', 'resource', 'character', 'story', 'event'] as const) {
+    for (const type of ['place', 'resource', 'character', 'context', 'story', 'event'] as const) {
       mkdirSync(join(root, 'catalog', type, 'examples'), { recursive: true });
     }
     const catalog = join(root, 'catalog', 'character', 'examples');

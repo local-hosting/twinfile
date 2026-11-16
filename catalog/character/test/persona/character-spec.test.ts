@@ -16,9 +16,9 @@ const persona = {
 const job = {
   id: 'job:1',
   text: 'Finish the task',
-  when: 'I open the product',
-  want: 'to finish quickly',
-  so: 'I can move on',
+  context: 'I open the product',
+  goal: 'to finish quickly',
+  outcome: 'I can move on',
 };
 
 describe('CharacterSpec', () => {

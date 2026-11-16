@@ -1,2 +1,2 @@
-/** @deprecated Prefer `@local-hosting/twinfile-character/situations/catalog/obstacles.schema.js`. */
-export * from '../../situations/catalog/obstacles.schema.js';
+/** @deprecated Prefer `@local-hosting/twinfile-context/catalog/obstacles.schema.js`. */
+export * from '@local-hosting/twinfile-context/catalog/obstacles.schema.js';
