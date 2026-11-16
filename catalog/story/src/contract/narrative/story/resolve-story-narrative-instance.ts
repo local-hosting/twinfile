@@ -20,7 +20,7 @@ export type ResolveStoryNarrativeInstanceResult = {
   synthesized: boolean;
 };
 
-function synthesizeSamStoryInstance(story: Story, subjectId: string): StoryInstanceDocument {
+function synthesizeStoryInstance(story: Story, subjectId: string): StoryInstanceDocument {
   const arc = story.episodeArc;
   if (!arc) {
     throw new Error('StoryInstanceDocument requires episodeArc on the Story template');
@@ -43,7 +43,7 @@ export function resolveStoryNarrativeInstance(
     };
   } catch {
     return {
-      document: synthesizeSamStoryInstance(input.story, input.subjectId?.trim() || 'story'),
+      document: synthesizeStoryInstance(input.story, input.subjectId?.trim() || 'story'),
       synthesized: true,
     };
   }

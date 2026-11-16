@@ -13,7 +13,7 @@ export type {
   SamCatalogEpisodeRef,
   SamCatalogPlaceRef,
   StoryCatalogMenuV1,
-  SamStorySelectionV1,
+  StorySelectionV1,
 } from './types/story-catalog-menu.js';
 export type { StoryArcKind } from './types/story-arc-kind.js';
 export { STORY_ARC_KINDS } from './types/story-arc-kind.js';
@@ -96,14 +96,14 @@ export {
   advanceStoryClockForArc,
 } from './story/advance-story-clock.js';
 export {
-  assembleSamStoryRun,
+  assembleCharacterStoryRun,
   resolveDayActivitiesFromTimelineWire,
-  type AssembledSamStoryRun,
+  type AssembledCharacterStoryRun,
 } from './story/assemble-story-run.js';
 export {
-  planSamStoryEpisodeCalendar,
-  type PlanSamStoryEpisodeCalendarInput,
-  type PlanSamStoryEpisodeCalendarResult,
+  planStoryEpisodeCalendar,
+  type PlanStoryEpisodeCalendarInput,
+  type PlanStoryEpisodeCalendarResult,
 } from './story/plan-story-episode-calendar.js';
 export {
   planEpisodeCalendarFromArc,
@@ -142,7 +142,7 @@ export type {
   StoryTimelineDayWire,
   StoryTimelineHostWire,
 } from './story/timeline-host-wire.js';
-export type { SamStoryRunState } from './types/story-run.js';
+export type { CharacterStoryRunState } from './types/story-run.js';
 export type {
   EpisodeActivityCalendar,
   EpisodeActivityDay,
@@ -195,7 +195,7 @@ export {
   touchpointIndexFromCatalog,
 } from './touchpoint/touchpoint-catalog.js';
 export {
-  touchpointGraphToSamWire,
+  touchpointGraphToStoryWire,
   type TouchpointGraphWireInput,
 } from './touchpoint/touchpoint-graph-to-wire.js';
 export {
@@ -307,17 +307,17 @@ export {
   storyCatalogMenuHasEpisodes,
 } from './story-catalog/build-story-catalog-menu.js';
 export {
-  matchSamStoryCatalogIdsFromText,
+  matchStoryCatalogIdsFromText,
   scoreCatalogTextMatch,
   placeSlugFromPlaceRef,
-  type SamStoryCatalogFleetPlaceRef,
-  type SamStoryCatalogTextMatchV1,
+  type StoryCatalogFleetPlaceRef,
+  type StoryCatalogTextMatchV1,
 } from './story-catalog/match-story-catalog-from-text.js';
 export type {
-  SamStoryPlanCatalogSnapshotV1,
-  SamStoryPlanFleetPlaceSnapshotV1,
-  SamStoryPlanSegmentObjectiveV1,
-  SamStoryPlanSegmentSnapshotV1,
+  StoryPlanCatalogSnapshotV1,
+  StoryPlanFleetPlaceSnapshotV1,
+  StoryPlanSegmentObjectiveV1,
+  StoryPlanSegmentSnapshotV1,
 } from './types/story-plan-catalog.js';
 export {
   pickRandomEngagementLevel,
@@ -344,14 +344,14 @@ export {
   scoreScenarioTokenOverlap,
 } from './story-plan/scenario-scoring.js';
 export {
-  planStoryCreateAxmMenuHeuristic,
-  validateStoryPlanAxmSelection,
-  type SamStoryPlanAxmMenuPlanInputV1,
-  type SamStoryPlanAxmMenuSelectionV1,
-} from './story-plan/plan-axm-menu-heuristic.js';
+  planStoryCreateCatalogMenuHeuristic,
+  validateStoryPlanCatalogMenuSelection,
+  type StoryPlanCatalogMenuPlanInputV1,
+  type StoryPlanCatalogMenuSelectionV1,
+} from './story-plan/plan-catalog-menu-heuristic.js';
 export {
   planStoryCreateHeuristic,
-  type SamStoryPlanHeuristicSelectionV1,
+  type StoryPlanHeuristicSelectionV1,
 } from './story-plan/plan-catalog-heuristic.js';
 export {
   resolveStoryPlanStoreForPlan,
@@ -359,40 +359,65 @@ export {
   shouldRandomizeStoryPlanStore,
 } from './story-plan/resolve-story-plan-store.js';
 export {
-  buildSamStoryPlanCatalogSnapshot,
-  buildSamStoryPlanChecklist,
-  buildSamStoryPlanExtractionIndex,
-  mergeSamStoryPlanInput,
+  buildStoryPlanCatalogSnapshot,
+  buildStoryPlanChecklist,
+  buildStoryPlanExtractionIndex,
+  mergeStoryPlanInput,
 } from './story-plan/plan-corpus.js';
 export {
-  buildSamStoryPlanNarrativeContext,
-  formatSamStoryPlanLlmUserPrompt,
+  buildStoryPlanNarrativeContext,
+  formatStoryPlanLlmUserPrompt,
 } from './story-plan/narrative.js';
 export {
-  composeSamStoryPlanWorkingScenario,
-  isThinSamStoryPlanScenario,
+  composeStoryPlanWorkingScenario,
+  isThinStoryPlanScenario,
 } from './story-plan/scenario.js';
 export {
-  intentIdsForSamStoryPlanningSegment,
-  readSamStoryPlanSegmentNeedsSummary,
-  readSamStoryPlanSegmentTopic,
-  resolveSamStoryPlanningPrimaryFocusArea,
+  intentIdsForStoryPlanningSegment,
+  readStoryPlanSegmentNeedsSummary,
+  readStoryPlanSegmentTopic,
+  resolveStoryPlanningPrimaryFocusArea,
 } from './story-plan/segment-psychology.js';
+export {
+  buildStoryPlanningCatalogsFromCharacters,
+  listStoryJourneyRefsFromPlanningCatalogs,
+} from './story-plan/build-story-planning-catalogs-from-characters.js';
+export {
+  focalCharacterIdFromStoryMenuEpisode,
+  personaMountIdFromStoryMenuEpisode,
+  focalCharacterFromStoryEpisodeMount,
+  storyPlanJourneyRowsFromMenuEpisodes,
+  matchStoryCatalogIdsFromTextForPlanning,
+  matchStoryCatalogIdsFromTextForPlanning,
+  storyWireFocalCharacterArg,
+  storyWireFocalCharacterField,
+  storyMenuEpisodeRefForTest,
+  type StoryMenuEpisodeWire,
+  type StoryPlanJourneyRowWire,
+} from './story-plan/story-catalog-menu-wire.js';
 export type {
-  SamStoryPlanCatalogBuildInputV1,
-  SamStoryPlanChecklistItemV1,
-  SamStoryPlanExtractedHintsV1,
-  SamStoryPlanExtractionIndexV1,
-  SamStoryPlanExtractionSegmentBriefV1,
-  SamStoryPlanInputV1,
-  SamStoryPlanNarrativeBuildInputV1,
-  SamStoryPlanNarrativeContextV1,
-  SamStoryPlanScenarioHintsV1,
-  SamStoryPlanSegmentNarrativeV1,
-  SamStoryPlanningCustomerCatalogV1,
-  SamStoryPlanningFocusInterestV1,
-  SamStoryPlanningSegmentObjectiveV1,
-  SamStoryPlanningSegmentProfileV1,
+  StoryJourneyRefV1,
+  StoryPlanningCatalogsFromCharactersV1,
+  StoryPlanningCustomerCatalogV1,
+  StoryPlanningJtbdCatalogV1,
+  StoryPlanningObstacleCatalogV1,
+  StoryPlanningPersonaCatalogV1,
+  StoryPlanningSegmentCatalogV1,
+} from './types/story-planning-catalog-slices.js';
+export type {
+  StoryPlanCatalogBuildInputV1,
+  StoryPlanChecklistItemV1,
+  StoryPlanExtractedHintsV1,
+  StoryPlanExtractionIndexV1,
+  StoryPlanExtractionSegmentBriefV1,
+  StoryPlanInputV1,
+  StoryPlanNarrativeBuildInputV1,
+  StoryPlanNarrativeContextV1,
+  StoryPlanScenarioHintsV1,
+  StoryPlanSegmentNarrativeV1,
+  StoryPlanningFocusInterestV1,
+  StoryPlanningSegmentObjectiveV1,
+  StoryPlanningSegmentProfileV1,
 } from './types/story-plan.js';
 export type { JourneyPaceId, PlanningSegmentJourneyPaceSource } from './story-plan/journey-pace.js';
 export {
@@ -441,7 +466,7 @@ export {
   attachPlaceSlugFromPlaceRef,
   HOST_STORY_WHERE_DIMENSION_ERROR,
   hostStoryWhereDimensionIsComplete,
-  mergeSamStoryDimensionsIntoCreateBody,
+  mergeStoryDimensionsIntoCreateBody,
   mergeStoryDimensionsWithHost,
   type HostStoryWhereDimensionInput,
 } from './project/merge-story-dimensions-with-host.js';

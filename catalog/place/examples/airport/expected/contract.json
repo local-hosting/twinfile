@@ -1,4 +1,4 @@
 {
-  "strictBindings": 2,
+  "strictBindings": 4,
   "bindings": [{ "for": "transit-disruption" }, { "for": "passenger-queue" }]
 }

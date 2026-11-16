@@ -3,7 +3,7 @@ import type { EpisodeArcV1 } from './episode-arc.js';
 import type { EpisodeScheduledActivity } from './episode-activity.js';
 
 /** Character instance + compiled Story episode at a story-clock cursor (portable run state). */
-export type SamStoryRunState = {
+export type CharacterStoryRunState = {
   simulationEpochStart: string;
   storyArc: EpisodeArcV1;
   cursor: StoryClockCursor;

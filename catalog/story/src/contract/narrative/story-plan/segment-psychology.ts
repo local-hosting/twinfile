@@ -1,7 +1,7 @@
 import type {
-  SamStoryPlanningCustomerCatalogV1,
-  SamStoryPlanningFocusInterestV1,
-  SamStoryPlanningSegmentProfileV1,
+  StoryPlanningCustomerCatalogV1,
+  StoryPlanningFocusInterestV1,
+  StoryPlanningSegmentProfileV1,
 } from '../types/story-plan.js';
 
 function asRecord(value: unknown): Record<string, unknown> | undefined {
@@ -9,16 +9,16 @@ function asRecord(value: unknown): Record<string, unknown> | undefined {
   return value as Record<string, unknown>;
 }
 
-function focusAreaIdsFromSegmentProfile(profile: SamStoryPlanningSegmentProfileV1): string[] {
+function focusAreaIdsFromSegmentProfile(profile: StoryPlanningSegmentProfileV1): string[] {
   const byFocus = profile.mentalModel?.mentalModel?.byFocus;
   if (!byFocus || typeof byFocus !== 'object') return [];
   return Object.keys(byFocus);
 }
 
-export function resolveSamStoryPlanningPrimaryFocusArea(
-  profile: SamStoryPlanningSegmentProfileV1,
-  customerCatalog?: SamStoryPlanningCustomerCatalogV1,
-): SamStoryPlanningFocusInterestV1 | undefined {
+export function resolveStoryPlanningPrimaryFocusArea(
+  profile: StoryPlanningSegmentProfileV1,
+  customerCatalog?: StoryPlanningCustomerCatalogV1,
+): StoryPlanningFocusInterestV1 | undefined {
   const segmentFocusIds = focusAreaIdsFromSegmentProfile(profile);
   if (segmentFocusIds.length === 0) return undefined;
 
@@ -37,7 +37,7 @@ export function resolveSamStoryPlanningPrimaryFocusArea(
   };
 }
 
-function readOverview(profile: SamStoryPlanningSegmentProfileV1) {
+function readOverview(profile: StoryPlanningSegmentProfileV1) {
   const overview = profile.overview;
   if (!overview) return {};
   return {
@@ -51,7 +51,7 @@ function readOverview(profile: SamStoryPlanningSegmentProfileV1) {
   };
 }
 
-function readCognitionMindset(profile: SamStoryPlanningSegmentProfileV1): string | undefined {
+function readCognitionMindset(profile: StoryPlanningSegmentProfileV1): string | undefined {
   const cognition = asRecord(profile.cognition);
   const bySegment = asRecord(cognition?.bySegment);
   const row = asRecord(bySegment?.[profile.id]);
@@ -59,7 +59,7 @@ function readCognitionMindset(profile: SamStoryPlanningSegmentProfileV1): string
   return typeof mindset === 'string' && mindset.trim() ? mindset.trim() : undefined;
 }
 
-function readEmpathyFeelings(profile: SamStoryPlanningSegmentProfileV1): string[] {
+function readEmpathyFeelings(profile: StoryPlanningSegmentProfileV1): string[] {
   const empathy = asRecord(profile.empathy);
   const inner = asRecord(empathy?.empathy);
   const feelings = asRecord(inner?.feelings);
@@ -72,8 +72,8 @@ function readEmpathyFeelings(profile: SamStoryPlanningSegmentProfileV1): string[
   return [...positive, ...negative];
 }
 
-export function readSamStoryPlanSegmentTopic(
-  profile: SamStoryPlanningSegmentProfileV1,
+export function readStoryPlanSegmentTopic(
+  profile: StoryPlanningSegmentProfileV1,
 ): string | undefined {
   const overview = readOverview(profile);
   const candidates = [
@@ -84,9 +84,9 @@ export function readSamStoryPlanSegmentTopic(
   return candidates[0]?.trim();
 }
 
-export function readSamStoryPlanSegmentNeedsSummary(
-  profile: SamStoryPlanningSegmentProfileV1,
-  customerCatalog?: SamStoryPlanningCustomerCatalogV1,
+export function readStoryPlanSegmentNeedsSummary(
+  profile: StoryPlanningSegmentProfileV1,
+  customerCatalog?: StoryPlanningCustomerCatalogV1,
 ): string {
   const overview = readOverview(profile);
   const parts: string[] = [];
@@ -114,7 +114,7 @@ export function readSamStoryPlanSegmentNeedsSummary(
     parts.push(`Objectives (intents): ${intentIds.join(', ')}`);
   }
   if (customerCatalog) {
-    const focus = resolveSamStoryPlanningPrimaryFocusArea(profile, customerCatalog);
+    const focus = resolveStoryPlanningPrimaryFocusArea(profile, customerCatalog);
     if (focus?.primaryFocusAreaId) {
       const label = customerCatalog.focusAreas?.find(
         (row) => row.id === focus.primaryFocusAreaId,
@@ -129,8 +129,8 @@ export function readSamStoryPlanSegmentNeedsSummary(
   return joined;
 }
 
-export function intentIdsForSamStoryPlanningSegment(
-  segment: SamStoryPlanningSegmentProfileV1,
+export function intentIdsForStoryPlanningSegment(
+  segment: StoryPlanningSegmentProfileV1,
 ): string[] {
   const ids = new Set<string>();
   for (const objective of segment.objectives ?? []) {

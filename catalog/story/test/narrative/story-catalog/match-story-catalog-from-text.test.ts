@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { matchSamStoryCatalogIdsFromText } from '../../../src/contract/narrative/story-catalog/match-story-catalog-from-text.js';
+import { matchStoryCatalogIdsFromText } from '../../../src/contract/narrative/story-catalog/match-story-catalog-from-text.js';
 import type { StoryCatalogMenuV1 } from '../../../src/contract/narrative/types/story-catalog-menu.js';
 
 const menu: StoryCatalogMenuV1 = {
@@ -27,9 +27,9 @@ const menu: StoryCatalogMenuV1 = {
   ],
 };
 
-describe('matchSamStoryCatalogIdsFromText', () => {
+describe('matchStoryCatalogIdsFromText', () => {
   it('matches rider commute without inferring place from NL by default', () => {
-    const hints = matchSamStoryCatalogIdsFromText({
+    const hints = matchStoryCatalogIdsFromText({
       text: 'Rider morning commute from home dropoff',
       menu,
     });
@@ -39,7 +39,7 @@ describe('matchSamStoryCatalogIdsFromText', () => {
   });
 
   it('matches place mount when includePlaces is true', () => {
-    const hints = matchSamStoryCatalogIdsFromText({
+    const hints = matchStoryCatalogIdsFromText({
       text: 'Rider morning commute from home dropoff',
       menu,
       includePlaces: true,
@@ -48,7 +48,7 @@ describe('matchSamStoryCatalogIdsFromText', () => {
   });
 
   it('matches driver offer episode when driver is mentioned', () => {
-    const hints = matchSamStoryCatalogIdsFromText({
+    const hints = matchStoryCatalogIdsFromText({
       text: 'Driver receives an offer notification during shift',
       menu,
       focalCharacterId: 'persona:driver',
@@ -58,7 +58,7 @@ describe('matchSamStoryCatalogIdsFromText', () => {
   });
 
   it('matches airport place when airport is mentioned and place matching enabled', () => {
-    const hints = matchSamStoryCatalogIdsFromText({
+    const hints = matchStoryCatalogIdsFromText({
       text: 'Vacation landing at airport pickup',
       menu,
       includePlaces: true,
