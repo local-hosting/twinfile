@@ -57,7 +57,7 @@ args:
   target_role: shelter
 ```
 
-See [Composition](../build/composition.md) for full compose order (place → events → events → scenario patches → **`args:`**).
+See [Composition](../build/composition.md) for full compose order (place → events → scenario patches → **`args:`**).
 
 ## Pre-defined catalog (`examples`)
 
