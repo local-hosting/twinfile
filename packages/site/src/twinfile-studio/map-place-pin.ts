@@ -1,4 +1,4 @@
-import { PLACE_DEMO_EXT_H3 } from '@doppler-group/twinfile-core/place/demo-ext-h3';
+import { PLACE_DEMO_EXT_H3 } from '@doppler-group/twinfile-place/place/demo-ext-h3';
 
 import type { TwinfileFeature } from './types/map-draft.js';
 

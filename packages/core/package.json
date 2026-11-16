@@ -50,11 +50,6 @@
       "import": "./dist/build/*.js",
       "default": "./dist/build/*.js"
     },
-    "./place/demo-ext-h3": {
-      "types": "./dist/place/demo-ext-h3.d.ts",
-      "import": "./dist/place/demo-ext-h3.js",
-      "default": "./dist/place/demo-ext-h3.js"
-    },
     "./method": {
       "types": "./dist/method/index.d.ts",
       "import": "./dist/method/index.js",

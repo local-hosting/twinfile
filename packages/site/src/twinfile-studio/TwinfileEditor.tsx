@@ -24,6 +24,8 @@ export type TwinfileEditorProps = {
   readOnly?: boolean;
 };
 
+type LoadResult = { uri: string; text?: string; error?: string };
+
 export function TwinfileEditor({
   uri,
   load,
@@ -36,49 +38,38 @@ export function TwinfileEditor({
   className,
   readOnly,
 }: TwinfileEditorProps) {
-  const [loaded, setLoaded] = useState(value ?? '');
-  const [loadError, setLoadError] = useState<string>();
-  const [phase, setPhase] = useState<'loading' | 'ready' | 'error'>(value === undefined ? 'loading' : 'ready');
-  const text = value ?? loaded;
+  const [loaded, setLoaded] = useState<LoadResult>();
 
   useEffect(() => {
-    if (value !== undefined) {
-      setPhase('ready');
-      setLoadError(undefined);
-      return;
-    }
+    if (value !== undefined) return;
 
     let cancelled = false;
-    setPhase('loading');
-    setLoadError(undefined);
     loadTwinfileText(uri, { load, examplesRoot })
-      .then((next) => {
-        if (cancelled) return;
-        setLoaded(next);
-        setPhase('ready');
+      .then((text) => {
+        if (!cancelled) setLoaded({ uri, text });
       })
       .catch((error: unknown) => {
         if (cancelled) return;
-        setLoadError(error instanceof Error ? error.message : 'Could not load twinfile');
-        setPhase('error');
+        setLoaded({ uri, error: error instanceof Error ? error.message : 'Could not load twinfile' });
       });
     return () => {
       cancelled = true;
     };
   }, [uri, load, examplesRoot, value]);
 
-  if (phase === 'loading') {
+  const current = loaded?.uri === uri ? loaded : undefined;
+  if (value === undefined && !current) {
     return createElement('p', { className: 'twinfile-editor__status' }, `Loading ${uri}`);
   }
-  if (loadError) {
-    return createElement('p', { className: 'twinfile-editor__status', 'data-tone': 'error' }, loadError);
+  if (value === undefined && current?.error) {
+    return createElement('p', { className: 'twinfile-editor__status', 'data-tone': 'error' }, current.error);
   }
 
   return createElement(TwinfileSourcePane, {
     unitKey: uri,
-    text,
+    text: value ?? current?.text ?? '',
     onChange: (next) => {
-      if (value === undefined) setLoaded(next);
+      if (value === undefined) setLoaded({ uri, text: next });
       onChange?.(next);
     },
     readOnly,
