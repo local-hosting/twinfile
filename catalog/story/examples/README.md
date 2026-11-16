@@ -6,8 +6,8 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 
 | Mode | Count | Stories |
 | --- | --- | --- |
-| **daily** | 11 | `airport-operations`, `arena-operations`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `park-operations`, `port-operations`, `river-operations`, `shop-visit`, `transit-hub-campus-operations` |
-| **resilience** | 10 | `airport-resilience`, `arena-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `shop-resilience`, `transit-hub-campus-resilience` |
+| **daily** | 12 | `airport-operations`, `arena-operations`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `park-operations`, `port-operations`, `river-operations`, `shop-visit`, `watershed-river-operations`, `transit-hub-campus-operations` |
+| **resilience** | 11 | `airport-resilience`, `arena-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `shop-resilience`, `watershed-river-resilience`, `transit-hub-campus-resilience` |
 
 | Place theme | Daily | Resilience |
 | --- | --- | --- |
@@ -17,6 +17,7 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 | park | `park-operations` | `park-resilience` |
 | port | `port-operations` | `port-resilience` |
 | river | `river-operations` | `river-resilience` |
+| tennessee river (Chattanooga) | `watershed-river-operations` | `watershed-river-resilience` |
 | shop | `shop-visit` | `shop-resilience` |
 | waterfront | `morning-crossing`, `falls-day-tour` | `harbor-resilience` |
 | mobility hub (King's Cross) | `mobility-hub-operations` | `mobility-hub-resilience` |
