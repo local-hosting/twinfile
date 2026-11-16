@@ -2,7 +2,9 @@
 
 Use **one prose word per concept**. YAML and APIs keep stable field names; docs, comments, README, and UI copy use the terms below.
 
-Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Four published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
+Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Five published twin types: [kinds/kinds.md](kinds/kinds.md). Dockerfile model: [RFC 0009](../rfcs/0009-dockerfile-model/index.md), [Place recipe](place/place-recipe.md).
+
+Say **place**, **resource**, **character**, **story**, **event** — never three-letter contract acronyms in prose.
 
 ## Quick reference (prose ↔ on-disk)
 
@@ -10,13 +12,13 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 | --- | --- | --- |
 | **Place** | **`<unit>.twin.yaml`**, `kind: place` | Spatial twin → built **`Place`** |
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
-| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — PCM/JSM; **`disclosure:`** required |
-| **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
+| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — persona + situations; **`disclosure:`** required |
+| **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — narrative; **player** input ([story-and-player](kinds/story-and-player.md)) |
+| **Event** | **`<unit>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; places host events through role tags |
 | **Run** | **`story.scenes[].run`** (`<story-dir>#<scene-id>`) | Inline scene run: `from:`, `copy:`, `clock:`, `args:` — **not** a published twin; optional `use.runner` for offline only |
 | **Runner** | `use.runner` | Offline **ENTRYPOINT** (`npm:` ref) for `twin run` — MCP / host supplies the analyst prompt; see [Runners](pack/runners.md) |
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
 | **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads each scene's inline **`run:`**, advances **session** on the patch **module bus** |
-| **Event** | **`catalog/event/<id>/<id>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; the scene `schedule:` and the player decide when phases fire. Places host events through role tags; `bindings/<event>.yaml` is an optional override |
 | **`id`** | head field | Ref slug (`twinfile/<type>/<id>:<version>`) — never UI copy |
 | **`name`** | head field | Display title |
 
@@ -26,7 +28,7 @@ Published twins live under **`catalog/<type>/examples/`** ([unit-layout](unit-la
 
 | Term | Path | Role |
 | --- | --- | --- |
-| **Catalog hub** | `catalog/` | Four twin type workspaces |
+| **Catalog hub** | `catalog/` | Five twin type workspaces |
 | **Ref map** | `catalog/place/examples/` | `twin.local.yaml` (local refs) + `published-refs.json` (golden digests) — **not** normative spec |
 | **Spec conf** | `packages/spec/conf/` | Conformance vectors, role vocabulary, crosswalk — **not** twin ops |
 | **Kernel** | `packages/{spec,core,cli,bridge}/` | Format, load/merge, CLI |
@@ -53,11 +55,11 @@ A **place does not run**. **Runs** + **player** execute on a built place (runner
 
 | Term | Role | Not |
 | --- | --- | --- |
-| **View** | One-way presentation of a twin (`TwinfileSummaryV1` → ascii/json/yaml/markdown; place → Schema.org **JSON-LD**) | Round-trip format I/O |
+| **View** | One-way presentation of a twin (`TwinfileSummaryV1` → ascii/json/yaml/markdown; place → Schema.org **JSON-LD**; trees → **loro** pack JSON) | Round-trip format I/O |
 | **Bridge** | Authoring-time import/export of place layers (IMDF, GTFS, …) | Card/HTML rendering |
 | **Host adapter** | Host runtime contracts (patch bus, map sink, locker) | Spec/kernel presentation |
 
-Kernel API: `renderTwinfileSummaryView`, `renderTwinfilePlaceView` (`jsonld`). CLI: `twin summary`, `twin export jsonld`.
+Kernel API: `renderTwinfileSummaryView`, `renderTwinfilePlaceView` (`jsonld`), `renderTwinfileLoroView` (`loro` — LoroMap-safe JSON; no `loro.js` WASM in core). CLI: `twin summary`, `twin export jsonld`.
 
 ## Site stack (prose)
 
@@ -80,15 +82,14 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 
 | Artifact | Prose | Role |
 | --- | --- | --- |
-| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
+| **`<unit>/<unit>.twin.yaml`** | **Place**, **Resource**, **Character**, **Story**, or **Event** (by `kind:`) | Twin head |
 | **`story.scenes[].run`** | **Run** (scene) | Inline on the story head — not published |
-| **Place event (TS)** | **Event** loaded from `catalog/event` | Catalog + `request()` → patch bus |
 
 ## Twin head (all types)
 
 | Field | Role |
 | --- | --- |
-| **`kind`** | `place` \| `resource` \| `character` \| `story` (loaders default **place** for legacy heads) |
+| **`kind`** | `place` \| `resource` \| `character` \| `story` \| `event` (loaders default **place** for legacy heads) |
 | **`twinfile`** | Format generation (`1` or `2`) |
 | **`id`** | **Ref slug** — `twinfile/<type>/<id>:<version>`, lock keys, OCI segment |
 | **`name`** | **Display name** — cards, workbench, catalog (when set) |
