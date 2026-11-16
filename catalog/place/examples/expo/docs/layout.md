@@ -1,6 +1,6 @@
 # Expo City Dubai — layout map
 
-Illustrative tri-petal campus pinned at **Expo City Dubai**. **Topology:** `archetype: campus`, **`space_granularity: zone`**. Site anchor: `place.ext` in the first patch of [`Twinfile.yaml`](../Twinfile.yaml).
+Illustrative tri-petal campus pinned at **Expo City Dubai**. **Topology:** `archetype: campus`, **`space_granularity: zone`**. Site anchor: `place.ext` in the first patch of [`expo.twin.yaml`](../expo.twin.yaml).
 
 **Opportunity gallery** is an extra `spaces:` step on the site twin (`pavilion-opportunity-gallery` under anchor `pavilion-opportunity`). Mobility and sustainability pavilions are modeled as site zones only.
 
@@ -43,5 +43,5 @@ Single site grade: the `levels:` patch declares `ground` only. Per-building floo
 
 ## Related
 
-- [`Twinfile.yaml`](../Twinfile.yaml) · [`ext/layout-index.yaml`](../ext/layout-index.yaml)
+- [`expo.twin.yaml`](../expo.twin.yaml) · [`ext/layout-index.yaml`](../ext/layout-index.yaml)
 - Nested **`copy:`** golden refs (larger stacks): [`arena`](../../arena/) · [`airport`](../../airport/)

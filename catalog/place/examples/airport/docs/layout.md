@@ -32,7 +32,7 @@ Pattern guide: [campus-building-floor.md](../../../../../packages/spec/doc/place
 
 ## Drill-down (future)
 
-When adding gate/hall detail, add patches to [`parts/terminal-a/Twinfile.yaml`](../parts/terminal-a/Twinfile.yaml) (piers, security, gates at `level: ground`), or a new floor under `parts/terminal-a/floors/`. Keep **`terminal-a`** as the zone rollup on the campus.
+When adding gate/hall detail, add patches to [`parts/terminal-a/terminal-a.twin.yaml`](../parts/terminal-a/terminal-a.twin.yaml) (piers, security, gates at `level: ground`), or a new floor under `parts/terminal-a/floors/`. Keep **`terminal-a`** as the zone rollup on the campus.
 
 ## Topology (this site)
 

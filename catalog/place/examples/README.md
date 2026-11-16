@@ -1,6 +1,6 @@
 # Place examples
 
-Golden **place** catalog: sites, bases, mixins. Layout: `catalog/place/examples/<id>/` with **`Place.yaml`** or legacy **`Twinfile.yaml`**.
+Golden **place** catalog: sites, bases, mixins. Layout: `catalog/place/examples/<id>/<id>.twin.yaml`.
 
 Other twin types:
 

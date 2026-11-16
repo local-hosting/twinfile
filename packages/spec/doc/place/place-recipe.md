@@ -8,11 +8,11 @@ See also [Composition](../build/composition.md) (unit-level `from:` / `layers:`)
 
 | Dockerfile | Twinfile | Declares |
 | --- | --- | --- |
-| `FROM image` | **`from:`** on `Twinfile.yaml` | Map-shape skeleton (`base-campus`, `base-indoor-stack`, …) |
+| `FROM image` | **`from:`** on `<unit>.twin.yaml` | Map-shape skeleton (`base-campus`, `base-indoor-stack`, …) |
 | `ENV KEY=val` | **`place/place.yaml`** → `authoring_scale` | Units, H3, default space grain (`room` / `zone` / `building`) |
 | `LABEL` / image metadata | **`place/place.yaml`** → `name`, `kind`, `ext`, `footprint` | Site identity and anchor on the map |
 | **Layout mode** (one per place) | **`place/place.yaml`** → **`archetype`** | Which layout rules `@doppler-group/twinfile-core` enforces (see below) |
-| `COPY` / patch files | **`layers:`** on `Twinfile.yaml` | Merge order for `place/*.yaml` (coarse → fine) |
+| `COPY` / patch files | **`layers:`** on `<unit>.twin.yaml` | Merge order for `place/*.yaml` (coarse → fine) |
 | `COPY --from=stage` | **`copy: ./parts/<name>`** with `into:` | Copy a nested building (or floor) Twinfile under a site anchor id ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)) |
 | Runtime config | **`spaces[]`**, **`openings`**, **`visits`** | Graph, connectivity, default path |
 | Per-process flags | **`spaces[].exposure`** | `indoor`, `outdoor`, `covered`, … on **each** zone |
@@ -43,7 +43,7 @@ This table covers the original four bases. The full three-axis model (adds **mov
 
 ### Site with indoor and outdoor (expo, airport, park)
 
-**`Twinfile.yaml`**
+**`<unit>.twin.yaml`**
 
 ```yaml
 from: twinfile/base-campus:0.1.0   # FROM — campus skeleton (indoor + outdoor zones)
@@ -120,7 +120,7 @@ At most **one** row in **`levels.yaml`** when levels are used.
 
 ## Layer order (like `COPY` stacking)
 
-Write **`Twinfile.yaml` `layers:`** coarse → fine ([layout navigation](layout-navigation.md)):
+Write **`<unit>.twin.yaml` `layers:`** coarse → fine ([layout navigation](layout-navigation.md)):
 
 1. **`place/place.yaml`** — layout mode + scale + site anchor  
 2. **`place/visits.yaml`** — overview path (optional)  
@@ -137,14 +137,14 @@ The **minimal runnable layout recipe** is **`from:`** + **`place/place.yaml`** (
 
 | Step | Twinfile | Docker analogy | When |
 | --- | --- | --- | --- |
-| **Registry pin** | `geotype.primary` + `registry` on `Twinfile.yaml` | Base image label / SBOM component | `twin init --geotype`; ties unit to `@doppler-group/geotypes` |
-| **Situation hooks** | `plans/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; mixin **`with:`** or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
+| **Registry pin** | `geotype.primary` + `registry` on `<unit>.twin.yaml` | Base image label / SBOM component | `twin init --geotype`; ties unit to `@doppler-group/geotypes` |
+| **Situation hooks** | `bindings/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; mixin **`with:`** or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
 | **Map geometry** | **`sources/`** + **`geometry.ref`** on spaces | Mount external volume | Optional; builds MUST NOT require geometry |
 | **Human + agent map** | **`docs/layout.md`**, **`ext/layout-index.yaml`** | README in image | Large sites; read before full `spaces` scan ([checklist](layout-navigation.md#checklist-for-a-new-large-place)) |
 | **Hierarchy** | **`spaces[].parent`** | Nested cgroup / path prefix | Rollups zone → building → room |
 | **Clock** | **`tracks.yaml`**, **`schedules.yaml`** | Cron / lifecycle | Time-varying scenarios ([Time](time.md)) |
 | **Run image** | Story scene **`run.yaml`** (`from:` place ref) | `docker compose` service | Exercises place + situations + **`args:`** — not part of place layout recipe |
-| **Build / ship** | **`twin build`**, **`Twinfile.lock`**, **`twin pack`** / push | `docker build` / `push` | Artifact + layer chain ([Composition](../build/composition.md#what-twin-build-records)) |
+| **Build / ship** | **`twin build`**, **`<unit>.twin.lock`**, **`twin pack`** / push | `docker build` / `push` | Artifact + layer chain ([Composition](../build/composition.md#what-twin-build-records)) |
 
 You do **not** need extra archetype steps for indoor and outdoor on one site — only **`exposure`** (and **`openings`**) on spaces. You do **not** need a composed `layout.map` + `layout.vertical` field in YAML today; derive **`archetype`** from the two-question table and write it on **`place`**.
 

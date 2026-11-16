@@ -12,7 +12,7 @@ yarn workbench    # monorepo root → http://localhost:4173
 | --- | --- |
 | `GET /api/catalog` | Browse catalog `entries` (+ `defaultEntryId`). `?scope=place`: site Twinfiles only. |
 | `GET /api/preview?entry=` | Build place; `view=index` \| `variation`; optional `lens=` for a run. |
-| `GET /api/source?entry=` | Raw `Twinfile.yaml` / `preset.yaml` (studio). |
+| `GET /api/source?entry=` | Raw `<unit>.twin.yaml` / `run.yaml` (studio). |
 | `GET /api/time/clock`, `GET /api/time/at`, `POST /api/time/advance` | Session clock scrub when a run has `clock:` (uses `@doppler-group/twinfile-simulator/host`). |
 
 **Context pulses** (`applyPlayerContextPulse`, situation/signal drives) are **`@doppler-group/twinfile-simulator/host`** — not HTTP on this server.

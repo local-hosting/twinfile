@@ -8,10 +8,10 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 
 | Prose | On disk | One line |
 | --- | --- | --- |
-| **Place** | **`Place.yaml`** (legacy **`Twinfile.yaml`**) | Spatial twin → built **`Place`** |
-| **Resource** | **`Resource.yaml`** | Equipment, material, product |
-| **Character** | **`Character.yaml`** | Personnel — PCM/JSM; **`disclosure:`** required |
-| **Story** | **`Story.yaml`** | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
+| **Place** | **`<unit>.twin.yaml`**, `kind: place` or `mixin` | Spatial twin → built **`Place`** |
+| **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
+| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — PCM/JSM; **`disclosure:`** required |
+| **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
 | **Run** | **`story/.../scenes/<id>/run.yaml`** | Scene preset (`role: run`): `from:`, `copy:`, `clock:`, optional `use.runner` — **not** a published twin |
 | **Runner** | `use.runner` | Offline **ENTRYPOINT** (`npm:` ref) for `twin run` — MCP / host supplies the analyst prompt; see [Runners](pack/runners.md) |
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
@@ -37,7 +37,7 @@ Ops env: **`TF_TWINFILE_ROOT`** → repo root, only needed outside the repo. `ca
 
 ## Twinfile (the format)
 
-**Twinfile** (prose) is the format name and CLI — not a single filename. Each **published twin** has a typed head (`Place.yaml`, …) and builds a type-specific artifact; **place** output is **`Place`** (`Place.data` + `Place.meta` + `Place.digest` in **`Twinfile.lock`** when lock write is on).
+**Twinfile** (prose) is the format name and CLI — not a single filename. Each **published twin** is a folder with one head, `<unit>/<unit>.twin.yaml`, typed by its `kind:`, and builds a type-specific artifact; **place** output is **`Place`** (`Place.data` + `Place.meta` + `Place.digest` in **`<unit>.twin.lock`** when lock write is on).
 
 | Term | Meaning |
 | --- | --- |
@@ -72,10 +72,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 
 | Artifact | Prose | Role |
 | --- | --- | --- |
-| **`Place.yaml`** / legacy **`Twinfile.yaml`** | **Site**, **base**, or **mixin** | Place twin |
-| **`Resource.yaml`** | **Resource** | Resource twin |
-| **`Character.yaml`** | **Character** | Character twin |
-| **`Story.yaml`** | **Story** | Story twin |
+| **`<unit>/<unit>.twin.yaml`** | **Site**, **base**, **mixin**, **Resource**, **Character**, or **Story** (by `kind:`) | Twin head |
 | **`run.yaml`** | **Run** (scene) | Under `story/.../scenes/` — not published |
 | **Place event (TS)** | **Situation** / timetable **event** | Catalog + `request()` → patch bus |
 

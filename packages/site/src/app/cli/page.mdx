@@ -17,7 +17,7 @@ Inside the monorepo, refs in `from:` and `with:` resolve automatically. Elsewher
 | `twin add plan <situation> [dir]` | Binds a situation to spaces tagged with `roles:`. |
 | `twin add assets [dir]` | Adds a starter `assets` layer. |
 | `twin check [dir]` | Validates manifest, layers, and contracts. `--strict`, `--frozen`, `--examples-root`. |
-| `twin build [dir]` | builds a `Place` in memory and writes `Twinfile.lock` when lock write is enabled. |
+| `twin build [dir]` | builds a `Place` in memory and writes `<unit>.twin.lock` when lock write is enabled. |
 | `twin layers [dir]` | Prints the merge stack (same layer chain as build). |
 | `twin run [scenarioDir]` | Runs the scenario runner named by `use.runner`. |
 | `twin verify [scenarioDir]` | Compares the run to a frozen digest. `--frozen`. |
@@ -31,7 +31,7 @@ yarn twin build path/to/unit
 
 ## What a build records {{ anchor: false }}
 
-**`twin build`** returns a **`Place`** in process memory (`Place.data`, `Place.meta`, `Place.digest`). Use **`TFPlace.load()`**, **`Place.toWire()`** (MCP **`twin://place`**), or the **`Place`** object directly. **`Twinfile.lock`** pins the manifest and layer chain when lock write is on.
+**`twin build`** returns a **`Place`** in process memory (`Place.data`, `Place.meta`, `Place.digest`). Use **`TFPlace.load()`**, **`Place.toWire()`** (MCP **`twin://place`**), or the **`Place`** object directly. **`<unit>.twin.lock`** pins the manifest and layer chain when lock write is on.
 
 **`twin pack`** writes an OCI layout to **`--out`** (or a temp directory); it is not stored under the unit tree by default.
 

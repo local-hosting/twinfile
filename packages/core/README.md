@@ -29,7 +29,7 @@ yarn conformance   # all spec conf/schema vectors
 yarn build
 # `twin` CLI lives in `@doppler-group/twinfile-simulator` (depends on this package).
 node ../simulator/dist/cli/twin.js check path/to/unit
-node ../simulator/dist/cli/twin.js build path/to/unit   # in-memory image + Twinfile.lock
+node ../simulator/dist/cli/twin.js build path/to/unit   # in-memory image + <unit>.twin.lock
 node ../simulator/dist/cli/twin.js pack path/to/unit
 node ../simulator/dist/cli/twin.js push path/to/unit --ref twinfile/arena:1.2.0   # needs GITHUB_TOKEN / OCI_REGISTRY_TOKEN
 node ../simulator/dist/cli/twin.js pull twinfile/arena:1.2.0 --out ./arena
@@ -46,7 +46,7 @@ twin serve path/to/place --stdio    # MCP: place_card, state_at, narrate, twin:/
 
 MCP tools and resources: [`spec/doc/pack/mcp.md`](../spec/doc/pack/mcp.md).
 
-Build yields a **`Place`** (`Twinfile.build()` / `buildTwinfile`). **`Twinfile.lock`** pins manifest/tree/layer chains at unit root. Wire JSON: `Place.toWire()` (`twin://place`). OCI layout via **`twin pack --out <dir>`**.
+Build yields a **`Place`** (`Twinfile.build()` / `buildTwinfile`). **`<unit>.twin.lock`** pins manifest/tree/layer chains at unit root. Wire JSON: `Place.toWire()` (`twin://place`). OCI layout via **`twin pack --out <dir>`**.
 
 ## API
 

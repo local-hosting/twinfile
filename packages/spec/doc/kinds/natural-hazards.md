@@ -32,6 +32,6 @@ Situation units describe **reusable operational stories** (`phases`, `expects` r
 
 Operational (non-hazard) situations: `transit-disruption`, `litter-pollution`.
 
-Wire a hazard by adding the matching situation mixin or `plans/<situation>.yaml` on your place — [Decorate a twin](../place/decorate-twin.md).
+Wire a hazard by adding the matching situation mixin or `bindings/<situation>.yaml` on your place — [Decorate a twin](../place/decorate-twin.md).
 
 **Map pin codes:** [Humanitarian crosswalk](hr-marker-crosswalk.md).

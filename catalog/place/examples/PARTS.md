@@ -40,6 +40,6 @@ Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings
 | B — building + floor | [`airport`](airport/) | [`parts/terminal-a`](airport/parts/terminal-a/), [`floors/airside`](airport/parts/terminal-a/floors/airside/) |
 | C — single building (`copy:`) | [`arena`](arena/) | [`arena/parts/concourse`](arena/parts/concourse/) |
 
-**Inlined interior** (same graph, one site `Twinfile.yaml`): [`expo`](expo/) (`pavilion-opportunity-gallery`), [`port`](port/) (`warehouse-main`). Use nested `copy:` only when the building is large or reused.
+**Inlined interior** (same graph, one site `<unit>.twin.yaml`): [`expo`](expo/) (`pavilion-opportunity-gallery`), [`port`](port/) (`warehouse-main`). Use nested `copy:` only when the building is large or reused.
 
 Replace `<name>`, `<floor>`, and `<anchor-space-id>` with your site names.

@@ -18,7 +18,7 @@ On a **place** recipe, **`twin build`** and **`twin layers`** apply steps in thi
 | --- | --- | --- |
 | 1 | **`from:`** | Golden base place (`FROM`): its built layers (archetype, authoring scale, default `levels`) come through read-only |
 | 2 | **`steps:`** (`twinfile: 2`) | One instruction per item, in list order; each builds one layer. Inline patch (`spaces:`, `openings:`, …), **`plan:`**, or **`copy:`** — a mixin ref, or a nested building/floor by `./path` with optional `into:` / `prefix:` ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)) |
-| 2′ | **`with:`** then **`layers:`** (`twinfile: 1`) | Mixins ([RFC 0004](../../rfcs/0004-composed-bases.md)), then `place/` files and **`plans/<situation>.yaml`** in list order |
+| 2′ | **`with:`** then **`layers:`** (`twinfile: 1`) | Mixins ([RFC 0004](../../rfcs/0004-composed-bases.md)), then `place/` files and **`bindings/<situation>.yaml`** in list order |
 
 Later patches win for the same `id`. A `copy:` with `into:` needs the anchor space declared by an earlier patch. Convert v1 with **`twin fmt --upgrade=2`** (`with:` becomes leading copies; `buildings:` is gone). **Editor stack expansion:** `with:` mixins and `copy: ./…` stages open in the composed buffer; **`from:`** stays a ref on the place recipe (like a pinned parent image).
 
@@ -28,19 +28,19 @@ Id-array merge rules and **`$delete`**: [Layers](layers.md).
 
 | Docker | Twinfile (authoring) | Twinfile (build output) |
 | --- | --- | --- |
-| Dockerfile | `Twinfile.yaml` + `place/` + `steps: - plan:` | — |
+| Dockerfile | `<unit>.twin.yaml` + `place/` + `steps: - plan:` | — |
 | `FROM` | **`from:`** on a **place** (or **`from: ..`** on a **scenario**) | Base unit ref in provenance |
-| `COPY` / patch steps | Manifest **`layers:`** / **`steps:`** — place patches and inline **`plan:`** (legacy `plans/*.yaml` lifted by `twin fmt`) | **`place`** compose layers; bindings end on **`Place.data.situationBindings`** |
+| `COPY` / patch steps | Manifest **`layers:`** / **`steps:`** — place patches and inline **`plan:`** (legacy `bindings/*.yaml` lifted by `twin fmt`) | **`place`** compose layers; bindings end on **`Place.data.situationBindings`** |
 | `COPY --from=<stage>` | **`with:`** mixin units (`kind: mixin`), applied after **`from:`** and before local **`layers:`** ([RFC 0004](../../rfcs/0004-composed-bases.md)) | **`mixin`** compose layers with refs like `with/mixin-severe-weather/place/spaces.yaml` |
 | `COPY --from=<stage>` (local stage) | **`copy: ./parts/<name>`** (and `./floors/<floor>` inside a building), nested Twinfiles under the campus ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)) | **`copy`** compose layers under `copy/<into>/…` |
-| Shared dependency image | **Situation** / **event** units linked by **`plans/`** (`for:` target name) | `situation`, `event`, `plan` compose layers |
+| Shared dependency image | **Situation** / **event** units linked by **`bindings/`** (`for:` target name) | `situation`, `event`, `plan` compose layers |
 | `ARG` | **`args:`** on scenarios | `args` compose layer |
 | `ENTRYPOINT` | **`use.runner`** | Offline runner (`twin run`); host **player** is not manifest — [World session](../place/world-session.md) |
 | `docker history` | — | **`twin layers`** (in-memory layer list) |
-| Image digest | — | **`Place.digest`**, **`Twinfile.lock`** layer chain |
+| Image digest | — | **`Place.digest`**, **`<unit>.twin.lock`** layer chain |
 | Registry | — | OCI artifacts (`oci:…`, `twin push` / `twin pull`) |
 
-Normalize manifest keys and lift legacy **`plans:`** into **`layers:`**: `twin fmt [path]` (unit dir, manifest file, or tree with **`--recursive`**).
+Normalize manifest keys and order **`bindings/`** after place layers: `twin fmt [path]` (unit dir, manifest file, or tree with **`--recursive`**).
 
 Normative merge rules: [Layers](layers.md). Authoring order: [Layout navigation](../place/layout-navigation.md). **Step-by-step place declaration:** [Place recipe](../place/place-recipe.md).
 
@@ -67,7 +67,7 @@ layers:
   - path: place/spaces.yaml
     mode: replace
   - place/openings.yaml
-  # … routes, assets, plans/*.yaml …
+  # … routes, assets, bindings/*.yaml …
 ```
 
 **Campus + nested building** (`twinfile: 2`) — site patches, then a copy of the building Twinfile under `parts/`. Pattern guide: [Campus → building → floor](../place/campus-building-floor.md). Examples: [`transit-hub-campus`](../../../../catalog/place/examples/mobility-hub/campus/), [`airport`](../../../../catalog/place/examples/airport/) (building copies `./floors/airside`), [`arena`](../../../../catalog/place/examples/arena/).
@@ -98,16 +98,16 @@ Conventions:
 2. **`@doppler-group/geotypes`** publishes a **place scaffold** per slug (`placeScaffoldForSlug`): default **`archetype`** and **`authoring_scale`** — `twin init` sets **`from:`** to the matching **`base-*`** under `examples/`.
 3. **Prefer one hop**: child → base. Deeper **`from:`** chains are allowed but harder to review.
 4. **Root bases** live under `examples/` (or your registry); they declare **no** **`from:`**.
-5. **Plan paths** live in **`layers:`** as `plans/<situation>.yaml` (after the place files). Mixin plan layers union with the child stack; nearest place unit wins on duplicate situation names.
+5. **Plan paths** live in **`layers:`** as `bindings/<situation>.yaml` (after the place files). Mixin plan layers union with the child stack; nearest place unit wins on duplicate situation names.
 6. **Situations stay separate units** — plans bind roles; scenario build pulls situation layers in compose order.
 7. **Decorate with `with:` mixins**, not copies: each golden situation mixin brings role-tagged rows plus a wired plan; **`axes:`** narrows axes the base leaves open. Two mixins MUST NOT define the same row id, plan file, or axis unless the child resolves it ([RFC 0004](../../rfcs/0004-composed-bases.md)).
-8. **Thin stack**: **`from:`** is the dependency (`FROM` / `package.json`) — archetype, scale, optional `levels` only. Your **`layers:`** stack on top and define spaces, openings, and the rest (`COPY`). Later steps override earlier ones for the same `id`; bases must not ship demo topology you would have to “uninstall.” Situation role hooks come from **`with:`** mixins or your own `spaces` / `plans` ([Layers](layers.md)).
+8. **Thin stack**: **`from:`** is the dependency (`FROM` / `package.json`) — archetype, scale, optional `levels` only. Your **`layers:`** stack on top and define spaces, openings, and the rest (`COPY`). Later steps override earlier ones for the same `id`; bases must not ship demo topology you would have to “uninstall.” Situation role hooks come from **`with:`** mixins or your own `spaces` / `bindings/` ([Layers](layers.md)).
 
 **Decorate** with shared bases, situations, and place layer modules: [Decorate a twin](../place/decorate-twin.md).
 
 ## What `twin build` records
 
-For a place unit, **`twin build`** merges patches, validates contracts, and returns a **`Place`** in memory (see [Built Place](built-place.md)). **`Twinfile.lock`** pins twinfile, tree, and layer **chain** digests when lock write is enabled.
+For a place unit, **`twin build`** merges patches, validates contracts, and returns a **`Place`** in memory (see [Built Place](built-place.md)). **`<unit>.twin.lock`** pins twinfile, tree, and layer **chain** digests when lock write is enabled.
 
 Inspect layers without a separate on-disk artifact:
 

@@ -27,7 +27,7 @@ Pattern C — [campus-building-floor.md](../../../../../packages/spec/doc/place/
 
 ## Building copy
 
-The last patch in [`Twinfile.yaml`](../Twinfile.yaml):
+The last patch in [`arena.twin.yaml`](../arena.twin.yaml):
 
 ```yaml
   - copy: ./parts/concourse
@@ -46,7 +46,7 @@ The `severe-weather` `plan:` item: shelter on `concourse` + prefixed interior; o
 
 ## Module patch graph
 
-Manifest **`processors:`** scopes the concourse building into **`map-concourse`**, wires GTFS into campus map input, and binds shelter standup to `concourse-lower` (see [`Twinfile.yaml`](../Twinfile.yaml)). Checked with `twin check … --profile processors`.
+Manifest **`processors:`** scopes the concourse building into **`map-concourse`**, wires GTFS into campus map input, and binds shelter standup to `concourse-lower` (see [`arena.twin.yaml`](../arena.twin.yaml)). Checked with `twin check … --profile processors`.
 
 ## Related
 

@@ -29,10 +29,9 @@ packages/simulator/
   src/catalog/builtin/  PlaceEvent modules
   events.registry.json  compose metadata for situation refs
   mixins/               kind: mixin (with:)
-  situations/           situation Twinfile heads (sync → builtin)
+  situations/           prebuilt situation images (`.twin/`)
   twin.local.yaml       dev ref map
 ```
 
-Regenerate builtin modules: `yarn workspace @doppler-group/twinfile-simulator sync:events`.
 
 Places and bases live in **`catalog/place/examples/`**.

@@ -18,8 +18,8 @@ Normative rules: [RFC 0009](../../rfcs/0009-dockerfile-model/index.md). Navigati
 **When:** Campus map shows a hub plus quads/roads; **one** indoor stack twin holds concourse/ticket-hall detail.
 
 ```
-mobility-hub/campus/Twinfile.yaml
-mobility-hub/campus/parts/transit-hub/Twinfile.yaml
+mobility-hub/campus/campus.twin.yaml
+mobility-hub/campus/parts/transit-hub/transit-hub.twin.yaml
 ```
 
 **Site manifest**
@@ -51,9 +51,9 @@ steps:
 **When:** Site needs **site-tier** zones (curb, apron) **and** a building interior **and** an extra slice (airside) maintained as its own Twinfile.
 
 ```
-places/airport/Twinfile.yaml
-places/airport/parts/terminal-a/Twinfile.yaml
-places/airport/parts/terminal-a/floors/airside/Twinfile.yaml
+places/airport/airport.twin.yaml
+places/airport/parts/terminal-a/terminal-a.twin.yaml
+places/airport/parts/terminal-a/floors/airside/airside.twin.yaml
 ```
 
 **Building manifest** (copies its floor):
