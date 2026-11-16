@@ -1,0 +1,21 @@
+twinfile: 1
+kind: event
+id: transit-disruption
+name: Transit disruption
+version: 1.0.0
+stability: stable
+phases:
+  - disrupted
+  - restored
+expects:
+  ground-transport:
+    kind: space
+    min: 1
+  alternative:
+    kind: space
+    min: 0
+args:
+  startsAt:
+    type: time
+  line:
+    type: string

@@ -153,23 +153,21 @@ export function loadTwinfile(unitRoot: string): Result<LoadedTwinfile> {
   if (catalogErrors.length > 0) return err(catalogErrors);
 
   const declared = String(twinfile.kind ?? '').trim();
-  if (declared && declared !== TWINFILE_UNIT_ROLE && declared !== 'mixin') {
+  const keepsKind = declared === 'mixin' || declared === 'event';
+  if (declared && declared !== TWINFILE_UNIT_ROLE && !keepsKind) {
     return err([
       {
         code: 'E_SCHEMA',
         message:
           declared === 'scenario'
             ? 'Runs use story scene run.yaml — this loader only reads places'
-            : `Expected a place head (got kind "${declared}"); use a story scene run.yaml or the event catalog`,
+            : `Expected a place or event head (got kind "${declared}"); use a story scene run.yaml`,
         file: twinfilePath,
       },
     ]);
   }
 
-  const normalized =
-    declared === 'mixin'
-      ? twinfile
-      : { ...twinfile, kind: TWINFILE_UNIT_ROLE };
+  const normalized = keepsKind ? twinfile : { ...twinfile, kind: TWINFILE_UNIT_ROLE };
 
   return ok({ root, twinfilePath, twinfile: normalized });
 }
