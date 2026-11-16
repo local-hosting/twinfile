@@ -1,11 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
-import { headFile, kind, module } from '../src/index.js';
+import { kind, module } from '../src/index.js';
 
 describe('@local-hosting/twinfile-place', () => {
   it('exports the place module', () => {
     expect(kind).toBe('place');
-    expect(headFile).toBe('Place.yaml');
     expect(module.kind).toBe('place');
   });
 
