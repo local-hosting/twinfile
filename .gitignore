@@ -9,7 +9,10 @@ node_modules/
 
 dist/
 build/
+!**/src/**/build/
+!**/doc/**/build/
 coverage/
+!**/src/**/coverage/
 .next/
 .vercel/
 .vercel-fetch/
