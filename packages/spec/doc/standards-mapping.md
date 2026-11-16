@@ -33,4 +33,4 @@ Twinfile units are **digital models** (authoring artifacts). Under [ISO/IEC 3017
 | resource | Brick, SOSA |
 | *(catalog / runs)* | GTFS bridges target timetable **stage packs** in the simulator catalog |
 | story | *(BPMN planned)* |
-| character | *(none — PCM JSON contract)* |
+| character | *(none — character JSON contract)* |
