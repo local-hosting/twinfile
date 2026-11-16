@@ -44,8 +44,8 @@ export function TwinfileMap({
   mapboxToken: mapboxTokenProp,
 }: TwinfileMapProps) {
   const mapboxToken = mapboxTokenProp ?? resolveMapboxKeyFromEnv();
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const mapRef = useRef<GkMapElement | null>(null);
+  const [container, setContainer] = useState<HTMLDivElement | null>(null);
+  const [mapEl, setMapEl] = useState<GkMapElement | null>(null);
   const [geokitReady, setGeokitReady] = useState(false);
   const [containerReady, setContainerReady] = useState(false);
   const [mapMountId, setMapMountId] = useState(0);
@@ -77,39 +77,38 @@ export function TwinfileMap({
   }, [mapboxToken]);
 
   useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
+    if (!container) return;
+    sizedRef.current = false;
 
     const measure = (): void => {
-      const ready = el.clientWidth >= 48 && el.clientHeight >= 48;
+      const ready = container.clientWidth >= 48 && container.clientHeight >= 48;
       setContainerReady(ready);
       if (ready && !sizedRef.current) {
         sizedRef.current = true;
         setMapMountId((id) => id + 1);
       }
-      if (ready) {
-        mapRef.current?.resizeAndRepaintMap?.();
-      }
     };
 
     measure();
     const ro = new ResizeObserver(() => measure());
-    ro.observe(el);
+    ro.observe(container);
     return () => ro.disconnect();
-  }, [unitKey]);
+  }, [container, unitKey]);
 
   useEffect(() => {
-    sizedRef.current = false;
-    setMapMountId((id) => id + 1);
-  }, [unitKey]);
+    if (!container || !mapEl) return;
+    const ro = new ResizeObserver(() => mapEl.resizeAndRepaintMap?.());
+    ro.observe(container);
+    return () => ro.disconnect();
+  }, [container, mapEl]);
 
   useEffect(() => {
-    if (!containerReady || !geokitReady) return;
+    if (!mapEl || !containerReady || !geokitReady) return;
     const handle = window.requestAnimationFrame(() => {
-      mapRef.current?.resizeAndRepaintMap?.();
+      mapEl.resizeAndRepaintMap?.();
     });
     return () => window.cancelAnimationFrame(handle);
-  }, [containerReady, geokitReady, draft.features.length, draft.camera.lat, draft.camera.lng]);
+  }, [mapEl, containerReady, geokitReady, draft.features.length, draft.camera.lat, draft.camera.lng]);
 
   const mapOverlays = useMemo(
     () =>
@@ -125,7 +124,7 @@ export function TwinfileMap({
   const canRenderMap = Boolean(mapProvider || resolvedKey);
   return createElement(
     'div',
-    { ref: containerRef, className: 'twinfile-editor__map' },
+    { ref: setContainer, className: 'twinfile-editor__map' },
     !canRenderMap
       ? createElement(
           'p',
@@ -142,9 +141,7 @@ export function TwinfileMap({
           : createElement(
               'gk-map',
               {
-                ref: (node: GkMapElement | null) => {
-                  mapRef.current = node;
-                },
+                ref: setMapEl,
                 key: `${unitKey ?? 'twinfile-map'}:${mapMountId}`,
                 theme: 'dark',
                 'map-style': 'dataviz-dark',
