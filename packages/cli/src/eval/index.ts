@@ -1,25 +1,25 @@
 /**
- * Scenario success evaluation (`expected/metrics.json` vs run `*.metrics.json`).
+ * Scene success evaluation (`run.expected.metrics` vs run `*.metrics.json`).
  * Flat compare uses @doppler-group/twinfile-core/method; planning KPI schemas live in @doppler-group/frameworks.
  */
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { loadRunUnit } from '@doppler-group/twinfile-core';
 import { compareScenarioMetrics, type MetricsEvalResult } from '@doppler-group/twinfile-core/method';
 
 export type EvalResult = MetricsEvalResult;
 
-export function evalRunPreset(presetDir: string, runsDir?: string): EvalResult {
-  const expected = join(presetDir, 'expected', 'metrics.json');
-  if (!existsSync(expected)) {
-    return { pass: true, messages: ['no expected/metrics.json — skip'] };
-  }
-  const runs = runsDir ?? join(presetDir, 'runs');
-  const observed = join(runs, 'latest.metrics.json');
+/** Compare a scene's `run.expected.metrics` with observed `<runs>/latest.metrics.json`. */
+export function evalSceneRun(target: string, runsDir?: string): EvalResult {
+  const loaded = loadRunUnit(target);
+  if (!loaded.ok) return { pass: false, messages: loaded.errors.map((e) => e.message) };
+  const expected = loaded.value.scene?.expected?.metrics;
+  if (!expected) return { pass: true, messages: ['no run.expected.metrics — skip'] };
+  const observed = join(runsDir ?? join(loaded.value.root, 'runs'), 'latest.metrics.json');
   if (!existsSync(observed)) {
     return { pass: false, messages: [`missing observed metrics: ${observed}`] };
   }
-  const exp = JSON.parse(readFileSync(expected, 'utf8')) as Record<string, number>;
   const obs = JSON.parse(readFileSync(observed, 'utf8')) as Record<string, number>;
-  return compareScenarioMetrics(exp, obs);
+  return compareScenarioMetrics(expected, obs);
 }

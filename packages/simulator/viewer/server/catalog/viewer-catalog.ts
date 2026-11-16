@@ -1,5 +1,5 @@
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
-import { basename, dirname, join, relative, resolve, sep } from 'node:path';
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import { basename, join, relative, resolve, sep } from 'node:path';
 
 import {
   isExamplesCatalogRoot,
@@ -8,7 +8,7 @@ import {
   resolveTypeExamplesRoot,
   twinfileDisplayName,
 } from '@doppler-group/twinfile-core';
-import { findTwinfileYamlPath } from '@doppler-group/twinfile-core';
+import { findTwinfileYamlPath, listSceneRunIds, loadRunUnit, sceneAddress } from '@doppler-group/twinfile-core';
 import { parse as parseYaml } from 'yaml';
 
 import { attachHostPlaceCatalogIds, attachEventHostPlaceScopes } from './viewer-host-place-scope.js';
@@ -85,21 +85,11 @@ function isNestedSiteBundlePath(relKey: string): boolean {
 }
 
 function unitManifestPath(dir: string): string | undefined {
-  const head = findTwinfileYamlPath(dir);
-  if (head) return head;
-  const run = join(dir, 'run.yaml');
-  return existsSync(run) ? run : undefined;
+  return findTwinfileYamlPath(dir);
 }
 
 function hasTwinfile(dir: string): boolean {
   return unitManifestPath(dir) !== undefined;
-}
-
-function isRunPresetDir(dir: string): boolean {
-  const manifest = unitManifestPath(dir);
-  if (!manifest) return false;
-  const base = basename(manifest).toLowerCase();
-  return base.startsWith('preset.') || base === 'run.yaml';
 }
 
 function readManifestBits(unitDir: string): {
@@ -113,16 +103,14 @@ function readManifestBits(unitDir: string): {
     const raw = readFileSync(manifestFile, 'utf8');
     const id = raw.match(/^\s*id:\s*([^\n#]+)/m)?.[1]?.trim();
     const name = raw.match(/^\s*name:\s*([^\n#]+)/m)?.[1]?.trim();
-    const kind =
-      raw.match(/^\s*kind:\s*([^\n#]+)/m)?.[1]?.trim() ??
-      (basename(manifestFile).toLowerCase().startsWith('preset.') ? 'run' : 'place');
+    const kind = raw.match(/^\s*kind:\s*([^\n#]+)/m)?.[1]?.trim() ?? 'place';
     return { id, name, kind };
   } catch {
     return {};
   }
 }
 
-/** Twinfile browse is place-only; runs and events use preset.yaml and the event catalog. */
+/** Twinfile browse is place-only; runs are story scenes and events use the event catalog. */
 function isViewerCatalogKind(kind: string | undefined): boolean {
   return (kind ?? 'place') === 'place';
 }
@@ -202,85 +190,37 @@ function labelForUnit(twinfile: Record<string, unknown>, relId: string): string 
     .join(' / ');
 }
 
-function collectStorySceneRuns(storyExamplesRoot: string): ViewerCatalogEntry[] {
-  const out: ViewerCatalogEntry[] = [];
-  if (!statSync(storyExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) return out;
-
-  function walkStories(storyDir: string): void {
-    const scenesDir = join(storyDir, 'scenes');
-    if (statSync(scenesDir, { throwIfNoEntry: false })?.isDirectory()) {
-      for (const sceneId of readdirSync(scenesDir)) {
-        const runDir = join(scenesDir, sceneId);
-        if (!isRunPresetDir(runDir)) continue;
-        const bits = readManifestBits(runDir);
-        const relKey = relative(storyExamplesRoot, runDir).split('\\').join('/');
-        out.push({
-          id: `scenarios/story/${relKey}`,
-          label: labelForUnit({ id: bits.id, name: bits.name, kind: 'scenario' }, relKey),
-          group: 'scenarios',
-          kind: 'scenario',
-          path: resolve(runDir),
-        });
-      }
-    }
-    for (const name of readdirSync(storyDir)) {
-      if (name.startsWith('.') || name === 'scenes') continue;
-      const child = join(storyDir, name);
-      if (statSync(child, { throwIfNoEntry: false })?.isDirectory()) walkStories(child);
-    }
-  }
-
-  for (const storyId of readdirSync(storyExamplesRoot)) {
-    if (storyId.startsWith('.')) continue;
-    const storyDir = join(storyExamplesRoot, storyId);
-    if (!statSync(storyDir, { throwIfNoEntry: false })?.isDirectory()) continue;
-    walkStories(storyDir);
-  }
-  return out;
+/** Host place slug from a run `from:` ref (`twinfile/place/airport:0.2.0` → `airport`). */
+function hostPlaceFromRunRef(from: unknown): string | undefined {
+  if (typeof from !== 'string') return undefined;
+  return from.trim().match(/^twinfile\/(?:place\/)?([^:@/]+)/)?.[1];
 }
 
-function collectRunPresets(root: string): ViewerCatalogEntry[] {
-  const out: ViewerCatalogEntry[] = [];
-  const presetRoots: string[] = [];
-  for (const name of readdirSync(root)) {
-    if (name.startsWith('.') || name === 'conf' || name === 'presets') continue;
-    const child = join(root, name);
-    if (statSync(child, { throwIfNoEntry: false })?.isDirectory() && hasTwinfile(child)) {
-      presetRoots.push(child);
-    }
-  }
-  if (presetRoots.length === 0) return out;
-
-  function walk(dir: string): void {
-    for (const name of readdirSync(dir)) {
-      if (name.startsWith('.')) continue;
-      const child = join(dir, name);
-      if (!statSync(child, { throwIfNoEntry: false })?.isDirectory()) continue;
-      if (name === 'scenarios') {
-        for (const runName of readdirSync(child)) {
-          const runDir = join(child, runName);
-          if (!statSync(runDir, { throwIfNoEntry: false })?.isDirectory()) continue;
-          if (!isRunPresetDir(runDir)) continue;
-          const bits = readManifestBits(runDir);
-          const relKey = relative(root, runDir).split('\\').join('/');
-          out.push({
-            id: `scenarios/${relKey}`,
-            label: labelForUnit({ id: bits.id, name: bits.name, kind: 'scenario' }, relKey),
-            group: 'scenarios',
+function collectStorySceneRuns(storyExamplesRoot: string): ViewerCatalogEntry[] {
+  if (!statSync(storyExamplesRoot, { throwIfNoEntry: false })?.isDirectory()) return [];
+  return readdirSync(storyExamplesRoot)
+    .filter((name) => !name.startsWith('.'))
+    .flatMap((storyId) => {
+      const storyRoot = join(storyExamplesRoot, storyId);
+      return listSceneRunIds(storyRoot).flatMap((sceneId) => {
+        const address = sceneAddress(storyRoot, sceneId);
+        const loaded = loadRunUnit(address);
+        if (!loaded.ok) return [];
+        const head = loaded.value.twinfile;
+        const relKey = `${storyId}/${sceneId}`;
+        const hostPlaceCatalogId = hostPlaceFromRunRef(head.from);
+        return [
+          {
+            id: `scenarios/story/${relKey}`,
+            label: labelForUnit(head, relKey),
+            group: 'scenarios' as const,
             kind: 'scenario',
-            path: resolve(runDir),
-          });
-        }
-      } else {
-        walk(child);
-      }
-    }
-  }
-
-  for (const presetRoot of presetRoots) {
-    walk(presetRoot);
-  }
-  return out;
+            path: address,
+            ...(hostPlaceCatalogId ? { hostPlaceCatalogId } : {}),
+          },
+        ];
+      });
+    });
 }
 
 function collectUnder(root: string, maxDepth: number): ViewerCatalogEntry[] {
@@ -548,7 +488,6 @@ export function listViewerCatalog(roots: ViewerRoots): ViewerCatalogEntry[] {
   let units: ViewerCatalogEntry[] = [];
   for (const examples of examplesRoots) {
     units = mergeCatalogEntries(units, collectUnder(examples, 6));
-    units = mergeCatalogEntries(units, collectRunPresets(examples));
     const storyExamples = resolveTypeExamplesRoot(
       'story',
       resolveTwinfileRoot(examples),

@@ -83,10 +83,8 @@ layers:
     }
   });
 
-  it('rejects a scenario head (runs use scene run.yaml)', () => {
-    const result = loadTwinfile(
-      resolve(examplesRoot, '../../../catalog/story/examples/shop-visit/scenes/shop-shelter-at-cap'),
-    );
+  it('rejects a story head (runs are story scenes)', () => {
+    const result = loadTwinfile(resolve(examplesRoot, '../../../catalog/story/examples/shop-visit'));
     expect(result.ok).toBe(false);
   });
 

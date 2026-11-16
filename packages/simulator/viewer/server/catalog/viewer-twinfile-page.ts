@@ -84,7 +84,7 @@ export function listViewerStoryTabs(result: BuildTwinfileResult): ViewerStoryTab
     const tabs: ViewerStoryTab[] = [...listLensStoryTabs(result)];
     tabs.push({
       id: 'twinfile',
-      label: isRunUnit(result.loaded) ? 'Preset' : 'Twinfile',
+      label: isRunUnit(result.loaded) ? 'Story' : 'Twinfile',
       kind: 'twinfile',
     });
     return tabs;

@@ -11,12 +11,12 @@ import {
 import {
   loadRunUnit,
 } from '@doppler-group/twinfile-core';
-import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 import { twinLockPath } from '@doppler-group/twinfile-core';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot } = testCatalogRoots(importDir);
-const scenarioRoot = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
+const scenarioRoot = goldenSceneRun(importDir, 'arena-storm-at-halftime');
 
 describe('composeScenarioLayers', () => {
   it('orders place, event, and args layers', () => {

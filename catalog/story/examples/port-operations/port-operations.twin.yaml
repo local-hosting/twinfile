@@ -11,5 +11,23 @@ story:
   arc: operations
   scenes:
     - id: port-gangway-backup
-      label: port gangway backup
-      run: ./scenes/port-gangway-backup
+      label: Gangway backup
+      run:
+        from: twinfile/place/port:0.2.0
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        domains:
+          - operations
+        args:
+          peakArrivals: 120
+          lanes: 1
+          service_s: 60
+          stagingCap: 25
+        use:
+          runner: npm:@twinfile/runner-queue@^0
+        expected:
+          digest: sha256:a6ddf2195036a7c74d8742be06ec648c4f6f322ca7a4269088b5afe12e7bb80c
+          metrics:
+            max_queue: 120
+            time_queue_spills_s: 5700
+            clearance_time_s: 7200

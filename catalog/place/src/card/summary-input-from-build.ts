@@ -1,10 +1,10 @@
-import { loadUnitRoot, type BuildTwinfileSummaryInput } from '@doppler-group/twinfile-core';
+import { loadUnitRoot, unitAddress, type BuildTwinfileSummaryInput } from '@doppler-group/twinfile-core';
 
 import type { BuildTwinfileResult } from '../build/build-twinfile.js';
 import { eventBindingsFromBuilt } from '../place/event-bindings.js';
 
 export function summaryInputFromBuild(result: BuildTwinfileResult): BuildTwinfileSummaryInput {
-  const loaded = loadUnitRoot(result.loaded.root);
+  const loaded = loadUnitRoot(unitAddress(result.loaded));
   const mergedPlace = result.data;
   const meta = result.meta;
   return {

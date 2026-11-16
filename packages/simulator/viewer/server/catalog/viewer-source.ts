@@ -28,7 +28,7 @@ export type ViewerTwinfilePayload = {
   text: string;
 };
 
-/** Declarative unit head: `<unit>.twin.yaml` or scene `run.yaml`. */
+/** Declarative unit head: `<unit>.twin.yaml`, or the story head that declares a scene run. */
 export function readViewerTwinfileYaml(unitDir: string): Result<ViewerTwinfilePayload> {
   const loaded = loadUnitRoot(unitDir);
   if (!loaded.ok) {

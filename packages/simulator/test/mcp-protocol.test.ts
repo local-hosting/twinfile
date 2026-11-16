@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { handleMcpProtocolMessage, type McpSession } from '@doppler-group/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 import { twinHeadPath } from '@doppler-group/twinfile-core';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
@@ -81,7 +81,7 @@ describe('MCP protocol', () => {
   });
 
   it('loads golden run test prompt when serving a scenario', async () => {
-    const runDir = goldenSceneRunDir(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
+    const runDir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'shop-shelter-at-cap');
     const state = await ready(runDir);
     const call = await rpc(runDir, state, 'tools/call', { name: 'run_test_prompt', arguments: {} });
     const body = JSON.parse((call?.result as { content: Array<{ text: string }> }).content[0]!.text) as {

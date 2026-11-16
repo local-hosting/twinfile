@@ -11,14 +11,14 @@ import { buildPlaceNarrative, describeTwinAt, openTimelineForPlace } from '@dopp
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot } = testCatalogRoots(importDir);
 
 describe('place narrative', () => {
   it('separates place, scenario, event, and now', async () => {
-    const scenarioDir = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
+    const scenarioDir = goldenSceneRun(importDir, 'arena-storm-at-halftime');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
             writeLock: false,
@@ -77,7 +77,7 @@ describe('place narrative', () => {
   });
 
   it('reframes scenario question when focus shifts to another space', async () => {
-    const scenarioDir = goldenSceneRunDir(importDir, 'arena-storm-at-halftime');
+    const scenarioDir = goldenSceneRun(importDir, 'arena-storm-at-halftime');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
             writeLock: false,
@@ -117,7 +117,7 @@ describe('place narrative', () => {
   });
 
   it('reports knowledge lag in the moment section', async () => {
-    const scenarioDir = goldenSceneRunDir(importDir, 'river-swim-unsafe-known');
+    const scenarioDir = goldenSceneRun(importDir, 'river-swim-unsafe-known');
     const built = await buildTwinfile(scenarioDir, {
       examplesRoot,
             writeLock: false,

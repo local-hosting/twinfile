@@ -1,6 +1,6 @@
 import { readFileSync, statSync } from 'node:fs';
 import { join } from 'node:path';
-import { findTwinfileYamlPath } from '@doppler-group/twinfile-core';
+import { findTwinfileYamlPath, isSceneAddress, loadRunUnit } from '@doppler-group/twinfile-core';
 
 import { parse as parseYaml } from 'yaml';
 
@@ -27,6 +27,10 @@ function hostPlaceFromCatalogParent(twinfile: Record<string, unknown> | undefine
 }
 
 function readTwinfileDoc(unitDir: string): Record<string, unknown> | undefined {
+  if (isSceneAddress(unitDir)) {
+    const run = loadRunUnit(unitDir);
+    return run.ok ? run.value.twinfile : undefined;
+  }
   try {
     const manifestFile = findTwinfileYamlPath(unitDir);
     if (!manifestFile) return undefined;
@@ -41,6 +45,7 @@ function readTwinfileDoc(unitDir: string): Record<string, unknown> | undefined {
 export function attachHostPlaceCatalogIds(entries: ViewerCatalogEntry[]): void {
   const byId = new Map(entries.map((e) => [e.id, e]));
   for (const entry of entries) {
+    if (entry.hostPlaceCatalogId) continue;
     const relSlug = hostPlaceSlugFromCatalogId(entry.id);
     const fromPath = inferHostPlaceCatalogId(entry.path, relSlug, entry.group);
     const fromParent = hostPlaceFromCatalogParent(readTwinfileDoc(entry.path));

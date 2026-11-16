@@ -101,7 +101,7 @@ export const MCP_TOOLS: McpToolDef[] = [
     name: 'run_test_prompt',
     method: 'run.test.prompt',
     description:
-      'Golden-run analyst prompt for MCP/CI testing (from examples/mcp/run-test-prompts.yaml). Not stored on run.yaml.',
+      'Golden-run analyst prompt for MCP/CI testing (from examples/mcp/run-test-prompts.yaml). Not stored on the scene run.',
     inputSchema: schema({ runId: str }),
   },
   {

@@ -254,7 +254,7 @@ export type {
 } from './types/twin-type-module.js';
 export type { TwinKind as TwinKindId } from './types/twin-kind.js';
 export type { TwinHead, BuiltTwinHead, TwinHeadPath } from './types/twin-head.js';
-export { TWIN_HEAD_SUFFIX, RUN_PRESET_NAMES } from './types/twin-kind.js';
+export { TWIN_HEAD_SUFFIX } from './types/twin-kind.js';
 export {
   parseTwinHead,
   findTwinHead,
@@ -278,9 +278,9 @@ export {
   type TwinCatalogType,
 } from './paths/catalog-layout.js';
 export {
-  GOLDEN_SCENE_RUN_RELPATHS,
+  GOLDEN_SCENE_RUN_STORIES,
   goldenSceneRunRelPath,
-  resolveGoldenSceneRunDir,
+  resolveGoldenSceneRun,
 } from './paths/golden-scene-runs.js';
 export {
   loadProjectTwinManifest,
@@ -308,20 +308,23 @@ export {
   resetPlaceLoadHooksForTests,
 } from './load/place-load-hooks.js';
 export {
+  isSceneAddress,
+  listSceneRunIds,
   loadRunUnit,
-  readPlaceRunPresetFile,
-  runPresetComposeHead,
-} from './load/load-run-preset.js';
+  parseSceneAddress,
+  sceneAddress,
+  unitAddress,
+  type SceneAddress,
+} from './load/load-scene-run.js';
 export {
   TWINFILE_UNIT_ROLE,
   RUN_PRESET_ROLE,
-  isRunPresetPath,
   isRunUnit,
   isPlaceTwinfileUnit,
   isRunComposeHead,
 } from './load/twinfile-unit-role.js';
 export { loadUnitRoot } from './load/load-unit-root.js';
-export type { PlaceRunPreset, SceneSchedule } from './types/place-run-preset.js';
+export type { LoadedScene, SceneExpected, SceneRun, SceneSchedule } from './types/scene-run.js';
 export {
   validateDocumentAtPath,
   readYamlDocument,

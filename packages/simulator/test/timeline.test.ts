@@ -16,7 +16,7 @@ import { createClock } from '@doppler-group/twinfile-simulator';
 import { loadFeedRows, resolveTrackFeeds } from '@doppler-group/twinfile-simulator';
 import { createTimeline } from '@doppler-group/twinfile-simulator';
 import type { TimelinePayload } from '@doppler-group/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
+import { goldenSceneRun, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
@@ -121,7 +121,7 @@ describe('feeds', () => {
 
 describe('createRunPayload', () => {
   it('adds a timeline for the river scenario', async () => {
-    const dir = goldenSceneRunDir(dirname(fileURLToPath(import.meta.url)), 'river-until-stage-unsafe');
+    const dir = goldenSceneRun(dirname(fileURLToPath(import.meta.url)), 'river-until-stage-unsafe');
     const built = await buildTwinfile(dir, { examplesRoot, writeLock: false });
     const loaded = loadRunUnit(dir);
     if (!built.ok || !loaded.ok) throw new Error('river scenario failed to build');

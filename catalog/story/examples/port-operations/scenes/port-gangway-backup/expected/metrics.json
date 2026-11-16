@@ -1,5 +1,0 @@
-{
-  "max_queue": 120,
-  "time_queue_spills_s": 5700,
-  "clearance_time_s": 7200
-}

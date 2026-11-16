@@ -107,10 +107,10 @@ export function buildViewerSummaryPayload(
   };
 }
 
-/** Place-card summary only — a place does not “run”; use the Run lens on `preset.yaml`. */
+/** Place-card summary only — a place does not “run”; use the Run lens on a story scene. */
 export function viewerShowsSummarySections(
   twinfile: Record<string, unknown>,
-  loaded?: Pick<LoadedTwinfile, 'twinfilePath'>,
+  loaded?: Pick<LoadedTwinfile, 'scene'>,
 ): boolean {
   if (loaded && isRunUnit(loaded)) return false;
   if (isRunComposeHead(twinfile)) return false;
