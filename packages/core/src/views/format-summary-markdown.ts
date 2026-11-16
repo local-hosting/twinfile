@@ -29,7 +29,7 @@ function modeLines(card: TwinfileSummaryBase, mode: TwinfileUseMode): string[] {
   return lines;
 }
 
-/** Short Markdown summary derived from {@link TwinfileSummaryBase} (not a second spec). */
+/** Markdown summary view derived from {@link TwinfileSummaryBase} (see `renderTwinfileSummaryView`). */
 export function formatTwinfileSummaryMarkdown(
   summary: TwinfileSummaryBase | import('../types/twinfile-summary.js').TwinfileSummaryV1,
 ): string {

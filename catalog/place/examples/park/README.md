@@ -10,6 +10,6 @@ Illustrative **`open_area`** site pinned at **Central Park, Manhattan** (`meadow
 
 ## Runs
 
-**Daily:** [`park-operations`](../../../story/examples/park-operations/park-operations.twin.yaml) — meadow–trailhead visit (`mode: daily`).
+**Daily:** [`park-operations`](../../../story/examples/park-operations/park-operations.twin.yaml) — meadow loop and trailhead queue (`mode: daily`).
 
-**Resilience:** [`trailhead-backup`](../../../story/examples/park-resilience/park-resilience.twin.yaml) — litter / field-damage on the loop (`mode: resilience`). **Analyst intent** lives in [`mcp/`](../mcp/), not in the scene `run:`. Live demos use event **pulses** on the place, not extra scenes per button.
+**Resilience:** [`park-resilience`](../../../story/examples/park-resilience/park-resilience.twin.yaml) — litter surge and slope-movement watch (`mode: resilience`). **Analyst intent** lives in [`mcp/`](../mcp/), not in the scene `run:`. Live demos use event **pulses** on the place, not extra scenes per button.

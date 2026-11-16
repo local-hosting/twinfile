@@ -1,0 +1,25 @@
+twinfile: 2
+kind: resource
+id: pavilion-kiosk
+name: Pavilion kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/expo:0.2.0
+    anchor: al-wasl-plaza
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-expo
+    elements:
+      purpose:
+        - wayfinding
+        - commerce
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people

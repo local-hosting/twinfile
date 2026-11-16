@@ -29,5 +29,12 @@ describe('loadCanvasDemoChrome', () => {
       dayIndex: '1',
     });
     expect(chrome.storyEventIds['morning-crossing']).toEqual(['dawn-cast-off', 'harbor-berth']);
+    expect(pack.stories).toContain('harbor-resilience');
+    expect(chrome.storyEventIds['harbor-resilience']).toEqual(['tsunami', 'field-damage']);
+    expect(chrome.stories.find((row) => row.id === 'harbor-resilience')).toMatchObject({
+      personaId: 'visitor-host',
+      mapSlug: 'buffalo-harbor',
+      storyPitch: 'Tsunami advisory at Dunkirk, then field-damage clearance on the apron.',
+    });
   });
 });

@@ -10,20 +10,19 @@ links:
     href: twinfile/place/buffalo-harbor:0.1.0
   - rel: involves
     href: twinfile/place/dunkirk-dock:0.1.0
+  - rel: involves
+    href: twinfile/character/visitor-host:0.1.0
 story:
-  pitch: Litter surge at the Buffalo slip, then field-damage clearance on the Dunkirk apron.
+  pitch: Tsunami advisory at Dunkirk, then field-damage clearance on the apron.
   scenes:
-    - id: slip-litter
-      label: Slip litter surge
+    - id: dunkirk-tsunami
+      label: Dunkirk tsunami
       run:
-        from: twinfile/place/buffalo-harbor:0.1.0
+        from: twinfile/place/dunkirk-dock:0.1.0
         steps:
-          - copy: twinfile/event/litter-pollution:1.0.0
+          - copy: twinfile/event/tsunami:1.0.0
         args:
-          peakArrivals: 90
-          lanes: 1
-          service_s: 90
-          stagingCap: 20
+          arrivalAt: tsunami.arrival
     - id: apron-damage
       label: Apron damage
       run:

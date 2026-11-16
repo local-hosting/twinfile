@@ -60,6 +60,18 @@ steps:
         roles:
           - collection-point
         state: open
+      - id: shed-refuge
+        name: Shed high ground
+        roles:
+          - flood-refuge
+        step_free: true
+        state: open
+      - id: launch-ladder
+        name: Berth launch ladder
+        roles:
+          - water-launch
+        step_free: false
+        state: open
   - stations:
       - id: dock-survey
         name: Dock survey booth
@@ -110,6 +122,36 @@ steps:
           - dock-survey
       actions:
         - at: post-storm-surge
+          set:
+            berth-mouth:
+              state: closed
+  - bind:
+      for: field-damage
+      roles:
+        hotspot:
+          - berth-mouth
+        safe-access:
+          - gangway-n
+        collection-point:
+          - gear-bay
+        survey-station:
+          - dock-survey
+      actions:
+        - at: active
+          set:
+            gangway-n:
+              state: closed
+  - bind:
+      for: tsunami
+      roles:
+        flood-refuge:
+          - shed-refuge
+        safe-access:
+          - gangway-n
+        water-launch:
+          - launch-ladder
+      actions:
+        - at: arrival
           set:
             berth-mouth:
               state: closed

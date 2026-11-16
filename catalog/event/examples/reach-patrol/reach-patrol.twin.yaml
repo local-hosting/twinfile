@@ -1,0 +1,17 @@
+twinfile: 1
+kind: event
+id: reach-patrol
+name: Reach patrol
+version: 0.1.0
+stability: example
+mode: daily
+phases:
+  - patrol
+  - clear
+expects:
+  water-launch:
+    kind: marker
+    min: 1
+args:
+  startsAt:
+    type: time

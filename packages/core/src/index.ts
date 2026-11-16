@@ -139,8 +139,17 @@ export {
   twinfileRefId,
   twinfileRefLabel,
 } from './twinfile/display-name.js';
-export { formatTwinfileSummaryMarkdown } from './card/format-card-markdown.js';
-export { renderTwinfileSummaryAscii } from './card/render-card-ascii.js';
+export { formatTwinfileSummaryMarkdown } from './views/format-summary-markdown.js';
+export { renderTwinfileSummaryAscii } from './views/render-summary-ascii.js';
+export {
+  renderTwinfileSummaryView,
+  type TwinfileSummaryViewFormat,
+  type RenderTwinfileSummaryViewOptions,
+} from './views/render-summary-view.js';
+export {
+  renderTwinfilePlaceView,
+  type TwinfilePlaceViewFormat,
+} from './views/place-json-ld.js';
 export type {
   TwinfileSummaryV1,
   TwinfileSummaryHeader,
@@ -243,7 +252,7 @@ export {
   isPublishedPlaceTwinfile,
   type BuildPlaceJsonLdOptions,
   type PlaceJsonLdDocument,
-} from './export/place-json-ld.js';
+} from './views/place-json-ld.js';
 export type { TwinError, TwinErrorCode, Result } from './types/twin-error.js';
 export { ok, err } from './types/twin-error.js';
 export { isRecord } from './doc/is-record.js';

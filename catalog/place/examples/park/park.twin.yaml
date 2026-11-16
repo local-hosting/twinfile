@@ -34,6 +34,16 @@ steps:
         level: ground
         exposure: outdoor
         parent: meadow
+        roles:
+          - ground-transport
+      - id: ranger-shelter
+        name: Ranger shelter
+        kind: shelter
+        level: ground
+        exposure: covered
+        parent: trailhead
+        roles:
+          - shelter
   - markers:
       - id: creek-crossing
         name: Creek crossing
@@ -50,6 +60,12 @@ steps:
         name: Recycling station
         roles:
           - collection-point
+        state: open
+      - id: ridge-refuge
+        name: Ridge refuge
+        roles:
+          - flood-refuge
+        step_free: false
         state: open
   - stations:
       - id: ranger-post
@@ -94,6 +110,22 @@ steps:
           - ranger-post
       actions:
         - at: post-storm-surge
+          set:
+            creek-crossing:
+              state: closed
+  - bind:
+      for: slope-movement
+      roles:
+        safe-access:
+          - boardwalk-n
+        flood-refuge:
+          - ridge-refuge
+        shelter:
+          - ranger-shelter
+        survey-station:
+          - ranger-post
+      actions:
+        - at: evacuation
           set:
             creek-crossing:
               state: closed
