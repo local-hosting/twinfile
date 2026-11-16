@@ -16,7 +16,7 @@ Twinfile units are **digital models** (authoring artifacts). Under [ISO/IEC 3017
 | Personnel | **character** | `kind: character` + `disclosure:` |
 | Process (planned) | **story** | `kind: story` |
 
-**Process (actual)** maps to the host **player** + scene **`run.yaml`** presets and simulator **catalog** situations/timetable modules (`twinfile/situation/*`, `twinfile/event/*` compose refs) — not a fifth published twin kind.
+**Process (actual)** maps to the host **player** + scene **`run.yaml`** presets and **event** twins under `catalog/event/` (`twinfile/event/*` compose refs).
 
 ## Cross-cutting identifiers
 

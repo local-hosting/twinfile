@@ -67,27 +67,14 @@ steps:
 
 ## Mixins {{ anchor: false }}
 
-`with:` attaches published mixin units. Each mixin brings role-tagged rows and a wired plan. `twin init` adds one mixin per situation the geotype suggests, plus `mixin-assets` or `mixin-sensors` when that slug asks for them.
+`with:` attaches published mixin units. `twin init` adds `mixin-assets` or `mixin-sensors` when the geotype asks for them. Events need no mixin: a place hosts an event through the `roles:` it already tags.
 
 | Mixin | Adds |
 | --- | --- |
-| `twinfile/mixin-severe-weather:0.1.0` | Shelter, outdoor assembly, two exits, `severe-weather` plan |
-| `twinfile/mixin-transit-disruption:0.1.0` | A stop, an alternative pickup, `transit-disruption` plan |
-| `twinfile/mixin-dam-release:0.1.0` | Launch, flood refuge, stage gauge, `dam-release` plan |
-| `twinfile/mixin-flood:0.1.0` | General flood refuge, crossing, gauge, `flood` plan |
-| `twinfile/mixin-earthquake:0.1.0` | Shelter, exits, survey zone, `earthquake` plan |
-| `twinfile/mixin-wildfire:0.1.0` | Shelter, exits, evac route, `wildfire` plan |
-| `twinfile/mixin-tsunami:0.1.0` | High ground, inland route, coastal lookout, `tsunami` plan |
-| `twinfile/mixin-volcanic-ash:0.1.0` | Ashfall shelter, egress, air-quality station, `volcanic-ash` plan |
-| `twinfile/mixin-slope-movement:0.1.0` | Evac route, high-ground refuge, `slope-movement` plan |
-| `twinfile/mixin-drought:0.1.0` | Reservoir gauge, water pickup, `drought` plan |
-| `twinfile/mixin-power-outage:0.1.0` | Shelter, egress path, stair lobby, `power-outage` plan |
-| `twinfile/mixin-field-damage:0.1.0` | Damage hotspot, debris staging, safe lane, `field-damage` plan |
-| `twinfile/mixin-litter-pollution:0.1.0` | Hotspot, access, collection point, `litter-pollution` plan |
 | `twinfile/mixin-assets:0.1.0` | Starter `assets` layer |
 | `twinfile/mixin-sensors:0.1.0` | Starter `sensors` layer |
 
-A local `bindings/<situation>.yaml` wins over the mixin plan. Tag your own spaces with `roles:` (`shelter`, `outdoor`, `exit`) and run:
+A local `bindings/<event>.yaml` overrides role matching. Tag your own spaces with `roles:` (`shelter`, `outdoor`, `exit`) and run:
 
 ```bash
 twin add plan severe-weather

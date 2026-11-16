@@ -1,16 +1,16 @@
-# Natural hazards and situation units
+# Natural hazards and event units
 
-Situation units describe **reusable operational stories** (`phases`, `expects` roles). They are not tied to a single hazard brand name. For emergency-management vocabulary, the repo ships a **catalog** that maps common natural hazard types to situation slugs.
+Event units describe **reusable operational stories** (`phases`, `expects` roles). They are not tied to a single hazard brand name. For emergency-management vocabulary, the repo ships a **catalog** that maps common natural hazard types to event slugs.
 
 **Catalog (normative list):** [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml)
 
-**CI:** `check-role-vocab.mjs` (from `@doppler-group/twinfile-spec` `yarn check`) verifies every catalog `situation` has a unit under `[`simulator/situations/`](../../../simulator/situations/).
+**CI:** `check-role-vocab.mjs` (from `@doppler-group/twinfile-spec` `yarn check`) verifies every catalog `situation` has a unit under [`catalog/event/examples/`](../../../../catalog/event/examples/).
 
-**Package:** All shared hazard situation units live in **`@doppler-group/twinfile-simulator`** (`[`simulator/README.md`](../../../simulator/README.md)). Local compose finds it from the repo root.
+**Package:** Shared hazard events live in **`@doppler-group/twinfile-event`** ([`catalog/event/README.md`](../../../../catalog/event/README.md)). Compose and the simulator load them from the repo root.
 
-## Situation units (hazard stories)
+## Event units (hazard stories)
 
-| Situation | Typical hazards | Role focus |
+| Event | Typical hazards | Role focus |
 | --- | --- | --- |
 | `severe-weather` | Hurricane, tornado, thunderstorm, lightning, hail, winter storm, blizzard, extreme heat, extreme cold, dust storm | Shelter, exits, outdoor program |
 | `flood` | River, pluvial, coastal flooding | Refuge, crossing, gauge |

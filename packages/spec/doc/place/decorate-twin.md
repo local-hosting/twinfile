@@ -51,7 +51,7 @@ name: Outdoor shelter capacity
 version: 1.0.0
 stability: example
 steps:
-  - copy: twinfile/situation/severe-weather:1.0.0
+  - copy: twinfile/event/severe-weather:1.0.0
 args:
   occupancy: 4200
   target_role: shelter
@@ -73,27 +73,34 @@ See [Composition](../build/composition.md) for full compose order (place → eve
 
 Paths: [`examples/`](../../../../catalog/place/examples/). Map-first pick: [Place archetypes](place-archetypes.md#axes--archetype).
 
-### Situations (reuse across places)
+### Events (reuse across places)
 
 | Unit | Role vocabulary (excerpt) | Example places |
 | --- | --- | --- |
 | `severe-weather` | `shelter`, `exit`, `outdoor` | expo, arena, shop |
 | `transit-disruption` | transit-specific roles | shop, airport, expo, transit-hub-campus |
 | `dam-release` | water / stage safety | river |
-| `flood` | refuge, crossing, gauge | (mixin; river/coastal sites) |
-| `earthquake` | `shelter`, `exit`, `outdoor` | (mixin) |
-| `wildfire` | `shelter`, `exit`, `safe-access` | (mixin) |
-| `tsunami` | refuge, evacuation route | (mixin; coastal sites) |
-| `volcanic-ash` | `shelter`, `exit`, `survey-station` | (mixin) |
-| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | (mixin; avalanche, landslide, lahar) |
-| `drought` | `gauge`, `collection-point`, optional `shelter` | (mixin) |
-| `power-outage` | `shelter`, `safe-access`, `alternative` | (mixin; utilities sites) |
-| `field-damage` | `hotspot`, `safe-access`, `collection-point` | (mixin; post-event reports) |
+| `flood` | refuge, crossing, gauge | (river/coastal sites) |
+| `earthquake` | `shelter`, `exit`, `outdoor` | — |
+| `wildfire` | `shelter`, `exit`, `safe-access` | — |
+| `tsunami` | refuge, evacuation route | (coastal sites) |
+| `volcanic-ash` | `shelter`, `exit`, `survey-station` | — |
+| `slope-movement` | `safe-access`, `flood-refuge`, `survey-station` | (avalanche, landslide, lahar) |
+| `drought` | `gauge`, `collection-point`, optional `shelter` | — |
+| `power-outage` | `shelter`, `safe-access`, `alternative` | (utilities sites) |
+| `field-damage` | `hotspot`, `safe-access`, `collection-point` | (post-event reports) |
 | `litter-pollution` | outdoor program / cleanup | port, park |
 
 Common **natural hazard** labels map to these units in [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml) — see [Natural hazards](../kinds/natural-hazards.md).
 
-Paths: `[`simulator/situations/`](../../../simulator/situations/). Each situation **`expects`** roles; your **`bindings/*.yaml`** maps those roles to **your** space and opening ids ([`bindings/severe-weather.yaml`](../../../simulator/mixins/mixin-severe-weather/bindings/severe-weather.yaml) on expo). Resolve refs with [`simulator/twin.local.yaml`](../../../simulator/twin.local.yaml).
+Paths: [`catalog/event/examples/`](../../../../catalog/event/examples/). Each event **`expects`** roles. A place hosts an event through its own role tags: every expected role is filled by rows of that kind whose `roles` include it. Add **`bindings/<event>.yaml`** only to override that match with explicit ids:
+
+```yaml
+for: severe-weather
+roles:
+  shelter: [concourse]
+  exit: [gate-north, gate-south]
+```
 
 ### Decoration layer files (copy patterns)
 
@@ -143,10 +150,10 @@ Every `@doppler-group/geotypes` slug carries suggested decorators next to its ar
 
 1. **`from:`** the archetype base (role hooks: `shelter`, `exit`, `outdoor`, … already tagged).
 2. **`axes:`** for any axis the archetype leaves open (e.g. `vertical: stacked` on a hospital campus).
-3. **`with:`** one golden mixin per suggested situation (`twinfile/mixin-severe-weather:0.1.0`, …) plus `mixin-assets` / `mixin-sensors` when suggested ([RFC 0004](../../rfcs/0004-composed-bases.md)). Each situation mixin brings its own role-tagged rows and a wired plan, so `twin check --strict` passes immediately.
+3. **`with:`** `mixin-assets` / `mixin-sensors` when suggested ([RFC 0004](../../rfcs/0004-composed-bases.md)). Suggested events need no mixin: the base already tags role hooks, so scenes that copy those events match roles without a binding.
 4. Prints remaining suggested layers (`next: add layers …`) that need real geometry (routes, optional visit moments).
 
-Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To bind a situation to your own rows, add a local `bindings/<situation>.yaml` (the child wins over mixins).
+Nothing is copied into the unit: improve a golden mixin and every place that pins it picks up the change on the next version bump. To pin an event to specific rows, add a local `bindings/<event>.yaml`.
 
 ## CLI (decorate)
 
