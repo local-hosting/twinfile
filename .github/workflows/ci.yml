@@ -39,11 +39,15 @@ jobs:
 
       - run: corepack enable && corepack prepare yarn@4.9.2 --activate
 
-      - name: Build linked frameworks (core + presets)
+      - name: Build linked frameworks (presets chain)
         working-directory: ../frameworks
         run: |
           corepack prepare yarn@4.14.1 --activate
           yarn install --no-immutable
+          yarn workspace @local-hosting/frameworks-heart run build
+          yarn workspace @local-hosting/frameworks-lift run build
+          yarn workspace @local-hosting/frameworks-mdvvp run build
+          yarn workspace @local-hosting/frameworks-visit-attribution run build
           yarn workspace @local-hosting/frameworks-core run build
           yarn workspace @local-hosting/frameworks-presets run build
 
