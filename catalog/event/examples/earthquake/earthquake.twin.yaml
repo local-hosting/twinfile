@@ -1,0 +1,24 @@
+twinfile: 1
+kind: event
+id: earthquake
+name: Earthquake
+version: 1.0.0
+stability: stable
+phases:
+  - alert
+  - shaking
+  - survey
+  - all-clear
+expects:
+  shelter:
+    kind: space
+    min: 1
+  exit:
+    kind: opening
+    min: 2
+  outdoor:
+    kind: space
+    min: 0
+args:
+  shakingAt:
+    type: time

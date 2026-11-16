@@ -1,25 +1,14 @@
+import { TWIN_CATALOG_TYPES, type TwinCatalogType } from '../paths/catalog-layout.js';
 import type { ProjectTwinManifest } from '../project/export-project-twin.js';
 import { exportProjectTwinBundle, loadProjectTwinManifest } from '../project/export-project-twin.js';
 import { canvasStubEntity } from './canvas-stubs.js';
 
-/** Storage-neutral bundle for optional host canvas import (four twin panels). */
-export type CanvasProjectExport = {
-  manifest: ProjectTwinManifest;
-  place: Record<string, unknown>[];
-  resource: Record<string, unknown>[];
-  character: Record<string, unknown>[];
-  story: Record<string, unknown>[];
-};
+/** Storage-neutral bundle for optional host canvas import (one panel per twin type). */
+export type CanvasProjectExport = { manifest: ProjectTwinManifest } & Record<TwinCatalogType, Record<string, unknown>[]>;
 
 export function emptyCanvasProjectExport(root?: string): CanvasProjectExport {
-  const manifest = loadProjectTwinManifest(root);
-  return {
-    manifest,
-    place: [],
-    resource: [],
-    character: [],
-    story: [],
-  };
+  const panels = Object.fromEntries(TWIN_CATALOG_TYPES.map((type) => [type, []]));
+  return { manifest: loadProjectTwinManifest(root), ...panels } as CanvasProjectExport;
 }
 
 /**
@@ -27,23 +16,15 @@ export function emptyCanvasProjectExport(root?: string): CanvasProjectExport {
  * Live session events belong on the player, not authored twins.
  */
 export function canvasEntitiesFromProjectBundle(root?: string): CanvasProjectExport & {
-  entityRefs: Array<{ panel: keyof CanvasProjectExport; ref: string }>;
+  entityRefs: Array<{ panel: TwinCatalogType; ref: string }>;
 } {
   const bundle = exportProjectTwinBundle(root);
-  const manifest = loadProjectTwinManifest(root);
-  const entityRefs: Array<{ panel: keyof CanvasProjectExport; ref: string }> = [];
-  const panels: CanvasProjectExport = {
-    manifest,
-    place: [],
-    resource: [],
-    character: [],
-    story: [],
-  };
+  const panels = emptyCanvasProjectExport(root);
+  const entityRefs: Array<{ panel: TwinCatalogType; ref: string }> = [];
   for (const type of bundle.manifest.types) {
-    const panel = type;
     for (const id of bundle.units[type]) {
-      panels[panel].push(canvasStubEntity(type, id));
-      entityRefs.push({ panel, ref: `twinfile/${type}/${id}` });
+      panels[type].push(canvasStubEntity(type, id));
+      entityRefs.push({ panel: type, ref: `twinfile/${type}/${id}` });
     }
   }
   return { ...panels, entityRefs };

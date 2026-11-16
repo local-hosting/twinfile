@@ -14,6 +14,9 @@ import { collectTwinfileSourcePaths } from './twinfile-tree.js';
 
 const OCI_CFG_SCHEMA = 'https://twinfile.org/schemas/1/oci/oci-cfg.schema.json';
 
+/** Head kinds that map 1:1 to an OCI config `kind`; scenes become `run`, everything else `place`. */
+const OCI_UNIT_KINDS: ReadonlySet<string> = new Set(['resource', 'character', 'story', 'event', 'mixin', 'base']);
+
 export type OciPackResult = {
   treePath: string;
   configPath: string;
@@ -25,22 +28,11 @@ export type OciPackResult = {
 export function ociConfigFromTwinfile(twinfile: Record<string, unknown>): Record<string, unknown> {
   const declared = typeof twinfile.kind === 'string' ? twinfile.kind : '';
   const role = typeof twinfile.role === 'string' ? twinfile.role : '';
-  const kind =
-    declared === 'resource' || declared === 'character' || declared === 'story'
-      ? declared
-      : declared === 'event'
-        ? role === 'situation' || role === 'timetable'
-          ? role
-          : 'run'
-      : declared === 'mixin' || declared === 'base'
-        ? declared
-        : declared === 'scenario'
-          ? 'run'
-          : role === 'situation' || role === 'timetable'
-            ? role
-            : typeof twinfile.from === 'string' || role === 'run'
-              ? 'run'
-              : 'place';
+  const kind = OCI_UNIT_KINDS.has(declared)
+    ? declared
+    : declared === 'scenario' || role === 'run' || typeof twinfile.from === 'string'
+      ? 'run'
+      : 'place';
   const cfg: Record<string, unknown> = {
     twinfile: 1,
     kind,
@@ -51,7 +43,6 @@ export function ociConfigFromTwinfile(twinfile: Record<string, unknown>): Record
   };
   if (Array.isArray(twinfile.domains)) cfg.domains = twinfile.domains;
   if (twinfile.expects && typeof twinfile.expects === 'object') cfg.expects = twinfile.expects;
-  if (twinfile.timetable && typeof twinfile.timetable === 'object') cfg.timetable = twinfile.timetable;
   if (Array.isArray(twinfile.phases)) cfg.phases = twinfile.phases;
   return cfg;
 }

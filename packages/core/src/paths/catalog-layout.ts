@@ -3,17 +3,14 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /**
- * Monorepo folder for the **four twin types** only (place, resource, character, story).
- * The **simulator** package is not under this hub — it operates on these catalogs at runtime
- * with its own situation registry.
+ * Monorepo folder for the **twin types** (place, resource, character, story, event).
+ * The **simulator** package is not under this hub — it plays these catalogs at runtime.
  *
  * Every catalog path derives from the monorepo root; `TF_TWINFILE_ROOT` is the only override.
  */
 export const TWIN_CATALOG_HUB = 'catalog' as const;
 
-export const TWIN_CATALOG_TYPES = ['place', 'resource', 'character', 'story'] as const;
-
-const SIMULATOR_PACKAGE = join('packages', 'simulator');
+export const TWIN_CATALOG_TYPES = ['place', 'resource', 'character', 'story', 'event'] as const;
 
 const MODULE_DIR = dirname(fileURLToPath(import.meta.url));
 
@@ -68,12 +65,6 @@ export function resolveTypeExamplesRoot(type: TwinCatalogType, root?: string): s
 /** Place golden catalog (`catalog/place/examples`). */
 export function resolvePlaceExamplesCatalogRoot(root?: string): string {
   return resolveTypeExamplesRoot('place', root);
-}
-
-/** `@doppler-group/twinfile-simulator` package (not a twin catalog type). */
-export function resolveSimulatorRoot(seed?: string): string | undefined {
-  const simulator = join(resolveTwinfileRoot(seed), SIMULATOR_PACKAGE);
-  return existsSync(join(simulator, 'events.registry.json')) ? simulator : undefined;
 }
 
 /** Character PCM/JSM YAML under `catalog/character/libs/`. */

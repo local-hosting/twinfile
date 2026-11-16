@@ -11,6 +11,7 @@ export function canvasStubEntity(type: TwinPanel, id: string): Record<string, un
     case 'resource':
       return { id, cardTitle, geo: '', label: cardTitle, orgInventoryId: id, orgVehicleId: '' };
     case 'character':
+    case 'event':
       return { id, cardTitle, label: cardTitle };
     case 'story':
       return {

@@ -325,6 +325,7 @@ __metadata:
     "@doppler-group/twinfile-bridge": "workspace:packages/bridge"
     "@doppler-group/twinfile-character": "workspace:^"
     "@doppler-group/twinfile-core": "workspace:packages/core"
+    "@doppler-group/twinfile-event": "workspace:^"
     "@doppler-group/twinfile-place": "workspace:^"
     "@doppler-group/twinfile-resource": "workspace:^"
     "@doppler-group/twinfile-simulator": "workspace:packages/simulator"
@@ -404,6 +405,16 @@ __metadata:
     unist-util-filter: "npm:^5.0.1"
     unist-util-visit: "npm:^5.0.0"
     zustand: "npm:^5.0.6"
+  languageName: unknown
+  linkType: soft
+
+"@doppler-group/twinfile-event@workspace:^, @doppler-group/twinfile-event@workspace:catalog/event":
+  version: 0.0.0-use.local
+  resolution: "@doppler-group/twinfile-event@workspace:catalog/event"
+  dependencies:
+    "@doppler-group/twinfile-core": "workspace:packages/core"
+    typescript: "npm:^5.8.3"
+    vitest: "npm:^4.1.12"
   languageName: unknown
   linkType: soft
 

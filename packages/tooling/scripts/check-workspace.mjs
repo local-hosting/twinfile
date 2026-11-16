@@ -71,6 +71,7 @@ const STEPS = [
   { id: 'resource-type', run: () => runWorkspaceScript('@doppler-group/twinfile-resource', ['check']) },
   { id: 'character-type', run: () => runWorkspaceScript('@doppler-group/twinfile-character', ['check']) },
   { id: 'story-type', run: () => runWorkspaceScript('@doppler-group/twinfile-story', ['check']) },
+  { id: 'event-type', run: () => runWorkspaceScript('@doppler-group/twinfile-event', ['check']) },
 ];
 
 function parseOnly(argv) {
