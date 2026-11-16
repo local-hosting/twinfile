@@ -1,0 +1,25 @@
+name: publish-doppler-group
+on:
+  workflow_dispatch:
+
+jobs:
+  npm-smoke:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          registry-url: https://npm.pkg.github.com
+          scope: '@doppler-group'
+      - run: corepack enable && yarn install --immutable
+      - run: yarn workspace @doppler-group/twinfile-spec build
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN }}
+      - name: publish spec (smoke)
+        run: yarn workspace @doppler-group/twinfile-spec npm publish --access restricted
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.TF_PACKAGES_TOKEN }}

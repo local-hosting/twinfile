@@ -1,0 +1,33 @@
+{
+  "name": "@doppler-group/twinfile-workspace",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doppler-group/twinfile.git"
+  },
+  "packageManager": "yarn@4.9.2",
+  "workspaces": [
+    "packages/*",
+    "catalog/*"
+  ],
+  "scripts": {
+    "workbench": "node packages/simulator/viewer/scripts/run-view.mjs",
+    "check": "yarn run check:twinfile",
+    "check:twinfile": "node packages/tooling/scripts/check-nested-yarn.mjs && node packages/tooling/scripts/check-workspace.mjs",
+    "sync:vendor-neutral-lib": "node packages/tooling/scripts/sync-vendor-neutral-lib.mjs",
+    "sync:ci-tooling": "node packages/tooling/scripts/sync-ci-tooling.mjs",
+    "refresh:scenario-expected": "node packages/tooling/scripts/refresh-scenario-expected.mjs",
+    "rename:scope": "node packages/tooling/scripts/rename-scope.mjs",
+    "sync:story-scenes": "node packages/tooling/scripts/sync-story-scenes.mjs",
+    "hygiene": "node packages/tooling/scripts/repo-hygiene.mjs"
+  },
+  "resolutions": {
+    "@doppler-group/twinfile-spec": "workspace:packages/spec",
+    "@doppler-group/twinfile-bridge": "workspace:packages/bridge",
+    "@doppler-group/twinfile-core": "workspace:packages/core",
+    "@doppler-group/twinfile-simulator": "workspace:packages/simulator",
+    "@doppler-group/twinfile-cli": "workspace:packages/cli",
+    "@doppler-group/frameworks": "link:../frameworks/packages/frameworks",
+    "@doppler-group/geotypes": "portal:../geotypes"
+  }
+}
