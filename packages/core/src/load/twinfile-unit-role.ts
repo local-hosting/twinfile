@@ -1,6 +1,6 @@
 import type { LoadedTwinfile } from './load-twinfile.js';
 
-/** A spatial twin — the only role allowed on `Twinfile.yaml`. */
+/** A spatial twin — the only role allowed on a place head. */
 export const TWINFILE_UNIT_ROLE = 'place' as const;
 
 /** Timeline playlist — scene `run.yaml`, not a Twinfile. */

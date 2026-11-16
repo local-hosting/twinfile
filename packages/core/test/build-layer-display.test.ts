@@ -4,6 +4,7 @@ import { buildLayerDisplayLabel, summarizeBuildLayerRows } from '../src/build/bu
 import { listTwinfileManifestRecipe } from '../src/build/build-layer-manifest.js';
 import { readYamlDocument } from '../src/validate/validate-yaml.js';
 import { resolve } from 'node:path';
+import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 describe('build layer display', () => {
   it('summarizes copy import sublayers', () => {
@@ -23,7 +24,7 @@ describe('build layer display', () => {
 
   it('lists MSG arena manifest recipe with binds and copy', () => {
     const arenaRoot = resolve(import.meta.dirname, '../../../catalog/place/examples/arena');
-    const twinfile = readYamlDocument(resolve(arenaRoot, 'Twinfile.yaml')).value as Record<string, unknown>;
+    const twinfile = readYamlDocument(twinHeadPath(arenaRoot)).value as Record<string, unknown>;
     const recipe = listTwinfileManifestRecipe(twinfile);
     expect(recipe.from).toBe('twinfile/base-campus:0.1.0');
     expect(recipe.steps.map((s) => s.label)).toEqual([

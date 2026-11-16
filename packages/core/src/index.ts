@@ -262,11 +262,11 @@ export type {
 } from './types/twin-type-module.js';
 export type { TwinKind as TwinKindId } from './types/twin-kind.js';
 export type { TwinHead, BuiltTwinHead, TwinHeadPath } from './types/twin-head.js';
-export { TWIN_HEAD_FILES, RUN_PRESET_NAMES } from './types/twin-kind.js';
+export { TWIN_HEAD_SUFFIX, RUN_PRESET_NAMES } from './types/twin-kind.js';
 export {
   parseTwinHead,
   findTwinHead,
-  DISCOVER_TWIN_HEAD_YAML_NAMES,
+  isTwinUnitDir,
   type ParseTwinHeadOptions,
 } from './twinfile/twin-head.js';
 export { createHeadTwinTypeModule, type HeadTwinTypeModuleOptions } from './twinfile/twin-type-module.js';
@@ -348,10 +348,10 @@ export {
 export { ALLOWED_TWINFILE_ROOT_NAMES, isAllowedTwinfileRootEntry } from './load/twinfile-allowlist.js';
 export {
   findTwinfileYamlPath,
-  listTwinfileYamlPaths,
-  twinfileYamlBasename,
-  PLACE_HEAD_NAMES,
-  TWINFILE_YAML_NAMES,
+  twinHeadFileName,
+  twinHeadPath,
+  twinLockFileName,
+  twinLockPath,
 } from './load/twinfile-locator.js';
 export {
   twinfileMixinRefs,

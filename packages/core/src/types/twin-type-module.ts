@@ -11,7 +11,6 @@ export type BuildOptions = {
 
 export type TwinTypeModule<TDoc, TBuilt> = {
   readonly kind: TwinKind;
-  readonly headFile: string;
   parse(raw: unknown): Result<TDoc>;
   validate(doc: TDoc): Result<TDoc>;
   build(dir: string, opts: BuildOptions): Promise<Result<TBuilt>>;

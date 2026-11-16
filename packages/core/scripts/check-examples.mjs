@@ -7,6 +7,7 @@ import { parse as parseYaml } from 'yaml';
 import {
   listTwinfileSituationBindings,
   loadTwinfile,
+  twinHeadPath,
   resolvePlaceExamplesCatalogRoot,
   resolveSimulatorRoot,
 } from '../dist/index.js';
@@ -25,7 +26,7 @@ function runTwin(args) {
 }
 
 function readManifest(placeDir) {
-  const path = join(placeDir, 'Twinfile.yaml');
+  const path = twinHeadPath(placeDir);
   const raw = readFileSync(path, 'utf8');
   return parseYaml(raw);
 }
@@ -77,7 +78,7 @@ function verifyExpected(placeDir, stdout) {
 const SKIP = new Set(['conf', 'presets', 'fixtures', 'docs', 'node_modules', 'dist', 'viewer', 'scripts']);
 
 function isTwinfilePlaceDir(dir) {
-  return statSync(join(dir, 'Twinfile.yaml'), { throwIfNoEntry: false })?.isFile();
+  return statSync(twinHeadPath(dir), { throwIfNoEntry: false })?.isFile();
 }
 
 function listBaseUnitDirs() {
@@ -176,7 +177,7 @@ for (const dir of siteDirs) {
 function findScenarioDirs(rootDir) {
   const out = [];
   function walk(dir) {
-    const twinfile = join(dir, 'Twinfile.yaml');
+    const twinfile = twinHeadPath(dir);
     if (statSync(twinfile, { throwIfNoEntry: false })?.isFile()) {
       const manifest = parseYaml(readFileSync(twinfile, 'utf8'));
       if (manifest?.kind === 'scenario') {

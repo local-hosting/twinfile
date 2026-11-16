@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 /** Enforce place head: `id` ref slug (not display `name`). */
-import { readFileSync, readdirSync, statSync } from 'node:fs';
-import { join, resolve } from 'node:path';
+import { readFileSync, statSync } from 'node:fs';
 import { parse as parseYaml } from 'yaml';
 
 import { findTwinfileDirs } from './find-twinfile-dirs.mjs';
-import { PLACE_HEAD_NAMES, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
+import { findTwinHead, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
 
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const simulatorRoot = resolveSimulatorRoot();
@@ -15,10 +14,9 @@ const errors = [];
 
 function checkRoot(root, label) {
   for (const dir of findTwinfileDirs(root)) {
-    const twinfilePath = PLACE_HEAD_NAMES.map((name) => join(dir, name)).find((p) =>
-      statSync(p, { throwIfNoEntry: false })?.isFile(),
-    );
-    if (!twinfilePath) continue;
+    const head = findTwinHead(dir);
+    if (head?.kind !== 'place') continue;
+    const twinfilePath = head.path;
     const rel = dir.replace(`${root}/`, '');
     const pathLabel = label ? `${label}/${rel}` : rel;
     const twinfile = parseYaml(readFileSync(twinfilePath, 'utf8'));

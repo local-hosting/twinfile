@@ -6,7 +6,7 @@ import { readFileSync, readdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { parse as parseYaml } from 'yaml';
 
-import { resolvePlaceExamplesCatalogRoot } from '../../dist/index.js';
+import { resolvePlaceExamplesCatalogRoot, twinHeadFileName } from '../../dist/index.js';
 
 const require = createRequire(import.meta.url);
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
@@ -35,8 +35,7 @@ function findTwinfiles(dir, acc = []) {
     if (name === 'node_modules' || name === '.git') continue;
     const p = join(dir, name);
     if (statSync(p).isDirectory()) findTwinfiles(p, acc);
-    else if (name === 'Twinfile.yaml' || name === 'twinfile.yaml')
-      acc.push(p);
+    else if (name === twinHeadFileName(dir)) acc.push(p);
   }
   return acc;
 }

@@ -1,6 +1,8 @@
 import { existsSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { twinHeadPath } from '../load/twinfile-locator.js';
+
 import { parse as parseYaml, stringify as stringifyYaml } from 'yaml';
 
 import { isPatchesTwinfile } from '../load/twinfile-instructions.js';
@@ -43,9 +45,9 @@ export function addAssetsLayerToPlace(
   unitDir: string,
   options: AddAssetsLayerOptions = {},
 ): { location: string } {
-  const twinfilePath = join(unitDir, 'Twinfile.yaml');
+  const twinfilePath = twinHeadPath(unitDir);
   if (!existsSync(twinfilePath)) {
-    throw new Error(`Missing Twinfile.yaml in ${unitDir}`);
+    throw new Error(`Missing twin head in ${unitDir}`);
   }
   const twinfile = readTwinfileDoc(twinfilePath);
   if (twinfile.kind !== 'place') {
