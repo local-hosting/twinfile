@@ -291,7 +291,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@local-hosting/twinfile-bridge@workspace:packages/bridge"
   dependencies:
-    "@local-hosting/geotypes": "npm:0.1.2"
+    "@local-hosting/geotypes": "npm:0.2.0"
     "@local-hosting/twinfile": "workspace:packages/spec"
     "@types/node": "npm:^24.0.0"
     typescript: "npm:^5.8.2"
@@ -346,7 +346,7 @@ __metadata:
   dependencies:
     "@local-hosting/frameworks-core": "link:../../../frameworks/packages/core"
     "@local-hosting/frameworks-presets": "link:../../../frameworks/packages/presets"
-    "@local-hosting/geotypes": "npm:0.1.2"
+    "@local-hosting/geotypes": "npm:0.2.0"
     "@local-hosting/twinfile-bridge": "workspace:packages/bridge"
     "@local-hosting/twinfile": "workspace:packages/spec"
     "@types/node": "npm:^24.0.0"
@@ -422,7 +422,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@local-hosting/twinfile-place@workspace:catalog/place"
   dependencies:
-    "@local-hosting/geotypes": "npm:0.1.2"
+    "@local-hosting/geotypes": "npm:0.2.0"
     "@local-hosting/twinfile-bridge": "workspace:packages/bridge"
     "@local-hosting/twinfile-core": "workspace:packages/core"
     typescript: "npm:^5.8.3"

@@ -64,7 +64,7 @@ name: airport
 version: 0.3.0
 geotype:
   primary: airport
-  registry: "@local-hosting/geotypes@0.1.2"
+  registry: "@local-hosting/geotypes@0.2.0"
 steps:
   - place:
       name: Airport
