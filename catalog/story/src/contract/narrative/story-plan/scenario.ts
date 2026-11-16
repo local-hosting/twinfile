@@ -1,9 +1,9 @@
 import type {
-  SamStoryPlanNarrativeContextV1,
-  SamStoryPlanScenarioHintsV1,
+  StoryPlanNarrativeContextV1,
+  StoryPlanScenarioHintsV1,
 } from '../types/story-plan.js';
 
-export function isThinSamStoryPlanScenario(text: string): boolean {
+export function isThinStoryPlanScenario(text: string): boolean {
   const trimmed = text.trim();
   if (trimmed.length < 120) return true;
   const words = trimmed.split(/\s+/).filter(Boolean);
@@ -16,9 +16,9 @@ function formatList(label: string, items: string[] | undefined): string | undefi
 }
 
 /** Build a planning brief from a short user hint + org narrative (no LLM). */
-export function composeSamStoryPlanWorkingScenario(input: {
-  hints: SamStoryPlanScenarioHintsV1;
-  narrative: SamStoryPlanNarrativeContextV1;
+export function composeStoryPlanWorkingScenario(input: {
+  hints: StoryPlanScenarioHintsV1;
+  narrative: StoryPlanNarrativeContextV1;
 }): string {
   const lines: string[] = [];
   const userLines = [

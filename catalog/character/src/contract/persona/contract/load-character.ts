@@ -77,9 +77,9 @@ function loadPersona(root: string): Persona {
 }
 
 /**
- * Load a Character root from disk (`pcm.yml` + topic folders on the root).
+ * Load a Character root from disk (`character.yml` + topic folders on the root).
  * Strategy topics (`needs/`, `mental-models/`, …) and story topics (`journeys/`, `quotes/`)
- * live beside `character.yml`. Nested `strategy/` / `a-strategy/` still resolve as legacy.
+ * live beside `character.yml`. Nested `strategy/` / `a-strategy/` still resolve when present.
  */
 export function loadCharacter(root: string): LoadCharacterResult {
   const characterYml = join(root, 'character.yml');

@@ -8,14 +8,14 @@ import {
 import { planEpisodeCalendarFromArc } from './plan-episode-calendar.js';
 import type { StoryTimelineHostWire } from './timeline-host-wire.js';
 
-export type PlanSamStoryEpisodeCalendarInput = {
+export type PlanStoryEpisodeCalendarInput = {
   storyArc: EpisodeArcV1;
   touchpointSequence: readonly string[];
   subjectId: string;
   touchpointGraph?: TouchpointGraphWire;
 };
 
-export type PlanSamStoryEpisodeCalendarResult = {
+export type PlanStoryEpisodeCalendarResult = {
   storyArc: EpisodeArcV1;
   touchpointSequence: readonly string[];
   timeline: StoryTimelineHostWire;
@@ -23,9 +23,9 @@ export type PlanSamStoryEpisodeCalendarResult = {
 };
 
 /** Calendar + per-day schedule from a compiled episode arc (after mount compile). */
-export function planSamStoryEpisodeCalendar(
-  input: PlanSamStoryEpisodeCalendarInput,
-): PlanSamStoryEpisodeCalendarResult {
+export function planStoryEpisodeCalendar(
+  input: PlanStoryEpisodeCalendarInput,
+): PlanStoryEpisodeCalendarResult {
   const touchpointCatalog = input.touchpointGraph
     ? touchpointCatalogFromWire(input.touchpointGraph)
     : undefined;

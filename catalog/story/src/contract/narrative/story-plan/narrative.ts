@@ -1,13 +1,13 @@
 import type {
-  SamStoryPlanNarrativeBuildInputV1,
-  SamStoryPlanNarrativeContextV1,
-  SamStoryPlanSegmentNarrativeV1,
-  SamStoryPlanningSegmentProfileV1,
+  StoryPlanNarrativeBuildInputV1,
+  StoryPlanNarrativeContextV1,
+  StoryPlanSegmentNarrativeV1,
+  StoryPlanningSegmentProfileV1,
 } from '../types/story-plan.js';
 import {
-  readSamStoryPlanSegmentNeedsSummary,
-  readSamStoryPlanSegmentTopic,
-  resolveSamStoryPlanningPrimaryFocusArea,
+  readStoryPlanSegmentNeedsSummary,
+  readStoryPlanSegmentTopic,
+  resolveStoryPlanningPrimaryFocusArea,
 } from './segment-psychology.js';
 
 function asRecord(value: unknown): Record<string, unknown> | undefined {
@@ -15,7 +15,7 @@ function asRecord(value: unknown): Record<string, unknown> | undefined {
   return value as Record<string, unknown>;
 }
 
-function readSegmentMindset(profile: SamStoryPlanningSegmentProfileV1): string | undefined {
+function readSegmentMindset(profile: StoryPlanningSegmentProfileV1): string | undefined {
   const cognition = asRecord(profile.cognition);
   const bySegment = asRecord(cognition?.bySegment);
   const row = asRecord(bySegment?.[profile.id]);
@@ -23,7 +23,7 @@ function readSegmentMindset(profile: SamStoryPlanningSegmentProfileV1): string |
   return typeof mindset === 'string' && mindset.trim() ? mindset.trim() : undefined;
 }
 
-function readEmpathyFeelings(profile: SamStoryPlanningSegmentProfileV1): {
+function readEmpathyFeelings(profile: StoryPlanningSegmentProfileV1): {
   positive?: string[];
   negative?: string[];
 } {
@@ -39,7 +39,7 @@ function readEmpathyFeelings(profile: SamStoryPlanningSegmentProfileV1): {
   return { positive, negative };
 }
 
-function readSuccessFeeling(profile: SamStoryPlanningSegmentProfileV1): string | undefined {
+function readSuccessFeeling(profile: StoryPlanningSegmentProfileV1): string | undefined {
   const emotions = asRecord(profile.emotions);
   const inner = asRecord(emotions?.emotions);
   const future = asRecord(inner?.futureEmotions);
@@ -47,7 +47,7 @@ function readSuccessFeeling(profile: SamStoryPlanningSegmentProfileV1): string |
   return typeof success === 'string' && success.trim() ? success.trim() : undefined;
 }
 
-function readOverview(profile: SamStoryPlanningSegmentProfileV1): {
+function readOverview(profile: StoryPlanningSegmentProfileV1): {
   name?: string;
   summary?: string;
 } {
@@ -67,13 +67,13 @@ function readOverview(profile: SamStoryPlanningSegmentProfileV1): {
 }
 
 function buildSegmentNarrative(
-  profile: SamStoryPlanningSegmentProfileV1,
-  input: SamStoryPlanNarrativeBuildInputV1,
-): SamStoryPlanSegmentNarrativeV1 {
+  profile: StoryPlanningSegmentProfileV1,
+  input: StoryPlanNarrativeBuildInputV1,
+): StoryPlanSegmentNarrativeV1 {
   const overview = readOverview(profile);
   const empathy = readEmpathyFeelings(profile);
   const focusInterest = input.customerCatalog
-    ? resolveSamStoryPlanningPrimaryFocusArea(profile, input.customerCatalog)
+    ? resolveStoryPlanningPrimaryFocusArea(profile, input.customerCatalog)
     : undefined;
   const focusLabel = focusInterest?.primaryFocusAreaId
     ? input.customerCatalog?.focusAreas?.find(
@@ -88,8 +88,8 @@ function buildSegmentNarrative(
   }));
 
   const suggestedIntentIds = objectives.map((row) => row.intentId).filter(Boolean);
-  const topic = readSamStoryPlanSegmentTopic(profile);
-  const needsSummary = readSamStoryPlanSegmentNeedsSummary(profile, input.customerCatalog);
+  const topic = readStoryPlanSegmentTopic(profile);
+  const needsSummary = readStoryPlanSegmentNeedsSummary(profile, input.customerCatalog);
 
   return {
     id: profile.id,
@@ -110,9 +110,9 @@ function buildSegmentNarrative(
   };
 }
 
-export function buildSamStoryPlanNarrativeContext(
-  input: SamStoryPlanNarrativeBuildInputV1,
-): SamStoryPlanNarrativeContextV1 {
+export function buildStoryPlanNarrativeContext(
+  input: StoryPlanNarrativeBuildInputV1,
+): StoryPlanNarrativeContextV1 {
   const segments = input.segments.map((row) => buildSegmentNarrative(row, input));
 
   const engagementLevels =
@@ -177,17 +177,17 @@ export function buildSamStoryPlanNarrativeContext(
   };
 }
 
-export function formatSamStoryPlanLlmUserPrompt(input: {
+export function formatStoryPlanLlmUserPrompt(input: {
   scenario: string;
   overrides?: Record<string, unknown>;
-  narrative: SamStoryPlanNarrativeContextV1;
+  narrative: StoryPlanNarrativeContextV1;
 }): string {
   return [
     '## Story scenario',
     input.scenario.trim(),
     '',
     input.narrative.storyPlanningGuide
-      ? `## Org customer context (axm corpus)\n${input.narrative.storyPlanningGuide.trim()}\n`
+      ? `## Org customer context\n${input.narrative.storyPlanningGuide.trim()}\n`
       : '',
     input.overrides && Object.keys(input.overrides).length > 0
       ? `## Hard overrides (must respect)\n${JSON.stringify(input.overrides, null, 2)}\n`

@@ -51,6 +51,7 @@ steps:
         capacity: 60
         roles:
           - shelter
+          - ground-transport
       - id: solution-floor
         name: Solution floor
         kind: retail

@@ -9,7 +9,7 @@ import type { ResearchQuote } from './story/quote.js';
 import type { CharacterInstanceVariationPolicy } from './story/character-instance-variation.js';
 import type { CharacterSegmentFacets } from './character-segment-facets.js';
 
-/** Document header (`pcm.yml`). */
+/** Document header (`character.yml`). */
 export type CharacterDocument = {
   /** Character spec contract version (alias on disk: `characterSpec`). */
   version: 1;

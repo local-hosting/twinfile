@@ -1,4 +1,4 @@
-import type { SamStoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { StoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
 import {
   pickRandomEngagementLevel,
   pickRandomFrom,
@@ -11,7 +11,7 @@ import {
   scoreScenarioTokenOverlap,
 } from './scenario-scoring.js';
 
-export type SamStoryPlanHeuristicSelectionV1 = {
+export type StoryPlanHeuristicSelectionV1 = {
   segmentId: string;
   storeSlug?: string;
   engagementLevelId: string;
@@ -42,7 +42,7 @@ function pickEngagement(
 
 function pickIntent(
   segmentId: string,
-  catalog: SamStoryPlanCatalogSnapshotV1,
+  catalog: StoryPlanCatalogSnapshotV1,
   hint?: string,
   random?: () => number,
 ): string {
@@ -62,7 +62,7 @@ const SEGMENT_SCENARIO_MATCH_THRESHOLD = 0.12;
 
 function pickSegmentId(
   scenario: string,
-  segments: SamStoryPlanCatalogSnapshotV1['segments'],
+  segments: StoryPlanCatalogSnapshotV1['segments'],
   explicit?: string,
   random?: () => number,
 ): string {
@@ -101,14 +101,14 @@ function pickSegmentId(
 
 export function planStoryCreateHeuristic(input: {
   scenario: string;
-  catalog: SamStoryPlanCatalogSnapshotV1;
+  catalog: StoryPlanCatalogSnapshotV1;
   segmentId?: string;
   storeSlug?: string;
   engagementLevelId?: string;
   intentId?: string;
   random?: () => number;
   seed?: string | number;
-}): SamStoryPlanHeuristicSelectionV1 {
+}): StoryPlanHeuristicSelectionV1 {
   const scenario = input.scenario.trim();
   if (input.catalog.segments.length === 0) {
     throw new Error('Org AXM catalog has no segments — publish segment catalog first');
@@ -116,7 +116,7 @@ export function planStoryCreateHeuristic(input: {
 
   const explicitSegmentId = input.segmentId?.trim();
   if (explicitSegmentId && !input.catalog.segments.some((row) => row.id === explicitSegmentId)) {
-    throw new Error(`segmentId "${explicitSegmentId}" is not in org axm catalog`);
+    throw new Error(`segmentId "${explicitSegmentId}" is not in org catalog`);
   }
   const random = resolveStoryPlanRandom({ random: input.random, seed: input.seed });
   const segmentId = pickSegmentId(

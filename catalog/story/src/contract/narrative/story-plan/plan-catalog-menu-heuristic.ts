@@ -1,11 +1,11 @@
 import { samePlaceRef } from '@local-hosting/twinfile-core/ref';
 
-import { matchSamStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
+import { matchStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
 import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
-import type { SamStoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { StoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
 import { resolveStoryPlanRandom } from './rng.js';
 
-export type SamStoryPlanAxmMenuSelectionV1 = {
+export type StoryPlanCatalogMenuSelectionV1 = {
   characterId: string;
   episodeId: string;
   placeRef?: string;
@@ -13,26 +13,26 @@ export type SamStoryPlanAxmMenuSelectionV1 = {
   rationale: string;
 };
 
-export type SamStoryPlanAxmMenuPlanInputV1 = {
+export type StoryPlanCatalogMenuPlanInputV1 = {
   characterId?: string;
   episodeId?: string;
   placeRef?: string;
   storeSlug?: string;
 };
 
-export function planStoryCreateAxmMenuHeuristic(input: {
+export function planStoryCreateCatalogMenuHeuristic(input: {
   scenario: string;
   menu: StoryCatalogMenuV1;
-  catalog: Pick<SamStoryPlanCatalogSnapshotV1, 'fleetPlaces'>;
-  plan?: SamStoryPlanAxmMenuPlanInputV1;
+  catalog: Pick<StoryPlanCatalogSnapshotV1, 'fleetPlaces'>;
+  plan?: StoryPlanCatalogMenuPlanInputV1;
   random?: () => number;
   seed?: string | number;
-}): SamStoryPlanAxmMenuSelectionV1 {
+}): StoryPlanCatalogMenuSelectionV1 {
   const random = resolveStoryPlanRandom({ random: input.random, seed: input.seed });
   const scenario = input.scenario.trim();
   const plan = input.plan ?? {};
 
-  const matched = matchSamStoryCatalogIdsFromText({
+  const matched = matchStoryCatalogIdsFromText({
     text: scenario,
     menu: input.menu,
     fleetPlaces: input.catalog.fleetPlaces,
@@ -47,8 +47,8 @@ export function planStoryCreateAxmMenuHeuristic(input: {
     throw new Error('Org user catalog menu has no characters');
   }
 
-  const episodesForPcm = input.menu.episodes.filter((row) => row.focalCharacterId === characterId);
-  const episodePool = episodesForPcm.length > 0 ? episodesForPcm : input.menu.episodes;
+  const episodesForCharacter = input.menu.episodes.filter((row) => row.focalCharacterId === characterId);
+  const episodePool = episodesForCharacter.length > 0 ? episodesForCharacter : input.menu.episodes;
 
   let episodeId = plan.episodeId?.trim() || matched.episodeId;
   if (!episodeId || !episodePool.some((row) => row.id === episodeId)) {
@@ -77,10 +77,10 @@ export function planStoryCreateAxmMenuHeuristic(input: {
   };
 }
 
-export function validateStoryPlanAxmSelection(input: {
+export function validateStoryPlanCatalogMenuSelection(input: {
   menu: StoryCatalogMenuV1;
-  selection: SamStoryPlanAxmMenuSelectionV1;
-}): SamStoryPlanAxmMenuSelectionV1 {
+  selection: StoryPlanCatalogMenuSelectionV1;
+}): StoryPlanCatalogMenuSelectionV1 {
   if (!input.menu.characters.some((row) => row.characterId === input.selection.characterId)) {
     throw new Error(`Invalid characterId "${input.selection.characterId}" — not in org user catalog`);
   }

@@ -3,7 +3,7 @@ import type { StoryClockCursor } from '../clock/story-clock-cursor.js';
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
 import type { EpisodePhaseId } from '../types/episode-arc.js';
 import type { EpisodeScheduledActivity } from '../types/episode-activity.js';
-import type { SamStoryRunState } from '../types/story-run.js';
+import type { CharacterStoryRunState } from '../types/story-run.js';
 import { resolveStoryBeat, type StoryBeatSnapshot } from './resolve-story-beat.js';
 import type { StoryTimelineActivityWire, StoryTimelineHostWire } from './timeline-host-wire.js';
 
@@ -34,16 +34,16 @@ export function resolveDayActivitiesFromTimelineWire(
   return activities.map(activityFromWire);
 }
 
-export type AssembledSamStoryRun = {
-  run: SamStoryRunState;
+export type AssembledCharacterStoryRun = {
+  run: CharacterStoryRunState;
   beat: StoryBeatSnapshot;
 };
 
-export function assembleSamStoryRun(input: {
+export function assembleCharacterStoryRun(input: {
   storyArc: EpisodeArcV1;
   cursor: StoryClockCursor;
   timeline?: StoryTimelineHostWire;
-}): AssembledSamStoryRun {
+}): AssembledCharacterStoryRun {
   const simulationEpochStart = input.storyArc.simulationEpochStart;
   const dayActivities = resolveDayActivitiesFromTimelineWire(
     input.timeline,
@@ -51,7 +51,7 @@ export function assembleSamStoryRun(input: {
     simulationEpochStart,
   );
 
-  const run: SamStoryRunState = {
+  const run: CharacterStoryRunState = {
     simulationEpochStart,
     storyArc: input.storyArc,
     cursor: input.cursor,

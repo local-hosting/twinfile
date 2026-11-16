@@ -2,4 +2,4 @@
  * Character twin — see packages/spec/doc/type-package-layout.md
  */
 export { module, kind } from './twin-module.js';
-export { loadAxmPcmMountIds, type AxmPcmMountIds } from './mounts/load-axm-mounts.js';
+export { loadCharacterMountIds, type CharacterMountIds } from './mounts/load-character-mounts.js';

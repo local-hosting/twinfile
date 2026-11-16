@@ -1,21 +1,21 @@
 import type { StoryCatalogMenuV1 } from './story-catalog-menu.js';
 import type {
-  SamStoryPlanCatalogSnapshotV1,
-  SamStoryPlanFleetPlaceSnapshotV1,
+  StoryPlanCatalogSnapshotV1,
+  StoryPlanFleetPlaceSnapshotV1,
 } from './story-plan-catalog.js';
 import type { TouchpointGraphWire } from './touchpoint-catalog.js';
 
-export type SamStoryPlanningSegmentObjectiveV1 = {
+export type StoryPlanningSegmentObjectiveV1 = {
   intentId: string;
   validLevelIds?: string[];
   touchpointSequences?: Record<string, unknown>;
 };
 
-export type SamStoryPlanningSegmentProfileV1 = {
+export type StoryPlanningSegmentProfileV1 = {
   id: string;
   label?: string;
   journeyPace?: string;
-  objectives?: SamStoryPlanningSegmentObjectiveV1[];
+  objectives?: StoryPlanningSegmentObjectiveV1[];
   overview?: {
     name?: string;
     description?: string;
@@ -32,18 +32,18 @@ export type SamStoryPlanningSegmentProfileV1 = {
   emotions?: unknown;
 };
 
-export type SamStoryPlanningCustomerCatalogV1 = {
+export type StoryPlanningCustomerCatalogV1 = {
   engagementLevels?: Array<{ id: string; label?: string; validIntentIds?: string[] }>;
   intents?: Array<{ id: string; label?: string }>;
   focusAreas?: Array<{ id: string; label?: string }>;
 };
 
-export type SamStoryPlanningFocusInterestV1 = {
+export type StoryPlanningFocusInterestV1 = {
   focusAreaIds: string[];
   primaryFocusAreaId: string;
 };
 
-export type SamStoryPlanSegmentNarrativeV1 = {
+export type StoryPlanSegmentNarrativeV1 = {
   id: string;
   label?: string;
   topic?: string;
@@ -65,14 +65,14 @@ export type SamStoryPlanSegmentNarrativeV1 = {
   suggestedIntentIds: string[];
 };
 
-export type SamStoryPlanNarrativeContextV1 = {
+export type StoryPlanNarrativeContextV1 = {
   storyPlanningGuide?: string;
   planningDefaults: {
     planningHorizonDays: number;
     useFeedCalendar: boolean;
     episodePhases: string;
   };
-  segments: SamStoryPlanSegmentNarrativeV1[];
+  segments: StoryPlanSegmentNarrativeV1[];
   engagementLevels: Array<{ id: string; label?: string; validIntentIds?: string[] }>;
   intents: Array<{ id: string; label?: string }>;
   focusAreas: Array<{ id: string; label?: string }>;
@@ -86,10 +86,10 @@ export type SamStoryPlanNarrativeContextV1 = {
     locus?: string;
   }>;
   hubTouchpointId?: string;
-  fleetPlaces: SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: StoryPlanFleetPlaceSnapshotV1[];
 };
 
-export type SamStoryPlanScenarioHintsV1 = {
+export type StoryPlanScenarioHintsV1 = {
   scenario?: string;
   topic?: string;
   goals?: string[];
@@ -103,7 +103,7 @@ export type SamStoryPlanScenarioHintsV1 = {
   intentId?: string;
 };
 
-export type SamStoryPlanInputV1 = {
+export type StoryPlanInputV1 = {
   request?: string;
   scenario?: string;
   extractFromRequest?: boolean;
@@ -130,7 +130,7 @@ export type SamStoryPlanInputV1 = {
   useFeedCalendar?: boolean;
 };
 
-export type SamStoryPlanExtractedHintsV1 = {
+export type StoryPlanExtractedHintsV1 = {
   scenarioSummary?: string;
   topic?: string;
   goals?: string[];
@@ -153,13 +153,13 @@ export type SamStoryPlanExtractedHintsV1 = {
   useFeedCalendar?: boolean;
 };
 
-export type SamStoryPlanChecklistItemV1 = {
+export type StoryPlanChecklistItemV1 = {
   id: string;
   ok: boolean;
   detail: string;
 };
 
-export type SamStoryPlanExtractionSegmentBriefV1 = {
+export type StoryPlanExtractionSegmentBriefV1 = {
   id: string;
   label?: string;
   topic?: string;
@@ -167,14 +167,14 @@ export type SamStoryPlanExtractionSegmentBriefV1 = {
   intentIds: string[];
 };
 
-export type SamStoryPlanExtractionIndexV1 = {
+export type StoryPlanExtractionIndexV1 = {
   storyPlanningGuide?: string;
   characters?: Array<{ characterId: string; label: string; journeyIds: string[] }>;
   episodes?: Array<{ id: string; title: string; focalCharacterId: string; journeyId?: string }>;
   places?: Array<{ placeRef: string; title: string }>;
   segmentIds: string[];
   segmentLabels: Record<string, string | undefined>;
-  segments: SamStoryPlanExtractionSegmentBriefV1[];
+  segments: StoryPlanExtractionSegmentBriefV1[];
   storeSlugs: string[];
   storeNames: Record<string, string | undefined>;
   engagementLevelIds: string[];
@@ -186,23 +186,23 @@ export type SamStoryPlanExtractionIndexV1 = {
   jobIds: string[];
 };
 
-export type SamStoryPlanNarrativeBuildInputV1 = {
-  segments: SamStoryPlanningSegmentProfileV1[];
-  customerCatalog?: SamStoryPlanningCustomerCatalogV1;
+export type StoryPlanNarrativeBuildInputV1 = {
+  segments: StoryPlanningSegmentProfileV1[];
+  customerCatalog?: StoryPlanningCustomerCatalogV1;
   jobs?: Array<{ id: string; label?: string }>;
   obstacles?: Array<{ id: string; label?: string }>;
   journeys: Array<{ id: string; label?: string; focalCharacterId?: string; journeyId?: string }>;
   storyMenu?: StoryCatalogMenuV1;
-  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: readonly StoryPlanFleetPlaceSnapshotV1[];
   touchpointGraph?: TouchpointGraphWire;
   storyPlanningGuide?: string;
   maxTouchpoints?: number;
   maxJobs?: number;
 };
 
-export type SamStoryPlanCatalogBuildInputV1 = {
-  segments: SamStoryPlanningSegmentProfileV1[];
-  customerCatalog?: SamStoryPlanningCustomerCatalogV1;
+export type StoryPlanCatalogBuildInputV1 = {
+  segments: StoryPlanningSegmentProfileV1[];
+  customerCatalog?: StoryPlanningCustomerCatalogV1;
   engagementLevelIds: string[];
   intentIds: string[];
   focusAreaIds: string[];
@@ -211,11 +211,10 @@ export type SamStoryPlanCatalogBuildInputV1 = {
   episodeIds: string[];
   storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
-  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces: readonly StoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: readonly string[];
-  axmMenu?: StoryCatalogMenuV1;
 };
 
-export type { SamStoryPlanCatalogSnapshotV1 };
+export type { StoryPlanCatalogSnapshotV1 };
