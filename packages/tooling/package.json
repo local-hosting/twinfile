@@ -1,0 +1,12 @@
+{
+  "name": "@doppler-group/twinfile-tooling",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Monorepo orchestration scripts (check-workspace, hygiene, sync).",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/doppler-group/twinfile.git",
+    "directory": "packages/tooling"
+  }
+}
