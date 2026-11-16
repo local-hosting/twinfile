@@ -15,7 +15,7 @@ yarn workbench    # monorepo root → http://localhost:4173
 | `GET /api/source?entry=` | Raw `<unit>.twin.yaml` / `run.yaml` (studio). |
 | `GET /api/time/clock`, `GET /api/time/at`, `POST /api/time/advance` | Session clock scrub when a run has `clock:` (uses `@local-hosting/twinfile-simulator/host`). |
 
-**Context pulses** (`applyPlayerContextPulse`, situation/signal drives) are **`@local-hosting/twinfile-simulator/host`** — not HTTP on this server.
+**Context pulses** (`applyPlayerContextPulse`, event/signal drives) are **`@local-hosting/twinfile-simulator/host`** — not HTTP on this server.
 
 Static: `index.html`, `viewer-app.js`. Catalog listing without HTTP: `listViewerCatalog` from `@local-hosting/twinfile-simulator/viewer`.
 

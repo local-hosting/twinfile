@@ -95,7 +95,7 @@ One **timeline** is authoritative: scenario **`clock:`**, place **tracks** / **s
 | Prose | Role |
 | --- | --- |
 | **Session** | Built place + clock + current playhead `t` (scrub or live) |
-| **Player** | Host loop that advances a **session** and publishes **`TwinMessageV1`** on the patch **module bus** (`signal:trigger`, `twin:situation`, `signal:*`). **Play** = same controls as clicks, on a schedule |
+| **Player** | Host loop that advances a **session** and publishes **`TwinMessageV1`** on the patch **module bus** (`signal:trigger`, `twin:event`, `signal:*`). **Play** = same controls as clicks, on a schedule |
 | **Runner** | Offline verify step for CI. Default: subprocess stdin (`Place` + **timeline**) → stdout JSON Lines. **`use.runner`** pins the implementation; prompts come from the host MCP catalog |
 
 **Consolidate at the session, not in YAML:** the **player** owns the clock step; a **runner** is a pluggable **answer step** (batch at end of run, or in-process for built-ins). Untrusted **`npm:`** runners stay subprocesses ([`gov/security.md`](gov/security.md)). Do not publish `twinfile/player` as a compose unit — player is host code; **`use.runner`** stays the manifest pin.
@@ -121,7 +121,7 @@ Verbs: **`from:`** (base), **`with:`** (mixin), **`copy:`** (ref or `./path`) �
 | Context | Values |
 | --- | --- |
 | **Merge mode** | `patch` \| `replace` on layer merges |
-| **Session layout** | `place` on timeline samples — hazard/recovery fiction via **situation** phases and **`twin:situation`** pulses (`@local-hosting/twinfile-simulator` world session), not manifest `mode:` |
+| **Session layout** | `place` on timeline samples — hazard/recovery fiction via **event** phases and **`twin:event`** pulses (`@local-hosting/twinfile-simulator` world session), not manifest `mode:` |
 
 ## Visit moments (`visits[]`)
 

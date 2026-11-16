@@ -24,7 +24,7 @@ Tools (underscore names; dotted forms such as `place.query` are accepted on `too
 
 `place_path` walks the merged place (see [Layout navigation](../place/layout-navigation.md#path-query)).
 
-`narrate` returns Markdown (`markdown` inside the tool JSON) with `## Place`, `## Scenario`, `## Situation`, `## Now`, plus grouped `facts` and `sections`.
+`narrate` returns Markdown (`markdown` inside the tool JSON) with `## Place`, `## Scenario`, `## Event`, `## Now`, plus grouped `facts` and `sections`.
 
 Resources:
 

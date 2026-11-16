@@ -4,7 +4,7 @@ Event units describe **reusable operational stories** (`phases`, `expects` roles
 
 **Catalog (normative list):** [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml)
 
-**CI:** `check-role-vocab.mjs` (from `@local-hosting/twinfile` `yarn check`) verifies every catalog `situation` has a unit under [`catalog/event/examples/`](../../../../catalog/event/examples/).
+**CI:** `check-role-vocab.mjs` (from `@local-hosting/twinfile` `yarn check`) verifies every catalog `event` has a unit under [`catalog/event/examples/`](../../../../catalog/event/examples/).
 
 **Package:** Shared hazard events live in **`@local-hosting/twinfile-event`** ([`catalog/event/README.md`](../../../../catalog/event/README.md)). Compose and the simulator load them from the repo root.
 
@@ -30,8 +30,8 @@ Event units describe **reusable operational stories** (`phases`, `expects` roles
 - **Power outage** is catalogued as a hazard because many place twins need backup egress and assembly roles even when the trigger was ice, wind, or wildfire.
 - **Pandemic, hazmat, rip currents** stay outside this catalog (different operational models or weak place-layer fit).
 
-Operational (non-hazard) situations: `transit-disruption`, `litter-pollution`.
+Operational (non-hazard) events: `transit-disruption`, `litter-pollution`.
 
-Wire a hazard by adding the matching situation mixin or `bindings/<situation>.yaml` on your place — [Decorate a twin](../place/decorate-twin.md).
+Wire a hazard by adding the matching event mixin or `bindings/<event>.yaml` on your place — [Decorate a twin](../place/decorate-twin.md).
 
 **Map pin codes:** [Humanitarian crosswalk](hr-marker-crosswalk.md).

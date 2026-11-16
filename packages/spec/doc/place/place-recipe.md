@@ -138,19 +138,19 @@ The **minimal runnable layout recipe** is **`from:`** + **`place/place.yaml`** (
 | Step | Twinfile | Docker analogy | When |
 | --- | --- | --- | --- |
 | **Registry pin** | `geotype.primary` + `registry` on `<unit>.twin.yaml` | Base image label / SBOM component | `twin init --geotype`; ties unit to `@local-hosting/geotypes` |
-| **Situation hooks** | `bindings/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; mixin **`with:`** or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
+| **Event hooks** | `bindings/*.yaml` in **`layers:`** | `HEALTHCHECK` / sidecar config | Scenarios need role → space bindings; mixin **`with:`** or local plan paths ([compose order](../build/composition.md#authoring-compose-order-canonical)) |
 | **Map geometry** | **`sources/`** + **`geometry.ref`** on spaces | Mount external volume | Optional; builds MUST NOT require geometry |
 | **Human + agent map** | **`docs/layout.md`**, **`ext/layout-index.yaml`** | README in image | Large sites; read before full `spaces` scan ([checklist](layout-navigation.md#checklist-for-a-new-large-place)) |
 | **Hierarchy** | **`spaces[].parent`** | Nested cgroup / path prefix | Rollups zone → building → room |
 | **Clock** | **`tracks.yaml`**, **`schedules.yaml`** | Cron / lifecycle | Time-varying scenarios ([Time](time.md)) |
-| **Run image** | Story scene **`run.yaml`** (`from:` place ref) | `docker compose` service | Exercises place + situations + **`args:`** — not part of place layout recipe |
+| **Run image** | Story scene **`run.yaml`** (`from:` place ref) | `docker compose` service | Exercises place + events + **`args:`** — not part of place layout recipe |
 | **Build / ship** | **`twin build`**, **`<unit>.twin.lock`**, **`twin pack`** / push | `docker build` / `push` | Artifact + layer chain ([Composition](../build/composition.md#what-twin-build-records)) |
 
 You do **not** need extra archetype steps for indoor and outdoor on one site — only **`exposure`** (and **`openings`**) on spaces. You do **not** need a composed `layout.map` + `layout.vertical` field in YAML today; derive **`archetype`** from the two-question table and write it on **`place`**.
 
 ## Overrides (when geotype ≠ your story)
 
-| Situation | Recipe change |
+| Event | Recipe change |
 | --- | --- |
 | Geotype suggests `campus`, you only model one floor in one building | Keep **`from: base-campus`** or switch to **`base-single-level`**; set **`archetype: single_level`** |
 | Geotype suggests `single_level`, you need floor-by-floor nav | **`from: base-indoor-stack`**, **`archetype: indoor_stack`**, add **`levels.yaml`** |
@@ -158,7 +158,7 @@ You do **not** need extra archetype steps for indoor and outdoor on one site —
 
 Golden examples: [`examples/expo`](../../../../catalog/place/examples/expo/) (**campus** with indoor and outdoor spaces), [`examples/shop`](../../../../catalog/place/examples/shop/) (**indoor_stack** mall story).
 
-**Customize by combining catalog elements** (bases, situations, assets): [Decorate a twin](decorate-twin.md).
+**Customize by combining catalog elements** (bases, events, assets): [Decorate a twin](decorate-twin.md).
 
 ## Inspect the stack
 

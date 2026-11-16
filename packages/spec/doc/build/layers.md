@@ -1,6 +1,6 @@
 # Layers
 
-**Compose layer order** (what `twin build` runs): **place** → each scenario **`steps` `copy`** event (+ plan roles layer) → each situation → scenario patch steps → resolved args. See [RFC 0001](../../rfcs/0001-five-layers.md).
+**Compose layer order** (what `twin build` runs): **place** → each scenario **`steps` `copy`** event (+ plan roles layer) → each event → scenario patch steps → resolved args. See [RFC 0001](../../rfcs/0001-five-layers.md).
 
 For **`from:`**, **`steps:`** (`copy:`, `plan:`), v1 **`with:`** / **`layers:`**, and the canonical compose order, see [Composition](composition.md#authoring-compose-order-canonical).
 
@@ -14,7 +14,7 @@ Merge: RFC 7396 on objects; id-array merge by `id`; other arrays replace.
 
 **Fine patches:** multiple files on **one** unit (`spaces-zones.yaml` then `spaces-rooms.yaml`) use the same id-merge. **`mode: replace`** on a layer entry replaces whole collections in that file (Docker `COPY` over a directory). To drop a row from an earlier file on the **same** unit, patch `{ id: <same>, $delete: true }` (rare).
 
-**Authoring stack:** list `bindings/<situation>.yaml` in **`layers:`** after place files.
+**Authoring stack:** list `bindings/<event>.yaml` in **`layers:`** after place files.
 
 Errors: `E_NO_PLAN`, `E_ROLE_MISSING`, `E_ROLE_KIND`, `E_ROLE_REF`, `E_ROLE_MIN`, `E_ROLE_VOCAB`, `E_ROLE_TAG`, `E_TIMETABLE_REF`.
 

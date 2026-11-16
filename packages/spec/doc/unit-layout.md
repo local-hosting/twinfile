@@ -23,7 +23,7 @@ Every twin under `catalog/<type>/examples/<id>/` shares:
 catalog/story/examples/<story-id>/
   <story-id>.twin.yaml
   scenes/<scene-id>/
-    run.yaml          # role: run — clock, runner, situation copies
+    run.yaml          # role: run — clock, runner, event copies
     expected/         # optional verify digest
 ```
 
@@ -33,4 +33,4 @@ Cross-type links use refs only (`links:`, `with:`, `copy: twinfile/<type>/<id>`)
 
 Place nested interiors: **`parts/<id>/`** ([`PARTS.md`](../../../catalog/place/examples/PARTS.md)). Legacy **`scenarios/`** on sites → `yarn sync:story-scenes`.
 
-Situations and timetable modules: **`packages/simulator/`** (simulator registry) — operates on twin catalogs; **not** under `catalog/` and not twin heads.
+Events and timetable modules: **`packages/simulator/`** (simulator registry) — operates on twin catalogs; **not** under `catalog/` and not twin heads.

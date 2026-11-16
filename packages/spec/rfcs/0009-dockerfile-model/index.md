@@ -91,7 +91,7 @@ Every `steps[]` item is exactly one of:
 | Instruction | Shape | Layer it produces |
 | --- | --- | --- |
 | **Data** | Object with place collection keys (`place`, `levels`, `spaces`, `openings`, `routes`, `assets`, `markers`, `schedules`, `visits`, …) and optional `mode: replace` | RFC 7396 merge; id-arrays merge by `id`; `mode: replace` replaces the named collections |
-| **Plan** | `{ plan: { for: <situation>, roles: … } }` | Compose layer `plan/<for>` in history; **built image** stores docs under `Place.data.situationBindings` (keyed by situation id), not a top-level `plans` map on the image |
+| **Plan** | `{ plan: { for: <event>, roles: … } }` | Compose layer `plan/<for>` in history; **built image** stores docs under `Place.data.eventBindings` (keyed by event id), not a top-level `plans` map on the image |
 | **Copy** | `{ copy: <ref or ./path>, into?: <space id>, prefix?: <string> }` | The referenced unit's **built** content (mixin or place) |
 
 **Copy semantics (place source).** The source is built in full (its own `from:` and `steps:`). Its `place` metadata and `levels` are dropped: the copying unit owns site identity and the level table. Every copied id gets `prefix`, and references to copied ids (`parent`, `space`, `from`, `to`, …) are rewritten to match. With `into:`, an earlier instruction MUST declare that space, the default `prefix` is `<into>-`, and copied rows with no `parent` get `parent: <into>`. Without `into:`, ids are unprefixed unless `prefix` is set.
@@ -149,14 +149,14 @@ twinfile: 2
 kind: scenario
 from: ..                     # parent `Place`
 steps:
-  - copy: twinfile/severe-weather:1.0.0     # situation
+  - copy: twinfile/severe-weather:1.0.0     # event
   - copy: twinfile/home-game:1.0.0          # event
   - spaces: [ { id: gym, state: { shelter: open } } ]
 args: { … }                  # ARG
 use: { runner: … }           # ENTRYPOINT
 ```
 
-RFC 0001's place → event → situation → scenario → args order becomes **step order in the scenario's `steps:`**, not a separate “five layers” concept. Prose calls those **stages**, never layers.
+RFC 0001's place → event → scenario → args order becomes **step order in the scenario's `steps:`**, not a separate “five layers” concept. Prose calls those **stages**, never layers.
 
 ## Terminology (normative for docs and UI)
 

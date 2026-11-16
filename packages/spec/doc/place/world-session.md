@@ -20,7 +20,7 @@ Do **not** publish catalog refs named `twinfile/clock` or `twinfile/player`. **C
 | Prose | Owns | Sink / output |
 | --- | --- | --- |
 | **Session** | built `Place` + `clock:` + current `t` | Read model for UI and algorithms |
-| **Player** | Advancing `t`, play/scrub/speed | Patch **module bus** (`signal:trigger`, `twin:situation`, `signal:*`) |
+| **Player** | Advancing `t`, play/scrub/speed | Patch **module bus** (`signal:trigger`, `twin:event`, `signal:*`) |
 | **Runner** | `use.runner` **ENTRYPOINT** | **Stdout** JSON Lines (`twin run`, frozen verify) |
 | **Run** | Story scene **`run.yaml`** | Compose + optional `clock:` + optional `use.runner` |
 
@@ -59,7 +59,7 @@ On a host site, preview uses **`entry`** for the **place card** (spatial twin) a
 2. Parse scenario **`clock:`**; call **`openTimelineForPlace`** once (or lazy per `t`).
 3. Maintain playhead **`t`** (user scrub, play loop, optional speed multiplier).
 4. Each tick or **edge**: `sample = timeline.at(t)`; diff against previous sample.
-5. Publish **IN** messages processors already accept (same payloads as `placeType.controls` and situation pulses).
+5. Publish **IN** messages processors already accept (same payloads as `placeType.controls` and event pulses).
 6. Do **not** require **`use.runner`** for playback.
 
 **Playback runtime** (`createClock`, `openPlaceTimeline`, `createWorldSession`, `createWorldClockPlayback`, `createTFSessionBus`, scrub helpers) lives in **`@local-hosting/twinfile-simulator`**, not in **`@local-hosting/twinfile-core`**. **`TFPlace.load(Twinfile.at(unitDir))`** builds from the on-disk Twinfile and returns a **`TFPlace`**; hosts pass **`TFPlace`** / **`TFWorld`** to world code — not YAML. **`createTFPlaceRuntime`** is the per-place observer: **clock**, **weather programmes**, **module bus** → **`TFPlaceState`** (occupancy, phases, signals); preset manifest **`mode:`** does not drive that state. Cached compose in the workbench uses **`TFPlace.compose(buildResult)`** only. The built image stays in memory (`TFPlace`); **`<unit>.twin.lock`** is the on-disk pin (`@local-hosting/twinfile-core`). **`@local-hosting/twinfile-core`** keeps build/merge; **`@local-hosting/twinfile-simulator/host`** is session bus → patch bus. Do not publish a separate `@twinfile/clock` catalog ref.
@@ -97,5 +97,5 @@ When porting concepts from legacy host personas or other simulators:
 ## Related
 
 - [Integration — open vs host](../pack/integration.md)
-- [Live controls vs offline runs](https://github.com/twinfile/twinfile.org/blob/main/src/app/situations/page.mdx) (twinfile.org)
+- [Live controls vs offline runs](https://github.com/twinfile/twinfile.org/blob/main/src/app/events/page.mdx) (twinfile.org)
 - RFC [0003 — Time](../../rfcs/0003-time.md)

@@ -29,7 +29,7 @@ Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings
 ```
 
 5. **Mobility** — **Passages** (`openings:`) at thresholds; **paths** (`routes:`) for walks with distance. One edge per pair (see [topology taxonomy](../../../packages/spec/doc/place/topology-taxonomy.md)). `copy:` / `parent` is rollup only; site `openings:` / `routes:` patch links across nested buildings (manual today).
-6. **Plans** — Bind situation **roles** to merged ids (`twin add plan …`); weather often uses zone ids, surge may use prefixed rooms.
+6. **Plans** — Bind event **roles** to merged ids (`twin add plan …`); weather often uses zone ids, surge may use prefixed rooms.
 7. **Verify** — `twin build` on the **site**; a missing anchor fails with `no space "<id>" to copy into`.
 
 ## Golden references
