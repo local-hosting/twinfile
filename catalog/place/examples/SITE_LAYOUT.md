@@ -4,7 +4,7 @@ Standard **catalog site** tree (bases and mixins omit optional paths).
 
 ```text
 <unit>/
-  Twinfile.yaml              # place | base | mixin | nested building (v2 + steps:)
+  <unit>.twin.yaml              # place | base | mixin | nested building (v2 + steps:)
   README.md                  # pin + story (sites); one link to docs/layout.md
   docs/layout.md             # fiction map + id tables (sites)
   expected/contract.json     # strict binding snapshot (sites with bind:)

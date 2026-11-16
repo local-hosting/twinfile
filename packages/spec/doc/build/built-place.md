@@ -1,6 +1,6 @@
 # Built Place (build output)
 
-**`twin build`** composes a **`Place`** in memory: merged collections on **`Place.data`**, plus **`meta`**, **`digest`**, and layer chain. Author with **`Twinfile.at(root).build()`**; wrap with **`TFPlace.load()`** for playback. **`Twinfile.lock`** pins digests on disk when lock write is enabled.
+**`twin build`** composes a **`Place`** in memory: merged collections on **`Place.data`**, plus **`meta`**, **`digest`**, and layer chain. Author with **`Twinfile.at(root).build()`**; wrap with **`TFPlace.load()`** for playback. **`<unit>.twin.lock`** pins digests on disk when lock write is enabled.
 
 ## Docker mapping
 
@@ -12,7 +12,7 @@
 | **`docker history`** | **`twin layers`** (rebuilds; layer list is not persisted on disk) |
 | **Registry** | **`twin pack --out <dir>`** then **`twin push`** (OCI under `--out`, not inside the unit) |
 
-Persisted pins: **`Twinfile.lock`** (manifest + tree + layer chain digests). Optional **`expected/digest.txt`** on run folders.
+Persisted pins: **`<unit>.twin.lock`** (manifest + tree + layer chain digests). Optional **`expected/digest.txt`** on run folders.
 
 Wire schema: [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json).
 

@@ -10,7 +10,7 @@
 examples catalog (sites, runs, bases, mixins) + @local-hosting/twinfile-simulator situations
 ```
 
-**Authoritative model:** Twinfile units → **`Place`** (`Place.data`); runs via `preset.yaml`; place events in TS catalog. **Not** archived venue YAML trees, **not** AXM six-plane docs.
+**Authoritative model:** Twinfile units → **`Place`** (`Place.data`); runs via `run.yaml`; place events in TS catalog. **Not** archived venue YAML trees, **not** AXM six-plane docs.
 
 **Host production path:** `twin pull` → build → run/disclose (OCI digest pins). Local dev: `resolveExamplePlace` + `catalog/place/examples/twin.local.yaml`.
 

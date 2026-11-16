@@ -39,6 +39,6 @@ Resources:
 
 **Session aliases** (same ref as the served directory): `twin://place`, `twin://layers`, `twin://processors`, `twin://place/{collection}/{id}`. Reading a **different** `twinfile/<id>:<version>` on that session returns `ref mismatch`.
 
-`resources/list` advertises ref-scoped URIs for the built unit (`refKey` from `Twinfile.lock`). Row and run templates use the served `refKey`.
+`resources/list` advertises ref-scoped URIs for the built unit (`refKey` from `<unit>.twin.lock`). Row and run templates use the served `refKey`.
 
 Read-tool results and resource bodies include `Place.digest`. `place_init` returns the new directory, `suggestedLayers`, `layerHints`, and `digest: null`, because that place has not been built.

@@ -1,3 +1,3 @@
 # Story examples
 
-**`Story.yaml`** planned-process twins. Each unit is `story/examples/<id>/` → `twinfile/story/<id>:<ver>`.
+**`<unit>.twin.yaml`** planned-process twins. Each unit is `story/examples/<id>/` → `twinfile/story/<id>:<ver>`.
