@@ -6,7 +6,7 @@ Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../..
 src/
   twin-module.ts          # story head module + normalization
   contract/
-    narrative/            # story narrative (npm subpath …/sam — legacy name)
+    narrative/            # story narrative (npm subpath …/narrative — legacy name)
 examples/*/<story>.twin.yaml  # story.scenes[].run — scene runs (not twins)
 ```
 

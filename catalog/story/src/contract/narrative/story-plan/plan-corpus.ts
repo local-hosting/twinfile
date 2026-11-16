@@ -1,28 +1,28 @@
 import type {
-  SamStoryPlanCatalogBuildInputV1,
-  SamStoryPlanCatalogSnapshotV1,
-  SamStoryPlanChecklistItemV1,
-  SamStoryPlanExtractedHintsV1,
-  SamStoryPlanExtractionIndexV1,
-  SamStoryPlanInputV1,
+  StoryPlanCatalogBuildInputV1,
+  StoryPlanCatalogSnapshotV1,
+  StoryPlanChecklistItemV1,
+  StoryPlanExtractedHintsV1,
+  StoryPlanExtractionIndexV1,
+  StoryPlanInputV1,
 } from '../types/story-plan.js';
 import {
-  intentIdsForSamStoryPlanningSegment,
-  readSamStoryPlanSegmentNeedsSummary,
-  readSamStoryPlanSegmentTopic,
+  intentIdsForStoryPlanningSegment,
+  readStoryPlanSegmentNeedsSummary,
+  readStoryPlanSegmentTopic,
 } from './segment-psychology.js';
 
-export function buildSamStoryPlanCatalogSnapshot(
-  input: SamStoryPlanCatalogBuildInputV1,
-): SamStoryPlanCatalogSnapshotV1 {
+export function buildStoryPlanCatalogSnapshot(
+  input: StoryPlanCatalogBuildInputV1,
+): StoryPlanCatalogSnapshotV1 {
   const segments = input.segments.map((row) => ({
     id: row.id,
     label: row.label,
-    topic: readSamStoryPlanSegmentTopic(row),
+    topic: readStoryPlanSegmentTopic(row),
     needsSummary:
-      readSamStoryPlanSegmentNeedsSummary(row, input.customerCatalog) || undefined,
+      readStoryPlanSegmentNeedsSummary(row, input.customerCatalog) || undefined,
     journeyPace: row.journeyPace,
-    intentIds: intentIdsForSamStoryPlanningSegment(row),
+    intentIds: intentIdsForStoryPlanningSegment(row),
   }));
 
   return {
@@ -39,14 +39,13 @@ export function buildSamStoryPlanCatalogSnapshot(
     touchpointCount: input.touchpointCount,
     hubTouchpointId: input.hubTouchpointId,
     touchpointIdsSample: [...input.touchpointIdsSample],
-    ...(input.axmMenu ? { axmMenu: input.axmMenu } : {}),
   };
 }
 
-export function buildSamStoryPlanExtractionIndex(
-  catalog: SamStoryPlanCatalogSnapshotV1,
+export function buildStoryPlanExtractionIndex(
+  catalog: StoryPlanCatalogSnapshotV1,
   options?: { storyPlanningGuide?: string },
-): SamStoryPlanExtractionIndexV1 {
+): StoryPlanExtractionIndexV1 {
   const segmentLabels: Record<string, string | undefined> = {};
   for (const row of catalog.segments) {
     segmentLabels[row.id] = row.label;
@@ -64,21 +63,21 @@ export function buildSamStoryPlanExtractionIndex(
   }));
 
   const storyPlanningGuide = options?.storyPlanningGuide?.trim();
-  const axmMenu = catalog.axmMenu;
+  const storyMenu = catalog.storyMenu;
   return {
     ...(storyPlanningGuide ? { storyPlanningGuide } : {}),
-    ...(axmMenu?.characters.length
+    ...(storyMenu?.characters.length
       ? {
-          characters: axmMenu.characters.map((row) => ({
+          characters: storyMenu.characters.map((row) => ({
             characterId: row.characterId,
             label: row.label,
             journeyIds: [...row.journeyIds],
           })),
         }
       : {}),
-    ...(axmMenu?.episodes.length
+    ...(storyMenu?.episodes.length
       ? {
-          episodes: axmMenu.episodes.map((row) => ({
+          episodes: storyMenu.episodes.map((row) => ({
             id: row.id,
             title: row.title,
             focalCharacterId: row.focalCharacterId,
@@ -118,10 +117,10 @@ function pickString(explicit?: string, extracted?: string): string | undefined {
 }
 
 /** Explicit plan fields win; extracted NL fields fill gaps. */
-export function mergeSamStoryPlanInput(
-  body: SamStoryPlanInputV1,
-  extracted?: SamStoryPlanExtractedHintsV1,
-): SamStoryPlanInputV1 {
+export function mergeStoryPlanInput(
+  body: StoryPlanInputV1,
+  extracted?: StoryPlanExtractedHintsV1,
+): StoryPlanInputV1 {
   if (!extracted) {
     return body;
   }
@@ -160,11 +159,11 @@ export function mergeSamStoryPlanInput(
   };
 }
 
-export function buildSamStoryPlanChecklist(input: {
-  catalog: SamStoryPlanCatalogSnapshotV1;
+export function buildStoryPlanChecklist(input: {
+  catalog: StoryPlanCatalogSnapshotV1;
   segmentId: string;
   storeSlug?: string;
-}): SamStoryPlanChecklistItemV1[] {
+}): StoryPlanChecklistItemV1[] {
   return [
     {
       id: 'segments',

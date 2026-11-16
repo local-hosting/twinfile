@@ -4,7 +4,7 @@ import {
   resolveVisitDayIndex,
   type EpisodeTimingVariation,
 } from '../episode/planning-horizon.js';
-import type { SamStoryPlanSegmentObjectiveV1 } from '../types/story-plan-catalog.js';
+import type { StoryPlanSegmentObjectiveV1 } from '../types/story-plan-catalog.js';
 
 export function pickRandomIndex(length: number, random: () => number): number {
   if (length <= 0) {
@@ -42,7 +42,7 @@ export function pickRandomEngagementLevel(
 }
 
 export function pickRandomIntentId(input: {
-  objectives?: readonly SamStoryPlanSegmentObjectiveV1[];
+  objectives?: readonly StoryPlanSegmentObjectiveV1[];
   catalogIntentIds: readonly string[];
   engagementLevelId: string;
   random?: () => number;

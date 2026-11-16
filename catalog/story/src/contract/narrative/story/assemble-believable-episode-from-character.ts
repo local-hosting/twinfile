@@ -8,7 +8,7 @@ import { resolvePersonaJourneyPace } from '../story-plan/journey-pace.js';
 import { resolveStoryEpisodeForCharacter } from '../story-catalog/resolve-story-episode-for-character.js';
 import { resolveJourneyForStory } from '../journey/build/resolve-journey-for-story.js';
 import { resolveStoryPlanStoreForPlan } from '../story-plan/resolve-story-plan-store.js';
-import type { SamStoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { StoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
 import type { Story } from '../types/story-narrative.js';
 import type { StoryTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import {
@@ -34,7 +34,7 @@ export type AssembleBelievableEpisodeFromCharacterInput = {
   journeyPace?: string;
   subjectId?: string;
   anchor?: GeoAnchorV1;
-  fleetPlaces?: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces?: readonly StoryPlanFleetPlaceSnapshotV1[];
   scenario?: string;
   random?: () => number;
   timingVariation?: Partial<EpisodeTimingVariation>;
@@ -105,7 +105,7 @@ function pickPreferredPlaceRef(
 
 function pickStoreSlug(input: {
   scenario?: string;
-  fleetPlaces?: readonly SamStoryPlanFleetPlaceSnapshotV1[];
+  fleetPlaces?: readonly StoryPlanFleetPlaceSnapshotV1[];
   random?: () => number;
 }): string | undefined {
   const places = input.fleetPlaces ?? [];

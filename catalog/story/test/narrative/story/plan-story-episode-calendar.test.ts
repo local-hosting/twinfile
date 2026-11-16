@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { planSamStoryEpisodeCalendar } from '../../../src/contract/narrative/story/plan-story-episode-calendar.js';
+import { planStoryEpisodeCalendar } from '../../../src/contract/narrative/story/plan-story-episode-calendar.js';
 
-describe('planSamStoryEpisodeCalendar', () => {
+describe('planStoryEpisodeCalendar', () => {
   it('builds timeline and calendar days from a minimal arc', () => {
     const storyArc = {
       version: 1 as const,
@@ -17,7 +17,7 @@ describe('planSamStoryEpisodeCalendar', () => {
       touchpointSchedule: [],
     };
 
-    const result = planSamStoryEpisodeCalendar({
+    const result = planStoryEpisodeCalendar({
       storyArc,
       touchpointSequence: ['tp-a'],
       subjectId: 'persona:demo',

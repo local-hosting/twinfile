@@ -113,8 +113,8 @@ steps:
           - exit
           - gate
   - markers:
-      - id: egress-rally
-        name: Egress rally point
+      - id: egress-muster
+        name: Egress muster point
         roles:
           - safe-access
         step_free: true
@@ -200,7 +200,7 @@ steps:
           - concourse-gate-6
           - gate-tunnel-plaza
         safe-access:
-          - egress-rally
+          - egress-muster
       actions:
         - at: evacuation-order
           set:

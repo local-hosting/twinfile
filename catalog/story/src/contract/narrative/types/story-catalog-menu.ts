@@ -28,7 +28,7 @@ export type StoryCatalogMenuV1 = {
 };
 
 /** Resolved ids for one story run (before compile). Character spine is on the episode binding. */
-export type SamStorySelectionV1 = {
+export type StorySelectionV1 = {
   characterId: string;
   episodeId: string;
   placeRef?: string;

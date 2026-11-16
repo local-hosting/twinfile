@@ -63,7 +63,7 @@ export function stripMethodFieldsForLoro<T>(value: T): T {
 }
 
 /**
- * Prepare a JSON-like tree for LoroMap / Trustbase pack storage
+ * Prepare a JSON-like tree for host map storage
  * (optional method-field strip + empty-node compact).
  */
 export function prepareTwinfileLoroValue<T>(
@@ -77,7 +77,7 @@ export function prepareTwinfileLoroValue<T>(
 
 /**
  * Render a Loro pack view (`loro`).
- * Returns a structured-clone-safe value suitable for `locker.pack(id).set(key, value)`.
+ * Returns a structured-clone-safe value suitable for host pack storage APIs.
  */
 export function renderTwinfileLoroView(
   value: unknown,

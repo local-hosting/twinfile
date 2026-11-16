@@ -4,8 +4,8 @@ Unlike place/resource/event JSON Schema wires under `schemas/1/`, **character** 
 
 | Type | Contract | Source (monorepo) |
 | --- | --- | --- |
-| **character** | Persona + situations (`toJSON` / `fromJSON`) | `character/src/contract/persona`, `…/situations` (npm subpaths `/pcm`, `/jsm` — path names only) |
-| **story** | Narrative | `story/src/contract/narrative` (npm subpath `/sam` — path name only) |
+| **character** | Persona + situations (`toJSON` / `fromJSON`) | `character/src/contract/persona`, `…/situations` (npm subpaths `/persona`, `/situations` — path names only) |
+| **story** | Narrative | `story/src/contract/narrative` (npm subpath `/narrative` — path name only) |
 
 Layout: [type-package-layout.md](../type-package-layout.md).
 

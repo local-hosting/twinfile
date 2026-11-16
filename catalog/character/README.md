@@ -13,4 +13,4 @@ src/
 # character YAML libs → catalog/character/libs/{audience,journey,psychology}/
 ```
 
-Import **`@doppler-group/twinfile-character/persona`** (persona) and **`…/jsm`** (situations) — legacy subpath names. **`disclosure:`** required on published characters.
+Import **`@doppler-group/twinfile-character/persona`** (persona) and **`…/situations`** (situations) — legacy subpath names. **`disclosure:`** required on published characters.

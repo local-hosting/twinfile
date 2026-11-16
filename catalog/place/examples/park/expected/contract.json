@@ -1,4 +1,4 @@
 {
-  "strictBindings": 1,
+  "strictBindings": 2,
   "bindings": [{ "for": "litter-pollution" }]
 }

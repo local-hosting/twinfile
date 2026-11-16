@@ -32,11 +32,14 @@ describe('build layer display', () => {
       'Step 1 · levels',
       'Step 2 · spaces',
       'Step 3 · openings',
-      'Step 4 · routes',
-      'Step 5 · assets',
-      'Step 6 · bind · severe-weather',
-      'Step 7 · bind · venue-turnstile-flow',
-      'Step 8 · copy · ./parts/concourse → concourse',
+      'Step 4 · markers',
+      'Step 5 · routes',
+      'Step 6 · assets',
+      'Step 7 · bind · severe-weather',
+      'Step 8 · bind · earthquake',
+      'Step 9 · bind · wildfire',
+      'Step 10 · bind · venue-turnstile-flow',
+      'Step 11 · copy · ./parts/concourse → concourse',
     ]);
   });
 });
