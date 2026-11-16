@@ -2,7 +2,7 @@
  * Place twin type — compose, build, mounts, and place wire.
  */
 import './register-load-hooks.js';
-export { module, kind, headFile } from './twin-module.js';
+export { module, kind } from './twin-module.js';
 export {
   buildTwinfile,
   type BuildTwinfileOptions,

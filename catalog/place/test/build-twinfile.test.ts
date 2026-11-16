@@ -8,12 +8,13 @@ import { buildTwinfile } from '../src/build/build-twinfile.js';
 import { readTwinfileLock } from '@local-hosting/twinfile-core';
 import { loadTwinfile } from '@local-hosting/twinfile-core';
 import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
+import { twinLockPath } from '@local-hosting/twinfile-core';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 const arenaRoot = join(examplesRoot, 'arena');
 
 function cleanupArenaLock(): void {
-  rmSync(join(arenaRoot, 'Twinfile.lock'), { force: true });
+  rmSync(twinLockPath(arenaRoot), { force: true });
 }
 
 describe('buildTwinfile', () => {
