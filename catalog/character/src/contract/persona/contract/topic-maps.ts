@@ -1,5 +1,5 @@
-/** PCM on-disk topic folders → in-memory keys. */
-export const PCM_STRATEGY_TOPIC_MAP = {
+/** Character on-disk topic folders → in-memory keys. */
+export const CHARACTER_STRATEGY_TOPIC_MAP = {
   jobs: 'jobs',
   /** @deprecated Prefer `jobs/` — maps into jobs. */
   needs: 'jobs',

@@ -158,6 +158,11 @@ export {
   type TwinfileLoroViewFormat,
   type RenderTwinfileLoroViewOptions,
 } from './views/loro-value.js';
+export {
+  exportTwinfileToLoroMap,
+  importTwinfileFromLoroMap,
+  type TwinfileLoroMap,
+} from './views/loro-map-io.js';
 export type {
   TwinfileSummaryV1,
   TwinfileSummaryHeader,
@@ -282,6 +287,14 @@ export {
   type ParseTwinHeadOptions,
 } from './twinfile/twin-head.js';
 export { createHeadTwinTypeModule, type HeadTwinTypeModuleOptions } from './twinfile/twin-type-module.js';
+export { composeHeadUnitDocument } from './compose/compose-head-unit.js';
+export {
+  readTwinHeadYaml,
+  resolveCatalogUnitRef,
+  listCatalogExampleUnitNames,
+  type LoadedTwinHeadUnit,
+  type CatalogUnitResolveOptions,
+} from './load/load-twin-head-unit.js';
 export { createTwinTypeRegistry } from './twinfile/twin-type-registry.js';
 export {
   TWIN_CATALOG_HUB,

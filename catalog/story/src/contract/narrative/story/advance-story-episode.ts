@@ -1,20 +1,20 @@
-import type { PcmStoryInstance } from '@local-hosting/twinfile-character/pcm';
+import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/persona';
 import { resolveStoryClockPosition, type StoryClockAdvanceTarget } from '../clock/story-clock.js';
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import { advanceStoryClockForArc } from './advance-story-clock.js';
-import { buildPcmSamStoryRun } from './pcm-sam-story-run.js';
+import { buildCharacterStoryRun } from './character-story-run.js';
 import type {
-  SamStoryInstanceDocument,
+  StoryInstanceDocument,
   StoryCharacteristics,
-} from './sam-story-instance-document.js';
+} from './story-instance-document.js';
 
 export type AdvanceStoryEpisodeTarget = StoryClockAdvanceTarget;
 
 export type AdvanceStoryEpisodeInput = {
   personaId: string;
-  story: SamStoryInstanceDocument;
+  story: StoryInstanceDocument;
   /** When it matches `personaId`, the advance continues from the story's current clock. */
-  instance?: PcmStoryInstance;
+  instance?: CharacterStoryInstance;
   target: StoryClockAdvanceTarget;
   hourOfDay?: number;
 };
@@ -36,11 +36,11 @@ export function advanceStoryEpisode(input: AdvanceStoryEpisodeInput): AdvanceSto
 
   const arc = input.story.episodeArc;
   if (!arc) {
-    throw new Error('SAM story has no episodeArc — cannot advance episode');
+    throw new Error('Story story has no episodeArc — cannot advance episode');
   }
 
   const existing = input.instance
-    ? buildPcmSamStoryRun({ personaId, instance: input.instance, story: input.story })
+    ? buildCharacterStoryRun({ personaId, instance: input.instance, story: input.story })
     : undefined;
   const cursor = advanceStoryClockForArc(arc, {
     target: input.target,

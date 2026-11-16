@@ -8,7 +8,7 @@ export type PlanEpisodeCalendarResult = {
   timeline: StoryTimelineHostWire;
 };
 
-/** Build host `when.timeline` days from a compiled episode arc (SAM story clock schedule). */
+/** Build host `when.timeline` days from a compiled episode arc (Story story clock schedule). */
 export function planEpisodeCalendarFromArc(
   input: BuildEpisodeActivityCalendarInput & { episodeArc: EpisodeArcV1 },
 ): PlanEpisodeCalendarResult {

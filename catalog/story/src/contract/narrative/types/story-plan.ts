@@ -1,4 +1,4 @@
-import type { SamStoryCatalogMenuV1 } from './story-catalog-menu.js';
+import type { StoryCatalogMenuV1 } from './story-catalog-menu.js';
 import type {
   SamStoryPlanCatalogSnapshotV1,
   SamStoryPlanFleetPlaceSnapshotV1,
@@ -78,7 +78,7 @@ export type SamStoryPlanNarrativeContextV1 = {
   focusAreas: Array<{ id: string; label?: string }>;
   jobsToBeDone: Array<{ id: string; label?: string }>;
   obstacles: Array<{ id: string; label?: string }>;
-  journeys: Array<{ id: string; label?: string; focalPcmId?: string; journeyId?: string }>;
+  journeys: Array<{ id: string; label?: string; focalCharacterId?: string; journeyId?: string }>;
   touchpoints: Array<{
     id: string;
     label?: string;
@@ -122,7 +122,7 @@ export type SamStoryPlanInputV1 = {
   intentId?: string;
   focusAreaId?: string;
   interestIds?: string[];
-  pcmId?: string;
+  characterId?: string;
   episodeId?: string;
   placeRef?: string;
   planningHorizonDays?: number;
@@ -145,7 +145,7 @@ export type SamStoryPlanExtractedHintsV1 = {
   intentId?: string;
   focusAreaId?: string;
   interestIds?: string[];
-  pcmId?: string;
+  characterId?: string;
   episodeId?: string;
   placeRef?: string;
   planningHorizonDays?: number;
@@ -169,8 +169,8 @@ export type SamStoryPlanExtractionSegmentBriefV1 = {
 
 export type SamStoryPlanExtractionIndexV1 = {
   storyPlanningGuide?: string;
-  characters?: Array<{ pcmId: string; label: string; journeyIds: string[] }>;
-  episodes?: Array<{ id: string; title: string; focalPcmId: string; journeyId?: string }>;
+  characters?: Array<{ characterId: string; label: string; journeyIds: string[] }>;
+  episodes?: Array<{ id: string; title: string; focalCharacterId: string; journeyId?: string }>;
   places?: Array<{ placeRef: string; title: string }>;
   segmentIds: string[];
   segmentLabels: Record<string, string | undefined>;
@@ -181,8 +181,8 @@ export type SamStoryPlanExtractionIndexV1 = {
   intentIds: string[];
   focusAreaIds: string[];
   journeyIds: string[];
-  pcmIds: string[];
-  samEpisodeIds: string[];
+  characterIds: string[];
+  episodeIds: string[];
   jobIds: string[];
 };
 
@@ -191,8 +191,8 @@ export type SamStoryPlanNarrativeBuildInputV1 = {
   customerCatalog?: SamStoryPlanningCustomerCatalogV1;
   jobs?: Array<{ id: string; label?: string }>;
   obstacles?: Array<{ id: string; label?: string }>;
-  journeys: Array<{ id: string; label?: string; focalPcmId?: string; journeyId?: string }>;
-  storyMenu?: SamStoryCatalogMenuV1;
+  journeys: Array<{ id: string; label?: string; focalCharacterId?: string; journeyId?: string }>;
+  storyMenu?: StoryCatalogMenuV1;
   fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointGraph?: TouchpointGraphWire;
   storyPlanningGuide?: string;
@@ -207,15 +207,15 @@ export type SamStoryPlanCatalogBuildInputV1 = {
   intentIds: string[];
   focusAreaIds: string[];
   journeyIds: string[];
-  pcmIds: string[];
-  samEpisodeIds: string[];
-  storyMenu?: SamStoryCatalogMenuV1;
+  characterIds: string[];
+  episodeIds: string[];
+  storyMenu?: StoryCatalogMenuV1;
   jobIds: string[];
   fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   touchpointCount: number;
   hubTouchpointId?: string;
   touchpointIdsSample: readonly string[];
-  axmMenu?: SamStoryCatalogMenuV1;
+  axmMenu?: StoryCatalogMenuV1;
 };
 
 export type { SamStoryPlanCatalogSnapshotV1 };

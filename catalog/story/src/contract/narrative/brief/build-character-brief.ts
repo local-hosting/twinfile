@@ -13,7 +13,7 @@ export function buildCharacterBrief(input: { character: StoryBriefCharacterV1 })
     ...(character.occupation ? [`Occupation: ${character.occupation}`] : []),
   ];
   const psychologyBullets: string[] = [
-    ...(psych?.pcmId ? [`PCM \`${psych.pcmId}\``] : []),
+    ...(psych?.characterId ? [`Character \`${psych.characterId}\``] : []),
     ...(psych?.segmentId
       ? [`Segment \`${psych.segmentId}\`${psych.segmentLabel ? ` (${psych.segmentLabel})` : ''}`]
       : []),

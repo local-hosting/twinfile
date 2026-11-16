@@ -1,0 +1,17 @@
+twinfile: 2
+kind: story
+id: online-visit
+name: Online shop visit
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/character/online-shopper:0.1.0
+story:
+  pitch: Cart review through checkout or pickup scheduling.
+  scenes:
+    - id: cart
+      label: Review cart
+    - id: checkout
+      label: Checkout

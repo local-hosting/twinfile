@@ -1,0 +1,73 @@
+presetId: store_shopper
+label: In-store connectivity shopper
+segmentMix:
+  spec-forward: 0.16
+  aspirational-upgrader: 0.19
+  self-serve: 0.23
+  human-help: 0.26
+  careful-evaluator: 0.17
+  connected-household: 0.12
+  mobile-professional: 0.14
+  performance-gamer: 0.11
+  value-seeker: 0.2
+  clarity-seeker: 0.18
+specVersion: "1.0"
+methodId: wireless-retail
+segments:
+  - id: spec-forward
+    overview:
+      name: Spec-forward visitor
+      mindset: Wants technical clarity fast
+      journeyPace: fast
+    empathy:
+      empathy:
+        feelings:
+          negative:
+            - Impatient when staff read scripts
+          positive:
+            - Confident when demos perform
+  - id: aspirational-upgrader
+    overview:
+      name: Aspirational upgrader
+      mindset: Open to upgrades that feel like progress
+      journeyPace: medium
+  - id: self-serve
+    overview:
+      name: Self-serve visitor
+      mindset: Prefers kiosk and mobile queue
+      journeyPace: fast
+  - id: human-help
+    overview:
+      name: Human-help visitor
+      mindset: Needs a person, not an app
+      journeyPace: slow
+  - id: careful-evaluator
+    overview:
+      name: Careful evaluator
+      mindset: Compares every detail before signing
+      journeyPace: slow
+  - id: connected-household
+    overview:
+      name: Connected household
+      mindset: Buying for family connectivity
+      journeyPace: medium
+  - id: mobile-professional
+    overview:
+      name: Mobile professional
+      mindset: Needs reliable mobile for work and travel
+      journeyPace: fast
+  - id: performance-gamer
+    overview:
+      name: Performance-focused visitor
+      mindset: Cares about latency and device performance
+      journeyPace: medium
+  - id: value-seeker
+    overview:
+      name: Value seeker
+      mindset: Promo-aware and price sensitive
+      journeyPace: medium
+  - id: clarity-seeker
+    overview:
+      name: Clarity seeker
+      mindset: Wants simple explanations and trust
+      journeyPace: slow

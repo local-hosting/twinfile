@@ -1,4 +1,4 @@
-/** Strategy facet ids (Peter Morville UX honeycomb) — used on JSM user needs. */
+/** Strategy facet ids (Peter Morville UX honeycomb) — used on Situations user needs. */
 
 export const HONEYCOMB_FACET_IDS = [
   'useful',

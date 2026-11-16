@@ -19,7 +19,7 @@ export {
 export {
   buildProtagonistWhoBlurbLines,
   isTechnicalStoryIdentityLabel,
-  resolveHumanProtagonistNameWithPcm,
+  resolveHumanProtagonistNameWithCharacter,
 } from './protagonist-identity.js';
 export { buildCharacterBrief } from './build-character-brief.js';
 export { buildFleetBrief, type BuildFleetBriefInput, type FleetBriefMember } from './build-fleet-brief.js';
@@ -32,11 +32,11 @@ export {
   type StoryEpisodePresentationV1,
 } from './resolve-story-episode-presentation.js';
 export {
-  buildStoryJsmNarrativeContext,
+  buildStorySituationsNarrativeContext,
   formatJsmJobBullet,
   resolveJobsForTouchpoint,
-  type StoryJsmNarrativeContextV1,
-} from './story-jsm-narrative-context.js';
+  type StorySituationsNarrativeContextV1,
+} from './story-situations-narrative-context.js';
 export type {
   AxmSegmentBriefRowV1,
   BriefSectionV1,

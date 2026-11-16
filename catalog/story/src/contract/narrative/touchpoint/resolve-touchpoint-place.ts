@@ -1,9 +1,9 @@
 import type { PlaceMount } from '../types/place-mount.js';
 import type { StoryScene, StorySceneTouchpointRef } from '../types/scene.js';
-import type { SAMTouchpointCatalog, SAMTouchpointLocus } from '../types/touchpoint-catalog.js';
+import type { StoryTouchpointCatalog, StoryTouchpointLocus } from '../types/touchpoint-catalog.js';
 import { resolveSceneSpaceId } from '../place/place-mount-catalog.js';
 
-const PHYSICAL_LOCI: readonly SAMTouchpointLocus[] = ['physical', 'blended'];
+const PHYSICAL_LOCI: readonly StoryTouchpointLocus[] = ['physical', 'blended'];
 
 export function listSceneTouchpointRefs(scene: StoryScene): StorySceneTouchpointRef[] {
   if (scene.touchpoints?.length) {
@@ -14,7 +14,7 @@ export function listSceneTouchpointRefs(scene: StoryScene): StorySceneTouchpoint
 
 export function resolveTouchpointDefinition(
   touchpointId: string,
-  catalog?: SAMTouchpointCatalog,
+  catalog?: StoryTouchpointCatalog,
 ) {
   return catalog?.touchpoints.find((row) => row.id === touchpointId);
 }
@@ -26,7 +26,7 @@ export function resolveTouchpointDefinition(
 export function resolveTouchpointPlaceAtScene(input: {
   touchpointId: string;
   scene: StoryScene;
-  touchpointCatalog?: SAMTouchpointCatalog;
+  touchpointCatalog?: StoryTouchpointCatalog;
   placeMounts?: readonly PlaceMount[];
   sceneRef?: StorySceneTouchpointRef;
 }): { placeRef: string; spaceId?: string } {
@@ -48,7 +48,7 @@ export function resolveTouchpointPlaceAtScene(input: {
 
 export function touchpointRequiresPlace(
   touchpointId: string,
-  catalog?: SAMTouchpointCatalog,
+  catalog?: StoryTouchpointCatalog,
 ): boolean {
   const definition = resolveTouchpointDefinition(touchpointId, catalog);
   if (!definition?.locus) {

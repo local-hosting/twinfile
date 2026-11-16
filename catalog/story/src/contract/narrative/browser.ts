@@ -1,17 +1,17 @@
 /**
- * Browser-safe SAM surface — no disk `loadSAM` or YAML tree I/O.
+ * Browser-safe Story surface — no disk `loadStory` or YAML tree I/O.
  * @packageDocumentation
  */
 
-export type { SAM, SAMBinding, SAMDocument } from './types/sam.js';
-export type { SAMCharacterRef, SAMPlaceRef } from './types/sam-refs.js';
+export type { Story, StoryBinding, StoryDocument as StoryHeader } from './types/story-narrative.js';
+export type { StoryCharacterRef, StoryPlaceRef } from './types/story-refs.js';
 export type { DramaticBeatId } from './types/dramatic-beat.js';
 export { DRAMATIC_BEAT_IDS } from './types/dramatic-beat.js';
 export type {
   SamCatalogCharacterRef,
   SamCatalogEpisodeRef,
   SamCatalogPlaceRef,
-  SamStoryCatalogMenuV1,
+  StoryCatalogMenuV1,
   SamStorySelectionV1,
 } from './types/story-catalog-menu.js';
 export type { StoryArcKind } from './types/story-arc-kind.js';
@@ -33,12 +33,12 @@ export {
 } from './story-arc/generate-from-arc-kind.js';
 export type { SceneEmotions, StoryScene } from './types/scene.js';
 export {
-  SAM_SPEC_VERSION,
-  assertSupportedSAMSpec,
-  samSpecVersion,
-  type SAMSpecVersion,
-} from './types/sam-spec.js';
-export { SAM_PACKAGE } from './contract/sam-package-meta.js';
+  STORY_NARRATIVE_SPEC_VERSION,
+  assertSupportedStoryNarrativeSpec,
+  storyNarrativeSpecVersion,
+  type StoryNarrativeSpecVersion,
+} from './types/story-narrative-spec.js';
+export { STORY_NARRATIVE_PACKAGE } from './contract/story-package-meta.js';
 export type {
   EpisodeArcV1,
   EpisodePhaseId,
@@ -120,8 +120,8 @@ export type {
   EpisodeActivityKind,
   EpisodeScheduledActivity,
 } from './types/episode-activity.js';
-export type { SAMCharacterContext } from './types/sam-character-context.js';
-export type { SAMPlaceMount, PlaceMount, TwinfilePlaceMount } from './types/place-mount.js';
+export type { StoryCharacterContext } from './types/story-character-context.js';
+export type { StoryPlaceMount, PlaceMount, TwinfilePlaceMount } from './types/place-mount.js';
 export {
   findScenePlaceRefsOutsidePlaceMounts,
   placeMountByPlaceRef,
@@ -145,16 +145,16 @@ export {
 } from './scene/extract-scene-touchpoint-rows.js';
 export {
   resolveJourneyFromCharacterContext,
-  resolvePcmForCharacter,
+  resolveCharacterForContext,
 } from './contract/resolve-character-context.js';
 export {
   buildEpisodeTouchpointScheduleFromSceneRows,
 } from './episode/materialize-episode-arc.js';
 export type {
-  SAMTouchpointCatalog,
-  SAMTouchpointDefinition,
-  SAMTouchpointLink,
-  SAMTouchpointLocus,
+  StoryTouchpointCatalog,
+  StoryTouchpointDefinition,
+  StoryTouchpointLink,
+  StoryTouchpointLocus,
   TouchpointGraphWire,
 } from './types/touchpoint-catalog.js';
 export {
@@ -173,38 +173,39 @@ export { hydrateSceneFromJourney, hydrateScenesFromJourney } from './scene/hydra
 export type { EpisodeCalendarResources } from './types/episode-calendar-generator.js';
 
 export {
-  validateSAM,
-  validateSAMAssociations,
-  type ValidateSAMResult,
-  type ValidateSAMContext,
-  type ValidateSAMAssociationsResult,
-} from './contract/validate-sam.js';
-export { samToJSON, samFromJSON, type SamJson } from './contract/json.js';
-export { SamDocument } from './contract/sam-document.js';
+  validateStoryNarrative,
+  validateStoryNarrativeAssociations,
+  type ValidateStoryResult,
+  type ValidateStoryContext,
+  type ValidateStoryAssociationsResult,
+} from './contract/validate-story-narrative.js';
+export { storyToJSON, storyFromJSON, type StoryJson } from './contract/json.js';
+export { StoryDocument } from './contract/story-document.js';
+export type { TwinfileLoroMap } from '@local-hosting/twinfile-core/loro';
 export {
-  SamStoryInstanceDocument,
+  StoryInstanceDocument,
   storyCharacteristicsFromJSON,
-  type SamStoryInstanceJson,
-  type SamStoryRuntimeWire,
+  type StoryInstanceJson,
+  type StoryRuntimeWire,
   type StoryCharacteristics,
-} from './story/sam-story-instance-document.js';
-export { parseSAM, SAMSchema } from './schemas/sam.schema.js';
+} from './story/story-instance-document.js';
+export { parseStory, StoryNarrativeSchema } from './schemas/story-narrative.schema.js';
 export {
   EpisodeArcV1Schema,
   EpisodePhaseIdSchema,
   EpisodeTouchpointScheduleEntrySchema,
 } from './schemas/episode-arc.schema.js';
 export {
-  parseSamStoryDimensions,
-  SamStoryDimensionHowSchema,
-  SamStoryDimensionWhatSchema,
-  SamStoryDimensionWhenSchema,
-  SamStoryDimensionWhereSchema,
-  SamStoryDimensionWhoSchema,
-  SamStoryDimensionWhySchema,
-  SamStoryDimensionsSchema,
+  parseStoryDimensions,
+  StoryDimensionHowSchema,
+  StoryDimensionWhatSchema,
+  StoryDimensionWhenSchema,
+  StoryDimensionWhereSchema,
+  StoryDimensionWhoSchema,
+  StoryDimensionWhySchema,
+  StoryDimensionsSchema,
 } from './schemas/story-dimensions.schema.js';
-export { compileSAM, type CompileSAMInput, type CompileSAMResult } from './contract/compile-sam.js';
+export { compileStory, type CompileStoryInput, type CompileStoryResult } from './contract/compile-story-narrative.js';
 
 export { extractJourneyTouchpointSequence } from './journey/extract-touchpoint-sequence.js';
 export { validateJourneyBindings, type ValidateJourneyBindingsResult } from './journey/validate-journey-bindings.js';
@@ -222,39 +223,39 @@ export {
 } from './episode/planning-horizon.js';
 export { materializeEpisodeArcFromScenes } from './episode/materialize-episode-arc-from-sequence.js';
 export { extractTouchpointSequenceFromScenes } from './scene/extract-touchpoint-sequence-from-scenes.js';
-export { validateSAMScenes, type ValidateSAMScenesResult } from './contract/validate-sam-scenes.js';
+export { validateStoryNarrativeScenes, type ValidateStoryScenesResult } from './contract/validate-story-scenes.js';
 export {
-  validateSamNarrativeCoherence,
-  type ValidateSamNarrativeCoherenceResult,
-} from './contract/validate-sam-narrative-coherence.js';
-export { validateSAMStoryArc, type ValidateSAMStoryArcResult } from './contract/validate-sam-story-arc.js';
+  validateStoryNarrativeCoherence,
+  type ValidateStoryNarrativeCoherenceResult,
+} from './contract/validate-story-narrative-coherence.js';
+export { validateStoryNarrativeStoryArc, type ValidateStoryStoryArcResult } from './contract/validate-story-story-arc.js';
 
 export type {
-  SamJourney,
-  SamJourneyContext,
-  SamJourneyNeed,
-  SamJourneyPhase,
-  SamJourneyTouchpoint,
-} from './types/sam-journey.js';
-export { resolveJourneyForSam } from './journey/build/resolve-journey-for-sam.js';
+  StoryJourney,
+  StoryJourneyContext,
+  StoryJourneyJob,
+  StoryJourneyPhase,
+  StoryJourneyTouchpoint,
+} from './types/story-narrative-journey.js';
+export { resolveJourneyForStory } from './journey/build/resolve-journey-for-story.js';
 export {
-  buildSamStoryCatalogMenu,
-  samStoryCatalogMenuHasEpisodes,
-} from './story-catalog/build-sam-story-catalog-menu.js';
+  buildStoryCatalogMenu,
+  storyCatalogMenuHasEpisodes,
+} from './story-catalog/build-story-catalog-menu.js';
 export {
-  resolveSamEpisode,
-  type ResolveSamEpisodeSelection,
-  type SamEpisodeMountV1,
-} from './story-catalog/resolve-sam-episode.js';
-export { compileSamsForCatalog } from './story-catalog/compile-sams-for-catalog.js';
+  resolveStoryEpisode,
+  type ResolveStoryEpisodeSelection,
+  type StoryEpisodeMountV1,
+} from './story-catalog/resolve-story-episode.js';
+export { compileStoriesForCatalog } from './story-catalog/compile-stories-for-catalog.js';
 export type {
-  SamStoryDimensionsV1,
-  SamStoryDimensionWhoV1,
-  SamStoryDimensionWhatV1,
-  SamStoryDimensionWhereV1,
-  SamStoryDimensionWhenV1,
-  SamStoryDimensionWhyV1,
-  SamStoryDimensionHowV1,
+  StoryDimensionsV1,
+  StoryDimensionWhoV1,
+  StoryDimensionWhatV1,
+  StoryDimensionWhereV1,
+  StoryDimensionWhenV1,
+  StoryDimensionWhyV1,
+  StoryDimensionHowV1,
 } from './types/story-dimensions.js';
 export type {
   HostEngagementLevelId,
@@ -267,17 +268,17 @@ export type {
   HostStoryDimensionWhyV1,
 } from './types/host-story-dimensions.js';
 export {
-  projectStoryDimensionsFromSam,
-  type ProjectStoryDimensionsFromSamInput,
-} from './project/project-story-dimensions-from-sam.js';
+  projectStoryDimensionsFromStory,
+  type ProjectStoryDimensionsFromStoryInput,
+} from './project/project-story-dimensions-from-story.js';
 export {
   attachPlaceSlugFromPlaceRef,
   HOST_STORY_WHERE_DIMENSION_ERROR,
   hostStoryWhereDimensionIsComplete,
   mergeSamStoryDimensionsIntoCreateBody,
-  mergeSamStoryDimensionsWithHost,
+  mergeStoryDimensionsWithHost,
   type HostStoryWhereDimensionInput,
-} from './project/merge-sam-story-dimensions-with-host.js';
+} from './project/merge-story-dimensions-with-host.js';
 export { buildJourney, buildJourneyFromBinding } from './journey/build/build-journey.js';
 export { formatJourneyMarkdown } from './journey/build/format-journey-markdown.js';
 export { journeyFileBasename } from './journey/build/journey-file-basename.js';

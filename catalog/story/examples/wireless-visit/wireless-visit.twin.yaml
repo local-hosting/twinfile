@@ -1,0 +1,25 @@
+twinfile: 2
+kind: story
+id: wireless-visit
+name: Wireless store visit
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/wireless-mobile:0.1.0
+  - rel: involves
+    href: twinfile/character/wireless-greeter:0.1.0
+  - rel: involves
+    href: twinfile/character/store-shopper-visitor:0.1.0
+story:
+  pitch: In-store visit from check-in through activation or service desk.
+  scenes:
+    - id: check-in
+      label: Welcome desk check-in
+    - id: wait
+      label: Waiting area
+    - id: demo
+      label: Device demo on solution floor
+    - id: activate
+      label: Service desk activation

@@ -1,2 +1,2 @@
-/** @deprecated Prefer `@local-hosting/twinfile-character/jsm/catalog/jtbd.js`. */
+/** @deprecated Prefer `@local-hosting/twinfile-character/situations/catalog/jtbd.js`. */
 export * from '../../situations/catalog/jtbd.js';

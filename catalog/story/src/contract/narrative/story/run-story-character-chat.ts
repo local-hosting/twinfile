@@ -1,9 +1,9 @@
-import { templateReplyFromPcmAtBeat } from '@local-hosting/twinfile-character/pcm';
-import type { PcmSamStoryRun } from './pcm-sam-story-run.js';
+import { templateReplyFromCharacterAtBeat } from '@local-hosting/twinfile-character/persona';
+import type { CharacterStoryRun } from './character-story-run.js';
 
 export type StoryCharacterLlmInterpretInput = {
   message: string;
-  run: PcmSamStoryRun;
+  run: CharacterStoryRun;
 };
 
 export type StoryCharacterLlmInterpretResult = {
@@ -23,7 +23,7 @@ export type StoryCharacterChatResult = {
 };
 
 export async function runStoryCharacterChat(
-  run: PcmSamStoryRun,
+  run: CharacterStoryRun,
   message: string,
   deps: { interpret?: StoryCharacterLlmInterpreter } = {},
 ): Promise<StoryCharacterChatResult> {
@@ -48,8 +48,8 @@ export async function runStoryCharacterChat(
   }
 
   return {
-    reply: templateReplyFromPcmAtBeat(psychology, beat, trimmed),
+    reply: templateReplyFromCharacterAtBeat(psychology, beat, trimmed),
     mode: 'template',
-    note: 'PCM at SAM story beat',
+    note: 'Character at Story story beat',
   };
 }

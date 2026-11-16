@@ -2,7 +2,7 @@
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "$id": "https://twinfile.org/schemas/1/run/story-wire.schema.json",
   "title": "StoryWire",
-  "description": "Wire JSON for story twins (planned process / SAM) — MCP and OCI config.",
+  "description": "Wire JSON for story twins (planned process / Story) — MCP and OCI config.",
   "type": "object",
   "required": ["meta", "story", "digest"],
   "properties": {

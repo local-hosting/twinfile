@@ -1,10 +1,10 @@
-import type { SamJourney } from '../../types/sam-journey.js';
+import type { StoryJourney } from '../../types/story-narrative-journey.js';
 
-export function formatJourneyMarkdown(journey: SamJourney): string {
+export function formatJourneyMarkdown(journey: StoryJourney): string {
   const lines = [
-    `# ${journey.samTitle}`,
+    `# ${journey.storyTitle}`,
     '',
-    `**SAM:** \`${journey.samId}\`  `,
+    `**Story:** \`${journey.storyId}\`  `,
     `**Journey:** \`${journey.journeyId}\`  `,
     `**Persona:** \`${journey.personaId}\``,
     '',
@@ -29,7 +29,7 @@ export function formatJourneyMarkdown(journey: SamJourney): string {
   return lines.join('\n').trimEnd() + '\n';
 }
 
-function formatJourneyHeartTable(journey: SamJourney): string[] {
+function formatJourneyHeartTable(journey: StoryJourney): string[] {
   if (journey.heartTrends.length === 0) {
     return [];
   }

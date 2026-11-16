@@ -1,13 +1,13 @@
 import { findDailyRhythmBlock, formatDailyRhythmClock } from './persona-daily-rhythm-format.js';
-import type { SAM } from '../types/sam.js';
+import type { Story } from '../types/story-narrative.js';
 import type { StoryScene } from '../types/scene.js';
 import { findJourneyTouchpointBinding } from './journey-touchpoint-binding.js';
-import { resolveJobsForTouchpoint } from './story-jsm-narrative-context.js';
+import { resolveJobsForTouchpoint } from './story-situations-narrative-context.js';
 import type { StoryBriefCharacterV1, StoryBriefSnapshotV1 } from './types.js';
 import type { DirectorScriptSceneV1, FormatStoryDirectorNarrativeInput, StoryboardPanelV1 } from './storyboard-types.js';
 import {
   isTechnicalStoryIdentityLabel,
-  resolveHumanProtagonistNameWithPcm,
+  resolveHumanProtagonistNameWithCharacter,
 } from './protagonist-identity.js';
 import { resolvePlaceLabelForNarrative } from './resolve-scene-place-for-reader.js';
 
@@ -42,17 +42,17 @@ export type StoryboardSceneContextV1 = {
   engagementLevel?: string;
   focusArea?: string;
   storyPitch?: string;
-  sam?: SAM;
+  story?: Story;
 };
 
 function resolveProtagonistName(input: FormatStoryDirectorNarrativeInput): string {
-  const focalPcm = input.focalPcm;
+  const focalCharacter = input.focalCharacter;
   const personaLabel = input.personaLabel;
-  if (focalPcm || personaLabel) {
-    return resolveHumanProtagonistNameWithPcm({
+  if (focalCharacter || personaLabel) {
+    return resolveHumanProtagonistNameWithCharacter({
       snapshot: input.snapshot,
       character: input.character,
-      focalPcm,
+      focalCharacter,
       personaLabel,
     });
   }
@@ -102,18 +102,18 @@ function resolveStoryGeography(snapshot: StoryBriefSnapshotV1): string | undefin
   return undefined;
 }
 
-function resolvePlaceLabelFromSam(sam: SAM | undefined, placeRef: string | undefined): string | undefined {
+function resolvePlaceLabelFromSam(story: Story | undefined, placeRef: string | undefined): string | undefined {
   const id = placeRef?.trim();
   if (!id) return undefined;
-  const place = sam?.places?.find((row) => row.placeRef?.trim() === id);
+  const place = story?.places?.find((row) => row.placeRef?.trim() === id);
   if (place?.label?.trim()) return place.label.trim();
   return humanizeStoryWireLabel(id);
 }
 
-export function findSamSceneForTouchpoint(sam: SAM | undefined, touchpointId: string): StoryScene | undefined {
+export function findSamSceneForTouchpoint(story: Story | undefined, touchpointId: string): StoryScene | undefined {
   const needle = touchpointId.trim();
-  if (!needle || !sam?.scenes?.length) return undefined;
-  for (const scene of sam.scenes) {
+  if (!needle || !story?.scenes?.length) return undefined;
+  for (const scene of story.scenes) {
     if (scene.touchpointIds?.some((id) => id.trim() === needle)) return scene;
     if (scene.touchpoints?.some((row) => row.id.trim() === needle)) return scene;
   }
@@ -121,10 +121,10 @@ export function findSamSceneForTouchpoint(sam: SAM | undefined, touchpointId: st
 }
 
 export function buildStoryboardSceneContext(input: FormatStoryDirectorNarrativeInput): StoryboardSceneContextV1 {
-  const { snapshot, character, sam } = input;
+  const { snapshot, character, story } = input;
   const protagonistName = resolveProtagonistName(input);
-  const firstScene = sam?.scenes?.[0];
-  const placeFromSam = firstScene ? resolvePlaceLabelFromSam(sam, firstScene.placeRef) : undefined;
+  const firstScene = story?.scenes?.[0];
+  const placeFromSam = firstScene ? resolvePlaceLabelFromSam(story, firstScene.placeRef) : undefined;
 
   return {
     protagonistName,
@@ -141,7 +141,7 @@ export function buildStoryboardSceneContext(input: FormatStoryDirectorNarrativeI
     engagementLevel: snapshot.why?.engagementLevelId?.trim(),
     focusArea: snapshot.why?.focusAreaId?.trim(),
     storyPitch: snapshot.storyPitch?.trim(),
-    sam,
+    story,
   };
 }
 
@@ -175,7 +175,7 @@ export function applyStoryboardPersonalization(
   touchpointId: string,
   input?: FormatStoryDirectorNarrativeInput,
 ): DirectorScriptSceneV1 {
-  const samScene = findSamSceneForTouchpoint(ctx.sam, touchpointId);
+  const samScene = findSamSceneForTouchpoint(ctx.story, touchpointId);
   const journeyBinding = input?.journey
     ? findJourneyTouchpointBinding(input.journey, touchpointId)
     : undefined;
@@ -184,13 +184,13 @@ export function applyStoryboardPersonalization(
         jsm: input.jsm,
         journey: input.journey,
         touchpointId,
-        personaJobIds: input.character?.psychology?.pcmId ? undefined : undefined,
+        personaJobIds: input.character?.psychology?.characterId ? undefined : undefined,
       })
     : [];
   const place =
     (samScene
       ? resolvePlaceLabelForNarrative({
-          sam: ctx.sam,
+          story: ctx.story,
           placeRef: samScene.placeRef,
           journey: input?.journey,
           touchpointId,
@@ -296,9 +296,9 @@ export function serializeStoryboardLlmContext(input: FormatStoryDirectorNarrativ
         pitch: ctx.storyPitch,
         engagement: ctx.engagementLevel,
         focus: ctx.focusArea,
-        episodeId: input.snapshot.what?.samEpisodeId,
+        episodeId: input.snapshot.what?.episodeId,
       },
-      samScenes: ctx.sam?.scenes?.map((scene) => ({
+      samScenes: ctx.story?.scenes?.map((scene) => ({
         id: scene.id,
         label: scene.label,
         situation: scene.situation,

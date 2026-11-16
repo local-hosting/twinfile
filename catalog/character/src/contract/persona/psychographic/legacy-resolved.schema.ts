@@ -1,11 +1,11 @@
 import { z } from 'zod';
 import { MbtiDimensionsSchema, MbtiTypeIdSchema } from '../myers-briggs/myers-briggs.schema.js';
-import { PcmAudienceAspectRefSchema } from '../schemas/audience/pcm-audience-plane.schema.js';
+import { CharacterAudienceAspectRefSchema } from '../schemas/audience/character-audience-plane.schema.js';
 
-/** Known psychographic frameworks shipped with PCM (open `frameworkId` allowed on aspect refs). */
+/** Known psychographic frameworks shipped with Character (open `frameworkId` allowed on aspect refs). */
 export const PsychographicFrameworkIdSchema = z.enum(['myers_briggs']);
 
-export const PsychographicAspectRefSchema = PcmAudienceAspectRefSchema;
+export const PsychographicAspectRefSchema = CharacterAudienceAspectRefSchema;
 
 export const PsychographicSchema = z
   .object({

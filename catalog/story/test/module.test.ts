@@ -8,7 +8,7 @@ import { kind, module } from '../src/twin-module.js';
 const exampleDir = join(resolveTypeExamplesRoot('story', resolveTwinfileRoot()), 'airport-operations');
 
 describe('@local-hosting/twinfile-story', () => {
-  it('exports TwinTypeModule with SAM wire', () => {
+  it('exports TwinTypeModule with Story wire', () => {
     expect(kind).toBe('story');
     expect(module.kind).toBe('story');
   });

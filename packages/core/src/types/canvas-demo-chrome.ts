@@ -1,6 +1,6 @@
 import type { TwinCatalogType } from '../paths/catalog-layout.js';
 
-/** Row shapes match portable host DS entity adapters (unsigned canvas demo chrome). */
+/** Row shapes for unsigned canvas demo chrome tables in the player shell. */
 export type CanvasDemoPlaceRow = {
   id: string;
   cardTitle: string;

@@ -1,5 +1,3 @@
-import { statSync } from 'node:fs';
-
 import { isRecord } from '../doc/is-record.js';
 import { twinHeadPath } from '../load/twinfile-locator.js';
 import type { Result } from '../types/twin-error.js';
@@ -7,7 +5,9 @@ import { err, ok } from '../types/twin-error.js';
 import type { BuiltTwinHead, TwinHead } from '../types/twin-head.js';
 import { TWIN_HEAD_SUFFIX, type TwinKind } from '../types/twin-kind.js';
 import type { TwinTypeModule } from '../types/twin-type-module.js';
-import { readYamlDocument } from '../validate/validate-yaml.js';
+import { composeHeadUnitDocument } from '../compose/compose-head-unit.js';
+import { readTwinHeadYaml } from '../load/load-twin-head-unit.js';
+import type { BuildOptions } from '../types/twin-type-module.js';
 import { parseTwinHead } from './twin-head.js';
 
 export type HeadTwinTypeModuleOptions = {
@@ -17,17 +17,6 @@ export type HeadTwinTypeModuleOptions = {
   /** Upgrade legacy head fields before the shared check (e.g. `story.beats`). */
   readonly normalize?: (raw: Record<string, unknown>) => Record<string, unknown>;
 };
-
-function readHead(path: string, parse: (raw: unknown, file: string) => Result<TwinHead>): Result<TwinHead> {
-  if (!statSync(path, { throwIfNoEntry: false })?.isFile()) {
-    return err([{ code: 'E_MISSING_FILE', message: 'missing twin head', file: path }]);
-  }
-  const { doc, value } = readYamlDocument(path);
-  if (doc.errors.length > 0) {
-    return err(doc.errors.map((error) => ({ code: 'E_SCHEMA', message: error.message, file: path })));
-  }
-  return parse(value, path);
-}
 
 /** Twin type module backed by the shared head check; type packages add their own build over time. */
 export function createHeadTwinTypeModule(
@@ -43,8 +32,35 @@ export function createHeadTwinTypeModule(
     kind,
     parse,
     validate: (doc) => ok(doc),
-    build: async (dir) => {
-      const head = readHead(twinHeadPath(dir), parseAt);
+    build: async (dir, opts: BuildOptions = {}) => {
+      const headPath = twinHeadPath(dir);
+      const loaded = readTwinHeadYaml(dir);
+      if (!loaded.ok) {
+        return err(loaded.errors);
+      }
+      const raw = loaded.value.doc;
+      const needsCompose =
+        (typeof raw.from === 'string' && raw.from.trim()) ||
+        (Array.isArray(raw.steps) && raw.steps.length > 0) ||
+        (Array.isArray(raw.patches) && raw.patches.length > 0);
+      let doc = raw;
+      if (needsCompose) {
+        if (!opts.examplesRoot) {
+          return err([
+            {
+              code: 'E_BUILD',
+              message: `${kind} from/steps requires examplesRoot (TF_TWINFILE_ROOT)`,
+              file: loaded.value.twinfilePath,
+            },
+          ]);
+        }
+        const composed = composeHeadUnitDocument(raw, loaded.value.twinfilePath, {
+          examplesRoot: opts.examplesRoot,
+        });
+        if (!composed.ok) return composed;
+        doc = composed.value;
+      }
+      const head = parseAt(doc, headPath);
       return head.ok ? ok({ kind, dir, head: head.value }) : head;
     },
     toJSON: (built) => ({ ...built }),

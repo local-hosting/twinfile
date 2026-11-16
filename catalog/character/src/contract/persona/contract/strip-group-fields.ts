@@ -1,13 +1,13 @@
-import type { PCMCharacter } from '../types/pcm-character.js';
+import type { CharacterPersona } from '../types/character-persona.js';
 import type { Persona } from '../types/strategy/persona.js';
-import { PCM_GROUP_FIELD_KEYS } from '../schemas/pcm-character.schema.js';
+import { CHARACTER_GROUP_FIELD_KEYS } from '../schemas/character-persona.schema.js';
 
-/** Drop AXM/cohort fields if present in authored YAML before PCM validation. */
-export function stripPersonaGroupFields(persona: Persona): PCMCharacter {
+/** Drop AXM/cohort fields if present in authored YAML before Character validation. */
+export function stripPersonaGroupFields(persona: Persona): CharacterPersona {
   const out = { ...persona } as Record<string, unknown>;
-  for (const key of PCM_GROUP_FIELD_KEYS) {
+  for (const key of CHARACTER_GROUP_FIELD_KEYS) {
     delete out[key];
   }
   delete out.primary;
-  return out as PCMCharacter;
+  return out as CharacterPersona;
 }

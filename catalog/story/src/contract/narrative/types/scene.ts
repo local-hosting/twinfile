@@ -4,7 +4,7 @@ export type SceneEmotionBand = 'low' | 'mid' | 'high';
 
 export type SceneEmotionValence = 'negative' | 'neutral' | 'positive';
 
-/** Scene-level emotion — aligns with PCM {@link JourneyEmotions} on journey phases/moments. */
+/** Scene-level emotion — aligns with Character {@link JourneyEmotions} on journey phases/moments. */
 export type SceneEmotions = {
   band?: SceneEmotionBand;
   valence?: SceneEmotionValence;
@@ -21,7 +21,7 @@ export type StorySceneTouchpointRef = {
 
 /** JTBD + feelings for one cast member when several characters share a scene. */
 export type SceneCharacterBeat = {
-  pcmId: string;
+  characterId: string;
   jobIds?: string[];
   emotions?: SceneEmotions;
   pain?: string;
@@ -29,8 +29,8 @@ export type SceneCharacterBeat = {
 };
 
 /**
- * One storyboard frame — cast at a place, with optional touchpoints and PCM journey links.
- * Authoritative runtime story spine when `scenes` is present on {@link import('./sam.js').SAM}.
+ * One storyboard frame — cast at a place, with optional touchpoints and Character journey links.
+ * Authoritative runtime story spine when `scenes` is present on {@link import('./story.js').Story}.
  */
 export type StoryScene = {
   id: string;
@@ -40,9 +40,9 @@ export type StoryScene = {
   actId: DramaticBeatId;
   narrativeBeat?: string;
   situation?: string;
-  /** PCM ids present in this scene — subset of {@link import('./sam.js').SAM.characters}. */
+  /** Character ids present in this scene — subset of {@link import('./story.js').Story.characters}. */
   characterIds: string[];
-  /** Mounted place place key — must appear on {@link import('./sam.js').SAM.places}. */
+  /** Mounted place place key — must appear on {@link import('./story.js').Story.places}. */
   placeRef: string;
   /** Primary `space:*` on the mounted place — defaults from place mount when omitted. */
   spaceId?: string;
@@ -55,7 +55,7 @@ export type StoryScene = {
   touchpoints?: StorySceneTouchpointRef[];
   /** Shorthand when every touchpoint shares the scene `placeRef`. */
   touchpointIds?: string[];
-  /** Optional link back to authored PCM/AXM journey rows during migration. */
+  /** Optional link back to authored Character/AXM journey rows during migration. */
   journeyPhaseId?: string;
   journeyMomentId?: string;
   /** JTBD job ids in play for the focal beat. */
