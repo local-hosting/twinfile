@@ -12,7 +12,7 @@ There is **no** published `twinfile/clock` or `twinfile/player` ref. **Clock** i
 ## Model
 
 1. **Story** (`<unit>.twin.yaml`) — `story.scenes[]` (legacy `story.beats`), `links:` to place / character / resource.
-2. **Scene run** — optional inline **`run:`** on a scene (`from:`, `steps:`, `clock:`, `use.runner`, `expected:`). Addressed as **`<story-dir>#<scene-id>`**; not published as its own ref.
+2. **Scene run** — optional inline **`run:`** on a scene (`from?`, `steps:`, `clock:`, `args:`). **`from:`** defaults to the story's single **`links` `involves` place**. Optional **`use.runner`** only for offline `twin run`. Addressed as **`<story-dir>#<scene-id>`**; not published as its own ref.
 3. **Player** — accepts **`twinfile/story/<id>:<ver>`**, builds linked places, walks scenes, advances **clock**, publishes session **edges** (and may spawn **runner** offline per scene).
 
 Today **`createTwinfilePlayer(result)`** still takes one **`BuildTwinfileResult`** (workbench transitional path). Target: **`createTwinfilePlayerFromStory(story, opts)`**.
@@ -25,7 +25,7 @@ Today **`createTwinfilePlayer(result)`** still takes one **`BuildTwinfileResult`
 
 ```text
 story/examples/shop-visit/
-  shop-visit.twin.yaml   # story.scenes[] with inline run: + expected:
+  shop-visit.twin.yaml   # story.scenes[] with inline run:
   runs/                  # twin run output (not committed)
 ```
 

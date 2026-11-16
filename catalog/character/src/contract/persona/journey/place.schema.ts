@@ -1,3 +1,4 @@
+import { isTwinfileRef } from '@local-hosting/twinfile-core/ref';
 import { z } from 'zod';
 
 export const GeoPointSchema = z.object({
@@ -10,7 +11,8 @@ export const PlaceRefSchema = z.object({
   label: z.string().min(1).optional(),
   lat: z.number().optional(),
   lon: z.number().optional(),
-  venueId: z.string().min(1).optional(),
+  /** Published Twinfile place unit for this anchor (kind + name identify the place). */
+  placeRef: z.string().refine(isTwinfileRef, 'placeRef must be a Twinfile ref').optional(),
   marketId: z.string().min(1).optional(),
   h3Cell: z.string().min(1).optional(),
   /** Instance zone role (curbside, gate, bedroom) — tenant vocabulary. */

@@ -17,12 +17,10 @@ export type PlaceMountLayoutPathway = {
   label?: string;
 };
 
-/** Built or resolved Twinfile place — SAM/AXM venue mount wire (replaces archived venue-layout repo for place refs). */
+/** Built or resolved Twinfile place — SAM/AXM place mount wire. */
 export type TwinfilePlaceMount = {
-  /** Set when resolved from a Twinfile catalog; omitted for old on-disk venue trees. */
-  placeRef?: TwinfileRef;
-  /** Stable venue key (`venue:{name}`) for scene binding and compose indexes (SAM field: `venueKey`). */
-  venueKey: string;
+  /** Unit ref the mount was resolved from; match mounts with `samePlaceRef` (kind + name, tag ignored). */
+  placeRef: TwinfileRef;
   title: string;
   /** Resolved slug from manifest `geotype.primary`. */
   geotypePrimary?: string;

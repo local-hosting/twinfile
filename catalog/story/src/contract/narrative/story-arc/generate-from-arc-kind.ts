@@ -43,8 +43,8 @@ function touchpointIdsForPhase(phase: JourneyPhase): string[] {
 export type ScaffoldScenesFromJourneyArcInput = {
   kind: StoryArcKind;
   journey: Journey;
-  /** Default place venue key for every scene. */
-  venueKey: string;
+  /** Default place place key for every scene. */
+  placeRef: string;
   characterIds?: string[];
 };
 
@@ -70,7 +70,7 @@ export function scaffoldScenesFromJourneyArc(
       order: index,
       actId: beat.id,
       characterIds,
-      venueKey: input.venueKey,
+      placeRef: input.placeRef,
       journeyPhaseId: phase.id,
       jobIds: phase.jobIds?.length ? [...phase.jobIds] : undefined,
       emotions: phase.emotions
@@ -94,7 +94,7 @@ export type GenerateSamEpisodeFromArcInput = {
   title: string;
   revision: number;
   focalPcmId: string;
-  venueKey: string;
+  placeRef: string;
   simulationEpochStart: string;
   planningHorizonDays?: number;
   visitDayIndex?: number;
@@ -125,7 +125,7 @@ export function generateSamEpisodeFromArc(
   const scenes = scaffoldScenesFromJourneyArc({
     kind: input.kind,
     journey: input.journey,
-    venueKey: input.venueKey,
+    placeRef: input.placeRef,
     characterIds: [input.focalPcmId],
   });
 

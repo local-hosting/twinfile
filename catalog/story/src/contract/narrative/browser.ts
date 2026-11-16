@@ -4,13 +4,13 @@
  */
 
 export type { SAM, SAMBinding, SAMDocument } from './types/sam.js';
-export type { SAMCharacterRef, SAMVenueRef } from './types/sam-refs.js';
+export type { SAMCharacterRef, SAMPlaceRef } from './types/sam-refs.js';
 export type { DramaticBeatId } from './types/dramatic-beat.js';
 export { DRAMATIC_BEAT_IDS } from './types/dramatic-beat.js';
 export type {
   SamCatalogCharacterRef,
   SamCatalogEpisodeRef,
-  SamCatalogVenueRef,
+  SamCatalogPlaceRef,
   SamStoryCatalogMenuV1,
   SamStorySelectionV1,
 } from './types/story-catalog-menu.js';
@@ -121,14 +121,14 @@ export type {
   EpisodeScheduledActivity,
 } from './types/episode-activity.js';
 export type { SAMCharacterContext } from './types/sam-character-context.js';
-export type { SAMPlaceMount, PlaceMount, TwinfilePlaceMount } from './types/venue-mount.js';
+export type { SAMPlaceMount, PlaceMount, TwinfilePlaceMount } from './types/place-mount.js';
 export {
-  findSceneVenueKeysOutsidePlaceMounts,
-  placeMountByVenueKey,
+  findScenePlaceRefsOutsidePlaceMounts,
+  placeMountByPlaceRef,
   resolveSceneSpaceId,
-} from './place/venue-mount-catalog.js';
+} from './place/place-mount-catalog.js';
 export {
-  mergePlaceMountsByVenueKey,
+  mergePlaceMountsByPlaceRef,
   minimalPlaceMount,
   minimalPlaceMountFromGeoAnchor,
 } from './place/minimal-place-mount.js';
@@ -138,7 +138,7 @@ export {
   distanceKmBetween,
   rankPlaceMountsNearAnchor,
   type GeoAnchorV1,
-} from './venue/rank-venues-near-anchor.js';
+} from './place/rank-places-near-anchor.js';
 export {
   extractSceneTouchpointRows,
   type SceneTouchpointRow,
@@ -165,9 +165,9 @@ export {
 export {
   listSceneTouchpointRefs,
   resolveTouchpointDefinition,
-  resolveTouchpointVenueAtScene,
-  touchpointRequiresVenue,
-} from './touchpoint/resolve-touchpoint-venue.js';
+  resolveTouchpointPlaceAtScene,
+  touchpointRequiresPlace,
+} from './touchpoint/resolve-touchpoint-place.js';
 export type { StorySceneTouchpointRef, SceneCharacterBeat } from './types/scene.js';
 export { hydrateSceneFromJourney, hydrateScenesFromJourney } from './scene/hydrate-scene-from-journey.js';
 export type { EpisodeCalendarResources } from './types/episode-calendar-generator.js';
@@ -265,7 +265,7 @@ export { formatJourneyMarkdown } from './journey/build/format-journey-markdown.j
 export { journeyFileBasename } from './journey/build/journey-file-basename.js';
 export type {
   SamStoryPlanCatalogSnapshotV1,
-  SamStoryPlanFleetVenueSnapshotV1,
+  SamStoryPlanFleetPlaceSnapshotV1,
   SamStoryPlanSegmentObjectiveV1,
   SamStoryPlanSegmentSnapshotV1,
 } from './types/story-plan-catalog.js';
@@ -290,7 +290,7 @@ export {
 export {
   normalizeScenarioText,
   scenarioTokenSet,
-  scoreFleetVenueScenarioMatch,
+  scoreFleetPlaceScenarioMatch,
   scoreScenarioTokenOverlap,
 } from './story-plan/scenario-scoring.js';
 export {

@@ -8,7 +8,7 @@ export function storyboardSamFixture(overrides?: Partial<SAM>): SAM {
     title: 'Fixture episode',
     revision: 1,
     characters: [{ pcmId: 'persona:rider', primary: true }],
-    venues: [{ venueKey: 'venue:curbside' }],
+    places: [{ placeRef: 'twinfile/place/curbside:0.0.0' }],
     arcTemplate: {
       id: 'arc:fixture',
       label: 'Fixture arc',
@@ -25,7 +25,7 @@ export function storyboardSamFixture(overrides?: Partial<SAM>): SAM {
         order: 0,
         actId: 'exposition',
         characterIds: ['persona:rider'],
-        venueKey: 'venue:curbside',
+        placeRef: 'twinfile/place/curbside:0.0.0',
         touchpointIds: ['touchpoint:a'],
       },
       {
@@ -34,7 +34,7 @@ export function storyboardSamFixture(overrides?: Partial<SAM>): SAM {
         order: 1,
         actId: 'denouement',
         characterIds: ['persona:rider'],
-        venueKey: 'venue:curbside',
+        placeRef: 'twinfile/place/curbside:0.0.0',
         touchpointIds: ['touchpoint:b'],
       },
     ],

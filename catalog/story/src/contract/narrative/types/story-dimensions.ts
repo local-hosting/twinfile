@@ -15,10 +15,10 @@ export type SamStoryDimensionWhatV1 = {
 };
 
 export type SamStoryDimensionWhereV1 = {
-  /** Distinct place mounts used across scenes (`venue:*`). */
-  venueKeys: string[];
-  /** First scene venue unless overridden by host fleet binding. */
-  primaryVenueKey?: string;
+  /** Distinct place mounts used across scenes (`place:*`). */
+  placeRefs: string[];
+  /** First scene place unless overridden by host fleet binding. */
+  primaryPlaceRef?: string;
   spaceIds?: string[];
 };
 

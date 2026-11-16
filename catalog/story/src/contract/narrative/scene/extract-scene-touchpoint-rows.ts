@@ -3,13 +3,13 @@ import type { SAMTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import type { PlaceMount } from '../types/place-mount.js';
 import {
   listSceneTouchpointRefs,
-  resolveTouchpointVenueAtScene,
-} from '../touchpoint/resolve-touchpoint-venue.js';
+  resolveTouchpointPlaceAtScene,
+} from '../touchpoint/resolve-touchpoint-place.js';
 
 export type SceneTouchpointRow = {
   sceneId: string;
   order: number;
-  venueKey: string;
+  placeRef: string;
   spaceId?: string;
   visitMomentId?: string;
   characterIds: readonly string[];
@@ -23,7 +23,7 @@ function orderedScenes(scenes: readonly StoryScene[]): StoryScene[] {
   return [...scenes].sort((left, right) => left.order - right.order);
 }
 
-/** Flatten storyboard scenes to touchpoint rows with per-scene venue (and optional space) context. */
+/** Flatten storyboard scenes to touchpoint rows with per-scene place (and optional space) context. */
 export function extractSceneTouchpointRows(
   scenes: readonly StoryScene[],
   options?: {
@@ -41,7 +41,7 @@ export function extractSceneTouchpointRows(
         continue;
       }
       seen.add(id);
-      const venue = resolveTouchpointVenueAtScene({
+      const place = resolveTouchpointPlaceAtScene({
         touchpointId: id,
         scene,
         sceneRef: ref,
@@ -51,8 +51,8 @@ export function extractSceneTouchpointRows(
       rows.push({
         sceneId: scene.id,
         order: scene.order,
-        venueKey: venue.venueKey,
-        spaceId: venue.spaceId,
+        placeRef: place.placeRef,
+        spaceId: place.spaceId,
         visitMomentId: scene.visitMomentId,
         characterIds: scene.characterIds,
         touchpointId: id,

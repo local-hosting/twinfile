@@ -5,7 +5,7 @@ import type { SAM } from '../types/sam.js';
 export type SamJson = {
   document: Record<string, unknown>;
   characters: unknown[];
-  venues?: unknown[];
+  places?: unknown[];
   arcTemplate?: Record<string, unknown>;
   scenes?: unknown[];
   binding: Record<string, unknown>;
@@ -21,7 +21,7 @@ export function samToJSON(sam: SAM): Record<string, unknown> {
     version,
     summary,
     characters,
-    venues,
+    places,
     arcTemplate,
     scenes,
     binding,
@@ -34,7 +34,7 @@ export function samToJSON(sam: SAM): Record<string, unknown> {
   return omitNullishDeep({
     document,
     characters,
-    ...(venues?.length ? { venues } : {}),
+    ...(places?.length ? { places } : {}),
     ...(arcTemplate ? { arcTemplate } : {}),
     ...(scenes?.length ? { scenes } : {}),
     binding,
@@ -49,7 +49,7 @@ export function samFromJSON(json: unknown): SAM {
   return parseSAM({
     ...doc,
     characters: raw.characters,
-    venues: raw.venues,
+    places: raw.places,
     arcTemplate: (raw as SamJson).arcTemplate,
     scenes: raw.scenes,
     binding: raw.binding,

@@ -9,7 +9,7 @@ export type TouchpointGraphWireInput = {
     label?: string;
     journeyPhase?: string;
     locus?: string;
-    venueKey?: string;
+    placeRef?: string;
     spaceId?: string;
   }[];
   links?: readonly {
@@ -33,7 +33,7 @@ export function touchpointGraphToSamWire(graph: TouchpointGraphWireInput): Touch
     label: row.label,
     journeyPhase: row.journeyPhase,
     locus: samLocusFromSpec(row.locus),
-    venueKey: row.venueKey?.trim(),
+    placeRef: row.placeRef?.trim(),
     spaceId: row.spaceId,
   }));
 

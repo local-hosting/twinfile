@@ -33,12 +33,12 @@ export function importPlace(input: unknown): ImportResult {
   const path = typeof root.path === 'string' ? root.path : typeof root.file === 'string' ? root.file : undefined;
   if (!path) throw new Error('gltf: path or file is required');
   const nodeId = typeof root.node === 'string' ? root.node : 'root';
-  const venueName = typeof root.name === 'string' ? root.name : 'Imported scene';
+  const placeName = typeof root.name === 'string' ? root.name : 'Imported scene';
   const spaceId = twinId(typeof root.space === 'string' ? root.space : 'scene');
   const docs: Row[] = [
     {
       place: {
-        name: venueName,
+        name: placeName,
         kind: 'venue',
         timezone: 'UTC',
         published: false,
@@ -51,7 +51,7 @@ export function importPlace(input: unknown): ImportResult {
           {
             id: spaceId,
             kind: 'scene',
-            name: venueName,
+            name: placeName,
             geometry: { ref: `${path}#${nodeId}` },
           },
           unmappedExt('gltf', 'spaces', root, ['path', 'file', 'node', 'name', 'space']),
@@ -59,5 +59,5 @@ export function importPlace(input: unknown): ImportResult {
       ],
     },
   ];
-  return packUnit(twinId(venueName), 'museum', docs);
+  return packUnit(twinId(placeName), 'museum', docs);
 }

@@ -24,7 +24,7 @@ export type CompileSAMInput = {
   subjectId?: string;
   random?: () => number;
   knownPcmIds?: readonly string[];
-  knownVenueKeys?: readonly string[];
+  knownPlaceRefs?: readonly string[];
 };
 
 export type CompileSAMResult =
@@ -60,7 +60,7 @@ export function compileSAM(
   const associationCheck = validateSAMAssociations(input.sam, {
     journey: input.journey,
     knownPcmIds: input.knownPcmIds,
-    knownVenueKeys: input.knownVenueKeys,
+    knownPlaceRefs: input.knownPlaceRefs,
   });
   if (!associationCheck.ok) {
     return associationCheck;

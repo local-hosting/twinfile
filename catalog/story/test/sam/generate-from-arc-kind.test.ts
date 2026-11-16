@@ -51,7 +51,7 @@ describe('generateSamEpisodeFromArc', () => {
         title: 'Test',
         revision: 1,
         focalPcmId: 'persona:rider',
-        venueKey: 'venue:demo',
+        placeRef: 'twinfile/place/demo:0.0.0',
         simulationEpochStart: '2026-01-06',
         visitDayIndex: 10,
         planningHorizonDays: 42,
@@ -62,7 +62,7 @@ describe('generateSamEpisodeFromArc', () => {
         id: draft.binding.pcmId,
         title: 'Test',
         revision: 1,
-        venues: [{ venueKey: 'venue:demo' }],
+        places: [{ placeRef: 'twinfile/place/demo:0.0.0' }],
         ...draft,
       });
 

@@ -7,7 +7,7 @@ import {
 import { resolveStoryPlanRandom } from './rng.js';
 import {
   normalizeScenarioText,
-  scoreFleetVenueScenarioMatch,
+  scoreFleetPlaceScenarioMatch,
   scoreScenarioTokenOverlap,
 } from './scenario-scoring.js';
 
@@ -126,25 +126,25 @@ export function planStoryCreateHeuristic(input: {
     random,
   );
 
-  const venues = input.catalog.fleetVenues;
+  const places = input.catalog.fleetPlaces;
   let storeSlug = input.storeSlug?.trim();
-  if (storeSlug && !venues.some((row) => row.slug === storeSlug)) {
+  if (storeSlug && !places.some((row) => row.slug === storeSlug)) {
     throw new Error(`storeSlug "${storeSlug}" is not in org fleet catalog`);
   }
-  if (!storeSlug && venues.length > 0) {
-    let best: (typeof venues)[number] | undefined;
+  if (!storeSlug && places.length > 0) {
+    let best: (typeof places)[number] | undefined;
     let bestScore = 0;
-    for (const venue of venues) {
-      const score = scoreFleetVenueScenarioMatch(scenario, venue);
+    for (const place of places) {
+      const score = scoreFleetPlaceScenarioMatch(scenario, place);
       if (score > bestScore) {
         bestScore = score;
-        best = venue;
+        best = place;
       }
     }
     if (best && bestScore >= 0.35) {
       storeSlug = best.slug;
     } else {
-      storeSlug = pickRandomStoryPlanStoreSlug(venues, random);
+      storeSlug = pickRandomStoryPlanStoreSlug(places, random);
     }
   }
 
@@ -156,7 +156,7 @@ export function planStoryCreateHeuristic(input: {
   const intentId = pickIntent(segmentId, input.catalog, input.intentId, random);
 
   const segmentLabel = input.catalog.segments.find((row) => row.id === segmentId)?.label;
-  const storeName = venues.find((row) => row.slug === storeSlug)?.name;
+  const storeName = places.find((row) => row.slug === storeSlug)?.name;
 
   return {
     segmentId,

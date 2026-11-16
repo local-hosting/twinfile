@@ -1,3 +1,5 @@
+import { isTwinfileRef } from '@local-hosting/twinfile-core/ref';
+
 import type { PlaceMount } from '../types/place-mount.js';
 
 function readStringArray(raw: unknown): string[] | undefined {
@@ -43,17 +45,17 @@ function readPathwayRows(raw: unknown): PlaceMount['layoutPathways'] | undefined
   return rows.length > 0 ? rows : undefined;
 }
 
-/** Parse a place mount from AXM mount pack JSON (ignores legacy `placeRef` keys). */
+/** Parse a place mount from AXM mount pack JSON. */
 export function placeMountFromJson(json: unknown): PlaceMount {
   if (!json || typeof json !== 'object' || Array.isArray(json)) {
     throw new Error('invalid place mount JSON');
   }
   const record = json as Record<string, unknown>;
-  const venueKey = String(record.venueKey ?? '').trim();
+  const placeRef = String(record.placeRef ?? '').trim();
   const title = String(record.title ?? '').trim();
   const spaceIds = readStringArray(record.spaceIds) ?? [];
-  if (!venueKey) {
-    throw new Error('place mount missing venueKey');
+  if (!isTwinfileRef(placeRef)) {
+    throw new Error(`place mount missing valid placeRef (got "${placeRef}")`);
   }
   if (!title) {
     throw new Error('place mount missing title');
@@ -65,9 +67,9 @@ export function placeMountFromJson(json: unknown): PlaceMount {
   const layoutSpaces = readLayoutRows(record.layoutSpaces);
   const layoutPathways = readPathwayRows(record.layoutPathways);
   return {
-    venueKey,
+    placeRef,
     title,
-    ...(typeof record.venueType === 'string' ? { venueType: record.venueType } : {}),
+    ...(typeof record.placeType === 'string' ? { placeType: record.placeType } : {}),
     ...(typeof record.geotypePrimary === 'string' ? { geotypePrimary: record.geotypePrimary } : {}),
     ...(typeof record.schemaOrgType === 'string' ? { schemaOrgType: record.schemaOrgType } : {}),
     spaceIds,

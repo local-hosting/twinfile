@@ -34,15 +34,15 @@ const GENERIC_PLACE_TOKENS = new Set([
   'shopping',
 ]);
 
-export function scoreFleetVenueScenarioMatch(
+export function scoreFleetPlaceScenarioMatch(
   scenario: string,
-  venue: { slug: string; name?: string },
+  place: { slug: string; name?: string },
 ): number {
-  const slugScore = scoreScenarioTokenOverlap(scenario, venue.slug);
+  const slugScore = scoreScenarioTokenOverlap(scenario, place.slug);
   if (slugScore > 0) {
     return slugScore;
   }
-  const nameTokens = [...scenarioTokenSet(venue.name ?? '')].filter(
+  const nameTokens = [...scenarioTokenSet(place.name ?? '')].filter(
     (token) => !GENERIC_PLACE_TOKENS.has(token),
   );
   if (nameTokens.length === 0) {

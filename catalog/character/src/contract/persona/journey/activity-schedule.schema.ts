@@ -22,8 +22,8 @@ export const ActivityBlockSchema = z.object({
   startPlace: PlaceRefSchema.optional(),
   endPlace: PlaceRefSchema.optional(),
   opportunityId: VisitOpportunityIdSchema.optional(),
-  /** Venue catalog id for habit scoring — not the JTBD visit-opportunity enum. */
-  venueOpportunityId: z.string().min(1).optional(),
+  /** Place catalog id for habit scoring — not the JTBD visit-opportunity enum. */
+  placeOpportunityId: z.string().min(1).optional(),
   touchpointId: z.string().min(1).optional(),
   journeyPhaseId: z.string().min(1).optional(),
   jobId: z.string().min(1).optional(),

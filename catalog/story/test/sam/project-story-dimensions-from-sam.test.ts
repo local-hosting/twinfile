@@ -27,7 +27,7 @@ describe('projectStoryDimensionsFromSam', () => {
     expect(dimensions.who.pcmId).toBeTruthy();
     expect(dimensions.what.samEpisodeId).toBe(loaded.id);
     expect(dimensions.what.journeyId).toBe(loaded.binding.journeyId);
-    expect(dimensions.where.venueKeys.length).toBeGreaterThan(0);
+    expect(dimensions.where.placeRefs.length).toBeGreaterThan(0);
     expect(dimensions.when.simulationEpochStart).toBeTruthy();
     expect(dimensions.when.storyArc?.touchpointSchedule.length).toBeGreaterThan(0);
   });

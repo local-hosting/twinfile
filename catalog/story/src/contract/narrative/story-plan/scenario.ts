@@ -102,7 +102,7 @@ export function composeSamStoryPlanWorkingScenario(input: {
 
   const storeSlug = input.hints.storeSlug?.trim();
   const store = storeSlug
-    ? input.narrative.fleetVenues.find((row) => row.slug === storeSlug)
+    ? input.narrative.fleetPlaces.find((row) => row.slug === storeSlug)
     : undefined;
 
   if (store) {

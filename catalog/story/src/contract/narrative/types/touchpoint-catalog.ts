@@ -11,10 +11,10 @@ export type SAMTouchpointDefinition = {
   journeyPhase?: string;
   locus?: SAMTouchpointLocus;
   /**
-   * Default venue for `physical` / `blended` touchpoints (`venue:*` / place mount key).
+   * Default place for `physical` / `blended` touchpoints (`place:*` / place mount key).
    * Scene-level or per-scene-touchpoint refs override at compile time.
    */
-  venueKey?: string;
+  placeRef?: string;
   spaceId?: string;
 };
 
@@ -38,7 +38,7 @@ export type TouchpointGraphWire = {
     label?: string;
     journeyPhase?: string;
     locus?: SAMTouchpointLocus;
-    venueKey?: string;
+    placeRef?: string;
     spaceId?: string;
   }[];
   links?: readonly {

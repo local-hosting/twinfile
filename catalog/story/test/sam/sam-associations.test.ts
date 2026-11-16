@@ -36,20 +36,20 @@ describe('SAM associations', () => {
     expect(sam.characters).toEqual([{ pcmId: 'persona:rider', primary: true }]);
   });
 
-  it('accepts multiple characters and venues', () => {
+  it('accepts multiple characters and places', () => {
     const sam = parseSAM({
       ...storyboardSamFixture(),
       characters: [
         { pcmId: 'persona:rider', primary: true },
         { pcmId: 'persona:driver', role: 'counterpart' },
       ],
-      venues: [{ venueKey: 'venue:hub' }, { venueKey: 'venue:store' }],
+      places: [{ placeRef: 'twinfile/place/hub:0.0.0' }, { placeRef: 'twinfile/place/store:0.0.0' }],
     });
-    expect(sam.venues).toHaveLength(2);
+    expect(sam.places).toHaveLength(2);
     const check = validateSAMAssociations(sam, {
       journey,
       knownPcmIds: ['persona:rider', 'persona:driver'],
-      knownVenueKeys: ['venue:hub', 'venue:store'],
+      knownPlaceRefs: ['twinfile/place/hub:0.0.0', 'twinfile/place/store:0.0.0'],
     });
     expect(check.ok).toBe(true);
   });
@@ -57,15 +57,15 @@ describe('SAM associations', () => {
   it('rejects unknown pcm or place mounts', () => {
     const sam = parseSAM({
       ...storyboardSamFixture(),
-      venues: [{ venueKey: 'venue:missing' }],
+      places: [{ placeRef: 'twinfile/place/missing:0.0.0' }],
     });
     const check = validateSAMAssociations(sam, {
       journey,
       knownPcmIds: ['persona:rider'],
-      knownVenueKeys: ['venue:hub'],
+      knownPlaceRefs: ['twinfile/place/hub:0.0.0'],
     });
     expect(check.ok).toBe(false);
     if (check.ok) return;
-    expect(check.issues.join(' ')).toMatch(/unknown venueKey/);
+    expect(check.issues.join(' ')).toMatch(/unknown placeRef/);
   });
 });

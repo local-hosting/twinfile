@@ -20,7 +20,7 @@ const catalog: SamStoryPlanCatalogSnapshotV1 = {
   pcmIds: [],
   samEpisodeIds: [],
   jobIds: [],
-  fleetVenues: [],
+  fleetPlaces: [],
   touchpointCount: 0,
   touchpointIdsSample: [],
 };

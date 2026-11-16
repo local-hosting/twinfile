@@ -20,7 +20,7 @@ export type SamStoryInstanceJson = StoryCharacteristics;
 
 export type SamStoryRuntimeWire = StoryCharacteristics;
 
-const SAM_TEMPLATE_KEYS = ['episodeArc', 'scenes', 'binding', 'arcTemplate', 'characters', 'venues'] as const;
+const SAM_TEMPLATE_KEYS = ['episodeArc', 'scenes', 'binding', 'arcTemplate', 'characters', 'places'] as const;
 
 function isClock(value: unknown): value is StoryClockCursorWire {
   if (!value || typeof value !== 'object') return false;

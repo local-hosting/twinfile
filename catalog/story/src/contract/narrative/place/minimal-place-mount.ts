@@ -1,9 +1,11 @@
+import { parseTwinfileRef, placeRefIdentity, type TwinfileRef } from '@local-hosting/twinfile-core/ref';
+
 import type { PlaceMount } from '../types/place-mount.js';
 
-import type { GeoAnchorV1 } from '../venue/rank-venues-near-anchor.js';
+import type { GeoAnchorV1 } from './rank-places-near-anchor.js';
 
 export type MinimalPlaceMountInput = {
-  venueKey: string;
+  placeRef: TwinfileRef;
   title?: string;
   lat?: number;
   lon?: number;
@@ -15,13 +17,17 @@ function geoFromLatLon(lat?: number, lon?: number): { lat: number; lon: number }
   return { lat, lon };
 }
 
-/** Portable venue mount without an external unit ref (geo-only or id-only). */
+/** Portable place mount without published layout (geo-only or id-only). */
 export function minimalPlaceMount(input: MinimalPlaceMountInput): PlaceMount {
-  const venueKey = input.venueKey.trim();
-  const title = input.title?.trim() || venueKey;
+  const placeRef = input.placeRef.trim();
+  const parsed = parseTwinfileRef(placeRef);
+  if (!parsed) {
+    throw new Error(`minimalPlaceMount: invalid placeRef "${placeRef}"`);
+  }
+  const title = input.title?.trim() || parsed.name;
   const geo = geoFromLatLon(input.lat, input.lon);
   return {
-    venueKey,
+    placeRef,
     title,
     spaceIds: [],
     ...(geo ? { geo } : {}),
@@ -30,22 +36,16 @@ export function minimalPlaceMount(input: MinimalPlaceMountInput): PlaceMount {
 
 export function minimalPlaceMountFromGeoAnchor(
   anchor: GeoAnchorV1,
-  venueKey = 'venue:geo-anchor',
+  placeRef: TwinfileRef = 'twinfile/place/geo-anchor:0.0.0',
 ): PlaceMount {
-  return minimalPlaceMount({
-    venueKey,
-    title: venueKey.replace(/^venue:/, '') || 'geo-anchor',
-    lat: anchor.lat,
-    lon: anchor.lon,
-  });
+  return minimalPlaceMount({ placeRef, lat: anchor.lat, lon: anchor.lon });
 }
 
-export function mergePlaceMountsByVenueKey(
-  mounts: readonly PlaceMount[],
-): PlaceMount[] {
+/** One mount per place (kind + name); prefers richer layout, then geo. */
+export function mergePlaceMountsByPlaceRef(mounts: readonly PlaceMount[]): PlaceMount[] {
   const map = new Map<string, PlaceMount>();
   for (const mount of mounts) {
-    const key = mount.venueKey.trim();
+    const key = placeRefIdentity(mount.placeRef);
     if (!key) continue;
     const existing = map.get(key);
     if (!existing) {
@@ -61,9 +61,7 @@ export function mergePlaceMountsByVenueKey(
     if (nextSpaces < existingSpaces) {
       continue;
     }
-    const existingGeo = existing.geo != null;
-    const nextGeo = mount.geo != null;
-    if (!existingGeo && nextGeo) {
+    if (existing.geo == null && mount.geo != null) {
       map.set(key, mount);
     }
   }

@@ -39,7 +39,7 @@ export const JourneyTouchpointRecordSchema = z
     heartCategory: z.string().min(1).optional(),
     status: z.string().min(1).optional(),
     feature: z.string().min(1).optional(),
-    /** Canonical link to `venue/fixtures.yaml` — prefer over free-text `fixture`. */
+    /** Canonical link to `place/fixtures.yaml` — prefer over free-text `fixture`. */
     fixtureId: z.string().min(1).optional(),
     /** @deprecated Use `fixtureId`. Kept for legacy YAML during migration. */
     fixture: z.string().min(1).optional(),
@@ -69,7 +69,7 @@ export const JourneyTouchpointZoneCatalogFileSchema = z
   })
   .passthrough();
 
-export const VenueZoneSchema = z
+export const PlaceZoneSchema = z
   .object({
     id: z.string().min(1),
     slug: z.string().min(1),
@@ -80,18 +80,18 @@ export const VenueZoneSchema = z
   })
   .passthrough();
 
-export const VenueJourneyZonePhaseSchema = z.enum(['pre-store', 'in-store', 'post-store']);
+export const PlaceJourneyZonePhaseSchema = z.enum(['pre-store', 'in-store', 'post-store']);
 
-export const VenueZoneFileSchema = z
+export const PlaceZoneFileSchema = z
   .object({
     name: z.string().min(1),
-    phase: VenueJourneyZonePhaseSchema,
+    phase: PlaceJourneyZonePhaseSchema,
     description: z.string().min(1),
-    zones: z.array(VenueZoneSchema),
+    zones: z.array(PlaceZoneSchema),
   })
   .passthrough();
 
-export const VenueFixtureSchema = z
+export const PlaceFixtureSchema = z
   .object({
     id: z.string().min(1),
     name: z.string().min(1),
@@ -100,18 +100,18 @@ export const VenueFixtureSchema = z
   })
   .passthrough();
 
-export const VenueFixtureFileSchema = z
+export const PlaceFixtureFileSchema = z
   .object({
     name: z.string().min(1),
     description: z.string().min(1),
-    fixtures: z.array(VenueFixtureSchema),
+    fixtures: z.array(PlaceFixtureSchema),
   })
   .passthrough();
 
 export type JourneyTouchpointRecord = z.output<typeof JourneyTouchpointRecordSchema>;
 export type JourneyTouchpointListFile = z.output<typeof JourneyTouchpointListFileSchema>;
 export type JourneyTouchpointZoneCatalogFile = z.output<typeof JourneyTouchpointZoneCatalogFileSchema>;
-export type VenueZone = z.output<typeof VenueZoneSchema>;
-export type VenueZoneFile = z.output<typeof VenueZoneFileSchema>;
-export type VenueFixture = z.output<typeof VenueFixtureSchema>;
-export type VenueFixtureFile = z.output<typeof VenueFixtureFileSchema>;
+export type PlaceZone = z.output<typeof PlaceZoneSchema>;
+export type PlaceZoneFile = z.output<typeof PlaceZoneFileSchema>;
+export type PlaceFixture = z.output<typeof PlaceFixtureSchema>;
+export type PlaceFixtureFile = z.output<typeof PlaceFixtureFileSchema>;

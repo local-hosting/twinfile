@@ -14,7 +14,6 @@
     "workbench": "node packages/simulator/viewer/scripts/run-view.mjs",
     "check": "yarn run check:twinfile",
     "check:twinfile": "node packages/tooling/scripts/check-nested-yarn.mjs && node packages/tooling/scripts/check-workspace.mjs",
-    "refresh:scenario-expected": "node packages/tooling/scripts/refresh-scenario-expected.mjs",
     "hygiene": "node packages/tooling/scripts/repo-hygiene.mjs"
   },
   "resolutions": {

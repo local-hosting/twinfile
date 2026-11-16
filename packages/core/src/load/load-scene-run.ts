@@ -3,13 +3,13 @@ import { resolve } from 'node:path';
 import { isRecord } from '../doc/is-record.js';
 import type { Result, TwinError } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
-import type { SceneExpected } from '../types/scene-run.js';
 import { readYamlDocument } from '../validate/validate-yaml.js';
 
 import type { LoadedTwinfile } from './load-twinfile.js';
 import { findTwinfileYamlPath } from './twinfile-locator.js';
 
 const SCENE_SEPARATOR = '#';
+const PLACE_REF = /^twinfile\/place\//;
 
 const RUN_COMPOSE_KEYS = ['steps', 'domains', 'args', 'schedule', 'clock', 'use'] as const;
 
@@ -62,19 +62,58 @@ export function listSceneRunIds(storyRoot: string): string[] {
     .map((scene) => String(scene.id));
 }
 
+/** `links` entries with `rel: involves` whose href is a place ref. */
+function involvesPlaceRefs(doc: Record<string, unknown>): string[] {
+  if (!Array.isArray(doc.links)) return [];
+  return doc.links.flatMap((link) => {
+    if (!isRecord(link) || link.rel !== 'involves' || typeof link.href !== 'string') return [];
+    return PLACE_REF.test(link.href) ? [link.href] : [];
+  });
+}
+
+/** Explicit `run.from`, else the story's single involves place ref. */
+function resolveRunFrom(
+  story: Record<string, unknown>,
+  scene: Record<string, unknown>,
+  file: string,
+): Result<string> {
+  const run = scene.run as Record<string, unknown>;
+  if (typeof run.from === 'string' && run.from.trim()) return ok(run.from.trim());
+  const places = involvesPlaceRefs(story);
+  if (places.length === 1) return ok(places[0]!);
+  const sceneId = String(scene.id);
+  if (places.length === 0) {
+    return err([
+      {
+        code: 'E_SCHEMA',
+        message: `scene ${sceneId} run requires from: (or a links involves place)`,
+        file,
+      },
+    ]);
+  }
+  return err([
+    {
+      code: 'E_SCHEMA',
+      message: `scene ${sceneId} run requires from: (ambiguous involves place links)`,
+      file,
+    },
+  ]);
+}
+
 function sceneRunErrors(scene: Record<string, unknown>, file: string): TwinError[] {
   const run = scene.run;
   if (typeof run === 'string') {
     return [{ code: 'E_SCHEMA', message: 'scene run: must be an inline mapping, not a folder path', file }];
   }
   if (!isRecord(run)) return [{ code: 'E_SCHEMA', message: `scene ${String(scene.id)} has no run:`, file }];
-  if (typeof run.from !== 'string' || !run.from.trim()) {
-    return [{ code: 'E_SCHEMA', message: `scene ${String(scene.id)} run requires from:`, file }];
-  }
   return [];
 }
 
-function runComposeHead(story: Record<string, unknown>, scene: Record<string, unknown>): Record<string, unknown> {
+function runComposeHead(
+  story: Record<string, unknown>,
+  scene: Record<string, unknown>,
+  from: string,
+): Record<string, unknown> {
   const run = scene.run as Record<string, unknown>;
   const head: Record<string, unknown> = {
     twinfile: 2,
@@ -84,7 +123,7 @@ function runComposeHead(story: Record<string, unknown>, scene: Record<string, un
     ...(typeof scene.label === 'string' ? { name: scene.label } : {}),
     version: story.version ?? '1.0.0',
     ...(story.stability ? { stability: story.stability } : {}),
-    from: run.from,
+    from,
   };
   for (const key of RUN_COMPOSE_KEYS) {
     if (run[key] !== undefined) head[key] = structuredClone(run[key]);
@@ -106,13 +145,14 @@ export function loadRunUnit(target: string): Result<LoadedTwinfile> {
     const known = listSceneRunIds(address.storyRoot).join(', ') || 'none';
     return err([{ code: 'E_SCHEMA', message: `unknown scene ${address.sceneId} (runs: ${known})`, file: path }]);
   }
-  const errors = sceneRunErrors(scene, path);
-  if (errors.length > 0) return err(errors);
-  const expected = (scene.run as { expected?: SceneExpected }).expected;
+  const shapeErrors = sceneRunErrors(scene, path);
+  if (shapeErrors.length > 0) return err(shapeErrors);
+  const from = resolveRunFrom(doc, scene, path);
+  if (!from.ok) return from;
   return ok({
     root: address.storyRoot,
     twinfilePath: path,
-    twinfile: runComposeHead(doc, scene),
-    scene: { id: address.sceneId, ...(expected ? { expected } : {}) },
+    twinfile: runComposeHead(doc, scene, from.value),
+    scene: { id: address.sceneId },
   });
 }

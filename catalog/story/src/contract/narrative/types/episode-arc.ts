@@ -8,8 +8,8 @@ export type EpisodeTouchpointScheduleEntry = {
   phase: EpisodePhaseId;
   /** Storyboard scene when compiled from SAM `scenes`. */
   sceneId?: string;
-  /** Venue setting for this beat (scene `venueKey` / mounted place). */
-  venueKey?: string;
+  /** Place setting for this beat (scene `placeRef` / mounted place). */
+  placeRef?: string;
   spaceId?: string;
   visitMomentId?: string;
   characterIds?: readonly string[];

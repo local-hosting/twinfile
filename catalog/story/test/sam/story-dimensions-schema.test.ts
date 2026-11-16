@@ -11,22 +11,22 @@ describe('SamStoryDimensionsSchema', () => {
       specVersion: '1.0',
       who: { pcmId: 'persona:rider', characterIds: ['persona:rider'] },
       what: { samEpisodeId: 'story:episode:commute', journeyId: 'journey:commute' },
-      where: { venueKeys: ['venue:home'], primaryVenueKey: 'venue:home' },
+      where: { placeRefs: ['twinfile/place/home:0.0.0'], primaryPlaceRef: 'twinfile/place/home:0.0.0' },
       when: {
         simulationEpochStart: '2026-01-06',
         planningHorizonDays: 42,
         visitDayIndex: 3,
       },
     });
-    expect(parsed.where.primaryVenueKey).toBe('venue:home');
+    expect(parsed.where.primaryPlaceRef).toBe('twinfile/place/home:0.0.0');
     expect(parsed.who.pcmId).toBe('persona:rider');
   });
 
-  it('accepts a venue mount without host geo', () => {
+  it('accepts a place mount without host geo', () => {
     const parsed = SamStoryDimensionWhereSchema.parse({
-      venueKeys: ['venue:demo-airport'],
-      primaryVenueKey: 'venue:demo-airport',
+      placeRefs: ['twinfile/place/demo-airport:0.0.0'],
+      primaryPlaceRef: 'twinfile/place/demo-airport:0.0.0',
     });
-    expect(parsed.venueKeys).toEqual(['venue:demo-airport']);
+    expect(parsed.placeRefs).toEqual(['twinfile/place/demo-airport:0.0.0']);
   });
 });

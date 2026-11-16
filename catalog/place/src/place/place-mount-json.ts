@@ -1,4 +1,4 @@
-import type { TwinfilePlaceMount } from '@local-hosting/twinfile-core';
+import { isTwinfileRef, type TwinfilePlaceMount } from '@local-hosting/twinfile-core';
 
 function readStringArray(raw: unknown): string[] | undefined {
   if (!Array.isArray(raw)) {
@@ -51,11 +51,11 @@ export function placeMountFromJson(json: unknown): TwinfilePlaceMount {
     throw new Error('invalid place mount JSON');
   }
   const record = json as Record<string, unknown>;
-  const venueKey = String(record.venueKey ?? '').trim();
+  const placeRef = String(record.placeRef ?? '').trim();
   const title = String(record.title ?? '').trim();
   const spaceIds = readStringArray(record.spaceIds) ?? [];
-  if (!venueKey) {
-    throw new Error('place mount missing venueKey');
+  if (!isTwinfileRef(placeRef)) {
+    throw new Error(`place mount missing valid placeRef (got "${placeRef}")`);
   }
   if (!title) {
     throw new Error('place mount missing title');
@@ -70,8 +70,7 @@ export function placeMountFromJson(json: unknown): TwinfilePlaceMount {
   const layoutSpaces = readLayoutRows(record.layoutSpaces);
   const layoutPathways = readPathwayRows(record.layoutPathways);
   return {
-    ...(typeof record.placeRef === 'string' ? { placeRef: record.placeRef as TwinfilePlaceMount['placeRef'] } : {}),
-    venueKey,
+    placeRef,
     title,
     ...(typeof record.geotypePrimary === 'string' ? { geotypePrimary: record.geotypePrimary } : {}),
     ...(typeof record.schemaOrgType === 'string' ? { schemaOrgType: record.schemaOrgType } : {}),
