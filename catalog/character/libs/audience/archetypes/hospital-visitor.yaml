@@ -1,0 +1,339 @@
+presetId: hospital_visitor
+label: Hospital visitor
+segmentMix:
+  default: 0.3
+  patient: 0.25
+  caregiver: 0.25
+  outpatient: 0.15
+  anxious-visitor: 0.05
+specVersion: "1.0"
+methodId: hospital-visit
+segments:
+  - id: default
+    overview:
+      name: Hospital Visitor
+      mindset: Care-focused and navigation-sensitive
+      journeyPace: medium
+    empathy:
+      empathy:
+        phases:
+          service:
+            Prep for Visit:
+              thinking:
+                - Do I know where to park and which entrance to use?
+            Arrival:
+              thinking:
+                - Signs and staff directions matter more than amenities right
+                  now.
+        feelings:
+          positive:
+            - Relief when staff explain the next step
+          negative:
+            - Anxiety when nobody can tell me the wait time
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: get-to-the-right-place
+            label: Get to the Right Place
+            innerThinking:
+              - Wrong floor or wing wastes precious time when someone needs care.
+            guidingPrinciples:
+              - Clear wayfinding beats decorative lobby design
+            supportingCapabilities:
+              services: []
+        byFocus:
+          wayfinding:
+            mentalSpaces:
+              - id: entrance-clarity
+                label: Entrance Clarity
+                innerThinking:
+                  - Which door is for emergencies versus scheduled visits?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: understand-next-steps
+                label: Understand Next Steps
+                innerThinking:
+                  - What happens after check-in — and how long will we wait?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Color-coded wing and floor directories
+            - Whether volunteers are at key intersections
+          othersObserved:
+            - Families clustered near information desks
+    hear:
+      hear:
+        baseline:
+          others:
+            - Staff paging for a doctor or room number
+          secondHand:
+            - Stories about long waits in this department
+  - id: patient
+    overview:
+      name: Patient
+      mindset: Symptom-focused and trust-dependent
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Engage:
+              thinking:
+                - I need clinicians who listen, not just read the chart.
+            Dwell:
+              thinking:
+                - Waiting without updates makes every minute feel longer.
+        feelings:
+          positive:
+            - Calm when staff explain the next step
+          negative:
+            - Anxiety when updates stop coming
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: feel-heard
+            label: Feel Heard
+            innerThinking:
+              - My symptoms and history should shape the plan, not just the
+                protocol.
+            guidingPrinciples:
+              - Dignity matters as much as diagnosis
+            supportingCapabilities:
+              services: []
+        byFocus:
+          care-navigation:
+            mentalSpaces:
+              - id: follow-the-care-path
+                label: Follow the Care Path
+                innerThinking:
+                  - Who do I see next — nurse, imaging, or the doctor?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          privacy:
+            mentalSpaces:
+              - id: protect-my-story
+                label: Protect My Story
+                innerThinking:
+                  - I do not want sensitive details discussed in the hallway.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          beginner:
+            mentalSpaces:
+              - id: new-diagnosis
+                label: New Diagnosis
+                innerThinking:
+                  - I need plain language, not jargon, when results come back.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - beginner
+          - regular
+      - intentId: fix
+        validLevelIds:
+          - beginner
+          - regular
+          - champion
+    see:
+      see:
+        baseline:
+          environment:
+            - Cleanliness in waiting areas
+            - Whether staff look rushed
+          materials:
+            - Paperwork clarity at check-in
+    hear:
+      hear:
+        baseline:
+          others:
+            - Other patients asking how long the wait will be
+          secondHand:
+            - Stories about good or bad care experiences
+  - id: caregiver
+    overview:
+      name: Caregiver
+      mindset: Advocate for someone else under stress
+      journeyPace: medium
+    empathy:
+      empathy:
+        phases:
+          service:
+            Arrival:
+              thinking:
+                - I am managing their paperwork, mobility, and emotional state
+                  at once.
+            Exit & Reflect:
+              thinking:
+                - Did we leave with clear discharge instructions and follow-up
+                  dates?
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: coordinate-for-two
+            label: Coordinate for Two
+            innerThinking:
+              - Every delay affects someone who may not be able to speak up for
+                themselves.
+            guidingPrinciples:
+              - Updates should reach the person actually making decisions
+            supportingCapabilities:
+              services: []
+        byFocus:
+          wait-time:
+            mentalSpaces:
+              - id: buffer-the-wait
+                label: Buffer the Wait
+                innerThinking:
+                  - I need a realistic ETA so I can manage expectations at home.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          fix:
+            mentalSpaces:
+              - id: escalate-when-stuck
+                label: Escalate When Stuck
+                innerThinking:
+                  - If nothing moves in an hour, I will ask for a nurse manager.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - regular
+      - intentId: fix
+        validLevelIds:
+          - regular
+          - champion
+  - id: outpatient
+    overview:
+      name: Outpatient
+      mindset: Appointment-driven and efficiency-minded
+      journeyPace: fast
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: in-and-out
+            label: In and Out
+            innerThinking:
+              - I took time off work — this visit should stay on schedule.
+            guidingPrinciples:
+              - Pre-visit instructions reduce surprises at the desk
+            supportingCapabilities:
+              services: []
+        byFocus:
+          schedule:
+            mentalSpaces:
+              - id: slot-discipline
+                label: Slot Discipline
+                innerThinking:
+                  - A 9:00 appointment should not become a 10:30 reality.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          price:
+            mentalSpaces:
+              - id: cost-clarity
+                label: Cost Clarity
+                innerThinking:
+                  - What will insurance cover versus what hits my bill?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          regular:
+            mentalSpaces:
+              - id: familiar-routine
+                label: Familiar Routine
+                innerThinking:
+                  - I know this clinic's rhythm — just keep it predictable.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - beginner
+      - intentId: setup
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+  - id: anxious-visitor
+    overview:
+      name: Anxious Visitor
+      mindset: Uncertainty-sensitive in clinical settings
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Awareness:
+              thinking:
+                - I start worrying about the visit days before I arrive.
+            Dwell:
+              thinking:
+                - Open bays and beeping monitors spike my stress even when care
+                  is good.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: reduce-unknowns
+            label: Reduce Unknowns
+            innerThinking:
+              - Knowing what step comes next calms me more than small talk.
+            guidingPrinciples:
+              - Proactive updates beat silence in the waiting room
+            supportingCapabilities:
+              services: []
+        byFocus:
+          safety:
+            mentalSpaces:
+              - id: trust-the-environment
+                label: Trust the Environment
+                innerThinking:
+                  - Clean, calm spaces signal that my safety is taken seriously.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          privacy:
+            mentalSpaces:
+              - id: quiet-space
+                label: Quiet Space
+                innerThinking:
+                  - I need a moment alone before difficult conversations.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+          - rejoiner

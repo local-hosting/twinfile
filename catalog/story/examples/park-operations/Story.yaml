@@ -1,0 +1,15 @@
+twinfile: 2
+kind: story
+id: park-operations
+name: Park operations
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/park:0.3.0
+story:
+  arc: operations
+  scenes:
+    - id: park-trailhead-backup
+      label: park trailhead backup
+      run: ./scenes/park-trailhead-backup

@@ -1,0 +1,22 @@
+role: run
+from: twinfile/place/arena:1.2.0
+id: arena-storm-at-halftime
+name: Storm at halftime
+version: 1.0.0
+stability: example
+steps:
+  - copy: twinfile/event/arena-game-day:1.0.0
+  - copy: twinfile/situation/severe-weather:1.0.0
+domains:
+  - safety
+clock:
+  starts_at: 2026-09-15T13:00:00-04:00
+  duration: PT3H30M
+  step: PT5M
+args:
+  attendance: 18000
+  warningAt: arena-game-day.halftime
+use:
+  runner: npm:@twinfile/runner-hydraulic@^0
+catalog:
+  parent: twinfile/arena:1.2.0

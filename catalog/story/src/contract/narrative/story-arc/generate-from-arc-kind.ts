@@ -1,0 +1,149 @@
+import type { Journey, JourneyPhase } from '@local-hosting/twinfile-character/pcm';
+
+import type { SAMBinding } from '../types/sam.js';
+import type { SAMCharacterRef } from '../types/sam-refs.js';
+import type { StoryScene } from '../types/scene.js';
+import type { StoryArcKind } from '../types/story-arc-kind.js';
+import type { StoryArcTemplate } from '../types/story-arc-template.js';
+import { defaultActsForStoryArcKind, WRITE_PRACTICE_ARC_PRESETS } from './write-practice-presets.js';
+
+export type BuildStoryArcTemplateFromKindInput = {
+  kind: StoryArcKind;
+  id?: string;
+  label?: string;
+};
+
+export function buildStoryArcTemplateFromKind(
+  input: BuildStoryArcTemplateFromKindInput,
+): StoryArcTemplate {
+  const preset = WRITE_PRACTICE_ARC_PRESETS[input.kind];
+  return {
+    id: input.id ?? `arc:${input.kind}`,
+    label: input.label ?? preset.label,
+    kind: input.kind,
+    description: preset.summary,
+    acts: defaultActsForStoryArcKind(input.kind),
+  };
+}
+
+function orderedPhases(journey: Journey): JourneyPhase[] {
+  return [...journey.phases].sort((left, right) => left.order - right.order);
+}
+
+function touchpointIdsForPhase(phase: JourneyPhase): string[] {
+  const ids: string[] = [...phase.touchpointIds];
+  for (const moment of [...(phase.moments ?? [])].sort((a, b) => a.order - b.order)) {
+    for (const touchpointId of moment.touchpointIds ?? []) {
+      ids.push(touchpointId);
+    }
+  }
+  return ids;
+}
+
+export type ScaffoldScenesFromJourneyArcInput = {
+  kind: StoryArcKind;
+  journey: Journey;
+  /** Default place venue key for every scene. */
+  venueKey: string;
+  characterIds?: string[];
+};
+
+/**
+ * Map PCM journey phases onto the dramatic beat rail for a Write Practice arc kind
+ * (one storyboard scene per journey phase).
+ */
+export function scaffoldScenesFromJourneyArc(
+  input: ScaffoldScenesFromJourneyArcInput,
+): StoryScene[] {
+  const beats = defaultActsForStoryArcKind(input.kind);
+  const phases = orderedPhases(input.journey);
+  const characterIds = input.characterIds ?? [input.journey.personaId];
+
+  return phases.map((phase, index) => {
+    const beatIndex =
+      phases.length <= 1 ? 0 : Math.floor((index * beats.length) / phases.length);
+    const beat = beats[Math.min(beatIndex, beats.length - 1)];
+
+    return {
+      id: `scene:${phase.id.replace(/^phase:/, '')}`,
+      label: phase.label,
+      order: index,
+      actId: beat.id,
+      characterIds,
+      venueKey: input.venueKey,
+      journeyPhaseId: phase.id,
+      jobIds: phase.jobIds?.length ? [...phase.jobIds] : undefined,
+      emotions: phase.emotions
+        ? {
+            band: phase.emotions.band,
+            valence: phase.emotions.valence,
+            feelings: phase.emotions.feelings,
+          }
+        : undefined,
+      pain: phase.pain,
+      gain: phase.gain,
+      touchpointIds: touchpointIdsForPhase(phase),
+    };
+  });
+}
+
+export type GenerateSamEpisodeFromArcInput = {
+  kind: StoryArcKind;
+  journey: Journey;
+  episodeId: string;
+  title: string;
+  revision: number;
+  focalPcmId: string;
+  venueKey: string;
+  simulationEpochStart: string;
+  planningHorizonDays?: number;
+  visitDayIndex?: number;
+  /** Additional cast beyond the focal PCM. */
+  characters?: SAMCharacterRef[];
+};
+
+export type GeneratedSamEpisodeDraft = {
+  arcTemplate: StoryArcTemplate;
+  scenes: StoryScene[];
+  characters: SAMCharacterRef[];
+  binding: SAMBinding;
+};
+
+/**
+ * Draft a SAM episode from a Write Practice arc kind + authored PCM journey
+ * (acts rail + scenes). Run {@link compileSAM} / {@link generateEpisodeCalendar} next.
+ */
+export function generateSamEpisodeFromArc(
+  input: GenerateSamEpisodeFromArcInput,
+): GeneratedSamEpisodeDraft {
+  const arcTemplate = buildStoryArcTemplateFromKind({
+    kind: input.kind,
+    id: `arc:${input.episodeId.replace(/^story:episode:/, '')}`,
+    label: input.title,
+  });
+
+  const scenes = scaffoldScenesFromJourneyArc({
+    kind: input.kind,
+    journey: input.journey,
+    venueKey: input.venueKey,
+    characterIds: [input.focalPcmId],
+  });
+
+  const characters: SAMCharacterRef[] =
+    input.characters?.length
+      ? input.characters
+      : [{ pcmId: input.focalPcmId, primary: true }];
+
+  return {
+    arcTemplate,
+    scenes,
+    characters,
+    binding: {
+      pcmId: input.focalPcmId,
+      journeyId: input.journey.id,
+      simulationEpochStart: input.simulationEpochStart,
+      planningHorizonDays: input.planningHorizonDays,
+      visitDayIndex: input.visitDayIndex,
+    },
+  };
+}

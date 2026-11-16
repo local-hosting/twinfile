@@ -1,0 +1,216 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: shop
+name: Starbucks Pike Place
+version: 0.2.0
+stability: example
+geotype:
+  primary: cafe
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: Starbucks Pike Place
+      kind: shop
+      timezone: America/Los_Angeles
+      published: false
+      ext:
+        lat: 47.610149
+        lon: -122.342065
+        h3: 8928d542cb3ffff
+  - spaces:
+      - id: sales-floor
+        name: Sales floor
+        kind: retail
+        level: ground
+        exposure: indoor
+        capacity: 120
+        roles:
+          - ground-transport
+      - id: stockroom
+        name: Stockroom
+        kind: back-of-house
+        level: ground
+        exposure: indoor
+        capacity: 40
+        roles:
+          - shelter
+          - alternative
+      - id: curb-zone
+        name: Curbside pickup
+        kind: curb
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+    mode: replace
+  - openings:
+      - id: door-main
+        kind: door
+        connects:
+          - sales-floor
+          - curb-zone
+        width_m: 2
+        state: open
+        roles:
+          - exit
+      - id: door-stock
+        kind: door
+        connects:
+          - sales-floor
+          - stockroom
+        width_m: 1.5
+        state: open
+        roles:
+          - exit
+      - id: door-service
+        kind: door
+        connects:
+          - stockroom
+          - curb-zone
+        width_m: 1.2
+        state: open
+        roles:
+          - exit
+  - routes:
+      - id: aisle-main
+        name: Main aisle to stock
+        from: sales-floor
+        to: stockroom
+        length_m: 22
+        kind: corridor
+        step_free: true
+      - id: path-curb
+        name: Sales to curbside
+        from: sales-floor
+        to: curb-zone
+        length_m: 14
+        kind: path
+        step_free: true
+  - assets:
+      - id: greeter-kiosk
+        name: Greeter kiosk
+        kind: kiosk
+        space: sales-floor
+        state: active
+        dtpr:
+          schema: dtpr@2026-09-01-beta
+          type: device
+          accountable: example-retailer
+          elements:
+            purpose:
+              - commerce
+            manifestation:
+              - chatbot_voice_reply
+            affected:
+              - people
+      - id: pos-system
+        name: Point of sale
+        kind: pos
+        space: sales-floor
+        state: active
+        dtpr:
+          schema: dtpr@2026-09-01-beta
+          type: device
+          accountable: example-retailer
+          elements:
+            purpose:
+              - commerce
+            manifestation:
+              - automatic_transaction
+            affected:
+              - people
+      - id: kiosk-checkout
+        name: Self-checkout kiosk
+        kind: kiosk
+        space: sales-floor
+        state: active
+      - id: sign-shelter
+        name: Shelter capacity sign
+        kind: signage
+        space: stockroom
+        state: active
+  - sensors:
+      - id: door-main-tracker
+        name: Main entrance door counter
+        observes: door-main
+        space: sales-floor
+        unit: entries_per_hour
+        dtpr:
+          schema: dtpr@2026-09-01-beta
+          type: device
+          accountable: example-retailer
+          elements:
+            collection:
+              - connected_device_telemetry
+            purpose:
+              - entry
+              - commerce
+            affected:
+              - people
+  - ai:
+      - id: greeter-assistant
+        name: Greeter kiosk assistant
+        kind: conversational
+        runs_on: on-device
+        space: sales-floor
+        accountable: example-retailer
+        dtpr:
+          schema: dtpr@2026-09-01-beta
+          type: ai
+          accountable: example-retailer
+          elements:
+            processing:
+              - classification_prediction
+            manifestation:
+              - chatbot_voice_reply
+            affected:
+              - people
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - sales-floor
+          - curb-zone
+        alternative:
+          - stockroom
+      actions:
+        - at: disrupted
+          set:
+            curb-zone:
+              state: closed
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - stockroom
+        exit:
+          - door-main
+          - door-service
+        outdoor:
+          - curb-zone
+      actions:
+        - at: warning
+          set:
+            curb-zone:
+              state: closed
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - sales-floor
+          - curb-zone
+      actions:
+        - at: steady
+          set: {}
+processors:
+  - id: context-situations
+    type: twinfile/mod.situation-in@0.1.0
+    outlets:
+      - port: alert
+        to:
+          processor: context-signals
+          port: alert
+  - id: context-signals
+    type: twinfile/mod.signal-hub@0.1.0

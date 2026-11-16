@@ -1,0 +1,9 @@
+for: transit-disruption
+roles:
+  ground-transport:
+    - only-zone
+actions:
+  - at: disrupted
+    set:
+      only-zone:
+        state: closed

@@ -1,0 +1,4 @@
+{
+  "strictBindings": 1,
+  "bindings": [{ "for": "dam-release" }]
+}

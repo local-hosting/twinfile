@@ -1,0 +1,125 @@
+specVersion: "1.0"
+methodId: general-journey
+types:
+  - id: J6lCdf1MZuXk
+    label: Performance
+    rootCategory: performance
+  - id: GmUDzukE6z4M
+    label: Presentation
+    rootCategory: presentation
+  - id: C3crCUhci6bh
+    label: Programmed experience
+    rootCategory: programmed_experience
+  - id: TIaBEiAUt3oK
+    label: Dining
+    rootCategory: dining
+  - id: bveNxIVOuAqb
+    label: Broadcast
+    rootCategory: broadcast
+  - id: N7weOUQx1qwV
+    label: Visual experience
+    rootCategory: visual_experience
+  - id: _B93-8U_yvBf
+    label: Commerce
+    rootCategory: commerce
+  - id: RmfprsDOlpqn
+    label: Gathering
+    rootCategory: gathering
+  - id: -9tL8P3aM8xt
+    label: Wellness
+    rootCategory: wellness
+  - id: f6CPZwy7CBR8
+    label: Sport
+    rootCategory: sport
+  - id: n2C_h74kMpsl
+    label: Learning
+    rootCategory: learning
+  - id: wk7Ewd6PdRT-
+    label: Exploration
+    rootCategory: exploration
+  - id: CfnY43EdD1R3
+    label: Civic program
+    rootCategory: civic_program
+  - id: 7mp7WajHXWpG
+    label: Live show
+    parentId: J6lCdf1MZuXk
+    slug: live-show
+  - id: l-QxDIpJhzIR
+    label: Talk session
+    parentId: GmUDzukE6z4M
+    slug: talk-session
+  - id: gG1AEqEEHxQI
+    label: Theatre show
+    parentId: J6lCdf1MZuXk
+    slug: theatre-show
+    redirectId: 7mp7WajHXWpG
+  - id: MstWcjjo6Bz8
+    label: Guided route
+    parentId: C3crCUhci6bh
+    slug: guided-route
+    physicalOnly: true
+  - id: YKm19I_q1KoN
+    label: Game day
+    parentId: f6CPZwy7CBR8
+    slug: game-day
+    physicalOnly: true
+  - id: kRiAuF_HYmNy
+    label: Tailgate
+    parentId: f6CPZwy7CBR8
+    slug: tailgate
+    physicalOnly: true
+  - id: 3duh36adSmmv
+    label: Clinical visit
+    parentId: -9tL8P3aM8xt
+    slug: clinical-visit
+    physicalOnly: true
+  - id: hJAxZbKoCNtX
+    label: Rehab session
+    parentId: -9tL8P3aM8xt
+    slug: rehab-session
+    physicalOnly: true
+  - id: cmAb2kbQvfn3
+    label: Station dwell
+    parentId: RmfprsDOlpqn
+    slug: station-dwell
+    physicalOnly: true
+  - id: h06cSgqjcn9x
+    label: Platform transfer
+    parentId: wk7Ewd6PdRT-
+    slug: platform-transfer
+    physicalOnly: true
+  - id: Ji2_VBGKjihJ
+    label: Wayfinding tour
+    parentId: C3crCUhci6bh
+    slug: wayfinding-tour
+    physicalOnly: true
+  - id: nZDRXqb6Xro2
+    label: Mode selection
+    parentId: h06cSgqjcn9x
+    slug: mode-selection
+    physicalOnly: true
+  - id: DZc2HZDilYJC
+    label: Vehicle handoff
+    parentId: h06cSgqjcn9x
+    slug: vehicle-handoff
+    physicalOnly: true
+  - id: Ui_1vy860U0k
+    label: Hub dwell visit
+    parentId: cmAb2kbQvfn3
+    slug: hub-dwell-visit
+    physicalOnly: true
+  - id: Bv0fBZ0LH26K
+    label: Post-trip reflection
+    parentId: wk7Ewd6PdRT-
+    slug: post-trip-reflection
+    physicalOnly: true
+  - id: 5g6qnbFV7x1a
+    label: Interchange planning
+    parentId: wk7Ewd6PdRT-
+    slug: interchange-planning
+    physicalOnly: true
+  - id: f247U2Ze1oz7
+    label: Micro errand
+    parentId: _B93-8U_yvBf
+    slug: micro-errand
+    physicalOnly: true

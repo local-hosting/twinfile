@@ -1,0 +1,53 @@
+specVersion: "1.0"
+methodId: general-daily
+types:
+  - slug: grocery_store
+    id: RSG
+    activityKindHints: [transaction]
+    jobIds: [run-weekly-errands, stock-up-pantry]
+    journeyPhaseIds: [pre_visit, on_site]
+  - slug: gas_station
+    id: ASG
+    activityKindHints: [transaction]
+    jobIds: [refuel-and-go]
+    journeyPhaseIds: [on_site]
+  - slug: bank
+    id: PSB
+    activityKindHints: [service]
+    jobIds: [handle-banking-errand]
+    journeyPhaseIds: [on_site]
+  - slug: post_office
+    id: GPP
+    activityKindHints: [service]
+    jobIds: [ship-or-pick-up-parcel]
+    journeyPhaseIds: [on_site]
+  - slug: pharmacy
+    id: RSP
+    activityKindHints: [transaction, service]
+    jobIds: [fill-prescription, pick-up-essentials]
+    journeyPhaseIds: [pre_visit, on_site]
+  - slug: restaurant
+    id: FDR
+    activityKindHints: [dwell]
+    jobIds: [grab-meal]
+    journeyPhaseIds: [on_site, concessions]
+  - slug: cafe
+    id: FDC
+    activityKindHints: [dwell]
+    jobIds: [grab-meal, take-break]
+    journeyPhaseIds: [on_site, concessions]
+  - slug: fast_food
+    id: FDF
+    activityKindHints: [transaction]
+    jobIds: [grab-meal]
+    journeyPhaseIds: [on_site]
+  - slug: gym
+    id: FCG
+    activityKindHints: [dwell]
+    jobIds: [stay-active]
+    journeyPhaseIds: [on_site]
+  - slug: laundromat
+    id: LND
+    activityKindHints: [service]
+    jobIds: [run-weekly-errands]
+    journeyPhaseIds: [on_site]

@@ -1,0 +1,21 @@
+twinfile: 2
+kind: story
+id: shop-visit
+name: Shop visit arc
+version: 0.1.0
+stability: example
+links:
+  - rel: involves
+    href: twinfile/place/shop:0.2.0
+  - rel: involves
+    href: twinfile/character/shop-greeter:0.1.0
+story:
+  arc: visit
+  scenes:
+    - id: arrive
+      label: Enter sales floor
+    - id: greet
+      label: Greeter interaction
+      run: ./scenes/shop-shelter-at-cap
+    - id: checkout
+      label: Point of sale

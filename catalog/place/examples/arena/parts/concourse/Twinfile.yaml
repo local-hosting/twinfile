@@ -1,0 +1,83 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: arena-concourse
+name: Arena Concourse
+version: 0.1.0
+stability: example
+geotype:
+  primary: office_building
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: Arena concourse (interior)
+      kind: concourse
+      timezone: America/New_York
+      published: false
+  - spaces:
+      - id: lower
+        name: Lower concourse
+        kind: concourse
+        level: ground
+        exposure: indoor
+        capacity: 4000
+        roles:
+          - shelter
+      - id: tunnel-north
+        name: North tunnel
+        kind: tunnel
+        level: ground
+        exposure: covered
+        roles:
+          - shelter
+  - openings:
+      - id: gate-5
+        kind: gate
+        connects:
+          - lower
+          - tunnel-north
+        width_m: 3
+        state: open
+        roles:
+          - exit
+          - gate
+      - id: gate-6
+        kind: gate
+        connects:
+          - lower
+          - tunnel-north
+        width_m: 3
+        state: open
+        roles:
+          - exit
+          - gate
+  - routes:
+      - id: concourse-tunnel
+        name: Lower concourse to north tunnel
+        from: lower
+        to: tunnel-north
+        length_m: 90
+        kind: corridor
+        step_free: true
+  - assets:
+      - id: sign-wayfinding
+        name: Concourse wayfinding
+        kind: signage
+        space: lower
+        state: active
+      - id: cot-stock
+        name: Cot stockpile
+        kind: equipment
+        space: lower
+        state: available
+        ext:
+          shelter_resource: cots
+          capacity: 600
+      - id: water-stock
+        name: Bottled water stock
+        kind: supplies
+        space: lower
+        state: available
+        ext:
+          shelter_resource: water
+          capacity_liters: 8000

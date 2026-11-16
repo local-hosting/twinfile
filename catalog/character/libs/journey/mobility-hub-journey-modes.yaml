@@ -1,0 +1,130 @@
+specVersion: "1.0"
+methodId: mobility-hub
+presetId: mobility_hub_traveler
+stages:
+  - id: en-route-to-hub
+    label: En Route to Hub
+    description: Planning and approach before arriving at the hub.
+    visitPhaseId: pre_visit
+    visitorJourneyStageIds:
+      - pre_visit
+    empathyPhaseIds:
+      - Decision to Visit
+      - Prep for Visit
+  - id: just-passing-through
+    label: Just Passing Through
+    description: Brief hub presence for spontaneous needs or quick errands.
+    visitPhaseId: on_site
+    visitorJourneyStageIds:
+      - arrival
+      - navigation
+    empathyPhaseIds:
+      - Arrival
+      - Engage
+  - id: staying-a-while
+    label: Staying a While
+    description: Extended dwell for vehicle care, services, or leisure.
+    visitPhaseId: on_site
+    visitorJourneyStageIds:
+      - on_site
+      - concessions
+    empathyPhaseIds:
+      - Dwell
+  - id: my-next-vehicle
+    label: My Next Vehicle
+    description: Choosing and taking the next leg of the journey.
+    visitPhaseId: on_site
+    visitorJourneyStageIds:
+      - navigation
+      - egress
+    empathyPhaseIds:
+      - Engage
+      - Exit & Reflect
+  - id: after-my-visit
+    label: After My Visit
+    description: Follow-up planning, community contribution, and reflection.
+    visitPhaseId: post_visit
+    visitorJourneyStageIds:
+      - post_visit
+    empathyPhaseIds:
+      - Exit & Reflect
+zones:
+  - id: A1-place
+    label: En Route / Place
+    stageId: en-route-to-hub
+    subModeId: place
+    description: Hub discovery, routing, pricing, and vehicle inventory before arrival.
+    focusAreaIds:
+      - place
+      - routing
+      - fare
+  - id: A2-time
+    label: En Route / Time
+    stageId: en-route-to-hub
+    subModeId: time
+    description: Live departures, connection windows, and upcoming events.
+    focusAreaIds:
+      - time
+      - real-time-info
+      - schedule
+  - id: Z1-spontaneous
+    label: Passing Through / Spontaneous
+    stageId: just-passing-through
+    subModeId: spontaneous
+    description: Weather, seating, local context, and low-commitment discovery.
+    focusAreaIds:
+      - experience
+  - id: Z2-errands
+    label: Passing Through / Errands
+    stageId: just-passing-through
+    subModeId: errands
+    description: Pickups, parking, and quick in-hub tasks while in motion.
+    focusAreaIds:
+      - wayfinding
+  - id: Z3-vehicle-services
+    label: Staying Awhile / Errands
+    stageId: staying-a-while
+    subModeId: vehicle-services
+    description: Fix, clean, charge, fuel, and service directory lookup.
+    focusAreaIds:
+      - equipment
+  - id: Z4-visit
+    label: Staying Awhile / Visit
+    stageId: staying-a-while
+    subModeId: visit
+    description: Social, leisure, and restorative time within the hub footprint.
+    focusAreaIds:
+      - experience
+  - id: Z5-pick
+    label: Next Vehicle / Pick
+    stageId: my-next-vehicle
+    subModeId: pick
+    description: Compare routes, vehicles, timing, pricing, and safety before committing.
+    focusAreaIds:
+      - mode-selection
+      - transfers
+      - fare
+  - id: Z6-take
+    label: Next Vehicle / Take
+    stageId: my-next-vehicle
+    subModeId: take
+    description: Rent, unlock, board, pay, and begin the next leg.
+    focusAreaIds:
+      - transfers
+      - fare
+      - accessibility
+  - id: P1-up-next
+    label: After Visit / Up Next
+    stageId: after-my-visit
+    subModeId: up-next
+    description: Reminders, alerts, problem reports, and planning the next trip.
+    focusAreaIds:
+      - schedule
+      - real-time-info
+  - id: P2-reflect
+    label: After Visit / Reflect
+    stageId: after-my-visit
+    subModeId: reflect
+    description: Ratings, reviews, cultural discovery, and experience memory.
+    focusAreaIds:
+      - experience

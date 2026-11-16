@@ -1,0 +1,50 @@
+specVersion: "1.0"
+methodId: field-worker
+jobs:
+  - id: close-service-ticket
+    label: Close service ticket
+    granularity: theme
+    situation: When I arrive at a customer site with an open work order
+    motivation: diagnose, repair, and close the ticket on this visit
+    desiredOutcome: The customer issue is resolved and the ticket is closed
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: diagnose-on-site
+    label: Diagnose on site
+    granularity: story
+    parentJobId: close-service-ticket
+    situation: When the root cause is unclear from the dispatch notes
+    motivation: inspect equipment and confirm the failure mode
+    desiredOutcome: I know exactly what to fix or replace
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess
+  - id: source-parts-nearby
+    label: Source parts nearby
+    granularity: story
+    parentJobId: close-service-ticket
+    situation: When I am missing a part needed to finish the job
+    motivation: find a supplier close to my route
+    desiredOutcome: I have the part and can return to close the ticket
+    visitationGoal: converge
+    visitationSubGoal: visit
+  - id: navigate-to-next-stop
+    label: Navigate to next stop
+    granularity: story
+    parentJobId: close-service-ticket
+    situation: When I finish one job and need to reach the next on time
+    motivation: minimize dead time and stay on the route plan
+    desiredOutcome: I arrive at the next stop within the SLA window
+    visitationGoal: converge
+    visitationSubGoal: visit
+  - id: meet-sla-window
+    label: Meet SLA window
+    granularity: story
+    parentJobId: close-service-ticket
+    situation: When the customer expects service within a promised window
+    motivation: arrive, work, and finish before the window closes
+    desiredOutcome: The visit completes inside the committed timeframe
+    visitationGoal: converge
+    visitationSubGoal: visit
+    heartDimensionId: taskSuccess

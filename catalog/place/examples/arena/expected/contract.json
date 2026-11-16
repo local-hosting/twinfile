@@ -1,0 +1,4 @@
+{
+  "strictBindings": 2,
+  "bindings": [{ "for": "severe-weather" }, { "for": "venue-turnstile-flow" }]
+}

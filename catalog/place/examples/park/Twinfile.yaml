@@ -1,0 +1,99 @@
+from: twinfile/base-open-area:0.1.0
+twinfile: 2
+kind: place
+id: park
+name: Central Park
+version: 0.3.0
+stability: example
+geotype:
+  primary: public_park
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: Central Park
+      kind: park
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 40.7829
+        lon: -73.9654
+        h3: 892a1008957ffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: meadow
+        name: Central meadow
+        kind: meadow
+        level: ground
+        exposure: outdoor
+      - id: trailhead
+        name: Trailhead plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        parent: meadow
+  - markers:
+      - id: creek-crossing
+        name: Creek crossing
+        roles:
+          - hotspot
+        state: open
+      - id: boardwalk-n
+        name: North boardwalk
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: bin-station
+        name: Recycling station
+        roles:
+          - collection-point
+        state: open
+  - stations:
+      - id: ranger-post
+        name: Ranger survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: meadow-trail
+        name: Meadow to trailhead
+        from: meadow
+        to: trailhead
+        length_m: 400
+        kind: path
+        step_free: true
+  - visits:
+      - id: visit-meadow
+        kind: activity
+        name: Meadow loop start
+        space: meadow
+        order: 0
+      - id: visit-trailhead
+        kind: activity
+        name: Trailhead plaza
+        space: trailhead
+        order: 1
+  - assets:
+      - id: station-recycle
+        name: Trailhead recycling station
+        kind: station
+        space: trailhead
+        state: active
+  - bind:
+      for: litter-pollution
+      roles:
+        hotspot:
+          - creek-crossing
+        safe-access:
+          - boardwalk-n
+        collection-point:
+          - bin-station
+        survey-station:
+          - ranger-post
+      actions:
+        - at: post-storm-surge
+          set:
+            creek-crossing:
+              state: closed

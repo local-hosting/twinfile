@@ -1,0 +1,20 @@
+from: twinfile/mobility-hub:0.1.0
+twinfile: 2
+kind: place
+id: mobility-hub
+name: King's Cross, London
+version: 0.2.0
+stability: example
+geotype:
+  primary: intermodal_facility
+  registry: "@local-hosting/geotypes@0.1.2"
+steps:
+  - place:
+      name: King's Cross, London
+      kind: mobility_hub
+      timezone: Europe/London
+      published: false
+      ext:
+        lat: 51.5308
+        lon: -0.1238
+        h3: 89195da4d8fffff

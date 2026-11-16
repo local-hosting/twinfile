@@ -1,0 +1,12 @@
+{
+  "name": "@local-hosting/twinfile-examples-catalog",
+  "version": "0.2.0",
+  "private": true,
+  "packageManager": "yarn@4.9.2",
+  "description": "Golden Twinfile place catalog — sites, bases, programmes, mixins, and scenario presets",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/local-hosting/twinfile.git",
+    "directory": "catalog/place/examples"
+  }
+}

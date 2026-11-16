@@ -1,0 +1,1 @@
+{"version":3,"file":"sam-spec.d.ts","sourceRoot":"","sources":["sam-spec.ts"],"names":[],"mappings":"AAAA,OAAO,KAAK,EAAE,GAAG,EAAE,MAAM,UAAU,CAAC;AAEpC,qEAAqE;AACrE,eAAO,MAAM,gBAAgB,IAAI,CAAC;AAElC,MAAM,MAAM,cAAc,GAAG,OAAO,gBAAgB,CAAC;AAErD,wBAAgB,cAAc,CAAC,GAAG,EAAE,GAAG,GAAG,cAAc,CAEvD;AAID,wBAAgB,sBAAsB,CAAC,OAAO,EAAE,MAAM,GAAG,IAAI,CAM5D"}

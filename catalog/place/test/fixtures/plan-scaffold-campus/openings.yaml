@@ -1,0 +1,21 @@
+openings:
+  - id: gate-north
+    name: North gate
+    kind: door
+    connects:
+      - hall-shelter
+      - quad-outdoor
+    width_m: 2
+    state: open
+    roles:
+      - exit
+  - id: gate-south
+    name: South gate
+    kind: door
+    connects:
+      - hall-shelter
+      - quad-outdoor
+    width_m: 2
+    state: open
+    roles:
+      - exit

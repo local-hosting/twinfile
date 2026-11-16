@@ -1,0 +1,38 @@
+specVersion: "1.0"
+methodId: field-worker
+types:
+  - slug: warehouse
+    id: LWW
+    activityKindHints: [service]
+    jobIds: [source-parts-nearby, close-service-ticket]
+    journeyPhaseIds: [pre_visit, on_site]
+  - slug: office_building
+    id: PSO
+    activityKindHints: [service]
+    jobIds: [close-service-ticket, diagnose-on-site]
+    journeyPhaseIds: [arrival, on_site]
+  - slug: auto_repair
+    id: ASR
+    activityKindHints: [service]
+    jobIds: [diagnose-on-site, close-service-ticket]
+    journeyPhaseIds: [on_site]
+  - slug: hardware_store
+    id: RSH
+    activityKindHints: [transaction, service]
+    jobIds: [source-parts-nearby]
+    journeyPhaseIds: [pre_visit, on_site]
+  - slug: gas_station
+    id: ASG
+    activityKindHints: [transaction]
+    jobIds: [refuel-and-go, navigate-to-next-stop]
+    journeyPhaseIds: [on_site, egress]
+  - slug: hospital
+    id: HMH
+    activityKindHints: [service]
+    jobIds: [diagnose-on-site, close-service-ticket]
+    journeyPhaseIds: [arrival, on_site]
+  - slug: apartment_building
+    id: RHA
+    activityKindHints: [service]
+    jobIds: [diagnose-on-site, close-service-ticket]
+    journeyPhaseIds: [arrival, navigation, on_site]

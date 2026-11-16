@@ -1,0 +1,329 @@
+presetId: sports_stadium_fan
+label: Sports stadium fan
+segmentMix:
+  default: 0.25
+  dedicated-fan: 0.3
+  casual-fan: 0.25
+  first-time-visitor: 0.1
+  group-social: 0.1
+specVersion: "1.0"
+methodId: stadium-visit
+segments:
+  - id: default
+    overview:
+      name: Stadium Fan
+      mindset: Event-day energy with logistics friction
+      journeyPace: medium
+    empathy:
+      empathy:
+        phases:
+          sales:
+            Awareness:
+              thinking:
+                - Ticket price is only part of what a game day actually costs.
+          service:
+            Arrival:
+              thinking:
+                - Gate lines and bag checks set the tone before kickoff.
+        feelings:
+          positive:
+            - Excitement when the crowd energy builds
+          negative:
+            - Frustration when entry lines eat into the pregame
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: protect-game-day
+            label: Protect Game Day
+            innerThinking:
+              - I came for the atmosphere — delays at entry steal the first
+                quarter.
+            guidingPrinciples:
+              - Arrival flow should match the hype of the event
+            supportingCapabilities:
+              services: []
+        byFocus:
+          atmosphere:
+            mentalSpaces:
+              - id: feel-the-crowd
+                label: Feel the Crowd
+                innerThinking:
+                  - Chants, music, and big screens matter as much as the
+                    scoreboard.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Gate signage and bag-check rules
+            - Crowd flow into the concourse
+          othersObserved:
+            - Fans in jerseys heading to the same section
+    hear:
+      hear:
+        baseline:
+          others:
+            - Chants starting from a nearby section
+          friends:
+            - Debate about whether to grab food before kickoff
+  - id: dedicated-fan
+    overview:
+      name: Dedicated Fan
+      mindset: Ritual-driven and loyalty-invested
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Prep for Visit:
+              thinking:
+                - Tailgate timing and seat location are part of the tradition.
+            Dwell:
+              thinking:
+                - I notice when concessions or restrooms cannot handle peak
+                  demand.
+        feelings:
+          positive:
+            - Excitement when the atmosphere delivers
+          negative:
+            - Disappointment when concessions lines kill the moment
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: honor-the-ritual
+            label: Honor the Ritual
+            innerThinking:
+              - Same seat, same pre-game routine — consistency is part of fandom.
+            guidingPrinciples:
+              - Season-long perks should feel earned, not arbitrary
+            supportingCapabilities:
+              services: []
+        byFocus:
+          seating:
+            mentalSpaces:
+              - id: sightline-matters
+                label: Sightline Matters
+                innerThinking:
+                  - A blocked view ruins a game I waited months to attend.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          concessions:
+            mentalSpaces:
+              - id: halftime-rush
+                label: Halftime Rush
+                innerThinking:
+                  - I will skip food if the line means missing the start of the
+                    half.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          champion:
+            mentalSpaces:
+              - id: represent-the-club
+                label: Represent the Club
+                innerThinking:
+                  - I bring friends and expect the venue to match my pride in
+                    the team.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: purchase
+        validLevelIds:
+          - regular
+          - champion
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - regular
+    see:
+      see:
+        baseline:
+          environment:
+            - Crowd energy in the concourse
+            - Scoreboard and replay screens
+          othersObserved:
+            - Fans in team colors chanting together
+    hear:
+      hear:
+        baseline:
+          others:
+            - Chants starting in the next section
+          friends:
+            - Friends debating whether to leave at halftime
+  - id: casual-fan
+    overview:
+      name: Casual Fan
+      mindset: Social and experience-led over stats
+      journeyPace: medium
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: fun-without-friction
+            label: Fun Without Friction
+            innerThinking:
+              - I am here for a good night out — explain the rules if I look
+                lost.
+            guidingPrinciples: []
+            supportingCapabilities:
+              services: []
+        byFocus:
+          experience:
+            mentalSpaces:
+              - id: shareable-moments
+                label: Shareable Moments
+                innerThinking:
+                  - Photo ops and big-screen replays keep me engaged between
+                    plays.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+          price:
+            mentalSpaces:
+              - id: total-night-out
+                label: Total Night Out
+                innerThinking:
+                  - Parking, food, and merch add up faster than the ticket.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+  - id: first-time-visitor
+    overview:
+      name: First-Time Visitor
+      mindset: Curious but easily disoriented in large venues
+      journeyPace: slow
+    empathy:
+      empathy:
+        phases:
+          service:
+            Awareness:
+              thinking:
+                - I am not sure which gate, lot, or app I should use before I
+                  leave home.
+            Engage:
+              thinking:
+                - Stadium maps on my phone only help if signal works in the
+                  concourse.
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: learn-the-venue
+            label: Learn the Venue
+            innerThinking:
+              - Clear signs to my section beat guessing at every fork in the
+                concourse.
+            guidingPrinciples:
+              - First-timers need confidence, not insider knowledge
+            supportingCapabilities:
+              services: []
+        byFocus:
+          parking:
+            mentalSpaces:
+              - id: lot-logistics
+                label: Lot Logistics
+                innerThinking:
+                  - Where do I park, and how long is the walk to my gate?
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byLevel:
+          stranger:
+            mentalSpaces:
+              - id: ask-for-help
+                label: Ask for Help
+                innerThinking:
+                  - I will follow staff in vests before I wander another loop.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          learn:
+            mentalSpaces:
+              - id: decode-the-experience
+                label: Decode the Experience
+                innerThinking:
+                  - A quick venue primer would help me enjoy the chants and
+                    timeouts.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: learn
+        validLevelIds:
+          - stranger
+          - explorer
+      - intentId: setup
+        validLevelIds:
+          - explorer
+          - beginner
+  - id: group-social
+    overview:
+      name: Group Social
+      mindset: Coordinating friends or family for a shared outing
+      journeyPace: medium
+    mentalModel:
+      mentalModel:
+        mentalSpaces:
+          - id: keep-the-group-together
+            label: Keep the Group Together
+            innerThinking:
+              - Splitting up for food or restrooms should not mean losing half
+                the party.
+            guidingPrinciples:
+              - Group seating and meet-up points should be obvious
+            supportingCapabilities:
+              services: []
+        byFocus:
+          concessions:
+            mentalSpaces:
+              - id: split-the-tab
+                label: Split the Tab
+                innerThinking:
+                  - Mobile order for groups beats sending one person on a
+                    twenty-minute run.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+        byObjective:
+          purchase:
+            mentalSpaces:
+              - id: bundle-the-experience
+                label: Bundle the Experience
+                innerThinking:
+                  - Food-and-seat packages simplify planning for a group of six.
+                guidingPrinciples: []
+                supportingCapabilities:
+                  services: []
+    objectives:
+      - intentId: purchase
+        validLevelIds:
+          - explorer
+          - beginner
+          - regular
+      - intentId: learn
+        validLevelIds:
+          - explorer
+          - beginner
