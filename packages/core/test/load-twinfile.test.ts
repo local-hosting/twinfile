@@ -7,7 +7,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile, validateTwinfileYamlPath, validatePlaceYamlPath } from '../src/load/load-twinfile.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const require = createRequire(import.meta.url);
 const specConf = join(dirname(require.resolve('@doppler-group/twinfile-spec/package.json')), 'conf');

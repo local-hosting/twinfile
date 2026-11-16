@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 import { loadTwinfile } from '@doppler-group/twinfile-core';
 import { placeMountFromResolved } from '../src/place/place-mount.js';
 import { resolveExamplePlace } from '@doppler-group/twinfile-core';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

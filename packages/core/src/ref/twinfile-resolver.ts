@@ -48,8 +48,6 @@ function parseTwinfileManifestRef(raw: string): { name: string; tag?: string } |
 function catalogTwinfileRoots(catalogRoot: string, name: string, placeRoot?: string): string[] {
   const roots: string[] = [];
   roots.push(join(catalogRoot, name));
-  roots.push(join(catalogRoot, 'places', name));
-  roots.push(join(catalogRoot, 'bases', name));
   roots.push(join(catalogRoot, 'mixins', name));
   roots.push(join(catalogRoot, 'templates', 'place', name));
   roots.push(join(catalogRoot, 'templates', name));

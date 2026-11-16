@@ -15,7 +15,7 @@ if (existsSync(linkedDist)) {
 
 const geotypesRoot = resolveGeotypesRoot();
 if (!geotypesRoot) {
-  console.error('build-geotypes: no geotypes checkout (set TF_GEOTYPES_ROOT or clone sibling)');
+  console.error('build-geotypes: no geotypes checkout (clone it beside the twinfile repo)');
   process.exit(1);
 }
 

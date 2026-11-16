@@ -2,12 +2,8 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
-/** CI checks out `twinfile/geotypes` to `./geotypes`; local dev clones it beside the monorepo. */
+/** `geotypes/` checkout beside the monorepo (CI clones it there too). */
 export function resolveGeotypesRoot(packageRoot = process.cwd()) {
-  const fromEnv = process.env.TF_GEOTYPES_ROOT?.trim();
-  if (fromEnv) {
-    return path.resolve(fromEnv);
-  }
   let dir = path.resolve(packageRoot);
   for (let i = 0; i < 6; i += 1) {
     const candidate = path.join(dir, 'geotypes');

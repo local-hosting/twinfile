@@ -19,7 +19,7 @@ import {
   type SituationBindingDoc,
 } from '@doppler-group/twinfile-core';
 import { formatTwinfilePath } from '@doppler-group/twinfile-core/cli';
-import { testCatalogRoots } from './test-examples-root.js';
+import { testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 

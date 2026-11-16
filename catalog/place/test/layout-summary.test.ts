@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile } from '@doppler-group/twinfile-core';
 import { buildLayoutSummary, formatLayoutSummaryText } from '../src/card/layout-summary.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

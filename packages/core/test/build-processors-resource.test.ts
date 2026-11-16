@@ -8,7 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { buildProcessorsResourceFromTwinfile } from '../src/patch/build-processors-resource.js';
 import { TWINFILE_PROCESSORS_RESOURCE_SCHEMA } from '../src/types/processors-resource.js';
 import { TWINFILE_PATCH_UI_SCHEMA } from '../src/types/processor-ui.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const arenaManifest = parseYaml(
   readFileSync(

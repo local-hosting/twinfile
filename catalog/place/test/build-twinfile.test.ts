@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { buildTwinfile } from '../src/build/build-twinfile.js';
 import { readTwinfileLock } from '@doppler-group/twinfile-core';
 import { loadTwinfile } from '@doppler-group/twinfile-core';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 const arenaRoot = join(examplesRoot, 'arena');

@@ -10,7 +10,7 @@ import { parse as parseYaml } from 'yaml';
 import { loadTwinfileStrict } from '../src/check/strict-place.js';
 import { decoratePlaceFromGeotype } from '../src/cli/decorate-place-from-geotype.js';
 import { initPlaceFromGeotype } from '../src/cli/init-place-from-geotype.js';
-import { testCatalogRoots } from './test-examples-root.js';
+import { testCatalogRoots } from '../../../packages/core/test/catalog-test-roots.js';
 
 const { examplesRoot, simulatorRoot } = testCatalogRoots(dirname(fileURLToPath(import.meta.url)));
 const catalogOpts = { examplesRoot, simulatorRoot };

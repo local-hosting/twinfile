@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 import { handleMcpProtocolMessage, type McpSession } from '@doppler-group/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from './test-examples-root.js';
+import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 const shop = join(examplesRoot, 'shop');

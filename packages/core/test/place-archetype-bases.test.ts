@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,15 +9,13 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile } from '../src/load/load-twinfile.js';
 import { placeBaseRefForArchetype } from '../src/ref/place-base-refs.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
 function baseDirForRef(ref: string): string {
   const name = ref.replace(/^twinfile\//, '').replace(/:.*$/, '');
-  const flat = join(examplesRoot, name);
-  const legacy = join(examplesRoot, 'bases', name);
-  return statSync(flat, { throwIfNoEntry: false })?.isDirectory() ? flat : legacy;
+  return join(examplesRoot, name);
 }
 
 function writePlaceUnit(dir: string, place: Record<string, unknown>, spaces: unknown[], levels?: unknown[]): void {

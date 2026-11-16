@@ -11,7 +11,7 @@ import {
   buildPlanRolesFromPlace,
   collectPlaceIdsForRole,
 } from '@doppler-group/twinfile-simulator';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 import {
   createPlace,
 } from '@doppler-group/twinfile-place';

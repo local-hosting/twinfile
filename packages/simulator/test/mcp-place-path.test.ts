@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { handleMcpRequest } from '@doppler-group/twinfile-simulator';
 
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 describe('place.path MCP', () => {
   it('returns the `Place.digest` with the path', async () => {

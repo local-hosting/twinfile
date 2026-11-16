@@ -2,23 +2,17 @@
 /** Place × situation matrix: each site with plans should pass strict check. */
 import { spawnSync } from 'node:child_process';
 import { readdirSync, statSync } from 'node:fs';
-import { dirname, join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
 import { createRequire } from 'node:module';
 
 import { resolveTwinCli } from '../../../tooling/scripts/resolve-twin-cli.mjs';
-import { resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
+import { loadTwinfile, resolvePlaceExamplesCatalogRoot, resolveSimulatorRoot } from '../../dist/index.js';
 
-const scriptsDir = dirname(fileURLToPath(import.meta.url));
 const examplesRoot = resolvePlaceExamplesCatalogRoot();
 const simulatorRoot = resolveSimulatorRoot();
-const coreRoot = process.env.TF_CORE_ROOT
-  ? resolve(process.env.TF_CORE_ROOT)
-  : resolve(scriptsDir, '../..');
 const twinCli = resolveTwinCli(import.meta.url);
 
-const require = createRequire(join(coreRoot, 'package.json'));
-const { loadTwinfile } = require(join(coreRoot, 'dist/index.js'));
+const require = createRequire(import.meta.url);
 const { listPlaceSituationBindings } = require('@doppler-group/twinfile-place');
 
 const inheritOpts = { examplesRoot, simulatorRoot };

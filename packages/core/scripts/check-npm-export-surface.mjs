@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { resolveGeotypesRoot } from './resolve-geotypes-root.mjs';
 
 const indexJs = readFileSync('dist/index.js', 'utf8');
@@ -18,8 +18,9 @@ if (missing.length > 0) {
 }
 
 const geotypesRoot = resolveGeotypesRoot();
-if (!geotypesRoot && process.env.TF_PUBLISH_USE_REGISTRY !== '1') {
-  console.error('check-npm-export-surface: geotypes root not found (CI should checkout twinfile/geotypes)');
+const geotypesInstalled = existsSync('node_modules/@doppler-group/geotypes/package.json');
+if (!geotypesRoot && !geotypesInstalled) {
+  console.error('check-npm-export-surface: @doppler-group/geotypes not found (clone it beside the repo or install it)');
   process.exit(1);
 }
 

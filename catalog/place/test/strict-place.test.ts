@@ -6,17 +6,13 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfileStrict, strictCheckPlace } from '../src/check/strict-place.js';
 import { loadTwinfile } from '@doppler-group/twinfile-core';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from '../../../packages/core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
-const siteRoot = statSync(join(examplesRoot, 'places'), { throwIfNoEntry: false })?.isDirectory()
-  ? join(examplesRoot, 'places')
-  : examplesRoot;
-
-const plannedPlaces = readdirSync(siteRoot).filter((name) => {
+const plannedPlaces = readdirSync(examplesRoot).filter((name) => {
   if (name.startsWith('base-') || name.startsWith('mixin-') || name.endsWith('-programme')) return false;
-  const twinfile = join(siteRoot, name, 'Twinfile.yaml');
+  const twinfile = join(examplesRoot, name, 'Twinfile.yaml');
   if (!statSync(twinfile, { throwIfNoEntry: false })?.isFile()) return false;
   const raw = readFileSync(twinfile, 'utf8');
   return raw.includes('plans/');

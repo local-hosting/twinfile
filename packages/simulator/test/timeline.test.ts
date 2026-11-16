@@ -16,7 +16,7 @@ import { createClock } from '@doppler-group/twinfile-simulator';
 import { loadFeedRows, resolveTrackFeeds } from '@doppler-group/twinfile-simulator';
 import { createTimeline } from '@doppler-group/twinfile-simulator';
 import type { TimelinePayload } from '@doppler-group/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from './test-examples-root.js';
+import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

@@ -11,7 +11,7 @@ import {
 import {
   loadRunUnit,
 } from '@doppler-group/twinfile-core';
-import { goldenSceneRunDir, testCatalogRoots } from './test-examples-root.js';
+import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 
 const importDir = dirname(fileURLToPath(import.meta.url));
 const { examplesRoot, simulatorRoot } = testCatalogRoots(importDir);

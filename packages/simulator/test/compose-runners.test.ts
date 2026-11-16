@@ -11,7 +11,7 @@ import {
   loadRunUnit,
 } from '@doppler-group/twinfile-core';
 import { createRunPayload } from '@doppler-group/twinfile-simulator';
-import { goldenSceneRunDir, testExamplesRoot } from './test-examples-root.js';
+import { goldenSceneRunDir, testExamplesRoot } from '../../core/test/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

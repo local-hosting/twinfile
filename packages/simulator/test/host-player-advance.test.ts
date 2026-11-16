@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { twinfilePlayerAdvance } from '@doppler-group/twinfile-simulator/host';
 
-import { goldenSceneRunDir, testCatalogRoots } from './test-examples-root.js';
+import { goldenSceneRunDir, testCatalogRoots } from '../../core/test/catalog-test-roots.js';
 import {
   buildTwinfile,
 } from '@doppler-group/twinfile-place';

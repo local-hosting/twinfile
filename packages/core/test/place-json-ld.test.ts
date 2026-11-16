@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { join } from 'node:path';
 
 import { buildPlaceJsonLdFromTwinfile, loadTwinfile } from '../src/index.js';
-import { testExamplesRoot } from './test-examples-root.js';
+import { testExamplesRoot } from './catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(import.meta.dirname);
 const examplesAirport = join(examplesRoot, 'airport');

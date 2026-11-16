@@ -134,7 +134,9 @@ function resolveRefDir(ref: string, examplesRoot: string): string {
   }
 
   const name = ref.slice('twinfile/'.length).split(':')[0] ?? '';
-  for (const bucket of ['places', 'bases', 'mixins', 'situations']) {
+  const flat = join(examplesRoot, name);
+  if (findTwinfileYamlPath(flat)) return flat;
+  for (const bucket of ['mixins', 'situations']) {
     const candidate = join(examplesRoot, bucket, name);
     if (findTwinfileYamlPath(candidate)) return candidate;
   }
