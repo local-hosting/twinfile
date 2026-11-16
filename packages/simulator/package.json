@@ -23,7 +23,6 @@
     "build:viewer-assets": "node viewer/scripts/build-viewer-assets.mjs",
     "workbench": "node viewer/scripts/run-view.mjs",
     "check": "node ../tooling/scripts/check-vendor-neutral.mjs && node scripts/check-all.mjs && yarn build && yarn workspace @local-hosting/twinfile-cli build && yarn build:viewer && yarn typecheck && yarn test",
-    "sync:events": "node scripts/sync-place-events.mjs",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "typecheck:viewer": "tsc -p viewer/tsconfig.json --noEmit"
