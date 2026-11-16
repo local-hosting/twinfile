@@ -26,6 +26,6 @@ Author new layout in **`examples`** `places/` (or your repo’s Twinfile units).
 
 ## Refs
 
-- **Current:** `placeRef: twinfile/arena:1.2.0` on downstream story/scene mounts and optional org strategy lists. Resolve with **`@doppler-group/twinfile-core`** **`resolvePlaceMount`** (or **`resolveExamplePlace`** for examples) and embed **`placeMount`** on host packs. SAM scenes use **`venueKey`** (`venue:{name}`).
+- **Current:** `placeRef: twinfile/arena:1.2.0` on downstream story/scene mounts and optional org strategy lists. Resolve with **`@doppler-group/twinfile-core`** **`resolvePlaceMount`** (or **`resolveExamplePlace`** for examples) and embed **`placeMount`** on host packs. SAM scenes and `sam.places` bind by **`placeRef`**, matched on kind + name (tag ignored; a kindless ref counts as `place`) with **`samePlaceRef`**.
 
 See [Refs](../pack/refs.md).

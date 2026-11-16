@@ -10,7 +10,7 @@ export type StoryTimelineActivityWire = {
   journeyPhaseId?: string;
   label?: string;
   jobId?: string;
-  venueOpportunityId?: string;
+  placeOpportunityId?: string;
 };
 
 export type StoryTimelineDayWire = {

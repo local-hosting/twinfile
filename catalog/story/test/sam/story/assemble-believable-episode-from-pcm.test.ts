@@ -51,7 +51,7 @@ const sam: SAM = {
     visitDayIndex: 20,
   },
   characters: [{ pcmId: 'persona:rider', role: 'focal' }],
-  venues: [{ venueKey: 'venue:store' }],
+  places: [{ placeRef: 'twinfile/place/store:0.0.0' }],
   arcTemplate: {
     id: 'arc:commute-visit',
     label: 'Commute visit',
@@ -65,7 +65,7 @@ const sam: SAM = {
       actId: 'climax',
       order: 0,
       characterIds: ['persona:rider'],
-      venueKey: 'venue:store',
+      placeRef: 'twinfile/place/store:0.0.0',
       touchpointIds: ['tp:store'],
       jobIds: ['job:commute'],
     },
@@ -73,7 +73,7 @@ const sam: SAM = {
 };
 
 const storeMount = placeMountFixture({
-  venueKey: 'venue:store',
+  placeRef: 'twinfile/place/store:0.0.0',
   title: 'Store',
   spaceIds: ['space:floor'],
 });

@@ -9,7 +9,7 @@ import {
   isTechnicalStoryIdentityLabel,
   resolveHumanProtagonistNameWithPcm,
 } from './protagonist-identity.js';
-import { resolveVenueLabelForNarrative } from './resolve-scene-place-for-reader.js';
+import { resolvePlaceLabelForNarrative } from './resolve-scene-place-for-reader.js';
 
 export function humanizeToken(token: string): string {
   const trimmed = token.trim();
@@ -34,7 +34,7 @@ export type StoryboardSceneContextV1 = {
   protagonistName: string;
   protagonistDescriptor: string;
   geography?: string;
-  venueLabel?: string;
+  placeLabel?: string;
   segmentLabel?: string;
   mindset?: string;
   traits: readonly string[];
@@ -90,23 +90,23 @@ function resolveProtagonistDescriptor(input: FormatStoryDirectorNarrativeInput, 
 function resolveStoryGeography(snapshot: StoryBriefSnapshotV1): string | undefined {
   const where = snapshot.where;
   if (!where) return undefined;
-  const venue =
-    where.venueSlug?.trim() ||
+  const place =
+    where.placeSlug?.trim() ||
     where.storeSlug?.trim() ||
     where.zip?.trim() ||
     where.h3Cell?.trim();
   const region = where.dma?.trim();
-  if (venue && region) return `${humanizeToken(venue)}, ${region}`;
-  if (venue) return humanizeToken(venue);
+  if (place && region) return `${humanizeToken(place)}, ${region}`;
+  if (place) return humanizeToken(place);
   if (region) return region;
   return undefined;
 }
 
-function resolveVenueLabelFromSam(sam: SAM | undefined, venueKey: string | undefined): string | undefined {
-  const id = venueKey?.trim();
+function resolvePlaceLabelFromSam(sam: SAM | undefined, placeRef: string | undefined): string | undefined {
+  const id = placeRef?.trim();
   if (!id) return undefined;
-  const venue = sam?.venues?.find((row) => row.venueKey?.trim() === id);
-  if (venue?.label?.trim()) return venue.label.trim();
+  const place = sam?.places?.find((row) => row.placeRef?.trim() === id);
+  if (place?.label?.trim()) return place.label.trim();
   return humanizeStoryWireLabel(id);
 }
 
@@ -124,13 +124,13 @@ export function buildStoryboardSceneContext(input: FormatStoryDirectorNarrativeI
   const { snapshot, character, sam } = input;
   const protagonistName = resolveProtagonistName(input);
   const firstScene = sam?.scenes?.[0];
-  const venueFromSam = firstScene ? resolveVenueLabelFromSam(sam, firstScene.venueKey) : undefined;
+  const placeFromSam = firstScene ? resolvePlaceLabelFromSam(sam, firstScene.placeRef) : undefined;
 
   return {
     protagonistName,
     protagonistDescriptor: resolveProtagonistDescriptor(input, protagonistName),
     geography: resolveStoryGeography(snapshot),
-    venueLabel: venueFromSam,
+    placeLabel: placeFromSam,
     segmentLabel:
       character?.psychology?.segmentLabel?.trim() ||
       humanizeStoryWireLabel(character?.psychology?.segmentId) ||
@@ -187,16 +187,16 @@ export function applyStoryboardPersonalization(
         personaJobIds: input.character?.psychology?.pcmId ? undefined : undefined,
       })
     : [];
-  const venue =
+  const place =
     (samScene
-      ? resolveVenueLabelForNarrative({
+      ? resolvePlaceLabelForNarrative({
           sam: ctx.sam,
-          venueKey: samScene.venueKey,
+          placeRef: samScene.placeRef,
           journey: input?.journey,
           touchpointId,
         })
       : undefined) ||
-    ctx.venueLabel ||
+    ctx.placeLabel ||
     ctx.geography;
   const { protagonistName, protagonistDescriptor } = ctx;
 
@@ -233,8 +233,8 @@ export function applyStoryboardPersonalization(
   }
 
   let setting = draft.storyboard.setting;
-  if (venue) {
-    setting = setting.includes(venue) ? setting : `${venue}; ${setting}`;
+  if (place) {
+    setting = setting.includes(place) ? setting : `${place}; ${setting}`;
   }
 
   let look = draft.storyboard.look;
@@ -291,7 +291,7 @@ export function serializeStoryboardLlmContext(input: FormatStoryDirectorNarrativ
         mindset: ctx.mindset,
         traits: ctx.traits,
       },
-      place: { geography: ctx.geography, venue: ctx.venueLabel },
+      place: { geography: ctx.geography, place: ctx.placeLabel },
       story: {
         pitch: ctx.storyPitch,
         engagement: ctx.engagementLevel,
@@ -303,7 +303,7 @@ export function serializeStoryboardLlmContext(input: FormatStoryDirectorNarrativ
         label: scene.label,
         situation: scene.situation,
         narrativeBeat: scene.narrativeBeat,
-        venueKey: scene.venueKey,
+        placeRef: scene.placeRef,
         touchpointIds: scene.touchpointIds,
       })),
     },

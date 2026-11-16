@@ -1,4 +1,5 @@
-/** Venue layout mount wire for SAM/AXM. */
+/** Place layout mount wire for SAM/AXM. */
+import type { TwinfileRef } from '@doppler-group/twinfile-core/ref';
 
 export type PlaceMountLayoutLevel = {
   id: string;
@@ -17,11 +18,11 @@ export type PlaceMountLayoutPathway = {
   label?: string;
 };
 
-/** Resolved venue for scene binding (`venueKey`, spaces, optional geo). Hosts map external place twins at the boundary. */
+/** Resolved place for scene binding (`placeRef`, spaces, optional geo). Hosts map external place twins at the boundary. */
 export type PlaceMount = {
-  venueKey: string;
+  placeRef: TwinfileRef;
   title: string;
-  venueType?: string;
+  placeType?: string;
   geotypePrimary?: string;
   schemaOrgType?: string;
   spaceIds: readonly string[];

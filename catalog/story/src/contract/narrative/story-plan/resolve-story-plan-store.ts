@@ -1,19 +1,19 @@
-import type { SamStoryPlanFleetVenueSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { SamStoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
 import { normalizeScenarioText, scenarioTokenSet } from './scenario-scoring.js';
 import { pickRandomStoryPlanStoreSlug } from './random.js';
 import { resolveStoryPlanRandom } from './rng.js';
 
-function scoreVenueHintMatch(haystack: string, venue: SamStoryPlanFleetVenueSnapshotV1): number {
+function scorePlaceHintMatch(haystack: string, place: SamStoryPlanFleetPlaceSnapshotV1): number {
   const text = normalizeScenarioText(haystack);
   if (!text) return 0;
 
-  const slug = venue.slug.toLowerCase();
+  const slug = place.slug.toLowerCase();
   if (text.includes(slug)) return 1;
 
-  const name = venue.name ? normalizeScenarioText(venue.name) : '';
+  const name = place.name ? normalizeScenarioText(place.name) : '';
   if (name && text.includes(name)) return 0.95;
 
-  const slugTokens = scenarioTokenSet(venue.slug);
+  const slugTokens = scenarioTokenSet(place.slug);
   const nameTokens = name ? scenarioTokenSet(name) : new Set<string>();
   const queryTokens = scenarioTokenSet(haystack);
   if (queryTokens.size === 0) return 0;
@@ -32,11 +32,11 @@ export function resolveStoryPlanStoreFromHints(input: {
   place?: string;
   scenario?: string;
   topic?: string;
-  fleetVenues: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
 }): string | undefined {
   const explicit = input.storeSlug?.trim();
   if (explicit) {
-    return input.fleetVenues.some((row) => row.slug === explicit) ? explicit : undefined;
+    return input.fleetPlaces.some((row) => row.slug === explicit) ? explicit : undefined;
   }
 
   const hints = [
@@ -46,19 +46,19 @@ export function resolveStoryPlanStoreFromHints(input: {
     input.scenario?.trim(),
   ].filter(Boolean) as string[];
 
-  if (hints.length === 0 || input.fleetVenues.length === 0) {
+  if (hints.length === 0 || input.fleetPlaces.length === 0) {
     return undefined;
   }
 
-  let best: SamStoryPlanFleetVenueSnapshotV1 | undefined;
+  let best: SamStoryPlanFleetPlaceSnapshotV1 | undefined;
   let bestScore = 0;
 
-  for (const venue of input.fleetVenues) {
+  for (const place of input.fleetPlaces) {
     for (const hint of hints) {
-      const score = scoreVenueHintMatch(hint, venue);
+      const score = scorePlaceHintMatch(hint, place);
       if (score > bestScore) {
         bestScore = score;
-        best = venue;
+        best = place;
       }
     }
   }
@@ -92,7 +92,7 @@ export function shouldRandomizeStoryPlanStore(input: {
 }
 
 export function resolveStoryPlanStoreForPlan(input: {
-  fleetVenues: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   storeSlug?: string;
   storeName?: string;
   place?: string;
@@ -102,7 +102,7 @@ export function resolveStoryPlanStoreForPlan(input: {
   seed?: string | number;
 }): string | undefined {
   const explicit = input.storeSlug?.trim();
-  if (explicit && input.fleetVenues.some((row) => row.slug === explicit)) {
+  if (explicit && input.fleetPlaces.some((row) => row.slug === explicit)) {
     return explicit;
   }
 
@@ -111,7 +111,7 @@ export function resolveStoryPlanStoreForPlan(input: {
     place: input.place,
     scenario: input.scenario,
     topic: input.topic,
-    fleetVenues: input.fleetVenues,
+    fleetPlaces: input.fleetPlaces,
   });
   if (fromHints) {
     return fromHints;
@@ -129,5 +129,5 @@ export function resolveStoryPlanStoreForPlan(input: {
   }
 
   const random = resolveStoryPlanRandom({ random: input.random, seed: input.seed });
-  return pickRandomStoryPlanStoreSlug(input.fleetVenues, random);
+  return pickRandomStoryPlanStoreSlug(input.fleetPlaces, random);
 }

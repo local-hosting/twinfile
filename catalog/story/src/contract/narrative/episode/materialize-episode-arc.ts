@@ -61,7 +61,7 @@ function spreadSceneRowsAcrossDays(input: {
       touchpointId: row.touchpointId,
       phase: input.phase,
       sceneId: row.sceneId,
-      venueKey: row.venueKey,
+      placeRef: row.placeRef,
       spaceId: row.spaceId,
       visitMomentId: row.visitMomentId,
       characterIds: row.characterIds,

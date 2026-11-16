@@ -44,13 +44,13 @@ function collectWhat(sam: SAM): SamStoryDimensionWhatV1 {
 }
 
 function collectWhere(sam: SAM): SamStoryDimensionWhereV1 {
-  const venueKeys = uniqueSorted(sam.scenes.map((scene) => scene.venueKey));
+  const placeRefs = uniqueSorted(sam.scenes.map((scene) => scene.placeRef));
   const spaceIds = uniqueSorted(
     sam.scenes.flatMap((scene) => (scene.spaceId ? [scene.spaceId] : [])),
   );
   return {
-    venueKeys,
-    ...(venueKeys[0] ? { primaryVenueKey: venueKeys[0] } : {}),
+    placeRefs,
+    ...(placeRefs[0] ? { primaryPlaceRef: placeRefs[0] } : {}),
     ...(spaceIds.length ? { spaceIds } : {}),
   };
 }

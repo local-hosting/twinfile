@@ -126,7 +126,7 @@ export function compileStoryEpisodeFromMounts(
     characterContext,
     placeMounts: input.placeMounts,
     knownPcmIds: input.pcms.map((row) => row.persona.id),
-    knownVenueKeys: input.placeMounts.map((row) => row.venueKey),
+    knownPlaceRefs: input.placeMounts.map((row) => row.placeRef),
     subjectId: input.subjectId,
     journeyPace: input.journeyPace,
     random: input.random,

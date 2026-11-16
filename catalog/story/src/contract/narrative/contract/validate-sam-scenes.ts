@@ -1,3 +1,5 @@
+import { placeRefIdentity } from '@doppler-group/twinfile-core/ref';
+
 import type { SAM } from '../types/sam.js';
 
 export type ValidateSAMScenesResult = { ok: true } | { ok: false; issues: string[] };
@@ -10,7 +12,7 @@ export function validateSAMScenes(sam: SAM): ValidateSAMScenesResult {
 
   const issues: string[] = [];
   const cast = new Set(sam.characters.map((row) => row.pcmId));
-  const venueIds = new Set((sam.venues ?? []).map((row) => row.venueKey));
+  const placeIds = new Set((sam.places ?? []).map((row) => placeRefIdentity(row.placeRef)));
   const sceneIds = new Set<string>();
 
   for (const scene of scenes) {
@@ -19,8 +21,8 @@ export function validateSAMScenes(sam: SAM): ValidateSAMScenesResult {
     }
     sceneIds.add(scene.id);
 
-    if (!venueIds.has(scene.venueKey)) {
-      issues.push(`scene ${scene.id} venueKey "${scene.venueKey}" is not listed on sam.venues`);
+    if (!placeIds.has(placeRefIdentity(scene.placeRef))) {
+      issues.push(`scene ${scene.id} placeRef "${scene.placeRef}" is not listed on sam.places`);
     }
 
     for (const pcmId of scene.characterIds) {

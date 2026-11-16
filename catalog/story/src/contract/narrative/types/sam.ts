@@ -2,7 +2,7 @@ import type { EpisodeArcV1 } from './episode-arc.js';
 import type { EpisodeTimingVariation } from './episode-timing-variation.js';
 import type { StoryScene } from './scene.js';
 import type { StoryArcTemplate } from './story-arc-template.js';
-import type { SAMCharacterRef, SAMVenueRef } from './sam-refs.js';
+import type { SAMCharacterRef, SAMPlaceRef } from './sam-refs.js';
 
 /** Document header (`sam.yml`). */
 export type SAMDocument = {
@@ -29,16 +29,16 @@ export type SAMBinding = {
 
 /**
  * Story Arc Model — one portable episode plan for a project story run.
- * Journey definitions stay on PCM/AXM; SAM holds cast/venue associations and the materialized arc.
+ * Journey definitions stay on PCM/AXM; SAM holds cast/place associations and the materialized arc.
  */
 export type SAM = SAMDocument & {
   /** PCMs in this story (≥1). When omitted on disk, defaults from `binding.pcmId`. */
   characters: SAMCharacterRef[];
-  /** Place mounts referenced by scenes (`venueKey` on each frame). */
-  venues: SAMVenueRef[];
+  /** Place mounts referenced by scenes (`placeRef` on each frame). */
+  places: SAMPlaceRef[];
   /** Write Practice arc (`kind` + dramatic beats). */
   arcTemplate: StoryArcTemplate;
-  /** Storyboard scenes — cast + venue per frame. */
+  /** Storyboard scenes — cast + place per frame. */
   scenes: StoryScene[];
   binding: SAMBinding;
   /** Filled by {@link compileSAM} when not authored on disk. */

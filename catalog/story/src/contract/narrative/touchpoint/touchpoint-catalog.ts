@@ -11,7 +11,7 @@ export function touchpointCatalogFromWire(wire: TouchpointGraphWire): SAMTouchpo
     label: row.label,
     journeyPhase: row.journeyPhase,
     locus: row.locus,
-    venueKey: row.venueKey,
+    placeRef: row.placeRef,
     spaceId: row.spaceId,
   }));
 

@@ -43,6 +43,30 @@ export function isTwinfileRef(value: string): value is TwinfileRef {
   return TWINFILE_REF_PATTERN.test(value.trim());
 }
 
+/** `{kind}/{name}` identity for place-mount matching; kindless refs count as `place`, tag and digest are ignored. */
+export function placeRefIdentity(ref: string): string | undefined {
+  const parsed = parseTwinfileRef(ref);
+  if (!parsed) return undefined;
+  return `${parsed.kind ?? 'place'}/${parsed.name}`;
+}
+
+export function samePlaceRef(a: string, b: string): boolean {
+  const left = placeRefIdentity(a);
+  return left != null && left === placeRefIdentity(b);
+}
+
+/** Typed place ref for mounts without a published unit (PCM places, geo anchors). */
+export function placeRefForName(name: string, tag = '0.0.0'): TwinfileRef {
+  const slug = name
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9-]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 63);
+  if (!slug) throw new Error(`placeRefForName: empty name "${name}"`);
+  return `twinfile/place/${slug}:${tag}`;
+}
+
 /** Flat `twinfile/<name>:<tag>` for catalogs that key refs without the kind segment (RFC 0008). */
 export function flatTwinfileRef(ref: string): string {
   const parsed = parseTwinfileRef(ref.trim());

@@ -12,7 +12,7 @@ Canonical layers: [`catalog/place/examples/README.md`](../../../catalog/place/ex
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
 | **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — PCM/JSM; **`disclosure:`** required |
 | **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — SAM; **player** input ([story-and-player](kinds/story-and-player.md)) |
-| **Run** | **`story.scenes[].run`** (`<story-dir>#<scene-id>`) | Inline scene run: `from:`, `copy:`, `clock:`, optional `use.runner`, `expected:` — **not** a published twin |
+| **Run** | **`story.scenes[].run`** (`<story-dir>#<scene-id>`) | Inline scene run: `from:`, `copy:`, `clock:`, `args:` — **not** a published twin; optional `use.runner` for offline only |
 | **Runner** | `use.runner` | Offline **ENTRYPOINT** (`npm:` ref) for `twin run` — MCP / host supplies the analyst prompt; see [Runners](pack/runners.md) |
 | **Session** | `clock:` + built **`Place`** (host) | **World time** at playhead `t`; precomputed **timeline** (`timeline.at(t)`). Not a catalog ref |
 | **Player** | host runtime | Runs a **story** (`twinfile/story/<id>`), loads each scene's inline **`run:`**, advances **session** on the patch **module bus** |

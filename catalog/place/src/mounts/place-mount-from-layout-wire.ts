@@ -1,14 +1,14 @@
 import type { TwinfilePlaceMount } from '@doppler-group/twinfile-core';
 
-import type { VenueLayoutMountWire } from '../types/venue-layout-mount-wire.js';
+import type { PlaceLayoutWire } from '../types/place-layout-wire.js';
 
-/** Map a parsed venue layout wire back to a portable place mount. */
-export function placeMountFromVenueLayoutWire(wire: VenueLayoutMountWire): TwinfilePlaceMount {
+/** Map a parsed place layout wire back to a portable place mount. */
+export function placeMountFromPlaceLayout(wire: PlaceLayoutWire): TwinfilePlaceMount {
   const spaceIds = (wire.spaces ?? []).map((row) => row.id).filter(Boolean);
   const defaultSpaceId = spaceIds[0];
   const visitMomentIds = wire.moments?.map((row) => row.id).filter(Boolean);
   return {
-    venueKey: wire.id,
+    placeRef: wire.placeRef,
     title: wire.title,
     spaceIds,
     ...(defaultSpaceId ? { defaultSpaceId } : {}),

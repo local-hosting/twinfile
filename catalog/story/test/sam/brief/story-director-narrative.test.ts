@@ -56,9 +56,9 @@ describe('formatStoryDirectorNarrative', () => {
             { id: 'denouement', label: 'Arrive', order: 2 },
           ],
         },
-        venues: [
-          { venueKey: 'venue:demo-home', label: 'Home dropoff', role: 'destination' },
-          { venueKey: 'venue:demo-airport', label: 'Curbside pickup', role: 'pickup' },
+        places: [
+          { placeRef: 'twinfile/place/demo-home:0.0.0', label: 'Home dropoff', role: 'destination' },
+          { placeRef: 'twinfile/place/demo-airport:0.0.0', label: 'Curbside pickup', role: 'pickup' },
         ],
       }),
       journey: {
@@ -148,14 +148,14 @@ describe('formatStoryDirectorNarrative', () => {
           order: 0,
           actId: 'exposition',
           characterIds: ['persona:rider'],
-          venueKey: 'venue:demo-home',
+          placeRef: 'twinfile/place/demo-home:0.0.0',
           situation: 'She checks the app before the morning rush.',
           narrativeBeat: 'Open the day with intention.',
           touchpointIds: ['touchpoint:rider-open-home'],
           emotions: {},
         },
       ],
-      venues: [{ venueKey: 'venue:demo-home', label: 'Demo apartment' }],
+      places: [{ placeRef: 'twinfile/place/demo-home:0.0.0', label: 'Demo apartment' }],
     });
 
     const scenes = buildDirectorScriptScenes({

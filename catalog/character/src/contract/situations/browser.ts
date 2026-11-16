@@ -45,6 +45,8 @@ export {
   JOB_OBSTACLE_TEXT_MIN_CHARS,
   MAX_OBSTACLES_PER_JOB,
 } from './jtbd/jtbd-obstacle.js';
+export { obstacleCatalogFromJobs } from './catalog/obstacle-catalog-from-jobs.js';
+export type { CustomerObstacleDefinition, ObstacleCatalog } from './catalog/obstacles.schema.js';
 
 export { JSM_PACKAGE } from './contract/jsm-package-meta.js';
 export { jsmFromJSON, jsmToJSON } from './contract/json.js';

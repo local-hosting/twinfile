@@ -30,7 +30,8 @@ describe('resolvePlaceMount with catalog URI', () => {
     const mount = resolvePlaceMount('twinfile/shop:0.2.0', {
       placesCatalogUri: `file://${examplesRoot}`,
     });
-    expect(mount.venueKey).toBe('venue:shop');
+    expect(mount.placeRef).toBe('twinfile/shop:0.2.0');
+    expect(mount).not.toHaveProperty('venueKey');
     expect(mount.layoutSpaces?.length).toBeGreaterThan(0);
   });
 

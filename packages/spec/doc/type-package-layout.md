@@ -24,7 +24,7 @@ catalog/<type>/
 
 | Type | Subfolder | Role |
 | --- | --- | --- |
-| **place** | `place/`, `build/`, `check/` | `Place` compose/build, archetype checks, venue mounts |
+| **place** | `place/`, `build/`, `check/` | `Place` compose/build, archetype checks, place mounts |
 | **resource** | `asset/` *(planned)* | Resource rows when lifted from place |
 | **character** | `persona/` | PCM — `contract/`, `journey/`, `empathy/`, `people/`, `schemas/` |
 | **character** | `events/` | JSM — `contract/`, `catalog/`, `job/`, `jtbd/` |

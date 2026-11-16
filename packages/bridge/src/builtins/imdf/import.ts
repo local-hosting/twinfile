@@ -53,7 +53,7 @@ export function importPlace(input: unknown): ImportResult {
   const venue = grouped.get('venue')?.[0];
   if (!venue) throw new Error('imdf: venue feature is required');
   const venueProps = asRecord(venue.properties ?? {}, 'imdf venue');
-  const venueName = readName(venueProps.name, 'Imported venue');
+  const placeName = readName(venueProps.name, 'Imported venue');
   const levels = (grouped.get('level') ?? []).map((feature) => {
     const props = asRecord(feature.properties ?? {}, 'imdf level');
     const id = twinId(String(feature.id ?? props.id ?? 'level'));
@@ -113,7 +113,7 @@ export function importPlace(input: unknown): ImportResult {
   const timezone = typeof venueProps.timezone === 'string' ? venueProps.timezone : 'UTC';
   const site = withExt(
     {
-      name: venueName,
+      name: placeName,
       kind: typeof venueProps.category === 'string' ? venueProps.category : 'venue',
       timezone,
       published: false,
@@ -129,5 +129,5 @@ export function importPlace(input: unknown): ImportResult {
   if (openings.length > 0) docs.push({ openings });
   const venueCategory = typeof venueProps.category === 'string' ? venueProps.category : '';
   const geotype = geotypeSlugForMapping('imdf', venueCategory) ?? 'museum';
-  return packUnit(twinId(venueName), geotype, docs);
+  return packUnit(twinId(placeName), geotype, docs);
 }

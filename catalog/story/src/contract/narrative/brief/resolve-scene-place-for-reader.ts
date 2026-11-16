@@ -5,11 +5,11 @@ import type { StoryScene } from '../types/scene.js';
 import { findJourneyTouchpointBinding } from './journey-touchpoint-binding.js';
 import { humanizeStoryWireLabel } from './storyboard-scene-context.js';
 
-function resolveVenueLabelFromSam(sam: SAM | undefined, venueKey: string | undefined): string | undefined {
-  const id = venueKey?.trim();
+function resolvePlaceLabelFromSam(sam: SAM | undefined, placeRef: string | undefined): string | undefined {
+  const id = placeRef?.trim();
   if (!id) return undefined;
-  const venue = sam?.venues?.find((row) => row.venueKey?.trim() === id);
-  if (venue?.label?.trim()) return venue.label.trim();
+  const place = sam?.places?.find((row) => row.placeRef?.trim() === id);
+  if (place?.label?.trim()) return place.label.trim();
   return humanizeStoryWireLabel(id);
 }
 
@@ -23,7 +23,7 @@ function isCommuteShapedJourney(journey: Journey | undefined): boolean {
   return /commute|work on time|to work|morning ride|pickup/i.test(text);
 }
 
-function isAirportVenueLabel(label: string): boolean {
+function isAirportPlaceLabel(label: string): boolean {
   return /airport/i.test(label);
 }
 
@@ -35,18 +35,18 @@ function journeyMentionsAirport(journey: Journey | undefined): boolean {
 /**
  * Human place name for reader copy — corrects demo mounts (e.g. airport place on a commute journey).
  */
-export function resolveVenueLabelForNarrative(args: {
+export function resolvePlaceLabelForNarrative(args: {
   sam?: SAM;
-  venueKey?: string;
+  placeRef?: string;
   journey?: Journey;
   touchpointId?: string;
 }): string | undefined {
-  const raw = resolveVenueLabelFromSam(args.sam, args.venueKey);
+  const raw = resolvePlaceLabelFromSam(args.sam, args.placeRef);
   if (!raw) return undefined;
 
   if (
     isCommuteShapedJourney(args.journey) &&
-    isAirportVenueLabel(raw) &&
+    isAirportPlaceLabel(raw) &&
     !journeyMentionsAirport(args.journey)
   ) {
     const tp = args.touchpointId?.toLowerCase() ?? '';
@@ -73,15 +73,15 @@ export function resolveScenePlaceForReader(args: {
     : undefined;
   const phaseLabel = binding?.phase.label?.trim();
 
-  const venue = resolveVenueLabelForNarrative({
+  const place = resolvePlaceLabelForNarrative({
     sam: args.sam,
-    venueKey: args.samScene?.venueKey,
+    placeRef: args.samScene?.placeRef,
     journey: args.journey,
     touchpointId,
   });
 
   if (key.includes('open-home') || key.includes('at-home')) {
-    return venue ? `At home (${venue})` : 'At home';
+    return place ? `At home (${place})` : 'At home';
   }
   if (key.includes('set-dest') || key.includes('choose-dest') || key.includes('confirm-dest')) {
     return 'At home, finishing the ride request';
@@ -96,7 +96,7 @@ export function resolveScenePlaceForReader(args: {
     return args.samScene.label.trim();
   }
   if (phaseLabel) return phaseLabel;
-  if (venue) return venue;
+  if (place) return place;
 
   const slug = args.slugline?.trim();
   if (slug && !slug.includes('UNDEFINED')) {

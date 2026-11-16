@@ -16,7 +16,7 @@ const commuteScenes = storyboardSamFixture({
       order: 0,
       actId: 'exposition',
       characterIds: ['persona:rider'],
-      venueKey: 'venue:curbside',
+      placeRef: 'twinfile/place/curbside:0.0.0',
       touchpointIds: ['touchpoint:pre'],
     },
     {
@@ -25,7 +25,7 @@ const commuteScenes = storyboardSamFixture({
       order: 1,
       actId: 'denouement',
       characterIds: ['persona:rider'],
-      venueKey: 'venue:curbside',
+      placeRef: 'twinfile/place/curbside:0.0.0',
       touchpointIds: ['touchpoint:on'],
     },
   ],

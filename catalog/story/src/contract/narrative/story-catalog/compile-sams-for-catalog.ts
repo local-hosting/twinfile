@@ -20,7 +20,7 @@ export function compileSamsForCatalog(input: {
   sams: readonly SAM[];
 }): SAM[] {
   const knownPcmIds = input.pcms.map((row) => row.persona.id);
-  const knownVenueKeys = input.placeMounts.map((row) => row.venueKey);
+  const knownPlaceRefs = input.placeMounts.map((row) => row.placeRef);
   const pcmById: Record<string, PCM> = {};
   for (const pcm of input.pcms) {
     pcmById[pcm.id] = pcm;
@@ -43,7 +43,7 @@ export function compileSamsForCatalog(input: {
       placeMounts: input.placeMounts,
       characterContext,
       knownPcmIds,
-      knownVenueKeys,
+      knownPlaceRefs,
       force: true,
     });
 

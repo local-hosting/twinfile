@@ -1,12 +1,12 @@
 import type { TwinfilePlaceMount } from '@doppler-group/twinfile-core';
 
-import type { VenueLayoutMountWire } from '../types/venue-layout-mount-wire.js';
+import type { PlaceLayoutWire } from '../types/place-layout-wire.js';
 
-/** Minimal venue layout wire from a place mount. */
-export function placeMountToVenueLayoutWire(mount: TwinfilePlaceMount): VenueLayoutMountWire {
+/** Minimal place layout wire from a place mount. */
+export function placeMountToPlaceLayout(mount: TwinfilePlaceMount): PlaceLayoutWire {
   return {
     version: 1,
-    id: mount.venueKey,
+    placeRef: mount.placeRef,
     title: mount.title,
     revision: 0,
     levels: [],

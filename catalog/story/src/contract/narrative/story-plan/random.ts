@@ -114,13 +114,13 @@ export function pickRandomVisitDayIndex(input: {
 }
 
 export function pickRandomStoryPlanStoreSlug(
-  fleetVenues: readonly { slug: string }[],
+  fleetPlaces: readonly { slug: string }[],
   random: () => number = Math.random,
 ): string | undefined {
-  if (fleetVenues.length === 0) {
+  if (fleetPlaces.length === 0) {
     return undefined;
   }
-  const index = Math.floor(random() * fleetVenues.length);
-  const clamped = Math.min(Math.max(index, 0), fleetVenues.length - 1);
-  return fleetVenues[clamped]!.slug;
+  const index = Math.floor(random() * fleetPlaces.length);
+  const clamped = Math.min(Math.max(index, 0), fleetPlaces.length - 1);
+  return fleetPlaces[clamped]!.slug;
 }

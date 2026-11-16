@@ -4,7 +4,7 @@ order: 0
 actId: exposition
 characterIds:
   - persona:rider
-venueKey: venue:urban-curbside
+placeRef: twinfile/place/urban-curbside:0.0.0
 journeyPhaseId: phase:rider-plan
 touchpointIds:
   - touchpoint:rider-open-home

@@ -18,7 +18,6 @@
     "check": "yarn build && yarn typecheck"
   },
   "exports": {
-    "./eval": "./src/eval/index.ts",
     "./cli/twin": {
       "types": "./dist/cli/twin.d.ts",
       "import": "./dist/cli/twin.js",

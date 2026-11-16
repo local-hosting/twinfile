@@ -14,7 +14,7 @@ import type {
   BuildTwinfileSummaryInput,
   TwinfileSummaryAspect,
   TwinfileSummaryIoPort,
-  TwinfileSummaryVenueVisit,
+  TwinfileSummaryPlaceVisit,
 } from '@doppler-group/twinfile-core';
 import { PlaceType } from '../place/place-type.js';
 import { regionNavFromTwinfile } from '../place/region-nav.js';
@@ -58,7 +58,7 @@ function iconForUnit(twinfile: Record<string, unknown>): string {
   return name.slice(0, 3).toUpperCase();
 }
 
-function visitMomentsFromPlace(place?: Record<string, unknown>): TwinfileSummaryVenueVisit[] {
+function visitMomentsFromPlace(place?: Record<string, unknown>): TwinfileSummaryPlaceVisit[] {
   const visits = place?.visits;
   if (!Array.isArray(visits)) return [];
   return visits.flatMap((row) => {

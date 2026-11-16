@@ -31,7 +31,7 @@ const scenes: StoryScene[] = [
     order: 0,
     actId: 'exposition',
     characterIds: ['persona:one'],
-    venueKey: 'venue:one',
+    placeRef: 'twinfile/place/one:0.0.0',
   },
   {
     id: 'scene-b',
@@ -39,7 +39,7 @@ const scenes: StoryScene[] = [
     order: 1,
     actId: 'rising_action',
     characterIds: ['persona:one'],
-    venueKey: 'venue:one',
+    placeRef: 'twinfile/place/one:0.0.0',
   },
 ];
 

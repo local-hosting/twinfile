@@ -35,7 +35,7 @@ export function buildSamStoryPlanCatalogSnapshot(
     samEpisodeIds: input.samEpisodeIds,
     ...(input.storyMenu ? { storyMenu: input.storyMenu } : {}),
     jobIds: input.jobIds,
-    fleetVenues: [...input.fleetVenues],
+    fleetPlaces: [...input.fleetPlaces],
     touchpointCount: input.touchpointCount,
     hubTouchpointId: input.hubTouchpointId,
     touchpointIdsSample: [...input.touchpointIdsSample],
@@ -52,7 +52,7 @@ export function buildSamStoryPlanExtractionIndex(
     segmentLabels[row.id] = row.label;
   }
   const storeNames: Record<string, string | undefined> = {};
-  for (const row of catalog.fleetVenues) {
+  for (const row of catalog.fleetPlaces) {
     storeNames[row.slug] = row.name;
   }
   const segments = catalog.segments.map((row) => ({
@@ -89,7 +89,7 @@ export function buildSamStoryPlanExtractionIndex(
     segmentIds: catalog.segments.map((row) => row.id),
     segmentLabels,
     segments,
-    storeSlugs: catalog.fleetVenues.map((row) => row.slug),
+    storeSlugs: catalog.fleetPlaces.map((row) => row.slug),
     storeNames,
     engagementLevelIds: catalog.engagementLevelIds,
     intentIds: catalog.intentIds,
@@ -153,7 +153,7 @@ export function mergeSamStoryPlanInput(
     interestIds: mergeStringArrays(body.interestIds, extracted.interestIds),
     pcmId: pickString(body.pcmId, extracted.pcmId),
     episodeId: pickString(body.episodeId, extracted.episodeId),
-    venueKey: pickString(body.venueKey, extracted.venueKey),
+    placeRef: pickString(body.placeRef, extracted.placeRef),
     planningHorizonDays: body.planningHorizonDays ?? extracted.planningHorizonDays,
     visitDayOffset: body.visitDayOffset ?? extracted.visitDayOffset,
     useFeedCalendar: body.useFeedCalendar ?? extracted.useFeedCalendar,
@@ -176,10 +176,10 @@ export function buildSamStoryPlanChecklist(input: {
     },
     {
       id: 'fleet',
-      ok: input.catalog.fleetVenues.length > 0,
+      ok: input.catalog.fleetPlaces.length > 0,
       detail:
-        input.catalog.fleetVenues.length > 0
-          ? `${input.catalog.fleetVenues.length} fleet venue(s)`
+        input.catalog.fleetPlaces.length > 0
+          ? `${input.catalog.fleetPlaces.length} fleet place(s)`
           : 'No fleet stores in catalog',
     },
     {
@@ -197,7 +197,7 @@ export function buildSamStoryPlanChecklist(input: {
     },
     {
       id: 'store_pick',
-      ok: !input.storeSlug || input.catalog.fleetVenues.some((row) => row.slug === input.storeSlug),
+      ok: !input.storeSlug || input.catalog.fleetPlaces.some((row) => row.slug === input.storeSlug),
       detail: input.storeSlug ? `storeSlug \`${input.storeSlug}\`` : 'No store selected',
     },
   ];

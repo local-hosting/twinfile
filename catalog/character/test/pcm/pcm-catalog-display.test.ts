@@ -5,6 +5,7 @@ import {
   pcmCatalogSegment,
 } from '../../src/contract/persona/contract/pcm-catalog-display.js';
 import { resolvePcmPersonaDisplayName } from '../../src/contract/persona/persona/resolve-persona-display-name.js';
+import * as pcmEntry from '../../src/contract/persona/index.js';
 import type { PCM } from '../../src/contract/persona/types/pcm.js';
 
 const sample: PCM = {
@@ -39,5 +40,9 @@ describe('pcm catalog display helpers', () => {
   it('resolvePcmPersonaDisplayName honors override', () => {
     expect(resolvePcmPersonaDisplayName(sample, 'Custom')).toBe('Custom');
     expect(resolvePcmPersonaDisplayName(sample)).toBe('Alex Rider');
+  });
+
+  it('exports resolvePcmPersonaDisplayName from the pcm entry', () => {
+    expect(pcmEntry.resolvePcmPersonaDisplayName).toBe(resolvePcmPersonaDisplayName);
   });
 });

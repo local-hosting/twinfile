@@ -25,7 +25,7 @@ export type StoryBriefWhatV1 = {
 
 export type StoryBriefWhereV1 = {
   storeSlug?: string;
-  venueSlug?: string;
+  placeSlug?: string;
   lat?: number;
   lon?: number;
   h3Cell?: string;

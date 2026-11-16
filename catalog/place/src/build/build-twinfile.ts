@@ -95,7 +95,7 @@ type UnitLockInput = {
   layerChains: string[];
 };
 
-/** `--frozen` drift check, then lock write; scene runs carry their pin in `run.expected.digest` instead. */
+/** `--frozen` drift check, then lock write; scene runs skip the unit lock. */
 function syncUnitLock(unit: LoadedTwinfile, options: BuildTwinfileOptions, input: UnitLockInput): Result<void> {
   const frozen = options.frozen ?? false;
   const writeLock = options.writeLock ?? !frozen;

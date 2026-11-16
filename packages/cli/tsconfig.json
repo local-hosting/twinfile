@@ -7,6 +7,7 @@
     "customConditions": ["development"],
     "declaration": true,
     "outDir": "dist",
+    "rootDir": "src",
     "strict": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
@@ -14,5 +15,5 @@
     "esModuleInterop": true,
     "types": ["node"],
   },
-  "include": ["src/cli/**/*.ts", "src/eval/**/*.ts"]
+  "include": ["src/cli/**/*.ts"]
 }

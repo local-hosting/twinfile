@@ -219,7 +219,10 @@ export async function handleMcpRequest(
       return { error: 'runs disabled; restart serve with --allow-runs', digest };
     }
     const loaded = built.loaded;
-    const runner = String((loaded.twinfile.use as { runner?: string } | undefined)?.runner ?? '');
+    const runner = String((loaded.twinfile.use as { runner?: string } | undefined)?.runner ?? '').trim();
+    if (!runner) {
+      return { digest, error: 'scene has no use.runner — offline run skipped' };
+    }
     const distRoot = distRootFromCli();
     const resolvedArgs = tfPlace.resolvedArgs ?? {};
     const args = { ...resolvedArgs, ...(req.params?.args as Record<string, unknown> | undefined) };

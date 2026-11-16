@@ -17,7 +17,7 @@ function activityFromWire(block: StoryTimelineActivityWire): EpisodeScheduledAct
     journeyPhaseId: block.journeyPhaseId as EpisodePhaseId | undefined,
     label: block.label,
     jobId: block.jobId,
-    venueOpportunityId: block.venueOpportunityId,
+    placeOpportunityId: block.placeOpportunityId,
   };
 }
 

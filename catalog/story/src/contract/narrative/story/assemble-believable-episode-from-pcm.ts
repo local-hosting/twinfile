@@ -8,13 +8,13 @@ import { resolvePersonaJourneyPace } from '../story-plan/journey-pace.js';
 import { resolveSamEpisodeForPcm } from '../story-catalog/resolve-sam-episode-for-pcm.js';
 import { resolveJourneyForSam } from '../journey/build/resolve-journey-for-sam.js';
 import { resolveStoryPlanStoreForPlan } from '../story-plan/resolve-story-plan-store.js';
-import type { SamStoryPlanFleetVenueSnapshotV1 } from '../types/story-plan-catalog.js';
+import type { SamStoryPlanFleetPlaceSnapshotV1 } from '../types/story-plan-catalog.js';
 import type { SAM } from '../types/sam.js';
 import type { SAMTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import {
   rankPlaceMountsNearAnchor,
   type GeoAnchorV1,
-} from '../venue/rank-venues-near-anchor.js';
+} from '../place/rank-places-near-anchor.js';
 import {
   compileStoryEpisodeFromMounts,
   type CompileStoryEpisodeFromMountsResult,
@@ -34,7 +34,7 @@ export type AssembleBelievableEpisodeFromPcmInput = {
   journeyPace?: string;
   subjectId?: string;
   anchor?: GeoAnchorV1;
-  fleetVenues?: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces?: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   scenario?: string;
   random?: () => number;
   timingVariation?: Partial<EpisodeTimingVariation>;
@@ -44,9 +44,9 @@ export type BelievableEpisodeAssemblyV1 = {
   samEpisodeId: string;
   journeyId: string;
   rankedJobIds: string[];
-  rankedVenueKeys: string[];
+  rankedPlaceRefs: string[];
   storeSlug?: string;
-  preferredVenueKey?: string;
+  preferredPlaceRef?: string;
 };
 
 export type AssembleBelievableEpisodeFromPcmResult = CompileStoryEpisodeFromMountsResult & {
@@ -83,37 +83,37 @@ function pickSamMount(input: AssembleBelievableEpisodeFromPcmInput): SAM {
   });
 }
 
-function pickPreferredVenueKey(
+function pickPreferredPlaceRef(
   placeMounts: readonly PlaceMount[],
   anchor?: GeoAnchorV1,
-): { rankedVenueKeys: string[]; preferredVenueKey?: string } {
+): { rankedPlaceRefs: string[]; preferredPlaceRef?: string } {
   if (placeMounts.length === 0) {
-    return { rankedVenueKeys: [] };
+    return { rankedPlaceRefs: [] };
   }
   if (anchor) {
     const ranked = rankPlaceMountsNearAnchor(placeMounts, anchor);
     return {
-      rankedVenueKeys: ranked.map((row) => row.mount.venueKey),
-      preferredVenueKey: ranked[0]?.mount.venueKey,
+      rankedPlaceRefs: ranked.map((row) => row.mount.placeRef),
+      preferredPlaceRef: ranked[0]?.mount.placeRef,
     };
   }
   return {
-    rankedVenueKeys: placeMounts.map((row) => row.venueKey),
-    preferredVenueKey: placeMounts[0]?.venueKey,
+    rankedPlaceRefs: placeMounts.map((row) => row.placeRef),
+    preferredPlaceRef: placeMounts[0]?.placeRef,
   };
 }
 
 function pickStoreSlug(input: {
   scenario?: string;
-  fleetVenues?: readonly SamStoryPlanFleetVenueSnapshotV1[];
+  fleetPlaces?: readonly SamStoryPlanFleetPlaceSnapshotV1[];
   random?: () => number;
 }): string | undefined {
-  const venues = input.fleetVenues ?? [];
-  if (venues.length === 0) {
+  const places = input.fleetPlaces ?? [];
+  if (places.length === 0) {
     return undefined;
   }
   return resolveStoryPlanStoreForPlan({
-    fleetVenues: venues,
+    fleetPlaces: places,
     scenario: input.scenario,
     random: input.random,
   });
@@ -137,13 +137,13 @@ export function assembleBelievableEpisodeFromPcm(
     resolvePersonaJourneyPace(focalPcm.persona) ||
     undefined;
 
-  const { rankedVenueKeys, preferredVenueKey } = pickPreferredVenueKey(
+  const { rankedPlaceRefs, preferredPlaceRef } = pickPreferredPlaceRef(
     input.placeMounts,
     input.anchor,
   );
   const storeSlug = pickStoreSlug({
     scenario: input.scenario,
-    fleetVenues: input.fleetVenues,
+    fleetPlaces: input.fleetPlaces,
     random: input.random,
   });
 
@@ -170,9 +170,9 @@ export function assembleBelievableEpisodeFromPcm(
       samEpisodeId: sam.id,
       journeyId: storyJourney.id,
       rankedJobIds: rankedJobs,
-      rankedVenueKeys,
+      rankedPlaceRefs,
       storeSlug,
-      preferredVenueKey,
+      preferredPlaceRef,
     },
   };
 }

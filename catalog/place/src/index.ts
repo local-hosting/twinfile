@@ -98,15 +98,12 @@ export {
 } from './check/place-archetype.js';
 export { loadTwinfileStrict, strictCheckPlace, type StrictCheckOptions } from './check/strict-place.js';
 export { placeMountFromAxmMountBody } from './mounts/place-mount-from-pack-body.js';
-export { placeMountFromVenueLayoutWire } from './mounts/place-mount-from-venue-wire.js';
-export { placeMountToVenueLayoutWire } from './mounts/place-mount-to-venue-wire.js';
+export { placeMountFromPlaceLayout } from './mounts/place-mount-from-layout-wire.js';
+export { placeMountToPlaceLayout } from './mounts/place-mount-to-layout-wire.js';
 export {
-  venueLayoutMountFromJson,
-  venueLayoutMountToJson,
-  venueLayoutToAxmContribution,
-  VENUE_LAYOUT_MOUNT_TOOLING,
-} from './mounts/venue-layout-mount-json.js';
-export type {
-  VenueLayoutAxmContribution,
-  VenueLayoutMountWire,
-} from './types/venue-layout-mount-wire.js';
+  placeLayoutFromJson,
+  placeLayoutToJson,
+  placeLayoutToAxmContribution,
+  PLACE_LAYOUT_TOOLING,
+} from './mounts/place-layout-json.js';
+export type { PlaceLayoutAxmContribution, PlaceLayoutWire } from './types/place-layout-wire.js';

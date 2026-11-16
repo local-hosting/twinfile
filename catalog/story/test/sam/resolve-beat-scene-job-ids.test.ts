@@ -24,8 +24,8 @@ describe('resolveStoryBeatSceneJobIds', () => {
         activity: { id: 'a1', kind: 'transaction', startTime: 9, endTime: 10, jobId: 'job:activity' },
       },
       scenes: [
-        { id: 's1', label: 'Open', order: 0, actId: 'exposition', characterIds: [], venueKey: 'venue:test', jobIds: ['job:scene'] },
-        { id: 's2', label: 'Close', order: 1, actId: 'denouement', characterIds: [], venueKey: 'venue:test', jobIds: ['job:other'] },
+        { id: 's1', label: 'Open', order: 0, actId: 'exposition', characterIds: [], placeRef: 'twinfile/place/test:0.0.0', jobIds: ['job:scene'] },
+        { id: 's2', label: 'Close', order: 1, actId: 'denouement', characterIds: [], placeRef: 'twinfile/place/test:0.0.0', jobIds: ['job:other'] },
       ],
       arc,
     });

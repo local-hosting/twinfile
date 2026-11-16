@@ -1,4 +1,5 @@
 import type { Journey } from '@doppler-group/twinfile-character/pcm';
+import { samePlaceRef } from '@doppler-group/twinfile-core/ref';
 
 import type { SAM } from '../types/sam.js';
 
@@ -8,9 +9,9 @@ function journeyNarrativeText(journey: Journey): string {
   return [journey.journeyGoal, journey.label, journey.id].filter(Boolean).join(' ');
 }
 
-function venueLabel(sam: SAM, venueKey: string): string {
-  const row = sam.venues?.find((v) => v.venueKey?.trim() === venueKey.trim());
-  return row?.label?.trim() || venueKey;
+function placeLabel(sam: SAM, placeRef: string): string {
+  const row = sam.places?.find((v) => samePlaceRef(v.placeRef, placeRef));
+  return row?.label?.trim() || placeRef;
 }
 
 /**
@@ -31,10 +32,10 @@ export function validateSamNarrativeCoherence(
 
   if (commuteLike && !airportInJourney) {
     for (const scene of sam.scenes) {
-      const label = venueLabel(sam, scene.venueKey);
+      const label = placeLabel(sam, scene.placeRef);
       if (/airport/i.test(label)) {
         issues.push(
-          `scene ${scene.id} uses venue label "${label}" but journey ${journey.id} reads as commute — relabel mount or change venueKey`,
+          `scene ${scene.id} uses place label "${label}" but journey ${journey.id} reads as commute — relabel mount or change placeRef`,
         );
       }
     }

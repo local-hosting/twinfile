@@ -455,7 +455,7 @@ function mergeCatalogEntries(primary: ViewerCatalogEntry[], extra: ViewerCatalog
   return primary;
 }
 
-/** Place Twinfiles only — sidebar card browser must not list run presets or programme packs. */
+/** Place Twinfiles only — sidebar card browser must not list story scene runs or programme packs. */
 export function isViewerPlaceCardCatalogEntry(entry: ViewerCatalogEntry): boolean {
   return entry.group === 'sites' && entry.kind === 'place';
 }

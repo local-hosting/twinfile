@@ -1,3 +1,5 @@
+import { samePlaceRef } from '@doppler-group/twinfile-core/ref';
+
 import { matchSamStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
 import type { SamStoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 import type { SamStoryPlanCatalogSnapshotV1 } from '../types/story-plan-catalog.js';
@@ -6,7 +8,7 @@ import { resolveStoryPlanRandom } from './rng.js';
 export type SamStoryPlanAxmMenuSelectionV1 = {
   pcmId: string;
   samEpisodeId: string;
-  venueKey?: string;
+  placeRef?: string;
   storeSlug?: string;
   rationale: string;
 };
@@ -14,14 +16,14 @@ export type SamStoryPlanAxmMenuSelectionV1 = {
 export type SamStoryPlanAxmMenuPlanInputV1 = {
   pcmId?: string;
   episodeId?: string;
-  venueKey?: string;
+  placeRef?: string;
   storeSlug?: string;
 };
 
 export function planStoryCreateAxmMenuHeuristic(input: {
   scenario: string;
   menu: SamStoryCatalogMenuV1;
-  catalog: Pick<SamStoryPlanCatalogSnapshotV1, 'fleetVenues'>;
+  catalog: Pick<SamStoryPlanCatalogSnapshotV1, 'fleetPlaces'>;
   plan?: SamStoryPlanAxmMenuPlanInputV1;
   random?: () => number;
   seed?: string | number;
@@ -33,7 +35,7 @@ export function planStoryCreateAxmMenuHeuristic(input: {
   const matched = matchSamStoryCatalogIdsFromText({
     text: scenario,
     menu: input.menu,
-    fleetVenues: input.catalog.fleetVenues,
+    fleetPlaces: input.catalog.fleetPlaces,
     focalPcmId: plan.pcmId?.trim(),
   });
 
@@ -58,20 +60,20 @@ export function planStoryCreateAxmMenuHeuristic(input: {
   }
 
   const episode = input.menu.episodes.find((row) => row.id === samEpisodeId);
-  const venueKey = plan.venueKey?.trim();
+  const placeRef = plan.placeRef?.trim();
   const storeSlug = plan.storeSlug?.trim() || matched.storeSlug;
 
   const character = input.menu.characters.find((row) => row.pcmId === pcmId);
-  const placeVenue =
-    venueKey && input.menu.placeVenues?.length
-      ? input.menu.placeVenues.find((row) => row.venueKey === venueKey)
+  const menuPlace =
+    placeRef && input.menu.places?.length
+      ? input.menu.places.find((row) => samePlaceRef(row.placeRef, placeRef))
       : undefined;
   return {
     pcmId,
     samEpisodeId,
-    venueKey,
+    placeRef,
     storeSlug,
-    rationale: `User catalog: character ${character?.label ?? pcmId}, episode ${episode?.title ?? samEpisodeId}${placeVenue ? `, place ${placeVenue.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
+    rationale: `User catalog: character ${character?.label ?? pcmId}, episode ${episode?.title ?? samEpisodeId}${menuPlace ? `, place ${menuPlace.title}` : ''}${storeSlug ? `, store ${storeSlug}` : ''}`,
   };
 }
 

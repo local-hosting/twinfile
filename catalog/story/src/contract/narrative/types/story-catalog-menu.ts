@@ -1,6 +1,6 @@
 /**
  * Org-published **user** catalog menu — PCM + SAM mounted on the org catalog.
- * Place mounts are optional (`placeVenues`) and are not part of user-specific planning menus.
+ * Place mounts are optional (`places`) and are not part of user-specific planning menus.
  */
 export type SamCatalogCharacterRef = {
   pcmId: string;
@@ -15,8 +15,8 @@ export type SamCatalogEpisodeRef = {
   journeyId?: string;
 };
 
-export type SamCatalogVenueRef = {
-  venueKey: string;
+export type SamCatalogPlaceRef = {
+  placeRef: string;
   title: string;
 };
 
@@ -24,12 +24,12 @@ export type SamStoryCatalogMenuV1 = {
   characters: readonly SamCatalogCharacterRef[];
   episodes: readonly SamCatalogEpisodeRef[];
   /** Host-only place plane — omit for story.plan / user NL extraction. */
-  placeVenues?: readonly SamCatalogVenueRef[];
+  places?: readonly SamCatalogPlaceRef[];
 };
 
 /** Resolved ids for one story run (before compile). PCM spine is on the episode binding. */
 export type SamStorySelectionV1 = {
   pcmId: string;
   episodeId: string;
-  venueKey?: string;
+  placeRef?: string;
 };

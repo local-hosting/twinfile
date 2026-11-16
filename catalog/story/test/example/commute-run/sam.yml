@@ -2,7 +2,7 @@ samSpec: 1
 id: story:episode:rider-commute-demo
 title: Rider commute demo episode
 revision: 1
-summary: Multi-cast commute — rider focal journey with driver and two venue mounts
+summary: Multi-cast commute — rider focal journey with driver and two place mounts
 arcTemplate:
   id: arc:five-act-commute
   label: Commute story arc
@@ -14,11 +14,11 @@ characters:
     role: protagonist
   - pcmId: persona:driver
     role: counterpart
-venues:
-  - venueKey: venue:urban-curbside
+places:
+  - placeRef: twinfile/place/urban-curbside:0.0.0
     role: pickup
     label: Curbside pickup
-  - venueKey: venue:office-dropoff
+  - placeRef: twinfile/place/office-dropoff:0.0.0
     role: destination
 binding:
   pcmId: persona:rider

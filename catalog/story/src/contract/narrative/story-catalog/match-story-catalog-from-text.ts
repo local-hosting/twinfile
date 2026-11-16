@@ -1,14 +1,16 @@
+import { parseTwinfileRef } from '@doppler-group/twinfile-core/ref';
+
 import type { SamStoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 
 export type SamStoryCatalogTextMatchV1 = {
   pcmId?: string;
   episodeId?: string;
-  venueKey?: string;
+  placeRef?: string;
   storeSlug?: string;
   journeyId?: string;
 };
 
-export type SamStoryCatalogFleetVenueRef = {
+export type SamStoryCatalogFleetPlaceRef = {
   slug: string;
   name?: string;
 };
@@ -56,18 +58,18 @@ function bestIdFromCandidates(
   return bestId;
 }
 
-export function venueSlugFromVenueKey(venueKey: string): string {
-  return venueKey.trim().replace(/^venue:/, '');
+export function placeSlugFromPlaceRef(placeRef: string): string {
+  return parseTwinfileRef(placeRef)?.name ?? placeRef.trim();
 }
 
 /** Keyword match user catalog menu (+ optional fleet slugs) against natural language. */
 export function matchSamStoryCatalogIdsFromText(input: {
   text: string;
   menu: SamStoryCatalogMenuV1;
-  fleetVenues?: readonly SamStoryCatalogFleetVenueRef[];
+  fleetPlaces?: readonly SamStoryCatalogFleetPlaceRef[];
   focalPcmId?: string;
-  /** When false (default), do not infer venueKey from place mount titles — places are not user content. */
-  includePlaceVenues?: boolean;
+  /** When false (default), do not infer placeRef from place mount titles — places are not user content. */
+  includePlaces?: boolean;
 }): SamStoryCatalogTextMatchV1 {
   const scenario = input.text.trim();
   if (!scenario) {
@@ -95,23 +97,23 @@ export function matchSamStoryCatalogIdsFromText(input: {
     0.15,
   );
 
-  const includePlaceVenues = input.includePlaceVenues === true;
-  const venueKey =
-    includePlaceVenues && input.menu.placeVenues?.length
+  const includePlaces = input.includePlaces === true;
+  const placeRef =
+    includePlaces && input.menu.places?.length
       ? bestIdFromCandidates(
           scenario,
-          input.menu.placeVenues.map((row) => ({
-            id: row.venueKey,
-            labels: [row.venueKey, row.title, row.venueKey.replace(/^venue:/, '')],
+          input.menu.places.map((row) => ({
+            id: row.placeRef,
+            labels: [row.placeRef, row.title, placeSlugFromPlaceRef(row.placeRef)],
           })),
           0.2,
         )
       : undefined;
 
-  const storeSlug = input.fleetVenues
+  const storeSlug = input.fleetPlaces
     ? bestIdFromCandidates(
         scenario,
-        input.fleetVenues.map((row) => ({
+        input.fleetPlaces.map((row) => ({
           id: row.slug,
           labels: [row.slug, row.name ?? ''],
         })),
@@ -126,7 +128,7 @@ export function matchSamStoryCatalogIdsFromText(input: {
   return {
     ...(pcmId ? { pcmId } : {}),
     ...(episodeId ? { episodeId } : {}),
-    ...(venueKey ? { venueKey } : {}),
+    ...(placeRef ? { placeRef } : {}),
     ...(storeSlug ? { storeSlug } : {}),
     ...(journeyId ? { journeyId } : {}),
   };

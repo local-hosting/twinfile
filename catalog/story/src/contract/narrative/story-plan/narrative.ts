@@ -162,7 +162,7 @@ export function buildSamStoryPlanNarrativeContext(
       planningHorizonDays: 0,
       useFeedCalendar: true,
       episodePhases:
-        'pursue ranked JTBD across touchpoints → primary moment at mounted venue → denouement — horizon derived from jobs unless binding fixes days',
+        'pursue ranked JTBD across touchpoints → primary moment at mounted place → denouement — horizon derived from jobs unless binding fixes days',
     },
     segments,
     engagementLevels,
@@ -173,7 +173,7 @@ export function buildSamStoryPlanNarrativeContext(
     journeys: [...input.journeys],
     touchpoints,
     hubTouchpointId: input.touchpointGraph?.hubTouchpointId,
-    fleetVenues: [...input.fleetVenues],
+    fleetPlaces: [...input.fleetPlaces],
   };
 }
 

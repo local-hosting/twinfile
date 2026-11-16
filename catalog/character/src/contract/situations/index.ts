@@ -57,7 +57,8 @@ export {
   parseObstacleCatalog,
   validateObstacleCatalog,
 } from './catalog/obstacles.js';
-export type { ObstacleCatalog } from './catalog/obstacles.schema.js';
+export { obstacleCatalogFromJobs } from './catalog/obstacle-catalog-from-jobs.js';
+export type { CustomerObstacleDefinition, ObstacleCatalog } from './catalog/obstacles.schema.js';
 
 export { jsmFromJSON, jsmToJSON } from './contract/json.js';
 export { pickJobsByIds } from './job/pick-jobs-by-ids.js';

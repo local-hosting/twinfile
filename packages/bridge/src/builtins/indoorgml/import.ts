@@ -192,8 +192,8 @@ export function importPlace(input: unknown): ImportResult {
     );
   }
   const placeMeta = asRecord(root.place ?? {}, 'indoorgml place');
-  const venueName = readName(placeMeta.name ?? root.name, 'IndoorGML place');
-  const venueKind = typeof placeMeta.kind === 'string' ? placeMeta.kind : 'building';
+  const placeName = readName(placeMeta.name ?? root.name, 'IndoorGML place');
+  const placeKind = typeof placeMeta.kind === 'string' ? placeMeta.kind : 'building';
   const archetype = levels.length > 1 ? 'indoor_stack' : 'single_level';
   const interLayer = root.interLayerConnections ?? root.InterLayerConnection;
   const layers = root.layers ?? root.MultiLayer;
@@ -212,11 +212,11 @@ export function importPlace(input: unknown): ImportResult {
   const geotype =
     typeof root.geotype === 'string'
       ? root.geotype
-      : geotypeSlugForMapping('indoorgml', venueKind) ?? 'office';
+      : geotypeSlugForMapping('indoorgml', placeKind) ?? 'office';
   const site = withExt(
     {
-      name: venueName,
-      kind: venueKind,
+      name: placeName,
+      kind: placeKind,
       timezone: typeof placeMeta.timezone === 'string' ? placeMeta.timezone : 'UTC',
       published: false,
       archetype,
@@ -228,5 +228,5 @@ export function importPlace(input: unknown): ImportResult {
   if (spaces.length) docs.push({ spaces });
   if (openings.length) docs.push({ openings });
   if (routes.length) docs.push({ routes });
-  return packUnit(twinId(venueName), geotype, docs);
+  return packUnit(twinId(placeName), geotype, docs);
 }

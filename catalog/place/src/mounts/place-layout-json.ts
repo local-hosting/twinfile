@@ -1,14 +1,13 @@
-import type {
-  VenueLayoutAxmContribution,
-  VenueLayoutMountWire,
-} from '../types/venue-layout-mount-wire.js';
+import { isTwinfileRef } from '@doppler-group/twinfile-core';
 
-export const VENUE_LAYOUT_MOUNT_TOOLING = {
+import type { PlaceLayoutAxmContribution, PlaceLayoutWire } from '../types/place-layout-wire.js';
+
+export const PLACE_LAYOUT_TOOLING = {
   name: '@doppler-group/twinfile-place',
   version: '0.0.1',
 } as const;
 
-function readSpaces(raw: unknown): VenueLayoutMountWire['spaces'] {
+function readSpaces(raw: unknown): PlaceLayoutWire['spaces'] {
   if (!Array.isArray(raw)) {
     return [];
   }
@@ -22,19 +21,19 @@ function readSpaces(raw: unknown): VenueLayoutMountWire['spaces'] {
     .filter((row) => row.id.length > 0);
 }
 
-export function venueLayoutMountFromJson(json: unknown): VenueLayoutMountWire {
+export function placeLayoutFromJson(json: unknown): PlaceLayoutWire {
   if (!json || typeof json !== 'object' || Array.isArray(json)) {
-    throw new Error('invalid venue layout mount JSON');
+    throw new Error('invalid place layout JSON');
   }
   const record = json as Record<string, unknown>;
-  const id = String(record.id ?? '').trim();
-  if (!id) {
-    throw new Error('venue layout mount missing id');
+  const placeRef = String(record.placeRef ?? '').trim();
+  if (!isTwinfileRef(placeRef)) {
+    throw new Error(`place layout missing valid placeRef (got "${placeRef}")`);
   }
-  const title = String(record.title ?? id).trim() || id;
+  const title = String(record.title ?? placeRef).trim() || placeRef;
   return {
     version: typeof record.version === 'number' ? record.version : 1,
-    id,
+    placeRef,
     title,
     ...(typeof record.revision === 'number' ? { revision: record.revision } : {}),
     ...(record.geo &&
@@ -49,22 +48,18 @@ export function venueLayoutMountFromJson(json: unknown): VenueLayoutMountWire {
           },
         }
       : {}),
-    levels: Array.isArray(record.levels) ? (record.levels as VenueLayoutMountWire['levels']) : [],
+    levels: Array.isArray(record.levels) ? (record.levels as PlaceLayoutWire['levels']) : [],
     spaces: readSpaces(record.spaces),
-    pathways: Array.isArray(record.pathways)
-      ? (record.pathways as VenueLayoutMountWire['pathways'])
-      : [],
-    ...(Array.isArray(record.moments) ? { moments: record.moments as VenueLayoutMountWire['moments'] } : {}),
-    ...(Array.isArray(record.fixtures)
-      ? { fixtures: record.fixtures as VenueLayoutMountWire['fixtures'] }
-      : {}),
+    pathways: Array.isArray(record.pathways) ? (record.pathways as PlaceLayoutWire['pathways']) : [],
+    ...(Array.isArray(record.moments) ? { moments: record.moments as PlaceLayoutWire['moments'] } : {}),
+    ...(Array.isArray(record.fixtures) ? { fixtures: record.fixtures as PlaceLayoutWire['fixtures'] } : {}),
   };
 }
 
-export function venueLayoutMountToJson(wire: VenueLayoutMountWire): Record<string, unknown> {
+export function placeLayoutToJson(wire: PlaceLayoutWire): Record<string, unknown> {
   return {
     version: wire.version ?? 1,
-    id: wire.id,
+    placeRef: wire.placeRef,
     title: wire.title,
     ...(wire.revision != null ? { revision: wire.revision } : {}),
     ...(wire.geo ? { geo: wire.geo } : {}),
@@ -76,9 +71,9 @@ export function venueLayoutMountToJson(wire: VenueLayoutMountWire): Record<strin
   };
 }
 
-export function venueLayoutToAxmContribution(wire: VenueLayoutMountWire): VenueLayoutAxmContribution {
+export function placeLayoutToAxmContribution(wire: PlaceLayoutWire): PlaceLayoutAxmContribution {
   return {
-    venueKey: wire.id,
+    placeRef: wire.placeRef,
     levels: wire.levels ?? [],
     spaces: wire.spaces ?? [],
     pathways: wire.pathways ?? [],
