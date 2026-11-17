@@ -1,0 +1,31 @@
+twinfile: 2
+kind: context
+id: cold-chain-haul
+name: Cold-chain haul
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Cold-chain haul
+context: When I am moving temperature-controlled parcels across air, hub, and pier legs
+jobs:
+  - id: clear-air-cargo-intake
+    text: Clear air-cargo intake
+    context: When parcels arrive on the apron or curb from a flight
+    goal: get them into controlled staging without breaking the cold window
+    outcome: Parcels are accepted and temperature-logged
+  - id: stage-in-cold-room
+    text: Stage in cold room
+    context: When inbound lots must wait for the next vehicle or vessel window
+    goal: hold parcels at the right temperature until release
+    outcome: Inventory is staged and ready for the next leg
+  - id: load-reefer-for-dispatch
+    text: Load reefer for dispatch
+    context: When the next haul window opens at the yard or curb
+    goal: load parcels onto the vehicle without excursions
+    outcome: The truck departs with sealed, logged cargo
+  - id: complete-pier-transfer
+    text: Complete pier transfer
+    context: When ocean or barge handoff is due at the port warehouse
+    goal: finish the pier-to-warehouse transfer with clear ownership
+    outcome: Parcels are staged for the vessel or onward haul

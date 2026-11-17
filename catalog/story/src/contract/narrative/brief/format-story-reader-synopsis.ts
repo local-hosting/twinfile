@@ -37,7 +37,7 @@ export function formatStoryReaderSynopsisLines(
   const situationsNarrative =
     input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      situations: input.situations,
+      context: input.context,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,

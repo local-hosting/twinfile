@@ -16,44 +16,7 @@ function resolveCharacterSpecVersion(raw: Record<string, unknown>): number {
   return resolved;
 }
 
-/** Expand legacy UserNeed wrappers (`{ text, jobs: [...] }`) into flat JTBD jobs. */
-function flattenLegacyJobRows(rows: unknown[]): unknown[] {
-  const out: unknown[] = [];
-  for (const row of rows) {
-    if (!row || typeof row !== 'object' || Array.isArray(row)) {
-      out.push(row);
-      continue;
-    }
-    const item = row as Record<string, unknown>;
-    if (
-      Array.isArray(item.jobs) &&
-      typeof item.context !== 'string' &&
-      typeof item.when !== 'string'
-    ) {
-      for (const nested of item.jobs) {
-        if (!nested || typeof nested !== 'object' || Array.isArray(nested)) {
-          out.push(nested);
-          continue;
-        }
-        const job = nested as Record<string, unknown>;
-        out.push({
-          ...job,
-          text:
-            typeof job.text === 'string' && job.text.length > 0
-              ? job.text
-              : typeof item.text === 'string'
-                ? item.text
-                : job.id,
-        });
-      }
-      continue;
-    }
-    out.push(row);
-  }
-  return out;
-}
-
-/** Fold `characterSpec` / legacy `version` → `version` before Zod parse. */
+/** Fold `characterSpec` / legacy `version` → `version`; strip JTBD fields (own on context twins). */
 export function normalizeCharacterInput(input: unknown): unknown {
   if (typeof input !== 'object' || input === null) {
     return input;
@@ -61,15 +24,14 @@ export function normalizeCharacterInput(input: unknown): unknown {
   const raw = input as Record<string, unknown>;
   const specVersion = resolveCharacterSpecVersion(raw);
   assertSupportedCharacterSpec(specVersion);
-  const { characterSpec: _characterSpec, userNeeds, ...rest } = raw;
-  const jobsSource = Array.isArray(rest.jobs)
-    ? rest.jobs
-    : Array.isArray(userNeeds)
-      ? userNeeds
-      : undefined;
+  const {
+    characterSpec: _characterSpec,
+    userNeeds: _userNeeds,
+    jobs: _jobs,
+    ...rest
+  } = raw;
   return {
     ...rest,
     version: specVersion,
-    ...(jobsSource ? { jobs: flattenLegacyJobRows(jobsSource) } : {}),
   };
 }

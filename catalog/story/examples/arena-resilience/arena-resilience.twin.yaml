@@ -10,6 +10,8 @@ links:
     href: twinfile/place/arena:1.2.0
   - rel: involves
     href: twinfile/character/arena-host:0.1.0
+  - rel: involves
+    href: twinfile/context/sports-stadium:0.1.0
 story:
   pitch: Shelter stand-up, storm at halftime, earthquake survey, then wildfire evacuation.
   scenes:

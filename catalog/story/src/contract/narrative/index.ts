@@ -365,6 +365,7 @@ export {
   buildStoryPlanExtractionIndex,
   mergeStoryPlanInput,
 } from './story-plan/plan-corpus.js';
+export { enrichStoryPlanExtractionIndexFromProjectTwins } from './story-plan/enrich-story-plan-extraction-index-from-twins.js';
 export {
   buildTouchpointGraphFromStories,
   type BuildTouchpointGraphFromStoriesOptions,
@@ -400,6 +401,7 @@ export {
   composeStoryPlanWorkingScenario,
   isThinStoryPlanScenario,
 } from './story-plan/scenario.js';
+export { shouldExpandStoryPlanScenarioWithLlm } from './story-plan/should-expand-story-plan-scenario.js';
 export {
   intentIdsForStoryPlanningSegment,
   readStoryPlanSegmentNeedsSummary,
@@ -434,8 +436,11 @@ export type {
   StoryPlanCatalogBuildInputV1,
   StoryPlanChecklistItemV1,
   StoryPlanExtractedHintsV1,
+  StoryPlanExtractionCharacterContextV1,
+  StoryPlanExtractionContextBriefV1,
   StoryPlanExtractionIndexV1,
   StoryPlanExtractionSegmentBriefV1,
+  StoryPlanExtractionStoryBlessV1,
   StoryPlanInputV1,
   StoryPlanNarrativeBuildInputV1,
   StoryPlanNarrativeContextV1,

@@ -1,0 +1,32 @@
+twinfile: 2
+kind: story
+id: museum-resilience
+name: Museum resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/museum:0.1.0
+  - rel: involves
+    href: twinfile/character/museum-host:0.1.0
+  - rel: involves
+    href: twinfile/context/museum-visit:0.1.0
+story:
+  pitch: Indoor shelter capacity under severe weather, then post-hazard recovery on the museum floor.
+  scenes:
+    - id: gallery-shelter-cap
+      label: Gallery shelter capacity
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 1800
+          target_role: shelter
+    - id: museum-recovery
+      label: Museum recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H

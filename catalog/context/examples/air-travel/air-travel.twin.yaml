@@ -1,0 +1,31 @@
+twinfile: 2
+kind: context
+id: air-travel
+name: Air travel
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Air travel
+context: When I am moving through an airport for a flight
+jobs:
+  - id: reach-gate-on-time
+    text: Reach gate on time
+    context: When I have a flight departure to make
+    goal: arrive at the gate before boarding closes
+    outcome: I board without stress or rebooking
+  - id: clear-security-efficiently
+    text: Clear security efficiently
+    context: When airport security is the main bottleneck
+    goal: pass screening with minimal delay
+    outcome: I am through security and headed to the gate
+  - id: find-gate-and-amenities
+    text: Find gate and amenities
+    context: When I am unfamiliar with the terminal layout
+    goal: locate my gate, restrooms, and food without backtracking
+    outcome: I know where to go and what is nearby
+  - id: manage-layover-time
+    text: Manage layover time
+    context: When I have a connection or long layover
+    goal: use the time productively without missing the next flight
+    outcome: I reach the next gate relaxed and on schedule

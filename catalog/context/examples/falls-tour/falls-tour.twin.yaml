@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: falls-tour
+name: Falls day tour
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Falls day tour
+context: When I am on a guided loop from the harbor to the falls visitor area
+jobs:
+  - id: join-guided-loop
+    text: Join the guided loop
+    context: When the day tour is forming at the harbor
+    goal: board with the right group and briefing
+    outcome: I am on the loop with clear next stops
+  - id: visit-falls-viewpoint
+    text: Visit the falls viewpoint
+    context: When we reach the Niagara Falls visitor area
+    goal: see the falls without losing the group
+    outcome: I get the viewpoint and rejoin on time
+  - id: return-to-harbor
+    text: Return to harbor
+    context: When the loop is complete
+    goal: get back to the harbor connection for the next leg
+    outcome: I am at the return dock ready for the next move

@@ -21,7 +21,6 @@ const character: Character = {
     segment: 'rider',
     jobIds: [],
   },
-  jobs: [],
   journeys: [
     {
       id: 'journey:fixture',

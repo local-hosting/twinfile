@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: museum-host
+name: Museum host (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional gallery host for the Met example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/gallery-kiosk:0.1.0
+character:
+  role: host
+  segment: museum-visitor
+  goals:
+    - Guide visitors from the Great Hall through gallery beats
+    - Keep ticketing and wayfinding clear when queues build

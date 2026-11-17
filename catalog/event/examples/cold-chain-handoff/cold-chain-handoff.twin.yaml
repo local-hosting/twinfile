@@ -1,0 +1,28 @@
+twinfile: 1
+kind: event
+id: cold-chain-handoff
+name: Cold-chain handoff
+version: 1.0.0
+stability: example
+mode: daily
+phases:
+  - intake
+  - stage
+  - release
+expects:
+  ground-transport:
+    kind: space
+    min: 1
+  collection-point:
+    kind: marker
+    min: 0
+  survey-station:
+    kind: station
+    min: 0
+args:
+  startsAt:
+    type: time
+  lanes:
+    type: integer
+  stagingCap:
+    type: integer

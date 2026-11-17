@@ -1,5 +1,5 @@
 import type { JobDefinition } from '@local-hosting/twinfile-context/catalog/jtbd.schema.js';
-import type { KpiDefinition } from '../../../situations/types/kpi-definition-wire.js';
+import type { KpiDefinition } from '@local-hosting/twinfile-context/types/kpi-definition-wire.js';
 import { HeartDimensionIdSchema } from '../../shared/heart-dimension-id.schema.js';
 import {
   CustomerCatalogSchema,

@@ -10,6 +10,8 @@ links:
     href: twinfile/place/park:0.3.0
   - rel: involves
     href: twinfile/character/park-ranger:0.1.0
+  - rel: involves
+    href: twinfile/context/park-visit:0.1.0
 story:
   pitch: Litter surge on the meadow–trailhead loop, then slope-movement evacuation.
   scenes:

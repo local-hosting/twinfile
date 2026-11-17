@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: online-shop
+name: Online shop visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Online shop visit
+context: When I am shopping online from cart through checkout or pickup
+jobs:
+  - id: review-cart
+    text: Review cart
+    context: When my cart has items ready to buy
+    goal: confirm items, price, and availability before paying
+    outcome: I know exactly what I will order
+  - id: complete-checkout
+    text: Complete checkout
+    context: When I am ready to pay
+    goal: finish payment without surprises
+    outcome: The order is confirmed with a clear receipt
+  - id: schedule-pickup
+    text: Schedule pickup
+    context: When I chose pickup instead of delivery
+    goal: pick a time that fits my day
+    outcome: Pickup is booked and I know when to arrive

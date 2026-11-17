@@ -1,0 +1,57 @@
+twinfile: 2
+kind: story
+id: cold-chain-resilience
+name: Cold-chain resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/cold-chain:0.1.0
+  - rel: involves
+    href: twinfile/place/airport:0.2.0
+  - rel: involves
+    href: twinfile/place/port:0.2.0
+  - rel: involves
+    href: twinfile/character/cold-chain-dispatcher:0.1.0
+  - rel: involves
+    href: twinfile/context/cold-chain-haul:0.1.0
+  - rel: involves
+    href: twinfile/resource/reefer-truck:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-parcel:0.1.0
+story:
+  pitch: Cold-room power outage at the hub, apron storm hold at the airport, then pier field-damage clearance at the port.
+  scenes:
+    - id: cold-room-outage
+      label: Cold-room outage
+      run:
+        from: twinfile/place/cold-chain:0.1.0
+        steps:
+          - copy: twinfile/event/power-outage:1.0.0
+        args:
+          outageAt: power-outage.outage
+    - id: apron-storm-hold
+      label: Apron storm hold
+      run:
+        from: twinfile/place/airport:0.2.0
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        clock:
+          starts_at: 2026-06-18T14:00:00-04:00
+          duration: PT2H
+          step: PT5M
+        args:
+          occupancy: 120
+          target_role: shelter
+    - id: pier-field-clearance
+      label: Pier field clearance
+      run:
+        from: twinfile/place/port:0.2.0
+        steps:
+          - copy: twinfile/event/litter-pollution:1.0.0
+        args:
+          peakArrivals: 80
+          lanes: 1
+          service_s: 60
+          stagingCap: 20

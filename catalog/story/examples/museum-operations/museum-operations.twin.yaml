@@ -1,0 +1,26 @@
+twinfile: 2
+kind: story
+id: museum-operations
+name: Museum operations
+version: 0.1.0
+stability: example
+mode: daily
+links:
+  - rel: involves
+    href: twinfile/place/museum:0.1.0
+  - rel: involves
+    href: twinfile/character/museum-host:0.1.0
+  - rel: involves
+    href: twinfile/context/museum-visit:0.1.0
+story:
+  pitch: Great Hall arrival and gallery walk through special-exhibit queues on a normal museum day.
+  scenes:
+    - id: hall-arrive
+      label: Great Hall arrival
+    - id: gallery-queue
+      label: Gallery queue
+      run:
+        steps:
+          - copy: twinfile/event/passenger-queue:1.0.0
+        args:
+          lanes: 2

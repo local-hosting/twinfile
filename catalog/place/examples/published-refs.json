@@ -1,10 +1,15 @@
 {
-  "generatedAt": "2026-11-16T22:09:50.281Z",
+  "generatedAt": "2026-11-17T00:20:54.726Z",
   "refs": {
     "twinfile/place/airport:0.2.0": {
       "digest": "sha256:910d979bf480601eacc14b381d8d4c4c51ada30310cfc67b163e344730ddc58e",
       "kind": "place",
       "path": "catalog/place/examples/airport"
+    },
+    "twinfile/place/aquarium:0.1.0": {
+      "digest": "sha256:4b02e3b1f2891bd1ac37579b864e1ca4ccb1181e64e1cb4bee90217bd5bae96c",
+      "kind": "place",
+      "path": "catalog/place/examples/aquarium"
     },
     "twinfile/place/aquarium-conservation:0.1.0": {
       "digest": "sha256:5e07351a9ca4b1d3278ed66621aec9a0f2df42c6cb2b8351d5b4db07b298c602",
@@ -12,7 +17,7 @@
       "path": "catalog/place/examples/aquarium-conservation"
     },
     "twinfile/place/arena:1.2.0": {
-      "digest": "sha256:0f206138bf0245a860e3f48374b20c030a8dadf42a246bd66fba049a7c733071",
+      "digest": "sha256:4931972ecb66f2ec73d12151bc3daba90c96b0fe7f2e758a3d1fa0a98f43e39f",
       "kind": "place",
       "path": "catalog/place/examples/arena"
     },
@@ -51,10 +56,20 @@
       "kind": "place",
       "path": "catalog/place/examples/buffalo-harbor"
     },
+    "twinfile/place/cold-chain:0.1.0": {
+      "digest": "sha256:0743eafed635d1db598ed68d44e23387268c6164d62e8488b680bf0ea36f6f25",
+      "kind": "place",
+      "path": "catalog/place/examples/cold-chain"
+    },
     "twinfile/place/dunkirk-dock:0.1.0": {
       "digest": "sha256:546b99f8cada19f3acd20df1a6f4582098bf5539e2fc13bac426139f6c471ddd",
       "kind": "place",
       "path": "catalog/place/examples/dunkirk-dock"
+    },
+    "twinfile/place/electronics-store:0.1.0": {
+      "digest": "sha256:100976c7a59986ebb7bb71c8a68f33bc456ad104079354adada658a548c1ae1e",
+      "kind": "place",
+      "path": "catalog/place/examples/electronics-store"
     },
     "twinfile/place/expo:0.2.0": {
       "digest": "sha256:53e2fd9f0a4ad0d81ee42dae9ba2217db8c4220adde8d110c28857eda9042421",
@@ -76,6 +91,11 @@
       "kind": "place",
       "path": "catalog/place/examples/mobility-hub/programme"
     },
+    "twinfile/place/museum:0.1.0": {
+      "digest": "sha256:7d01596d02f4bcd7b1fd363a3ab337cd33d8a262c2e2ba8e5f93c11f4ab4a1ff",
+      "kind": "place",
+      "path": "catalog/place/examples/museum"
+    },
     "twinfile/place/niagara-falls:0.1.0": {
       "digest": "sha256:9bf765b2accf3f3e8a1193acb70dc0ae16fe612fbfd8dad13685199f4c77ab78",
       "kind": "place",
@@ -90,6 +110,11 @@
       "digest": "sha256:e5599184d89940e0faceeb1384dcf9c6fbe1c0862785cb8b9406e9d2a3696d45",
       "kind": "place",
       "path": "catalog/place/examples/park"
+    },
+    "twinfile/place/physical-store:0.1.0": {
+      "digest": "sha256:9bd9fe5f13aeb3446865395aced96b707cc8cc54e7bd0014e3df3deaf7c0699b",
+      "kind": "place",
+      "path": "catalog/place/examples/physical-store"
     },
     "twinfile/place/port:0.2.0": {
       "digest": "sha256:6f4a7a474875430f040d64237ed8bb9daefb987c2da0f7853e0a010dd5bc65e5",
@@ -116,6 +141,11 @@
       "kind": "place",
       "path": "catalog/place/examples/watershed-river"
     },
+    "twinfile/place/wireless-mobile:0.1.0": {
+      "digest": "sha256:336f32290af857a67d575bfb713ea23d73b5d01a6f090a996eef2814e3096d86",
+      "kind": "place",
+      "path": "catalog/place/examples/wireless-mobile"
+    },
     "twinfile/story/airport-operations:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/airport-operations"
@@ -124,6 +154,14 @@
       "kind": "story",
       "path": "catalog/story/examples/airport-resilience"
     },
+    "twinfile/story/aquarium-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/aquarium-operations"
+    },
+    "twinfile/story/aquarium-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/aquarium-resilience"
+    },
     "twinfile/story/arena-operations:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/arena-operations"
@@ -131,6 +169,18 @@
     "twinfile/story/arena-resilience:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/arena-resilience"
+    },
+    "twinfile/story/cold-chain-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/cold-chain-operations"
+    },
+    "twinfile/story/cold-chain-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/cold-chain-resilience"
+    },
+    "twinfile/story/electronics-visit:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/electronics-visit"
     },
     "twinfile/story/expo-operations:0.1.0": {
       "kind": "story",
@@ -159,6 +209,18 @@
     "twinfile/story/morning-crossing:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/morning-crossing"
+    },
+    "twinfile/story/museum-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/museum-operations"
+    },
+    "twinfile/story/museum-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/museum-resilience"
+    },
+    "twinfile/story/online-visit:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/online-visit"
     },
     "twinfile/story/park-operations:0.1.0": {
       "kind": "story",
@@ -208,10 +270,22 @@
       "kind": "story",
       "path": "catalog/story/examples/transit-hub-campus-resilience"
     },
+    "twinfile/story/wireless-queue-stress:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/wireless-queue-stress"
+    },
+    "twinfile/story/wireless-visit:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/wireless-visit"
+    },
     "twinfile/event/arena-game-day:1.0.0": {
       "kind": "event",
       "path": "catalog/event/examples/arena-game-day",
       "parent": "twinfile/arena:1.2.0"
+    },
+    "twinfile/event/cold-chain-handoff:1.0.0": {
+      "kind": "event",
+      "path": "catalog/event/examples/cold-chain-handoff"
     },
     "twinfile/event/dam-release:1.0.0": {
       "kind": "event",
@@ -311,6 +385,7 @@
       "place": [
         "twinfile/place/airport:0.2.0",
         "twinfile/place/aquarium-conservation:0.1.0",
+        "twinfile/place/aquarium:0.1.0",
         "twinfile/place/arena:1.2.0",
         "twinfile/place/base-campus:0.1.0",
         "twinfile/place/base-indoor-stack:0.1.0",
@@ -319,25 +394,35 @@
         "twinfile/place/base-single-level:0.1.0",
         "twinfile/place/baylor-school:0.1.0",
         "twinfile/place/buffalo-harbor:0.1.0",
+        "twinfile/place/cold-chain:0.1.0",
         "twinfile/place/dunkirk-dock:0.1.0",
+        "twinfile/place/electronics-store:0.1.0",
         "twinfile/place/expo:0.2.0",
         "twinfile/place/mobility-hub:0.1.0",
         "twinfile/place/mobility-hub:0.2.0",
+        "twinfile/place/museum:0.1.0",
         "twinfile/place/niagara-falls:0.1.0",
         "twinfile/place/normal-park:0.1.0",
         "twinfile/place/park:0.3.0",
+        "twinfile/place/physical-store:0.1.0",
         "twinfile/place/port:0.2.0",
         "twinfile/place/red-bank-high:0.1.0",
         "twinfile/place/river:0.2.0",
         "twinfile/place/shop:0.2.0",
         "twinfile/place/watershed-river:0.1.0",
-        "twinfile/place/transit-hub-campus:0.1.0"
+        "twinfile/place/transit-hub-campus:0.1.0",
+        "twinfile/place/wireless-mobile:0.1.0"
       ],
       "story": [
         "twinfile/story/airport-operations:0.1.0",
         "twinfile/story/airport-resilience:0.1.0",
+        "twinfile/story/aquarium-operations:0.1.0",
+        "twinfile/story/aquarium-resilience:0.1.0",
         "twinfile/story/arena-operations:0.1.0",
         "twinfile/story/arena-resilience:0.1.0",
+        "twinfile/story/cold-chain-operations:0.1.0",
+        "twinfile/story/cold-chain-resilience:0.1.0",
+        "twinfile/story/electronics-visit:0.1.0",
         "twinfile/story/expo-operations:0.1.0",
         "twinfile/story/expo-resilience:0.1.0",
         "twinfile/story/falls-day-tour:0.1.0",
@@ -345,6 +430,9 @@
         "twinfile/story/mobility-hub-operations:0.1.0",
         "twinfile/story/mobility-hub-resilience:0.1.0",
         "twinfile/story/morning-crossing:0.1.0",
+        "twinfile/story/museum-operations:0.1.0",
+        "twinfile/story/museum-resilience:0.1.0",
+        "twinfile/story/online-visit:0.1.0",
         "twinfile/story/park-operations:0.1.0",
         "twinfile/story/park-resilience:0.1.0",
         "twinfile/story/port-operations:0.1.0",
@@ -356,10 +444,13 @@
         "twinfile/story/watershed-river-operations:0.1.0",
         "twinfile/story/watershed-river-resilience:0.1.0",
         "twinfile/story/transit-hub-campus-operations:0.1.0",
-        "twinfile/story/transit-hub-campus-resilience:0.1.0"
+        "twinfile/story/transit-hub-campus-resilience:0.1.0",
+        "twinfile/story/wireless-queue-stress:0.1.0",
+        "twinfile/story/wireless-visit:0.1.0"
       ],
       "event": [
         "twinfile/event/arena-game-day:1.0.0",
+        "twinfile/event/cold-chain-handoff:1.0.0",
         "twinfile/event/dam-release:1.0.0",
         "twinfile/event/dawn-cast-off:0.1.0",
         "twinfile/event/drought:1.0.0",

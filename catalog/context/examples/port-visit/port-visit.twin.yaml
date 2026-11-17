@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: port-visit
+name: Port visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Port visit
+context: When I am at a port pier for passenger or cargo transfer
+jobs:
+  - id: clear-pier-queue
+    text: Clear the pier queue
+    context: When arrivals stack at the gangway
+    goal: board or disembark without missing the window
+    outcome: I am through the pier lane on schedule
+  - id: complete-warehouse-transfer
+    text: Complete warehouse transfer
+    context: When freight or bags must move between pier and warehouse
+    goal: finish the handoff with clear ownership
+    outcome: Goods are staged in the right place
+  - id: find-berth-and-amenities
+    text: Find berth and amenities
+    context: When the apron layout is unfamiliar
+    goal: locate my berth, restrooms, and waiting area
+    outcome: I know where to wait without circling

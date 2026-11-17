@@ -1,0 +1,32 @@
+twinfile: 2
+kind: story
+id: aquarium-resilience
+name: Aquarium resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/aquarium:0.1.0
+  - rel: involves
+    href: twinfile/character/aquarium-host:0.1.0
+  - rel: involves
+    href: twinfile/context/aquarium-visit:0.1.0
+story:
+  pitch: Indoor shelter capacity under severe weather, then post-hazard recovery on the aquarium floor.
+  scenes:
+    - id: exhibit-shelter-cap
+      label: Exhibit shelter capacity
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 2200
+          target_role: shelter
+    - id: aquarium-recovery
+      label: Aquarium recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H

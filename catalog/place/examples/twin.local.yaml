@@ -5,7 +5,10 @@ refs:
   twinfile/airport:0.2.0: airport
   twinfile/river:0.2.0: river
   twinfile/port:0.2.0: port
+  twinfile/cold-chain:0.1.0: cold-chain
   twinfile/park:0.3.0: park
+  twinfile/museum:0.1.0: museum
+  twinfile/aquarium:0.1.0: aquarium
   twinfile/mobility-hub:0.1.0: mobility-hub/programme
   twinfile/mobility-hub:0.2.0: mobility-hub
   twinfile/arena:1.2.0: arena

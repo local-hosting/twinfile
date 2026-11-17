@@ -13,3 +13,5 @@ Illustrative **port** campus pinned at the **Port of New Orleans** (Napoleon Ave
 **Daily:** [`port-operations`](../../../story/examples/port-operations/port-operations.twin.yaml) — pier queue and warehouse transfer with [`port-clerk`](../../../character/examples/port-clerk/) (`mode: daily`).
 
 **Resilience:** [`gangway-backup`](../../../story/examples/port-resilience/port-resilience.twin.yaml) — litter / field-damage (`twin run catalog/story/examples/port-resilience#gangway-backup`).
+
+**Cold chain:** also a pier leg in [`cold-chain-operations`](../../../story/examples/cold-chain-operations/) / [`cold-chain-resilience`](../../../story/examples/cold-chain-resilience/) with [`cold-chain`](../cold-chain/) and [`airport`](../airport/).

@@ -1,3 +1,4 @@
+import type { JobContextModel } from '@local-hosting/twinfile-context';
 import { obstacleCatalogFromJobs } from '@local-hosting/twinfile-context';
 import {
   resolvePlanningSegmentJourneyPace,
@@ -23,12 +24,23 @@ function storyJourneyRefsFromCharacters(characters: readonly Character[]): Story
   return refs;
 }
 
-/** Character twin documents → story.create / plan catalog slices. */
+export type BuildStoryPlanningCatalogsFromCharactersInput = {
+  characters: readonly Character[];
+  /** JTBD packs from context twins (story bless / involves). */
+  contexts?: readonly JobContextModel[];
+};
+
+/** Character + context twin documents → story.create / plan catalog slices. */
 export function buildStoryPlanningCatalogsFromCharacters(
-  characters: readonly Character[],
+  charactersOrInput: readonly Character[] | BuildStoryPlanningCatalogsFromCharactersInput,
 ): StoryPlanningCatalogsFromCharactersV1 {
+  const input: BuildStoryPlanningCatalogsFromCharactersInput =
+    'characters' in charactersOrInput && !Array.isArray(charactersOrInput)
+      ? charactersOrInput
+      : { characters: charactersOrInput as readonly Character[] };
+  const { characters, contexts = [] } = input;
   const personas = characters.map((row) => row.persona).filter(Boolean);
-  const jobs = characters.flatMap((row) => row.jobs ?? []);
+  const jobs = contexts.flatMap((row) => row.jobs ?? []);
   const obstacleCatalog = obstacleCatalogFromJobs(jobs);
 
   const segmentIds = [

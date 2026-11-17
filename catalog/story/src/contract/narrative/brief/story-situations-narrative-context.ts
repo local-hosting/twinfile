@@ -59,22 +59,35 @@ function uniqueJobNarratives(rows: readonly StorySituationsJobNarrativeV1[]): St
   return [...byId.values()];
 }
 
+function resolveContextTwin(input: {
+  context?: JobContextModel;
+  /** @deprecated Prefer `context`. */
+  situations?: JobContextModel;
+}): JobContextModel | undefined {
+  return input.context ?? input.situations;
+}
+
 export function resolveJobsForTouchpoint(input: {
+  context?: JobContextModel;
+  /** @deprecated Prefer `context`. */
   situations?: JobContextModel;
   journey?: Journey;
   touchpointId: string;
   personaJobIds?: readonly string[];
 }): StorySituationsJobNarrativeV1[] {
+  const contextTwin = resolveContextTwin(input);
   const binding = findJourneyTouchpointBinding(input.journey, input.touchpointId);
   const phaseJobIds = binding?.moment?.jobIds ?? binding?.phase.jobIds ?? [];
   const sceneJobIds = [...phaseJobIds, ...(input.personaJobIds ?? [])];
-  if (!input.situations || sceneJobIds.length === 0) {
+  if (!contextTwin || sceneJobIds.length === 0) {
     return [];
   }
-  return pickJobsByIds(input.situations, sceneJobIds).map(jobToNarrative);
+  return pickJobsByIds(contextTwin, sceneJobIds).map(jobToNarrative);
 }
 
 export function buildStorySituationsNarrativeContext(input: {
+  context?: JobContextModel;
+  /** @deprecated Prefer `context`. */
   situations?: JobContextModel;
   journey?: Journey;
   character?: StoryBriefCharacterV1;
@@ -92,26 +105,28 @@ export function buildStorySituationsNarrativeContext(input: {
     .filter(Boolean);
   const personaFrustrations = (input.personaFrustrations ?? []).map((row) => row.trim()).filter(Boolean);
 
+  const contextTwin = resolveContextTwin(input);
+
   let rankedJobs: StorySituationsJobNarrativeV1[] = [];
-  if (input.situations && input.personaJobRankingSource) {
-    rankedJobs = rankJobsForPersona(input.personaJobRankingSource, input.situations).map((row) =>
+  if (contextTwin && input.personaJobRankingSource) {
+    rankedJobs = rankJobsForPersona(input.personaJobRankingSource, contextTwin).map((row) =>
       jobToNarrative(row.job),
     );
-  } else if (input.situations) {
+  } else if (contextTwin) {
     const ids = uniqueJobNarratives(
-      pickJobsByIds(input.situations, journeyJobIds).map(jobToNarrative),
+      pickJobsByIds(contextTwin, journeyJobIds).map(jobToNarrative),
     );
     rankedJobs = ids;
   }
 
-  if (input.situations && journeyJobIds.length > 0) {
-    const journeyJobs = pickJobsByIds(input.situations, journeyJobIds).map(jobToNarrative);
+  if (contextTwin && journeyJobIds.length > 0) {
+    const journeyJobs = pickJobsByIds(contextTwin, journeyJobIds).map(jobToNarrative);
     rankedJobs = uniqueJobNarratives([...rankedJobs, ...journeyJobs]);
   }
 
   return {
-    contextPackLabel: input.situations?.label?.trim(),
-    contextPackContext: input.situations?.context?.trim(),
+    contextPackLabel: contextTwin?.label?.trim(),
+    contextPackContext: contextTwin?.context?.trim(),
     rankedJobs,
     journeyJobIds,
     personaGoals,

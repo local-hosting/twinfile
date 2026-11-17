@@ -187,7 +187,7 @@ export function applyStoryboardPersonalization(
     : undefined;
   const jsmJobs = input
     ? resolveJobsForTouchpoint({
-        situations: input.situations,
+        context: input.context,
         journey: input.journey,
         touchpointId,
         personaJobIds: input.character?.psychology?.characterId ? undefined : undefined,

@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: expo-visit
+name: Expo visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Expo visit
+context: When I am attending an expo or pavilion day on the grounds
+jobs:
+  - id: arrive-at-pavilion
+    text: Arrive at pavilion
+    context: When I enter the grounds for a pavilion program
+    goal: reach the right pavilion without getting lost
+    outcome: I am inside and ready for the program
+  - id: move-through-visitor-surge
+    text: Move through visitor surge
+    context: When ground-transport lanes are crowded
+    goal: keep moving toward my next stop
+    outcome: I clear the surge without abandoning the visit
+  - id: explore-exhibits
+    text: Explore exhibits
+    context: When I have discretionary time between sessions
+    goal: see high-priority exhibits without missing the next slot
+    outcome: I leave with the experiences I came for

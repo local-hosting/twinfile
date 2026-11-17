@@ -12,6 +12,8 @@ links:
     href: twinfile/place/dunkirk-dock:0.1.0
   - rel: involves
     href: twinfile/character/visitor-host:0.1.0
+  - rel: involves
+    href: twinfile/context/harbor-crossing:0.1.0
 story:
   pitch: Tsunami advisory at Dunkirk, then field-damage clearance on the apron.
   scenes:

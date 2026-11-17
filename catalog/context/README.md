@@ -13,7 +13,7 @@ Twin type for **JTBD context** packs — separate from **character** (who) and *
 | Outcome / Need | `outcome` |
 | Pain Point / Obstacle | `obstacles[]` |
 
-Import the contract from **`@local-hosting/twinfile-context`** (or `/browser`). Legacy `@local-hosting/twinfile-character/situations` re-exports this package.
+Import the contract from **`@local-hosting/twinfile-context`** (or `/browser`).
 
 A story **blesses** a character with a context for an episode; that context informs behavior.
 

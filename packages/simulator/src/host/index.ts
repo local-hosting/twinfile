@@ -15,6 +15,21 @@ export {
   type TFPlaceRuntime,
   type CreateTFPlaceRuntimeOptions,
 } from './create-twinfile-player.js';
+export {
+  resolveStorySceneAddress,
+  type ResolveStorySceneAddressOptions,
+  type ResolvedStoryScene,
+} from './resolve-story-scene-address.js';
+export {
+  buildStoryScene,
+  type BuildStorySceneOptions,
+  type BuildStorySceneResult,
+} from './build-story-scene.js';
+export {
+  createTwinfilePlayerFromStory,
+  type CreateTwinfilePlayerFromStoryOptions,
+  type CreateTwinfilePlayerFromStoryResult,
+} from './create-twinfile-player-from-story.js';
 export { worldSessionEdgesToPlayerSlice } from './edges-to-pulse.js';
 export {
   publishSessionClockRecordsToPatch,

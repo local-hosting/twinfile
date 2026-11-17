@@ -12,3 +12,5 @@ Illustrative **airport** campus for curb-to-gate flow and terminal shelter. Topo
 **Daily:** [`airport-operations`](../../../story/examples/airport-operations/airport-operations.twin.yaml) — passenger queue and transit disruption (`mode: daily`).
 
 **Resilience:** [`airport-resilience`](../../../story/examples/airport-resilience/airport-resilience.twin.yaml) — severe-weather shelter and recovery (`mode: resilience`).
+
+**Cold chain:** also an air-cargo leg in [`cold-chain-operations`](../../../story/examples/cold-chain-operations/) / [`cold-chain-resilience`](../../../story/examples/cold-chain-resilience/) with [`cold-chain`](../cold-chain/) and [`port`](../port/).
