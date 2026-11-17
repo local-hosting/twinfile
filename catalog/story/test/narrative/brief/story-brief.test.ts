@@ -30,7 +30,7 @@ describe('buildStoryBrief', () => {
         characterId: 'character-1',
         storyPitch: 'Explorer at Polaris.',
         who: { segmentId: 'early-adopter' },
-        what: { storyId: 'story:episode:store-visit', startStoreVisitJourney: true },
+        what: { storyId: 'story:store-visit', startStoreVisitJourney: true },
         where: { storeSlug: 'SAC06', lat: 40.1, lon: -82.9, h3Cell: '852a957b' },
         when: { useFeedCalendar: true },
         why: { engagementLevelId: 'explorer', intentIds: ['setup'], focusAreaId: 'mobile-phones' },
@@ -44,7 +44,7 @@ describe('buildStoryBrief', () => {
 
     const md = formatBriefMarkdown(brief);
     expect(md).toContain('Jeanette Colon');
-    expect(md).toContain('story:episode:store-visit');
+    expect(md).toContain('story:store-visit');
     expect(md).toContain('mobile-phones');
     expect(md).toContain('Explorer at Polaris.');
   });

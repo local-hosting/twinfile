@@ -9,7 +9,7 @@ import {
 const storyDimensions: StoryDimensionsV1 = {
   specVersion: '1.0',
   who: { characterId: 'persona:rider', characterIds: ['persona:rider'] },
-  what: { storyId: 'story:episode:rider-commute' },
+  what: { storyId: 'story:rider-commute' },
   where: {
     placeRefs: ['twinfile/place/airport:0.0.0', 'twinfile/place/home:0.0.0'],
     primaryPlaceRef: 'twinfile/place/airport:0.0.0',
@@ -36,7 +36,7 @@ describe('mergeStoryDimensionsWithHost', () => {
       displayName: 'Alex',
       segmentId: 'commuter',
     });
-    expect(merged.what?.storyId).toBe('story:episode:rider-commute');
+    expect(merged.what?.storyId).toBe('story:rider-commute');
     expect(merged.where.primaryPlaceRef).toBe('twinfile/place/airport:0.0.0');
     expect(merged.where.placeRef).toBe('twinfile/place/airport:0.0.0');
     expect(merged.where.placeRefs).toEqual([
