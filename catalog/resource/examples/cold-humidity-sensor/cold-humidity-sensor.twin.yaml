@@ -1,0 +1,31 @@
+from: twinfile/resource/wireless-sensor:0.1.0
+twinfile: 2
+kind: resource
+id: cold-humidity-sensor
+name: Cold-room humidity sensor
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/cold-chain:0.1.0
+    anchor: cold-room
+steps:
+  - resource:
+      dtpr:
+        accountable: example-cold-chain
+        elements:
+          purpose:
+            - logistics
+          affected:
+            - environment
+            - people
+      ext:
+        lat: 35.04203
+        lon: -89.97703
+        observes: humidity
+        unit: pctRH
+        sample:
+          value: 58
+          quality: good
+          rssi_dbm: -71
+          at: 2026-06-18T10:15:00-05:00

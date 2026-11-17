@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { checkGeotypeTwinfile } from '@local-hosting/twinfile-core';
+import { checkGeotypeTwinfile, isPublishedPlaceTwinfile } from '@local-hosting/twinfile-core';
 import { twinHeadPath, twinLockFileName, twinLockPath } from '@local-hosting/twinfile-core';
 import type { PlaceWireJson } from '@local-hosting/twinfile-core';
 import { placeImageDigest } from '@local-hosting/twinfile-core';
@@ -139,7 +139,9 @@ export async function buildTwinfile(
   const unit = loaded.value;
   const runUnit = isRunUnit(unit);
   if (!runUnit) {
-    const geotypeErr = checkGeotypeTwinfile(unit.twinfile, unit.twinfilePath);
+    const geotypeErr = checkGeotypeTwinfile(unit.twinfile, unit.twinfilePath, {
+      published: isPublishedPlaceTwinfile(unit),
+    });
     if (geotypeErr) {
       return err([geotypeErr]);
     }

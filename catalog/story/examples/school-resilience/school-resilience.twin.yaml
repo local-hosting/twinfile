@@ -1,0 +1,32 @@
+twinfile: 2
+kind: story
+id: school-resilience
+name: School resilience
+version: 0.1.0
+stability: example
+mode: resilience
+links:
+  - rel: involves
+    href: twinfile/place/school:0.1.0
+  - rel: involves
+    href: twinfile/character/school-host:0.1.0
+  - rel: involves
+    href: twinfile/context/school-visit:0.1.0
+story:
+  pitch: Indoor shelter capacity under severe weather, then post-hazard recovery on the school campus.
+  scenes:
+    - id: gym-shelter-cap
+      label: Gym shelter capacity
+      run:
+        steps:
+          - copy: twinfile/event/severe-weather:1.0.0
+        args:
+          occupancy: 1500
+          target_role: shelter
+    - id: school-recovery
+      label: School recovery
+      run:
+        steps:
+          - copy: twinfile/event/recovery-resilience:0.1.0
+        args:
+          restorationAt: PT1H
