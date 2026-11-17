@@ -1,4 +1,4 @@
-import type { Journey, JourneyMoment, JourneyPhase } from '@local-hosting/twinfile-character/persona';
+import type { Journey, JourneyMoment, JourneyPhase } from '@local-hosting/twinfile-character/character';
 
 export type JourneyTouchpointBindingV1 = {
   phase: JourneyPhase;

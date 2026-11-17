@@ -1,4 +1,4 @@
-import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/persona';
+import type { CharacterStoryInstance } from '@local-hosting/twinfile-character/character';
 import { resolveStoryClockPosition, type StoryClockAdvanceTarget } from '../clock/story-clock.js';
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import { advanceStoryClockForArc } from './advance-story-clock.js';

@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
+import type { Journey, Character } from '@local-hosting/twinfile-character/character';
 import type { JobContextModel } from '@local-hosting/twinfile-context';
 import type { Story } from '../types/story-narrative.js';
 import type { StoryEpisodePresentationV1 } from './resolve-story-episode-presentation.js';

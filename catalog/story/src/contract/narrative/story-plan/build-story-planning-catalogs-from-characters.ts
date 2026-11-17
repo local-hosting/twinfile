@@ -4,7 +4,7 @@ import {
   resolvePlanningSegmentJourneyPace,
   segmentIdFromPersonaSegment,
   type Character,
-} from '@local-hosting/twinfile-character/persona';
+} from '@local-hosting/twinfile-character/character';
 
 import type {
   StoryJourneyRefV1,

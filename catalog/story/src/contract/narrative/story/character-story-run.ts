@@ -2,7 +2,7 @@ import {
   psychologyFromCharacterStoryInstance,
   type CharacterStoryInstance,
   type CharacterStoryPsychology,
-} from '@local-hosting/twinfile-character/persona';
+} from '@local-hosting/twinfile-character/character';
 import { assembleCharacterStoryRun } from './assemble-story-run.js';
 import { resolveStoryBeatSceneJobIds } from './resolve-beat-scene-job-ids.js';
 import type { StoryInstanceDocument } from './story-instance-document.js';

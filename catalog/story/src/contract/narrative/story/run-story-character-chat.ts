@@ -1,4 +1,4 @@
-import { templateReplyFromCharacterAtBeat } from '@local-hosting/twinfile-character/persona';
+import { templateReplyFromCharacterAtBeat } from '@local-hosting/twinfile-character/character';
 import type { CharacterStoryRun } from './character-story-run.js';
 
 export type StoryCharacterLlmInterpretInput = {

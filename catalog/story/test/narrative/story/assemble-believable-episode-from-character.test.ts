@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 import type { Story } from '../../../src/contract/narrative/types/story-narrative.js';
 import { assembleBelievableEpisodeFromCharacter } from '../../../src/contract/narrative/story/assemble-believable-episode-from-character.js';
 import { placeMountFixture } from '../helpers/place-mount-fixture.js';
