@@ -22,10 +22,6 @@ const LEGACY_PREFIXES = [
   ['packages/cli/', 'packages/twinfile/src/cli/'],
 ]
 
-const LEGACY_FILES = [
-  ['.github/workflows/publish-local-hosting.yml', '.github/workflows/publish-local-hosting.yml'],
-]
-
 function existsAtRepoPath(absPath) {
   const rel = relative(root, absPath)
   if (rel.startsWith('..')) return false
@@ -41,12 +37,6 @@ function existsAtRepoPath(absPath) {
   for (const [from, to] of [...LEGACY_PREFIXES].sort((a, b) => b[0].length - a[0].length)) {
     if (rel.startsWith(from)) {
       candidates.push(join(root, to, rel.slice(from.length)))
-    }
-  }
-
-  for (const [from, to] of LEGACY_FILES) {
-    if (rel === from) {
-      candidates.push(join(root, to))
     }
   }
 
