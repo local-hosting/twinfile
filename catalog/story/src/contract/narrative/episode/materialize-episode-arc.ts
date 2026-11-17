@@ -1,6 +1,6 @@
 import { classifyTouchpointPhase } from '../journey/classify-touchpoint-phase.js';
 import type { SceneTouchpointRow } from '../scene/extract-scene-touchpoint-rows.js';
-import type { EpisodeArcV1, EpisodePhaseId, EpisodeTouchpointScheduleEntry } from '../types/episode-arc.js';
+import type { EpisodePhaseId, EpisodeTouchpointScheduleEntry } from '../types/episode-arc.js';
 import type { TouchpointIndex } from '../types/touchpoint-index.js';
 
 function spreadTouchpointsAcrossDays(input: {

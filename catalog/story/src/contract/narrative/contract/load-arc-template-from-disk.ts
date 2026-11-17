@@ -1,7 +1,6 @@
 import { join } from 'node:path';
 
 import { StoryArcActSchema } from '../schemas/story-arc-template.schema.js';
-import type { StoryArcKind } from '../types/story-arc-kind.js';
 import type { StoryArcAct, StoryArcTemplate } from '../types/story-arc-template.js';
 import { StoryArcKindSchema } from '../schemas/story-arc-kind.schema.js';
 import { loadEntityDir } from './io.js';
