@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: mobility-hub
+name: Mobility hub transfer
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Mobility hub transfer
+context: When my trip spans modes at a mobility or transit hub
+jobs:
+  - id: plan-intermodal-route
+    text: Plan intermodal route
+    context: When my trip spans more than one mode or operator
+    goal: choose a route that balances time, cost, and reliability
+    outcome: I know which lines, stops, and transfers to use
+  - id: transfer-modes
+    text: Transfer modes
+    context: When I must switch between bus, rail, ride-hail, or parking
+    goal: make the connection without missing the next leg
+    outcome: I transition modes smoothly and stay on schedule
+  - id: dwell-at-hub
+    text: Dwell at hub
+    context: When I have time between connections at a mobility hub
+    goal: use the wait productively or comfortably
+    outcome: I am ready for the next leg without feeling stranded

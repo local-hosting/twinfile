@@ -10,6 +10,8 @@ links:
     href: twinfile/place/river:0.2.0
   - rel: involves
     href: twinfile/character/river-guide:0.1.0
+  - rel: involves
+    href: twinfile/context/river-patrol:0.1.0
 story:
   pitch: Clear-day reach patrol and eddy visit before any release watch begins.
   scenes:

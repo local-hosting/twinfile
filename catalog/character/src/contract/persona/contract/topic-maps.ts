@@ -1,8 +1,5 @@
-/** Character on-disk topic folders → in-memory keys. */
+/** Character on-disk topic folders → in-memory keys. JTBD packs live on context twins. */
 export const CHARACTER_STRATEGY_TOPIC_MAP = {
-  jobs: 'jobs',
-  /** @deprecated Prefer `jobs/` — maps into jobs. */
-  needs: 'jobs',
   'mental-models': 'mentalModels',
   'thinking-styles': 'thinkingStyles',
   dimensions: 'dimensions',

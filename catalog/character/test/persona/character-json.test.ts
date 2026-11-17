@@ -31,15 +31,6 @@ const sample: Character = {
       signatureMoves: ['Glance at the ETA, then the street'],
     },
   },
-  jobs: [
-    {
-      id: 'job:commute',
-      text: 'Get to work reliably',
-      context: 'I am getting ready for work',
-      goal: 'to request a ride',
-      outcome: 'I can get to work on time',
-    },
-  ],
 };
 
 describe('character json', () => {
@@ -50,6 +41,6 @@ describe('character json', () => {
     expect(restored.persona.label).toBe('Rider');
     expect(restored.persona.personality?.wants).toBe(sample.persona.personality?.wants);
     expect(restored.persona.personality?.delivery?.lines).toEqual(['Is this still on time?']);
-    expect(restored.jobs).toHaveLength(1);
+    expect(restored.persona.jobIds).toEqual(['job:commute']);
   });
 });

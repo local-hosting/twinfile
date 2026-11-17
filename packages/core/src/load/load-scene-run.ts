@@ -53,6 +53,17 @@ function readStoryHead(storyRoot: string): Result<{ path: string; doc: Record<st
   return ok({ path, doc: value });
 }
 
+/** Load a `kind: story` unit folder (not a scene run address). */
+export function loadStoryUnit(storyRoot: string): Result<LoadedTwinfile> {
+  const head = readStoryHead(storyRoot);
+  if (!head.ok) return head;
+  return ok({
+    root: resolve(storyRoot),
+    twinfilePath: head.value.path,
+    twinfile: head.value.doc,
+  });
+}
+
 /** Scene ids in a story folder that declare an inline `run:`. */
 export function listSceneRunIds(storyRoot: string): string[] {
   const head = readStoryHead(storyRoot);

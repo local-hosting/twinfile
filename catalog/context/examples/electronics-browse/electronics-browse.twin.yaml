@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: electronics-browse
+name: Electronics store browse
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Electronics store browse
+context: When I am browsing a thin electronics floor for devices
+jobs:
+  - id: browse-solution-floor
+    text: Browse the solution floor
+    context: When I enter to compare devices
+    goal: see models side by side without sales pressure
+    outcome: I know which options fit my need
+  - id: compare-devices
+    text: Compare devices
+    context: When two or more models look similar
+    goal: weigh features and price honestly
+    outcome: I pick with confidence or walk away clear
+  - id: self-checkout
+    text: Self-checkout
+    context: When I am ready to buy and leave
+    goal: pay quickly without a desk wait
+    outcome: I leave with the device and a clear receipt

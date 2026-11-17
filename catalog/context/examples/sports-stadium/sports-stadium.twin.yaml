@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: sports-stadium
+name: Sports stadium visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Sports stadium visit
+context: When I am attending a live sporting event at a stadium
+jobs:
+  - id: arrive-and-enter
+    text: Arrive and enter
+    context: When game day traffic and entry queues compress my timeline
+    goal: get into the venue before kickoff or first pitch
+    outcome: I am inside with time to settle in
+  - id: find-seat-section
+    text: Find seat section
+    context: When the bowl layout or gate assignment is unfamiliar
+    goal: reach my section without circling the concourse
+    outcome: I am in my seat before the event starts
+  - id: enjoy-pre-event
+    text: Enjoy pre-event
+    context: When I arrive early and want the full game-day experience
+    goal: grab food, merch, or warm-up atmosphere
+    outcome: I feel the energy before the main event

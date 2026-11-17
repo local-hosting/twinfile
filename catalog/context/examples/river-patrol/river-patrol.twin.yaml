@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: river-patrol
+name: River patrol
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: River patrol
+context: When I am on a clear-day river reach for patrol or recreation
+jobs:
+  - id: patrol-reach
+    text: Patrol the reach
+    context: When I am responsible for a river segment on a clear day
+    goal: observe conditions and note issues along the reach
+    outcome: I have a current picture of the water and banks
+  - id: visit-eddy-pool
+    text: Visit the eddy pool
+    context: When an eddy or pool needs a closer look
+    goal: check the pool safely and leave a clear note
+    outcome: The eddy visit is logged before release watches begin
+  - id: brief-next-crew
+    text: Brief the next crew
+    context: When I hand off to another guide or shift
+    goal: transfer hazards and observations without gaps
+    outcome: The next crew starts with full situational awareness

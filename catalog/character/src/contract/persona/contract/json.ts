@@ -5,9 +5,6 @@ import type { Character } from '../types/character.js';
 export type CharacterJson = {
   document: Record<string, unknown>;
   persona: Record<string, unknown>;
-  jobs?: unknown[];
-  /** @deprecated Prefer `jobs`. */
-  userNeeds?: unknown[];
   story?: Record<string, unknown>;
   strategy?: Record<string, unknown>;
 };
@@ -16,7 +13,6 @@ export type CharacterJson = {
 export function characterToJSON(character: Character): Record<string, unknown> {
   const {
     persona,
-    jobs,
     journeys,
     quotes,
     quoteTaxonomy,
@@ -40,7 +36,6 @@ export function characterToJSON(character: Character): Record<string, unknown> {
   return omitNullishDeep({
     document,
     persona,
-    jobs: jobs ?? [],
     ...(journeys?.length || quotes?.length || quoteTaxonomy
       ? {
           story: omitNullishDeep({
@@ -68,12 +63,10 @@ export function characterFromJSON(json: unknown): Character {
   const doc = raw.document ?? {};
   const story = (raw.story ?? {}) as Record<string, unknown>;
   const strategy = (raw.strategy ?? {}) as Record<string, unknown>;
-  const jobs = raw.jobs ?? raw.userNeeds ?? [];
 
   return parseCharacter({
     ...doc,
     persona: raw.persona,
-    jobs,
     journeys: story.journeys,
     quotes: story.quotes,
     quoteTaxonomy: story.quoteTaxonomy,

@@ -32,7 +32,6 @@ export {
   CharacterPersonalityDeliverySchema,
 } from './schemas/character-persona.schema.js';
 export { stripPersonaGroupFields } from './contract/strip-group-fields.js';
-export type { Job } from '../situations/index.js';
 export type {
   HeartDimension,
   HeartImpact,

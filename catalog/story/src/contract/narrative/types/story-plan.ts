@@ -107,6 +107,8 @@ export type StoryPlanInputV1 = {
   request?: string;
   scenario?: string;
   extractFromRequest?: boolean;
+  /** Pass-2 LLM scenario prose after slot extract; default on when `request` / `scenario` is set. */
+  expandScenarioFromRequest?: boolean;
   topic?: string;
   goals?: string[];
   jobIds?: string[];
@@ -167,11 +169,39 @@ export type StoryPlanExtractionSegmentBriefV1 = {
   intentIds: string[];
 };
 
+export type StoryPlanExtractionContextBriefV1 = {
+  contextId: string;
+  label: string;
+  context: string;
+  jobIds: string[];
+  jobs?: Array<{ id: string; goal: string; outcome: string }>;
+};
+
+export type StoryPlanExtractionCharacterContextV1 = {
+  characterId: string;
+  label?: string;
+  contextId?: string;
+  rankedJobIds: string[];
+  rankedJobs?: Array<{ id: string; label: string }>;
+};
+
+export type StoryPlanExtractionStoryBlessV1 = {
+  storyId: string;
+  characterId: string;
+  contextId?: string;
+};
+
 export type StoryPlanExtractionIndexV1 = {
   storyPlanningGuide?: string;
   characters?: Array<{ characterId: string; label: string; journeyIds: string[] }>;
   stories?: Array<{ id: string; title: string; focalCharacterId: string }>;
   places?: Array<{ placeRef: string; title: string }>;
+  /** Context twins (`kind: context`) derived from project Character bodies. */
+  contexts?: StoryPlanExtractionContextBriefV1[];
+  /** Per-character ranked JTBD ids (explicit jobIds first, then persona overlap). */
+  characterContexts?: StoryPlanExtractionCharacterContextV1[];
+  /** Focal character per story when a blessed context id is not materialized on the Story wire yet. */
+  storyBlessings?: StoryPlanExtractionStoryBlessV1[];
   segmentIds: string[];
   segmentLabels: Record<string, string | undefined>;
   segments: StoryPlanExtractionSegmentBriefV1[];

@@ -14,13 +14,48 @@ jobs:
     context: When I arrive without a clear next step
     goal: check in quickly and know where to wait or go
     outcome: I am in the right queue or routed to a rep
+    obstacles:
+      - id: obstacle:unclear-queue-entry
+        text: Queue kiosk does not show where to check in
+        heart: task-success
   - id: wait-with-clarity
     text: Wait with clarity
     context: When I must wait before service
     goal: see my place in line and what happens next
     outcome: I am not anxious or overlooked
+    obstacles:
+      - id: obstacle:wait-time-unknown
+        text: Display does not show estimated wait time
+        heart: happiness
   - id: compare-devices
     text: Compare devices
     context: When I am choosing a phone or tablet
     goal: compare models side by side with honest pricing
     outcome: I pick the right device for my budget
+    obstacles:
+      - id: obstacle:demo-device-unavailable
+        text: Demo unit is offline or locked
+        heart: engagement
+  - id: activate-mobile-line
+    text: Activate a mobile line
+    context: When I am adding or upgrading mobile service
+    goal: complete activation before I leave
+    outcome: I leave with a working line and clear monthly cost
+    obstacles:
+      - id: obstacle:activation-system-down
+        text: Activation tool cannot complete the line
+        heart: task-success
+  - id: resolve-billing
+    text: Resolve a billing question
+    context: When my bill is unclear or wrong
+    goal: get a rep to explain and fix charges
+    outcome: I trust the bill I will pay
+    obstacles:
+      - id: obstacle:billing-dispute-unresolved
+        text: Rep cannot explain or adjust charges on the spot
+        heart: task-success
+  - id: pay-and-exit
+    text: Pay and exit
+    context: When I am ready to leave
+    goal: pay quickly with proof of purchase
+    outcome: I exit without surprises

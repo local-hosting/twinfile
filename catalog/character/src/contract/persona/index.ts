@@ -18,9 +18,6 @@ export type {
   StrategyEntityLifecycle,
 } from './types/strategy/strategy.js';
 
-/** @deprecated Import from `@local-hosting/twinfile-context`. */
-export { JobSchema, parseJob } from '../situations/index.js';
-
 export {
   ObstacleSchema,
   JourneyObstacleEncounterSchema,

@@ -1,0 +1,19 @@
+twinfile: 2
+kind: character
+id: aquarium-host
+name: Aquarium host (synthetic)
+version: 0.1.0
+stability: example
+disclosure:
+  synthetic: true
+  no_pii: true
+  note: Fictional exhibit host for the Georgia Aquarium example — not a real person.
+links:
+  - rel: operates
+    href: twinfile/resource/exhibit-kiosk:0.1.0
+character:
+  role: host
+  segment: aquarium-visitor
+  goals:
+    - Guide visitors from lobby check-in through ocean gallery and touch pools
+    - Keep ticket queues moving when arrival surges

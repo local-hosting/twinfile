@@ -1,0 +1,24 @@
+layout_index:
+  version: 1
+  regions:
+    - id: dock
+      title: Receiving dock
+      granularity: zone
+      space_ids: [receiving-dock]
+      detail_layers: [spaces, markers, routes]
+    - id: cold-store
+      title: Cold store
+      granularity: zone
+      space_ids: [cold-room]
+      detail_layers: [spaces, assets]
+      children:
+        - id: packing
+          title: Packing bay
+          granularity: room
+          space_ids: [packing-bay]
+          detail_layers: [spaces]
+    - id: yard
+      title: Reefer yard and curb
+      granularity: zone
+      space_ids: [reefer-yard, dispatch-curb]
+      detail_layers: [spaces, markers, routes]

@@ -1,0 +1,246 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: cold-chain
+name: Memphis Cold Chain Hub
+version: 0.1.0
+stability: example
+geotype:
+  primary: fulfillment_center
+  registry: "@local-hosting/geotypes@0.2.0"
+steps:
+  - place:
+      name: Memphis Cold Chain Hub
+      kind: warehouse
+      timezone: America/Chicago
+      published: false
+      ext:
+        lat: 35.042
+        lon: -89.977
+        h3: 8944c1b4b6bffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: receiving-dock
+        name: Receiving dock
+        kind: dock
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+          - outdoor
+      - id: reefer-yard
+        name: Reefer yard
+        kind: yard
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+          - outdoor
+      - id: cold-room
+        name: Cold room
+        kind: warehouse
+        level: ground
+        exposure: indoor
+        capacity: 80
+        roles:
+          - shelter
+          - alternative
+      - id: packing-bay
+        name: Packing bay
+        kind: warehouse
+        level: ground
+        exposure: indoor
+        parent: cold-room
+        roles:
+          - alternative
+      - id: dispatch-curb
+        name: Dispatch curb
+        kind: curb
+        level: ground
+        exposure: outdoor
+        roles:
+          - ground-transport
+          - outdoor
+  - markers:
+      - id: dock-mouth
+        name: Dock mouth
+        roles:
+          - hotspot
+        state: open
+      - id: reefer-gate
+        name: Reefer gate
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+      - id: parcel-staging
+        name: Parcel staging
+        roles:
+          - collection-point
+        state: open
+      - id: cold-refuge
+        name: Cold-room refuge aisle
+        roles:
+          - flood-refuge
+        step_free: true
+        state: open
+  - stations:
+      - id: temp-survey
+        name: Temperature survey booth
+        roles:
+          - survey-station
+  - openings:
+      - id: door-dock-cold
+        kind: door
+        connects:
+          - receiving-dock
+          - cold-room
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: gate-yard-curb
+        kind: gate
+        connects:
+          - reefer-yard
+          - dispatch-curb
+        width_m: 6
+        state: open
+        roles:
+          - exit
+  - routes:
+      - id: dock-to-cold
+        name: Dock to cold room
+        from: receiving-dock
+        to: cold-room
+        length_m: 40
+        kind: corridor
+        step_free: true
+      - id: cold-to-pack
+        name: Cold room to packing bay
+        from: cold-room
+        to: packing-bay
+        length_m: 25
+        kind: corridor
+        step_free: true
+      - id: pack-to-yard
+        name: Packing bay to reefer yard
+        from: packing-bay
+        to: reefer-yard
+        length_m: 60
+        kind: path
+        step_free: true
+      - id: yard-to-dispatch
+        name: Reefer yard to dispatch curb
+        from: reefer-yard
+        to: dispatch-curb
+        length_m: 35
+        kind: path
+        step_free: true
+  - visits:
+      - id: visit-receive
+        kind: activity
+        name: Dock receiving
+        space: receiving-dock
+        order: 0
+      - id: visit-stage
+        kind: activity
+        name: Cold-room staging
+        space: cold-room
+        order: 1
+      - id: visit-pack
+        kind: activity
+        name: Parcel packing
+        space: packing-bay
+        order: 2
+      - id: visit-dispatch
+        kind: activity
+        name: Reefer dispatch
+        space: dispatch-curb
+        order: 3
+  - assets:
+      - id: dock-temp-sensor
+        name: Dock temperature sensor
+        kind: sensor
+        space: receiving-dock
+        state: active
+      - id: cold-room-logger
+        name: Cold-room data logger
+        kind: sensor
+        space: cold-room
+        state: active
+  - bind:
+      for: cold-chain-handoff
+      roles:
+        ground-transport:
+          - receiving-dock
+          - reefer-yard
+          - dispatch-curb
+        collection-point:
+          - parcel-staging
+        survey-station:
+          - temp-survey
+      actions:
+        - at: stage
+          set: {}
+  - bind:
+      for: passenger-queue
+      roles:
+        ground-transport:
+          - receiving-dock
+          - dispatch-curb
+      actions:
+        - at: steady
+          set: {}
+  - bind:
+      for: transit-disruption
+      roles:
+        ground-transport:
+          - receiving-dock
+          - reefer-yard
+          - dispatch-curb
+        alternative:
+          - cold-room
+      actions:
+        - at: disrupted
+          set:
+            dispatch-curb:
+              state: closed
+  - bind:
+      for: power-outage
+      roles:
+        shelter:
+          - cold-room
+        safe-access:
+          - reefer-gate
+        alternative:
+          - packing-bay
+        survey-station:
+          - temp-survey
+      actions:
+        - at: outage
+          set:
+            cold-room:
+              state: closed
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - cold-room
+        exit:
+          - door-dock-cold
+          - gate-yard-curb
+        outdoor:
+          - receiving-dock
+          - reefer-yard
+          - dispatch-curb
+      actions:
+        - at: warning
+          set:
+            reefer-yard:
+              state: closed
+            dispatch-curb:
+              state: closed

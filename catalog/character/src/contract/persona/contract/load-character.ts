@@ -115,7 +115,6 @@ export function loadCharacter(root: string): LoadCharacterResult {
   const character = parseCharacter({
     ...header,
     persona,
-    jobs: strategySlice.jobs ?? [],
     mentalModels: mentalModels.length ? mentalModels : undefined,
     thinkingStyles: strategySlice.thinkingStyles,
     dimensions: strategySlice.dimensions,

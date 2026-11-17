@@ -8,6 +8,13 @@ mode: daily
 links:
   - rel: involves
     href: twinfile/character/online-shopper:0.1.0
+  - rel: involves
+    href: twinfile/context/online-shop:0.1.0
+steps:
+  - story:
+      bless:
+        - character: twinfile/character/online-shopper:0.1.0
+          context: twinfile/context/online-shop:0.1.0
 story:
   pitch: Cart review through checkout or pickup scheduling.
   scenes:

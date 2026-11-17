@@ -20,7 +20,6 @@ const sampleCharacter: Character = {
     segment: 'commuter',
     jobIds: [],
   },
-  jobs: [],
 };
 
 describe('materializeCharacterStoryInstance', () => {

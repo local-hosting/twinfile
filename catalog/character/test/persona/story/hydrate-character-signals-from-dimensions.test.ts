@@ -17,7 +17,6 @@ const basePcm: Character = {
     frustrations: [],
     jobIds: [],
   },
-  jobs: [],
   signalValues: {
     'attitude-tech-always-connected': 0.85,
   },

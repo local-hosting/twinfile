@@ -15,7 +15,7 @@ There is **no** published `twinfile/clock` or `twinfile/player` ref. **Clock** i
 2. **Scene run** — optional inline **`run:`** on a scene (`from?`, `steps:`, `clock:`, `args:`). **`from:`** defaults to the story's single **`links` `involves` place**. Optional **`use.runner`** only for offline `twin run`. Addressed as **`<story-dir>#<scene-id>`**; not published as its own ref.
 3. **Player** — accepts **`twinfile/story/<id>:<ver>`**, builds linked places, walks scenes, advances **clock**, publishes session **edges** (and may spawn **runner** offline per scene).
 
-Today **`createTwinfilePlayer(result)`** still takes one **`BuildTwinfileResult`** (workbench transitional path). Target: **`createTwinfilePlayerFromStory(story, opts)`**.
+**`createTwinfilePlayerFromStory(storyRoot, opts)`** (`@local-hosting/twinfile-simulator/host`) resolves a scene, calls **`buildTwinfile`** on the scene address, then **`createTwinfilePlayer`**. **`createTwinfilePlayer(result)`** remains for hosts that already built a place run (workbench lens path).
 
 ## Workbench (transitional)
 

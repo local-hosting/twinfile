@@ -32,7 +32,6 @@ describe('Character audience planes (demographic ↔ psychographic symmetry)', (
           ],
         },
       },
-      jobs: [],
     });
 
     expect(character.persona.demographic?.aspects).toHaveLength(2);
