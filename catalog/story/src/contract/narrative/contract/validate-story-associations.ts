@@ -60,15 +60,15 @@ export function validateStoryNarrativeAssociations(
     );
   }
 
-  if (journey && journey.personaId !== story.binding.characterId) {
+  if (journey && journey.characterId !== story.binding.characterId) {
     issues.push(
-      `journey.personaId (${journey.personaId}) must match binding.characterId (${story.binding.characterId})`,
+      `journey.characterId (${journey.characterId}) must match binding.characterId (${story.binding.characterId})`,
     );
   }
 
-  if (journey && !characterIds.has(journey.personaId)) {
+  if (journey && !characterIds.has(journey.characterId)) {
     issues.push(
-      `journey.personaId (${journey.personaId}) must appear in characters`,
+      `journey.characterId (${journey.characterId}) must appear in characters`,
     );
   }
 

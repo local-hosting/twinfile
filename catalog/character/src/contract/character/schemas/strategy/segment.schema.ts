@@ -9,7 +9,7 @@ export const SegmentDimensionSchema = z.object({
 export const AudienceSchema = z.object({
   id: z.string().min(1),
   label: z.string().min(1).optional(),
-  personaId: z.string().min(1),
+  characterId: z.string().min(1),
   thinkingStyleId: z.string().min(1).optional(),
   dimensions: z.record(z.string(), z.union([z.string().min(1), z.array(z.string().min(1))])),
   campaign: z.string().min(1).optional(),

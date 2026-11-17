@@ -22,7 +22,6 @@ export {
   CharacterAudiencePlaneSchema,
 } from './schemas/audience/character-audience-plane.schema.js';
 export { normalizeCharacterAudiencePlane } from './audience/normalize-audience-plane-weights.js';
-export type { Persona } from './types/strategy/persona.js';
 export type {
   CharacterPersonality,
   CharacterPersonalityDelivery,
@@ -31,7 +30,7 @@ export {
   CharacterPersonalitySchema,
   CharacterPersonalityDeliverySchema,
 } from './schemas/character-persona.schema.js';
-export { stripPersonaGroupFields } from './contract/strip-group-fields.js';
+export { stripCharacterGroupFields } from './contract/strip-group-fields.js';
 export type {
   HeartDimension,
   HeartImpact,
@@ -78,10 +77,10 @@ export {
 } from './domain/journey/heart-series.js';
 export { extractJourneyTouchpointSequence } from './journey/extract-touchpoint-sequence.js';
 export {
-  listJourneysForPersona,
+  listJourneysForCharacter,
   requireJourneyById,
   resolveJourneyById,
-  resolveJourneyForPersona,
+  resolveJourneyForCharacter,
 } from './journey/resolve-journey.js';
 
 export { characterToContribution, type CharacterAxmContribution } from './contract/to-contribution.js';
@@ -134,15 +133,12 @@ export type { JourneyPaceId } from './types/story/journey-pace.js';
 export { JOURNEY_PACE_IDS } from './types/story/journey-pace.js';
 export {
   normalizeJourneyPaceId,
-  resolvePersonaJourneyPace,
+  resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
-  resolveSegmentJourneyPaceFromPersonas,
+  resolveSegmentJourneyPaceFromCharacters,
   type PlanningSegmentJourneyPaceSource,
 } from './story/resolve-journey-pace.js';
-export {
-  segmentIdFromPersonaSegment,
-  segmentIdFromCharacterPersonaSegment,
-} from './persona/segment-id-from-persona.js';
+export { segmentIdFromCharacterSegment } from './persona/segment-id-from-character.js';
 
 export * from './myers-briggs/myers-briggs.schema.js';
 export {

@@ -21,7 +21,7 @@ describe('loadCanvasDemoChrome', () => {
       geo: '42.4680, -79.3185',
     });
     expect(chrome.stories.find((row) => row.id === 'morning-crossing')).toMatchObject({
-      personaId: 'ferry-captain',
+      characterId: 'ferry-captain',
       mapSlug: 'buffalo-harbor',
       storyPitch: 'Dawn ferry run from Dunkirk into Buffalo Harbor.',
     });
@@ -32,7 +32,7 @@ describe('loadCanvasDemoChrome', () => {
     expect(pack.stories).toContain('harbor-resilience');
     expect(chrome.storyEventIds['harbor-resilience']).toEqual(['tsunami', 'field-damage']);
     expect(chrome.stories.find((row) => row.id === 'harbor-resilience')).toMatchObject({
-      personaId: 'visitor-host',
+      characterId: 'visitor-host',
       mapSlug: 'buffalo-harbor',
       storyPitch: 'Tsunami advisory at Dunkirk, then field-damage clearance on the apron.',
     });

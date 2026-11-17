@@ -14,9 +14,9 @@ import type {
 export type { StorySceneSeekDirection };
 
 export type SeekStorySceneInput = {
-  personaId: string;
+  characterId: string;
   story: StoryInstanceDocument;
-  /** When it matches `personaId`, the seek starts from the story's current clock. */
+  /** When it matches `characterId`, the seek starts from the story's current clock. */
   instance?: CharacterStoryInstance;
   direction: StorySceneSeekDirection;
   sceneId?: string;
@@ -38,9 +38,9 @@ export type SeekStorySceneResult = {
 };
 
 export function seekStoryScene(input: SeekStorySceneInput): SeekStorySceneResult {
-  const personaId = input.personaId.trim();
-  if (!personaId) {
-    throw new Error('personaId is required');
+  const characterId = input.characterId.trim();
+  if (!characterId) {
+    throw new Error('characterId is required');
   }
 
   const arc = input.story.episodeArc;
@@ -49,7 +49,7 @@ export function seekStoryScene(input: SeekStorySceneInput): SeekStorySceneResult
   }
 
   const existing = input.instance
-    ? buildCharacterStoryRun({ personaId, instance: input.instance, story: input.story })
+    ? buildCharacterStoryRun({ characterId, instance: input.instance, story: input.story })
     : undefined;
 
   const core = seekStoryEpisodeSceneOnArc({

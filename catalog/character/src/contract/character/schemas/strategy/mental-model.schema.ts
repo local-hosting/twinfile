@@ -96,7 +96,7 @@ const MentalModelBaseSchema = z.object({
   label: z.string().min(1),
   purpose: z.string().min(1).optional(),
   /** Optional when owned by a Character folder — stamped on load. */
-  personaIds: z.array(z.string().min(1)).optional(),
+  characterIds: z.array(z.string().min(1)).optional(),
   jobGroups: z.array(MentalModelJobGroupSchema).optional(),
   stacks: z.array(MentalModelStackSchema).min(1),
 });

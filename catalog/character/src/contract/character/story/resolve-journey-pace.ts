@@ -1,5 +1,5 @@
-import { segmentIdFromPersonaSegment } from '../persona/segment-id-from-persona.js';
-import type { Persona } from '../types/strategy/persona.js';
+import { segmentIdFromCharacterSegment } from '../persona/segment-id-from-character.js';
+import type { CharacterPersona } from '../types/character-persona.js';
 import { JOURNEY_PACE_IDS, type JourneyPaceId } from '../types/story/journey-pace.js';
 
 export function normalizeJourneyPaceId(value?: string): JourneyPaceId | undefined {
@@ -10,10 +10,10 @@ export function normalizeJourneyPaceId(value?: string): JourneyPaceId | undefine
   return (JOURNEY_PACE_IDS as readonly string[]).includes(pace) ? (pace as JourneyPaceId) : undefined;
 }
 
-export function resolvePersonaJourneyPace(
-  persona?: Pick<Persona, 'journeyPace'>,
+export function resolveCharacterJourneyPace(
+  sheet?: Pick<CharacterPersona, 'journeyPace'>,
 ): JourneyPaceId | undefined {
-  return normalizeJourneyPaceId(persona?.journeyPace);
+  return normalizeJourneyPaceId(sheet?.journeyPace);
 }
 
 /** AXM / story-planning segment profile (projected from Character or org packs). */
@@ -28,19 +28,19 @@ export function resolvePlanningSegmentJourneyPace(
   return normalizeJourneyPaceId(segment?.journeyPace ?? segment?.overview?.journeyPace);
 }
 
-export function resolveSegmentJourneyPaceFromPersonas(
-  personas: readonly Pick<Persona, 'segment' | 'journeyPace'>[],
+export function resolveSegmentJourneyPaceFromCharacters(
+  sheets: readonly Pick<CharacterPersona, 'segment' | 'journeyPace'>[],
   segmentId: string,
 ): JourneyPaceId | undefined {
   const target = segmentId.trim();
   if (!target) {
     return undefined;
   }
-  for (const persona of personas) {
-    if (segmentIdFromPersonaSegment(persona.segment) !== target) {
+  for (const sheet of sheets) {
+    if (segmentIdFromCharacterSegment(sheet.segment) !== target) {
       continue;
     }
-    const pace = resolvePersonaJourneyPace(persona);
+    const pace = resolveCharacterJourneyPace(sheet);
     if (pace) {
       return pace;
     }

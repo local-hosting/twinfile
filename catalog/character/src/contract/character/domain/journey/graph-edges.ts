@@ -3,7 +3,7 @@ import type { Journey, JourneyRelationshipEdge } from '../../types/story/journey
 /** Emit journey trace edges (phase/moment → touchpoint ids on structure). */
 export function buildJourneyRelationshipEdges(journey: Journey): JourneyRelationshipEdge[] {
   const edges: JourneyRelationshipEdge[] = [
-    { kind: 'journey_for_persona', journeyId: journey.id, personaId: journey.personaId },
+    { kind: 'journey_for_character', journeyId: journey.id, characterId: journey.characterId },
   ];
 
   for (const phase of journey.phases) {

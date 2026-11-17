@@ -12,7 +12,7 @@ import { parseStory } from '../../src/contract/narrative/schemas/story-narrative
 const commute = {
   id: 'journey:rider-commute',
   label: 'Commute',
-  personaId: 'persona:rider',
+  characterId: 'persona:rider',
   phases: [
     {
       id: 'phase:a',

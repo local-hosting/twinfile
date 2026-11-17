@@ -7,7 +7,7 @@ export type SegmentDimension = {
 export type Audience = {
   id: string;
   label?: string;
-  personaId: string;
+  characterId: string;
   /** Thinking style this audience wears for the campaign context. */
   thinkingStyleId?: string;
   dimensions: Record<string, string | string[]>;

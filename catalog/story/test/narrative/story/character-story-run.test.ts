@@ -109,16 +109,16 @@ describe('buildCharacterStoryRun', () => {
     characteristics: savedCharacteristics,
   }).document;
 
-  it('matches personaId to characterId when instanceId differs', () => {
-    const run = buildCharacterStoryRun({ personaId: 'persona:rider', instance, story });
-    expect(run?.personaId).toBe('persona:rider');
+  it('matches characterId to characterId when instanceId differs', () => {
+    const run = buildCharacterStoryRun({ characterId: 'persona:rider', instance, story });
+    expect(run?.characterId).toBe('persona:rider');
     expect(run?.instance.instanceId).toBe('rider-urban-commuter-3');
     expect(run?.beat).toBeDefined();
     expect(run?.psychology).toBeDefined();
   });
 
-  it('returns undefined when personaId does not match the instance', () => {
-    expect(buildCharacterStoryRun({ personaId: 'persona:driver', instance, story })).toBe(undefined);
+  it('returns undefined when characterId does not match the instance', () => {
+    expect(buildCharacterStoryRun({ characterId: 'persona:driver', instance, story })).toBe(undefined);
   });
 });
 
@@ -130,7 +130,7 @@ describe('advanceStoryEpisode', () => {
     }).document;
 
     const result = advanceStoryEpisode({
-      personaId: 'persona:rider',
+      characterId: 'persona:rider',
       story,
       instance,
       target: 'visit_day',

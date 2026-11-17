@@ -49,7 +49,7 @@ export type StoryJourney = {
   /** Journey id — AXM deliverables use this as the legacy journey key. */
   id: string;
   label: string;
-  personaId: string;
+  characterId: string;
   phases: StoryJourneyPhase[];
   heartTrends: JourneyHeartTrend[];
 };

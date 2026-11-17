@@ -6,7 +6,7 @@ describe('buildCharacterBrief', () => {
   it('includes a Personality section from dramaturgy fields', () => {
     const brief = buildCharacterBrief({
       character: {
-        personaId: 'blork',
+        characterId: 'blork',
         name: 'Blork',
         psychology: {
           mindset: 'timid',

@@ -12,11 +12,11 @@ export function contextFromCharacter(source: CharacterJobsSourceV1): JobContextM
   const jobs = source.jobs?.filter((job) => job?.id?.trim()) ?? [];
   if (jobs.length === 0) return undefined;
 
-  const personaId = source.persona?.id?.trim() || source.id.trim();
-  const label = source.persona?.label?.trim() || personaId || source.id.trim();
+  const characterId = source.persona?.id?.trim() || source.id.trim();
+  const label = source.persona?.label?.trim() || characterId || source.id.trim();
 
   return {
-    id: `context:${personaId}`,
+    id: `context:${characterId}`,
     label,
     context: label,
     jobs: [...jobs],

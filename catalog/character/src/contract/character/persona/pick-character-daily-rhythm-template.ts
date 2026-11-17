@@ -3,7 +3,7 @@ import type {
   PersonaDailyRhythm,
   PersonaDailyRhythmVariant,
 } from '../types/strategy/persona-daily-rhythm.js';
-import { resolvePersonaDailyRhythm } from './resolve-persona-daily-rhythm.js';
+import { resolveCharacterDailyRhythm } from './resolve-character-daily-rhythm.js';
 
 export type ResolvedPersonaDailyRhythmTemplate = {
   template: PersonaDailyRhythm;
@@ -37,7 +37,7 @@ function variantToTemplate(variant: PersonaDailyRhythmVariant): PersonaDailyRhyt
 }
 
 /** Pick authored rhythm, weighted variant, or role-based preset. */
-export function pickPersonaDailyRhythmTemplate(
+export function pickCharacterDailyRhythmTemplate(
   character: Character,
   random: () => number,
   pickMode: 'weighted' | 'first' = 'weighted',
@@ -56,5 +56,5 @@ export function pickPersonaDailyRhythmTemplate(
     };
   }
 
-  return { template: resolvePersonaDailyRhythm(character) };
+  return { template: resolveCharacterDailyRhythm(character) };
 }

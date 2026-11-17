@@ -58,7 +58,7 @@ export function buildJourneyFromBinding(
     journeyId: journey.id,
     id: journey.id,
     label: journey.label,
-    personaId: journey.personaId,
+    characterId: journey.characterId,
     phases: journey.phases.map((phase) => ({
       id: phase.id,
       label: phase.label,

@@ -11,9 +11,9 @@ import type {
 export type AdvanceStoryEpisodeTarget = StoryClockAdvanceTarget;
 
 export type AdvanceStoryEpisodeInput = {
-  personaId: string;
+  characterId: string;
   story: StoryInstanceDocument;
-  /** When it matches `personaId`, the advance continues from the story's current clock. */
+  /** When it matches `characterId`, the advance continues from the story's current clock. */
   instance?: CharacterStoryInstance;
   target: StoryClockAdvanceTarget;
   hourOfDay?: number;
@@ -29,9 +29,9 @@ export type AdvanceStoryEpisodeResult = {
 };
 
 export function advanceStoryEpisode(input: AdvanceStoryEpisodeInput): AdvanceStoryEpisodeResult {
-  const personaId = input.personaId.trim();
-  if (!personaId) {
-    throw new Error('personaId is required');
+  const characterId = input.characterId.trim();
+  if (!characterId) {
+    throw new Error('characterId is required');
   }
 
   const arc = input.story.episodeArc;
@@ -40,7 +40,7 @@ export function advanceStoryEpisode(input: AdvanceStoryEpisodeInput): AdvanceSto
   }
 
   const existing = input.instance
-    ? buildCharacterStoryRun({ personaId, instance: input.instance, story: input.story })
+    ? buildCharacterStoryRun({ characterId, instance: input.instance, story: input.story })
     : undefined;
   const cursor = advanceStoryClockForArc(arc, {
     target: input.target,

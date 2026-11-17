@@ -218,7 +218,7 @@ export const SegmentObjectivesPartSchema = z.object({
 export const PsychographicSegmentProfileSchema = z.object({
   id: PsychographicSegmentIdSchema,
   overview: SegmentOverviewSchema.optional(),
-  exemplarPersonaId: z.string().min(1).optional(),
+  exemplarCharacterId: z.string().min(1).optional(),
   visitFrequency: z
     .partialRecord(EngagementLevelIdSchema, SegmentVisitFrequencySchema)
     .optional(),

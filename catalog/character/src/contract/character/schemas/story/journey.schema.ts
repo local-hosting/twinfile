@@ -121,7 +121,7 @@ export const JourneySchema = z
   .object({
     id: z.string().min(1),
     label: z.string().min(1),
-    personaId: z.string().min(1),
+    characterId: z.string().min(1),
     thinkingStyleId: z.string().min(1).optional(),
     description: z.string().min(1).optional(),
     journeyGoal: z.string().min(1).optional(),

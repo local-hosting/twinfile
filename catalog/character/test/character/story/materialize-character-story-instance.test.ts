@@ -130,7 +130,7 @@ describe('materializeCharacterStoryInstance', () => {
       signals: [
         {
           id: 'signal:rider-demographic-age-18-34',
-          personaId: 'persona:rider',
+          characterId: 'persona:rider',
           category: 'demographic',
           group: 'age',
           label: '18-34',

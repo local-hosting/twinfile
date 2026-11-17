@@ -10,7 +10,7 @@ import type { StoryBeatSnapshot } from './resolve-story-beat.js';
 import type { CharacterStoryRunState } from '../types/story-run.js';
 
 export type CharacterStoryRun = {
-  personaId: string;
+  characterId: string;
   instance: CharacterStoryInstance;
   psychology: CharacterStoryPsychology;
   run: CharacterStoryRunState;
@@ -20,21 +20,23 @@ export type CharacterStoryRun = {
 
 export type BuildCharacterStoryRunInput = {
   /** Matches the Character instance by `instanceId` or `characterId`. */
-  personaId: string;
+  characterId: string;
   instance: CharacterStoryInstance;
   story: StoryInstanceDocument;
 };
 
-/** Character persona plus Story story clock, or undefined when the persona does not match the instance. */
+/** Character sheet + Story clock, or undefined when the character does not match the instance. */
 export function buildCharacterStoryRun(input: BuildCharacterStoryRunInput): CharacterStoryRun | undefined {
-  const personaId = input.personaId.trim();
-  if (!personaId) return undefined;
+  const characterId = input.characterId.trim();
+  if (!characterId) return undefined;
 
   const { instance, story } = input;
   const instanceId = instance.instanceId?.trim();
-  const characterId = instance.characterId?.trim();
-  const matchesPersona = personaId === instanceId || (Boolean(characterId) && personaId === characterId);
-  if (!matchesPersona) return undefined;
+  const instanceCharacterId = instance.characterId?.trim();
+  const matchesCharacter =
+    characterId === instanceId ||
+    (Boolean(instanceCharacterId) && characterId === instanceCharacterId);
+  if (!matchesCharacter) return undefined;
 
   const storyArc = story.episodeArc;
   if (!storyArc) return undefined;
@@ -46,7 +48,7 @@ export function buildCharacterStoryRun(input: BuildCharacterStoryRunInput): Char
   });
 
   return {
-    personaId,
+    characterId,
     instance,
     psychology: psychologyFromCharacterStoryInstance(instance),
     run,

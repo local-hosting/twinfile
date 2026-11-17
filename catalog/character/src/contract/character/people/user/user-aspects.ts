@@ -54,7 +54,7 @@ export interface WovenUserAspects
     segmentProfile: PsychographicSegmentProfile;
   };
   persona?: {
-    personaId: string;
+    characterId: string;
     profile: PersonaCatalog['personas'][number];
     source: NonNullable<PersonaAspectRef['source']>;
   };
@@ -153,22 +153,22 @@ const archetypeAspect: UserAspect = {
 const personaAspect: UserAspect = {
   id: 'persona',
   resolve(user, context, aspects, issues) {
-    const declaredId = user.aspectRefs?.persona?.personaId;
+    const declaredId = user.aspectRefs?.persona?.characterId;
     const archetypeId = user.aspectRefs?.archetype?.archetypeId;
     const segmentProfile = segmentProfileForArchetype(context, archetypeId);
-    const personaId = declaredId ?? segmentProfile?.exemplarPersonaId;
-    if (!personaId) return;
-    const profile = findPersonaProfile(context.personaCatalog, personaId);
+    const characterId = declaredId ?? segmentProfile?.exemplarCharacterId;
+    if (!characterId) return;
+    const profile = findPersonaProfile(context.personaCatalog, characterId);
     if (!profile) {
       issues.push({
         aspectId: 'persona',
         code: 'unknown_persona',
-        message: `Unknown persona "${personaId}"`,
+        message: `Unknown persona "${characterId}"`,
       });
       return;
     }
     aspects.persona = {
-      personaId,
+      characterId,
       profile,
       source: user.aspectRefs?.persona?.source ?? (declaredId ? 'declared' : 'inferred'),
     };

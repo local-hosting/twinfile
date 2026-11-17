@@ -57,7 +57,7 @@ export function scaffoldScenesFromJourneyArc(
 ): StoryScene[] {
   const beats = defaultActsForStoryArcKind(input.kind);
   const phases = orderedPhases(input.journey);
-  const characterIds = input.characterIds ?? [input.journey.personaId];
+  const characterIds = input.characterIds ?? [input.journey.characterId];
 
   return phases.map((phase, index) => {
     const beatIndex =

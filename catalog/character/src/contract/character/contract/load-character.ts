@@ -4,7 +4,7 @@ import { statSync } from 'node:fs';
 import { parseCharacter } from '../schemas/character.schema.js';
 import type { Character } from '../types/character.js';
 import type { ResearchSignal } from '../types/story/research-signal.js';
-import { stripPersonaGroupFields } from './strip-group-fields.js';
+import { stripCharacterGroupFields } from './strip-group-fields.js';
 import type { Persona } from '../types/strategy/persona.js';
 import {
   loadEntityDir,
@@ -87,7 +87,7 @@ export function loadCharacter(root: string): LoadCharacterResult {
     throw new Error(`Character root ${root} is missing character.yml`);
   }
   const header = readYamlFile(characterYml) as Record<string, unknown>;
-  const persona = stripPersonaGroupFields(loadPersona(root));
+  const persona = stripCharacterGroupFields(loadPersona(root));
   const strategyTopicRoot = resolveCharacterStrategyTopicRoot(
     root,
     Object.keys(CHARACTER_STRATEGY_TOPIC_MAP),
@@ -107,9 +107,9 @@ export function loadCharacter(root: string): LoadCharacterResult {
   const mentalModels = mentalModelTopic.mentalModels.map((model) => {
     if (!model || typeof model !== 'object') return model;
     const row = model as Record<string, unknown>;
-    const personaIds = row.personaIds;
-    if (Array.isArray(personaIds) && personaIds.length > 0) return model;
-    return { ...row, personaIds: [ownerId] };
+    const characterIds = row.characterIds;
+    if (Array.isArray(characterIds) && characterIds.length > 0) return model;
+    return { ...row, characterIds: [ownerId] };
   });
 
   const character = parseCharacter({

@@ -1,12 +1,12 @@
 import { z } from 'zod';
 
-import { PERSONA_DAILY_BLOCK_IDS } from '../../types/strategy/persona-daily-rhythm.js';
+import { CHARACTER_DAILY_BLOCK_IDS } from '../../types/strategy/persona-daily-rhythm.js';
 
 const hourSchema = z.number().int().min(0).max(23);
 const minuteSchema = z.number().int().min(0).max(59);
 
 export const PersonaDailyRhythmBlockSchema = z.object({
-  id: z.enum(PERSONA_DAILY_BLOCK_IDS),
+  id: z.enum(CHARACTER_DAILY_BLOCK_IDS),
   label: z.string().min(1),
   startHour: hourSchema,
   startMinute: minuteSchema.optional(),

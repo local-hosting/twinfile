@@ -2,7 +2,7 @@ export type { JourneyPaceId, PlanningSegmentJourneyPaceSource } from '@doppler-g
 export {
   JOURNEY_PACE_IDS,
   normalizeJourneyPaceId,
-  resolvePersonaJourneyPace,
+  resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
-  resolveSegmentJourneyPaceFromPersonas,
+  resolveSegmentJourneyPaceFromCharacters,
 } from '@doppler-group/twinfile-character/character';

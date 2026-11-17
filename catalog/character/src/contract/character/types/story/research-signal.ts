@@ -22,7 +22,7 @@ export type ResearchSignalUnit = 'percent' | 'ratio';
 /** Measured research value about one persona (survey share, attitude slider, adoption). */
 export type ResearchSignal = {
   id: string;
-  personaId: string;
+  characterId: string;
   category: ResearchSignalCategory;
   label: string;
   value: number;
