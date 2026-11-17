@@ -19,7 +19,7 @@ export function researchSignalsFromDimensionsAndValues(
     if (typeof value !== 'number' || Number.isNaN(value)) continue;
     out.push({
       id: `signal:${slug}-${dimension.id}`,
-      personaId: characterId,
+      characterId: characterId,
       category: dimension.category,
       label: dimension.label,
       value,

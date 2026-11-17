@@ -64,9 +64,9 @@ function resolveProtagonistName(input: FormatStoryDirectorNarrativeInput): strin
   if (fromCharacter && !isTechnicalStoryIdentityLabel(fromCharacter)) return fromCharacter;
   const fromWho = snapshot.who?.displayName?.trim();
   if (fromWho && !isTechnicalStoryIdentityLabel(fromWho)) return fromWho;
-  const personaId = snapshot.personaId?.trim() || character?.personaId?.trim();
-  if (personaId && !isTechnicalStoryIdentityLabel(personaId)) {
-    return humanizeStoryWireLabel(personaId) || personaId;
+  const characterId = snapshot.characterId?.trim() || character?.characterId?.trim();
+  if (characterId && !isTechnicalStoryIdentityLabel(characterId)) {
+    return humanizeStoryWireLabel(characterId) || characterId;
   }
   const storyId = snapshot.storyId?.trim();
   if (storyId) {

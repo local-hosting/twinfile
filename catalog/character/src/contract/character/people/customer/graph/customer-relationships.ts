@@ -140,12 +140,12 @@ export const SegmentUserKindEdgeSchema = z.object({
 export const SegmentExemplarPersonaEdgeSchema = z.object({
   kind: z.literal('segment_exemplar_persona'),
   segmentId: PsychographicSegmentIdSchema,
-  personaId: z.string().min(1),
+  characterId: z.string().min(1),
 });
 
 export const PersonaSegmentAffinityEdgeSchema = z.object({
   kind: z.literal('persona_segment_affinity'),
-  personaId: z.string().min(1),
+  characterId: z.string().min(1),
   segmentId: PsychographicSegmentIdSchema,
   weight: z.number().min(0).max(1).optional(),
 });
@@ -155,7 +155,7 @@ export const PersonaRelationshipEdgeSchema = z.discriminatedUnion('kind', [
 ]);
 
 export const PersonaRelationshipGraphSchema = z.object({
-  personaId: z.string().min(1),
+  characterId: z.string().min(1),
   edges: z.array(PersonaRelationshipEdgeSchema),
 });
 

@@ -47,7 +47,7 @@
       "id": "morning-crossing",
       "cardTitle": "Morning Crossing",
       "title": "Morning Crossing",
-      "personaId": "ferry-captain",
+      "characterId": "ferry-captain",
       "orgStoryboardId": "",
       "mapSlug": "buffalo-harbor",
       "storyPitch": "Dawn ferry run from Dunkirk into Buffalo Harbor."
@@ -56,7 +56,7 @@
       "id": "falls-day-tour",
       "cardTitle": "Falls Day Tour",
       "title": "Falls Day Tour",
-      "personaId": "harbor-guide",
+      "characterId": "harbor-guide",
       "orgStoryboardId": "",
       "mapSlug": "niagara-falls",
       "storyPitch": "Guided loop from the harbor to Niagara Falls Visitor."
@@ -65,7 +65,7 @@
       "id": "harbor-resilience",
       "cardTitle": "Harbor resilience",
       "title": "Harbor resilience",
-      "personaId": "visitor-host",
+      "characterId": "visitor-host",
       "orgStoryboardId": "",
       "mapSlug": "buffalo-harbor",
       "storyPitch": "Tsunami advisory at Dunkirk, then field-damage clearance on the apron."

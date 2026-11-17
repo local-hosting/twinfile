@@ -2,7 +2,7 @@ import type { JobContextModel } from '@local-hosting/twinfile-context';
 import { obstacleCatalogFromJobs } from '@local-hosting/twinfile-context';
 import {
   resolvePlanningSegmentJourneyPace,
-  segmentIdFromPersonaSegment,
+  segmentIdFromCharacterSegment,
   type Character,
 } from '@local-hosting/twinfile-character/character';
 
@@ -46,13 +46,13 @@ export function buildStoryPlanningCatalogsFromCharacters(
   const segmentIds = [
     ...new Set(
       personas
-        .map((persona) => segmentIdFromPersonaSegment(persona.segment))
+        .map((persona) => segmentIdFromCharacterSegment(persona.segment))
         .filter((id) => id.length > 0),
     ),
   ];
 
   const segments = segmentIds.map((id) => {
-    const persona = personas.find((row) => segmentIdFromPersonaSegment(row.segment) === id);
+    const persona = personas.find((row) => segmentIdFromCharacterSegment(row.segment) === id);
     return {
       id,
       overview: {
@@ -100,7 +100,7 @@ export function buildStoryPlanningCatalogsFromCharacters(
       painPoints: persona.frustrations ?? [],
       segmentAffinities: [
         {
-          segmentId: segmentIdFromPersonaSegment(persona.segment),
+          segmentId: segmentIdFromCharacterSegment(persona.segment),
           weight: 'share' in persona && typeof persona.share === 'number' ? persona.share : 1,
         },
       ],

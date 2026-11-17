@@ -200,13 +200,13 @@ function projectResource(root: string, id: string): CanvasDemoResourceRow {
 function projectStory(root: string, id: string): CanvasDemoStoryRow {
   const twinfile = loadUnitTwinfile(root, 'story', id);
   const title = displayName(twinfile, id);
-  const personaId = linkedIds(twinfile, 'character')[0] ?? '';
+  const characterId = linkedIds(twinfile, 'character')[0] ?? '';
   const mapSlug = linkedIds(twinfile, 'place')[0] ?? id;
   return {
     id,
     cardTitle: title,
     title,
-    personaId,
+    characterId,
     orgStoryboardId: '',
     mapSlug,
     storyPitch: storyPitchFromTwinfile(twinfile),

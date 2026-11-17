@@ -17,7 +17,7 @@ describe('resolveHumanProtagonistNameWithCharacter', () => {
     const name = resolveHumanProtagonistNameWithCharacter({
       snapshot: {
         storyId: 'rider-urban-commuter-3',
-        personaId: 'rider-urban-commuter-3',
+        characterId: 'rider-urban-commuter-3',
         who: { displayName: 'rider-urban-commuter-3', characterId: 'persona:rider' },
       },
       focalCharacter: {

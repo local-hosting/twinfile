@@ -20,7 +20,7 @@ export type CharacterDocument = {
 };
 
 /**
- * Persona Character Model — one portable character (persona + story spine).
+ * Character twin — one portable character (character sheet + story spine).
  * JTBD jobs live on **context** twins (`@local-hosting/twinfile-context`); story
  * blesses a character with a context. Product cohorts / audiences stay on AXM.
  */

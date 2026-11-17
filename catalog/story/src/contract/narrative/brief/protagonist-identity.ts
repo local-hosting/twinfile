@@ -56,14 +56,15 @@ export function resolveHumanProtagonistName(input: {
       return candidate;
     }
   }
-  const characterId = snapshot.who?.characterId?.trim() || character?.psychology?.characterId?.trim();
-  if (characterId) {
-    const fromPcmId = humanizeStoryWireLabel(characterId);
-    if (fromPcmId) return fromPcmId;
+  const psychologyCharacterId =
+    snapshot.who?.characterId?.trim() || character?.psychology?.characterId?.trim();
+  if (psychologyCharacterId) {
+    const fromPsychologyId = humanizeStoryWireLabel(psychologyCharacterId);
+    if (fromPsychologyId) return fromPsychologyId;
   }
-  const personaId = snapshot.personaId?.trim() || character?.personaId?.trim();
-  if (personaId && !isTechnicalStoryIdentityLabel(personaId)) {
-    return humanizeStoryWireLabel(personaId) || personaId;
+  const characterId = snapshot.characterId?.trim() || character?.characterId?.trim();
+  if (characterId && !isTechnicalStoryIdentityLabel(characterId)) {
+    return humanizeStoryWireLabel(characterId) || characterId;
   }
   const storyId = snapshot.storyId?.trim();
   if (storyId) {
@@ -104,17 +105,18 @@ export function formatProtagonistInstanceCredits(input: {
   character?: StoryBriefCharacterV1;
 }): string | undefined {
   const storyId = input.snapshot.storyId?.trim();
-  const personaId = input.snapshot.personaId?.trim() || input.character?.personaId?.trim();
-  const characterId = input.snapshot.who?.characterId?.trim() || input.character?.psychology?.characterId?.trim();
+  const characterId = input.snapshot.characterId?.trim() || input.character?.characterId?.trim();
+  const psychologyCharacterId =
+    input.snapshot.who?.characterId?.trim() || input.character?.psychology?.characterId?.trim();
   const bits: string[] = [];
   if (storyId && isTechnicalStoryIdentityLabel(storyId)) {
     bits.push(`project instance \`${storyId}\``);
   }
-  if (personaId && personaId !== storyId && isTechnicalStoryIdentityLabel(personaId)) {
-    bits.push(`catalog id \`${personaId}\``);
+  if (characterId && characterId !== storyId && isTechnicalStoryIdentityLabel(characterId)) {
+    bits.push(`catalog id \`${characterId}\``);
   }
-  if (characterId) {
-    bits.push(`org Character \`${characterId}\``);
+  if (psychologyCharacterId) {
+    bits.push(`org Character \`${psychologyCharacterId}\``);
   }
   if (bits.length === 0) return undefined;
   return bits.join(' · ');
