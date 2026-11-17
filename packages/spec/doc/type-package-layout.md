@@ -40,7 +40,7 @@ catalog/<type>/
 npm subpaths (stable):
 
 - `@local-hosting/twinfile-<type>/module` → `catalog/<type>/src/twin-module.ts`
-- `@local-hosting/twinfile-character/persona` → `catalog/character/src/contract/persona/` (legacy subpath name)
+- `@local-hosting/twinfile-character/character` → `catalog/character/src/contract/character/` (legacy subpath name)
 - `@local-hosting/twinfile-context` → `catalog/context/src/contract/`
 - `@local-hosting/twinfile-story/narrative` → `catalog/story/src/contract/narrative/` (legacy subpath name)
 

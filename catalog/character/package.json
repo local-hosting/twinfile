@@ -11,12 +11,12 @@
   "exports": {
     ".": "./src/index.ts",
     "./module": "./src/twin-module.ts",
-    "./persona": {
-      "development": "./src/contract/persona/index.ts",
-      "default": "./src/contract/persona/index.ts"
+    "./character": {
+      "development": "./src/contract/character/index.ts",
+      "default": "./src/contract/character/index.ts"
     },
-    "./persona/*": "./src/contract/persona/*",
-    "./persona/browser": "./src/contract/persona/browser.ts"
+    "./character/*": "./src/contract/character/*",
+    "./character/browser": "./src/contract/character/browser.ts"
   },
   "scripts": {
     "test": "vitest run",

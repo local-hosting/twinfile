@@ -3,6 +3,27 @@ import type { StrategyHoneycombFacets } from './honeycomb.js';
 
 export type StrategyEntityLifecycle = 'proposed' | 'validated' | 'deprecated';
 
+/** MdVVP Five C goal — keep in sync with VisitationGoalSchema. */
+export type VisitationGoal =
+  | 'converge'
+  | 'consume'
+  | 'contribute'
+  | 'collect'
+  | 'connect';
+
+/** MdVVP sub-goal — keep in sync with VisitationSubGoalSchema. */
+export type VisitationSubGoal =
+  | 'visit'
+  | 'explore'
+  | 'watch'
+  | 'learn'
+  | 'ideas'
+  | 'things'
+  | 'personalize'
+  | 'play'
+  | 'business'
+  | 'friends';
+
 /** Pain point / obstacle nested on a JTBD — ownership is this job. */
 export type JobObstacle = {
   id: string;
@@ -38,4 +59,10 @@ export type Job = {
   facets?: StrategyHoneycombFacets;
   persona?: string;
   segment?: string;
+  /** MdVVP Five C goal this job advances when completed. */
+  visitationGoal?: VisitationGoal;
+  /** MdVVP sub-goal within the Five C category. */
+  visitationSubGoal?: VisitationSubGoal;
+  /** Instrumentation goal events that indicate progress on this job. */
+  goalEventIds?: string[];
 };

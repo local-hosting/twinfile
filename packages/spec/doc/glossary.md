@@ -12,7 +12,7 @@ Say **place**, **resource**, **character**, **context**, **story**, **event** �
 | --- | --- | --- |
 | **Place** | **`<unit>.twin.yaml`**, `kind: place` | Spatial twin → built **`Place`** |
 | **Resource** | **`<unit>.twin.yaml`**, `kind: resource` | Equipment, material, product |
-| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel — persona; **`disclosure:`** required |
+| **Character** | **`<unit>.twin.yaml`**, `kind: character` | Personnel; **`disclosure:`** required; body **`character.kind`**: **`narrative`** (cast/NPC) or **`persona`** (visitor/staff archetype) |
 | **Context** | **`<unit>.twin.yaml`**, `kind: context` | JTBD pack — When [Context], I want to [Goal], so I can [Outcome] without [Obstacle]; story blesses character |
 | **Story** | **`<unit>.twin.yaml`**, `kind: story` | Planned process — narrative; **player** input ([story-and-player](kinds/story-and-player.md)) |
 | **Event** | **`<unit>.twin.yaml`**, `kind: event` | Phases, `expects` roles, `args`. Scenes **`copy: twinfile/event/<id>:<ver>`**; places host events through role tags |
@@ -95,6 +95,7 @@ Each published twin tree has one typed head. **Runs** and **simulator catalog** 
 | **`twinfile`** | Format generation (`1` or `2`) |
 | **`id`** | **Ref slug** — `twinfile/<type>/<id>:<version>`, lock keys, OCI segment |
 | **`name`** | **Display name** — cards, workbench, catalog (when set) |
+| **`tags`** | Optional **programme / interest** labels — `ns:slug` strings (e.g. `theme:climate-bio`, `district:opportunity`). Any twin kind MAY set them. **Not** JTBD (`kind: context`) and **not** place event-role hooks (`roles[]`) |
 | **`use.runner`** | **Runs only** (scene `run:`) — **`npm:`** solver ref; analyst prompts are MCP-only (`test_prompt`), not twin YAML |
 
 **`place.name`** in `steps` = site fiction on the map, not the published ref in **`id`**.

@@ -1,6 +1,10 @@
 import { z } from 'zod';
 
 import {
+  VisitationGoalSchema,
+  VisitationSubGoalSchema,
+} from '../catalog/jtbd.schema.js';
+import {
   collectJtbdJobIssues,
   normalizeJtbdClause,
 } from '../jtbd/jtbd-job.js';
@@ -70,6 +74,9 @@ export const JobSchema = z
     facets: StrategyHoneycombFacetsSchema.optional(),
     persona: z.string().min(1).optional(),
     segment: z.string().min(1).optional(),
+    visitationGoal: VisitationGoalSchema.optional(),
+    visitationSubGoal: VisitationSubGoalSchema.optional(),
+    goalEventIds: z.array(z.string().min(1)).optional(),
   })
   .transform((job) => {
     const context = job.context ?? job.when;
@@ -137,6 +144,9 @@ export const JobSchema = z
     facets: job.facets,
     persona: job.persona,
     segment: job.segment,
+    visitationGoal: job.visitationGoal,
+    visitationSubGoal: job.visitationSubGoal,
+    goalEventIds: job.goalEventIds,
   }));
 
 export function parseJob(input: unknown) {

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T00:27:27.686Z",
+  "generatedAt": "2026-11-17T01:04:09.369Z",
   "refs": {
     "twinfile/place/airport:0.2.0": {
       "digest": "sha256:910d979bf480601eacc14b381d8d4c4c51ada30310cfc67b163e344730ddc58e",
@@ -111,6 +111,11 @@
       "kind": "place",
       "path": "catalog/place/examples/park"
     },
+    "twinfile/place/pavilion:0.1.0": {
+      "digest": "sha256:9738bea99e46fa10d52a64cc76b0ffaf6fba03c7b3880a691a7ce1a7e7652846",
+      "kind": "place",
+      "path": "catalog/place/examples/pavilion"
+    },
     "twinfile/place/physical-store:0.1.0": {
       "digest": "sha256:9bd9fe5f13aeb3446865395aced96b707cc8cc54e7bd0014e3df3deaf7c0699b",
       "kind": "place",
@@ -145,6 +150,11 @@
       "digest": "sha256:4f3b593e297fcbee2bdc96623341e08ef24f4145bab9b2371afd28d812390d60",
       "kind": "place",
       "path": "catalog/place/examples/watershed-river"
+    },
+    "twinfile/place/transit-arrival:0.1.0": {
+      "digest": "sha256:f14cdd60ec1160c1be973b3cc8dc2cb1e9e505332cfe2c82502bfc2294b10fa6",
+      "kind": "place",
+      "path": "catalog/place/examples/transit-arrival"
     },
     "twinfile/place/wireless-mobile:0.1.0": {
       "digest": "sha256:336f32290af857a67d575bfb713ea23d73b5d01a6f090a996eef2814e3096d86",
@@ -417,6 +427,7 @@
         "twinfile/place/niagara-falls:0.1.0",
         "twinfile/place/normal-park:0.1.0",
         "twinfile/place/park:0.3.0",
+        "twinfile/place/pavilion:0.1.0",
         "twinfile/place/physical-store:0.1.0",
         "twinfile/place/port:0.2.0",
         "twinfile/place/red-bank-high:0.1.0",
@@ -424,6 +435,7 @@
         "twinfile/place/school:0.1.0",
         "twinfile/place/shop:0.2.0",
         "twinfile/place/watershed-river:0.1.0",
+        "twinfile/place/transit-arrival:0.1.0",
         "twinfile/place/transit-hub-campus:0.1.0",
         "twinfile/place/wireless-mobile:0.1.0"
       ],
