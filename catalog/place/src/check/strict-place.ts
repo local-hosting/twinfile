@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 
-import { checkGeotypeTwinfile } from '@local-hosting/twinfile-core';
+import { checkGeotypeTwinfile, isPublishedPlaceTwinfile } from '@local-hosting/twinfile-core';
 import { twinHeadPath } from '@local-hosting/twinfile-core';
 import {
   checkExpectsAgainstVocabulary,
@@ -73,7 +73,9 @@ export function strictCheckPlace(unit: LoadedTwinfile, options: StrictCheckOptio
     return ok({ bindings: 0 });
   }
 
-  const geotypeErr = checkGeotypeTwinfile(twinfile, unit.twinfilePath);
+  const geotypeErr = checkGeotypeTwinfile(twinfile, unit.twinfilePath, {
+    published: isPublishedPlaceTwinfile(unit),
+  });
   if (geotypeErr) {
     return err([geotypeErr]);
   }

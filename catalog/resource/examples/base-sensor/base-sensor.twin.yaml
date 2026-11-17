@@ -1,0 +1,28 @@
+twinfile: 2
+kind: resource
+id: base-sensor
+name: Sensor base
+version: 0.1.0
+stability: example
+resource:
+  kind: sensor
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-ops
+    elements:
+      purpose:
+        - public_safety
+      collection:
+        - connected_device_telemetry
+      manifestation:
+        - sensor_telemetry
+      affected:
+        - environment
+  ext:
+    observes: reading
+    unit: ''
+    sample:
+      value: null
+      quality: unknown

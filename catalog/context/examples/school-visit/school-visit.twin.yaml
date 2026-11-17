@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: school-visit
+name: School visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: School visit
+context: When I am visiting a school campus for classes or an assembly
+jobs:
+  - id: arrive-and-check-in
+    text: Arrive and check in
+    context: When I reach the main lobby or attendance desk
+    goal: clear check-in and orient without missing the period
+    outcome: I am inside and know where to go next
+  - id: walk-class-route
+    text: Walk the class route
+    context: When I have a period in the classroom wing
+    goal: reach the room without backtracking through crowded halls
+    outcome: I arrive on time for the period
+  - id: clear-class-change
+    text: Clear class change
+    context: When the hall and lobby are busy between periods
+    goal: move between rooms without a long delay
+    outcome: I make the next period without abandoning the visit

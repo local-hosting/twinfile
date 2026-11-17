@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T00:20:54.726Z",
+  "generatedAt": "2026-11-17T00:27:27.686Z",
   "refs": {
     "twinfile/place/airport:0.2.0": {
       "digest": "sha256:910d979bf480601eacc14b381d8d4c4c51ada30310cfc67b163e344730ddc58e",
@@ -131,6 +131,11 @@
       "kind": "place",
       "path": "catalog/place/examples/river"
     },
+    "twinfile/place/school:0.1.0": {
+      "digest": "sha256:a7dcb9f4090e1d7ecb874016a776c2792124c554d44622ae742610b45dbba24b",
+      "kind": "place",
+      "path": "catalog/place/examples/school"
+    },
     "twinfile/place/shop:0.2.0": {
       "digest": "sha256:40a51db8ba821a77efece7a0bbee2eb1965bb16cec790b1d91fb65f48f8d062b",
       "kind": "place",
@@ -245,6 +250,14 @@
     "twinfile/story/river-resilience:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/river-resilience"
+    },
+    "twinfile/story/school-operations:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/school-operations"
+    },
+    "twinfile/story/school-resilience:0.1.0": {
+      "kind": "story",
+      "path": "catalog/story/examples/school-resilience"
     },
     "twinfile/story/shop-resilience:0.1.0": {
       "kind": "story",
@@ -408,6 +421,7 @@
         "twinfile/place/port:0.2.0",
         "twinfile/place/red-bank-high:0.1.0",
         "twinfile/place/river:0.2.0",
+        "twinfile/place/school:0.1.0",
         "twinfile/place/shop:0.2.0",
         "twinfile/place/watershed-river:0.1.0",
         "twinfile/place/transit-hub-campus:0.1.0",
@@ -439,6 +453,8 @@
         "twinfile/story/port-resilience:0.1.0",
         "twinfile/story/river-operations:0.1.0",
         "twinfile/story/river-resilience:0.1.0",
+        "twinfile/story/school-operations:0.1.0",
+        "twinfile/story/school-resilience:0.1.0",
         "twinfile/story/shop-resilience:0.1.0",
         "twinfile/story/shop-visit:0.1.0",
         "twinfile/story/watershed-river-operations:0.1.0",
