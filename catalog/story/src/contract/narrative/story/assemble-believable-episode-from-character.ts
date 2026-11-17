@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
+import type { Journey, Character } from '@doppler-group/twinfile-character/character';
 import type { JobContextModel } from '@doppler-group/twinfile-context';
 import { rankJobsForPersona } from '@doppler-group/twinfile-context';
 import type { PlaceMount } from '../types/place-mount.js';

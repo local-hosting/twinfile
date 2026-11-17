@@ -2,7 +2,7 @@ import {
   resolveJourneyForPersona,
   type Journey,
   type Character,
-} from '@doppler-group/twinfile-character/persona';
+} from '@doppler-group/twinfile-character/character';
 
 import type { StoryCharacterContext } from '../types/story-character-context.js';
 

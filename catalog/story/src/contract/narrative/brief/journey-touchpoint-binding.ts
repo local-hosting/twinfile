@@ -1,4 +1,4 @@
-import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/persona';
+import type { Journey, JourneyMoment, JourneyPhase } from '@doppler-group/twinfile-character/character';
 
 export type JourneyTouchpointBindingV1 = {
   phase: JourneyPhase;

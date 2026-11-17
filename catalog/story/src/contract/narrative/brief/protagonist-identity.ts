@@ -1,4 +1,4 @@
-import type { Character } from '@doppler-group/twinfile-character/persona';
+import type { Character } from '@doppler-group/twinfile-character/character';
 import type { StoryBriefCharacterV1, StoryBriefSnapshotV1 } from './types.js';
 
 function humanizeToken(token: string): string {

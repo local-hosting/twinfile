@@ -1,5 +1,5 @@
 import { placeRefForName } from '@doppler-group/twinfile-core/ref';
-import type { PlaceRef } from '@doppler-group/twinfile-character/persona/journey/place.schema.js';
+import type { PlaceRef } from '@doppler-group/twinfile-character/character/journey/place.schema.js';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import { minimalPlaceMount } from './minimal-place-mount.js';

@@ -1,4 +1,4 @@
-import type { Journey } from '@doppler-group/twinfile-character/persona';
+import type { Journey } from '@doppler-group/twinfile-character/character';
 
 import { resolvePlanningHorizonDays, resolveVisitDayIndex } from '../episode/planning-horizon.js';
 import { extractTouchpointSequenceFromScenes } from '../scene/extract-touchpoint-sequence-from-scenes.js';

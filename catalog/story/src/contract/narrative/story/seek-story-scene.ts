@@ -1,4 +1,4 @@
-import type { CharacterStoryInstance } from '@doppler-group/twinfile-character/persona';
+import type { CharacterStoryInstance } from '@doppler-group/twinfile-character/character';
 import { storyClockCursorToWire } from '../clock/story-clock-cursor.js';
 import {
   seekStoryEpisodeSceneOnArc,

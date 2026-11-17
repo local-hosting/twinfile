@@ -17,7 +17,7 @@ export type EpisodeTouchpointScheduleEntry = {
 
 /**
  * Compiled episode calendar — host wire shape (`StoryEpisodeArcV1`).
- * Produced from a validated {@link import('@doppler-group/twinfile-character/persona').Journey} plus touchpoint index.
+ * Produced from a validated {@link import('@doppler-group/twinfile-character/character').Journey} plus touchpoint index.
  */
 export type EpisodeArcV1 = {
   version: 1;

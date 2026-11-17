@@ -1,4 +1,4 @@
-import type { Character } from '@doppler-group/twinfile-character/persona';
+import type { Character } from '@doppler-group/twinfile-character/character';
 import { matchStoryCatalogIdsFromText } from '../story-catalog/match-story-catalog-from-text.js';
 import type { StoryCatalogMenuV1 } from '../types/story-catalog-menu.js';
 

@@ -1,1 +1,1 @@
-export { extractJourneyTouchpointSequence } from '@doppler-group/twinfile-character/persona';
+export { extractJourneyTouchpointSequence } from '@doppler-group/twinfile-character/character';

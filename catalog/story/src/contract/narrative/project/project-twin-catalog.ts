@@ -1,5 +1,5 @@
 import type { Job } from '@doppler-group/twinfile-context';
-import type { Character } from '@doppler-group/twinfile-character/persona';
+import type { Character } from '@doppler-group/twinfile-character/character';
 
 import type { Story } from '../types/story-narrative.js';
 

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Journey } from '@doppler-group/twinfile-character/persona';
+import type { Journey } from '@doppler-group/twinfile-character/character';
 
 import { parseStory } from '../../src/contract/narrative/schemas/story-narrative.schema.js';
 import { validateStoryNarrativeAssociations } from '../../src/contract/narrative/contract/validate-story-associations.js';

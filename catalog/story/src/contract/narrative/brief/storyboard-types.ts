@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
+import type { Journey, Character } from '@doppler-group/twinfile-character/character';
 import type { JobContextModel } from '@doppler-group/twinfile-context';
 import type { Story } from '../types/story-narrative.js';
 import type { StoryEpisodePresentationV1 } from './resolve-story-episode-presentation.js';

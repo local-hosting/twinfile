@@ -1,4 +1,4 @@
-import { extractJourneyTouchpointSequence, type Journey } from '@doppler-group/twinfile-character/persona';
+import { extractJourneyTouchpointSequence, type Journey } from '@doppler-group/twinfile-character/character';
 
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
 import type { Story } from '../types/story-narrative.js';

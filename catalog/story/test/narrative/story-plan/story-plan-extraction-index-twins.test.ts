@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { buildStoryPlanExtractionIndex } from '../../../src/contract/narrative/story-plan/plan-corpus.js';
 import { enrichStoryPlanExtractionIndexFromProjectTwins } from '../../../src/contract/narrative/story-plan/enrich-story-plan-extraction-index-from-twins.js';
-import type { Character } from '@doppler-group/twinfile-character/persona';
+import type { Character } from '@doppler-group/twinfile-character/character';
 import type { JobContextModel } from '@doppler-group/twinfile-context';
 
 const commuteContext: JobContextModel = {

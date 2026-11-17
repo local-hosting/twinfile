@@ -1,4 +1,4 @@
-import type { Journey } from '@doppler-group/twinfile-character/persona';
+import type { Journey } from '@doppler-group/twinfile-character/character';
 
 import { StoryNarrativeSchema } from '../schemas/story-narrative.schema.js';
 import type { Story } from '../types/story-narrative.js';

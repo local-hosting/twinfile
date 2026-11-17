@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
+import type { Journey, Character } from '@doppler-group/twinfile-character/character';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';

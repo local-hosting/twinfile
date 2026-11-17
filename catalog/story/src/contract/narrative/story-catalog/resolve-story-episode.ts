@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
+import type { Journey, Character } from '@doppler-group/twinfile-character/character';
 
 import { resolveJourneyForStory } from '../journey/build/resolve-journey-for-story.js';
 import type { Story } from '../types/story-narrative.js';

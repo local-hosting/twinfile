@@ -1,4 +1,4 @@
-import type { Journey } from '@doppler-group/twinfile-character/persona';
+import type { Journey } from '@doppler-group/twinfile-character/character';
 
 import { extractJourneyTouchpointSequence } from './extract-touchpoint-sequence.js';
 import type { TouchpointIndex } from '../types/touchpoint-index.js';

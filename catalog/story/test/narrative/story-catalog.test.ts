@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import type { Character } from '@doppler-group/twinfile-character/persona';
+import type { Character } from '@doppler-group/twinfile-character/character';
 
 import { buildStoryCatalogMenu, storyCatalogMenuHasStories } from '../../src/contract/narrative/story-catalog/build-story-catalog-menu.js';
 import { compileStoriesForCatalog } from '../../src/contract/narrative/story-catalog/compile-stories-for-catalog.js';

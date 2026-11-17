@@ -4,7 +4,7 @@ import {
   resolvePlanningSegmentJourneyPace,
   segmentIdFromPersonaSegment,
   type Character,
-} from '@doppler-group/twinfile-character/persona';
+} from '@doppler-group/twinfile-character/character';
 
 import type {
   StoryJourneyRefV1,

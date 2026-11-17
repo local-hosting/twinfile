@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
+import type { Journey, Character } from '@doppler-group/twinfile-character/character';
 
 /**
  * Character-first compile input — stories anchor on Character twins, not psychographic segments.

@@ -1,4 +1,4 @@
-import { templateReplyFromCharacterAtBeat } from '@doppler-group/twinfile-character/persona';
+import { templateReplyFromCharacterAtBeat } from '@doppler-group/twinfile-character/character';
 import type { CharacterStoryRun } from './character-story-run.js';
 
 export type StoryCharacterLlmInterpretInput = {

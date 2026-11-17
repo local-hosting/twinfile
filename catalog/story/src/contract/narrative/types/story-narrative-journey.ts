@@ -4,7 +4,7 @@ import type {
   JourneyHeartTrend,
   JourneyObstacleOutcome,
   Obstacle,
-} from '@doppler-group/twinfile-character/persona';
+} from '@doppler-group/twinfile-character/character';
 
 /** Structure touchpoint row used to label ids on a journey (from AXM structure plane). */
 export type StoryJourneyTouchpoint = {

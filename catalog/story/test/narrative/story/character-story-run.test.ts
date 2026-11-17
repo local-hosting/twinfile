@@ -1,4 +1,4 @@
-import { CharacterStoryInstanceDocument } from '@doppler-group/twinfile-character/persona';
+import { CharacterStoryInstanceDocument } from '@doppler-group/twinfile-character/character';
 import { describe, expect, it } from 'vitest';
 import type { EpisodeArcV1 } from '../../../src/contract/narrative/types/episode-arc.js';
 import type { Story } from '../../../src/contract/narrative/types/story-narrative.js';

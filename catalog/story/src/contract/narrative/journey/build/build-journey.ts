@@ -1,9 +1,9 @@
-import type { Journey } from '@doppler-group/twinfile-character/persona';
+import type { Journey } from '@doppler-group/twinfile-character/character';
 import {
   journeyHeartSeries,
   journeyHeartTrends,
   phaseObstacleEncounters,
-} from '@doppler-group/twinfile-character/persona';
+} from '@doppler-group/twinfile-character/character';
 
 import type { StoryJourney, StoryJourneyContext, StoryJourneyTouchpoint } from '../../types/story-narrative-journey.js';
 import type { Story } from '../../types/story-narrative.js';
