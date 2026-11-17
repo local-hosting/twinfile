@@ -70,6 +70,7 @@ const STEPS = [
   { id: 'place-type', run: () => runWorkspaceScript('@local-hosting/twinfile-place', ['check']) },
   { id: 'resource-type', run: () => runWorkspaceScript('@local-hosting/twinfile-resource', ['check']) },
   { id: 'character-type', run: () => runWorkspaceScript('@local-hosting/twinfile-character', ['check']) },
+  { id: 'context-type', run: () => runWorkspaceScript('@local-hosting/twinfile-context', ['check']) },
   { id: 'story-type', run: () => runWorkspaceScript('@local-hosting/twinfile-story', ['check']) },
   { id: 'event-type', run: () => runWorkspaceScript('@local-hosting/twinfile-event', ['check']) },
 ];

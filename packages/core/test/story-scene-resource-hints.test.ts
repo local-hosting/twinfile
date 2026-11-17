@@ -14,7 +14,7 @@ describe('storySceneResourceHintFindings', () => {
   it('is silent when showcase resource is linked', () => {
     const findings = storySceneResourceHintFindings(
       [{ id: 'store', label: 'Device demo' }],
-      new Set(['spectrum-device-showcase']),
+      new Set(['wireless-device-showcase']),
     );
     expect(findings.length).toBe(0);
   });
