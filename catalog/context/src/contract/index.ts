@@ -74,6 +74,10 @@ export {
 } from './contract/json.js';
 export { pickJobsByIds } from './job/pick-jobs-by-ids.js';
 export {
+  contextFromCharacter,
+  type CharacterJobsSourceV1,
+} from './job/context-from-character.js';
+export {
   rankJobsForPersona,
   type PersonaJobRankingSourceV1,
   type RankedJobForPersonaV1,
