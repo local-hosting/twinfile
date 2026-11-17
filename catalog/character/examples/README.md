@@ -25,4 +25,5 @@
 | `ferry-captain` | visitor-shuttle | buffalo-harbor |
 | `harbor-guide` | falls-tram | niagara-falls |
 | `visitor-host` | dock-crane | dunkirk-dock |
-| `watershed-steward` | water-quality-sensor | tennessee-river |
+
+Tennessee watershed steward (`watershed-steward`) lives in `@doppler-group/river-twinfile`.

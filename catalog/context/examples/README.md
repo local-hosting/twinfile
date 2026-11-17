@@ -19,8 +19,9 @@ Hierarchy on each job: **context** (situation) → **goal** (job/progress) → *
 | `river-patrol` | river |
 | `harbor-crossing` | buffalo-harbor, dunkirk-dock |
 | `falls-tour` | niagara-falls |
-| `watershed-monitor` | tennessee-river |
-| `aquarium-visit` | aquarium-conservation |
+| `aquarium-visit` | aquarium |
+
+Tennessee watershed JTBD (`watershed-monitor`) lives in `@doppler-group/river-twinfile`.
 | `museum-visit` | museum / gallery |
 | `school-visit` | school / campus |
 | `cold-chain-haul` | cold-chain logistics |

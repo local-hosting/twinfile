@@ -6,6 +6,8 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 
 **Network base:** `base-network` (`kind: network`) — Contentful Research Center networks live in `@doppler-group/sensors-twinfile`.
 
+**Tennessee watershed sensors** (`water-quality-sensor`, `river-buoy`, `bend-buoy`) live in `@doppler-group/river-twinfile`.
+
 | Id | Place |
 | --- | --- |
 | `base-sensor` | — (resource base) |
@@ -31,6 +33,3 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 | `cold-temp-sensor` | cold-chain (extends `wireless-sensor`) |
 | `cold-humidity-sensor` | cold-chain (extends `wireless-sensor`) |
 | `falls-tram` | niagara-falls |
-| `water-quality-sensor` | tennessee-river (Mountain Creek) |
-| `river-buoy` | tennessee-river (Williams Island) |
-| `bend-buoy` | tennessee-river (Moccasin Bend) |

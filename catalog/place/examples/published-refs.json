@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-17T01:04:09.369Z",
+  "generatedAt": "2026-11-17T03:21:36.804Z",
   "refs": {
     "twinfile/place/airport:0.2.0": {
       "digest": "sha256:910d979bf480601eacc14b381d8d4c4c51ada30310cfc67b163e344730ddc58e",
@@ -7,14 +7,9 @@
       "path": "catalog/place/examples/airport"
     },
     "twinfile/place/aquarium:0.1.0": {
-      "digest": "sha256:4b02e3b1f2891bd1ac37579b864e1ca4ccb1181e64e1cb4bee90217bd5bae96c",
+      "digest": "sha256:2df4cf3b328890d5b0d9241dd24dd9517333d1c23a096efbb59e33e76a3403d4",
       "kind": "place",
       "path": "catalog/place/examples/aquarium"
-    },
-    "twinfile/place/aquarium-conservation:0.1.0": {
-      "digest": "sha256:5e07351a9ca4b1d3278ed66621aec9a0f2df42c6cb2b8351d5b4db07b298c602",
-      "kind": "place",
-      "path": "catalog/place/examples/aquarium-conservation"
     },
     "twinfile/place/arena:1.2.0": {
       "digest": "sha256:4931972ecb66f2ec73d12151bc3daba90c96b0fe7f2e758a3d1fa0a98f43e39f",
@@ -45,11 +40,6 @@
       "digest": "sha256:3b730eb5c5ad2e6be9668bb90c7ab1e0119cf2bb269e0546bf94134c4de10f01",
       "kind": "place",
       "path": "catalog/place/examples/base-single-level"
-    },
-    "twinfile/place/baylor-school:0.1.0": {
-      "digest": "sha256:c94702df7097e820f35d4eff5d5f60c9d7d051199c36c37cf7a7e677984c4611",
-      "kind": "place",
-      "path": "catalog/place/examples/baylor-school"
     },
     "twinfile/place/buffalo-harbor:0.1.0": {
       "digest": "sha256:7703c510ae2d36e51cbc7fc04d9cf3dac359a057d611e619e53fc8ac531854b5",
@@ -92,7 +82,7 @@
       "path": "catalog/place/examples/mobility-hub/programme"
     },
     "twinfile/place/museum:0.1.0": {
-      "digest": "sha256:7d01596d02f4bcd7b1fd363a3ab337cd33d8a262c2e2ba8e5f93c11f4ab4a1ff",
+      "digest": "sha256:31b2b08fb5a3d50062b1774918779d151dba459e361fbeb49fdef36b435b002b",
       "kind": "place",
       "path": "catalog/place/examples/museum"
     },
@@ -100,11 +90,6 @@
       "digest": "sha256:9bf765b2accf3f3e8a1193acb70dc0ae16fe612fbfd8dad13685199f4c77ab78",
       "kind": "place",
       "path": "catalog/place/examples/niagara-falls"
-    },
-    "twinfile/place/normal-park:0.1.0": {
-      "digest": "sha256:9236fe5b32aeec4b1eff970ae706a23bff966924b948ff00d66cdb7228f370c2",
-      "kind": "place",
-      "path": "catalog/place/examples/normal-park"
     },
     "twinfile/place/park:0.3.0": {
       "digest": "sha256:e5599184d89940e0faceeb1384dcf9c6fbe1c0862785cb8b9406e9d2a3696d45",
@@ -126,18 +111,13 @@
       "kind": "place",
       "path": "catalog/place/examples/port"
     },
-    "twinfile/place/red-bank-high:0.1.0": {
-      "digest": "sha256:ca084dccead1ab2597a6927998932e532b0e24573ffe431162929ecac45362b1",
-      "kind": "place",
-      "path": "catalog/place/examples/red-bank-high"
-    },
     "twinfile/place/river:0.2.0": {
       "digest": "sha256:772d5014457815a593b61801e2c4a46c7d4baf74cfe896cdd4a7255ec71a5bde",
       "kind": "place",
       "path": "catalog/place/examples/river"
     },
     "twinfile/place/school:0.1.0": {
-      "digest": "sha256:a7dcb9f4090e1d7ecb874016a776c2792124c554d44622ae742610b45dbba24b",
+      "digest": "sha256:2ddc7c58290203d7888313ec9c72c5d6fa85af6d1f33215088f9558375e2135e",
       "kind": "place",
       "path": "catalog/place/examples/school"
     },
@@ -145,11 +125,6 @@
       "digest": "sha256:40a51db8ba821a77efece7a0bbee2eb1965bb16cec790b1d91fb65f48f8d062b",
       "kind": "place",
       "path": "catalog/place/examples/shop"
-    },
-    "twinfile/place/tennessee-river:0.1.0": {
-      "digest": "sha256:4f3b593e297fcbee2bdc96623341e08ef24f4145bab9b2371afd28d812390d60",
-      "kind": "place",
-      "path": "catalog/place/examples/tennessee-river"
     },
     "twinfile/place/transit-arrival:0.1.0": {
       "digest": "sha256:f14cdd60ec1160c1be973b3cc8dc2cb1e9e505332cfe2c82502bfc2294b10fa6",
@@ -277,14 +252,6 @@
       "kind": "story",
       "path": "catalog/story/examples/shop-visit"
     },
-    "twinfile/story/tennessee-river-operations:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/tennessee-river-operations"
-    },
-    "twinfile/story/tennessee-river-resilience:0.1.0": {
-      "kind": "story",
-      "path": "catalog/story/examples/tennessee-river-resilience"
-    },
     "twinfile/story/transit-hub-campus-operations:0.1.0": {
       "kind": "story",
       "path": "catalog/story/examples/transit-hub-campus-operations"
@@ -394,10 +361,6 @@
       "kind": "event",
       "path": "catalog/event/examples/volcanic-ash"
     },
-    "twinfile/event/water-quality-alert:1.0.0": {
-      "kind": "event",
-      "path": "catalog/event/examples/water-quality-alert"
-    },
     "twinfile/event/wildfire:1.0.0": {
       "kind": "event",
       "path": "catalog/event/examples/wildfire"
@@ -407,7 +370,6 @@
     "byKind": {
       "place": [
         "twinfile/place/airport:0.2.0",
-        "twinfile/place/aquarium-conservation:0.1.0",
         "twinfile/place/aquarium:0.1.0",
         "twinfile/place/arena:1.2.0",
         "twinfile/place/base-campus:0.1.0",
@@ -415,7 +377,6 @@
         "twinfile/place/base-linear:0.1.0",
         "twinfile/place/base-open-area:0.1.0",
         "twinfile/place/base-single-level:0.1.0",
-        "twinfile/place/baylor-school:0.1.0",
         "twinfile/place/buffalo-harbor:0.1.0",
         "twinfile/place/cold-chain:0.1.0",
         "twinfile/place/dunkirk-dock:0.1.0",
@@ -425,16 +386,13 @@
         "twinfile/place/mobility-hub:0.2.0",
         "twinfile/place/museum:0.1.0",
         "twinfile/place/niagara-falls:0.1.0",
-        "twinfile/place/normal-park:0.1.0",
         "twinfile/place/park:0.3.0",
         "twinfile/place/pavilion:0.1.0",
         "twinfile/place/physical-store:0.1.0",
         "twinfile/place/port:0.2.0",
-        "twinfile/place/red-bank-high:0.1.0",
         "twinfile/place/river:0.2.0",
         "twinfile/place/school:0.1.0",
         "twinfile/place/shop:0.2.0",
-        "twinfile/place/tennessee-river:0.1.0",
         "twinfile/place/transit-arrival:0.1.0",
         "twinfile/place/transit-hub-campus:0.1.0",
         "twinfile/place/wireless-mobile:0.1.0"
@@ -469,8 +427,6 @@
         "twinfile/story/school-resilience:0.1.0",
         "twinfile/story/shop-resilience:0.1.0",
         "twinfile/story/shop-visit:0.1.0",
-        "twinfile/story/tennessee-river-operations:0.1.0",
-        "twinfile/story/tennessee-river-resilience:0.1.0",
         "twinfile/story/transit-hub-campus-operations:0.1.0",
         "twinfile/story/transit-hub-campus-resilience:0.1.0",
         "twinfile/story/wireless-queue-stress:0.1.0",
@@ -500,7 +456,6 @@
         "twinfile/event/tsunami:1.0.0",
         "twinfile/event/venue-turnstile-flow:1.0.0",
         "twinfile/event/volcanic-ash:1.0.0",
-        "twinfile/event/water-quality-alert:1.0.0",
         "twinfile/event/wildfire:1.0.0"
       ]
     }

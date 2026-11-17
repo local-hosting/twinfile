@@ -9,4 +9,6 @@ Tag every event with **`mode: daily`** or **`mode: resilience`** (default when o
 | Mode | Examples |
 | --- | --- |
 | **daily** | `arena-game-day`, `cold-chain-handoff`, `dawn-cast-off`, `dunkirk-return`, `falls-loop`, `harbor-berth`, `monitor-round`, `passenger-queue`, `reach-patrol`, `transit-disruption`, `venue-turnstile-flow` |
-| **resilience** | `dam-release`, `drought`, `earthquake`, `field-damage`, `flood`, `litter-pollution`, `power-outage`, `recovery-resilience`, `severe-weather`, `slope-movement`, `tsunami`, `volcanic-ash`, `water-quality-alert`, `wildfire` |
+| **resilience** | `dam-release`, `drought`, `earthquake`, `field-damage`, `flood`, `litter-pollution`, `power-outage`, `recovery-resilience`, `severe-weather`, `slope-movement`, `tsunami`, `volcanic-ash`, `wildfire` |
+
+Tennessee watershed exceedance (`water-quality-alert`) lives in `@doppler-group/river-twinfile`.

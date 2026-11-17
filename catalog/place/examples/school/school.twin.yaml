@@ -140,10 +140,12 @@ steps:
           - main-lobby
           - classroom-wing
           - gymnasium
+        exit:
+          - door-main
+          - door-class
+          - door-gym
         outdoor:
           - courtyard
-        survey-station:
-          - campus-survey
       actions:
         - at: warning
           set:

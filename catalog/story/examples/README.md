@@ -6,8 +6,10 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 
 | Mode | Count | Stories |
 | --- | --- | --- |
-| **daily** | 19 | `airport-operations`, `aquarium-operations`, `arena-operations`, `cold-chain-operations`, `electronics-visit`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `museum-operations`, `online-visit`, `park-operations`, `port-operations`, `river-operations`, `school-operations`, `shop-visit`, `tennessee-river-operations`, `transit-hub-campus-operations`, `wireless-visit` |
-| **resilience** | 16 | `airport-resilience`, `aquarium-resilience`, `arena-resilience`, `cold-chain-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `museum-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `school-resilience`, `shop-resilience`, `tennessee-river-resilience`, `transit-hub-campus-resilience`, `wireless-queue-stress` |
+| **daily** | 18 | `airport-operations`, `aquarium-operations`, `arena-operations`, `cold-chain-operations`, `electronics-visit`, `expo-operations`, `falls-day-tour`, `mobility-hub-operations`, `morning-crossing`, `museum-operations`, `online-visit`, `park-operations`, `port-operations`, `river-operations`, `school-operations`, `shop-visit`, `transit-hub-campus-operations`, `wireless-visit` |
+| **resilience** | 15 | `airport-resilience`, `aquarium-resilience`, `arena-resilience`, `cold-chain-resilience`, `expo-resilience`, `harbor-resilience`, `mobility-hub-resilience`, `museum-resilience`, `park-resilience`, `port-resilience`, `river-resilience`, `school-resilience`, `shop-resilience`, `transit-hub-campus-resilience`, `wireless-queue-stress` |
+
+Tennessee River Chattanooga stories (`tennessee-river-operations`, `tennessee-river-resilience`) live in `@doppler-group/river-twinfile`.
 
 | Place theme | Daily | Resilience |
 | --- | --- | --- |
@@ -21,7 +23,6 @@ Tag every story with **`mode: daily`** or **`mode: resilience`** (same enum as e
 | port | `port-operations` | `port-resilience` |
 | cold-chain (hub + airport + port) | `cold-chain-operations` | `cold-chain-resilience` |
 | river | `river-operations` | `river-resilience` |
-| tennessee river (Chattanooga) | `tennessee-river-operations` | `tennessee-river-resilience` |
 | shop | `shop-visit` | `shop-resilience` |
 | wireless-mobile | `wireless-visit` | `wireless-queue-stress` |
 | electronics-store | `electronics-visit` | — |
