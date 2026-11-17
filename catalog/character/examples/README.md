@@ -1,6 +1,6 @@
 # Character examples
 
-**`<unit>.twin.yaml`** units with required **`disclosure:`** (synthetic only). Each unit is `character/examples/<id>/` → `twinfile/character/<id>:<ver>`.
+**`<unit>.twin.yaml`** units with required **`disclosure:`** (synthetic only). Body **`character.kind`**: `narrative` (cast/NPC) or `persona` (visitor/staff archetype). Each unit is `character/examples/<id>/` → `twinfile/character/<id>:<ver>`.
 
 | Id | Resource | Place theme |
 | --- | --- | --- |

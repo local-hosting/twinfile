@@ -67,7 +67,7 @@ Golden catalog (see [`examples/README.md`](../../../catalog/place/examples/READM
 | --- | --- | --- |
 | [`airport`](../../../catalog/place/examples/airport) | `buildings` + nested `floors` | `terminal-a`, `terminal-a-airside` |
 | [`transit-hub-campus`](../../../catalog/place/examples/mobility-hub/campus) | single building | `transit-hub-interior` |
-| [`expo`](../../../catalog/place/examples/expo) | single pavilion | `expo-pavilion-opportunity` |
+| [`expo`](../../../catalog/place/examples/expo) | site spaces (districts + pavilions); optional nested pavilion part | *(inline zones today; room-tier via extra `spaces:` or `copy: ./parts/<pavilion>`)* |
 | [`arena`](../../../catalog/place/examples/arena) | concourse interior | `arena-concourse` |
 | [`port`](../../../catalog/place/examples/port) | warehouse | `port-warehouse` |
 | [`park`](../../../catalog/place/examples/park) | *(none — `open_area`)* | — |

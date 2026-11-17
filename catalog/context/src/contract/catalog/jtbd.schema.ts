@@ -18,7 +18,7 @@ const JourneyPhaseRefSchema = z.object({
 });
 
 /** MdVVP Five C's — duplicated here to avoid a character↔context cycle. */
-const VisitationGoalSchema = z.enum([
+export const VisitationGoalSchema = z.enum([
   'converge',
   'consume',
   'contribute',
@@ -26,7 +26,7 @@ const VisitationGoalSchema = z.enum([
   'connect',
 ]);
 
-const VisitationSubGoalSchema = z.enum([
+export const VisitationSubGoalSchema = z.enum([
   'visit',
   'explore',
   'watch',
@@ -38,6 +38,9 @@ const VisitationSubGoalSchema = z.enum([
   'business',
   'friends',
 ]);
+
+export type VisitationGoal = z.infer<typeof VisitationGoalSchema>;
+export type VisitationSubGoal = z.infer<typeof VisitationSubGoalSchema>;
 
 /**
  * Canonical JTBD progress story.

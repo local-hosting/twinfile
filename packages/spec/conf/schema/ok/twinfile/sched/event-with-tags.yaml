@@ -1,0 +1,18 @@
+twinfile: 2
+kind: event
+id: event-with-tags
+name: Event with tags
+version: 0.1.0
+stability: example
+tags:
+  - theme:climate-bio
+  - track:sustainability
+  - activity:talk
+mode: daily
+phases:
+  - open
+  - close
+expects:
+  venue:
+    kind: space
+    min: 0

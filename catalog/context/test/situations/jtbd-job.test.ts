@@ -43,6 +43,22 @@ describe('JTBD job contract', () => {
     expect(job.context).toBe('I am ready to go home from work');
   });
 
+  it('preserves MdVVP visitation tags and goal event ids', () => {
+    const job = parseJob({
+      id: 'explore-pavilions',
+      text: 'Explore pavilions',
+      context: 'When I am orienting inside the expo',
+      goal: 'discover districts and pavilions',
+      outcome: 'I find places worth deeper exploration',
+      visitationGoal: 'converge',
+      visitationSubGoal: 'explore',
+      goalEventIds: ['cve:pavilion-join', 'cve:room-join'],
+    });
+    expect(job.visitationGoal).toBe('converge');
+    expect(job.visitationSubGoal).toBe('explore');
+    expect(job.goalEventIds).toEqual(['cve:pavilion-join', 'cve:room-join']);
+  });
+
   it('formats the canonical When / I want to / so I can / without statement', () => {
     expect(
       formatJtbdStatement({

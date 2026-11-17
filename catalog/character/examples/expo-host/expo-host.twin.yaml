@@ -12,6 +12,7 @@ links:
   - rel: operates
     href: twinfile/resource/pavilion-kiosk:0.1.0
 character:
+  kind: narrative
   role: host
   segment: expo-visitor
   goals:

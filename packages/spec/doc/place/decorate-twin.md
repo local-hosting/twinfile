@@ -137,6 +137,7 @@ See [`fixtures/plan-scaffold-campus`](../../../../catalog/place/test/fixtures/pl
 | “Add retail tech to a floor” | Add **`place/assets.yaml`** layer |
 | “Enable storm scenario” | Add **`bindings/severe-weather.yaml`** + space **`roles`** + scenario unit |
 | “Indoor + outdoor expo” | **`from: base-campus`**, patch spaces/exposure, wire expo-style **`bindings`** ([expo](../../../../catalog/place/examples/expo/)) |
+| “CMS pavilion list → campus” | One campus unit + zone `spaces[]` (or `parts/` for rich interiors); do not publish one place per pavilion ([recipe](place-recipe.md#cms--multi-pavilion-catalogs-world-expo)) |
 
 Thin derived examples: [`mobility-hub/campus`](../../../../catalog/place/examples/mobility-hub/campus/) — **`from:`** campus base, `place.kind: mobility_hub`, site `steps:`, **`copy: ./parts/transit-hub`**, **`transit-disruption`** plan. Building + floor: [`places/airport`](../../../../catalog/place/examples/airport/) (the building copies `./floors/airside`). Single building: [`expo`](../../../../catalog/place/examples/expo/), [`arena`](../../../../catalog/place/examples/arena/), [`port`](../../../../catalog/place/examples/port/). **`open_area`** [`park`](../../../../catalog/place/examples/park/) stays site-only ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). When geotypes **`suggest_building_import`** is true for the resolved archetype (today **`campus`** only), `twin init place --geotype` writes `PARTS.md`.
 
