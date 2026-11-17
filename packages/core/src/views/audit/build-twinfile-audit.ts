@@ -76,7 +76,9 @@ export function buildTwinfileAudit(
   }
 
   const links =
-    kind === 'story' ? collectStoryAuditLinks(doc, unit, options) : parseTwinfileLinks(doc);
+    kind === 'story'
+      ? collectStoryAuditLinks(unit.doc, unit, options)
+      : parseTwinfileLinks(doc);
 
   let involvesPlace = false;
   let involvesCharacter = false;

@@ -1,16 +1,26 @@
-import { dirname, join } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
 import { resolveAuditExamplesRoot, resolveTwinfilePackRoot } from '../src/paths/resolve-examples-root.js';
 
 describe('resolveAuditExamplesRoot', () => {
-  it('finds osc-twinfile pack root from a nested unit path', () => {
-    const oscRoot = join(dirname(fileURLToPath(import.meta.url)), '../../../../../osc-stores/osc-twinfile');
-    const story = join(oscRoot, 'story/spectrum-tech-titans-wearables');
+  it('finds overlay pack root from a nested unit path via twin.local.yaml', () => {
+    const packRoot = join(tmpdir(), `twin-pack-${Date.now()}`);
+    const story = join(packRoot, 'story', 'visit-shim');
+    mkdirSync(story, { recursive: true });
+    writeFileSync(
+      join(packRoot, 'twin.local.yaml'),
+      `refs:
+  twinfile/context/wireless-retail:0.1.0: context/wireless-retail
+`,
+    );
+    writeFileSync(join(story, 'visit-shim.twin.yaml'), 'twinfile: 2\nkind: story\nid: visit-shim\n');
+
     const pack = resolveTwinfilePackRoot(story);
-    expect(pack).toBe(oscRoot);
-    expect(resolveAuditExamplesRoot(story)).toBe(oscRoot);
+    expect(pack).toBe(packRoot);
+    expect(resolveAuditExamplesRoot(story)).toBe(packRoot);
   });
 });
