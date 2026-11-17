@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
+import type { Journey, Character } from '@local-hosting/twinfile-character/character';
 import type { JobContextModel } from '@local-hosting/twinfile-context';
 import { rankJobsForPersona } from '@local-hosting/twinfile-context';
 import type { PlaceMount } from '../types/place-mount.js';

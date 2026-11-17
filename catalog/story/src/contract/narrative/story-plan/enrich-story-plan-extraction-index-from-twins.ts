@@ -1,4 +1,4 @@
-import type { Character } from '@local-hosting/twinfile-character/persona';
+import type { Character } from '@local-hosting/twinfile-character/character';
 import {
   rankJobsForPersona,
   type JobContextModel,

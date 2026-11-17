@@ -9,7 +9,7 @@ import type { StoryCharacterContext } from '../types/story-character-context.js'
 import type { Story } from '../types/story-narrative.js';
 import type { StoryTouchpointCatalog } from '../types/touchpoint-catalog.js';
 import type { TouchpointIndex } from '../types/touchpoint-index.js';
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 
 export type CompileStoryInput = {
   story: Story;

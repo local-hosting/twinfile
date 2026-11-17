@@ -1,4 +1,4 @@
-/** Character character mounted on this story run (see `@local-hosting/twinfile-character/persona`). */
+/** Character character mounted on this story run (see `@local-hosting/twinfile-character/character`). */
 export type StoryCharacterRef = {
   characterId: string;
   /** Cast label for multi-character episodes (e.g. driver, rider). */

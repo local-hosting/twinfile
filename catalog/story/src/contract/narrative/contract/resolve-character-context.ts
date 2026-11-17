@@ -2,7 +2,7 @@ import {
   resolveJourneyForPersona,
   type Journey,
   type Character,
-} from '@local-hosting/twinfile-character/persona';
+} from '@local-hosting/twinfile-character/character';
 
 import type { StoryCharacterContext } from '../types/story-character-context.js';
 

@@ -1,4 +1,4 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 
 import { resolvePlanningHorizonDays, resolveVisitDayIndex } from '../episode/planning-horizon.js';
 import { extractTouchpointSequenceFromScenes } from '../scene/extract-touchpoint-sequence-from-scenes.js';

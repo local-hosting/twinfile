@@ -1,9 +1,9 @@
-import type { Journey } from '@local-hosting/twinfile-character/persona';
+import type { Journey } from '@local-hosting/twinfile-character/character';
 import {
   journeyHeartSeries,
   journeyHeartTrends,
   phaseObstacleEncounters,
-} from '@local-hosting/twinfile-character/persona';
+} from '@local-hosting/twinfile-character/character';
 
 import type { StoryJourney, StoryJourneyContext, StoryJourneyTouchpoint } from '../../types/story-narrative-journey.js';
 import type { Story } from '../../types/story-narrative.js';

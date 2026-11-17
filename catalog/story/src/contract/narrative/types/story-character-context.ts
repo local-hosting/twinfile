@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
+import type { Journey, Character } from '@local-hosting/twinfile-character/character';
 
 /**
  * Character-first compile input — stories anchor on Character twins, not psychographic segments.

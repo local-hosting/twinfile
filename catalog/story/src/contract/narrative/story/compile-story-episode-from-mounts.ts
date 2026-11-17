@@ -1,4 +1,4 @@
-import type { Journey, Character } from '@local-hosting/twinfile-character/persona';
+import type { Journey, Character } from '@local-hosting/twinfile-character/character';
 import type { PlaceMount } from '../types/place-mount.js';
 
 import { deriveEpisodeTimingFromJobs } from '../episode/derive-episode-timing-from-jobs.js';
