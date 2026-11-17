@@ -19,15 +19,6 @@ const sample: Character = {
     segment: 'commuter',
     jobIds: ['job:commute'],
   },
-  jobs: [
-    {
-      id: 'job:commute',
-      text: 'Get to work reliably',
-      context: 'I am getting ready for work',
-      goal: 'to request a ride',
-      outcome: 'I can get to work on time',
-    },
-  ],
 };
 
 function memoryLoroMap(initial: Record<string, unknown> = {}): TwinfileLoroMap {
@@ -62,6 +53,6 @@ describe('CharacterBundle loro map I/O', () => {
     const restored = CharacterBundle.import(map);
     expect(restored.value.id).toBe('persona:rider');
     expect(restored.value.persona.label).toBe('Rider');
-    expect(restored.value.jobs).toHaveLength(1);
+    expect(restored.value.persona.jobIds).toEqual(['job:commute']);
   });
 });

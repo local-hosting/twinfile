@@ -14,6 +14,8 @@ links:
     href: twinfile/place/baylor-school:0.1.0
   - rel: involves
     href: twinfile/character/watershed-steward:0.1.0
+  - rel: involves
+    href: twinfile/context/watershed-monitor:0.1.0
 story:
   pitch: Clear-day monitor round from Mountain Creek through Williams Island, then school and aquarium sample handoff.
   scenes:

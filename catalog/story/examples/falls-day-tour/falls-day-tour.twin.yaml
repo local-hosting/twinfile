@@ -12,6 +12,8 @@ links:
     href: twinfile/place/buffalo-harbor:0.1.0
   - rel: involves
     href: twinfile/character/harbor-guide:0.1.0
+  - rel: involves
+    href: twinfile/context/falls-tour:0.1.0
 story:
   pitch: Guided loop from the harbor to Niagara Falls Visitor.
   scenes:

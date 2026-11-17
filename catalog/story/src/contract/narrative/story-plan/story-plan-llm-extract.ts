@@ -41,6 +41,9 @@ export const STORY_PLAN_EXTRACT_SYSTEM_PROMPT = [
   'Read planningIndex.storyPlanningGuide when present — customer context from project Characters.',
   'Read planningIndex.segments[] (topic, needsSummary, intentIds) from project Characters to pick segmentId.',
   'When planningIndex.characters/stories are present, pick characterId and storyId when the user mentions a character or Story twin.',
+  'Read planningIndex.contexts[] and planningIndex.characterContexts[] for Context twins and ranked jobIds — pick jobIds only from planningIndex.jobIds.',
+  'When the user names a job in plain language, prefer characterContexts[].rankedJobIds for the chosen characterId.',
+  'Use planningIndex.storyBlessings[] to relate storyId with focal characterId and optional contextId.',
   'For place, use planningIndex storeSlugs / fleet places (storeSlug, storeName) — do not invent place refs.',
   'Put desired outcomes in goals[] (plain language). Put channel/timing constraints in constraints[].',
   'If the user names a city or store but not a slug, set place and/or storeName — not a invented storeSlug.',
@@ -52,10 +55,34 @@ export const STORY_PLAN_EXTRACT_SYSTEM_PROMPT = [
 ].join(' ');
 
 export function buildStoryPlanExtractUserContent(request: string, index: StoryPlanExtractionIndexV1): string {
+  const contextLines =
+    index.contexts && index.contexts.length > 0
+      ? [
+          '## Context twins (summaries)',
+          ...index.contexts.map(
+            (row) =>
+              `- ${row.contextId}: ${row.label} — ${row.context} (jobs: ${row.jobIds.slice(0, 8).join(', ')})`,
+          ),
+          '',
+        ]
+      : [];
+  const rankedLines =
+    index.characterContexts && index.characterContexts.length > 0
+      ? [
+          '## Ranked jobs per character',
+          ...index.characterContexts.map(
+            (row) =>
+              `- ${row.characterId}${row.label ? ` (${row.label})` : ''}: ${row.rankedJobIds.join(', ')}`,
+          ),
+          '',
+        ]
+      : [];
   return [
     '## User request',
     request.trim(),
     '',
+    ...contextLines,
+    ...rankedLines,
     '## planningIndex (valid ids)',
     JSON.stringify(index, null, 2),
   ].join('\n');

@@ -60,7 +60,7 @@ export function assembleBelievableEpisodeFromTwinCatalog(
     placeMounts: input.placeMounts ?? [],
     touchpointCatalog,
     storyId: input.storyId,
-    situations: input.situations,
+    context: input.context,
     simulationEpochStart: input.simulationEpochStart,
     planningHorizonDays: input.planningHorizonDays,
     visitDayOffset: input.visitDayOffset,

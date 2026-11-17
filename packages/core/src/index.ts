@@ -378,6 +378,7 @@ export {
 export {
   isSceneAddress,
   listSceneRunIds,
+  loadStoryUnit,
   loadRunUnit,
   parseSceneAddress,
   sceneAddress,

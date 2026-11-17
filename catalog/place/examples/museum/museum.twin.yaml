@@ -1,0 +1,151 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: museum
+name: The Metropolitan Museum of Art
+version: 0.1.0
+stability: example
+geotype:
+  primary: museum
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: The Metropolitan Museum of Art
+      kind: museum
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 40.7794
+        lon: -73.9632
+        h3: 892a1008957ffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: grand-hall
+        name: Great Hall
+        kind: lobby
+        level: ground
+        exposure: indoor
+        capacity: 800
+        roles:
+          - ground-transport
+          - shelter
+      - id: european-wing
+        name: European painting wing
+        kind: gallery
+        level: ground
+        exposure: indoor
+        capacity: 400
+        roles:
+          - shelter
+      - id: special-exhibit
+        name: Special exhibition galleries
+        kind: gallery
+        level: ground
+        exposure: indoor
+        capacity: 250
+        roles:
+          - shelter
+          - alternative
+      - id: fifth-ave-plaza
+        name: Fifth Avenue plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+  - openings:
+      - id: door-main
+        kind: door
+        connects:
+          - grand-hall
+          - fifth-ave-plaza
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: door-european
+        kind: door
+        connects:
+          - grand-hall
+          - european-wing
+        width_m: 2.5
+        state: open
+        roles:
+          - exit
+      - id: door-special
+        kind: door
+        connects:
+          - grand-hall
+          - special-exhibit
+        width_m: 2.5
+        state: open
+        roles:
+          - exit
+  - markers:
+      - id: ticketing-desk
+        name: Ticketing desk
+        roles:
+          - hotspot
+        state: open
+      - id: step-free-entry
+        name: Step-free entry
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+  - stations:
+      - id: gallery-survey
+        name: Gallery survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: hall-to-european
+        name: Great Hall to European wing
+        from: grand-hall
+        to: european-wing
+        length_m: 80
+        kind: corridor
+        step_free: true
+      - id: hall-to-special
+        name: Great Hall to special exhibit
+        from: grand-hall
+        to: special-exhibit
+        length_m: 60
+        kind: corridor
+        step_free: true
+  - visits:
+      - id: visit-hall
+        kind: activity
+        name: Great Hall arrival
+        space: grand-hall
+        order: 0
+      - id: visit-european
+        kind: activity
+        name: European wing walk
+        space: european-wing
+        order: 1
+      - id: visit-special
+        kind: activity
+        name: Special exhibition
+        space: special-exhibit
+        order: 2
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - grand-hall
+          - european-wing
+          - special-exhibit
+        outdoor:
+          - fifth-ave-plaza
+        survey-station:
+          - gallery-survey
+      actions:
+        - at: warning
+          set:
+            fifth-ave-plaza:
+              state: closed

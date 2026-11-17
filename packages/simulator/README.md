@@ -15,7 +15,7 @@ Scenes copy **events** (`copy: twinfile/event/...`) from [`catalog/event/example
 | --- | --- |
 | **`@doppler-group/twinfile-core`** | Load/build twins; `catalog/` path layout; ref resolve |
 | **`catalog/{place,resource,character,story,event}/`** | Golden twin heads + character YAML libs |
-| **`@doppler-group/twinfile-simulator`** | Timeline, session bus, event catalog (loads `catalog/event` units) |
+| **`@doppler-group/twinfile-simulator`** | Timeline, session bus, event catalog; **`buildStoryScene`** / **`createTwinfilePlayerFromStory`** orchestrate core + place (compose is not here) |
 
 Normative **format** (roles, `markers`, phases, plans) stays in **`@doppler-group/twinfile-spec`**.
 

@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[2].parent / "fieldwise-locker"
 REPLACEMENTS = [
     (r"@doppler-group/twinfile-character/pcm/browser", "@doppler-group/twinfile-character/persona/browser"),
     (r"@doppler-group/twinfile-character/pcm", "@doppler-group/twinfile-character/persona"),
-    (r"@doppler-group/twinfile-character/jsm", "@doppler-group/twinfile-character/situations"),
+    (r"@doppler-group/twinfile-character/jsm", "@doppler-group/twinfile-context"),
     (r"@doppler-group/twinfile-story/sam/browser", "@doppler-group/twinfile-story/narrative/browser"),
     (r"@doppler-group/twinfile-story/sam", "@doppler-group/twinfile-story/narrative"),
     (r"\bpcmFromJSON\b", "characterFromJSON"),

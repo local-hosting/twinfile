@@ -2,7 +2,6 @@ import type { MentalModel } from './strategy/mental-model.js';
 import type { Obstacle } from './story/obstacle.js';
 import type { CharacterPersona } from './character-persona.js';
 import type { ResearchSignal } from './story/research-signal.js';
-import type { Job } from '../../situations/index.js';
 import type { ThinkingStyle } from './strategy/thinking-style.js';
 import type { Journey } from './story/journey.js';
 import type { ResearchQuote } from './story/quote.js';
@@ -22,13 +21,11 @@ export type CharacterDocument = {
 
 /**
  * Persona Character Model — one portable character (persona + story spine).
- * JTBD jobs live on Context mounts (situation → goal → outcome); optional `jobs`
- * here are character-local only. Product cohorts / audiences stay on AXM, not character.
+ * JTBD jobs live on **context** twins (`@doppler-group/twinfile-context`); story
+ * blesses a character with a context. Product cohorts / audiences stay on AXM.
  */
 export type Character = CharacterDocument & CharacterSegmentFacets & {
   persona: CharacterPersona;
-  /** Optional character-local JTBD jobs (prefer org Context mounts). */
-  jobs?: Job[];
   journeys?: Journey[];
   quotes?: ResearchQuote[];
   /** Skyline / matrix cognition for this twin only (`mental-models/`). */

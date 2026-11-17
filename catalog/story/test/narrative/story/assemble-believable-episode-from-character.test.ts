@@ -85,8 +85,8 @@ describe('assembleBelievableEpisodeFromCharacter', () => {
       characters: [character],
       placeMounts: [storeMount],
       stories: [story],
-      situations: {
-        id: 'jsm:commute',
+      context: {
+        id: 'context:commute',
         label: 'Commute',
         context: 'daily',
         jobs: [

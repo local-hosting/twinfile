@@ -26,8 +26,7 @@ catalog/<type>/
 | --- | --- | --- |
 | **place** | `place/`, `build/`, `check/` | `Place` compose/build, archetype checks, place mounts |
 | **resource** | `asset/` *(planned)* | Resource rows when lifted from place |
-| **character** | `persona/` | Persona — `contract/`, `journey/`, `empathy/`, `people/`, `schemas/` |
-| **character** | `persona/` | Persona only — JTBD re-exports `@doppler-group/twinfile-context` via deprecated `/situations` |
+| **character** | `persona/` | Persona only — who; JTBD lives on **context** |
 | **context** | `contract/` | JTBD — `JobContextModel`: When [Context], I want to [Goal], so I can [Outcome] without [Obstacle] |
 | **story** | `narrative/` | Narrative — `contract/`, `scene/`, `episode/`, `story-arc/` |
 | **event** | *(module)* | Event unit — phases, `expects`, hazard catalog |
@@ -43,12 +42,11 @@ npm subpaths (stable):
 - `@doppler-group/twinfile-<type>/module` → `catalog/<type>/src/twin-module.ts`
 - `@doppler-group/twinfile-character/persona` → `catalog/character/src/contract/persona/` (legacy subpath name)
 - `@doppler-group/twinfile-context` → `catalog/context/src/contract/`
-- `@doppler-group/twinfile-character/situations` → re-exports `@doppler-group/twinfile-context` (deprecated)
 - `@doppler-group/twinfile-story/narrative` → `catalog/story/src/contract/narrative/` (legacy subpath name)
 
 ## Rules
 
-- Prose and identifiers use **character** / **context** / **story** — not three-letter acronyms. npm subpaths are `persona`, `situations` (JTBD; alias toward context), and `narrative`. JTBD triad: **context** (situation) → **goal** (job/progress) → **outcome** (definition of success).
+- Prose and identifiers use **character** / **context** / **story** — not three-letter acronyms. npm subpaths are `persona`, `narrative`, and the context package root. JTBD triad: **context** (situation) → **goal** (job/progress) → **outcome** (definition of success).
 - No nested package name folders — use `contract/<domain>/contract/` for load/save/json.
 - Twin **heads** (`<unit>.twin.yaml`, …) are only under `catalog/<type>/examples/`; `src/` is library code for parse/wire/export.
 - Cross-type links stay **refs** in YAML (`twinfile/<type>/<id>`), not TypeScript imports between type packages (except story narrative optionally peers character for mount compile).

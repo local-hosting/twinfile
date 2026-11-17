@@ -16,6 +16,8 @@ links:
     href: twinfile/place/normal-park:0.1.0
   - rel: involves
     href: twinfile/character/watershed-steward:0.1.0
+  - rel: involves
+    href: twinfile/context/watershed-monitor:0.1.0
 story:
   pitch: Post-storm litter and pollution at the Mountain Creek outfall, then a water-quality exceedance advisory.
   scenes:

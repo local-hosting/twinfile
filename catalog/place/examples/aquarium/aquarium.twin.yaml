@@ -1,0 +1,151 @@
+from: twinfile/base-indoor-stack:0.1.0
+twinfile: 2
+kind: place
+id: aquarium
+name: Georgia Aquarium
+version: 0.1.0
+stability: example
+geotype:
+  primary: aquarium
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Georgia Aquarium
+      kind: aquarium
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 33.7634
+        lon: -84.3951
+        h3: 8944a2552b3ffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: lobby
+        name: Arrival lobby
+        kind: lobby
+        level: ground
+        exposure: indoor
+        capacity: 600
+        roles:
+          - ground-transport
+          - shelter
+      - id: ocean-gallery
+        name: Ocean voyager gallery
+        kind: gallery
+        level: ground
+        exposure: indoor
+        capacity: 500
+        roles:
+          - shelter
+      - id: touch-pools
+        name: Touch pools
+        kind: exhibit
+        level: ground
+        exposure: indoor
+        capacity: 120
+        roles:
+          - shelter
+          - alternative
+      - id: plaza-entry
+        name: Entry plaza
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+  - openings:
+      - id: door-main
+        kind: door
+        connects:
+          - lobby
+          - plaza-entry
+        width_m: 4
+        state: open
+        roles:
+          - exit
+      - id: door-ocean
+        kind: door
+        connects:
+          - lobby
+          - ocean-gallery
+        width_m: 3
+        state: open
+        roles:
+          - exit
+      - id: door-touch
+        kind: door
+        connects:
+          - ocean-gallery
+          - touch-pools
+        width_m: 2
+        state: open
+        roles:
+          - exit
+  - markers:
+      - id: ticket-queue
+        name: Ticket queue
+        roles:
+          - hotspot
+        state: open
+      - id: step-free-entry
+        name: Step-free entry
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+  - stations:
+      - id: exhibit-survey
+        name: Exhibit survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: lobby-to-ocean
+        name: Lobby to ocean gallery
+        from: lobby
+        to: ocean-gallery
+        length_m: 70
+        kind: corridor
+        step_free: true
+      - id: ocean-to-touch
+        name: Ocean gallery to touch pools
+        from: ocean-gallery
+        to: touch-pools
+        length_m: 40
+        kind: corridor
+        step_free: true
+  - visits:
+      - id: visit-lobby
+        kind: activity
+        name: Lobby check-in
+        space: lobby
+        order: 0
+      - id: visit-ocean
+        kind: activity
+        name: Ocean gallery walk
+        space: ocean-gallery
+        order: 1
+      - id: visit-touch
+        kind: activity
+        name: Touch pool stop
+        space: touch-pools
+        order: 2
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - lobby
+          - ocean-gallery
+          - touch-pools
+        outdoor:
+          - plaza-entry
+        survey-station:
+          - exhibit-survey
+      actions:
+        - at: warning
+          set:
+            plaza-entry:
+              state: closed

@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: park-visit
+name: Park visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Park visit
+context: When I am visiting a park for recreation or a short walk
+jobs:
+  - id: enter-and-orient
+    text: Enter and orient
+    context: When I arrive at the park entrance
+    goal: know which trails and amenities are open
+    outcome: I start in the right direction without backtracking
+  - id: walk-meadow-loop
+    text: Walk the meadow loop
+    context: When I have time for a short clear-day loop
+    goal: complete the meadow–trailhead circuit comfortably
+    outcome: I finish the loop feeling restored
+  - id: clear-trailhead-queue
+    text: Clear the trailhead queue
+    context: When the trailhead is busy
+    goal: check in or pass through without a long delay
+    outcome: I am on the trail without frustration

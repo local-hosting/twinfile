@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: aquarium-visit
+name: Aquarium visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Aquarium visit
+context: When I am visiting an aquarium for galleries or touch experiences
+jobs:
+  - id: check-in-at-lobby
+    text: Check in at lobby
+    context: When I arrive at the ticket queue
+    goal: enter and orient without missing timed entries
+    outcome: I am inside and ready for the galleries
+  - id: walk-ocean-gallery
+    text: Walk the ocean gallery
+    context: When I have time for the main tank loop
+    goal: see priority exhibits without backtracking
+    outcome: I finish the loop with the experiences I came for
+  - id: clear-touch-pool-queue
+    text: Clear the touch pool queue
+    context: When the touch pools are busy
+    goal: get a turn without a long delay
+    outcome: I complete the stop without abandoning the visit

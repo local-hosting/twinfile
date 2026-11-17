@@ -16,13 +16,7 @@
       "default": "./src/contract/persona/index.ts"
     },
     "./persona/*": "./src/contract/persona/*",
-    "./situations": {
-      "development": "./src/contract/situations/index.ts",
-      "default": "./src/contract/situations/index.ts"
-    },
-    "./situations/*": "./src/contract/situations/*",
-    "./persona/browser": "./src/contract/persona/browser.ts",
-    "./situations/browser": "./src/contract/situations/browser.ts"
+    "./persona/browser": "./src/contract/persona/browser.ts"
   },
   "scripts": {
     "test": "vitest run",

@@ -1,5 +1,3 @@
-import type { Job } from '../../situations/index.js';
-
 import type { Character } from '../types/character.js';
 import type { MentalModel } from '../types/strategy/mental-model.js';
 import type { Persona } from '../types/strategy/persona.js';
@@ -12,7 +10,6 @@ import type { ResearchSignal } from '../types/story/research-signal.js';
 export type CharacterAxmContribution = {
   characterId: string;
   persona: Persona;
-  jobs: Job[];
   journeys?: Journey[];
   quotes?: ResearchQuote[];
   mentalModels?: MentalModel[];
@@ -33,7 +30,6 @@ export function characterToContribution(
   return {
     characterId: character.id,
     persona: options?.persona ?? (character.persona as Persona),
-    jobs: character.jobs ?? [],
     ...(character.journeys?.length ? { journeys: character.journeys } : {}),
     ...(character.quotes?.length ? { quotes: character.quotes } : {}),
     ...(mentalModels.length ? { mentalModels } : {}),

@@ -32,6 +32,14 @@ export const GOLDEN_SCENE_RUN_STORIES: Record<string, string> = {
   'trailhead-queue': 'park-operations',
   'trailhead-backup': 'park-resilience',
   'slope-watch': 'park-resilience',
+  'hall-arrive': 'museum-operations',
+  'gallery-queue': 'museum-operations',
+  'gallery-shelter-cap': 'museum-resilience',
+  'museum-recovery': 'museum-resilience',
+  'lobby-arrive': 'aquarium-operations',
+  'exhibit-surge': 'aquarium-operations',
+  'exhibit-shelter-cap': 'aquarium-resilience',
+  'aquarium-recovery': 'aquarium-resilience',
   'pier-queue': 'port-operations',
   'warehouse-transfer': 'port-operations',
   'gangway-backup': 'port-resilience',
@@ -54,6 +62,12 @@ export const GOLDEN_SCENE_RUN_STORIES: Record<string, string> = {
   'school-handoff': 'tennessee-river-operations',
   'creek-pollution': 'tennessee-river-resilience',
   'quality-exceedance': 'tennessee-river-resilience',
+  'air-cargo-intake': 'cold-chain-operations',
+  'hub-handoff': 'cold-chain-operations',
+  'pier-transfer': 'cold-chain-operations',
+  'cold-room-outage': 'cold-chain-resilience',
+  'apron-storm-hold': 'cold-chain-resilience',
+  'pier-field-clearance': 'cold-chain-resilience',
 };
 
 function goldenSceneStory(runId: string): string {

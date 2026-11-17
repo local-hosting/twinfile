@@ -332,6 +332,7 @@ export {
   buildStoryPlanExtractionIndex,
   mergeStoryPlanInput,
 } from './story-plan/plan-corpus.js';
+export { enrichStoryPlanExtractionIndexFromProjectTwins } from './story-plan/enrich-story-plan-extraction-index-from-twins.js';
 export {
   buildTouchpointGraphFromStories,
   type BuildTouchpointGraphFromStoriesOptions,
@@ -367,6 +368,7 @@ export {
   composeStoryPlanWorkingScenario,
   isThinStoryPlanScenario,
 } from './story-plan/scenario.js';
+export { shouldExpandStoryPlanScenarioWithLlm } from './story-plan/should-expand-story-plan-scenario.js';
 export {
   intentIdsForStoryPlanningSegment,
   readStoryPlanSegmentNeedsSummary,

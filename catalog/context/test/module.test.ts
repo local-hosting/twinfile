@@ -1,3 +1,4 @@
+import { readdirSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { resolveTwinfileRoot, resolveTypeExamplesRoot } from '@doppler-group/twinfile-core';
@@ -5,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 import { kind, module } from '../src/index.js';
 
-const exampleDir = join(resolveTypeExamplesRoot('context', resolveTwinfileRoot()), 'wireless-retail');
+const examplesRoot = resolveTypeExamplesRoot('context', resolveTwinfileRoot());
 
 describe('@doppler-group/twinfile-context', () => {
   it('exports the context module', () => {
@@ -13,9 +14,17 @@ describe('@doppler-group/twinfile-context', () => {
     expect(module.kind).toBe('context');
   });
 
-  it('builds the wireless-retail example head', async () => {
-    const built = await module.build(exampleDir, {});
-    expect(built.ok && built.value.head.id).toBe('wireless-retail');
+  it('builds every context example head', async () => {
+    const ids = readdirSync(examplesRoot).filter((name) => !name.startsWith('.') && name !== 'README.md');
+    expect(ids.length).toBeGreaterThan(1);
+    for (const id of ids) {
+      const built = await module.build(join(examplesRoot, id), {});
+      expect(built.ok, id).toBe(true);
+      if (built.ok) {
+        expect(built.value.head.id).toBe(id);
+        expect(built.value.head.kind).toBe('context');
+      }
+    }
   });
 
   it('rejects a head with the wrong kind', () => {

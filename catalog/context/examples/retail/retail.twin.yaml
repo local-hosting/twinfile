@@ -1,0 +1,36 @@
+twinfile: 2
+kind: context
+id: retail
+name: Retail shop visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Retail shop visit
+context: When I am in a retail shop running errands or browsing
+jobs:
+  - id: compare-prices
+    text: Compare prices
+    context: When prices or promos differ between nearby stores
+    goal: confirm I am getting a fair deal before I buy
+    outcome: I choose the store and basket that fit my budget
+  - id: find-product-fast
+    text: Find product fast
+    context: When I am on a tight schedule and know what I need
+    goal: locate the item quickly without wandering the store
+    outcome: I find the product and move to checkout
+  - id: browse-new-arrivals
+    text: Browse new arrivals
+    context: When I have discretionary time and want to explore
+    goal: discover new products or seasonal items
+    outcome: I find something worth buying or bookmark for later
+  - id: compare-options
+    text: Compare options
+    context: When I am evaluating a considered purchase
+    goal: weigh features, price, and availability across choices
+    outcome: I feel confident in the option I select
+  - id: complete-purchase
+    text: Complete purchase
+    context: When I am ready to pay and leave
+    goal: finish checkout quickly with no surprises
+    outcome: I pay, receive my items, and exit smoothly

@@ -1,5 +1,5 @@
 import type { Journey, Character } from '@doppler-group/twinfile-character/persona';
-import type { JobSituationModel } from '@doppler-group/twinfile-context';
+import type { JobContextModel } from '@doppler-group/twinfile-context';
 import { rankJobsForPersona } from '@doppler-group/twinfile-context';
 import type { PlaceMount } from '../types/place-mount.js';
 
@@ -25,7 +25,8 @@ export type AssembleBelievableEpisodeFromCharacterInput = {
   characters: readonly Character[];
   placeMounts: readonly PlaceMount[];
   stories: readonly Story[];
-  situations?: JobSituationModel;
+  /** Context twin (`kind: context`) — JTBD pack blessed onto the character for this episode. */
+  context?: JobContextModel;
   touchpointCatalog?: StoryTouchpointCatalog;
   storyId?: string;
   simulationEpochStart: string;
@@ -72,8 +73,8 @@ function pickStoryMount(input: AssembleBelievableEpisodeFromCharacterInput): Sto
     return direct;
   }
   const rankedJobs =
-    input.situations != null
-      ? rankJobsForPersona(input.focalCharacter, input.situations).map((row) => row.job.id)
+    input.context != null
+      ? rankJobsForPersona(input.focalCharacter, input.context).map((row) => row.job.id)
       : [];
   return resolveStoryEpisodeForCharacter({
     stories: input.stories,
@@ -128,8 +129,8 @@ export function assembleBelievableEpisodeFromCharacter(
   const storyJourney: Journey = resolveJourneyForStory(story, focalCharacter.journeys ?? []);
 
   const rankedJobs =
-    input.situations != null
-      ? rankJobsForPersona(focalCharacter, input.situations).map((row) => row.job.id)
+    input.context != null
+      ? rankJobsForPersona(focalCharacter, input.context).map((row) => row.job.id)
       : [];
 
   const journeyPace =

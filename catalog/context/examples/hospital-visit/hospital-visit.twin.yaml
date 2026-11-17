@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: hospital-visit
+name: Hospital visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Hospital visit
+context: When I am visiting or supporting someone in a hospital
+jobs:
+  - id: support-loved-one
+    text: Support loved one
+    context: When someone I care about is in the hospital
+    goal: be present, informed, and helpful during their stay
+    outcome: They feel supported and I understand the care plan
+  - id: find-way-to-department
+    text: Find way to department
+    context: When the campus layout is unfamiliar
+    goal: reach the correct wing or room without getting lost
+    outcome: I arrive at the right place on the first try
+  - id: wait-comfortably
+    text: Wait comfortably
+    context: When procedures or visits run longer than expected
+    goal: stay nearby without added stress
+    outcome: I can wait without feeling stranded or anxious

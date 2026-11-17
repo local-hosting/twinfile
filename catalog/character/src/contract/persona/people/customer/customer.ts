@@ -1,5 +1,5 @@
 import type { JobDefinition } from '@doppler-group/twinfile-context/catalog/jtbd.schema.js';
-import type { KpiDefinition } from '../../../situations/types/kpi-definition-wire.js';
+import type { KpiDefinition } from '@doppler-group/twinfile-context/types/kpi-definition-wire.js';
 import { HeartDimensionIdSchema } from '../../shared/heart-dimension-id.schema.js';
 import {
   CustomerCatalogSchema,

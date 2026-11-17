@@ -1,0 +1,27 @@
+twinfile: 2
+kind: resource
+id: cold-parcel
+name: Cold parcel
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/cold-chain:0.1.0
+    anchor: packing-bay
+resource:
+  kind: parcel
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-cold-chain
+    elements:
+      purpose:
+        - logistics
+      manifestation:
+        - sensor_telemetry
+      affected:
+        - people
+  ext:
+    lat: 35.042
+    lon: -89.9771

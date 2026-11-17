@@ -14,6 +14,8 @@
 | `airport-liaison` | terminal-kiosk | airport |
 | `arena-host` | concession-cart | arena |
 | `park-ranger` | trail-station | park |
+| `museum-host` | gallery-kiosk | museum |
+| `aquarium-host` | exhibit-kiosk | aquarium |
 | `port-clerk` | gangway-kiosk | port |
 | `expo-host` | pavilion-kiosk | expo |
 | `river-guide` | river-gauge | river |

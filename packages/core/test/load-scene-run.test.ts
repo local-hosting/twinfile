@@ -4,13 +4,34 @@ import { tmpdir } from 'node:os';
 
 import { describe, expect, it } from 'vitest';
 
-import { loadRunUnit, sceneAddress } from '../src/load/load-scene-run.js';
+import { loadRunUnit, loadStoryUnit, sceneAddress } from '../src/load/load-scene-run.js';
 import { twinHeadPath } from '../src/load/twinfile-locator.js';
 
 function writeStory(root: string, body: string): string {
   writeFileSync(twinHeadPath(root), body);
   return root;
 }
+
+describe('loadStoryUnit', () => {
+  it('loads a story head folder', () => {
+    const root = writeStory(
+      mkdtempSync(join(tmpdir(), 'twinfile-story-')),
+      `twinfile: 2
+kind: story
+id: demo-story
+name: Demo
+version: 0.1.0
+stability: example
+story:
+  scenes: []
+`,
+    );
+    const loaded = loadStoryUnit(root);
+    expect(loaded.ok).toBe(true);
+    if (!loaded.ok) return;
+    expect(loaded.value.twinfile.kind).toBe('story');
+  });
+});
 
 describe('loadRunUnit', () => {
   it('defaults run.from from the story involves place', () => {

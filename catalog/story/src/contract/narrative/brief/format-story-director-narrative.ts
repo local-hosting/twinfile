@@ -294,7 +294,7 @@ function formatProtagonistLeadSection(
   const situationsNarrative =
     input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      situations: input.situations,
+      context: input.context,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,
@@ -303,7 +303,7 @@ function formatProtagonistLeadSection(
     });
   if (situationsNarrative.contextPackContext) {
     motivation.push(
-      `**Context (situation):** ${situationsNarrative.contextPackContext}`,
+      `**Context:** ${situationsNarrative.contextPackContext}`,
     );
   }
   if (situationsNarrative.journeyGoal) {
@@ -445,7 +445,7 @@ export function formatStoryDirectorNarrative(input: FormatStoryDirectorNarrative
   const situationsNarrative =
     input.situationsNarrative ??
     buildStorySituationsNarrativeContext({
-      situations: input.situations,
+      context: input.context,
       journey: input.journey,
       character: input.character,
       personaGoals: input.personaGoals,

@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: museum-visit
+name: Museum visit
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Museum visit
+context: When I am visiting a museum for galleries or a special exhibition
+jobs:
+  - id: arrive-and-enter
+    text: Arrive and enter
+    context: When I reach the Great Hall or main lobby
+    goal: clear ticketing and orient without losing my group
+    outcome: I am inside and know where to start
+  - id: walk-gallery-route
+    text: Walk the gallery route
+    context: When I have time for the main collection loop
+    goal: see priority galleries without backtracking
+    outcome: I finish the route with the works I came for
+  - id: clear-exhibit-queue
+    text: Clear the exhibit queue
+    context: When the special exhibition entry is busy
+    goal: enter timed or popular galleries without a long delay
+    outcome: I am in the exhibit without abandoning the visit

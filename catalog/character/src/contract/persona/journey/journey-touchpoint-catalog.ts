@@ -11,7 +11,7 @@ import {
   type PlaceFixtureFile,
   type PlaceZoneFile,
 } from './journey-touchpoint-catalog.schema.js';
-import type { KpiDefinition } from '../../situations/types/kpi-definition-wire.js';
+import type { KpiDefinition } from '@doppler-group/twinfile-context/types/kpi-definition-wire.js';
 
 function parseWithSchema<S extends ZodTypeAny>(
   schema: S,

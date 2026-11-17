@@ -1,0 +1,26 @@
+twinfile: 2
+kind: context
+id: harbor-crossing
+name: Harbor crossing
+version: 0.1.0
+stability: example
+links: []
+# When [Context/Circumstance], I want to [Goal/Job], so I can [Outcome/Need] without [Obstacle].
+label: Harbor crossing
+context: When I am making a dawn or day ferry run between docks and harbor
+jobs:
+  - id: cast-off-on-time
+    text: Cast off on time
+    context: When the dawn departure window is tight
+    goal: leave the dock with passengers and cargo secured
+    outcome: We are underway without missing the slot
+  - id: berth-safely
+    text: Berth safely
+    context: When we approach the harbor berth
+    goal: dock cleanly with clear gangway ownership
+    outcome: Passengers and goods move ashore without delay
+  - id: clear-apron
+    text: Clear the apron
+    context: When the apron is congested after arrival
+    goal: free the berth for the next vessel
+    outcome: The apron is clear and the next move can start

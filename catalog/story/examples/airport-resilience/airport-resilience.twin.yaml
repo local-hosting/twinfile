@@ -10,6 +10,8 @@ links:
     href: twinfile/place/airport:0.2.0
   - rel: involves
     href: twinfile/character/airport-liaison:0.1.0
+  - rel: involves
+    href: twinfile/context/air-travel:0.1.0
 story:
   pitch: Terminal shelter when severe weather closes the curb, then volcanic-ash advisory.
   scenes:

@@ -10,6 +10,8 @@ links:
     href: twinfile/place/mobility-hub:0.2.0
   - rel: involves
     href: twinfile/character/station-host:0.1.0
+  - rel: involves
+    href: twinfile/context/mobility-hub:0.1.0
 story:
   pitch: Post-hazard recovery staging across the King's Cross hub network.
   scenes:
