@@ -20,6 +20,12 @@ links:
     href: twinfile/resource/reefer-truck:0.1.0
   - rel: involves
     href: twinfile/resource/cold-parcel:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-pallet:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-temp-sensor:0.1.0
+  - rel: involves
+    href: twinfile/resource/cold-humidity-sensor:0.1.0
 story:
   pitch: Cold-room power outage at the hub, apron storm hold at the airport, then pier field-damage clearance at the port.
   scenes:
