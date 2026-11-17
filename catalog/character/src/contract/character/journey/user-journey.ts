@@ -1,5 +1,5 @@
 import type { CustomerCatalog } from '../people/customer/profile/customer.js';
-import type { JobDefinition, JtbdCatalog } from '@doppler-group/twinfile-context/catalog/jtbd.schema.js';
+import type { JtbdCatalog } from '@doppler-group/twinfile-context/catalog/jtbd.schema.js';
 import type { ObstacleCatalog } from '@doppler-group/twinfile-context/catalog/obstacles.schema.js';
 import type { TouchpointGraphSpec } from './touchpoints.schema.js';
 import type {

@@ -1,6 +1,6 @@
 import { buildEpisodeActivityCalendar, type BuildEpisodeActivityCalendarInput } from '../calendar/build-episode-activity-calendar.js';
 import type { EpisodeArcV1 } from '../types/episode-arc.js';
-import type { StoryTimelineDayWire, StoryTimelineHostWire } from './timeline-host-wire.js';
+import type { StoryTimelineHostWire } from './timeline-host-wire.js';
 import { simulationDateIso } from '../calendar/simulation-date.js';
 
 export type PlanEpisodeCalendarResult = {
