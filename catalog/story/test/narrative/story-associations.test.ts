@@ -8,7 +8,7 @@ import { storyboardStoryFixture } from './helpers/storyboard-story-fixture.js';
 const journey = {
   id: 'journey:fixture',
   label: 'Commute',
-  personaId: 'persona:rider',
+  characterId: 'persona:rider',
   phases: [
     {
       id: 'p1',

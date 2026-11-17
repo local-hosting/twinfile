@@ -1,5 +1,5 @@
 import {
-  resolveJourneyForPersona,
+  resolveJourneyForCharacter,
   type Journey,
   type Character,
 } from '@local-hosting/twinfile-character/character';
@@ -19,7 +19,7 @@ export function resolveJourneyFromCharacterContext(
 
   const focalCharacter = resolveCharacterForContext(context);
   if (focalCharacter) {
-    return resolveJourneyForPersona(focalCharacter, journeyId, context.focalCharacterId);
+    return resolveJourneyForCharacter(focalCharacter, journeyId, context.focalCharacterId);
   }
 
   return undefined;

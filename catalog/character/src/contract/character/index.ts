@@ -57,26 +57,26 @@ export {
 
 export { normalizeAXMIdentityInput, normalizeTouchpointInput } from './axm/normalize-identity-input.js';
 export { mergeHostContexts, normalizeHostContext } from './axm/normalize-host.js';
-export { PERSONA_DAILY_BLOCK_IDS } from './types/strategy/persona-daily-rhythm.js';
+export { CHARACTER_DAILY_BLOCK_IDS } from './types/strategy/persona-daily-rhythm.js';
 export {
   CREATIVE_LATE_WEEKDAY_DAILY_RHYTHM,
   DRIVER_WEEKDAY_DAILY_RHYTHM,
   URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM,
-} from './persona/persona-daily-rhythm-presets.js';
-export { resolvePersonaDailyRhythm } from './persona/resolve-persona-daily-rhythm.js';
-export { resolveCharacterPersonaDisplayName } from './persona/resolve-persona-display-name.js';
-export { pickPersonaDailyRhythmTemplate } from './persona/pick-persona-daily-rhythm-template.js';
+} from './persona/character-daily-rhythm-presets.js';
+export { resolveCharacterDailyRhythm } from './persona/resolve-character-daily-rhythm.js';
+export { resolveCharacterDisplayName } from './persona/resolve-character-display-name.js';
+export { pickCharacterDailyRhythmTemplate } from './persona/pick-character-daily-rhythm-template.js';
 export { adjustDailyRhythmForInstance } from './persona/adjust-daily-rhythm-for-instance.js';
 export {
   findDailyRhythmBlock,
   formatDailyRhythmClock,
-  samplePersonaDailyRhythm,
-} from './persona/sample-persona-daily-rhythm.js';
+  sampleCharacterDailyRhythm,
+} from './persona/sample-character-daily-rhythm.js';
 export {
-  allocateUniquePersonaId,
-  buildPersonaIdSlug,
-  slugifyPersonaToken,
-} from './persona/persona-instance-id.js';
+  allocateUniqueCharacterId,
+  buildCharacterIdSlug,
+  slugifyCharacterToken,
+} from './persona/character-instance-id.js';
 
 export {
   parsePsychographicAspectRef,

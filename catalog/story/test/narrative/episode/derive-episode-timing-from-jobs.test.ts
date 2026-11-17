@@ -5,7 +5,7 @@ const commuteJourney = {
   id: 'journey:rider-commute',
   journeyGoal: 'Arrive on time',
   label: 'Commute',
-  personaId: 'persona:rider',
+  characterId: 'persona:rider',
   phases: [
     {
       id: 'phase:plan',

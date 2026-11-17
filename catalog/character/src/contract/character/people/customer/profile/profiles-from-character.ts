@@ -32,7 +32,7 @@ export function psychographicSegmentProfileFromCharacter(
   return PsychographicSegmentProfileSchema.parse({
     id: segmentId,
     overview: character.overview,
-    exemplarPersonaId: character.persona.exemplar?.id,
+    exemplarCharacterId: character.persona.exemplar?.id,
     visitFrequency: character.visitFrequency,
     attitudes: wrap('attitudes', attitudes),
     behavior: wrap('behavior', character.behavior),

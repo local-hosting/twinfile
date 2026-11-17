@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import type { Character } from '../../../src/contract/character/types/character.js';
-import { findDailyRhythmBlock } from '../../../src/contract/character/persona/sample-persona-daily-rhythm.js';
-import { pickPersonaDailyRhythmTemplate } from '../../../src/contract/character/persona/pick-persona-daily-rhythm-template.js';
+import { findDailyRhythmBlock } from '../../../src/contract/character/persona/sample-character-daily-rhythm.js';
+import { pickCharacterDailyRhythmTemplate } from '../../../src/contract/character/persona/pick-character-daily-rhythm-template.js';
 import { pickCharacterInstanceCharacteristics } from '../../../src/contract/character/story/materialize-character-story-instance.js';
 import { resolveCharacterInstanceRandom } from '../../../src/contract/character/story/character-instance-rng.js';
-import { URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM } from '../../../src/contract/character/persona/persona-daily-rhythm-presets.js';
+import { URBAN_COMMUTER_WEEKDAY_DAILY_RHYTHM } from '../../../src/contract/character/persona/character-daily-rhythm-presets.js';
 
 function characterWithVariants(): Character {
   return {
@@ -55,12 +55,12 @@ function characterWithVariants(): Character {
   };
 }
 
-describe('pickPersonaDailyRhythmTemplate', () => {
+describe('pickCharacterDailyRhythmTemplate', () => {
   it('picks weighted variants by random', () => {
     const character = characterWithVariants();
-    const early = pickPersonaDailyRhythmTemplate(character, () => 0.1, 'weighted');
+    const early = pickCharacterDailyRhythmTemplate(character, () => 0.1, 'weighted');
     expect(early.variantId).toBe('rhythm:early');
-    const late = pickPersonaDailyRhythmTemplate(character, () => 0.9, 'weighted');
+    const late = pickCharacterDailyRhythmTemplate(character, () => 0.9, 'weighted');
     expect(late.variantId).toBe('rhythm:late');
   });
 });

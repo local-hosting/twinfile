@@ -25,7 +25,7 @@ const character: Character = {
     {
       id: 'journey:fixture',
       label: 'Fixture',
-      personaId: 'persona:rider',
+      characterId: 'persona:rider',
       phases: [
         {
           id: 'phase:a',

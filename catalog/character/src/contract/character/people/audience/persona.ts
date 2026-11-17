@@ -6,7 +6,7 @@ export function parsePersonaCatalog(input: unknown): PersonaCatalog {
 
 export function findPersonaProfile(
   catalog: PersonaCatalog | undefined,
-  personaId: string,
+  characterId: string,
 ): PersonaCatalog['personas'][number] | undefined {
-  return catalog?.personas.find((row) => row.id === personaId);
+  return catalog?.personas.find((row) => row.id === characterId);
 }

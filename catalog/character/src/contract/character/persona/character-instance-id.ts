@@ -1,6 +1,6 @@
 const MAX_SLUG_LENGTH = 80;
 
-export function slugifyPersonaToken(value: string): string {
+export function slugifyCharacterToken(value: string): string {
   const trimmed = value.trim().toLowerCase();
   if (!trimmed) {
     return '';
@@ -12,12 +12,12 @@ export function slugifyPersonaToken(value: string): string {
 }
 
 /** Build a project-local persona instance id slug from display name + segment/customer type. */
-export function buildPersonaIdSlug(input: {
+export function buildCharacterIdSlug(input: {
   name: string;
   customerTypeSlug: string;
 }): string {
-  const namePart = slugifyPersonaToken(input.name);
-  const typePart = slugifyPersonaToken(input.customerTypeSlug);
+  const namePart = slugifyCharacterToken(input.name);
+  const typePart = slugifyCharacterToken(input.customerTypeSlug);
   const parts = [namePart, typePart].filter(Boolean);
   const slug = parts.join('-');
   if (!slug) {
@@ -29,9 +29,9 @@ export function buildPersonaIdSlug(input: {
   return slug.slice(0, MAX_SLUG_LENGTH).replace(/-+$/g, '');
 }
 
-export function allocateUniquePersonaId(
+export function allocateUniqueCharacterId(
   baseSlug: string,
-  isTaken: (personaId: string) => boolean,
+  isTaken: (characterId: string) => boolean,
 ): string {
   const base = baseSlug.trim() || 'persona';
   if (!isTaken(base)) {

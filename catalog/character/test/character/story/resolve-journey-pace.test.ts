@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import {
   normalizeJourneyPaceId,
-  resolvePersonaJourneyPace,
+  resolveCharacterJourneyPace,
   resolvePlanningSegmentJourneyPace,
-  resolveSegmentJourneyPaceFromPersonas,
+  resolveSegmentJourneyPaceFromCharacters,
 } from '../../../src/contract/character/story/resolve-journey-pace.js';
 
 describe('resolve-journey-pace', () => {
   it('normalizes persona and planning segment pace', () => {
-    expect(resolvePersonaJourneyPace({ journeyPace: 'fast' })).toBe('fast');
+    expect(resolveCharacterJourneyPace({ journeyPace: 'fast' })).toBe('fast');
     expect(
       resolvePlanningSegmentJourneyPace({
         overview: { journeyPace: 'SLOW' },
@@ -18,7 +18,7 @@ describe('resolve-journey-pace', () => {
   });
 
   it('resolves pace from personas sharing a segment id', () => {
-    const pace = resolveSegmentJourneyPaceFromPersonas(
+    const pace = resolveSegmentJourneyPaceFromCharacters(
       [
         { segment: 'segment:commuter', journeyPace: 'medium' },
         { segment: 'segment:driver', journeyPace: 'fast' },

@@ -22,7 +22,7 @@ const character: Character = {
   journeys: [
     {
       id: 'journey:commute',
-      personaId: 'persona:rider',
+      characterId: 'persona:rider',
       label: 'Commute',
       phases: [
         {

@@ -1,5 +1,5 @@
 /** Canonical blocks in a weekday home/work rhythm template. */
-export const PERSONA_DAILY_BLOCK_IDS = [
+export const CHARACTER_DAILY_BLOCK_IDS = [
   'wake',
   'home_morning',
   'commute_out',
@@ -10,7 +10,7 @@ export const PERSONA_DAILY_BLOCK_IDS = [
   'sleep',
 ] as const;
 
-export type PersonaDailyBlockId = (typeof PERSONA_DAILY_BLOCK_IDS)[number];
+export type PersonaDailyBlockId = (typeof CHARACTER_DAILY_BLOCK_IDS)[number];
 
 export type PersonaDailyRhythmSetting = 'home' | 'work' | 'transit' | 'other';
 
@@ -30,7 +30,7 @@ export type PersonaDailyRhythmBlock = {
 
 /**
  * Persona-level weekday rhythm — authored on Character before instance materialization.
- * Hosts jitter blocks per story instance (see {@link samplePersonaDailyRhythm}).
+ * Hosts jitter blocks per story instance (see {@link sampleCharacterDailyRhythm}).
  */
 export type PersonaDailyRhythm = {
   specVersion: '1.0';

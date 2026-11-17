@@ -23,7 +23,7 @@ function rubricContext(): StoryJourneyContext {
       {
         id: 'journey:core',
         label: 'Core journey',
-        personaId: 'persona:commuter',
+        characterId: 'persona:commuter',
         journeyGoal: 'Get there',
         phases: [
           {

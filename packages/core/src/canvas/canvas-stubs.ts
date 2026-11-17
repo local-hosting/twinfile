@@ -20,7 +20,7 @@ export function canvasStubEntity(type: TwinPanel, id: string): Record<string, un
         cardTitle,
         mapSlug: id,
         orgStoryboardId: id,
-        personaId: '',
+        characterId: '',
         storyPitch: '',
         title: cardTitle,
       };

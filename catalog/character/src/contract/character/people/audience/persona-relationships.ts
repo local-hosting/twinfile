@@ -16,10 +16,10 @@ export interface PersonaRelationshipIssue {
 
 export function buildPersonaRelationshipGraph(persona: PersonaProfile): PersonaRelationshipGraph {
   const graph = {
-    personaId: persona.id,
+    characterId: persona.id,
     edges: persona.segmentAffinities.map((affinity) => ({
       kind: 'persona_segment_affinity' as const,
-      personaId: persona.id,
+      characterId: persona.id,
       segmentId: affinity.segmentId,
       weight: affinity.weight,
     })),

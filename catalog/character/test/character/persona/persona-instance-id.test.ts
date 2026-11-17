@@ -1,23 +1,23 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  allocateUniquePersonaId,
-  buildPersonaIdSlug,
-} from '../../../src/contract/character/persona/persona-instance-id.js';
-import { segmentIdFromPersonaSegment } from '../../../src/contract/character/persona/segment-id-from-persona.js';
+  allocateUniqueCharacterId,
+  buildCharacterIdSlug,
+} from '../../../src/contract/character/persona/character-instance-id.js';
+import { segmentIdFromCharacterSegment } from '../../../src/contract/character/persona/segment-id-from-character.js';
 
-describe('segmentIdFromPersonaSegment', () => {
+describe('segmentIdFromCharacterSegment', () => {
   it('normalizes segment refs', () => {
-    expect(segmentIdFromPersonaSegment('urban-commuter')).toBe('urban-commuter');
-    expect(segmentIdFromPersonaSegment('segment:urban-commuter')).toBe('urban-commuter');
-    expect(segmentIdFromPersonaSegment(undefined)).toBe('default');
+    expect(segmentIdFromCharacterSegment('urban-commuter')).toBe('urban-commuter');
+    expect(segmentIdFromCharacterSegment('segment:urban-commuter')).toBe('urban-commuter');
+    expect(segmentIdFromCharacterSegment(undefined)).toBe('default');
   });
 });
 
-describe('buildPersonaIdSlug', () => {
+describe('buildCharacterIdSlug', () => {
   it('joins name and customer type', () => {
     expect(
-      buildPersonaIdSlug({
+      buildCharacterIdSlug({
         name: 'Maya Chen',
         customerTypeSlug: 'urban-commuter',
       }),
@@ -25,10 +25,10 @@ describe('buildPersonaIdSlug', () => {
   });
 });
 
-describe('allocateUniquePersonaId', () => {
+describe('allocateUniqueCharacterId', () => {
   it('suffixes when base is taken', () => {
     const taken = new Set(['maya-commuter']);
-    expect(allocateUniquePersonaId('maya-commuter', (id) => taken.has(id))).toBe(
+    expect(allocateUniqueCharacterId('maya-commuter', (id) => taken.has(id))).toBe(
       'maya-commuter-2',
     );
   });

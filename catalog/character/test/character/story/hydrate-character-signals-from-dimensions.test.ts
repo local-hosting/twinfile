@@ -37,7 +37,7 @@ describe('hydrateCharacterSignalsFromDimensions', () => {
     expect(hydrated.signals).toHaveLength(1);
     expect(hydrated.signals?.[0]).toMatchObject({
       id: 'signal:tech-titans-attitude-tech-always-connected',
-      personaId: 'persona:tech-titans',
+      characterId: 'persona:tech-titans',
       value: 0.85,
       label: 'Always connected',
     });

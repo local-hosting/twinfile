@@ -109,9 +109,9 @@ type MentalModelBase = {
   purpose?: string;
   /**
    * Owning character id(s). When the model lives under `personas/<character>/mental-models/`,
-   * ownership is implied by the folder — `personaIds` may be omitted and is stamped on load.
+   * ownership is implied by the folder — `characterIds` may be omitted and is stamped on load.
    */
-  personaIds?: string[];
+  characterIds?: string[];
   jobGroups?: MentalModelJobGroup[];
   stacks: MentalModelStack[];
 };

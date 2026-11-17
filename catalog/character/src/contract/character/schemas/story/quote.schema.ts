@@ -14,7 +14,7 @@ export const ResearchQuoteSchema = z.preprocess(
   z.object({
     id: z.string().min(1),
     text: z.string().min(1),
-    personaId: z.string().min(1),
+    characterId: z.string().min(1),
     jobIds: TagListSchema.optional(),
     journeyId: z.string().min(1).optional(),
     phaseId: z.string().min(1).optional(),

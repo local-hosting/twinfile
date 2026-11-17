@@ -27,7 +27,7 @@ describe('buildStoryBrief', () => {
     const brief = buildStoryBrief({
       snapshot: {
         storyId: 'character-1',
-        personaId: 'character-1',
+        characterId: 'character-1',
         storyPitch: 'Explorer at Polaris.',
         who: { segmentId: 'early-adopter' },
         what: { storyId: 'story:episode:store-visit', startStoreVisitJourney: true },
@@ -37,7 +37,7 @@ describe('buildStoryBrief', () => {
       },
       character: {
         id: 'character-1',
-        personaId: 'character-1',
+        characterId: 'character-1',
         name: 'Jeanette Colon',
       },
     });

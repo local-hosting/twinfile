@@ -9,7 +9,7 @@ import { touchpointIndexFromIds } from '../../src/contract/narrative/types/touch
 const riderCommute = {
   id: 'journey:rider-commute',
   label: 'Rider morning commute',
-  personaId: 'persona:rider',
+  characterId: 'persona:rider',
   phases: [
     {
       id: 'phase:rider-plan',
