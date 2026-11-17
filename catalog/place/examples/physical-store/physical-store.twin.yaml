@@ -5,6 +5,9 @@ id: physical-store
 name: Example physical retail store
 version: 0.1.0
 stability: example
+geotype:
+  primary: shopping_mall
+  registry: "@doppler-group/geotypes@0.2.0"
 steps:
   - place:
       name: Example physical retail store

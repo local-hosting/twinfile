@@ -278,7 +278,10 @@ export type { PlaceWireJson } from './doc/place-wire.js';
 
 export type { GeotypeTwinfile } from './types/geotype-twinfile.js';
 export { parseGeotypeTwinfile } from './types/geotype-twinfile.js';
-export { checkGeotypeTwinfile } from './check/geotype-check.js';
+export {
+  checkGeotypeTwinfile,
+  type CheckGeotypeTwinfileOptions,
+} from './check/geotype-check.js';
 export {
   buildPlaceJsonLd,
   buildPlaceJsonLdFromTwinfile,

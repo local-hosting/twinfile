@@ -8,6 +8,8 @@ links:
   - rel: locatedIn
     href: twinfile/place/cold-chain:0.1.0
     anchor: packing-bay
+  - rel: locatedIn
+    href: twinfile/resource/cold-pallet:0.1.0
 resource:
   kind: parcel
   state: active
@@ -25,3 +27,4 @@ resource:
   ext:
     lat: 35.042
     lon: -89.9771
+

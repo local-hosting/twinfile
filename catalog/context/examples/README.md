@@ -22,6 +22,7 @@ Hierarchy on each job: **context** (situation) → **goal** (job/progress) → *
 | `watershed-monitor` | tennessee-river |
 | `aquarium-visit` | aquarium-conservation |
 | `museum-visit` | museum / gallery |
+| `school-visit` | school / campus |
 | `cold-chain-haul` | cold-chain logistics |
 | `field-worker` | field service |
 | `hospital-visit` | hospital |

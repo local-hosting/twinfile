@@ -1,0 +1,25 @@
+twinfile: 2
+kind: resource
+id: classroom-kiosk
+name: Classroom kiosk
+version: 0.1.0
+stability: example
+links:
+  - rel: locatedIn
+    href: twinfile/place/school:0.1.0
+    anchor: main-lobby
+resource:
+  kind: kiosk
+  state: active
+  dtpr:
+    schema: dtpr@2026-09-01-beta
+    type: device
+    accountable: example-school
+    elements:
+      purpose:
+        - wayfinding
+        - commerce
+      manifestation:
+        - chatbot_voice_reply
+      affected:
+        - people

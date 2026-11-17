@@ -6,7 +6,7 @@ name: Urban Services Building
 version: 0.1.0
 stability: example
 geotype:
-  primary: town_hall
+  primary: city_hall
   registry: "@doppler-group/geotypes@0.2.0"
 steps:
   - place:

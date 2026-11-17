@@ -1,0 +1,151 @@
+from: twinfile/base-campus:0.1.0
+twinfile: 2
+kind: place
+id: school
+name: Bronx High School of Science
+version: 0.1.0
+stability: example
+geotype:
+  primary: high_school
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Bronx High School of Science
+      kind: school
+      timezone: America/New_York
+      published: false
+      ext:
+        lat: 40.8779
+        lon: -73.8907
+        h3: 892a100121bffff
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: main-lobby
+        name: Main lobby
+        kind: lobby
+        level: ground
+        exposure: indoor
+        capacity: 400
+        roles:
+          - ground-transport
+          - shelter
+      - id: classroom-wing
+        name: Classroom wing
+        kind: classroom
+        level: ground
+        exposure: indoor
+        capacity: 600
+        roles:
+          - shelter
+      - id: gymnasium
+        name: Gymnasium
+        kind: gym
+        level: ground
+        exposure: indoor
+        capacity: 500
+        roles:
+          - shelter
+          - alternative
+      - id: courtyard
+        name: Courtyard
+        kind: plaza
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+  - openings:
+      - id: door-main
+        kind: door
+        connects:
+          - main-lobby
+          - courtyard
+        width_m: 3.5
+        state: open
+        roles:
+          - exit
+      - id: door-class
+        kind: door
+        connects:
+          - main-lobby
+          - classroom-wing
+        width_m: 2.5
+        state: open
+        roles:
+          - exit
+      - id: door-gym
+        kind: door
+        connects:
+          - main-lobby
+          - gymnasium
+        width_m: 3
+        state: open
+        roles:
+          - exit
+  - markers:
+      - id: attendance-desk
+        name: Attendance desk
+        roles:
+          - hotspot
+        state: open
+      - id: step-free-entry
+        name: Step-free entry
+        roles:
+          - safe-access
+        step_free: true
+        state: open
+  - stations:
+      - id: campus-survey
+        name: Campus survey post
+        roles:
+          - survey-station
+  - routes:
+      - id: lobby-to-class
+        name: Lobby to classroom wing
+        from: main-lobby
+        to: classroom-wing
+        length_m: 50
+        kind: corridor
+        step_free: true
+      - id: lobby-to-gym
+        name: Lobby to gymnasium
+        from: main-lobby
+        to: gymnasium
+        length_m: 40
+        kind: corridor
+        step_free: true
+  - visits:
+      - id: visit-lobby
+        kind: activity
+        name: Lobby check-in
+        space: main-lobby
+        order: 0
+      - id: visit-class
+        kind: activity
+        name: Classroom period
+        space: classroom-wing
+        order: 1
+      - id: visit-gym
+        kind: activity
+        name: Gym assembly
+        space: gymnasium
+        order: 2
+  - bind:
+      for: severe-weather
+      roles:
+        shelter:
+          - main-lobby
+          - classroom-wing
+          - gymnasium
+        outdoor:
+          - courtyard
+        survey-station:
+          - campus-survey
+      actions:
+        - at: warning
+          set:
+            courtyard:
+              state: closed

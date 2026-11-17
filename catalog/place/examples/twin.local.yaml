@@ -9,6 +9,7 @@ refs:
   twinfile/park:0.3.0: park
   twinfile/museum:0.1.0: museum
   twinfile/aquarium:0.1.0: aquarium
+  twinfile/school:0.1.0: school
   twinfile/mobility-hub:0.1.0: mobility-hub/programme
   twinfile/mobility-hub:0.2.0: mobility-hub
   twinfile/arena:1.2.0: arena
