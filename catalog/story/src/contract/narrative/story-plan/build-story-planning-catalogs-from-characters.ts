@@ -11,6 +11,35 @@ import type {
   StoryPlanningCatalogsFromCharactersV1,
 } from '../types/story-planning-catalog-slices.js';
 
+function priorityJobIdsForCharacterFromContexts(
+  personaId: string,
+  contexts: readonly JobContextModel[],
+): string[] {
+  const id = personaId.trim();
+  if (!id) {
+    return [];
+  }
+  const keys = new Set([
+    id,
+    id.replace(/^persona:/, 'character:'),
+    id.replace(/^character:/, 'persona:'),
+  ]);
+  const jobIds: string[] = [];
+  for (const model of contexts) {
+    const contextKey = model.id.replace(/^context:/, '').trim();
+    if (!keys.has(contextKey)) {
+      continue;
+    }
+    for (const job of model.jobs ?? []) {
+      const jobId = job.id.trim();
+      if (jobId) {
+        jobIds.push(jobId);
+      }
+    }
+  }
+  return [...new Set(jobIds)];
+}
+
 function storyJourneyRefsFromCharacters(characters: readonly Character[]): StoryJourneyRefV1[] {
   const seen = new Set<string>();
   const refs: StoryJourneyRefV1[] = [];
@@ -104,7 +133,7 @@ export function buildStoryPlanningCatalogsFromCharacters(
           weight: 'share' in persona && typeof persona.share === 'number' ? persona.share : 1,
         },
       ],
-      priorityJobIds: [...(persona.jobIds ?? [])].filter((id) => id.trim().length > 0),
+      priorityJobIds: priorityJobIdsForCharacterFromContexts(persona.id, contexts),
     })),
   };
 
