@@ -158,6 +158,28 @@ You do **not** need extra archetype steps for indoor and outdoor on one site —
 
 Golden examples: [`examples/expo`](../../../../catalog/place/examples/expo/) (**campus** with indoor and outdoor spaces), [`examples/shop`](../../../../catalog/place/examples/shop/) (**indoor_stack** mall story).
 
+## CMS / multi-pavilion catalogs (World Expo)
+
+When a CMS lists **many** pavilions, plazas, and parks on one fairground (e.g. Contentful World Expo `place` entries), Twinfile still models **one campus place**, not one published place twin per CMS row.
+
+| CMS / map object | Twinfile | Base / archetype | Notes |
+| --- | --- | --- | --- |
+| Fairground / Expo City site | One **`kind: place`** unit | `from: twinfile/base-campus`, `archetype: campus`, `geotype.primary: theme_park` | Site needs **`ext` lat/lon** (or footprint). Catalog: [`examples/expo`](../../../../catalog/place/examples/expo/). |
+| District / thematic precinct | **`spaces[]`** row | `kind: district`, usually `exposure: covered` | Taxonomy only — **not** a place twin. Roll up pavilions with **`parent`**. |
+| Country / thematic pavilion | **`spaces[]`** zone, published unit, **or** `copy: ./parts/<slug>` | Zone: `kind: pavilion`, `exposure: indoor`, `roles: [shelter]`. Published pin: **`from: twinfile/place/pavilion:0.1.0`** ([`examples/pavilion`](../../../../catalog/place/examples/pavilion/)). Part: `from: twinfile/base-indoor-stack` into a site anchor. | Prefer **spaces** at zone grain on the campus; use the pavilion example when the overlay publishes one unit per CMS pavilion. |
+| Metro / gate arrival (standalone) | Published unit | **`from: twinfile/place/transit-arrival:0.1.0`** ([`examples/transit-arrival`](../../../../catalog/place/examples/transit-arrival/)) | Campus can still keep arrival as a **`kind: transit`** space (see expo `metro-arrival`). |
+| Plaza, park, outdoor stage | **`spaces[]`** | `kind: plaza` \| `park` \| `stage`; `exposure: outdoor` or `covered`; parks/stages often `roles: [outdoor]` | Parks alone can also be a separate **`open_area`** unit when the scenario is park-only. |
+| Metro / arrival (on campus) | **`spaces[]`** | `kind: transit`, `roles: [ground-transport]` | Wire **`openings`** / **`routes`** to plazas and districts. Standalone pin: see transit-arrival row above. |
+| Linear trail / spine | Optional separate unit **or** sequenced spaces | `archetype: linear` / `from: twinfile/base-linear` when the story is the path | Else keep as outdoor `spaces` + `routes` on the campus. |
+| CMS `location` | **`place.ext`** or **`spaces[].ext`** | `lat` / `lon` (optional `h3`) | Geometry refs remain optional. |
+| CMS slug / entry id | Stable **`spaces[].id`** (+ `ext.contentful`) | Id MUST match `^[a-z0-9][a-z0-9-]{0,62}$` | Prefer CMS **slug**; stash entry id under `ext.contentful`. |
+
+**Campus site** stays one unit (`expo`). Nested `parts/` are **build stages** (unpublished) unless promoted ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). **Overlay packs** (e.g. `expo-twinfile`) MAY publish one place unit per CMS pavilion with **`from: twinfile/place/pavilion`**, parks with **`from: twinfile/place/park`**, and arrivals with **`from: twinfile/place/transit-arrival`**, linking back to the campus via `links` / `ext.contentful` — same pattern as sensor overlays on `wireless-sensor`.
+
+**Geotype pin:** there is no dedicated `pavilion` / `exhibition` slug today — keep the **site** on **`theme_park`** (campus). Pavilion **buildings** set `place.kind: pavilion` on the nested twin (or `spaces[].kind: pavilion` on the site); override archetype only when modeling one pin in isolation (`single_level` / `indoor_stack`).
+
+**Space kind vocabulary** used by the expo golden (open string; not a closed enum): `transit`, `plaza`, `district`, `pavilion`, `park`, `stage`, `hall`. See [Layout navigation](layout-navigation.md#expo-space-kinds).
+
 **Customize by combining catalog elements** (bases, events, assets): [Decorate a twin](decorate-twin.md).
 
 ## Inspect the stack

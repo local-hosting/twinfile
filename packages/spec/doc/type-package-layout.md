@@ -40,7 +40,7 @@ catalog/<type>/
 npm subpaths (stable):
 
 - `@doppler-group/twinfile-<type>/module` → `catalog/<type>/src/twin-module.ts`
-- `@doppler-group/twinfile-character/persona` → `catalog/character/src/contract/persona/` (legacy subpath name)
+- `@doppler-group/twinfile-character/character` → `catalog/character/src/contract/character/` (legacy subpath name)
 - `@doppler-group/twinfile-context` → `catalog/context/src/contract/`
 - `@doppler-group/twinfile-story/narrative` → `catalog/story/src/contract/narrative/` (legacy subpath name)
 

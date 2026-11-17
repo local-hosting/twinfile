@@ -1,5 +1,6 @@
 ## Unreleased
 
+- **Character:** body field **`character.kind`**: `narrative` \| `persona` (fictional cast/NPC vs visitor/staff archetype; both stay `disclosure.synthetic`) — [character-story](doc/kinds/character-story.md), `twinfile.schema.json` `$defs/characterBody`
 - **Breaking (draft):** [RFC 0009](rfcs/0009-dockerfile-model/index.md) — v2 place **`steps:`** deterministic image build; [RFC 0007](rfcs/0007-patch-graph.md) **`processors:`** / **`outlets:`** wiring; **`twin fmt`** drops legacy `patches:`, `patch:`, and split `inputs`/`outputs`/`connections`
 - **Simulator catalog (`simulator/`)** — shared **situation** units and hazard **mixins** moved out of `examples/` into **`@doppler-group/twinfile-simulator`**; place demos and non-hazard mixins stay under `examples/`. Tooling and CI set **`TF_SIMULATOR_ROOT`** alongside **`TF_EXAMPLES_ROOT`**; `@doppler-group/twinfile-core` merges `examples/twin.local.yaml` + `simulator/twin.local.yaml` and resolves situation refs from the simulator tree ([`simulator/README.md`](../simulator/README.md))
 - **`twin init place --geotype`** and strict checks load situations from the simulator catalog; plan `for:` names resolve via unversioned `twinfile/<situation>` refs

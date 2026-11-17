@@ -12,6 +12,7 @@ links:
   - rel: involves
     href: twinfile/place/wireless-mobile:0.1.0
 character:
+  kind: persona
   role: visitor
   segment: spec-forward
   exemplar:

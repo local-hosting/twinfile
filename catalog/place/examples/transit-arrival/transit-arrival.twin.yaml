@@ -1,0 +1,60 @@
+from: twinfile/base-single-level:0.1.0
+twinfile: 2
+kind: place
+id: transit-arrival
+name: Example transit arrival
+version: 0.1.0
+stability: example
+geotype:
+  primary: subway_station
+  registry: "@doppler-group/geotypes@0.2.0"
+steps:
+  - place:
+      name: Example transit arrival
+      kind: transit
+      timezone: UTC
+      published: false
+      ext:
+        lat: 24.9607
+        lon: 55.1509
+  - levels:
+      - id: ground
+        name: Ground
+        ordinal: 0
+  - spaces:
+      - id: arrival-concourse
+        name: Arrival concourse
+        kind: transit
+        level: ground
+        exposure: covered
+        roles:
+          - ground-transport
+      - id: curb
+        name: Curb and drop-off
+        kind: curb
+        level: ground
+        exposure: outdoor
+        roles:
+          - outdoor
+          - ground-transport
+  - openings:
+      - id: gate-concourse-curb
+        kind: gate
+        connects:
+          - arrival-concourse
+          - curb
+        width_m: 8
+        state: open
+        roles:
+          - exit
+  - visits:
+      - id: visit-arrive
+        kind: arrival
+        name: Arrive at concourse
+        space: arrival-concourse
+        order: 0
+      - id: visit-curb
+        kind: exit
+        name: Exit to curb
+        space: curb
+        order: 1

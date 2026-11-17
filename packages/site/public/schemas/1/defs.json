@@ -8,17 +8,10 @@
     },
     "mergeDeletePatch": {
       "type": "object",
-      "required": [
-        "id",
-        "$delete"
-      ],
+      "required": ["id", "$delete"],
       "properties": {
-        "id": {
-          "$ref": "#/$defs/twinId"
-        },
-        "$delete": {
-          "const": true
-        }
+        "id": { "$ref": "#/$defs/twinId" },
+        "$delete": { "const": true }
       },
       "additionalProperties": false
     },
@@ -28,55 +21,37 @@
     },
     "stability": {
       "type": "string",
-      "enum": [
-        "stable",
-        "example"
-      ]
+      "enum": ["stable", "example"]
+    },
+    "twinTag": {
+      "type": "string",
+      "description": "Namespaced programme/interest tag: <ns>:<slug> (e.g. theme:climate-bio). Not JTBD context; not place roles[].",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,31}:[a-z0-9][a-z0-9-]{0,62}$"
     },
     "twinfileHead": {
       "type": "object",
-      "required": [
-        "twinfile",
-        "kind",
-        "id",
-        "version",
-        "stability"
-      ],
+      "required": ["twinfile", "kind", "id", "version", "stability"],
       "properties": {
-        "twinfile": {
-          "enum": [
-            1,
-            2
-          ]
-        },
-        "kind": {
-          "type": "string"
-        },
-        "id": {
-          "$ref": "#/$defs/twinId"
-        },
-        "name": {
-          "type": "string",
-          "minLength": 1
-        },
-        "version": {
-          "$ref": "#/$defs/semver"
-        },
-        "stability": {
-          "$ref": "#/$defs/stability"
-        },
+        "twinfile": { "enum": [1, 2] },
+        "kind": { "type": "string" },
+        "id": { "$ref": "#/$defs/twinId" },
+        "name": { "type": "string", "minLength": 1 },
+        "version": { "$ref": "#/$defs/semver" },
+        "stability": { "$ref": "#/$defs/stability" },
         "domains": {
           "type": "array",
-          "items": {
-            "type": "string"
-          }
+          "items": { "type": "string" }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Optional programme/interest tags on any twin kind. Prefixed ns:slug. Distinct from kind: context (JTBD) and place roles[].",
+          "items": { "$ref": "#/$defs/twinTag" },
+          "uniqueItems": true
         },
         "catalog": {
           "type": "object",
           "properties": {
-            "parent": {
-              "$ref": "#/$defs/twinfileRef"
-            }
+            "parent": { "$ref": "#/$defs/twinfileRef" }
           },
           "additionalProperties": false
         }
@@ -85,9 +60,7 @@
     },
     "geotypeTwinfile": {
       "type": "object",
-      "required": [
-        "primary"
-      ],
+      "required": ["primary"],
       "properties": {
         "primary": {
           "type": "string",
@@ -103,10 +76,7 @@
     },
     "expectsRole": {
       "type": "object",
-      "required": [
-        "kind",
-        "min"
-      ],
+      "required": ["kind", "min"],
       "properties": {
         "kind": {
           "type": "string",
@@ -122,10 +92,7 @@
             "station"
           ]
         },
-        "min": {
-          "type": "integer",
-          "minimum": 0
-        }
+        "min": { "type": "integer", "minimum": 0 }
       },
       "additionalProperties": false
     },
@@ -137,26 +104,9 @@
       "type": "object",
       "minProperties": 1,
       "properties": {
-        "extent": {
-          "enum": [
-            "footprint",
-            "site",
-            "area",
-            "route"
-          ]
-        },
-        "vertical": {
-          "enum": [
-            "flat",
-            "stacked"
-          ]
-        },
-        "movement": {
-          "enum": [
-            "free",
-            "sequenced"
-          ]
-        }
+        "extent": { "enum": ["footprint", "site", "area", "route"] },
+        "vertical": { "enum": ["flat", "stacked"] },
+        "movement": { "enum": ["free", "sequenced"] }
       },
       "additionalProperties": false
     },
@@ -171,68 +121,37 @@
     },
     "clock": {
       "type": "object",
-      "required": [
-        "starts_at",
-        "duration",
-        "step"
-      ],
+      "required": ["starts_at", "duration", "step"],
       "properties": {
         "starts_at": {
           "type": "string",
           "format": "date-time",
           "description": "RFC 3339 instant with an explicit offset; t = 0 for the run"
         },
-        "duration": {
-          "$ref": "#/$defs/isoDuration"
-        },
-        "step": {
-          "$ref": "#/$defs/isoDuration"
-        }
+        "duration": { "$ref": "#/$defs/isoDuration" },
+        "step": { "$ref": "#/$defs/isoDuration" }
       },
       "additionalProperties": false
     },
     "location": {
       "type": "object",
-      "required": [
-        "lat",
-        "lng"
-      ],
+      "required": ["lat", "lng"],
       "properties": {
-        "lat": {
-          "type": "number",
-          "minimum": -90,
-          "maximum": 90
-        },
-        "lng": {
-          "type": "number",
-          "minimum": -180,
-          "maximum": 180
-        }
+        "lat": { "type": "number", "minimum": -90, "maximum": 90 },
+        "lng": { "type": "number", "minimum": -180, "maximum": 180 }
       },
       "additionalProperties": false
     },
     "argDef": {
       "type": "object",
-      "required": [
-        "type"
-      ],
+      "required": ["type"],
       "properties": {
         "type": {
           "type": "string",
-          "enum": [
-            "integer",
-            "number",
-            "string",
-            "boolean",
-            "duration",
-            "time",
-            "enum"
-          ]
+          "enum": ["integer", "number", "string", "boolean", "duration", "time", "enum"]
         },
         "default": {},
-        "enum": {
-          "type": "array"
-        }
+        "enum": { "type": "array" }
       },
       "additionalProperties": false
     },
@@ -267,9 +186,7 @@
     "mergedPlace": {
       "type": "object",
       "description": "Merged place/ YAML collections keyed by collection name (`Place.data`; wire field `place` on `twin://place`).",
-      "propertyNames": {
-        "$ref": "#/$defs/placeLayerCollectionKey"
-      },
+      "propertyNames": { "$ref": "#/$defs/placeLayerCollectionKey" },
       "additionalProperties": true
     }
   }

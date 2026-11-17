@@ -23,6 +23,11 @@
       "type": "string",
       "enum": ["stable", "example"]
     },
+    "twinTag": {
+      "type": "string",
+      "description": "Namespaced programme/interest tag: <ns>:<slug> (e.g. theme:climate-bio). Not JTBD context; not place roles[].",
+      "pattern": "^[a-z0-9][a-z0-9-]{0,31}:[a-z0-9][a-z0-9-]{0,62}$"
+    },
     "twinfileHead": {
       "type": "object",
       "required": ["twinfile", "kind", "id", "version", "stability"],
@@ -36,6 +41,12 @@
         "domains": {
           "type": "array",
           "items": { "type": "string" }
+        },
+        "tags": {
+          "type": "array",
+          "description": "Optional programme/interest tags on any twin kind. Prefixed ns:slug. Distinct from kind: context (JTBD) and place roles[].",
+          "items": { "$ref": "#/$defs/twinTag" },
+          "uniqueItems": true
         },
         "catalog": {
           "type": "object",

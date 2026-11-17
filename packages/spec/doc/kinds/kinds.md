@@ -6,10 +6,12 @@ Twinfile hosts **six published twin types**: **place**, **resource**, **characte
 | --- | --- | --- | --- |
 | **place** | `place` | [`place-wire.schema.json`](../../schemas/1/run/place-wire.schema.json) | Spatial twin |
 | **resource** | `resource` | [`res-wire.schema.json`](../../schemas/1/run/res-wire.schema.json) | Equipment, material, product |
-| **character** | `character` | [Character / story contracts](character-story.md) | **`disclosure:`** required — who they are |
+| **character** | `character` | [Character / story contracts](character-story.md) | **`disclosure:`** required; body **`character.kind`**: `narrative` \| `persona` |
 | **context** | `context` | [JTBD context](jtbd-context.md) | When [Context], I want to [Goal], so I can [Outcome] without [Obstacle]; story blesses character |
 | **story** | `story` | Narrative JSON | Planned process — **input to the player** ([story-and-player.md](story-and-player.md)) |
 | **event** | `event` | Event unit (`phases`, `expects`) | Timed occurrence a place hosts — [natural-hazards.md](natural-hazards.md), [`catalog/event/`](../../../../catalog/event/) |
+
+Any twin head MAY carry optional **`tags: []`** — namespaced `ns:slug` programme/interest labels (e.g. `theme:water`). That is **not** JTBD (`kind: context`) and **not** place **`roles[]`** event hooks. See [glossary — Twin head](../glossary.md#twin-head-all-types).
 
 **Runs are not twins.** Executable runs are inline **`run:`** blocks on **`story.scenes[]`** (`steps:`, `clock:`, `args:`), addressed as `<story-dir>#<scene-id>`. Optional **`use.runner`** is offline-only. Hosts pass **`twinfile/story/<id>:<ver>`** to the player; the player walks **`story.scenes`** and loads scene runs.
 

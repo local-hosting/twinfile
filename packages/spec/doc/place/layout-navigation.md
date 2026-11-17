@@ -45,9 +45,25 @@ Declare the default grain on the place, then add finer layers that **patch** the
 | **Floor** | `zone` or `room` | `indoor_stack` | Per-level concourses, piers | **Required** id from `levels.yaml` |
 | **Room** | `room` | `indoor_stack` | Gates, shops, galleries, shelters | **Required** |
 
-**Expo (example):** [`examples/expo`](../../../../catalog/place/examples/expo/) — `archetype: campus`, `space_granularity: zone`, **`visits.yaml`** for tour overview, **`exposure`** on each space; pavilion **interiors** are separate indoor spaces linked by **`openings`**. See [`places/expo/README.md`](../../../../catalog/place/examples/expo/README.md).
+**Expo (example):** [`examples/expo`](../../../../catalog/place/examples/expo/) — `archetype: campus`, `space_granularity: zone`, **`visits.yaml`** for tour overview, **`exposure`** on each space; pavilion **interiors** are separate indoor spaces linked by **`openings`**. See [`places/expo/README.md`](../../../../catalog/place/examples/expo/README.md). Generating many CMS pavilion rows onto that campus: [Place recipe — CMS / multi-pavilion](place-recipe.md#cms--multi-pavilion-catalogs-world-expo).
 
 **Airport (example):** [`examples/airport`](../../../../catalog/place/examples/airport/) — today mostly **site-tier** spaces (`terminal-a`, curb, airside); **`levels`** (`ground` / `airside`) foreshadow floor/airside split. Room-tier detail would arrive in **additional place layers** (below), not a new `kind`.
+
+### Expo space kinds
+
+`spaces[].kind` is an open string. Expo / World Expo authoring SHOULD reuse these hints so agents and overlays stay aligned with the golden campus:
+
+| `kind` | Typical `exposure` | Typical `roles` | CMS / map cue |
+| --- | --- | --- | --- |
+| `district` | `covered` | `alternative` (transit plans) | Thematic precinct / Contentful `district` |
+| `pavilion` | `indoor` | `shelter` | Country or thematic pavilion |
+| `hall` | `indoor` | `shelter` | Gallery / auditorium inside a pavilion |
+| `plaza` | `covered` or `outdoor` | `ground-transport` when it is the arrival hub | Al Wasl–style plaza |
+| `park` | `outdoor` | `outdoor` | Jubilee / Al Forsan–style park |
+| `stage` | `outdoor` | `outdoor` | Outdoor performance apron |
+| `transit` | `covered` | `ground-transport` | Metro / gate arrival |
+
+Ids for CMS-backed rows SHOULD equal the CMS **slug** when it already matches the twin id regex.
 
 ## Layer files: coarse first, detail later
 

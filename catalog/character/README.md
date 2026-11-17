@@ -12,4 +12,4 @@ src/
 # character YAML libs → catalog/character/libs/{audience,journey,psychology}/
 ```
 
-Import **`@doppler-group/twinfile-character/persona`**. JTBD lives on **`@doppler-group/twinfile-context`** (story blesses character × context). **`disclosure:`** required on published characters.
+Import **`@doppler-group/twinfile-character/character`**. JTBD lives on **`@doppler-group/twinfile-context`** (story blesses character × context). **`disclosure:`** required on published characters.
