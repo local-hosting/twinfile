@@ -20,7 +20,7 @@ describe('formatStoryDirectorNarrative', () => {
         characterId: 'rider-urban-commuter-3',
         storyPitch: 'A rider threads the city from home to destination.',
         who: { characterId: 'persona:rider', displayName: 'Maya' },
-        what: { storyId: 'story:episode:rider-commute' },
+        what: { storyId: 'story:rider-commute' },
         when: {
           simulationEpochStart: '2026-01-06',
           planningHorizonDays: 56,

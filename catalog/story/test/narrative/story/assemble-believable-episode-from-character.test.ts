@@ -40,7 +40,7 @@ const character: Character = {
 
 const story: Story = {
   version: 1,
-  id: 'story:episode:commute',
+  id: 'story:commute',
   revision: 1,
   title: 'Commute episode',
   binding: {
@@ -106,7 +106,7 @@ describe('assembleBelievableEpisodeFromCharacter', () => {
       simulationEpochStart: '2026-03-01',
       scenario: 'morning commute',
     });
-    expect(result.assembly.storyId).toBe('story:episode:commute');
+    expect(result.assembly.storyId).toBe('story:commute');
     expect(result.assembly.rankedJobIds).toContain('job:commute');
     expect(result.dimensions.when.storyArc).toBeDefined();
   });

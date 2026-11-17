@@ -10,7 +10,7 @@ describe('StoryDimensionsSchema', () => {
     const parsed = parseStoryDimensions({
       specVersion: '1.0',
       who: { characterId: 'persona:rider', characterIds: ['persona:rider'] },
-      what: { storyId: 'story:episode:commute' },
+      what: { storyId: 'story:commute' },
       where: { placeRefs: ['twinfile/place/home:0.0.0'], primaryPlaceRef: 'twinfile/place/home:0.0.0' },
       when: {
         simulationEpochStart: '2026-01-06',

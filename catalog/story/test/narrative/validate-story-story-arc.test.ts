@@ -16,7 +16,7 @@ const baseSceneboard = {
 describe('validateStoryNarrativeStoryArc', () => {
   it('accepts a shortened man_in_a_hole rail (exposition → denouement)', () => {
     const story = parseStory({
-      id: 'story:episode:driver-offer',
+      id: 'story:driver-offer',
       title: 'Offer',
       revision: 1,
       ...baseSceneboard,
@@ -56,7 +56,7 @@ describe('validateStoryNarrativeStoryArc', () => {
 
   it('rejects scenes that regress on the beat rail', () => {
     const story = parseStory({
-      id: 'story:episode:bad',
+      id: 'story:bad',
       title: 'Bad',
       revision: 1,
       ...baseSceneboard,
@@ -99,7 +99,7 @@ describe('validateStoryNarrativeStoryArc', () => {
 
   it('requires every arc beat to have at least one scene', () => {
     const story = parseStory({
-      id: 'story:episode:gap',
+      id: 'story:gap',
       title: 'Gap',
       revision: 1,
       ...baseSceneboard,

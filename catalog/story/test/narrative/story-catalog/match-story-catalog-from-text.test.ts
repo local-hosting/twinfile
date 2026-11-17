@@ -9,12 +9,12 @@ const menu: StoryCatalogMenuV1 = {
   ],
   stories: [
     {
-      id: 'story:episode:rider-commute',
+      id: 'story:rider-commute',
       title: 'Rider commute episode',
       focalCharacterId: 'persona:rider',
     },
     {
-      id: 'story:episode:driver-offer',
+      id: 'story:driver-offer',
       title: 'Driver offer episode',
       focalCharacterId: 'persona:driver',
     },
@@ -32,7 +32,7 @@ describe('matchStoryCatalogIdsFromText', () => {
       menu,
     });
     expect(hints.characterId).toBe('persona:rider');
-    expect(hints.storyId).toBe('story:episode:rider-commute');
+    expect(hints.storyId).toBe('story:rider-commute');
     expect(hints.placeRef).toBeUndefined();
   });
 
@@ -52,7 +52,7 @@ describe('matchStoryCatalogIdsFromText', () => {
       focalCharacterId: 'persona:driver',
     });
     expect(hints.characterId).toBe('persona:driver');
-    expect(hints.storyId).toBe('story:episode:driver-offer');
+    expect(hints.storyId).toBe('story:driver-offer');
   });
 
   it('matches airport place when airport is mentioned and place matching enabled', () => {
