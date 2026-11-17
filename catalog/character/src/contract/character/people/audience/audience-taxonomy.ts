@@ -5,7 +5,6 @@ import {
   type AudienceConceptKind,
   type AudienceConceptMapEntry,
   type SegmentTouchpointAffinities,
-  type TouchpointSegmentPreference,
   type TouchpointSegmentPreferences,
 } from '../audience/audience-taxonomy.schema.js';
 import type { UserAspectId } from './method-aspect-refs.js';
