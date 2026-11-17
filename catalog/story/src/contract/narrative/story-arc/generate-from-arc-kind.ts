@@ -118,7 +118,7 @@ export function generateStoryEpisodeFromArc(
 ): GeneratedStoryEpisodeDraft {
   const arcTemplate = buildStoryArcTemplateFromKind({
     kind: input.kind,
-    id: `arc:${input.storyId.replace(/^story:episode:/, '')}`,
+    id: `arc:${input.storyId.replace(/^story:/, '')}`,
     label: input.title,
   });
 

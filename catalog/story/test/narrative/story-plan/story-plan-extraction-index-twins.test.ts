@@ -51,7 +51,7 @@ describe('enrichStoryPlanExtractionIndexFromProjectTwins', () => {
       focusAreaIds: [],
       journeyIds: [],
       characterIds: ['persona:rider'],
-      storyIds: ['story:episode:rider'],
+      storyIds: ['story:rider'],
       jobIds: [],
       fleetPlaces: [],
       touchpointCount: 0,
@@ -60,7 +60,7 @@ describe('enrichStoryPlanExtractionIndexFromProjectTwins', () => {
         characters: [{ characterId: 'persona:rider', label: 'Rider', journeyIds: ['journey:commute'] }],
         stories: [
           {
-            id: 'story:episode:rider',
+            id: 'story:rider',
             title: 'Commute',
             focalCharacterId: 'persona:rider',
           },

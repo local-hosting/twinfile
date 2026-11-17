@@ -104,7 +104,7 @@ export function matchStoryCatalogIdsFromText(input: {
     scenario,
     storyPool.map((row) => ({
       id: row.id,
-      labels: [row.id, row.title, row.id.replace(/^story:episode:/, '')],
+      labels: [row.id, row.title, row.id.replace(/^story:/, '')],
     })),
     0.15,
   );

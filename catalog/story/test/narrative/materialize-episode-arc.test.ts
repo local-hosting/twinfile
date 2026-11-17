@@ -58,7 +58,7 @@ describe('episode arc from Story scenes', () => {
 
   it('compileStory fills episodeArc from storyboard scenes', () => {
     const story = parseStory({
-      id: 'story:episode:rider-commute-1',
+      id: 'story:rider-commute-1',
       title: 'Commute run',
       revision: 1,
       characters: [{ characterId: 'persona:rider', primary: true }],
