@@ -163,6 +163,10 @@ export {
   touchpointIndexFromCatalog,
 } from './touchpoint/touchpoint-catalog.js';
 export {
+  touchpointGraphToStoryWire,
+  type TouchpointGraphWireInput,
+} from './touchpoint/touchpoint-graph-to-wire.js';
+export {
   listSceneTouchpointRefs,
   resolveTouchpointDefinition,
   resolveTouchpointPlaceAtScene,
@@ -242,6 +246,13 @@ export {
   buildStoryCatalogMenu,
   storyCatalogMenuHasStories,
 } from './story-catalog/build-story-catalog-menu.js';
+export {
+  matchStoryCatalogIdsFromText,
+  scoreCatalogTextMatch,
+  placeSlugFromPlaceRef,
+  type StoryCatalogFleetPlaceRef,
+  type StoryCatalogTextMatchV1,
+} from './story-catalog/match-story-catalog-from-text.js';
 export {
   resolveStoryEpisode,
   type ResolveStorySelection,
@@ -413,3 +424,38 @@ export {
   resolvePlanningSegmentJourneyPace,
   resolveSegmentJourneyPaceFromCharacters,
 } from './story-plan/journey-pace.js';
+export {
+  briefSection,
+  buildAxmSegmentBrief,
+  buildCharacterBrief,
+  buildFeedBrief,
+  buildFleetBrief,
+  buildDirectorScriptScenes,
+  buildStoryboardSceneContext,
+  buildStoryBrief,
+  formatStoryDirectorNarrative,
+  formatBriefMarkdown,
+  humanizeStoryWireLabel,
+  serializeStoryboardLlmContext,
+  joinBriefSections,
+  type AxmSegmentBriefRowV1,
+  type BriefSectionV1,
+  type BuildFleetBriefInput,
+  type FeedBriefRow,
+  type BriefV1,
+  type FleetBriefMember,
+  type StoryBriefCharacterV1,
+  type StoryBriefPersonalityV1,
+  type DirectorScriptSceneV1,
+  type FormatStoryDirectorNarrativeInput,
+  type StoryboardPanelV1,
+  type StoryboardSceneContextV1,
+  type StoryBriefSnapshotV1,
+  mergeJobContextModels,
+  mergeJobSituationModels,
+  resolveStoryEpisodePresentation,
+  buildStorySituationsNarrativeContext,
+  isTechnicalStoryIdentityLabel,
+  type StoryEpisodePresentationV1,
+  type StorySituationsNarrativeContextV1,
+} from './brief/index.js';

@@ -10,7 +10,7 @@
   "type": "module",
   "exports": {
     ".": {
-      "development": "./src/contract/index.ts",
+      "browser": "./src/contract/browser.ts",
       "default": "./src/contract/index.ts"
     },
     "./module": "./src/twin-module.ts",

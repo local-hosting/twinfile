@@ -12,11 +12,11 @@
     ".": "./src/index.ts",
     "./module": "./src/twin-module.ts",
     "./narrative": {
-      "development": "./src/contract/narrative/index.ts",
+      "browser": "./src/contract/narrative/browser.ts",
       "default": "./src/contract/narrative/index.ts"
     },
-    "./narrative/*": "./src/contract/narrative/*",
-    "./narrative/browser": "./src/contract/narrative/browser.ts"
+    "./narrative/browser": "./src/contract/narrative/browser.ts",
+    "./narrative/*": "./src/contract/narrative/*"
   },
   "peerDependencies": {
     "@doppler-group/twinfile-character": "workspace:^",

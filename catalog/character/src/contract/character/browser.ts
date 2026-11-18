@@ -139,6 +139,12 @@ export {
   type PlanningSegmentJourneyPaceSource,
 } from './story/resolve-journey-pace.js';
 export { segmentIdFromCharacterSegment } from './persona/segment-id-from-character.js';
+export { resolveCharacterDisplayName } from './persona/resolve-character-display-name.js';
+export {
+  allocateUniqueCharacterId,
+  buildCharacterIdSlug,
+  slugifyCharacterToken,
+} from './persona/character-instance-id.js';
 
 export * from './myers-briggs/myers-briggs.schema.js';
 export {
