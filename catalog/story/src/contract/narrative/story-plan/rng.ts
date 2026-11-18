@@ -1,6 +1,6 @@
-import Chance from 'chance';
+import { loadChanceCtor, type ChanceLike } from './load-chance-ctor.js';
 
-type StoryPlanChance = InstanceType<typeof Chance>;
+type StoryPlanChance = ChanceLike;
 
 export type StoryPlanRandomSource = {
   /** Injectable PRNG (tests); takes precedence over {@link seed}. */
@@ -11,6 +11,7 @@ export type StoryPlanRandomSource = {
 
 /** Chance instance for story-plan sampling (segment/store/intent combos). */
 export function createStoryPlanChance(seed?: string | number): StoryPlanChance {
+  const Chance = loadChanceCtor();
   if (seed === undefined) {
     return new Chance();
   }
