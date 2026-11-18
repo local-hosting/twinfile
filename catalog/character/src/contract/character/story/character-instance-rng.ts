@@ -1,6 +1,6 @@
-import Chance from 'chance';
+import { loadChanceCtor, type ChanceLike } from './load-chance-ctor.js';
 
-type PcmInstanceChance = InstanceType<typeof Chance>;
+type PcmInstanceChance = ChanceLike;
 
 export type CharacterInstanceRandomSource = {
   /** Injectable PRNG (tests); takes precedence over {@link seed}. */
@@ -11,6 +11,7 @@ export type CharacterInstanceRandomSource = {
 
 /** Chance instance for Character story-instance materialization. */
 export function createCharacterInstanceChance(seed?: string | number): PcmInstanceChance {
+  const Chance = loadChanceCtor();
   if (seed === undefined) {
     return new Chance();
   }
