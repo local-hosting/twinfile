@@ -2,6 +2,8 @@
 
 Each twin type is one tree: **`catalog/<type>/`** = `@local-hosting/twinfile-<type>` workspace (`src/`, `test/`) plus **`examples/<id>/`** (and character YAML libs beside `examples/`).
 
+**Browser:** character, story, and context ship a Node-free browser surface. Vite/webpack with the `browser` condition resolve the main entry to it (`./character`, `./narrative`, `@local-hosting/twinfile-context`). Explicit subpaths remain: `…/character/browser`, `…/narrative/browser`, `…/browser`. Disk loaders stay on the Node default entry.
+
 | Kind | Twin examples | Other authored YAML |
 | --- | --- | --- |
 | place | `catalog/place/examples/<id>/` | — |

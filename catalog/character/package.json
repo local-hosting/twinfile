@@ -12,11 +12,11 @@
     ".": "./src/index.ts",
     "./module": "./src/twin-module.ts",
     "./character": {
-      "development": "./src/contract/character/index.ts",
+      "browser": "./src/contract/character/browser.ts",
       "default": "./src/contract/character/index.ts"
     },
-    "./character/*": "./src/contract/character/*",
-    "./character/browser": "./src/contract/character/browser.ts"
+    "./character/browser": "./src/contract/character/browser.ts",
+    "./character/*": "./src/contract/character/*"
   },
   "scripts": {
     "test": "vitest run",

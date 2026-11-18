@@ -29,7 +29,7 @@ import { embedEventBindings } from '../place/event-bindings.js';
 import { PlaceType } from '../place/place-type.js';
 import { validatePlaceTypeV1 } from '../place/place-type-defaults.js';
 import { catalogResolveOptions } from '@local-hosting/twinfile-core';
-import { resolveExamplesRoot } from '@local-hosting/twinfile-core';
+import { resolveAuditExamplesRoot } from '@local-hosting/twinfile-core';
 
 const PLACE_WIRE_SCHEMA_ID = 'https://twinfile.org/schemas/1/run/place-wire.schema.json';
 
@@ -154,7 +154,8 @@ export async function buildTwinfile(
   let eventBindingDocs: Record<string, unknown> = {};
 
   if (runUnit) {
-    const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
+    // Prefer overlay pack twin.local.yaml (overlay-pack, …) over place goldens.
+    const examplesRoot = options.examplesRoot ?? resolveAuditExamplesRoot(unit.root);
     if (!examplesRoot) {
       return err([
         {
@@ -174,7 +175,7 @@ export async function buildTwinfile(
     scenarioEvents = scenario.value.events;
     eventBindingDocs = scenario.value.eventBindingDocs;
   } else {
-    const examplesRoot = options.examplesRoot ?? resolveExamplesRoot(unit.root);
+    const examplesRoot = options.examplesRoot ?? resolveAuditExamplesRoot(unit.root);
     const resolveOpts = examplesRoot ? catalogResolveOptions(examplesRoot) : undefined;
     if (!runUnit && unit.twinfile.from && !examplesRoot) {
       return err([
