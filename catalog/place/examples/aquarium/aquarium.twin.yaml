@@ -140,10 +140,12 @@ steps:
           - lobby
           - ocean-gallery
           - touch-pools
+        exit:
+          - door-main
+          - door-ocean
+          - door-touch
         outdoor:
           - plaza-entry
-        survey-station:
-          - exhibit-survey
       actions:
         - at: warning
           set:

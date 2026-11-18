@@ -25,4 +25,5 @@
 | `ferry-captain` | visitor-shuttle | buffalo-harbor |
 | `harbor-guide` | falls-tram | niagara-falls |
 | `visitor-host` | dock-crane | dunkirk-dock |
-| `watershed-steward` | water-quality-sensor | watershed-river |
+
+watershed overlay steward (`watershed-steward`) lives in `@local-hosting/overlay-pack`.

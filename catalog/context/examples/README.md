@@ -19,8 +19,9 @@ Hierarchy on each job: **context** (situation) → **goal** (job/progress) → *
 | `river-patrol` | river |
 | `harbor-crossing` | buffalo-harbor, dunkirk-dock |
 | `falls-tour` | niagara-falls |
-| `watershed-monitor` | watershed-river |
-| `aquarium-visit` | aquarium-conservation |
+| `aquarium-visit` | aquarium |
+
+watershed overlay JTBD (`watershed-monitor`) lives in `@local-hosting/overlay-pack`.
 | `museum-visit` | museum / gallery |
 | `school-visit` | school / campus |
 | `cold-chain-haul` | cold-chain logistics |
