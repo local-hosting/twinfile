@@ -6,6 +6,7 @@ import {
 } from '@local-hosting/twinfile-place';
 import {
   loadRunUnit,
+  resolveAuditExamplesRoot,
   resolveExamplesRoot,
 } from '@local-hosting/twinfile-core';
 import { formatTwinErrors } from '@local-hosting/twinfile-core/cli';
@@ -44,7 +45,7 @@ export async function runFeedSimulate(argv: string[]): Promise<number> {
   }
 
   const scenarioDir = resolve(dir);
-  const examplesRoot = resolveExamplesRoot(scenarioDir);
+  const examplesRoot = resolveAuditExamplesRoot(scenarioDir) ?? resolveExamplesRoot(scenarioDir);
   if (!examplesRoot) {
     console.error('twin feed simulate requires TF_TWINFILE_ROOT');
     return 2;

@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, realpathSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -46,8 +46,18 @@ export function isTwinfileMonorepoRoot(dir: string): boolean {
   return TWIN_CATALOG_TYPES.every((d) => existsSync(join(root, TWIN_CATALOG_HUB, d)));
 }
 
+function tryRealpath(dir: string): string {
+  try {
+    return realpathSync(dir);
+  } catch {
+    return resolve(dir);
+  }
+}
+
 function findTwinfileRootAbove(start: string): string | undefined {
-  let dir = resolve(start);
+  // Portal / nested node_modules symlinks must be realpath’d first — walking the
+  // logical path never reaches `local-hosting/twinfile`.
+  let dir = tryRealpath(start);
   for (let i = 0; i < 12; i += 1) {
     if (isTwinfileMonorepoRoot(dir)) return dir;
     const parent = resolve(dir, '..');
