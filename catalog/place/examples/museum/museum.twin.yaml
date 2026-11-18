@@ -140,10 +140,12 @@ steps:
           - grand-hall
           - european-wing
           - special-exhibit
+        exit:
+          - door-main
+          - door-european
+          - door-special
         outdoor:
           - fifth-ave-plaza
-        survey-station:
-          - gallery-survey
       actions:
         - at: warning
           set:

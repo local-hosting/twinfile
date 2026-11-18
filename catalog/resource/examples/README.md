@@ -6,6 +6,8 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 
 **Network base:** `base-network` (`kind: network`) — Contentful Research Center networks live in `@local-hosting/sensors-twinfile`.
 
+**watershed overlay sensors** (`water-quality-sensor`, `river-buoy`, `bend-buoy`) live in `@local-hosting/overlay-pack`.
+
 | Id | Place |
 | --- | --- |
 | `base-sensor` | — (resource base) |
@@ -31,6 +33,3 @@ Equipment, material, and product twins use **`<unit>.twin.yaml`**. Each unit is 
 | `cold-temp-sensor` | cold-chain (extends `wireless-sensor`) |
 | `cold-humidity-sensor` | cold-chain (extends `wireless-sensor`) |
 | `falls-tram` | niagara-falls |
-| `water-quality-sensor` | watershed-river (Mountain Creek) |
-| `river-buoy` | watershed-river (Williams Island) |
-| `bend-buoy` | watershed-river (Moccasin Bend) |
