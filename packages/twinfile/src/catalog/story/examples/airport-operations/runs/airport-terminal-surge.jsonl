@@ -1,0 +1,4 @@
+{"t":0,"type":"phase","phase":"outage"}
+{"t":0,"type":"metric","id":"max_queue","value":300,"unit":"count"}
+{"t":3750,"type":"metric","id":"time_queue_spills_s","value":3750,"unit":"s"}
+{"t":4500,"type":"metric","id":"clearance_time_s","value":4500,"unit":"s"}

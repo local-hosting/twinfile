@@ -1,0 +1,11 @@
+import { importPlace } from './import.js';
+import { exportPlace } from './export.js';
+export const bridge = {
+    id: 'gtfs',
+    crosswalkSource: 'gtfs',
+    roles: ['import', 'export'],
+    importPlace,
+    exportPlace,
+};
+export { importPlace } from './import.js';
+export { exportPlace } from './export.js';

@@ -1,15 +1,5 @@
-# @local-hosting/twinfile-character
+# Character catalog (source)
 
-Twin type package — layout: [`packages/spec/doc/type-package-layout.md`](../../packages/spec/doc/type-package-layout.md).
+Character twins are built from **`packages/twinfile/src/catalog/character/`** (contract, examples, libs). Published as **`@local-hosting/twinfile`** — no separate `@local-hosting/twinfile-character` npm package.
 
-```text
-src/
-  twin-module.ts
-  mounts/                 # legacy AXM character-id sidecar reader
-  contract/
-    persona/                # journey/, empathy/, people/, contract/, schemas/
-# twin example heads → catalog/character/examples/
-# character YAML libs → catalog/character/libs/{audience,journey,psychology}/
-```
-
-Import **`@local-hosting/twinfile-character/character`**. JTBD lives on **`@local-hosting/twinfile-context`** (story blesses character × context). **`disclosure:`** required on published characters.
+Examples: `packages/twinfile/src/catalog/character/examples/<id>/`.
