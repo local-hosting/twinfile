@@ -2,14 +2,12 @@ import { readFileSync, statSync } from 'node:fs';
 import { basename, isAbsolute, dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
-  isLocalCopyRef,
-} from '@local-hosting/twinfile-place';
-import {
   catalogResolveOptions,
   findTwinfileYamlPath,
+  isLocalCopyRef,
   parseManifestPatches,
   resolveTwinfileByRef,
-} from '@local-hosting/twinfile-core';
+} from '@local-hosting/twinfile';
 import { parse } from 'yaml';
 
 import { serializeTwinfileFiles, splitEditorBuffer } from './serialize-twinfile.js';

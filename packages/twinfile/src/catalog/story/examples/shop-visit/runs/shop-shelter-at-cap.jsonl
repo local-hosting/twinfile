@@ -1,0 +1,3 @@
+{"t":0,"type":"phase","phase":"warning"}
+{"t":27,"type":"metric","id":"time_to_shelter_s","value":27,"unit":"s"}
+{"t":27,"type":"metric","id":"shelter_overflow","value":140,"unit":"count"}

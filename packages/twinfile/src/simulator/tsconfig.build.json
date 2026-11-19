@@ -1,0 +1,33 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "types": [
+      "node"
+    ],
+    "paths": {
+      "@local-hosting/twinfile": [
+        "../core/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/cli": [
+        "../core/dist/cli/twinfile-cli.d.ts"
+      ],
+      "@local-hosting/twinfile/mcp": [
+        "../core/dist/mcp/twinfile-mcp.d.ts"
+      ],
+      "@local-hosting/twinfile/place": [
+        "../catalog/place/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/place/*": [
+        "../catalog/place/dist/*"
+      ],
+      "@local-hosting/twinfile/story": [
+        "../catalog/story/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/story/*": [
+        "../catalog/story/dist/*"
+      ]
+    },
+    "customConditions": []
+  }
+}

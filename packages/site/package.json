@@ -20,7 +20,7 @@
   "browserslist": "defaults, not ie <= 11",
   "dependencies": {
     "@algolia/autocomplete-core": "^1.19.2",
-    "@local-hosting/twinfile-place": "workspace:catalog/place",
+    "@local-hosting/twinfile": "workspace:packages/twinfile",
     "@headlessui/react": "^2.2.6",
     "@local-hosting/geokit": "link:../../../../local-hosting/geokit",
     "@mdx-js/loader": "^3.1.0",

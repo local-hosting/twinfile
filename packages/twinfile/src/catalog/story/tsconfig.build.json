@@ -1,0 +1,47 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "declaration": true,
+    "noEmit": false,
+    "paths": {
+      "@local-hosting/twinfile": [
+        "../../core/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/ref": [
+        "../../core/dist/types/twinfile-ref.d.ts"
+      ],
+      "@local-hosting/twinfile/loro": [
+        "../../core/dist/views/loro.d.ts"
+      ],
+      "@local-hosting/twinfile/context": [
+        "../context/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/context/*": [
+        "../context/dist/*"
+      ],
+      "@local-hosting/twinfile/context/catalog/*": [
+        "../context/dist/contract/catalog/*"
+      ],
+      "@local-hosting/twinfile/context/types/*": [
+        "../context/dist/contract/types/*"
+      ],
+      "@local-hosting/twinfile/character": [
+        "../character/dist/contract/character/index.d.ts"
+      ],
+      "@local-hosting/twinfile/character/*": [
+        "../character/dist/contract/character/*"
+      ]
+    },
+    "customConditions": []
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    ".DS_Store",
+    "dist",
+    "**/*.test.ts"
+  ]
+}

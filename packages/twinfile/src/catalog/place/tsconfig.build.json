@@ -1,0 +1,32 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": ".",
+    "declaration": true,
+    "noEmit": false,
+    "paths": {
+      "@local-hosting/twinfile": [
+        "../../core/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/cli": [
+        "../../core/dist/cli/twinfile-cli.d.ts"
+      ],
+      "@local-hosting/twinfile/bridge": [
+        "../../bridge/dist/index.d.ts"
+      ],
+      "@local-hosting/twinfile/bridge/*": [
+        "../../bridge/dist/*"
+      ]
+    },
+    "customConditions": []
+  },
+  "include": [
+    "**/*.ts"
+  ],
+  "exclude": [
+    ".DS_Store",
+    "dist",
+    "**/*.test.ts"
+  ]
+}

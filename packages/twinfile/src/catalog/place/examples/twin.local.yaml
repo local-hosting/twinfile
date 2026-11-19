@@ -1,0 +1,24 @@
+# Local ref map (flat layout under examples/).
+# Hazard events: @local-hosting/twinfile/simulator.
+refs:
+  twinfile/shop:0.2.0: shop
+  twinfile/airport:0.2.0: airport
+  twinfile/river:0.2.0: river
+  twinfile/port:0.2.0: port
+  twinfile/cold-chain:0.1.0: cold-chain
+  twinfile/park:0.3.0: park
+  twinfile/museum:0.1.0: museum
+  twinfile/aquarium:0.1.0: aquarium
+  twinfile/school:0.1.0: school
+  twinfile/mobility-hub:0.1.0: mobility-hub/programme
+  twinfile/mobility-hub:0.2.0: mobility-hub
+  twinfile/arena:1.2.0: arena
+  twinfile/expo:0.2.0: expo
+  twinfile/pavilion:0.1.0: pavilion
+  twinfile/transit-arrival:0.1.0: transit-arrival
+  twinfile/transit-hub-campus:0.1.0: mobility-hub/campus
+  twinfile/base-campus:0.1.0: base-campus
+  twinfile/base-indoor-stack:0.1.0: base-indoor-stack
+  twinfile/base-single-level:0.1.0: base-single-level
+  twinfile/base-open-area:0.1.0: base-open-area
+  twinfile/base-linear:0.1.0: base-linear
