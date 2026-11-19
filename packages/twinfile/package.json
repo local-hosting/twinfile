@@ -1,6 +1,6 @@
 {
   "name": "@local-hosting/twinfile",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "packageManager": "yarn@4.9.2",
   "type": "module",
   "description": "Twinfile — one published package (core, catalog, bridge, cli, simulator)",
@@ -19,102 +19,84 @@
   },
   "exports": {
     ".": {
-      "development": "./src/dev-entry.ts",
       "browser": "./dist/browser.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     },
     "./bridge": {
-      "development": "./src/bridge/index.ts",
       "types": "./dist/bridge.d.ts",
       "import": "./dist/bridge.js",
       "default": "./dist/bridge.js"
     },
     "./loro": {
-      "development": "./src/core/views/loro.ts",
       "types": "./dist/loro.d.ts",
       "import": "./dist/loro.js",
       "default": "./dist/loro.js"
     },
     "./ref": {
-      "development": "./src/core/types/twinfile-ref.ts",
       "types": "./dist/core/types/twinfile-ref.d.ts",
       "import": "./dist/core/types/twinfile-ref.js",
       "default": "./dist/core/types/twinfile-ref.js"
     },
     "./cli": {
-      "development": "./src/core/cli/twinfile-cli.ts",
       "types": "./dist/core/cli/twinfile-cli.d.ts",
       "import": "./dist/core/cli/twinfile-cli.js",
       "default": "./dist/core/cli/twinfile-cli.js"
     },
     "./mcp": {
-      "development": "./src/core/mcp/twinfile-mcp.ts",
       "types": "./dist/core/mcp/twinfile-mcp.d.ts",
       "import": "./dist/core/mcp/twinfile-mcp.js",
       "default": "./dist/core/mcp/twinfile-mcp.js"
     },
     "./place": {
-      "development": "./src/catalog/place/index.ts",
       "types": "./dist/place/index.d.ts",
       "import": "./dist/place/index.js",
       "default": "./dist/place/index.js"
     },
     "./place/*": {
-      "development": "./src/catalog/place/*",
       "import": "./dist/place/*"
     },
     "./character": {
-      "development": "./src/catalog/character/contract/character/index.ts",
       "types": "./dist/character/contract/character/index.d.ts",
       "import": "./dist/character/contract/character/index.js",
       "default": "./dist/character/contract/character/index.js"
     },
     "./character/*": {
-      "development": "./src/catalog/character/*",
       "import": "./dist/character/*"
     },
     "./context": {
-      "development": "./src/catalog/context/index.ts",
       "types": "./dist/context/index.d.ts",
       "import": "./dist/context/index.js",
       "default": "./dist/context/index.js"
     },
     "./context/*": {
-      "development": "./src/catalog/context/contract/*",
       "import": "./dist/context/contract/*"
     },
     "./story": {
-      "development": "./src/catalog/story/index.ts",
       "types": "./dist/story/index.d.ts",
       "import": "./dist/story/index.js",
       "default": "./dist/story/index.js"
     },
     "./story/*": {
-      "development": "./src/catalog/story/*",
       "import": "./dist/story/*"
     },
     "./event": {
-      "development": "./src/catalog/event/index.ts",
       "types": "./dist/event/index.d.ts",
       "import": "./dist/event/index.js",
       "default": "./dist/event/index.js"
     },
     "./resource": {
-      "development": "./src/catalog/resource/index.ts",
       "types": "./dist/resource/index.d.ts",
       "import": "./dist/resource/index.js",
       "default": "./dist/resource/index.js"
     },
     "./simulator": {
-      "development": "./src/simulator/index.ts",
       "types": "./dist/simulator.d.ts",
       "import": "./dist/simulator.js",
       "default": "./dist/simulator.js"
     },
     "./simulator/*": {
-      "development": "./src/simulator/*",
       "import": "./dist/simulator/*"
     },
     "./fixtures/demo-project-content": {
