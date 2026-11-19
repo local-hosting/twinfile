@@ -1,6 +1,6 @@
 {
   "name": "@local-hosting/twinfile",
-  "version": "0.2.0",
+  "version": "0.2.2",
   "packageManager": "yarn@4.9.2",
   "type": "module",
   "description": "Twinfile — one published package (core, catalog, bridge, cli, simulator)",
@@ -125,7 +125,7 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "build": "node scripts/build-all.mjs",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "node scripts/build-all.mjs",
     "typecheck": "node scripts/typecheck-all.mjs",
     "test": "vitest run",
     "check:publish": "node scripts/check-npm-export-surface.mjs"
