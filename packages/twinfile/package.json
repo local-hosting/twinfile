@@ -1,6 +1,6 @@
 {
   "name": "@local-hosting/twinfile",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "packageManager": "yarn@4.9.2",
   "type": "module",
   "description": "Twinfile — one published package (core, catalog, bridge, cli, simulator)",
@@ -132,6 +132,7 @@
   },
   "files": [
     "dist",
+    "spec",
     "CHANGELOG.md",
     "README.md"
   ],

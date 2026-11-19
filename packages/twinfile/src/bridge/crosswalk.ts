@@ -1,5 +1,4 @@
 import { readFileSync, statSync } from 'node:fs';
-import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -13,8 +12,6 @@ export type CrosswalkRow = {
   ext?: boolean;
   values?: Record<string, string>;
 };
-
-const require = createRequire(import.meta.url);
 
 const PLACE_COLLECTIONS = new Set([
   'place',
@@ -32,9 +29,10 @@ let cached: CrosswalkRow[] | undefined;
 
 export function crosswalkPath(): string {
   const bundled = join(dirname(fileURLToPath(import.meta.url)), '..', '..', 'spec', 'conf', 'crosswalk.yaml');
-  if (statSync(bundled, { throwIfNoEntry: false })?.isFile()) return bundled;
-  const fromPkg = join(dirname(require.resolve('@local-hosting/twinfile/package.json')), 'conf', 'crosswalk.yaml');
-  return fromPkg;
+  if (statSync(bundled, { throwIfNoEntry: false })?.isFile()) {
+    return bundled;
+  }
+  throw new Error('Missing twinfile spec/conf/crosswalk.yaml beside @local-hosting/twinfile');
 }
 
 export function loadCrosswalk(): CrosswalkRow[] {
