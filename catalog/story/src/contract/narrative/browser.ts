@@ -404,6 +404,11 @@ export {
 export type {
   StoryJourneyRefV1,
   StoryPlanningCatalogsFromCharactersV1,
+  StoryPlanningCustomerCatalogV1,
+  StoryPlanningJtbdCatalogV1,
+  StoryPlanningObstacleCatalogV1,
+  StoryPlanningPersonaCatalogV1,
+  StoryPlanningSegmentCatalogV1,
 } from './types/story-planning-catalog-slices.js';
 export type {
   StoryPlanCatalogBuildInputV1,
@@ -414,6 +419,8 @@ export type {
   StoryPlanNarrativeBuildInputV1,
   StoryPlanNarrativeContextV1,
   StoryPlanScenarioHintsV1,
+  StoryPlanningFocusInterestV1,
+  StoryPlanningSegmentObjectiveV1,
   StoryPlanningSegmentProfileV1,
 } from './types/story-plan.js';
 export type { JourneyPaceId, PlanningSegmentJourneyPaceSource } from './story-plan/journey-pace.js';
