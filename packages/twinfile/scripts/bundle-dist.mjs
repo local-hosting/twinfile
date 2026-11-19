@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { cpSync, existsSync, mkdirSync, rmSync, writeFileSync } from 'node:fs'
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -86,5 +86,41 @@ if (!existsSync(cliTwin)) {
     cpSync(alt, cliTwin)
   }
 }
+
+/** Avoid ESM cycle when `@local-hosting/twinfile/place` is resolved from a nested install. */
+function patchPlaceBarrelCycles() {
+  const placeIndexJs = join(distRoot, 'place/index.js')
+  if (!existsSync(placeIndexJs)) return
+  const replacements = [
+    [
+      "export { copyRefAlternates } from '@local-hosting/twinfile';",
+      "export { copyRefAlternates } from '../core/load/copy-ref-alternates.js';",
+    ],
+    [
+      "export { loadTwinfile } from '@local-hosting/twinfile';",
+      "export { loadTwinfile } from '../core/load/load-twinfile.js';",
+    ],
+  ]
+  let js = readFileSync(placeIndexJs, 'utf8')
+  for (const [from, to] of replacements) {
+    js = js.replace(from, to)
+  }
+  writeFileSync(placeIndexJs, js)
+
+  const placeIndexDts = join(distRoot, 'place/index.d.ts')
+  if (!existsSync(placeIndexDts)) return
+  let dts = readFileSync(placeIndexDts, 'utf8')
+  dts = dts.replace(
+    "export { loadTwinfile, type LoadedTwinfile } from '@local-hosting/twinfile';",
+    "export { loadTwinfile, type LoadedTwinfile } from '../core/load/load-twinfile.js';",
+  )
+  dts = dts.replace(
+    "export { copyRefAlternates } from '@local-hosting/twinfile';",
+    "export { copyRefAlternates } from '../core/load/copy-ref-alternates.js';",
+  )
+  writeFileSync(placeIndexDts, dts)
+}
+
+patchPlaceBarrelCycles()
 
 console.info('[bundle-dist] ok → packages/twinfile/dist')
