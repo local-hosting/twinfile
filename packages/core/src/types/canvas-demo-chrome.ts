@@ -20,6 +20,8 @@ export type CanvasDemoResourceRow = {
   id: string;
   cardTitle: string;
   label: string;
+  /** DomainSpec Resource.resourceKind — e.g. vehicle (may have geo), inventory. */
+  resourceKind: string;
   orgInventoryId: string;
   orgVehicleId: string;
   geo: string;
@@ -30,7 +32,6 @@ export type CanvasDemoStoryRow = {
   cardTitle: string;
   title: string;
   characterId: string;
-  orgStoryboardId: string;
   mapSlug: string;
   storyPitch: string;
 };

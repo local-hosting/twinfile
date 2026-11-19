@@ -48,7 +48,6 @@
       "cardTitle": "Morning Crossing",
       "title": "Morning Crossing",
       "characterId": "ferry-captain",
-      "orgStoryboardId": "",
       "mapSlug": "buffalo-harbor",
       "storyPitch": "Dawn ferry run from Dunkirk into Buffalo Harbor."
     },
@@ -57,7 +56,6 @@
       "cardTitle": "Falls Day Tour",
       "title": "Falls Day Tour",
       "characterId": "harbor-guide",
-      "orgStoryboardId": "",
       "mapSlug": "niagara-falls",
       "storyPitch": "Guided loop from the harbor to Niagara Falls Visitor."
     },
@@ -66,7 +64,6 @@
       "cardTitle": "Harbor resilience",
       "title": "Harbor resilience",
       "characterId": "visitor-host",
-      "orgStoryboardId": "",
       "mapSlug": "buffalo-harbor",
       "storyPitch": "Tsunami advisory at Dunkirk, then field-damage clearance on the apron."
     }
@@ -76,6 +73,7 @@
       "id": "dock-crane",
       "cardTitle": "Dock Crane",
       "label": "Dock Crane",
+      "resourceKind": "inventory",
       "orgInventoryId": "",
       "orgVehicleId": "",
       "geo": "42.4680, -79.3185"
@@ -84,6 +82,7 @@
       "id": "visitor-shuttle",
       "cardTitle": "Visitor Shuttle",
       "label": "Visitor Shuttle",
+      "resourceKind": "vehicle",
       "orgInventoryId": "",
       "orgVehicleId": "",
       "geo": "42.8750, -78.8620"
@@ -92,6 +91,7 @@
       "id": "falls-tram",
       "cardTitle": "Falls Tram",
       "label": "Falls Tram",
+      "resourceKind": "vehicle",
       "orgInventoryId": "",
       "orgVehicleId": "",
       "geo": "43.0780, -79.0700"

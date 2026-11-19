@@ -184,6 +184,15 @@ function projectCharacter(root: string, id: string): CanvasDemoCharacterRow {
   return { id, cardTitle: label, label };
 }
 
+function resourceKindFromTwinfile(twinfile: Record<string, unknown>): string {
+  const resource = twinfile.resource;
+  if (resource && typeof resource === 'object' && !Array.isArray(resource)) {
+    const kind = (resource as Record<string, unknown>).kind;
+    if (typeof kind === 'string' && kind.trim()) return kind.trim();
+  }
+  return 'inventory';
+}
+
 function projectResource(root: string, id: string): CanvasDemoResourceRow {
   const twinfile = loadUnitTwinfile(root, 'resource', id);
   const label = displayName(twinfile, id);
@@ -191,6 +200,7 @@ function projectResource(root: string, id: string): CanvasDemoResourceRow {
     id,
     cardTitle: label,
     label,
+    resourceKind: resourceKindFromTwinfile(twinfile),
     orgInventoryId: '',
     orgVehicleId: '',
     geo: resourceGeoFromTwinfile(twinfile),
@@ -207,7 +217,6 @@ function projectStory(root: string, id: string): CanvasDemoStoryRow {
     cardTitle: title,
     title,
     characterId,
-    orgStoryboardId: '',
     mapSlug,
     storyPitch: storyPitchFromTwinfile(twinfile),
   };
