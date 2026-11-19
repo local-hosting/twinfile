@@ -1,6 +1,6 @@
 {
   "name": "@local-hosting/twinfile",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "packageManager": "yarn@4.9.2",
   "type": "module",
   "description": "Twinfile — one published package (core, catalog, bridge, cli, simulator)",
