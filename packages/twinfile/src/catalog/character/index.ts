@@ -3,3 +3,4 @@
  */
 export { module, kind } from './twin-module.js';
 export { loadCharacterMountIds, type CharacterMountIds } from './mounts/load-character-mounts.js';
+export * from './contract/character/index.js';

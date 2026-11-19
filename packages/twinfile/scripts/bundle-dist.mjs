@@ -38,6 +38,11 @@ for (const part of PARTS) {
   copyPart(part.from, part.as)
 }
 
+const characterLibs = join(srcRoot, 'catalog/character/libs')
+if (existsSync(characterLibs)) {
+  cpSync(characterLibs, join(distRoot, 'character/libs'), { recursive: true })
+}
+
 const fixtureSrc = join(srcRoot, 'core/canvas/demo-project-content.json')
 if (existsSync(fixtureSrc)) {
   const fixtureDest = join(distRoot, 'fixtures')
