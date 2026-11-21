@@ -67,5 +67,6 @@
   "twinfilePinnedDependencies": {},
   "twinfileCiPrepare": {
     "profile": "site"
-  }
+  },
+  "license": "MPL-2.0"
 }
