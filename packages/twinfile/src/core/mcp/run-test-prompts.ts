@@ -8,7 +8,7 @@ import { resolveTwinfileRoot } from '../paths/catalog-layout.js';
 import { isRecord } from '../doc/is-record.js';
 
 export const MCP_RUN_TEST_PROMPTS_REL = 'mcp/run-test-prompts.yaml';
-const CLI_MCP_REL = 'packages/cli/mcp/run-test-prompts.yaml';
+const CLI_MCP_REL = 'packages/twinfile/src/catalog/place/examples/mcp/run-test-prompts.yaml';
 
 export type McpRunTestPromptsDoc = {
   schema?: string;
@@ -26,7 +26,7 @@ export function resolveMcpRunTestPromptsPath(examplesRoot?: string): string | un
   return undefined;
 }
 
-/** Load golden-run test prompts from `packages/cli/mcp/run-test-prompts.yaml`. */
+/** Load golden-run test prompts from `packages/twinfile/src/catalog/place/examples/mcp/run-test-prompts.yaml`. */
 export function loadMcpRunTestPrompts(examplesRoot?: string): McpRunTestPromptsDoc | undefined {
   const root = examplesRoot ?? resolveExamplesRoot();
   const path = resolveMcpRunTestPromptsPath(root);

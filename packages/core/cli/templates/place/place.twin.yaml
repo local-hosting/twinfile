@@ -1,8 +1,0 @@
-twinfile: 1
-kind: place
-name: example-place
-version: 0.1.0
-stability: example
-layers:
-  - place/place.yaml
-  - place/spaces.yaml

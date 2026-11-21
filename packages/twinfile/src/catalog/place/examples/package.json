@@ -7,7 +7,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/local-hosting/twinfile.git",
-    "directory": "catalog/place/examples"
+    "directory": "packages/twinfile/src/catalog/place/examples"
   },
   "license": "MPL-2.0"
 }

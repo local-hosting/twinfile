@@ -41,7 +41,7 @@ const resources: Array<Resource> = [
   },
   {
     href: '/core',
-    name: '@local-hosting/twinfile-core',
+    name: '@local-hosting/twinfile',
     description: 'The reference implementation and the twin CLI.',
     icon: PackageIcon,
     pattern: {

@@ -1,6 +1,8 @@
 # Twin catalog (in-repo)
 
-Twin type source lives under **`packages/twinfile/src/catalog/<type>/`** (examples, libs, contract). Consumers install one package: **`@local-hosting/twinfile`**.
+Twin type source lives under **`packages/twinfile/src/catalog/<type>/`** (examples, libs, contract). Consumers install one package: **`@local-hosting/twinfile`** with subpaths such as **`/place`**, **`/event`**, **`/simulator`**.
+
+The repo root **`catalog/`** folder holds **ops conf only** (`catalog/conf/`). Per-type hubs (`catalog/place/`, …) and hyphenated npm names (`@local-hosting/twinfile-event`, …) are retired.
 
 | Kind | Examples (in repo) |
 | --- | --- |
