@@ -5,6 +5,7 @@
 | Workflow | Role |
 | --- | --- |
 | [`ci.yml`](workflows/ci.yml) | `yarn check:twinfile` on push/PR |
+| [`guard-main.yml`](workflows/guard-main.yml) | reject direct pushes to `main` (PR merges only) |
 | [`publish-doppler-group.yml`](workflows/publish-doppler-group.yml) | npm publish for `@local-hosting/*` packages |
 
 Per-package `.github/` under `packages/*` was removed — those workflows targeted the old split `twinfile/*` repos.
