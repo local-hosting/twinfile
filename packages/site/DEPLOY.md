@@ -13,7 +13,7 @@ The build runs `scripts/sync-schemas.mjs`. In the **local-hosting/twinfile** mon
 
 ## CI
 
-The docs site embeds a local YAML studio under `src/twinfile-studio/`. Example Twinfiles resolve from `packages/twinfile/src/catalog/place/examples` under the repo root (or `TF_TWINFILE_ROOT`).
+The docs site embeds a local YAML studio under `src/twinfile-studio/`. Example Twinfiles resolve from `catalog/place/examples` under the repo root (or `TF_TWINFILE_ROOT`).
 
 Repo secret **`TF_PACKAGES_TOKEN`**: a token with `read:packages` when CI still pulls split `twinfile/*` checkouts.
 

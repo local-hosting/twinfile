@@ -82,14 +82,14 @@ const FILE_RENAMES = [
 
 const TEXT_REPLACEMENTS = [
   // import paths first
-  ['@local-hosting/twinfile/character/pcm/browser', '@local-hosting/twinfile/character/persona/browser'],
-  ['@local-hosting/twinfile/character/pcm/', '@local-hosting/twinfile/character/persona/'],
-  ['@local-hosting/twinfile/character/pcm', '@local-hosting/twinfile/character/persona'],
-  ['@local-hosting/twinfile/character/jsm/', '@local-hosting/twinfile/context/'],
-  ['@local-hosting/twinfile/character/jsm', '@local-hosting/twinfile/context'],
-  ['@local-hosting/twinfile/story/sam/browser', '@local-hosting/twinfile/story/narrative/browser'],
-  ['@local-hosting/twinfile/story/sam/', '@local-hosting/twinfile/story/narrative/'],
-  ['@local-hosting/twinfile/story/sam', '@local-hosting/twinfile/story/narrative'],
+  ['@local-hosting/twinfile-character/pcm/browser', '@local-hosting/twinfile-character/persona/browser'],
+  ['@local-hosting/twinfile-character/pcm/', '@local-hosting/twinfile-character/persona/'],
+  ['@local-hosting/twinfile-character/pcm', '@local-hosting/twinfile-character/persona'],
+  ['@local-hosting/twinfile-character/jsm/', '@local-hosting/twinfile-context/'],
+  ['@local-hosting/twinfile-character/jsm', '@local-hosting/twinfile-context'],
+  ['@local-hosting/twinfile-story/sam/browser', '@local-hosting/twinfile-story/narrative/browser'],
+  ['@local-hosting/twinfile-story/sam/', '@local-hosting/twinfile-story/narrative/'],
+  ['@local-hosting/twinfile-story/sam', '@local-hosting/twinfile-story/narrative'],
   // file path segments in imports
   ['/pcm.', '/character.'],
   ['pcm-package-meta', 'character-package-meta'],

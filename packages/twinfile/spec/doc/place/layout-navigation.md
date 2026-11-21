@@ -45,9 +45,9 @@ Declare the default grain on the place, then add finer layers that **patch** the
 | **Floor** | `zone` or `room` | `indoor_stack` | Per-level concourses, piers | **Required** id from `levels.yaml` |
 | **Room** | `room` | `indoor_stack` | Gates, shops, galleries, shelters | **Required** |
 
-**Expo (example):** [`examples/expo`](../../../src/catalog/place/examples/expo/) — `archetype: campus`, `space_granularity: zone`, **`visits.yaml`** for tour overview, **`exposure`** on each space; pavilion **interiors** are separate indoor spaces linked by **`openings`**. See [`places/expo/README.md`](../../../src/catalog/place/examples/expo/README.md). Generating many CMS pavilion rows onto that campus: [Place recipe — CMS / multi-pavilion](place-recipe.md#cms--multi-pavilion-catalogs-world-expo).
+**Expo (example):** [`examples/expo`](../../../../catalog/place/examples/expo/) — `archetype: campus`, `space_granularity: zone`, **`visits.yaml`** for tour overview, **`exposure`** on each space; pavilion **interiors** are separate indoor spaces linked by **`openings`**. See [`places/expo/README.md`](../../../../catalog/place/examples/expo/README.md). Generating many CMS pavilion rows onto that campus: [Place recipe — CMS / multi-pavilion](place-recipe.md#cms--multi-pavilion-catalogs-world-expo).
 
-**Airport (example):** [`examples/airport`](../../../src/catalog/place/examples/airport/) — today mostly **site-tier** spaces (`terminal-a`, curb, airside); **`levels`** (`ground` / `airside`) foreshadow floor/airside split. Room-tier detail would arrive in **additional place layers** (below), not a new `kind`.
+**Airport (example):** [`examples/airport`](../../../../catalog/place/examples/airport/) — today mostly **site-tier** spaces (`terminal-a`, curb, airside); **`levels`** (`ground` / `airside`) foreshadow floor/airside split. Room-tier detail would arrive in **additional place layers** (below), not a new `kind`.
 
 ### Expo space kinds
 
@@ -118,7 +118,7 @@ Place units MAY ship **`ext/layout-index.yaml`** with top-level key **`layout_in
 
 Validated at **`twin check`** (`E_LAYOUT` on bad refs). Does not duplicate coordinates — indexes ids and files only.
 
-Example: [`examples/expo/ext/layout-index.yaml`](../../../src/catalog/place/examples/expo/ext/layout-index.yaml).
+Example: [`examples/expo/ext/layout-index.yaml`](../../../../catalog/place/examples/expo/ext/layout-index.yaml).
 
 **CLI:** `twin layout summary [dir]` prints topology, visits, layer space counts, and layout_index regions; **`--json`** for agents.
 
@@ -172,4 +172,4 @@ Runners read the merged place. They do not carry their own pathfinder. MCP `plac
 
 - [Place layers](place.md) — collections and topology enums
 - [Layers](../build/layers.md) — merge and place `from:`
-- Example narrative: [`examples/expo/README.md`](../../../src/catalog/place/examples/expo/README.md)
+- Example narrative: [`examples/expo/README.md`](../../../../catalog/place/examples/expo/README.md)

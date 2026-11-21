@@ -75,7 +75,7 @@ if (existsSync(join(simulatorRoot, 'package.json'))) {
 }
 const cliRoot = join(root, '..', 'cli');
 if (existsSync(join(cliRoot, 'package.json'))) {
-  execSync('yarn workspace @local-hosting/twinfile build', { cwd: join(root, '../..'), stdio: 'inherit' });
+  execSync('yarn workspace @local-hosting/twinfile-cli build', { cwd: join(root, '../..'), stdio: 'inherit' });
 }
 
 let mergeObjects;
@@ -184,7 +184,7 @@ function checkTimeCase(id, c) {
 for (const entry of index.vectors) {
   if (entry.category === 'merge' || entry.category === 'digest' || entry.category === 'time') {
     if (!coreBuild) {
-      console.warn(`check-schema: skip ${entry.id} (no @local-hosting/twinfile build)`);
+      console.warn(`check-schema: skip ${entry.id} (no @local-hosting/twinfile-core build)`);
       continue;
     }
   }

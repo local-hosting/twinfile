@@ -1,0 +1,5 @@
+spaces:
+  - id: main
+    name: Main space
+    kind: hall
+    capacity: 100
