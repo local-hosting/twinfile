@@ -162,7 +162,7 @@ export const navigation: Array<NavGroup> = [
     title: 'Reference',
     links: [
       { title: '@local-hosting/twinfile', href: '/spec' },
-      { title: '@local-hosting/twinfile-core', href: '/core' },
+      { title: '@local-hosting/twinfile', href: '/core' },
     ],
   },
 ]

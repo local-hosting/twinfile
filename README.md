@@ -1,6 +1,6 @@
 # Twinfile
 
-**local-hosting/twinfile** — one monorepo for the Twinfile open stack: **four twin types** (**place, resource, character, story**). Scene **runs** are inline `run:` blocks on `story.scenes[]` in `catalog/story/examples/`; the **player** (`packages/simulator`) executes stories.
+**local-hosting/twinfile** — one monorepo for the Twinfile open stack: **four twin types** (**place, resource, character, story**). Scene **runs** are inline `run:` blocks on `story.scenes[]` in `packages/twinfile/src/catalog/story/examples/`; playback lives in **`@local-hosting/twinfile/simulator`**.
 
 **Twinfile** is a Dockerfile-style recipe for a place you can build, pin, publish, and talk to — without a closed host to author or validate units.
 
@@ -8,15 +8,17 @@
 
 ```text
 twinfile/
-  catalog/                    # twin types, golden content
-  packages/                   # kernel, simulator, site, tooling
+  catalog/conf/               # in-repo ops conf (not golden twins)
+  packages/twinfile/          # @local-hosting/twinfile — core, catalog, CLI, simulator, workbench
+  packages/site/              # twinfile.org
+  packages/tooling/           # check:twinfile, hygiene
 ```
 
 | Area | Path | Role |
 | --- | --- | --- |
-| **Catalog** | [`catalog/<type>/`](catalog/) | `@local-hosting/twinfile-<type>` + `examples/` |
-| **Kernel** | [`packages/spec|core|cli|bridge/`](packages/) | Format, load/merge, CLI, bridges |
-| **Simulator** | [`packages/simulator/`](packages/simulator/) | Playback, events (not a catalog type) |
+| **Package** | [`packages/twinfile/`](packages/twinfile/) | One npm name: core, catalog types, CLI, simulator subpaths |
+| **Golden twins** | [`packages/twinfile/src/catalog/<type>/examples/`](catalog/) | Place, event, story, … units in-repo |
+| **Workbench** | [`packages/twinfile/src/workbench/viewer/`](packages/twinfile/src/workbench/viewer/) | Local viewer for golden catalog |
 | **Site** | [`packages/site/`](packages/site/) | [twinfile.org](https://twinfile.org) |
 | **Tooling** | [`packages/tooling/`](packages/tooling/) | `check:twinfile`, hygiene, sync scripts |
 
@@ -34,28 +36,28 @@ yarn workbench    # golden catalog → http://localhost:4173
 ```
 
 ```bash
-yarn workspace @local-hosting/twinfile-cli build
-yarn twin check catalog/place/examples/shop
-yarn twin build catalog/place/examples/shop
-yarn twin summary catalog/place/examples/shop
-yarn twin describe catalog/place/examples/shop --t 0
-yarn twin serve catalog/place/examples/shop --stdio   # MCP for agents
+yarn workspace @local-hosting/twinfile build
+yarn twin check packages/twinfile/src/catalog/place/examples/shop
+yarn twin build packages/twinfile/src/catalog/place/examples/shop
+yarn twin summary packages/twinfile/src/catalog/place/examples/shop
+yarn twin describe packages/twinfile/src/catalog/place/examples/shop --t 0
+yarn twin serve packages/twinfile/src/catalog/place/examples/shop --stdio   # MCP for agents
 ```
 
-Explore **`catalog/place/examples/`** in the browser with **`yarn workbench`**, or on the CLI with **`twin summary`**, **`twin layout summary`**, **`twin query`**, **`twin describe`**, and **`twin serve --stdio`** ([MCP](packages/spec/doc/pack/mcp.md)).
+Explore **`packages/twinfile/src/catalog/place/examples/`** in the browser with **`yarn workbench`**, or on the CLI with **`twin summary`**, **`twin layout summary`**, **`twin query`**, **`twin describe`**, and **`twin serve --stdio`** ([MCP](packages/twinfile/spec/doc/pack/mcp.md)).
 
 Resolve example places in code:
 
 ```ts
-import { resolveExamplePlace, listExamplePlaceRefs, buildTwinfile } from '@local-hosting/twinfile-core';
+import { resolveExamplePlace, listExamplePlaceRefs, buildTwinfile } from '@local-hosting/twinfile';
 
 const root = process.env.TF_TWINFILE_ROOT ?? '/path/to/twinfile';
-const examplesRoot = `${root}/catalog/place/examples`;
+const examplesRoot = `${root}/packages/twinfile/src/catalog/place/examples`;
 const place = resolveExamplePlace('twinfile/shop:0.2.0', { examplesRoot });
 const built = await buildTwinfile(place.rootDir, { examplesRoot });
 ```
 
-Local ref overrides: [`catalog/place/examples/twin.local.yaml`](catalog/place/examples/twin.local.yaml); golden digests in [`published-refs.json`](catalog/place/examples/published-refs.json). Ops env: **`TF_TWINFILE_ROOT`** only, when running from outside the repo; every catalog path derives from it (see [glossary — repository layout](packages/spec/doc/glossary.md#repository-layout-prose)).
+Local ref overrides: [`packages/twinfile/src/catalog/place/examples/twin.local.yaml`](packages/twinfile/src/catalog/place/examples/twin.local.yaml); golden digests in [`published-refs.json`](packages/twinfile/src/catalog/place/examples/published-refs.json). Ops env: **`TF_TWINFILE_ROOT`** only, when running from outside the repo; every catalog path derives from it (see [glossary — repository layout](packages/twinfile/spec/doc/glossary.md#repository-layout-prose)).
 
 Hygiene: `yarn hygiene` (`packages/tooling/scripts/repo-hygiene.mjs`).
 
@@ -75,9 +77,9 @@ Classification and simulation are different packages.
 
 **`../geotypes` classifies.** A registry slug (`hotel`, `public_park`, `fire_hydrant`) resolves to three axes — extent, vertical, movement — and those axes look up one archetype (`single_level`, `indoor_stack`, `campus`, `open_area`, `linear`). `placeScaffoldForSlug` returns the archetype and a suggested `authoring_scale`. `placeDecorationsForSlug` suggests events and layer files. `isAssetGeotype` marks a point with no interior (hydrant, meter, pole) as an asset row, not a place. Provider crosswalks cover Foursquare, Google, OSM, and HERE. The map picture is the oracle: a pin, a site boundary, open land, or a line.
 
-**Twinfile builds the simulation for that class.** A place unit records the archetype geotypes already resolved and inherits a golden base (`from: twinfile/base-campus:0.1.0` and the other `base-*` units). `@local-hosting/twinfile-core` checks the archetype's axes at load (stacked places set `level` on every space, sequenced places set `visit_order`). A scenario then stacks portable units in a fixed order: place, events, plan role bindings, scenario patches, args ([RFC 0001](packages/spec/rfcs/0001-five-layers.md)). An event names phases and the roles it expects. A plan binds those roles to this place. A runner reads the built bundle and writes a timeline ([Runners](packages/spec/doc/pack/runners.md)). Indoor, covered, and outdoor stay on each space as `exposure`. Geometry is a reference.
+**Twinfile builds the simulation for that class.** A place unit records the archetype geotypes already resolved and inherits a golden base (`from: twinfile/base-campus:0.1.0` and the other `base-*` units). `@local-hosting/twinfile` checks the archetype's axes at load (stacked places set `level` on every space, sequenced places set `visit_order`). A scenario then stacks portable units in a fixed order: place, events, plan role bindings, scenario patches, args ([RFC 0001](packages/twinfile/spec/rfcs/0001-five-layers.md)). An event names phases and the roles it expects. A plan binds those roles to this place. A runner reads the built bundle and writes a timeline ([Runners](packages/twinfile/spec/doc/pack/runners.md)). Indoor, covered, and outdoor stay on each space as `exposure`. Geometry is a reference.
 
-Axis rules are written in the spec ([Place archetypes](packages/spec/doc/place/place-archetypes.md)) and executed in `@local-hosting/geotypes`. Field-level crosswalks to IMDF, BOT, Brick, SOSA, GTFS, and DTPR stay in the [appendix](packages/spec/doc/map/appendix.md).
+Axis rules are written in the spec ([Place archetypes](packages/twinfile/spec/doc/place/place-archetypes.md)) and executed in `@local-hosting/geotypes`. Field-level crosswalks to IMDF, BOT, Brick, SOSA, GTFS, and DTPR stay in the [appendix](packages/twinfile/spec/doc/map/appendix.md).
 
 | Precedent | What it standardizes | Geotypes (classify) | Twinfile (build the simulation) |
 | --- | --- | --- | --- |
@@ -91,7 +93,7 @@ Axis rules are written in the spec ([Place archetypes](packages/spec/doc/place/p
 | [OGC IMDF](https://www.ogc.org/standards/indoor-mapping-data-format/) | Venue, level, unit, opening, amenity categories | Extent and vertical decide whether the place is a footprint, a stack, or a site | `levels`, `spaces`, `openings` authored on the unit |
 | [BOT](https://w3c-lbd-cg.github.io/bot/) | Site, building, storey, space, and topology relations | Same spatial scale, expressed as three axes | `levels` and `spaces` with load-time rules for the resolved archetype |
 | [Brick](https://brickschema.org/) | Equipment and point classes | Resource slugs and asset slugs; no Brick class tree | `sensors` and `assets` layers; event roles are a separate vocabulary |
-| [W3C SOSA](https://www.w3.org/TR/vocab-ssn/) / [OGC SensorThings](https://www.ogc.org/standards/sensorthings/) | Sensors, observed properties, datastreams | Sensor-bearing categories suggest a `sensors` layer | Sensor rows on the place; a runner reads them on the scenario clock. Published sensors carry [DTPR](packages/spec/doc/gov/transparency.md) disclosures |
+| [W3C SOSA](https://www.w3.org/TR/vocab-ssn/) / [OGC SensorThings](https://www.ogc.org/standards/sensorthings/) | Sensors, observed properties, datastreams | Sensor-bearing categories suggest a `sensors` layer | Sensor rows on the place; a runner reads them on the scenario clock. Published sensors carry [DTPR](packages/twinfile/spec/doc/gov/transparency.md) disclosures |
 | [ETSI NGSI-LD](https://www.etsi.org/committee/cim) | Context entity types and subscriptions | Registry slugs and provider crosswalks | Unit refs, built and digested, then run |
 | [FMI](https://fmi-standard.org/) | Numerical model exchange and co-simulation | — | The runner is the solver. The bundle is the scenario contract it reads |
 | [IEEE 1516 HLA](https://standards.ieee.org/standard/1516-2010.html) | Federated simulators and managed time | — | One bundle, one runner. Composition is an authoring-time merge |

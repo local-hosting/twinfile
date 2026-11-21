@@ -1,6 +1,6 @@
 # Place bases (layout classification)
 
-In prose, call this a **base** — the layout image a site inherits with **`from:`** (Docker-style). Geotypes and manifests use the field name **`archetype`** (`campus`, `open_area`, …) for the same five kinds. Classify on **three axes** first; the base kind is a **lookup**, not a judgment call. Examples vocabulary: [`examples/README.md`](../../../../catalog/place/examples/README.md#vocabulary-one-word-per-layer). Field definitions: [Place layers](place.md#place-archetype).
+In prose, call this a **base** — the layout image a site inherits with **`from:`** (Docker-style). Geotypes and manifests use the field name **`archetype`** (`campus`, `open_area`, …) for the same five kinds. Classify on **three axes** first; the base kind is a **lookup**, not a judgment call. Examples vocabulary: [`examples/README.md`](../../../src/catalog/place/examples/README.md#vocabulary-one-word-per-layer). Field definitions: [Place layers](place.md#place-archetype).
 
 ## The three axes
 
@@ -106,4 +106,4 @@ Every golden base names its ground level `ground`.
 
 ## Building and floor imports
 
-Campus places MAY nest **`indoor_stack`** (or other) building Twinfiles under `parts/` and copy each one under a site anchor space with `copy: ./parts/<name>` and `into:`; a building may copy its own `floors/` the same way ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). Catalog: [`examples/README.md`](../../../../catalog/place/examples/README.md#campus-buildings-rfc-0009) (airport, transit-hub, expo, arena, port). Patterns: [Campus → building → floor](campus-building-floor.md).
+Campus places MAY nest **`indoor_stack`** (or other) building Twinfiles under `parts/` and copy each one under a site anchor space with `copy: ./parts/<name>` and `into:`; a building may copy its own `floors/` the same way ([RFC 0009](../../rfcs/0009-dockerfile-model/index.md)). Catalog: [`examples/README.md`](../../../src/catalog/place/examples/README.md#campus-buildings-rfc-0009) (airport, transit-hub, expo, arena, port). Patterns: [Campus → building → floor](campus-building-floor.md).

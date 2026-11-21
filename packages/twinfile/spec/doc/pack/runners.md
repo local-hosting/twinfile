@@ -14,7 +14,7 @@ A runner that cannot answer its question (missing clock, unknown track, unreadab
 
 Hydraulic-style runners read **`args.target_role`** (e.g. `shelter`) and headcount from **`args.attendance`** or **`args.occupancy`**. Space capacity comes from merged **`spaces[]`** with that role.
 
-Optional **`args.resources`** names stockpiles (e.g. `cots`, `water_liters`) that may also appear on merged **`assets[]`** via `ext.shelter_resource` (golden: [`examples/arena/parts/concourse`](../../../../catalog/place/examples/arena/parts/concourse/)). Other stock uses **`ext.relief_resource`** per [`hr-marker-crosswalk.yaml`](../../conf/hr-marker-crosswalk.yaml).
+Optional **`args.resources`** names stockpiles (e.g. `cots`, `water_liters`) that may also appear on merged **`assets[]`** via `ext.shelter_resource` (golden: [`examples/arena/parts/concourse`](../../../src/catalog/place/examples/arena/parts/concourse/)). Other stock uses **`ext.relief_resource`** per [`hr-marker-crosswalk.yaml`](../../conf/hr-marker-crosswalk.yaml).
 
 When **`target_role: shelter`** and **`args.resources`** is set, `@twinfile/runner-hydraulic` also emits **`resource_shortfall_<key>`** metrics: `max(0, headcount − supply)` where `supply` is the greater of the declared amount and summed asset capacities for that resource key.
 

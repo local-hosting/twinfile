@@ -12,7 +12,7 @@
     "packages/site"
   ],
   "scripts": {
-    "workbench": "node packages/twinfile/src/simulator/viewer/scripts/run-view.mjs",
+    "workbench": "node --experimental-strip-types packages/twinfile/src/workbench/viewer/server/start-workbench.ts",
     "check": "yarn run check:twinfile",
     "check:twinfile": "node packages/tooling/scripts/check-nested-yarn.mjs && node packages/tooling/scripts/check-workspace.mjs",
     "hygiene": "node packages/tooling/scripts/repo-hygiene.mjs",
