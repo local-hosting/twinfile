@@ -52,6 +52,6 @@ jobs:
       - name: Verify tracked src/build trees (gitignore regression guard)
         run: |
           test -f packages/core/src/build/merge.ts
-          test -f catalog/story/src/contract/narrative/journey/build/build-journey.ts
+          test -f packages/twinfile/src/catalog/story/contract/narrative/journey/build/build-journey.ts
 
       - run: yarn run check:twinfile
