@@ -58,6 +58,7 @@
       "import": "./dist/place/*"
     },
     "./character": {
+      "browser": "./dist/character/contract/character/browser.js",
       "types": "./dist/character/contract/character/index.d.ts",
       "import": "./dist/character/contract/character/index.js",
       "default": "./dist/character/contract/character/index.js"
@@ -66,6 +67,7 @@
       "import": "./dist/character/*"
     },
     "./context": {
+      "browser": "./dist/context/contract/browser.js",
       "types": "./dist/context/index.d.ts",
       "import": "./dist/context/index.js",
       "default": "./dist/context/index.js"
@@ -74,6 +76,7 @@
       "import": "./dist/context/contract/*"
     },
     "./story": {
+      "browser": "./dist/story/contract/narrative/browser.js",
       "types": "./dist/story/index.d.ts",
       "import": "./dist/story/index.js",
       "default": "./dist/story/index.js"
