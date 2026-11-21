@@ -6,7 +6,7 @@
 
 A campus is a stack of building cards. Each building is its own Twinfile under `parts/<name>/`; floors nest under `parts/<name>/floors/<floor>/`. The parent copies each one in by path. Nested units are build stages: never published, no `twinfile/` ref.
 
-Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings/…` as a one-release alias for `./parts/…` ([`place-copy.ts`](../src/place/place-copy.ts)).
+Legacy twins may still use `buildings/` paths; loaders accept `copy: ./buildings/…` as a one-release alias for `./parts/…` ([`place-copy.ts`](../place/place-copy.ts)).
 
 ## Checklist
 
