@@ -101,7 +101,7 @@ Legacy manifest `patch: { modules, connections }` and `inputs` / `outputs` / `co
 
 **`twinfile/mod.building-scope@0.1.0`**: `in` = `place:merged`, `scoped` out = `place:building`; bind `anchor: ref:building:<id>`.
 
-Golden: [`examples/arena`](../../../src/catalog/place/examples/arena/), [`transit-hub-campus`](../../../src/catalog/place/examples/mobility-hub/campus/).
+Golden: [`examples/arena`](../../../../catalog/place/examples/arena/), [`transit-hub-campus`](../../../../catalog/place/examples/mobility-hub/campus/).
 
 ## Event pulses (`twin:event`)
 

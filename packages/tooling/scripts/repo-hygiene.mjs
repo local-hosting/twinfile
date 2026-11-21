@@ -43,9 +43,4 @@ try {
   console.warn('find .DS_Store failed (non-fatal)');
 }
 
-const pruneScript = join(dirname(fileURLToPath(import.meta.url)), 'prune-legacy-layout.mjs');
-if (existsSync(pruneScript)) {
-  execSync(`node ${JSON.stringify(pruneScript)}`, { cwd: root, stdio: 'inherit' });
-}
-
 console.log('repo-hygiene ok');

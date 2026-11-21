@@ -12,12 +12,18 @@ const EXTERNAL = /^(?:[a-z]+:|\/)/i
 /** After single-package merge, many docs still link legacy `catalog/` and `packages/*` paths. */
 const LEGACY_PREFIXES = [
   ['catalog/', 'packages/twinfile/src/catalog/'],
+  ['packages/spec/', 'packages/twinfile/spec/'],
   ['packages/twinfile/spec/', 'packages/twinfile/spec/'],
+  ['packages/core/src/', 'packages/twinfile/src/core/'],
   ['packages/core/', 'packages/twinfile/src/core/'],
   ['packages/bridge/', 'packages/twinfile/src/bridge/'],
   ['packages/simulator/', 'packages/twinfile/src/simulator/'],
   ['packages/twinfile/src/workbench/', 'packages/twinfile/src/workbench/'],
   ['packages/cli/', 'packages/twinfile/src/cli/'],
+]
+
+const LEGACY_FILES = [
+  ['.github/workflows/publish-local-hosting.yml', '.github/workflows/publish-doppler-group.yml'],
 ]
 
 function existsAtRepoPath(absPath) {
@@ -32,9 +38,15 @@ function existsAtRepoPath(absPath) {
     candidates.push(join(root, 'catalog', wrongCatalog[1]))
   }
 
-  for (const [from, to] of LEGACY_PREFIXES) {
+  for (const [from, to] of [...LEGACY_PREFIXES].sort((a, b) => b[0].length - a[0].length)) {
     if (rel.startsWith(from)) {
       candidates.push(join(root, to, rel.slice(from.length)))
+    }
+  }
+
+  for (const [from, to] of LEGACY_FILES) {
+    if (rel === from) {
+      candidates.push(join(root, to))
     }
   }
 
