@@ -4,9 +4,9 @@ Event units describe **reusable operational stories** (`phases`, `expects` roles
 
 **Catalog (normative list):** [`conf/hazard-catalog.yaml`](../../conf/hazard-catalog.yaml)
 
-**CI:** `check-role-vocab.mjs` (from `@local-hosting/twinfile` `yarn check`) verifies every catalog `event` has a unit under [`catalog/event/examples/`](../../../../catalog/event/examples/).
+**CI:** `check-role-vocab.mjs` (from `@local-hosting/twinfile` `yarn check`) verifies every catalog `event` has a unit under [`src/catalog/event/examples/`](../../../src/catalog/event/examples/).
 
-**Package:** Shared hazard events live in **`@local-hosting/twinfile/event`** ([`catalog/event/README.md`](../../../../catalog/event/README.md)). Compose and the simulator load them from the repo root.
+**Package:** Shared hazard events live in **`@local-hosting/twinfile/event`** (source under `packages/twinfile/src/catalog/event/`). Compose and the simulator load them from the monorepo via `catalog-layout`.
 
 ## Event units (hazard stories)
 
