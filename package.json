@@ -22,5 +22,6 @@
   },
   "resolutions": {
     "@local-hosting/geotypes": "portal:../../local-hosting/geotypes"
-  }
+  },
+  "license": "MPL-2.0"
 }
