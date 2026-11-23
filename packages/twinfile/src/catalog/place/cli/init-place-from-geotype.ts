@@ -16,7 +16,7 @@ import {
 import { stringify } from 'yaml';
 
 import { PLACE_DEMO_EXT_H3 } from '../place/demo-ext-h3.js';
-import { resolveExamplesRoot } from '@local-hosting/twinfile';
+import { resolveExamplesRoot, resolveTwinfilePackageRoot } from '@local-hosting/twinfile';
 import { twinHeadPath } from '@local-hosting/twinfile';
 import { placeBaseRefForArchetype } from '@local-hosting/twinfile';
 import { decoratePlaceFromGeotype, type DecoratePlaceResult } from './decorate-place-from-geotype.js';
@@ -139,7 +139,7 @@ export type CreatePlaceResult = {
 
 /** Registry pin recorded on a new place twinfile. */
 export function pinnedGeotypeRegistry(): string {
-  const corePkgPath = join(dirname(fileURLToPath(import.meta.url)), '../../../../package.json');
+  const corePkgPath = join(resolveTwinfilePackageRoot(), 'package.json');
   const corePkg = JSON.parse(readFileSync(corePkgPath, 'utf8')) as {
     twinfilePinnedDependencies?: Record<string, string>;
   };

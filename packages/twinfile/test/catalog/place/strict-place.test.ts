@@ -6,7 +6,7 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfileStrict, strictCheckPlace } from '../../../src/check/strict-place.js';
 import { loadTwinfile } from '@local-hosting/twinfile';
-import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
+import { testExamplesRoot } from '../../helpers/catalog-test-roots.js';
 import { twinHeadPath } from '@local-hosting/twinfile';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));

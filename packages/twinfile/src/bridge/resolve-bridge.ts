@@ -65,7 +65,7 @@ export async function loadBridgeFromNpm(ref: string): Promise<TwinBridge> {
     throw new Error(`bridge package not installed: ${name} (${ref})`);
   }
   const mod = (await import(
-    /* webpackIgnore: true */ /* turbopackIgnore: true */ pathToFileURL(resolved).href
+    /* webpackIgnore: true */ /* turbopackIgnore: true */ /* @vite-ignore */ pathToFileURL(resolved).href
   )) as { bridge?: TwinBridge; default?: TwinBridge };
   const bridge = mod.bridge ?? mod.default;
   if (!bridge?.importPlace && !bridge?.exportPlace) {

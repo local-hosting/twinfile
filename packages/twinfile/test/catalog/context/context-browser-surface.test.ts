@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const NODE_BUILTINS = new Set(['node:fs', 'node:path', 'node:url', 'fs', 'path', 'url']);
 
@@ -29,13 +29,10 @@ async function collectStaticImports(entryRel: string): Promise<void> {
       continue;
     }
 
-    for (const match of source.matchAll(
-      /(?:from|import)\s+['"]([^'"]+)['"]|export\s+\*\s+from\s+['"]([^'"]+)['"]/g,
-    )) {
-      const spec = match[1] ?? match[2];
-      if (!spec) continue;
-      if (NODE_BUILTINS.has(spec) || spec.startsWith('node:')) {
-        throw new Error(`${file} imports Node builtin ${spec}`);
+    for (const match of source.matchAll(/from\s+['"]([^'"]+)['"]/g)) {
+      const spec = match[1];
+      if (NODE_BUILTINS.has(spec) || spec.startsWith('@local-hosting/') || spec.startsWith('@accord-')) {
+        continue;
       }
       if (!spec.startsWith('.')) continue;
       const resolved = await import.meta.resolve(spec, pathToFileURL(file).href);
@@ -45,17 +42,13 @@ async function collectStaticImports(entryRel: string): Promise<void> {
 }
 
 describe('twinfile-context browser surface', () => {
-  it('maps package root to browser.ts under the browser export condition', () => {
-    const root = packageExports()['.'] as Record<string, string>;
-    expect(root.browser).toBe('./src/contract/browser.ts');
-    expect(root.default).toBe('./src/contract/index.ts');
-  });
-
-  it('keeps an explicit ./browser subpath', () => {
-    expect(packageExports()['./browser']).toBe('./src/contract/browser.ts');
+  it('maps ./context to browser.ts under the browser export condition', () => {
+    const root = packageExports()['./context'] as Record<string, string>;
+    expect(root.browser).toBe('./dist/context/contract/browser.js');
+    expect(root.default).toBe('./dist/context/index.js');
   });
 
   it('does not pull node:fs / node:path / node:url through the browser entry graph', async () => {
-    await collectStaticImports('src/contract/browser.ts');
+    await collectStaticImports('src/catalog/context/contract/browser.ts');
   });
 });

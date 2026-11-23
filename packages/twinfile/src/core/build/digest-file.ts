@@ -1,12 +1,11 @@
-import { createHash } from 'node:crypto';
 import { readFileSync } from 'node:fs';
 
+import { sha256BufferHex } from './digest.js';
+
 export function digestFileBytes(path: string): string {
-  const hex = createHash('sha256').update(readFileSync(path)).digest('hex');
-  return `sha256:${hex}`;
+  return sha256BufferHex(readFileSync(path));
 }
 
-export function digestBuffer(buf: Buffer): string {
-  const hex = createHash('sha256').update(buf).digest('hex');
-  return `sha256:${hex}`;
+export function digestBuffer(buf: Uint8Array): string {
+  return sha256BufferHex(buf);
 }

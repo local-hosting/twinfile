@@ -1,28 +1,29 @@
 import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
+import { fileURLToPath } from 'node:url';
+
 import { describe, expect, it } from 'vitest';
 import { parse } from 'yaml';
 
-import {
-  copyIntoAnchorsFromTwinfile,
-  regionNavFromTwinfile,
-  spacesFromTwinfileSteps,
-} from '../../../src/place/region-nav.js';
+import { twinHeadPath } from '@local-hosting/twinfile';
+import { regionNavFromTwinfile, copyIntoAnchorsFromTwinfile, spacesFromTwinfileSteps } from '../../../src/catalog/place/place/region-nav.js';
+import { testExamplesRoot } from '../../helpers/catalog-test-roots.js';
 
-const packageRoot = join(import.meta.dirname, '..');
+const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 
-function loadTwinfile(rel: string): Record<string, unknown> {
-  return parse(readFileSync(join(packageRoot, rel), 'utf8')) as Record<string, unknown>;
+function loadTwinfile(unitSlug: string): Record<string, unknown> {
+  const path = twinHeadPath(join(examplesRoot, unitSlug));
+  return parse(readFileSync(path, 'utf8')) as Record<string, unknown>;
 }
 
 describe('regionNavFromTwinfile', () => {
   it('lists park meadow and trailhead', () => {
-    const rows = regionNavFromTwinfile(loadTwinfile('examples/park/park.twin.yaml'));
+    const rows = regionNavFromTwinfile(loadTwinfile('park'));
     expect(rows.map((r) => r.id).sort()).toEqual(['meadow', 'ranger-shelter', 'trailhead']);
   });
 
   it('omits copy anchors on campus twins', () => {
-    const twinfile = loadTwinfile('examples/airport/airport.twin.yaml');
+    const twinfile = loadTwinfile('airport');
     const into = copyIntoAnchorsFromTwinfile(twinfile);
     expect(into.has('terminal-a')).toBe(true);
     const rows = regionNavFromTwinfile(twinfile);
@@ -30,7 +31,7 @@ describe('regionNavFromTwinfile', () => {
   });
 
   it('reads spaces from manifest steps', () => {
-    const twinfile = loadTwinfile('examples/park/park.twin.yaml');
+    const twinfile = loadTwinfile('park');
     expect(spacesFromTwinfileSteps(twinfile).length).toBe(3);
   });
 });

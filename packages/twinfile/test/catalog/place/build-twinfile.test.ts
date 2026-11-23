@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { buildTwinfile } from '../../../src/build/build-twinfile.js';
 import { readTwinfileLock } from '@local-hosting/twinfile';
 import { loadTwinfile } from '@local-hosting/twinfile';
-import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
+import { testExamplesRoot } from '../../helpers/catalog-test-roots.js';
 import { twinLockPath } from '@local-hosting/twinfile';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));

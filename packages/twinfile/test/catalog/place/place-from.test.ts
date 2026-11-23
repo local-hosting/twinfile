@@ -7,7 +7,7 @@ import { buildTwinfile } from '../../../src/build/build-twinfile.js';
 import { mergePlaceFromTwinfile } from '../../../src/place/place-inherit.js';
 import { loadTwinfile } from '@local-hosting/twinfile';
 import { loadTwinfileStrict } from '../../../src/check/strict-place.js';
-import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
+import { testExamplesRoot } from '../../helpers/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

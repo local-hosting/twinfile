@@ -339,6 +339,12 @@ export {
   resolveGoldenSceneRun,
 } from './paths/golden-scene-runs.js';
 export {
+  resolveSpecConfRoot,
+  resolveSpecPackageRoot,
+  resolveSpecSchemasRoot,
+  resolveTwinfilePackageRoot,
+} from './paths/resolve-spec-package-root.js';
+export {
   loadProjectTwinManifest,
   listExampleUnitIds,
   exportProjectTwinBundle,

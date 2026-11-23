@@ -31,6 +31,11 @@ jobs:
           for repo in geotypes geokit; do
             git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/local-hosting/${repo}.git" "${stack_root}/${repo}"
           done
+          doppler_root="${work_root}/doppler-group"
+          mkdir -p "${doppler_root}"
+          if ! git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/doppler-group/river-twinfile.git" "${doppler_root}/river-twinfile"; then
+            echo "::warning::river-twinfile clone failed — overlay integration tests will skip"
+          fi
           mkdir -p "${work_root}/westlane"
           git clone --depth 1 "https://x-access-token:${GH_TOKEN}@github.com/westlane/isocanvas.git" "${work_root}/westlane/isocanvas"
 

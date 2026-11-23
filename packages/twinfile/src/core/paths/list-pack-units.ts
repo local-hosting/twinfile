@@ -35,3 +35,20 @@ export function listPackUnitDirsForPack(
   }
   return out;
 }
+
+/** Overlay pack layout (`place/`, `story/`, … each with twin heads) without `twin.local.yaml`. */
+export function isTwinfileOverlayPackRoot(dir: string): boolean {
+  const root = resolve(dir);
+  for (const type of TWIN_CATALOG_TYPES) {
+    if (listPackUnitDirs(join(root, type)).length > 0) return true;
+  }
+  return false;
+}
+
+export function overlayPackUnitDir(
+  packRoot: string,
+  kind: TwinCatalogType,
+  unitId: string,
+): string {
+  return join(resolve(packRoot), kind, unitId);
+}

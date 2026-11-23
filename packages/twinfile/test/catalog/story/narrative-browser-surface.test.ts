@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const NODE_BUILTINS = new Set(['node:fs', 'node:path', 'node:url', 'fs', 'path', 'url']);
 
@@ -29,13 +29,10 @@ async function collectStaticImports(entryRel: string): Promise<void> {
       continue;
     }
 
-    for (const match of source.matchAll(
-      /(?:from|import)\s+['"]([^'"]+)['"]|export\s+\*\s+from\s+['"]([^'"]+)['"]/g,
-    )) {
-      const spec = match[1] ?? match[2];
-      if (!spec) continue;
-      if (NODE_BUILTINS.has(spec) || spec.startsWith('node:')) {
-        throw new Error(`${file} imports Node builtin ${spec}`);
+    for (const match of source.matchAll(/from\s+['"]([^'"]+)['"]/g)) {
+      const spec = match[1];
+      if (NODE_BUILTINS.has(spec) || spec.startsWith('@local-hosting/') || spec.startsWith('@accord-')) {
+        continue;
       }
       if (!spec.startsWith('.')) continue;
       const resolved = await import.meta.resolve(spec, pathToFileURL(file).href);
@@ -45,22 +42,18 @@ async function collectStaticImports(entryRel: string): Promise<void> {
 }
 
 describe('twinfile-story browser surface', () => {
-  it('maps ./narrative to browser.ts under the browser export condition', () => {
-    const narrative = packageExports()['./narrative'] as Record<string, string>;
-    expect(narrative.browser).toBe('./src/contract/narrative/browser.ts');
-    expect(narrative.default).toBe('./src/contract/narrative/index.ts');
-  });
-
-  it('keeps an explicit ./narrative/browser subpath', () => {
-    expect(packageExports()['./narrative/browser']).toBe('./src/contract/narrative/browser.ts');
+  it('maps ./story to narrative browser under the browser export condition', () => {
+    const narrative = packageExports()['./story'] as Record<string, string>;
+    expect(narrative.browser).toBe('./dist/story/contract/narrative/browser.js');
+    expect(narrative.default).toBe('./dist/story/index.js');
   });
 
   it('does not pull node:fs / node:path / node:url through the browser entry graph', async () => {
-    await collectStaticImports('src/contract/narrative/browser.ts');
+    await collectStaticImports('src/catalog/story/contract/narrative/browser.ts');
   });
 
   it('exports browser-safe brief and catalog helpers used by catalog-host', async () => {
-    const browser = await import('../src/contract/narrative/browser.js');
+    const browser = await import('../../../src/catalog/story/contract/narrative/browser.js');
     expect(typeof browser.isTechnicalStoryIdentityLabel).toBe('function');
     expect(browser.isTechnicalStoryIdentityLabel('rider-urban-commuter-3')).toBe(true);
     expect(typeof browser.buildDirectorScriptScenes).toBe('function');

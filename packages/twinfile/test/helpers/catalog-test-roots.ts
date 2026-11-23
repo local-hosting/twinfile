@@ -1,8 +1,8 @@
-import { resolveGoldenSceneRun } from '../../src/core/paths/golden-scene-runs.js';
 import {
+  resolveGoldenSceneRun,
   resolvePlaceExamplesCatalogRoot,
   resolveTwinfileRoot,
-} from '../../src/core/paths/catalog-layout.js';
+} from '@local-hosting/twinfile';
 
 export function testExamplesRoot(importMetaDir: string): string {
   return resolvePlaceExamplesCatalogRoot(resolveTwinfileRoot(importMetaDir));

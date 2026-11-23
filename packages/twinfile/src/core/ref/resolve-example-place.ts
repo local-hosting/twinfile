@@ -1,5 +1,5 @@
 import { statSync } from 'node:fs';
-import { join } from 'node:path';
+import { join, resolve } from 'node:path';
 
 import { twinHeadPath } from '../load/twinfile-locator.js';
 
@@ -14,6 +14,8 @@ import { isPatchesTwinfile, parseManifestPatches } from '../load/twinfile-instru
 import { RefResolver } from './ref-resolver.js';
 import { flatExampleUnitDir, listFlatExampleUnitNames } from '../paths/examples-catalog.js';
 import { resolvePlaceExamplesCatalogRoot } from '../paths/catalog-layout.js';
+import { isTwinfileOverlayPackRoot, overlayPackUnitDir } from '../paths/list-pack-units.js';
+import type { TwinCatalogType } from '../paths/catalog-layout.js';
 
 import {
   loadTwinLocalMap,
@@ -36,12 +38,37 @@ function readLayerFile(unitRoot: string, rel: string): Record<string, unknown> {
   return doc as Record<string, unknown>;
 }
 
+function parseTypedTwinfileRef(ref: string): { kind?: TwinCatalogType; name: string } | undefined {
+  const trimmed = ref.trim();
+  const body = trimmed.startsWith('twinfile/') ? trimmed.slice('twinfile/'.length) : trimmed;
+  if (!body) return undefined;
+  const slash = body.indexOf('/');
+  if (slash <= 0) {
+    const colon = body.lastIndexOf(':');
+    const name = colon > 0 ? body.slice(0, colon) : body;
+    return { name };
+  }
+  const kind = body.slice(0, slash) as TwinCatalogType;
+  const rest = body.slice(slash + 1);
+  const colon = rest.lastIndexOf(':');
+  const name = colon > 0 ? rest.slice(0, colon) : rest;
+  return { kind, name };
+}
+
 function resolveTwinfileDirFromRef(ref: TwinfileRef, examplesRoot: string): string {
   const normalized = ref.trim().startsWith('twinfile/') ? ref.trim() : (`twinfile/${ref.trim()}` as TwinfileRef);
   const localMap = loadTwinLocalMap(examplesRoot);
   const localPath = resolveTwinLocalPath(normalized, localMap);
   if (localPath && statSync(localPath, { throwIfNoEntry: false })?.isDirectory()) {
     return localPath;
+  }
+  const typed = parseTypedTwinfileRef(normalized);
+  const packRoot = resolve(examplesRoot);
+  if (typed?.kind && isTwinfileOverlayPackRoot(packRoot)) {
+    const overlayDir = overlayPackUnitDir(packRoot, typed.kind, typed.name);
+    if (statSync(overlayDir, { throwIfNoEntry: false })?.isDirectory()) {
+      return overlayDir;
+    }
   }
   const resolver = new RefResolver();
   const { name } = parseRefName(normalized, resolver);

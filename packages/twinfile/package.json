@@ -59,6 +59,8 @@
     },
     "./character": {
       "browser": "./dist/character/contract/character/browser.js",
+      "development": "./src/catalog/character/contract/character/browser.ts",
+      "source": "./src/catalog/character/contract/character/browser.ts",
       "types": "./dist/character/contract/character/index.d.ts",
       "import": "./dist/character/contract/character/index.js",
       "default": "./dist/character/contract/character/index.js"
@@ -68,6 +70,8 @@
     },
     "./context": {
       "browser": "./dist/context/contract/browser.js",
+      "development": "./src/catalog/context/contract/browser.ts",
+      "source": "./src/catalog/context/contract/browser.ts",
       "types": "./dist/context/index.d.ts",
       "import": "./dist/context/index.js",
       "default": "./dist/context/index.js"
@@ -77,6 +81,8 @@
     },
     "./story": {
       "browser": "./dist/story/contract/narrative/browser.js",
+      "development": "./src/catalog/story/contract/narrative/browser.ts",
+      "source": "./src/catalog/story/contract/narrative/browser.ts",
       "types": "./dist/story/index.d.ts",
       "import": "./dist/story/index.js",
       "default": "./dist/story/index.js"
@@ -122,6 +128,7 @@
     "README.md"
   ],
   "dependencies": {
+    "@noble/hashes": "^2.0.0",
     "@local-hosting/geotypes": "^0.2.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1",

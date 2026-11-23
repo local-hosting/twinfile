@@ -1,7 +1,7 @@
 import type { PlaceArchetype, PlaceArchetypeAxes } from '@local-hosting/geotypes';
 
 import type { LoadedTwinfile } from '@local-hosting/twinfile';
-import { resolveExamplesRoot } from '@local-hosting/twinfile';
+import { resolveAuditExamplesRoot } from '@local-hosting/twinfile';
 import { getPlaceArchetype, getPlaceAxes } from '../place/place-axes.js';
 import { composePlace } from '../place/place-inherit.js';
 import type { Result, TwinError } from '@local-hosting/twinfile';
@@ -103,7 +103,7 @@ export function checkPlaceArchetype(unit: LoadedTwinfile): Result<{ archetype?: 
     return ok({});
   }
 
-  const examplesRoot = resolveExamplesRoot(unit.root);
+  const examplesRoot = resolveAuditExamplesRoot(unit.root);
   const composed = composePlace(unit, examplesRoot ? { examplesRoot } : undefined);
   if (!composed.ok) return composed;
 

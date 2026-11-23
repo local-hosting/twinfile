@@ -1,5 +1,4 @@
-import { createHash } from 'node:crypto';
-
+import { uniformUnitFromSha256Utf8 } from '../../core/build/digest.js';
 import { requireDurationSeconds } from './clock.js';
 import { localParts, shiftDate, weekdayOf, zonedToUtc } from './zone.js';
 import type { ActiveSchedule, ScheduleDef } from '../types/twinfile-time.js';
@@ -66,8 +65,7 @@ export function parseWeeklyHours(when: string): WeeklyRule[] {
 export function varianceOffsetSeconds(seed: number, id: string, nominalStartMs: number, varianceS: number): number {
   if (varianceS <= 0) return 0;
   const key = `${seed}:${id}:${new Date(nominalStartMs).toISOString()}`;
-  const u = createHash('sha256').update(key).digest().readUInt32BE(0) / 2 ** 32;
-  return Math.floor(u * varianceS);
+  return Math.floor(uniformUnitFromSha256Utf8(key) * varianceS);
 }
 
 export function compileSchedule(def: ScheduleDef, timeZone: string, seed: number): CompiledSchedule {

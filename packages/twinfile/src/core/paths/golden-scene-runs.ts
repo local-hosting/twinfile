@@ -2,7 +2,7 @@ import { join } from 'node:path';
 
 import { sceneAddress } from '../load/load-scene-run.js';
 
-import { resolveTwinfileRoot } from './catalog-layout.js';
+import { resolveTwinfileRoot, resolveTypeExamplesRoot } from './catalog-layout.js';
 
 /** Golden scene run id → story example folder that declares it under `story.scenes[]`. */
 export const GOLDEN_SCENE_RUN_STORIES: Record<string, string> = {
@@ -76,13 +76,15 @@ function goldenSceneStory(runId: string): string {
   return story;
 }
 
-/** `catalog/story/examples/<story>#<scene-id>` relative to the repo root. */
+/** `<story-example-dir>#<scene-id>` relative to the story examples catalog. */
 export function goldenSceneRunRelPath(runId: string): string {
-  return `catalog/story/examples/${goldenSceneStory(runId)}#${runId}`;
+  const story = goldenSceneStory(runId);
+  return `${story}#${runId}`;
 }
 
 /** Absolute scene address (`<story-dir>#<scene-id>`) for a golden run. */
 export function resolveGoldenSceneRun(runId: string, projectRoot?: string): string {
-  const storyRoot = join(resolveTwinfileRoot(projectRoot), 'catalog/story/examples', goldenSceneStory(runId));
+  const twinRoot = resolveTwinfileRoot(projectRoot);
+  const storyRoot = join(resolveTypeExamplesRoot('story', twinRoot), goldenSceneStory(runId));
   return sceneAddress(storyRoot, runId);
 }

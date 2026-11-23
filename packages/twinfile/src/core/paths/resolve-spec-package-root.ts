@@ -1,10 +1,21 @@
-import { statSync } from 'node:fs';
+import { readFileSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 /** `packages/twinfile` (this npm package root). */
 export function resolveTwinfilePackageRoot(): string {
-  return join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
+  let dir = dirname(fileURLToPath(import.meta.url));
+  for (let i = 0; i < 8; i += 1) {
+    const pkg = join(dir, 'package.json');
+    if (statSync(pkg, { throwIfNoEntry: false })?.isFile()) {
+      const doc = JSON.parse(readFileSync(pkg, 'utf8')) as { name?: string };
+      if (doc.name === '@local-hosting/twinfile') return dir;
+    }
+    const parent = dirname(dir);
+    if (parent === dir) break;
+    dir = parent;
+  }
+  throw new Error('Could not resolve @local-hosting/twinfile package root');
 }
 
 /** Bundled `spec/` at the `@local-hosting/twinfile` package root (shipped in the npm tarball). */

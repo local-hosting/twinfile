@@ -11,6 +11,7 @@ import {
 } from '../paths/catalog-layout.js';
 import { mergeTwinLocalMaps } from '../ref/twin-local-map.js';
 import { listFlatExampleUnitNames, flatExampleUnitDir } from '../paths/examples-catalog.js';
+import { isTwinfileOverlayPackRoot, overlayPackUnitDir } from '../paths/list-pack-units.js';
 import { normalizeComposeTwinfileKeys } from './twinfile-compose.js';
 import type { Result } from '../types/twin-error.js';
 import { err, ok } from '../types/twin-error.js';
@@ -104,8 +105,12 @@ function catalogSearchRoots(
     const catalog = resolveTypeExamplesRoot(type, twinfileRoot);
     roots.push(flatExampleUnitDir(catalog, parsed.name));
   }
+  const packRoot = resolve(examplesRoot);
+  if (parsed.kind && isTwinfileOverlayPackRoot(packRoot)) {
+    roots.unshift(overlayPackUnitDir(packRoot, parsed.kind as TwinCatalogType, parsed.name));
+  }
   // legacy flat place catalog under examples root
-  roots.push(join(resolve(examplesRoot), parsed.name));
+  roots.push(join(packRoot, parsed.name));
   return roots;
 }
 

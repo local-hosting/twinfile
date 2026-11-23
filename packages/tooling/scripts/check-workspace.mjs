@@ -54,6 +54,27 @@ const STEPS = [
         stdio: ['ignore', 'pipe', 'pipe'],
       }),
   },
+  {
+    id: 'vitest',
+    run: () => {
+      const riverDefault = join(root, '..', '..', 'doppler-group', 'river-twinfile')
+      const riverRoot = process.env.TF_RIVER_TWINFILE_ROOT?.trim() || riverDefault
+      return spawnSync(
+        'npx',
+        ['vitest', 'run'],
+        {
+          cwd: twinfilePkg,
+          encoding: 'utf8',
+          stdio: ['ignore', 'pipe', 'pipe'],
+          env: {
+            ...process.env,
+            TF_TWINFILE_ROOT: root,
+            ...(existsSync(riverRoot) ? { TF_RIVER_TWINFILE_ROOT: riverRoot } : {}),
+          },
+        },
+      )
+    },
+  },
 ]
 
 function parseOnly(argv) {

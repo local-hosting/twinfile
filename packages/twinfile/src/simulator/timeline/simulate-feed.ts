@@ -1,5 +1,4 @@
-import { createHash } from 'node:crypto';
-
+import { uniformUnitFromSha256Utf8 } from '../../core/build/digest.js';
 import { type Clock, requireDurationSeconds } from './clock.js';
 import type { FeedRow, PhaseStarts } from '../types/twinfile-time.js';
 
@@ -31,8 +30,7 @@ export type SimulatedDevice = {
 };
 
 function seededUnit(seed: number, ...parts: string[]): number {
-  const key = `${seed}:${parts.join(':')}`;
-  return createHash('sha256').update(key).digest().readUInt32BE(0) / 2 ** 32;
+  return uniformUnitFromSha256Utf8(`${seed}:${parts.join(':')}`);
 }
 
 function propertyModel(spec: SimulateSpec, property: string): SimulatePropertyModel | undefined {

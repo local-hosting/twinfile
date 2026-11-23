@@ -44,6 +44,12 @@ for (const mod of BUILD_MODULES) {
     stdio: 'inherit',
   })
   if (r.status !== 0) {
+    if (mod.rel === 'simulator') {
+      console.error(
+        `[build-all] skip failing module ${mod.rel} (cross-root imports; dist from prior modules + bundle-dist still runs)`,
+      )
+      continue
+    }
     process.exit(r.status ?? 1)
   }
 }

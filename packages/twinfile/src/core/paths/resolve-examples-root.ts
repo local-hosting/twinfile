@@ -4,6 +4,7 @@ import { parseSceneAddress } from '../load/load-scene-run.js';
 import { loadTwinLocalMap } from '../ref/twin-local-map.js';
 import { isExamplesCatalogRoot } from './examples-catalog.js';
 import { resolvePlaceExamplesCatalogRoot, resolveTwinfileRoot } from './catalog-layout.js';
+import { isTwinfileOverlayPackRoot } from './list-pack-units.js';
 
 /** Place golden catalog for the monorepo containing `fromDir`, when it exists. */
 export function resolveExamplesRoot(fromDir?: string): string | undefined {
@@ -17,6 +18,7 @@ export function resolveTwinfilePackRoot(fromDir: string): string | undefined {
   let dir = resolve(scene?.storyRoot ?? fromDir);
   for (let i = 0; i < 16; i += 1) {
     if (loadTwinLocalMap(dir).size > 0) return dir;
+    if (isTwinfileOverlayPackRoot(dir)) return dir;
     const parent = dirname(dir);
     if (parent === dir) break;
     dir = parent;
@@ -26,7 +28,7 @@ export function resolveTwinfilePackRoot(fromDir: string): string | undefined {
 
 /**
  * Ref resolution root for audit / compose / build / run:
- * overlay pack `twin.local.yaml` when present, else monorepo place examples catalog.
+ * overlay pack (`twin.local.yaml` or kind-folder layout), else monorepo place examples catalog.
  */
 export function resolveAuditExamplesRoot(fromDir: string): string | undefined {
   return resolveTwinfilePackRoot(fromDir) ?? resolveExamplesRoot(fromDir);

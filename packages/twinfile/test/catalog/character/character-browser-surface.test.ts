@@ -4,7 +4,7 @@ import { fileURLToPath, pathToFileURL } from 'node:url';
 
 import { describe, expect, it } from 'vitest';
 
-const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '..');
+const packageRoot = join(dirname(fileURLToPath(import.meta.url)), '../../..');
 
 const NODE_BUILTINS = new Set(['node:fs', 'node:path', 'node:url', 'fs', 'path', 'url']);
 
@@ -49,22 +49,18 @@ async function collectStaticImports(entryRel: string): Promise<Set<string>> {
 describe('twinfile-character browser surface', () => {
   it('maps ./character to browser.ts under the browser export condition', () => {
     const character = packageExports()['./character'] as Record<string, string>;
-    expect(character.browser).toBe('./src/contract/character/browser.ts');
-    expect(character.default).toBe('./src/contract/character/index.ts');
-  });
-
-  it('keeps an explicit ./character/browser subpath', () => {
-    expect(packageExports()['./character/browser']).toBe('./src/contract/character/browser.ts');
+    expect(character.browser).toBe('./dist/character/contract/character/browser.js');
+    expect(character.default).toBe('./dist/character/contract/character/index.js');
   });
 
   it('exports persona id helpers used by locker/browser consumers', async () => {
-    const browser = await import('../src/contract/character/browser.js');
+    const browser = await import('../../../src/catalog/character/contract/character/browser.js');
     expect(typeof browser.allocateUniqueCharacterId).toBe('function');
     expect(typeof browser.buildCharacterIdSlug).toBe('function');
     expect(typeof browser.resolveCharacterDisplayName).toBe('function');
   });
 
   it('does not pull node:fs / node:path / node:url through the browser entry graph', async () => {
-    await collectStaticImports('src/contract/character/browser.ts');
+    await collectStaticImports('src/catalog/character/contract/character/browser.ts');
   });
 });

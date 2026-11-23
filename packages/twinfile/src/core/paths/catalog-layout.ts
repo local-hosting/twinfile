@@ -59,6 +59,15 @@ function tryRealpath(dir: string): string {
   }
 }
 
+/** Published examples live under `src/catalog/*` (or legacy `catalog/*` at package root). */
+function normalizeTwinfilePackageRoot(root: string): string {
+  const resolved = resolve(root);
+  if (existsSync(join(resolved, 'src', 'catalog', 'place'))) return resolved;
+  const nested = join(resolved, 'packages', 'twinfile');
+  if (existsSync(join(nested, 'src', 'catalog', 'place'))) return nested;
+  return resolved;
+}
+
 function findTwinfileRootAbove(start: string): string | undefined {
   // Portal / nested node_modules symlinks must be realpath’d first — walking the
   // logical path never reaches `local-hosting/twinfile`.
@@ -75,8 +84,10 @@ function findTwinfileRootAbove(start: string): string | undefined {
 /** Monorepo root: `TF_TWINFILE_ROOT`, else walk up from `seed`, else from this package. */
 export function resolveTwinfileRoot(seed = process.cwd()): string {
   const fromEnv = process.env.TF_TWINFILE_ROOT?.trim();
-  if (fromEnv && existsSync(fromEnv)) return resolve(fromEnv);
-  return findTwinfileRootAbove(seed) ?? findTwinfileRootAbove(MODULE_DIR) ?? resolve(seed);
+  if (fromEnv && existsSync(fromEnv)) return normalizeTwinfilePackageRoot(fromEnv);
+  const walked = findTwinfileRootAbove(seed) ?? findTwinfileRootAbove(MODULE_DIR);
+  if (walked) return normalizeTwinfilePackageRoot(walked);
+  return normalizeTwinfilePackageRoot(resolve(seed));
 }
 
 /** Golden twin units for a kind (`catalog/<type>/examples`). */

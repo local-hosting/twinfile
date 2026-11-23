@@ -5,7 +5,7 @@ import { describe, expect, it } from 'vitest';
 
 import { loadTwinfile } from '@local-hosting/twinfile';
 import { buildLayoutSummary, formatLayoutSummaryText } from '../../../src/card/layout-summary.js';
-import { testExamplesRoot } from '../../../helpers/catalog-test-roots.js';
+import { testExamplesRoot } from '../../helpers/catalog-test-roots.js';
 
 const examplesRoot = testExamplesRoot(dirname(fileURLToPath(import.meta.url)));
 

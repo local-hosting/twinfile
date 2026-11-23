@@ -34,7 +34,7 @@ describe('add plan to place', () => {
 
     const scaffoldRoot = join(
       dirname(fileURLToPath(import.meta.url)),
-      '../../../catalog/place/test/fixtures/plan-scaffold-campus',
+      '../catalog/place/fixtures/plan-scaffold-campus',
     );
     const baseSpaces = readFileSync(join(scaffoldRoot, 'spaces.yaml'), 'utf8');
     const baseOpenings = readFileSync(join(scaffoldRoot, 'openings.yaml'), 'utf8');

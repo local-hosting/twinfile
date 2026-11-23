@@ -6,7 +6,7 @@ import {
   isViewerPlaceCardCatalogEntry,
   listViewerCatalog,
   listViewerPlaceCardCatalog,
-} from '../viewer/dist/server/catalog/viewer-catalog.js';
+} from '../../src/workbench/viewer/server/catalog/viewer-catalog.js';
 import { testCatalogRoots } from '../helpers/catalog-test-roots.js';
 
 describe('viewer place catalog', () => {
